@@ -1,0 +1,38 @@
+.background {
+        -fx-background-color: #e7e7e7;
+        -fx-border-color: #1883d7;
+        -fx-border-width: 1;
+        -fx-padding: 2;
+}
+
+.digits {
+        -fx-background-radius: 0;
+        -fx-background-color: #fafafa;
+        -fx-font-family: "Segoe UI";
+        -fx-font-size: 23px;
+        -fx-border-width: 0;
+}
+
+.digits:hover {
+    -fx-background-color: #e7e7e7;
+}
+
+.operations {
+        -fx-background-radius: 0;
+        -fx-background-color: #f0f0f0;
+        -fx-font-family: "Segoe UI";
+        -fx-font-size: 19px;
+        -fx-border-width: 0;
+}
+
+.backspace {
+    -fx-background-radius: 0;
+    -fx-background-color: #f0f0f0;
+    -fx-font-family: "Arial Unicode MS";
+    -fx-font-size: 20px;
+    -fx-border-width: 0;
+}
+
+.backspace:hover {
+    -fx-background-color: #d1d1d1;
+}
