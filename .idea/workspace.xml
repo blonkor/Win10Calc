@@ -105,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564428663583</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Standard view filled with components.">
+      <created>1564433490291</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1564433490291</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -140,6 +147,7 @@
     </ignored-roots>
     <MESSAGE value=" Memory buttons added. Other buttons' view changed." />
     <MESSAGE value="Close, maximize and hide buttons customized. Fonts changed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Close, maximize and hide buttons customized. Fonts changed." />
+    <MESSAGE value="Standard view filled with components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Standard view filled with components." />
   </component>
 </project>

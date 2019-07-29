@@ -28,6 +28,19 @@
     -fx-background-color: #e7e7e7;
 }
 
+.operations_standard {
+    -fx-background-radius: 0;
+    -fx-background-color: #f0f0f0;
+    -fx-font-family: "Segoe MDL2 Assets";
+    -fx-font-size: 11pt;
+    -fx-border-width: 0;
+}
+
+.operations_standard:hover {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+}
+
 .operations_letters {
     -fx-background-radius: 0;
     -fx-background-color: #f0f0f0;
@@ -99,6 +112,10 @@
      -fx-font-size: 4pt;
      -fx-font-family: "Segoe MDL2 Assets";
      -fx-padding: 5 5 5 5;
+}
+
+.memory_show:hover {
+    -fx-background-color: #d0d0d0;
 }
 
 .screen {
