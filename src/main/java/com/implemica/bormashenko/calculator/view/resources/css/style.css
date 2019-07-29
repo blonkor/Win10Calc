@@ -8,9 +8,9 @@
 .digits {
         -fx-background-radius: 0;
         -fx-background-color: #fafafa;
-        -fx-font-family: "Segoe UI";
-        -fx-font-size: 23px;
-        -fx-border-width: 0;
+        -fx-font-family: "Segoe UI Semibold";
+        -fx-font-size: 17pt;
+        -fx-padding: 1;
 }
 
 .digits:hover {
@@ -20,19 +20,67 @@
 .operations {
         -fx-background-radius: 0;
         -fx-background-color: #f0f0f0;
-        -fx-font-family: "Segoe UI";
-        -fx-font-size: 19px;
+        -fx-font-family: "Segoe MDL2 Assets";
+        -fx-font-size: 11pt;
         -fx-border-width: 0;
+}
+
+.operations:hover {
+    -fx-background-color: #e7e7e7;
+}
+
+.operations_letters {
+        -fx-background-radius: 0;
+        -fx-background-color: #f0f0f0;
+        -fx-font-family: "Segoe UI";
+        -fx-font-size: 11pt;
+        -fx-border-width: 0;
+}
+
+.operations_letters:hover {
+    -fx-background-color: #e7e7e7;
+}
+
+.operations_degree {
+        -fx-background-radius: 0;
+        -fx-background-color: #f0f0f0;
+        -fx-font-family: "Segoe UI";
+        -fx-font-size: 15pt;
+        -fx-border-width: 0;
+}
+
+.operations_degree:hover {
+    -fx-background-color: #e7e7e7;
 }
 
 .backspace {
     -fx-background-radius: 0;
     -fx-background-color: #f0f0f0;
     -fx-font-family: "Arial Unicode MS";
-    -fx-font-size: 20px;
-    -fx-border-width: 0;
+    -fx-font-size: 15pt;
 }
 
 .backspace:hover {
-    -fx-background-color: #d1d1d1;
+    -fx-background-color: #e7e7e7;
 }
+
+.dot {
+    -fx-background-radius: 0;
+    -fx-background-color: #f0f0f0;
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 12pt;
+    -fx-border-width: 0;
+    -fx-padding: 9;
+}
+
+.dot:hover {
+    -fx-background-color: #e7e7e7;
+}
+
+.memory {
+        -fx-background-radius: 0;
+        -fx-background-color: #e7e7e7;
+        -fx-font-weight: bold;
+        -fx-font-size: 9pt;
+        -fx-padding: 5 5 5 5;
+    }
