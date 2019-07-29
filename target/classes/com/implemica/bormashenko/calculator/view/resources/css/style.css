@@ -106,6 +106,31 @@
     -fx-font-size: 36pt;
 }
 
+.navigation {
+    -fx-background-radius: 0;
+    -fx-background-color: #e7e7e7;
+    -fx-font-family: "Segoe MDL2 Assets";
+    -fx-font-size: 12pt;
+    -fx-border-width: 0;
+}
+
+.navigation:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.history {
+    -fx-background-radius: 0;
+    -fx-background-color: #e7e7e7;
+    -fx-font-family: "Segoe MDL2 Assets";
+    -fx-font-size: 12pt;
+    -fx-border-width: 0;
+}
+
+.type {
+    -fx-font-family: "Frutiger Neue LT W1G";
+    -fx-font-size: 15pt;
+}
+
 .window {
     -fx-background-radius: 0;
     -fx-background-color:#e7e7e7;
@@ -124,7 +149,6 @@
     -fx-font-family: "Segoe MDL2 Assets";
     -fx-border-width: 0;
     -fx-font-size: 10px;
-    -fx-text-fill: black;
 }
 
 .window_close:hover {
