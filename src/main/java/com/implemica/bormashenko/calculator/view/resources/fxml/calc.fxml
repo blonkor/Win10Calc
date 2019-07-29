@@ -8,121 +8,134 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0" prefHeight="501.0" prefWidth="322.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.implemica.bormashenko.calculator.controller.Controller">
-        <AnchorPane prefHeight="32.0" styleClass="title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Button fx:id="hide" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="−" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
-            <Button fx:id="exit" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="exit" text="✕" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button fx:id="expand" maxHeight="30.0" maxWidth="50.0" minHeight="30.0" minWidth="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="hide" text="⬜" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0" />
-            <Label fx:id="title" layoutX="20.0" layoutY="7.0" text="Calculator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
-                <padding>
-                    <Insets left="15.0" />
-                </padding>
-            </Label>
-        </AnchorPane>
-        <GridPane hgap="1.0" vgap="2.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="159.0" AnchorPane.topAnchor="194.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="117.0" styleClass="operations" text="" />
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="109.0" styleClass="operations_letters" text="CE" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="97.0" styleClass="operations" text="" GridPane.rowIndex="5" />
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="79.0" styleClass="operations" text="" GridPane.columnIndex="1" />
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="79.0" styleClass="operations_letters" text="C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="8" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="5" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="2" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-        </GridPane>
-        <GridPane hgap="1.0" layoutX="10.0" layoutY="10.0" vgap="2.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="194.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="79.0" styleClass="operations_degree" text="𝑥²" />
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="79.0" styleClass="backspace" text="⌫" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="9" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="80.0" styleClass="digits" text="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </Button>
-                <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="79.0" styleClass="dot" text="." GridPane.rowIndex="5" />
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="95.0" styleClass="operations_degree" text="¹⁄𝑥" GridPane.columnIndex="1" />
-                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="104.0" styleClass="operations" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="99.0" styleClass="operations" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="108.0" styleClass="operations" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="128.0" styleClass="operations" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="139.0" styleClass="operations" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            </children>
-        </GridPane>
-        <HBox alignment="CENTER" layoutX="2.0" layoutY="145.0" prefHeight="49.0" prefWidth="322.0" AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="165.0">
-            <children>
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="MC" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="MR" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="M+" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="M-" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="MS" />
-                <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="M▾" />
-            </children>
-        </HBox>
+<AnchorPane fx:id="background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0"
+            minWidth="320.0" prefHeight="501.0" prefWidth="322.0" styleClass="background"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.implemica.bormashenko.calculator.controller.Controller">
+    <AnchorPane prefHeight="32.0" styleClass="title" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Button fx:id="hide" layoutX="184.0" layoutY="1.0" maxHeight="42.0" maxWidth="50.0" minHeight="31.0"
+                minWidth="46.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="46.0" styleClass="window" text=""
+                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="94.0"
+                AnchorPane.topAnchor="0.0"/>
+        <Button fx:id="close" mnemonicParsing="false" prefHeight="31.0" prefWidth="46.0" styleClass="window_close"
+                text="" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="274.0" AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="0.0"/>
+        <Button fx:id="expand" layoutX="226.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                minHeight="31.0" minWidth="46.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="46.0"
+                styleClass="window" text="" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="228.0"
+                AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="0.0"/>
+        <Label layoutX="20.0" layoutY="7.0" text="Calculator" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets left="15.0"/>
+            </padding>
+        </Label>
+    </AnchorPane>
+    <HBox alignment="CENTER" layoutX="2.0" layoutY="145.0" prefHeight="49.0" prefWidth="322.0"
+          AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0"
+          AnchorPane.topAnchor="165.0">
+        <children>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="MC"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="MR"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="M+"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="M-"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory" text="MS"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="54.0" styleClass="memory_show" text=""/>
+        </children>
+    </HBox>
+    <Label accessibleRole="LIST_VIEW" alignment="CENTER_RIGHT" layoutX="6.0" layoutY="116.0" prefHeight="49.0"
+           prefWidth="307.0" styleClass="screen" text="0" AnchorPane.bottomAnchor="352.0" AnchorPane.leftAnchor="6.0"
+           AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="90.0">
+        <font>
+            <Font size="36.0"/>
+        </font>
+        <padding>
+            <Insets bottom="2.0"/>
+        </padding>
+    </Label>
+    <GridPane hgap="1.0" layoutX="6.0" layoutY="314.0" vgap="2.0" AnchorPane.bottomAnchor="5.0"
+              AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="161.0" AnchorPane.topAnchor="196.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE94C;"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations_letters" text="C"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations_letters" text="CE"
+                    GridPane.rowIndex="1"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE94B;"
+                    GridPane.columnIndex="1"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="7"
+                    GridPane.rowIndex="2"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="8"
+                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="4"
+                    GridPane.rowIndex="3"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="5"
+                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="1"
+                    GridPane.rowIndex="4"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="2"
+                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE94D;"
+                    GridPane.rowIndex="5"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="0"
+                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        </children>
+    </GridPane>
+    <GridPane hgap="1.0" layoutX="90.0" layoutY="307.0" vgap="2.0" AnchorPane.bottomAnchor="5.0"
+              AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="196.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE949;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations_degree" text="¹⁄𝑥"
+                    GridPane.columnIndex="1"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE94E;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="dot" text="."
+                    GridPane.rowIndex="5"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="3"
+                    GridPane.rowIndex="4"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE948;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="6"
+                    GridPane.rowIndex="3"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="digits" text="9"
+                    GridPane.rowIndex="2"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE947;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations" text="&#xE94A;"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="backspace" text="&#xE94F;"
+                    GridPane.rowIndex="1"/>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="78.0" styleClass="operations_degree"
+                    text="𝑥²"/>
+        </children>
+    </GridPane>
 
 </AnchorPane>
