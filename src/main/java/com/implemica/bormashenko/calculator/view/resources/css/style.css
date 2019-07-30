@@ -172,3 +172,26 @@
     -fx-background-color: #e9091e;
     -fx-text-fill: white;
 }
+
+.tooltip_gray {
+    -fx-text-fill: black;
+    -fx-background-radius: 0;
+    -fx-background-color: #e0e0e0;
+    -fx-border-width: 1pt;
+    -fx-border-color: #d0d0d0;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI Semilight";
+    -fx-effect: null;
+}
+
+.tooltip_white {
+    -fx-padding: 2 2 2 2;
+    -fx-text-fill: black;
+    -fx-background-radius: 0;
+    -fx-background-color: #f9fedf;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-font-size: 11px;
+    -fx-font-family: "Segoe UI Semilight";
+    -fx-effect: null;
+}
