@@ -7,41 +7,19 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for application's controls.
+ *
+ * @author Mykhailo Bormashenko
+ */
 public class Controller implements Initializable {
 
+    /**
+     * Calculator buttons.
+     */
     @FXML
-    private Button memoryClear;
-
-    @FXML
-    private Button memoryRecall;
-
-    @FXML
-    private Button memoryAdd;
-
-    @FXML
-    private Button memorySubtract;
-
-    @FXML
-    private Button memoryStore;
-
-    @FXML
-    private Button memoryShow;
-
-    @FXML
-    private Button navigation;
-
-    @FXML
-    private Button history;
-
-    @FXML
-    private Button close;
-
-    @FXML
-    private Button hide;
-
-    @FXML
-    private Button expand;
-
+    private Button memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
+            navigation, history, close, hide, expand;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +35,13 @@ public class Controller implements Initializable {
         setWhiteTooltipsLocation(buttonsWithWhiteTooltip);
     }
 
+    /**
+     * Changes locations for gray tooltips.
+     * Gray tooltip is a tooltip with {@code styleClass = "tooltip_gray"}.
+     * Gray tooltip have to appear above the cursor.
+     *
+     * @param buttons controllers with tooltip.
+     */
     private void setGrayTooltipsLocation(Button[] buttons) {
         final double[] currentMouseX = new double[1];
         final double[] currentMouseY = new double[1];
@@ -72,6 +57,13 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Changes locations for white tooltips.
+     * White tooltip is a tooltip with {@code styleClass = "tooltip_white"}.
+     * White tooltip have to appear below the cursor.
+     *
+     * @param buttons controllers with tooltip.
+     */
     private void setWhiteTooltipsLocation(Button[] buttons) {
         final double[] currentMouseX = new double[1];
         final double[] currentMouseY = new double[1];
