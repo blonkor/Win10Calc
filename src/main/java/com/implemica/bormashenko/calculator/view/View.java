@@ -3,6 +3,7 @@ package com.implemica.bormashenko.calculator.view;
 import com.implemica.bormashenko.calculator.view.listeners.ExitListener;
 import com.implemica.bormashenko.calculator.view.listeners.ExpandListener;
 import com.implemica.bormashenko.calculator.view.listeners.HideListener;
+import com.implemica.bormashenko.calculator.view.listeners.ResizeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -77,10 +78,16 @@ public class View {
         Button hide = (Button) scene.lookup(HIDE_ID);
         hide.setOnAction(new HideListener(primaryStage));
 
+        //add resize listener
+        ResizeListener resizeListener = new ResizeListener(scene, primaryStage);
+        scene.setOnMouseMoved(resizeListener);
+        scene.setOnMousePressed(resizeListener);
+        scene.setOnMouseDragged(resizeListener);
+
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(true);
 
         scene.setFill(Color.color(1, 1, 1, 0));

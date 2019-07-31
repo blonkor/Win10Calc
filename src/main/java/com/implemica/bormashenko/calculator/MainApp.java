@@ -4,8 +4,14 @@ import com.implemica.bormashenko.calculator.view.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Main class for application.
+ */
 public class MainApp extends Application {
 
+    /**
+     * View of application.
+     */
     private View view = new View();
 
     @Override
@@ -13,6 +19,10 @@ public class MainApp extends Application {
         view.initStage(primaryStage);
     }
 
+    /**
+     * Entry point.
+     * @param args command line parameters.
+     */
     public static void main(String[] args) {
         launch(args);
     }
