@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -56,6 +57,11 @@ public class View {
     private static final String HIDE_ID = "#hide";
 
     /**
+     * ID of top panel (anchor pane).
+     */
+    private static final String TOP_PANEL_ID = "#topPanel";
+
+    /**
      * Initializing main view and listeners.
      *
      * @param primaryStage JavaFX stage.
@@ -66,22 +72,27 @@ public class View {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource(STYLE_PATH).toExternalForm());
 
-        //add close listener
+        //close listener
         Button exit = (Button) scene.lookup(CLOSE_ID);
         exit.setOnAction(new ExitListener(primaryStage));
 
-        //add expand listener
+        //expand listener
         Button expand = (Button) scene.lookup(EXPAND_ID);
         expand.setOnAction(new ExpandListener(primaryStage));
 
-        //add hide listener
+        //hide listener
         Button hide = (Button) scene.lookup(HIDE_ID);
         hide.setOnAction(new HideListener(primaryStage));
 
-        //add resize listener
+        //add move listener
+        AnchorPane topPanel = (AnchorPane) scene.lookup(TOP_PANEL_ID);
+        MoveListener moveListener = new MoveListener(primaryStage);
+        topPanel.setOnMousePressed(moveListener);
+        topPanel.setOnMouseDragged(moveListener);
+
+        //resize listener
         ResizeListener resizeListener = new ResizeListener(scene, primaryStage);
         scene.setOnMouseMoved(resizeListener);
-        scene.setOnMousePressed(resizeListener);
         scene.setOnMouseDragged(resizeListener);
 
         primaryStage.setTitle(TITLE);
