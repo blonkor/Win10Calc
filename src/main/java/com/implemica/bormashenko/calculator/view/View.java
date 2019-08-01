@@ -18,7 +18,6 @@ import javafx.stage.StageStyle;
  * Main view of application.
  *
  * @author Mykhailo Bormashenko
- *
  */
 public class View {
 
