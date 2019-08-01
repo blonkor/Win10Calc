@@ -121,12 +121,12 @@
             <children>
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button fx:id="memoryClear" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="memory" text="MC" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryClear" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="memory" text="MC" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Clear all memory (Ctrl+L)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryRecall" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="memory" text="MR" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryRecall" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="memory" text="MR" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory recall (Ctrl+R)" />
                             </tooltip>
@@ -146,7 +146,7 @@
                                 <Tooltip styleClass="tooltip_gray" text="Memory store (Ctrl+M)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryShow" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="memory_show" text="M" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryShow" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="memory_show" text="M" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory" />
                             </tooltip>

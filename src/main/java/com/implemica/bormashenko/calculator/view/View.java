@@ -18,6 +18,7 @@ import javafx.stage.StageStyle;
  * Main view of application.
  *
  * @author Mykhailo Bormashenko
+ *
  */
 public class View {
 
@@ -78,7 +79,7 @@ public class View {
 
         //expand listener
         Button expand = (Button) scene.lookup(EXPAND_ID);
-        expand.setOnAction(new ExpandListener(primaryStage));
+        expand.setOnAction(new ExpandListener(scene, primaryStage));
 
         //hide listener
         Button hide = (Button) scene.lookup(HIDE_ID);
