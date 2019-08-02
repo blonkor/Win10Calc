@@ -3,6 +3,8 @@ package com.implemica.bormashenko.calculator.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +22,11 @@ public class Controller implements Initializable {
     @FXML
     private Button memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
             navigation, history, close, hide, expand;
+
+    @FXML
+    private Label mainScreen;
+
+    private static final String ZERO = "0";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,4 +85,68 @@ public class Controller implements Initializable {
             });
         }
     }
+
+    public void zeroClick(MouseEvent mouseEvent) {
+        String digit = "0";
+        addDigitToMainScreen(digit);
+    }
+
+    public void oneClick(MouseEvent mouseEvent) {
+        String digit = "1";
+        addDigitToMainScreen(digit);
+    }
+
+    public void twoClick(MouseEvent mouseEvent) {
+        String digit = "2";
+        addDigitToMainScreen(digit);
+    }
+
+    public void threeClick(MouseEvent mouseEvent) {
+        String digit = "3";
+        addDigitToMainScreen(digit);
+    }
+
+    public void fourClick(MouseEvent mouseEvent) {
+        String digit = "4";
+        addDigitToMainScreen(digit);
+    }
+
+    public void fiveClick(MouseEvent mouseEvent) {
+        String digit = "5";
+        addDigitToMainScreen(digit);
+    }
+
+    public void sixClick(MouseEvent mouseEvent) {
+        String digit = "6";
+        addDigitToMainScreen(digit);
+    }
+
+    public void sevenClick(MouseEvent mouseEvent) {
+        String digit = "7";
+        addDigitToMainScreen(digit);
+    }
+
+    public void eightClick(MouseEvent mouseEvent) {
+        String digit = "8";
+        addDigitToMainScreen(digit);
+    }
+
+    public void nineClick(MouseEvent mouseEvent) {
+        String digit = "9";
+        addDigitToMainScreen(digit);
+    }
+
+    private void addDigitToMainScreen(String digit) {
+        String number = mainScreen.getText();
+        int maxSymbols = 21;
+
+        if (number.equals(ZERO)) {
+            number = digit;
+        } else if (number.length() <= maxSymbols) {
+            number += digit;
+        }
+
+        mainScreen.setText(number);
+    }
+
 }
