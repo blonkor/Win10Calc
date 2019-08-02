@@ -28,6 +28,8 @@ public class Controller implements Initializable {
 
     private static final String ZERO = "0";
 
+    private static final String COMMA = ",";
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] buttonsWithGrayTooltip = {
@@ -136,17 +138,36 @@ public class Controller implements Initializable {
         addDigitToMainScreen(digit);
     }
 
+    public void negate(MouseEvent mouseEvent) {
+        String number = mainScreen.getText();
+    }
+
     private void addDigitToMainScreen(String digit) {
         String number = mainScreen.getText();
-        int maxSymbols = 21;
+        int maxSymbols = 16;
+        number = number.replaceAll(COMMA, "");
 
         if (number.equals(ZERO)) {
             number = digit;
-        } else if (number.length() <= maxSymbols) {
+        } else if (number.length() < maxSymbols) {
             number += digit;
         }
 
-        mainScreen.setText(number);
+        addCommasToMainScreen(number);
     }
 
+    private void addCommasToMainScreen(String number) {
+        StringBuilder str = new StringBuilder();
+        char[] chars = number.toCharArray();
+        int counter = 0;
+        for (int i = chars.length - 1; i >= 0; i--) {
+            if (counter == 3) {
+                str.append(COMMA);
+                counter = 0;
+            }
+            str.append(chars[i]);
+            counter++;
+        }
+        mainScreen.setText(str.reverse().toString());
+    }
 }
