@@ -160,6 +160,22 @@
     -fx-background-color: #d0d0d0;
 }
 
+.navigation_buttons {
+    -fx-background-color:#e7e7e7;
+}
+
+.navigation_buttons:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.navigation_labels {
+    -fx-background-color:#e7e7e7;
+}
+
+.scroll_pane {
+    -fx-background-color: transparent;
+}
+
 .window_close {
     -fx-background-radius: 0;
     -fx-background-color:#e7e7e7;
