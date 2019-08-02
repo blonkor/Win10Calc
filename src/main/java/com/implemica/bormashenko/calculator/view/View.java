@@ -1,13 +1,11 @@
 package com.implemica.bormashenko.calculator.view;
 
-import com.implemica.bormashenko.calculator.view.listeners.ExitListener;
-import com.implemica.bormashenko.calculator.view.listeners.ExpandListener;
-import com.implemica.bormashenko.calculator.view.listeners.HideListener;
-import com.implemica.bormashenko.calculator.view.listeners.ResizeListener;
+import com.implemica.bormashenko.calculator.view.listeners.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -61,6 +59,8 @@ public class View {
      */
     private static final String TOP_PANEL_ID = "#topPanel";
 
+    private static final String SCREEN_LABEL_ID = "#mainScreen";
+
     /**
      * Initializing main view and listeners.
      *
@@ -94,6 +94,10 @@ public class View {
         ResizeListener resizeListener = new ResizeListener(scene, primaryStage);
         scene.setOnMouseMoved(resizeListener);
         scene.setOnMouseDragged(resizeListener);
+
+        //add numeric field font resize
+        Label numericLabel = (Label) scene.lookup(SCREEN_LABEL_ID);
+        numericLabel.textProperty().addListener(new DigitsResizeListener(scene));
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
