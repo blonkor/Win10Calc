@@ -24,7 +24,7 @@ public class Controller implements Initializable {
             navigation, history, close, hide, expand;
 
     @FXML
-    private Label mainScreen;
+    private Label result;
 
     private static final String ZERO = "0";
 
@@ -139,11 +139,11 @@ public class Controller implements Initializable {
     }
 
     public void negate(MouseEvent mouseEvent) {
-        String number = mainScreen.getText();
+        String number = result.getText();
     }
 
     private void addDigitToMainScreen(String digit) {
-        String number = mainScreen.getText();
+        String number = result.getText();
         int maxSymbols = 16;
         number = number.replaceAll(COMMA, "");
 
@@ -168,6 +168,6 @@ public class Controller implements Initializable {
             str.append(chars[i]);
             counter++;
         }
-        mainScreen.setText(str.reverse().toString());
+        result.setText(str.reverse().toString());
     }
 }

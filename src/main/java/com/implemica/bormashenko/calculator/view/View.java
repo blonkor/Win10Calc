@@ -59,7 +59,7 @@ public class View {
      */
     private static final String TOP_PANEL_ID = "#topPanel";
 
-    private static final String SCREEN_LABEL_ID = "#mainScreen";
+    private static final String RESULT_LABEL_ID = "#result";
 
     /**
      * Initializing main view and listeners.
@@ -84,7 +84,7 @@ public class View {
         Button hide = (Button) scene.lookup(HIDE_ID);
         hide.setOnAction(new HideListener(primaryStage));
 
-        //add move listener
+        //move listener
         AnchorPane topPanel = (AnchorPane) scene.lookup(TOP_PANEL_ID);
         MoveListener moveListener = new MoveListener(primaryStage);
         topPanel.setOnMousePressed(moveListener);
@@ -95,8 +95,8 @@ public class View {
         scene.setOnMouseMoved(resizeListener);
         scene.setOnMouseDragged(resizeListener);
 
-        //add numeric field font resize
-        Label numericLabel = (Label) scene.lookup(SCREEN_LABEL_ID);
+        //digits resize listener
+        Label numericLabel = (Label) scene.lookup(RESULT_LABEL_ID);
         numericLabel.textProperty().addListener(new DigitsResizeListener(scene));
 
         primaryStage.setTitle(TITLE);

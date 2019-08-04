@@ -18,7 +18,7 @@ public class DigitsResizeListener implements InvalidationListener {
 
     private static final int MEDIUM_FONT_COUNT = 15;
 
-    private static final String SCREEN_LABEL_ID = "#mainScreen";
+    private static final String RESULT_LABEL_ID = "#result";
 
     private Scene scene;
 
@@ -28,7 +28,7 @@ public class DigitsResizeListener implements InvalidationListener {
 
     @Override
     public void invalidated(Observable observable) {
-        Label field = (Label) scene.lookup(SCREEN_LABEL_ID);
+        Label field = (Label) scene.lookup(RESULT_LABEL_ID);
         int length = field.getText().length();
         int font;
 
