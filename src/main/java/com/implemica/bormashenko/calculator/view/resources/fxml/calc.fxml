@@ -14,395 +14,206 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0"
-            prefHeight="501.0" prefWidth="322.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.implemica.bormashenko.calculator.controller.Controller">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="320.0" prefHeight="501.0" prefWidth="322.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.implemica.bormashenko.calculator.controller.Controller">
     <children>
         <AnchorPane fx:id="topPanel" layoutX="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <HBox alignment="TOP_RIGHT" layoutX="170.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0"
-                      prefWidth="140.0" AnchorPane.rightAnchor="0.0">
+                <HBox alignment="TOP_RIGHT" layoutX="170.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="140.0" AnchorPane.rightAnchor="0.0">
                     <children>
-                        <Button fx:id="hide" maxHeight="32.0" maxWidth="-Infinity" minHeight="32.0"
-                                mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" styleClass="window" text="">
+                        <Button fx:id="hide" maxHeight="32.0" maxWidth="-Infinity" minHeight="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" styleClass="window" text="">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_white" text="Minimize"/>
+                                <Tooltip styleClass="tooltip_white" text="Minimize" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="expand" maxHeight="32.0" maxWidth="-Infinity" minHeight="32.0"
-                                mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" styleClass="window" text="">
+                        <Button fx:id="expand" maxHeight="32.0" maxWidth="-Infinity" minHeight="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" styleClass="window" text="">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_white" text="Maximize"/>
+                                <Tooltip styleClass="tooltip_white" text="Maximize" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="close" maxHeight="32.0" maxWidth="-Infinity" minHeight="32.0"
-                                mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" styleClass="window_close"
-                                text="">
+                        <Button fx:id="close" maxHeight="32.0" maxWidth="-Infinity" minHeight="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="46.0" styleClass="window_close" text="">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_white" text="Close"/>
+                                <Tooltip styleClass="tooltip_white" text="Close" />
                             </tooltip>
                         </Button>
                     </children>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                 </HBox>
-                <TextFlow layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                          minWidth="-Infinity" prefHeight="16.0" prefWidth="71.0" AnchorPane.leftAnchor="10.0">
+                <TextFlow layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="71.0" AnchorPane.leftAnchor="10.0">
                     <children>
-                        <Label prefHeight="16.0" prefWidth="71.0" text="Calculator"/>
+                        <Label prefHeight="16.0" prefWidth="71.0" text="Calculator" />
                     </children>
                 </TextFlow>
             </children>
         </AnchorPane>
-        <HBox layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-              prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="429.0" AnchorPane.leftAnchor="0.0"
-              AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="33.0">
+        <HBox layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="429.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="33.0">
             <children>
-                <Button fx:id="navigation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                        minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-                        styleClass="navigation" text="">
+                <Button fx:id="navigation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="navigation" text="">
                     <tooltip>
-                        <Tooltip styleClass="tooltip_gray" text="Open Navigation"/>
+                        <Tooltip styleClass="tooltip_gray" text="Open Navigation" />
                     </tooltip>
                 </Button>
             </children>
         </HBox>
-        <TextFlow layoutX="42.0" layoutY="32.0" prefHeight="30.0" prefWidth="77.0" AnchorPane.bottomAnchor="438.0"
-                  AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="203.0" AnchorPane.topAnchor="40.0">
+        <TextFlow layoutX="42.0" layoutY="32.0" prefHeight="30.0" prefWidth="77.0" AnchorPane.bottomAnchor="438.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="203.0" AnchorPane.topAnchor="40.0">
             <children>
                 <Label contentDisplay="CENTER" styleClass="type" text="Standard">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Label>
             </children>
         </TextFlow>
-        <HBox layoutX="278.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-              minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="429.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
+        <HBox layoutX="278.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="429.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
             <children>
-                <Button fx:id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                        minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-                        styleClass="history" text="">
+                <Button fx:id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="history" text="">
                     <tooltip>
-                        <Tooltip styleClass="tooltip_gray" text="History (Ctrl+H)"/>
+                        <Tooltip styleClass="tooltip_gray" text="History (Ctrl+H)" />
                     </tooltip>
                 </Button>
             </children>
         </HBox>
-        <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308"
-                  nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0"
-                  AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0"
-                  AnchorPane.topAnchor="90.0">
+        <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="90.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" valignment="CENTER" vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0"
-                                valignment="CENTER" vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER"
-                                vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER"
-                                vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER"
-                                vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER"
-                                vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER"
-                                vgrow="ALWAYS"/>
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER"
-                                vgrow="ALWAYS"/>
+                <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations" text="" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_letters" text="CE" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#sevenClick" styleClass="digits"
-                        text="7" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                        GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#fourClick" styleClass="digits" text="4"
-                        textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                        GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#oneClick" styleClass="digits" text="1"
-                        textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                        GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" onMouseClicked="#negate" styleClass="operations" text=""
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations" text="" GridPane.columnIndex="1"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_degree" text="𝑥²" GridPane.columnIndex="2"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_degree" text="⅟𝑥" GridPane.columnIndex="3"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
-                        minWidth="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0"
-                        styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_letters" text="C" GridPane.columnIndex="1"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="backspace" text="" GridPane.columnIndex="2"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#eightClick" styleClass="digits"
-                        text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#nineClick" styleClass="digits" text="9"
-                        textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#fiveClick" styleClass="digits" text="5"
-                        textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-                        maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="dot"
-                        text="." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                        GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#zeroClick" styleClass="digits" text="0"
-                        textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#twoClick" styleClass="digits" text="2"
-                        textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#threeClick" styleClass="digits"
-                        text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minWidth="50.0" mnemonicParsing="false" onMouseClicked="#sixClick" styleClass="digits" text="6"
-                        textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER"
-                        GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER"
-                        GridPane.vgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0"
-                        mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3"
-                        GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6"
-                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-                <HBox alignment="BOTTOM_LEFT" fillHeight="false" maxWidth="700.0" nodeOrientation="LEFT_TO_RIGHT"
-                      GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS"
-                      GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations" text="" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_letters" text="CE" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#sevenClick" styleClass="digits" text="7" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#fourClick" styleClass="digits" text="4" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#oneClick" styleClass="digits" text="1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#negate" styleClass="operations" text="" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_degree" text="𝑥²" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_degree" text="⅟𝑥" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="50.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_letters" text="C" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="backspace" text="" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#eightClick" styleClass="digits" text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#nineClick" styleClass="digits" text="9" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#fiveClick" styleClass="digits" text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="dot" text="." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#zeroClick" styleClass="digits" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#twoClick" styleClass="digits" text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#threeClick" styleClass="digits" text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#sixClick" styleClass="digits" text="6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                <HBox alignment="BOTTOM_LEFT" fillHeight="false" maxWidth="700.0" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <children>
-                        <Button fx:id="memoryClear" disable="true" maxHeight="-Infinity"
-                                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MC"
-                                HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryClear" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MC" HBox.hgrow="ALWAYS">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_gray" text="Clear all memory (Ctrl+L)"/>
+                                <Tooltip styleClass="tooltip_gray" text="Clear all memory (Ctrl+L)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryRecall" disable="true" maxHeight="-Infinity"
-                                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MR"
-                                HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryRecall" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MR" HBox.hgrow="ALWAYS">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_gray" text="Memory recall (Ctrl+R)"/>
+                                <Tooltip styleClass="tooltip_gray" text="Memory recall (Ctrl+R)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryAdd" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
-                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0"
-                                styleClass="memory" text="M+" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryAdd" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="M+" HBox.hgrow="ALWAYS">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_gray" text="Memory add (Ctrl+P)"/>
+                                <Tooltip styleClass="tooltip_gray" text="Memory add (Ctrl+P)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memorySubtract" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
-                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0"
-                                styleClass="memory" text="M-" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memorySubtract" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="M-" HBox.hgrow="ALWAYS">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_gray" text="Memory subtract (Ctrl+Q)"/>
+                                <Tooltip styleClass="tooltip_gray" text="Memory subtract (Ctrl+Q)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryStore" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
-                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0"
-                                styleClass="memory" text="MS" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryStore" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MS" HBox.hgrow="ALWAYS">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_gray" text="Memory store (Ctrl+M)"/>
+                                <Tooltip styleClass="tooltip_gray" text="Memory store (Ctrl+M)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryShow" disable="true" maxHeight="-Infinity"
-                                maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
-                                mnemonicParsing="false" prefHeight="30.0" styleClass="memory_show" text="M"
-                                HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryShow" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory_show" text="M" HBox.hgrow="ALWAYS">
                             <tooltip>
-                                <Tooltip styleClass="tooltip_gray" text="Memory"/>
+                                <Tooltip styleClass="tooltip_gray" text="Memory" />
                             </tooltip>
                         </Button>
                     </children>
                 </HBox>
-                <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0"
-                      GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                     <children>
                         <Label fx:id="result" text="0">
                             <font>
-                                <Font size="48.0"/>
+                                <Font size="48.0" />
                             </font>
                             <cursor>
-                                <Cursor fx:constant="TEXT"/>
+                                <Cursor fx:constant="TEXT" />
                             </cursor>
                         </Label>
                     </children>
                 </HBox>
-                <Label GridPane.columnIndex="3" GridPane.halignment="RIGHT"/>
+                <Label GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>
-        <ScrollPane fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0"
-                    minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane"
-                    visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.topAnchor="73.0">
+        <ScrollPane fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
             <content>
                 <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
                     <children>
-                        <Label layoutY="5.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0"
-                               prefWidth="256.0" styleClass="navigation_labels" text="Calculator"
-                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutY="5.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_labels" text="Calculator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                             <font>
-                                <Font name="System Bold" size="14.0"/>
+                                <Font name="System Bold" size="14.0" />
                             </font>
                             <padding>
-                                <Insets left="5.0"/>
+                                <Insets left="5.0" />
                             </padding>
                         </Label>
-                        <Button alignment="BASELINE_LEFT" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity"
-                                minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0"
-                                styleClass="navigation_buttons" text=" Standard" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0">
+                        <Button alignment="BASELINE_LEFT" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" styleClass="navigation_buttons" text=" Standard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <font>
-                                <Font name="Segoe MDL2 Assets" size="12.0"/>
+                                <Font name="Segoe MDL2 Assets" size="12.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="80.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text=" Scientific" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="120.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Programmer" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="160.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Date Calculation" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Label layoutX="2.0" layoutY="200.0" maxHeight="-Infinity" minWidth="-Infinity"
-                               prefHeight="40.0" prefWidth="256.0" styleClass="navigation_labels" text="Converter"
-                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text=" Scientific" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="120.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Programmer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="160.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Date Calculation" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Label layoutX="2.0" layoutY="200.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_labels" text="Converter" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <padding>
-                                <Insets left="5.0"/>
+                                <Insets left="5.0" />
                             </padding>
                         </Label>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="240.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Currency" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="280.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Volume" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="320.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Length" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutY="360.0" maxHeight="-Infinity" minHeight="-Infinity"
-                                mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Weight and Mass" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="400.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Temperature" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="440.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Energy" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="480.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Area" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="520.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Speed" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="560.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Time" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="600.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Power" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutY="640.0" maxHeight="-Infinity" minHeight="-Infinity"
-                                mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Data" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="680.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Pressure" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="720.0" maxHeight="-Infinity"
-                                minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0"
-                                styleClass="navigation_buttons" text="Angle" AnchorPane.leftAnchor="0.0"
-                                AnchorPane.rightAnchor="-15.0"/>
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Currency" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="280.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Volume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="320.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Length" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutY="360.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Weight and Mass" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="400.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Temperature" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="440.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Energy" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="480.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="520.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Speed" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="560.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="600.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Power" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutY="640.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Data" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="680.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Pressure" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
+                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="720.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="Angle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" />
                     </children>
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Button alignment="BASELINE_LEFT" layoutX="180.0" layoutY="501.0" maxHeight="-Infinity" minHeight="-Infinity"
-                mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="About"
-                visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0"
-                AnchorPane.topAnchor="456.0"/>
-        <AnchorPane layoutX="-21.0" layoutY="-8.0" prefHeight="305.0" prefWidth="322.0" visible="false"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Button alignment="BASELINE_LEFT" layoutX="180.0" layoutY="501.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="About" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="456.0" />
+        <AnchorPane layoutX="-21.0" layoutY="-8.0" prefHeight="305.0" prefWidth="322.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0"
-                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label text="There's nothing saved in memory"/>
+                        <Label text="There's nothing saved in memory" />
                     </children>
                 </TextFlow>
             </children>

@@ -8,7 +8,6 @@ import javafx.stage.Stage;
  * Main class for application.
  */
 public class MainApp extends Application {
-    //check commit
 
     /**
      * View of application.

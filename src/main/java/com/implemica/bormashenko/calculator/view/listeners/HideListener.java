@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
- * Listener for minimizing application.
+ * Listener for minimizing an application.
  *
  * @author Mykhailo Bormashenko
  */
@@ -22,7 +22,6 @@ public class HideListener implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        boolean isIconified = !stage.isIconified();
-        stage.setIconified(isIconified);
+        stage.setIconified(true);
     }
 }

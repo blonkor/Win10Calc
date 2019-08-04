@@ -5,21 +5,46 @@ import javafx.beans.Observable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
-
+/**
+ * Listener for resizing font in result label.
+ *
+ * @author Mykhailo Bormashenko
+ */
 public class DigitsResizeListener implements InvalidationListener {
 
-    private static final int FONT_BIG = 47;
+    /**
+     * Size of font used as big.
+     */
+    private static final int BIG_FONT = 47;
 
-    private static final int FONT_MEDIUM = 35;
+    /**
+     * Size of font used as medium.
+     */
+    private static final int MEDIUM_FONT = 35;
 
-    private static final int FONT_SMALL = 21;
+    /**
+     * Size of font used as small.
+     */
+    private static final int SMALL_FONT = 21;
 
+    /**
+     * Number of symbols in label from which the big font is used.
+     */
     private static final int BIG_FONT_COUNT = 11;
 
+    /**
+     * Number of symbols in label from which the medium font is used.
+     */
     private static final int MEDIUM_FONT_COUNT = 15;
 
+    /**
+     * ID of label in which the result of operations is shown.
+     */
     private static final String RESULT_LABEL_ID = "#result";
 
+    /**
+     * JavaFX scene.
+     */
     private Scene scene;
 
     public DigitsResizeListener(Scene scene) {
@@ -33,16 +58,21 @@ public class DigitsResizeListener implements InvalidationListener {
         int font;
 
         if (length < BIG_FONT_COUNT) {
-            font = FONT_BIG;
+            font = BIG_FONT;
         } else if (length < MEDIUM_FONT_COUNT) {
-            font = FONT_MEDIUM;
+            font = MEDIUM_FONT;
         } else {
-            font = FONT_SMALL;
+            font = SMALL_FONT;
         }
 
         field.setStyle(getFontString(font));
     }
 
+    /**
+     * Stylesheet representation of font size.
+     * @param size size of font to set in px.
+     * @return string for setting size of font in stylesheets.
+     */
     private String getFontString(int size) {
         return "-fx-font-size: " + size + "px;";
     }

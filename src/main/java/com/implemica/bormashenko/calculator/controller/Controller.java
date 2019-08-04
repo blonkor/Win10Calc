@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,17 +16,26 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     /**
-     * Calculator buttons.
+     * Application buttons.
      */
     @FXML
     private Button memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
             navigation, history, close, hide, expand;
 
+    /**
+     * Application labels.
+     */
     @FXML
     private Label result;
 
+    /**
+     * Zero symbol is used instead of empty string.
+     */
     private static final String ZERO = "0";
 
+    /**
+     * Symbol for separation every three digit in number.
+     */
     private static final String COMMA = ",";
 
     @Override
@@ -88,61 +96,99 @@ public class Controller implements Initializable {
         }
     }
 
-    public void zeroClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "0" to result screen while button is clicked.
+     */
+    public void zeroClick() {
         String digit = "0";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void oneClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "1" to result screen while button is clicked.
+     */
+    public void oneClick() {
         String digit = "1";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void twoClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "2" to result screen while button is clicked.
+     */
+    public void twoClick() {
         String digit = "2";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void threeClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "3" to result screen while button is clicked.
+     */
+    public void threeClick() {
         String digit = "3";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void fourClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "4" to result screen while button is clicked.
+     */
+    public void fourClick() {
         String digit = "4";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void fiveClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "5" to result screen while button is clicked.
+     */
+    public void fiveClick() {
         String digit = "5";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void sixClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "6" to result screen while button is clicked.
+     */
+    public void sixClick() {
         String digit = "6";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void sevenClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "7" to result screen while button is clicked.
+     */
+    public void sevenClick() {
         String digit = "7";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void eightClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "8" to result screen while button is clicked.
+     */
+    public void eightClick() {
         String digit = "8";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void nineClick(MouseEvent mouseEvent) {
+    /**
+     * Adds digit "9" to result screen while button is clicked.
+     */
+    public void nineClick() {
         String digit = "9";
-        addDigitToMainScreen(digit);
+        addDigitToResult(digit);
     }
 
-    public void negate(MouseEvent mouseEvent) {
+    /**
+     * Negates number in result screen while button is clicked.
+     * @TODO
+     */
+    public void negate() {
         String number = result.getText();
     }
 
-    private void addDigitToMainScreen(String digit) {
+    /**
+     * Adds digit symbol to result number string.
+     * @param digit symbol to add.
+     */
+    private void addDigitToResult(String digit) {
         String number = result.getText();
         int maxSymbols = 16;
         number = number.replaceAll(COMMA, "");
@@ -153,10 +199,14 @@ public class Controller implements Initializable {
             number += digit;
         }
 
-        addCommasToMainScreen(number);
+        addCommasToResultScreen(number);
     }
 
-    private void addCommasToMainScreen(String number) {
+    /**
+     * Separates every three digit in number and sets this number to result label.
+     * @param number number to manipulate with.
+     */
+    private void addCommasToResultScreen(String number) {
         StringBuilder str = new StringBuilder();
         char[] chars = number.toCharArray();
         int counter = 0;

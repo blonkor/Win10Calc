@@ -7,6 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * Listener for resizing an application.
+ *
+ * @author Mykhailo Bormashenko
+ */
 public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**

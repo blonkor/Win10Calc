@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 /**
- * Listener for exit from application.
+ * Listener for exit from an application.
  *
  * @author Mykhailo Bormashenko
  */

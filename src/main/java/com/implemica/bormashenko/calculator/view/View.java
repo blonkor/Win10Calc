@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -20,19 +19,14 @@ import javafx.stage.StageStyle;
 public class View {
 
     /**
-     * Title of application.
+     * Title of the application.
      */
     private static final String TITLE = "Calculator";
 
     /**
-     * Path to fxml representation of application.
+     * Path to fxml representation of the application.
      */
     private static final String FXML_PATH = "resources/fxml/calc.fxml";
-
-    /**
-     * Path to application's icon.
-     */
-    private static final String ICON_PATH = "resources/images/icon.png";
 
     /**
      * Path to stylesheets used in application.
@@ -40,25 +34,33 @@ public class View {
     private static final String STYLE_PATH = "resources/css/style.css";
 
     /**
-     * ID of close button.
+     * Path to application's icon.
+     */
+    private static final String ICON_PATH = "resources/images/icon.png";
+
+    /**
+     * ID of exit button that closes the application.
      */
     private static final String CLOSE_ID = "#close";
 
     /**
-     * ID of expand button.
+     * ID of expand button that maximizes the application.
      */
     private static final String EXPAND_ID = "#expand";
 
     /**
-     * ID of expand button.
+     * ID of hide button that minimizes the application.
      */
     private static final String HIDE_ID = "#hide";
 
     /**
-     * ID of top panel (anchor pane).
+     * ID of top panel with which the application can be moved.
      */
     private static final String TOP_PANEL_ID = "#topPanel";
 
+    /**
+     * ID of label in which the result of operations is shown.
+     */
     private static final String RESULT_LABEL_ID = "#result";
 
     /**
@@ -96,8 +98,8 @@ public class View {
         scene.setOnMouseDragged(resizeListener);
 
         //digits resize listener
-        Label numericLabel = (Label) scene.lookup(RESULT_LABEL_ID);
-        numericLabel.textProperty().addListener(new DigitsResizeListener(scene));
+        Label resultLabel = (Label) scene.lookup(RESULT_LABEL_ID);
+        resultLabel.textProperty().addListener(new DigitsResizeListener(scene));
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
@@ -105,7 +107,6 @@ public class View {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(true);
 
-        scene.setFill(Color.color(1, 1, 1, 0));
         primaryStage.show();
     }
 }
