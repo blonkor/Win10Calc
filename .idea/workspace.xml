@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ModelTest.java" afterDir="false" />
     </list>
@@ -243,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565011200052</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Adding new tests for add operation with negative numbers.">
+      <created>1565031725504</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1565031725504</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -294,6 +300,7 @@
     <MESSAGE value="View changed." />
     <MESSAGE value="Adding methods while buttons clicked." />
     <MESSAGE value="Adding model for calculator." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding model for calculator." />
+    <MESSAGE value="Adding new tests for add operation with negative numbers." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding new tests for add operation with negative numbers." />
   </component>
 </project>

@@ -5,34 +5,101 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for model of calculator application.
+ *
+ * @author Mykhailo Bormashenko.
+ */
 class ModelTest {
 
+    /**
+     * Big decimal value of minimal number that calculator's result label can show minus one.
+     */
     private static final BigDecimal MIN_CALC_MINUS_ONE = new BigDecimal("-10000000000000000");
+
+    /**
+     * Big decimal value of minimal number that calculator's result label can show.
+     */
     private static final BigDecimal MIN_CALC = new BigDecimal("-9999999999999999");
+
+    /**
+     * Big decimal value of minimal number that calculator's result label can show plus one.
+     */
     private static final BigDecimal MIN_CALC_PLUS_ONE = new BigDecimal("-9999999999999998");
-    private static final BigDecimal NEG_BILLION = new BigDecimal("-1000000000");
+
+    /**
+     * Big decimal value of -1000000.
+     */
     private static final BigDecimal NEG_MILLION = new BigDecimal("-1000000");
+
+    /**
+     * Big decimal value of -1000.
+     */
     private static final BigDecimal NEG_THOUSAND = new BigDecimal("-1000");
+
+    /**
+     * Big decimal value of -100.
+     */
     private static final BigDecimal NEG_HUNDRED = new BigDecimal("-100");
+
+    /**
+     * Big decimal value of -10.
+     */
     private static final BigDecimal NEG_TEN = new BigDecimal("-10");
+
+    /**
+     * Big decimal value of -2.
+     */
     private static final BigDecimal NEG_TWO = new BigDecimal("-2");
+
+    /**
+     * Big decimal value of -1.
+     */
     private static final BigDecimal NEG_ONE = new BigDecimal("-1");
+
+    /**
+     * Big decimal value of 2.
+     */
     private static final BigDecimal TWO = new BigDecimal("2");
+
+    /**
+     * Big decimal value of 100.
+     */
     private static final BigDecimal HUNDRED = new BigDecimal("100");
+
+    /**
+     * Big decimal value of 1000.
+     */
     private static final BigDecimal THOUSAND = new BigDecimal("1000");
+
+    /**
+     * Big decimal value of 1000000.
+     */
     private static final BigDecimal MILLION = new BigDecimal("1000000");
-    private static final BigDecimal BILLION = new BigDecimal("1000000000");
+
+    /**
+     * Big decimal value of maximal number that calculator's result label can show minus one.
+     */
     private static final BigDecimal MAX_CALC_MINUS_ONE = new BigDecimal("9999999999999998");
+
+    /**
+     * Big decimal value of maximal number that calculator's result label can show.
+     */
     private static final BigDecimal MAX_CALC = new BigDecimal("9999999999999999");
+
+    /**
+     * Big decimal value of maximal number that calculator's result label can show plus one.
+     */
     private static final BigDecimal MAX_CALC_PLUS_ONE = new BigDecimal("10000000000000000");
 
     @Test
     void tests() {
+        //add operation tests
+        //integer values only
         //first is min calc value minus one
         checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC_MINUS_ONE, new BigDecimal("-20000000000000000"));
         checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC, new BigDecimal("-19999999999999999"));
         checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC_PLUS_ONE, new BigDecimal("-19999999999999998"));
-        checkAdd(MIN_CALC_MINUS_ONE, NEG_BILLION, new BigDecimal("-10000001000000000"));
         checkAdd(MIN_CALC_MINUS_ONE, NEG_MILLION, new BigDecimal("-10000000001000000"));
         checkAdd(MIN_CALC_MINUS_ONE, NEG_THOUSAND, new BigDecimal("-10000000000001000"));
         checkAdd(MIN_CALC_MINUS_ONE, NEG_HUNDRED, new BigDecimal("-10000000000000100"));
@@ -48,16 +115,14 @@ class ModelTest {
         checkAdd(MIN_CALC_MINUS_ONE, HUNDRED, new BigDecimal("-9999999999999900"));
         checkAdd(MIN_CALC_MINUS_ONE, THOUSAND, new BigDecimal("-9999999999999000"));
         checkAdd(MIN_CALC_MINUS_ONE, MILLION, new BigDecimal("-9999999999000000"));
-        checkAdd(MIN_CALC_MINUS_ONE, BILLION, new BigDecimal("-9999999000000000"));
         checkAdd(MIN_CALC_MINUS_ONE, MAX_CALC_MINUS_ONE, NEG_TWO);
         checkAdd(MIN_CALC_MINUS_ONE, MAX_CALC, NEG_ONE);
         checkAdd(MIN_CALC_MINUS_ONE, MAX_CALC_PLUS_ONE, BigDecimal.ZERO);
-        
+
         //first is min calc value
         checkAdd(MIN_CALC, MIN_CALC_MINUS_ONE, new BigDecimal("-19999999999999999"));
         checkAdd(MIN_CALC, MIN_CALC, new BigDecimal("-19999999999999998"));
         checkAdd(MIN_CALC, MIN_CALC_PLUS_ONE, new BigDecimal("-19999999999999997"));
-        checkAdd(MIN_CALC, NEG_BILLION, new BigDecimal("-10000000999999999"));
         checkAdd(MIN_CALC, NEG_MILLION, new BigDecimal("-10000000000999999"));
         checkAdd(MIN_CALC, NEG_THOUSAND, new BigDecimal("-10000000000000999"));
         checkAdd(MIN_CALC, NEG_HUNDRED, new BigDecimal("-10000000000000099"));
@@ -73,16 +138,14 @@ class ModelTest {
         checkAdd(MIN_CALC, HUNDRED, new BigDecimal("-9999999999999899"));
         checkAdd(MIN_CALC, THOUSAND, new BigDecimal("-9999999999998999"));
         checkAdd(MIN_CALC, MILLION, new BigDecimal("-9999999998999999"));
-        checkAdd(MIN_CALC, BILLION, new BigDecimal("-9999998999999999"));
         checkAdd(MIN_CALC, MAX_CALC_MINUS_ONE, NEG_ONE);
         checkAdd(MIN_CALC, MAX_CALC, BigDecimal.ZERO);
         checkAdd(MIN_CALC, MAX_CALC_PLUS_ONE, BigDecimal.ONE);
-        
+
         //first is min calc value plus one
         checkAdd(MIN_CALC_PLUS_ONE, MIN_CALC_MINUS_ONE, new BigDecimal("-19999999999999998"));
         checkAdd(MIN_CALC_PLUS_ONE, MIN_CALC, new BigDecimal("-19999999999999997"));
         checkAdd(MIN_CALC_PLUS_ONE, MIN_CALC_PLUS_ONE, new BigDecimal("-19999999999999996"));
-        checkAdd(MIN_CALC_PLUS_ONE, NEG_BILLION, new BigDecimal("-10000000999999998"));
         checkAdd(MIN_CALC_PLUS_ONE, NEG_MILLION, new BigDecimal("-10000000000999998"));
         checkAdd(MIN_CALC_PLUS_ONE, NEG_THOUSAND, new BigDecimal("-10000000000000998"));
         checkAdd(MIN_CALC_PLUS_ONE, NEG_HUNDRED, new BigDecimal("-10000000000000098"));
@@ -98,41 +161,14 @@ class ModelTest {
         checkAdd(MIN_CALC_PLUS_ONE, HUNDRED, new BigDecimal("-9999999999999898"));
         checkAdd(MIN_CALC_PLUS_ONE, THOUSAND, new BigDecimal("-9999999999998998"));
         checkAdd(MIN_CALC_PLUS_ONE, MILLION, new BigDecimal("-9999999998999998"));
-        checkAdd(MIN_CALC_PLUS_ONE, BILLION, new BigDecimal("-9999998999999998"));
         checkAdd(MIN_CALC_PLUS_ONE, MAX_CALC_MINUS_ONE, BigDecimal.ZERO);
         checkAdd(MIN_CALC_PLUS_ONE, MAX_CALC, BigDecimal.ONE);
         checkAdd(MIN_CALC_PLUS_ONE, MAX_CALC_PLUS_ONE, TWO);
-        
-        //first is -billion
-        checkAdd(NEG_BILLION, MIN_CALC_MINUS_ONE, new BigDecimal("-10000001000000000"));
-        checkAdd(NEG_BILLION, MIN_CALC, new BigDecimal("-10000000999999999"));
-        checkAdd(NEG_BILLION, MIN_CALC_PLUS_ONE, new BigDecimal("-10000000999999998"));
-        checkAdd(NEG_BILLION, NEG_BILLION, new BigDecimal("-2000000000"));
-        checkAdd(NEG_BILLION, NEG_MILLION, new BigDecimal("-1001000000"));
-        checkAdd(NEG_BILLION, NEG_THOUSAND, new BigDecimal("-1000001000"));
-        checkAdd(NEG_BILLION, NEG_HUNDRED, new BigDecimal("-1000000100"));
-        checkAdd(NEG_BILLION, NEG_TEN, new BigDecimal("-1000000010"));
-        checkAdd(NEG_BILLION, NEG_TWO, new BigDecimal("-1000000002"));
-        checkAdd(NEG_BILLION, NEG_ONE, new BigDecimal("-1000000001"));
 
-        checkAdd(NEG_BILLION, BigDecimal.ZERO, NEG_BILLION);
-
-        checkAdd(NEG_BILLION, BigDecimal.ONE, new BigDecimal("-999999999"));
-        checkAdd(NEG_BILLION, TWO, new BigDecimal("-999999998"));
-        checkAdd(NEG_BILLION, BigDecimal.TEN, new BigDecimal("-999999990"));
-        checkAdd(NEG_BILLION, HUNDRED, new BigDecimal("-999999900"));
-        checkAdd(NEG_BILLION, THOUSAND, new BigDecimal("-999999000"));
-        checkAdd(NEG_BILLION, MILLION, new BigDecimal("-999000000"));
-        checkAdd(NEG_BILLION, BILLION, BigDecimal.ZERO);
-        checkAdd(NEG_BILLION, MAX_CALC_MINUS_ONE, new BigDecimal("9999998999999998"));
-        checkAdd(NEG_BILLION, MAX_CALC, new BigDecimal("9999998999999999"));
-        checkAdd(NEG_BILLION, MAX_CALC_PLUS_ONE, new BigDecimal("9999999000000000"));
-        
         //first is -million
         checkAdd(NEG_MILLION, MIN_CALC_MINUS_ONE, new BigDecimal("-10000000001000000"));
         checkAdd(NEG_MILLION, MIN_CALC, new BigDecimal("-10000000000999999"));
         checkAdd(NEG_MILLION, MIN_CALC_PLUS_ONE, new BigDecimal("-10000000000999998"));
-        checkAdd(NEG_MILLION, NEG_BILLION, new BigDecimal("-1001000000"));
         checkAdd(NEG_MILLION, NEG_MILLION, new BigDecimal("-2000000"));
         checkAdd(NEG_MILLION, NEG_THOUSAND, new BigDecimal("-1001000"));
         checkAdd(NEG_MILLION, NEG_HUNDRED, new BigDecimal("-1000100"));
@@ -148,7 +184,6 @@ class ModelTest {
         checkAdd(NEG_MILLION, HUNDRED, new BigDecimal("-999900"));
         checkAdd(NEG_MILLION, THOUSAND, new BigDecimal("-999000"));
         checkAdd(NEG_MILLION, MILLION, BigDecimal.ZERO);
-        checkAdd(NEG_MILLION, BILLION, new BigDecimal("999000000"));
         checkAdd(NEG_MILLION, MAX_CALC_MINUS_ONE, new BigDecimal("9999999998999998"));
         checkAdd(NEG_MILLION, MAX_CALC, new BigDecimal("9999999998999999"));
         checkAdd(NEG_MILLION, MAX_CALC_PLUS_ONE, new BigDecimal("9999999999000000"));
@@ -157,7 +192,6 @@ class ModelTest {
         checkAdd(NEG_THOUSAND, MIN_CALC_MINUS_ONE, new BigDecimal("-10000000000001000"));
         checkAdd(NEG_THOUSAND, MIN_CALC, new BigDecimal("-10000000000000999"));
         checkAdd(NEG_THOUSAND, MIN_CALC_PLUS_ONE, new BigDecimal("-10000000000000998"));
-        checkAdd(NEG_THOUSAND, NEG_BILLION, new BigDecimal("-1000001000"));
         checkAdd(NEG_THOUSAND, NEG_MILLION, new BigDecimal("-1001000"));
         checkAdd(NEG_THOUSAND, NEG_THOUSAND, new BigDecimal("-2000"));
         checkAdd(NEG_THOUSAND, NEG_HUNDRED, new BigDecimal("-1100"));
@@ -173,16 +207,14 @@ class ModelTest {
         checkAdd(NEG_THOUSAND, HUNDRED, new BigDecimal("-900"));
         checkAdd(NEG_THOUSAND, THOUSAND, BigDecimal.ZERO);
         checkAdd(NEG_THOUSAND, MILLION, new BigDecimal("999000"));
-        checkAdd(NEG_THOUSAND, BILLION, new BigDecimal("999999000"));
         checkAdd(NEG_THOUSAND, MAX_CALC_MINUS_ONE, new BigDecimal("9999999999998998"));
         checkAdd(NEG_THOUSAND, MAX_CALC, new BigDecimal("9999999999998999"));
         checkAdd(NEG_THOUSAND, MAX_CALC_PLUS_ONE, new BigDecimal("9999999999999000"));
-        
+
         //first is -100
         checkAdd(NEG_HUNDRED, MIN_CALC_MINUS_ONE, new BigDecimal("-10000000000000100"));
         checkAdd(NEG_HUNDRED, MIN_CALC, new BigDecimal("-10000000000000099"));
         checkAdd(NEG_HUNDRED, MIN_CALC_PLUS_ONE, new BigDecimal("-10000000000000098"));
-        checkAdd(NEG_HUNDRED, NEG_BILLION, new BigDecimal("-1000000100"));
         checkAdd(NEG_HUNDRED, NEG_MILLION, new BigDecimal("-1000100"));
         checkAdd(NEG_HUNDRED, NEG_THOUSAND, new BigDecimal("-1100"));
         checkAdd(NEG_HUNDRED, NEG_HUNDRED, new BigDecimal("-200"));
@@ -198,16 +230,14 @@ class ModelTest {
         checkAdd(NEG_HUNDRED, HUNDRED, BigDecimal.ZERO);
         checkAdd(NEG_HUNDRED, THOUSAND, new BigDecimal("900"));
         checkAdd(NEG_HUNDRED, MILLION, new BigDecimal("999900"));
-        checkAdd(NEG_HUNDRED, BILLION, new BigDecimal("999999900"));
         checkAdd(NEG_HUNDRED, MAX_CALC_MINUS_ONE, new BigDecimal("9999999999999898"));
         checkAdd(NEG_HUNDRED, MAX_CALC, new BigDecimal("9999999999999899"));
         checkAdd(NEG_HUNDRED, MAX_CALC_PLUS_ONE, new BigDecimal("9999999999999900"));
-        
+
         //first is -10
         checkAdd(NEG_TEN, MIN_CALC_MINUS_ONE, new BigDecimal("-10000000000000010"));
         checkAdd(NEG_TEN, MIN_CALC, new BigDecimal("-10000000000000009"));
         checkAdd(NEG_TEN, MIN_CALC_PLUS_ONE, new BigDecimal("-10000000000000008"));
-        checkAdd(NEG_TEN, NEG_BILLION, new BigDecimal("-1000000010"));
         checkAdd(NEG_TEN, NEG_MILLION, new BigDecimal("-1000010"));
         checkAdd(NEG_TEN, NEG_THOUSAND, new BigDecimal("-1010"));
         checkAdd(NEG_TEN, NEG_HUNDRED, new BigDecimal("-110"));
@@ -223,16 +253,14 @@ class ModelTest {
         checkAdd(NEG_TEN, HUNDRED, new BigDecimal("90"));
         checkAdd(NEG_TEN, THOUSAND, new BigDecimal("990"));
         checkAdd(NEG_TEN, MILLION, new BigDecimal("999990"));
-        checkAdd(NEG_TEN, BILLION, new BigDecimal("999999990"));
         checkAdd(NEG_TEN, MAX_CALC_MINUS_ONE, new BigDecimal("9999999999999988"));
         checkAdd(NEG_TEN, MAX_CALC, new BigDecimal("9999999999999989"));
         checkAdd(NEG_TEN, MAX_CALC_PLUS_ONE, new BigDecimal("9999999999999990"));
-        
+
         //first is -2
         checkAdd(NEG_TWO, MIN_CALC_MINUS_ONE, new BigDecimal("-10000000000000002"));
         checkAdd(NEG_TWO, MIN_CALC, new BigDecimal("-10000000000000001"));
         checkAdd(NEG_TWO, MIN_CALC_PLUS_ONE, MIN_CALC_MINUS_ONE);
-        checkAdd(NEG_TWO, NEG_BILLION, new BigDecimal("-1000000002"));
         checkAdd(NEG_TWO, NEG_MILLION, new BigDecimal("-1000002"));
         checkAdd(NEG_TWO, NEG_THOUSAND, new BigDecimal("-1002"));
         checkAdd(NEG_TWO, NEG_HUNDRED, new BigDecimal("-102"));
@@ -248,16 +276,14 @@ class ModelTest {
         checkAdd(NEG_TWO, HUNDRED, new BigDecimal("98"));
         checkAdd(NEG_TWO, THOUSAND, new BigDecimal("998"));
         checkAdd(NEG_TWO, MILLION, new BigDecimal("999998"));
-        checkAdd(NEG_TWO, BILLION, new BigDecimal("999999998"));
         checkAdd(NEG_TWO, MAX_CALC_MINUS_ONE, new BigDecimal("9999999999999996"));
         checkAdd(NEG_TWO, MAX_CALC, new BigDecimal("9999999999999997"));
         checkAdd(NEG_TWO, MAX_CALC_PLUS_ONE, MAX_CALC_MINUS_ONE);
-        
+
         //first is -1
         checkAdd(NEG_ONE, MIN_CALC_MINUS_ONE, new BigDecimal("-10000000000000001"));
         checkAdd(NEG_ONE, MIN_CALC, MIN_CALC_MINUS_ONE);
         checkAdd(NEG_ONE, MIN_CALC_PLUS_ONE, MIN_CALC);
-        checkAdd(NEG_ONE, NEG_BILLION, new BigDecimal("-1000000001"));
         checkAdd(NEG_ONE, NEG_MILLION, new BigDecimal("-1000001"));
         checkAdd(NEG_ONE, NEG_THOUSAND, new BigDecimal("-1001"));
         checkAdd(NEG_ONE, NEG_HUNDRED, new BigDecimal("-101"));
@@ -273,16 +299,14 @@ class ModelTest {
         checkAdd(NEG_ONE, HUNDRED, new BigDecimal("99"));
         checkAdd(NEG_ONE, THOUSAND, new BigDecimal("999"));
         checkAdd(NEG_ONE, MILLION, new BigDecimal("999999"));
-        checkAdd(NEG_ONE, BILLION, new BigDecimal("999999999"));
         checkAdd(NEG_ONE, MAX_CALC_MINUS_ONE, new BigDecimal("9999999999999997"));
         checkAdd(NEG_ONE, MAX_CALC, MAX_CALC_MINUS_ONE);
         checkAdd(NEG_ONE, MAX_CALC_PLUS_ONE, MAX_CALC);
-        
+
         //first is 0
         checkAdd(BigDecimal.ZERO, MIN_CALC_MINUS_ONE, MIN_CALC_MINUS_ONE);
         checkAdd(BigDecimal.ZERO, MIN_CALC, MIN_CALC);
         checkAdd(BigDecimal.ZERO, MIN_CALC_PLUS_ONE, MIN_CALC_PLUS_ONE);
-        checkAdd(BigDecimal.ZERO, NEG_BILLION, NEG_BILLION);
         checkAdd(BigDecimal.ZERO, NEG_MILLION, NEG_MILLION);
         checkAdd(BigDecimal.ZERO, NEG_THOUSAND, NEG_THOUSAND);
         checkAdd(BigDecimal.ZERO, NEG_HUNDRED, NEG_HUNDRED);
@@ -298,7 +322,6 @@ class ModelTest {
         checkAdd(BigDecimal.ZERO, HUNDRED, HUNDRED);
         checkAdd(BigDecimal.ZERO, THOUSAND, THOUSAND);
         checkAdd(BigDecimal.ZERO, MILLION, MILLION);
-        checkAdd(BigDecimal.ZERO, BILLION, BILLION);
         checkAdd(BigDecimal.ZERO, MAX_CALC_MINUS_ONE, MAX_CALC_MINUS_ONE);
         checkAdd(BigDecimal.ZERO, MAX_CALC, MAX_CALC);
         checkAdd(BigDecimal.ZERO, MAX_CALC_PLUS_ONE, MAX_CALC_PLUS_ONE);
@@ -307,7 +330,6 @@ class ModelTest {
         checkAdd(BigDecimal.ONE, MIN_CALC_MINUS_ONE, MIN_CALC);
         checkAdd(BigDecimal.ONE, MIN_CALC, MIN_CALC_PLUS_ONE);
         checkAdd(BigDecimal.ONE, MIN_CALC_PLUS_ONE, new BigDecimal("-9999999999999997"));
-        checkAdd(BigDecimal.ONE, NEG_BILLION, new BigDecimal("-999999999"));
         checkAdd(BigDecimal.ONE, NEG_MILLION, new BigDecimal("-999999"));
         checkAdd(BigDecimal.ONE, NEG_THOUSAND, new BigDecimal("-999"));
         checkAdd(BigDecimal.ONE, NEG_HUNDRED, new BigDecimal("-99"));
@@ -323,7 +345,6 @@ class ModelTest {
         checkAdd(BigDecimal.ONE, HUNDRED, new BigDecimal("101"));
         checkAdd(BigDecimal.ONE, THOUSAND, new BigDecimal("1001"));
         checkAdd(BigDecimal.ONE, MILLION, new BigDecimal("1000001"));
-        checkAdd(BigDecimal.ONE, BILLION, new BigDecimal("1000000001"));
         checkAdd(BigDecimal.ONE, MAX_CALC_MINUS_ONE, MAX_CALC);
         checkAdd(BigDecimal.ONE, MAX_CALC, MAX_CALC_PLUS_ONE);
         checkAdd(BigDecimal.ONE, MAX_CALC_PLUS_ONE, new BigDecimal("10000000000000001"));
@@ -332,7 +353,6 @@ class ModelTest {
         checkAdd(TWO, MIN_CALC_MINUS_ONE, MIN_CALC_PLUS_ONE);
         checkAdd(TWO, MIN_CALC, new BigDecimal("-9999999999999997"));
         checkAdd(TWO, MIN_CALC_PLUS_ONE, new BigDecimal("-9999999999999996"));
-        checkAdd(TWO, NEG_BILLION, new BigDecimal("-999999998"));
         checkAdd(TWO, NEG_MILLION, new BigDecimal("-999998"));
         checkAdd(TWO, NEG_THOUSAND, new BigDecimal("-998"));
         checkAdd(TWO, NEG_HUNDRED, new BigDecimal("-98"));
@@ -348,7 +368,6 @@ class ModelTest {
         checkAdd(TWO, HUNDRED, new BigDecimal("102"));
         checkAdd(TWO, THOUSAND, new BigDecimal("1002"));
         checkAdd(TWO, MILLION, new BigDecimal("1000002"));
-        checkAdd(TWO, BILLION, new BigDecimal("1000000002"));
         checkAdd(TWO, MAX_CALC_MINUS_ONE, MAX_CALC_PLUS_ONE);
         checkAdd(TWO, MAX_CALC, new BigDecimal("10000000000000001"));
         checkAdd(TWO, MAX_CALC_PLUS_ONE, new BigDecimal("10000000000000002"));
@@ -357,13 +376,12 @@ class ModelTest {
         checkAdd(BigDecimal.TEN, MIN_CALC_MINUS_ONE, new BigDecimal("-9999999999999990"));
         checkAdd(BigDecimal.TEN, MIN_CALC, new BigDecimal("-9999999999999989"));
         checkAdd(BigDecimal.TEN, MIN_CALC_PLUS_ONE, new BigDecimal("-9999999999999988"));
-        checkAdd(BigDecimal.TEN, NEG_BILLION, new BigDecimal("-999999990"));
-        checkAdd(BigDecimal.TEN, NEG_MILLION,  new BigDecimal("-999990"));
-        checkAdd(BigDecimal.TEN, NEG_THOUSAND,  new BigDecimal("-990"));
-        checkAdd(BigDecimal.TEN, NEG_HUNDRED,  new BigDecimal("-90"));
+        checkAdd(BigDecimal.TEN, NEG_MILLION, new BigDecimal("-999990"));
+        checkAdd(BigDecimal.TEN, NEG_THOUSAND, new BigDecimal("-990"));
+        checkAdd(BigDecimal.TEN, NEG_HUNDRED, new BigDecimal("-90"));
         checkAdd(BigDecimal.TEN, NEG_TEN, BigDecimal.ZERO);
-        checkAdd(BigDecimal.TEN, NEG_TWO,  new BigDecimal("8"));
-        checkAdd(BigDecimal.TEN, NEG_ONE,  new BigDecimal("9"));
+        checkAdd(BigDecimal.TEN, NEG_TWO, new BigDecimal("8"));
+        checkAdd(BigDecimal.TEN, NEG_ONE, new BigDecimal("9"));
 
         checkAdd(BigDecimal.TEN, BigDecimal.ZERO, BigDecimal.TEN);
 
@@ -373,7 +391,6 @@ class ModelTest {
         checkAdd(BigDecimal.TEN, HUNDRED, new BigDecimal("110"));
         checkAdd(BigDecimal.TEN, THOUSAND, new BigDecimal("1010"));
         checkAdd(BigDecimal.TEN, MILLION, new BigDecimal("1000010"));
-        checkAdd(BigDecimal.TEN, BILLION, new BigDecimal("1000000010"));
         checkAdd(BigDecimal.TEN, MAX_CALC_MINUS_ONE, new BigDecimal("10000000000000008"));
         checkAdd(BigDecimal.TEN, MAX_CALC, new BigDecimal("10000000000000009"));
         checkAdd(BigDecimal.TEN, MAX_CALC_PLUS_ONE, new BigDecimal("10000000000000010"));
@@ -382,7 +399,6 @@ class ModelTest {
         checkAdd(HUNDRED, MIN_CALC_MINUS_ONE, new BigDecimal("-9999999999999900"));
         checkAdd(HUNDRED, MIN_CALC, new BigDecimal("-9999999999999899"));
         checkAdd(HUNDRED, MIN_CALC_PLUS_ONE, new BigDecimal("-9999999999999898"));
-        checkAdd(HUNDRED, NEG_BILLION, new BigDecimal("-999999900"));
         checkAdd(HUNDRED, NEG_MILLION, new BigDecimal("-999900"));
         checkAdd(HUNDRED, NEG_THOUSAND, new BigDecimal("-900"));
         checkAdd(HUNDRED, NEG_HUNDRED, BigDecimal.ZERO);
@@ -398,7 +414,6 @@ class ModelTest {
         checkAdd(HUNDRED, HUNDRED, new BigDecimal("200"));
         checkAdd(HUNDRED, THOUSAND, new BigDecimal("1100"));
         checkAdd(HUNDRED, MILLION, new BigDecimal("1000100"));
-        checkAdd(HUNDRED, BILLION, new BigDecimal("1000000100"));
         checkAdd(HUNDRED, MAX_CALC_MINUS_ONE, new BigDecimal("10000000000000098"));
         checkAdd(HUNDRED, MAX_CALC, new BigDecimal("10000000000000099"));
         checkAdd(HUNDRED, MAX_CALC_PLUS_ONE, new BigDecimal("10000000000000100"));
@@ -407,7 +422,6 @@ class ModelTest {
         checkAdd(THOUSAND, MIN_CALC_MINUS_ONE, new BigDecimal("-9999999999999000"));
         checkAdd(THOUSAND, MIN_CALC, new BigDecimal("-9999999999998999"));
         checkAdd(THOUSAND, MIN_CALC_PLUS_ONE, new BigDecimal("-9999999999998998"));
-        checkAdd(THOUSAND, NEG_BILLION, new BigDecimal("-999999000"));
         checkAdd(THOUSAND, NEG_MILLION, new BigDecimal("-999000"));
         checkAdd(THOUSAND, NEG_THOUSAND, BigDecimal.ZERO);
         checkAdd(THOUSAND, NEG_HUNDRED, new BigDecimal("900"));
@@ -423,7 +437,6 @@ class ModelTest {
         checkAdd(THOUSAND, HUNDRED, new BigDecimal("1100"));
         checkAdd(THOUSAND, THOUSAND, new BigDecimal("2000"));
         checkAdd(THOUSAND, MILLION, new BigDecimal("1001000"));
-        checkAdd(THOUSAND, BILLION, new BigDecimal("1000001000"));
         checkAdd(THOUSAND, MAX_CALC_MINUS_ONE, new BigDecimal("10000000000000998"));
         checkAdd(THOUSAND, MAX_CALC, new BigDecimal("10000000000000999"));
         checkAdd(THOUSAND, MAX_CALC_PLUS_ONE, new BigDecimal("10000000000001000"));
@@ -432,7 +445,6 @@ class ModelTest {
         checkAdd(MILLION, MIN_CALC_MINUS_ONE, new BigDecimal("-9999999999000000"));
         checkAdd(MILLION, MIN_CALC, new BigDecimal("-9999999998999999"));
         checkAdd(MILLION, MIN_CALC_PLUS_ONE, new BigDecimal("-9999999998999998"));
-        checkAdd(MILLION, NEG_BILLION, new BigDecimal("-999000000"));
         checkAdd(MILLION, NEG_MILLION, BigDecimal.ZERO);
         checkAdd(MILLION, NEG_THOUSAND, new BigDecimal("999000"));
         checkAdd(MILLION, NEG_HUNDRED, new BigDecimal("999900"));
@@ -448,41 +460,14 @@ class ModelTest {
         checkAdd(MILLION, HUNDRED, new BigDecimal("1000100"));
         checkAdd(MILLION, THOUSAND, new BigDecimal("1001000"));
         checkAdd(MILLION, MILLION, new BigDecimal("2000000"));
-        checkAdd(MILLION, BILLION, new BigDecimal("1001000000"));
         checkAdd(MILLION, MAX_CALC_MINUS_ONE, new BigDecimal("10000000000999998"));
         checkAdd(MILLION, MAX_CALC, new BigDecimal("10000000000999999"));
         checkAdd(MILLION, MAX_CALC_PLUS_ONE, new BigDecimal("10000000001000000"));
-
-        //first is billion
-        checkAdd(BILLION, MIN_CALC_MINUS_ONE, new BigDecimal("-9999999000000000"));
-        checkAdd(BILLION, MIN_CALC, new BigDecimal("-9999998999999999"));
-        checkAdd(BILLION, MIN_CALC_PLUS_ONE, new BigDecimal("-9999998999999998"));
-        checkAdd(BILLION, NEG_BILLION, BigDecimal.ZERO);
-        checkAdd(BILLION, NEG_MILLION, new BigDecimal("999000000"));
-        checkAdd(BILLION, NEG_THOUSAND, new BigDecimal("999999000"));
-        checkAdd(BILLION, NEG_HUNDRED, new BigDecimal("999999900"));
-        checkAdd(BILLION, NEG_TEN, new BigDecimal("999999990"));
-        checkAdd(BILLION, NEG_TWO, new BigDecimal("999999998"));
-        checkAdd(BILLION, NEG_ONE, new BigDecimal("999999999"));
-
-        checkAdd(BILLION, BigDecimal.ZERO, BILLION);
-
-        checkAdd(BILLION, BigDecimal.ONE, new BigDecimal("1000000001"));
-        checkAdd(BILLION, TWO, new BigDecimal("1000000002"));
-        checkAdd(BILLION, BigDecimal.TEN, new BigDecimal("1000000010"));
-        checkAdd(BILLION, HUNDRED, new BigDecimal("1000000100"));
-        checkAdd(BILLION, THOUSAND, new BigDecimal("1000001000"));
-        checkAdd(BILLION, MILLION, new BigDecimal("1001000000"));
-        checkAdd(BILLION, BILLION, new BigDecimal("2000000000"));
-        checkAdd(BILLION, MAX_CALC_MINUS_ONE, new BigDecimal("10000000999999998"));
-        checkAdd(BILLION, MAX_CALC, new BigDecimal("10000000999999999"));
-        checkAdd(BILLION, MAX_CALC_PLUS_ONE, new BigDecimal("10000001000000000"));
 
         //first is max calc value minus one
         checkAdd(MAX_CALC_MINUS_ONE, MIN_CALC_MINUS_ONE, NEG_TWO);
         checkAdd(MAX_CALC_MINUS_ONE, MIN_CALC, NEG_ONE);
         checkAdd(MAX_CALC_MINUS_ONE, MIN_CALC_PLUS_ONE, BigDecimal.ZERO);
-        checkAdd(MAX_CALC_MINUS_ONE, NEG_BILLION, new BigDecimal("9999998999999998"));
         checkAdd(MAX_CALC_MINUS_ONE, NEG_MILLION, new BigDecimal("9999999998999998"));
         checkAdd(MAX_CALC_MINUS_ONE, NEG_THOUSAND, new BigDecimal("9999999999998998"));
         checkAdd(MAX_CALC_MINUS_ONE, NEG_HUNDRED, new BigDecimal("9999999999999898"));
@@ -498,7 +483,6 @@ class ModelTest {
         checkAdd(MAX_CALC_MINUS_ONE, HUNDRED, new BigDecimal("10000000000000098"));
         checkAdd(MAX_CALC_MINUS_ONE, THOUSAND, new BigDecimal("10000000000000998"));
         checkAdd(MAX_CALC_MINUS_ONE, MILLION, new BigDecimal("10000000000999998"));
-        checkAdd(MAX_CALC_MINUS_ONE, BILLION, new BigDecimal("10000000999999998"));
         checkAdd(MAX_CALC_MINUS_ONE, MAX_CALC_MINUS_ONE, new BigDecimal("19999999999999996"));
         checkAdd(MAX_CALC_MINUS_ONE, MAX_CALC, new BigDecimal("19999999999999997"));
         checkAdd(MAX_CALC_MINUS_ONE, MAX_CALC_PLUS_ONE, new BigDecimal("19999999999999998"));
@@ -507,7 +491,6 @@ class ModelTest {
         checkAdd(MAX_CALC, MIN_CALC_MINUS_ONE, NEG_ONE);
         checkAdd(MAX_CALC, MIN_CALC, BigDecimal.ZERO);
         checkAdd(MAX_CALC, MIN_CALC_PLUS_ONE, BigDecimal.ONE);
-        checkAdd(MAX_CALC, NEG_BILLION, new BigDecimal("9999998999999999"));
         checkAdd(MAX_CALC, NEG_MILLION, new BigDecimal("9999999998999999"));
         checkAdd(MAX_CALC, NEG_THOUSAND, new BigDecimal("9999999999998999"));
         checkAdd(MAX_CALC, NEG_HUNDRED, new BigDecimal("9999999999999899"));
@@ -523,7 +506,6 @@ class ModelTest {
         checkAdd(MAX_CALC, HUNDRED, new BigDecimal("10000000000000099"));
         checkAdd(MAX_CALC, THOUSAND, new BigDecimal("10000000000000999"));
         checkAdd(MAX_CALC, MILLION, new BigDecimal("10000000000999999"));
-        checkAdd(MAX_CALC, BILLION, new BigDecimal("10000000999999999"));
         checkAdd(MAX_CALC, MAX_CALC_MINUS_ONE, new BigDecimal("19999999999999997"));
         checkAdd(MAX_CALC, MAX_CALC, new BigDecimal("19999999999999998"));
         checkAdd(MAX_CALC, MAX_CALC_PLUS_ONE, new BigDecimal("19999999999999999"));
@@ -532,7 +514,6 @@ class ModelTest {
         checkAdd(MAX_CALC_PLUS_ONE, MIN_CALC_MINUS_ONE, BigDecimal.ZERO);
         checkAdd(MAX_CALC_PLUS_ONE, MIN_CALC, BigDecimal.ONE);
         checkAdd(MAX_CALC_PLUS_ONE, MIN_CALC_PLUS_ONE, TWO);
-        checkAdd(MAX_CALC_PLUS_ONE, NEG_BILLION, new BigDecimal("9999999000000000"));
         checkAdd(MAX_CALC_PLUS_ONE, NEG_MILLION, new BigDecimal("9999999999000000"));
         checkAdd(MAX_CALC_PLUS_ONE, NEG_THOUSAND, new BigDecimal("9999999999999000"));
         checkAdd(MAX_CALC_PLUS_ONE, NEG_HUNDRED, new BigDecimal("9999999999999900"));
@@ -548,13 +529,18 @@ class ModelTest {
         checkAdd(MAX_CALC_PLUS_ONE, HUNDRED, new BigDecimal("10000000000000100"));
         checkAdd(MAX_CALC_PLUS_ONE, THOUSAND, new BigDecimal("10000000000001000"));
         checkAdd(MAX_CALC_PLUS_ONE, MILLION, new BigDecimal("10000000001000000"));
-        checkAdd(MAX_CALC_PLUS_ONE, BILLION, new BigDecimal("10000001000000000"));
         checkAdd(MAX_CALC_PLUS_ONE, MAX_CALC_MINUS_ONE, new BigDecimal("19999999999999998"));
         checkAdd(MAX_CALC_PLUS_ONE, MAX_CALC, new BigDecimal("19999999999999999"));
         checkAdd(MAX_CALC_PLUS_ONE, MAX_CALC_PLUS_ONE, new BigDecimal("20000000000000000"));
     }
 
-
+    /**
+     * Test for add operation.
+     *
+     * @param firstValue  first big decimal value.
+     * @param secondValue second big decimal value.
+     * @param expected    expected result of adding those values.
+     */
     private void checkAdd(BigDecimal firstValue, BigDecimal secondValue, BigDecimal expected) {
         assertEquals(expected, CalculatorOperations.add(firstValue, secondValue));
     }
