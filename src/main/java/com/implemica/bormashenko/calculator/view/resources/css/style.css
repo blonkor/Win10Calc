@@ -143,11 +143,6 @@
     -fx-border-width: 0;
 }
 
-.type {
-    -fx-font-family: "Frutiger Neue LT W1G";
-    -fx-font-size: 15pt;
-}
-
 .window {
     -fx-background-radius: 0;
     -fx-background-color:#e7e7e7;

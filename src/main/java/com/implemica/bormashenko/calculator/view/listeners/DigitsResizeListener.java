@@ -74,6 +74,7 @@ public class DigitsResizeListener implements InvalidationListener {
      * @return string for setting size of font in stylesheets.
      */
     private String getFontString(int size) {
-        return "-fx-font-size: " + size + "px;";
+        return "-fx-font-size: " + size + "px;" +
+               "-fx-font-family: \"Segoe UI Semibold\"";
     }
 }
