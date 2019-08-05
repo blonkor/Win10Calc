@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/CalculatorOperations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ModelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +62,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ModelTest">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.MainApp" />
       <module name="Win10Calc" />
@@ -75,8 +76,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ModelTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ModelTest" />
         <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
@@ -225,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565009655160</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Adding model for calculator.">
+      <created>1565011200052</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1565011200052</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -275,6 +293,7 @@
     <MESSAGE value="View changed. Few fields names changed. Few comments changed." />
     <MESSAGE value="View changed." />
     <MESSAGE value="Adding methods while buttons clicked." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding methods while buttons clicked." />
+    <MESSAGE value="Adding model for calculator." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding model for calculator." />
   </component>
 </project>
