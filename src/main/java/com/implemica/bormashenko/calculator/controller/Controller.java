@@ -38,6 +38,18 @@ public class Controller implements Initializable {
      */
     private static final String COMMA = ",";
 
+    /**
+     * Symbol for separation every three digit in number.
+     */
+    private static final String DOT = ".";
+
+    /**
+     * Symbol for negating number.
+     */
+    private static final String MINUS = "-";
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] buttonsWithGrayTooltip = {
@@ -94,6 +106,106 @@ public class Controller implements Initializable {
                 button.getTooltip().setY(currentMouseY[0] + 6);
             });
         }
+    }
+
+    /**
+     * Sets text in result screen to 0.
+     */
+    public void clearText() {
+        result.setText(ZERO);
+    }
+
+    /**
+     * Deletes last symbol in result screen.
+     */
+    public void backspace() {
+        String number = result.getText();
+
+        if (number.length() == 1) {
+            number = ZERO;
+        } else {
+            number = number.substring(0, number.length() - 1);
+        }
+
+        addCommasToResultScreen(number);
+    }
+
+    /**
+     * Sums two numbers.
+     */
+    public void addOperation() {
+
+    }
+
+    /**
+     * Subtracts two numbers.
+     */
+    public void subtractOperation() {
+
+    }
+
+    /**
+     * Multiplies two numbers.
+     */
+    public void multiplyOperation() {
+
+    }
+
+    /**
+     * Divides two numbers.
+     */
+    public void divideOperation() {
+
+    }
+
+    /**
+     * Inverses number.
+     */
+    public void inverseOperation() {
+
+    }
+
+    /**
+     * Calculates square of number.
+     */
+    public void squareOperation() {
+
+    }
+
+    /**
+     * Calculates square root of number.
+     */
+    public void squareRootOperation() {
+
+    }
+
+    /**
+     * Calculates percent of number.
+     */
+    public void percentOperation() {
+
+    }
+
+    /**
+     * Calculates result of operation.
+     */
+    public void calculateResult() {
+
+    }
+
+    /**
+     * Makes number in result screen decimal.
+     */
+    public void makeDecimal() {
+        String number = result.getText();
+
+        if (number.endsWith(DOT)) {
+            number = number.replace(DOT, "");
+        } else if (!number.contains(DOT)) {
+            number += DOT;
+        }
+
+        result.setText(number);
     }
 
     /**
@@ -178,10 +290,18 @@ public class Controller implements Initializable {
 
     /**
      * Negates number in result screen while button is clicked.
-     * @TODO
      */
     public void negate() {
         String number = result.getText();
+        if (number.equals(ZERO)) {
+
+        } else if (number.startsWith(MINUS)) {
+            number = number.substring(1);
+        } else {
+            number = MINUS + number;
+        }
+
+        result.setText(number);
     }
 
     /**
@@ -207,9 +327,21 @@ public class Controller implements Initializable {
      * @param number number to manipulate with.
      */
     private void addCommasToResultScreen(String number) {
+        boolean negative = number.startsWith(MINUS);
+        number = number.replaceAll(MINUS, "");
+        number = number.replaceAll(COMMA, "");
+        String digitsAfterDot = "";
+
+        if (number.contains(DOT)) {
+            int dotIndex = number.indexOf(DOT);
+            digitsAfterDot = number.substring(dotIndex);
+            number = number.substring(0, dotIndex);
+        }
+
         StringBuilder str = new StringBuilder();
         char[] chars = number.toCharArray();
         int counter = 0;
+
         for (int i = chars.length - 1; i >= 0; i--) {
             if (counter == 3) {
                 str.append(COMMA);
@@ -218,6 +350,11 @@ public class Controller implements Initializable {
             str.append(chars[i]);
             counter++;
         }
-        result.setText(str.reverse().toString());
+
+        if (negative) {
+            str.append(MINUS);
+        }
+
+        result.setText(str.reverse().append(digitsAfterDot).toString());
     }
 }
