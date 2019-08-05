@@ -92,6 +92,363 @@ class ModelTest {
      */
     private static final BigDecimal MAX_CALC_PLUS_ONE = new BigDecimal("10000000000000000");
 
+    /**
+     * Big decimal value of 0.0.
+     */
+    private static final BigDecimal ZERO_DOT_ZERO = new BigDecimal("0.0");
+
+    /**
+     * Big decimal value of 0.00.
+     */
+    private static final BigDecimal ZERO_DOT_TWO_ZEROS = new BigDecimal("0.00");
+
+    /**
+     * Big decimal value of 0.0000000000000000.
+     */
+    private static final BigDecimal ZERO_DOT_16_ZEROS = new BigDecimal("0.0000000000000000");
+
+    /**
+     * Big decimal value of 0.00000000000000000.
+     */
+    private static final BigDecimal ZERO_DOT_17_ZEROS = new BigDecimal("0.00000000000000000");
+
+    /**
+     * Big decimal value of 0.1.
+     */
+    private static final BigDecimal ONE_TENTH = new BigDecimal("0.1");
+
+    /**
+     * Big decimal value of 0.01.
+     */
+    private static final BigDecimal ONE_HUNDREDTH = new BigDecimal("0.01");
+
+    /**
+     * Big decimal value of 0.001.
+     */
+    private static final BigDecimal ONE_THOUSANDTH = new BigDecimal("0.001");
+
+    /**
+     * Big decimal value of 0.0000000000000001.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal ZERO_DOT_15_ZEROS_ONE = new BigDecimal("0.0000000000000001");
+
+    /**
+     * Big decimal value of 0.00000000000000001.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal ZERO_DOT_16_ZEROS_ONE = new BigDecimal("0.00000000000000001");
+
+    /**
+     * Big decimal value of 1.1.
+     */
+    private static final BigDecimal ONE_AND_ONE_TENTH = new BigDecimal("1.1");
+
+    /**
+     * Big decimal value of 1.01.
+     */
+    private static final BigDecimal ONE_AND_ONE_HUNDREDTH = new BigDecimal("1.01");
+
+    /**
+     * Big decimal value of 1.000000000000001.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal ONE_DOT_14_ZEROS_ONE = new BigDecimal("1.000000000000001");
+
+    /**
+     * Big decimal value of 1.0000000000000001.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal ONE_DOT_15_ZEROS_ONE = new BigDecimal("1.0000000000000001");
+
+    /**
+     * Big decimal value of 1.0.
+     */
+    private static final BigDecimal ONE_DOT_ZERO = new BigDecimal("1.0");
+
+    /**
+     * Big decimal value of 1.0000000000000000.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal ONE_DOT_15_ZEROS = new BigDecimal("1.0000000000000000");
+
+    /**
+     * Big decimal value of 10.1.
+     */
+    private static final BigDecimal TEN_AND_ONE_TENTH = new BigDecimal("10.1");
+
+    /**
+     * Big decimal value of 10.01.
+     */
+    private static final BigDecimal TEN_AND_ONE_HUNDREDTH = new BigDecimal("10.01");
+
+    /**
+     * Big decimal value of 10.00000000000001.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal TEN_DOT_13_ZEROS_ONE = new BigDecimal("10.00000000000001");
+
+    /**
+     * Big decimal value of 10.000000000000001.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal TEN_AND_14_ZEROS_ONE = new BigDecimal("10.000000000000001");
+
+    /**
+     * Big decimal value of 0.9.
+     */
+    private static final BigDecimal NINE_TENTH = new BigDecimal("0.9");
+
+    /**
+     * Big decimal value of 0.09.
+     */
+    private static final BigDecimal NINE_HUNDREDTH = new BigDecimal("0.09");
+
+    /**
+     * Big decimal value of 0.99.
+     */
+    private static final BigDecimal NINETY_NINE_HUNDREDTH = new BigDecimal("0.99");
+
+    /**
+     * Big decimal value of 0.009.
+     */
+    private static final BigDecimal NINE_THOUSANDTH = new BigDecimal("0.009");
+
+    /**
+     * Big decimal value of 0.099.
+     */
+    private static final BigDecimal NINETY_NINE_THOUSANDTH = new BigDecimal("0.099");
+
+    /**
+     * Big decimal value of 0.999.
+     */
+    private static final BigDecimal NINE_HUNDRED_NINETY_NINE_THOUSANDTH = new BigDecimal("0.999");
+
+    /**
+     * Big decimal value of 0.0000000000000009.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal ZERO_DOT_15_ZEROS_NINE = new BigDecimal("0.0000000000000009");
+
+    /**
+     * Big decimal value of 0.00000000000000009.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal ZERO_DOT_16_ZEROS_NINE = new BigDecimal("0.00000000000000009");
+
+    /**
+     * Big decimal value of 0.9999999999999999.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal ZERO_DOT_16_NINES = new BigDecimal("0.9999999999999999");
+
+    /**
+     * Big decimal value of 0.99999999999999999.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal ZERO_DOT_17_NINES = new BigDecimal("0.9999999999999999");
+
+    /**
+     * Big decimal value of 9.0.
+     */
+    private static final BigDecimal NINE_DOT_ZERO = new BigDecimal("9.0");
+
+    /**
+     * Big decimal value of 9.0000000000000000.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINE_AND_15_ZEROS = new BigDecimal("9.0000000000000000");
+
+    /**
+     * Big decimal value of 9.9.
+     */
+    private static final BigDecimal NINE_AND_NINE_TENTH = new BigDecimal("9.9");
+
+    /**
+     * Big decimal value of 9.09.
+     */
+    private static final BigDecimal NINE_AND_NINE_HUNDREDTH = new BigDecimal("9.09");
+
+    /**
+     * Big decimal value of 9.99.
+     */
+    private static final BigDecimal NINE_AND_NINETY_NINE_HUNDREDTH = new BigDecimal("9.99");
+
+    /**
+     * Big decimal value of 9.999.
+     */
+    private static final BigDecimal NINE_AND_NINE_HUNDRED_NINETY_NINE_THOUSANDTH = new BigDecimal("9.999");
+
+    /**
+     * Big decimal value of 9.000000000000009.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINE_DOT_14_ZEROS_NINE = new BigDecimal("9.000000000000009");
+
+    /**
+     * Big decimal value of 9.0000000000000009.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINE_DOT_15_ZEROS_NINE = new BigDecimal("9.0000000000000009");
+
+    /**
+     * Big decimal value of 9.9999999999999999.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINE_DOT_15_NINES = new BigDecimal("9.9999999999999999");
+
+    /**
+     * Big decimal value of 9.99999999999999999.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINE_DOT_16_NINES = new BigDecimal("9.99999999999999999");
+
+    /**
+     * Big decimal value of 99.999999999999999.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINETY_NINE_DOT_14_NINES = new BigDecimal("99.999999999999999");
+
+    /**
+     * Big decimal value of 99.9999999999999999.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NINETY_NINE_DOT_15_NINES = new BigDecimal("99.9999999999999999");
+
+    /**
+     * Big decimal value of -0.1.
+     */
+    private static final BigDecimal NEG_ONE_TENTH = new BigDecimal("-0.1");
+
+    /**
+     * Big decimal value of -0.01.
+     */
+    private static final BigDecimal NEG_ONE_HUNDREDTH = new BigDecimal("-0.01");
+
+    /**
+     * Big decimal value of -0.001.
+     */
+    private static final BigDecimal NEG_ONE_THOUSANDTH = new BigDecimal("-0.001");
+
+    /**
+     * Big decimal value of -0.0000000000000001.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ZERO_DOT_15_ZEROS_ONE = new BigDecimal("-0.0000000000000001");
+
+    /**
+     * Big decimal value of -0.00000000000000001.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ZERO_DOT_16_ZEROS_ONE = new BigDecimal("-0.00000000000000001");
+
+    /**
+     * Big decimal value of -1.1.
+     */
+    private static final BigDecimal NEG_ONE_AND_ONE_TENTH = new BigDecimal("-1.1");
+
+    /**
+     * Big decimal value of -1.01.
+     */
+    private static final BigDecimal NEG_ONE_AND_ONE_HUNDREDTH = new BigDecimal("-1.01");
+
+    /**
+     * Big decimal value of -1.0.
+     */
+    private static final BigDecimal NEG_ONE_DOT_ZERO = new BigDecimal("-1.0");
+
+    /**
+     * Big decimal value of -1.0000000000000000.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ONE_DOT_15_ZEROS = new BigDecimal("-1.0000000000000000");
+
+    /**
+     * Big decimal value of -0.9.
+     */
+    private static final BigDecimal NEG_NINE_TENTH = new BigDecimal("-0.9");
+
+    /**
+     * Big decimal value of -0.09.
+     */
+    private static final BigDecimal NEG_NINE_HUNDREDTH = new BigDecimal("-0.09");
+
+    /**
+     * Big decimal value of -0.99.
+     */
+    private static final BigDecimal NEG_NINETY_NINE_HUNDREDTH = new BigDecimal("-0.99");
+
+    /**
+     * Big decimal value of -0.0000000000000009.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ZERO_DOT_15_ZEROS_NINE = new BigDecimal("-0.0000000000000009");
+
+    /**
+     * Big decimal value of -0.00000000000000009.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ZERO_DOT_16_ZEROS_NINE = new BigDecimal("-0.00000000000000009");
+
+    /**
+     * Big decimal value of -0.9999999999999999.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ZERO_DOT_16_NINES = new BigDecimal("-0.9999999999999999");
+
+    /**
+     * Big decimal value of -0.99999999999999999.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_ZERO_DOT_17_NINES = new BigDecimal("-0.9999999999999999");
+
+    /**
+     * Big decimal value of -9.9.
+     */
+    private static final BigDecimal NEG_NINE_AND_NINE_TENTH = new BigDecimal("-9.9");
+
+    /**
+     * Big decimal value of -9.99.
+     */
+    private static final BigDecimal NEG_NINE_AND_NINETY_NINE_HUNDREDTH = new BigDecimal("-9.99");
+
+
+    /**
+     * Big decimal value of -9.000000000000009.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_NINE_DOT_14_ZEROS_NINE = new BigDecimal("-9.000000000000009");
+
+    /**
+     * Big decimal value of -9.0000000000000009.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_NINE_DOT_15_ZEROS_NINE = new BigDecimal("-9.0000000000000009");
+
+    /**
+     * Big decimal value of -9.9999999999999999.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_NINE_DOT_15_NINES = new BigDecimal("-9.9999999999999999");
+
+    /**
+     * Big decimal value of -9.99999999999999999.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_NINE_DOT_16_NINES = new BigDecimal("-9.99999999999999999");
+
+    /**
+     * Big decimal value of -99.999999999999999.
+     * This value is the longest that can be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_NINETY_NINE_DOT_14_NINES = new BigDecimal("-99.999999999999999");
+
+    /**
+     * Big decimal value of -99.9999999999999999.
+     * This value can not be shown in the calculator's result label.
+     */
+    private static final BigDecimal NEG_NINETY_NINE_DOT_15_NINES = new BigDecimal("-99.9999999999999999");
+
     @Test
     void tests() {
         //add operation tests

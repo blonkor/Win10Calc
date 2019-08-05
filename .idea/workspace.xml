@@ -249,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565031725504</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Adding JavaDoc in test class. Removing one billion value from tests.">
+      <created>1565032596823</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1565032596823</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -301,6 +308,7 @@
     <MESSAGE value="Adding methods while buttons clicked." />
     <MESSAGE value="Adding model for calculator." />
     <MESSAGE value="Adding new tests for add operation with negative numbers." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding new tests for add operation with negative numbers." />
+    <MESSAGE value="Adding JavaDoc in test class. Removing one billion value from tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding JavaDoc in test class. Removing one billion value from tests." />
   </component>
 </project>
