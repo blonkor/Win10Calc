@@ -49,7 +49,7 @@
         </AnchorPane>
         <HBox layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="429.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="33.0">
             <children>
-                <Button fx:id="navigation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="navigation" text="">
+                <Button fx:id="navigation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#showNavigationPanel" prefHeight="40.0" prefWidth="40.0" styleClass="navigation" text="">
                     <tooltip>
                         <Tooltip styleClass="tooltip_gray" text="Open Navigation" />
                     </tooltip>
@@ -67,7 +67,7 @@
         </TextFlow>
         <HBox layoutX="278.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" AnchorPane.bottomAnchor="429.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
             <children>
-                <Button fx:id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="history" text="">
+                <Button fx:id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#showHistoryPanel" prefHeight="40.0" prefWidth="40.0" styleClass="history" text="">
                     <tooltip>
                         <Tooltip styleClass="tooltip_gray" text="History (Ctrl+H)" />
                     </tooltip>
@@ -119,7 +119,7 @@
                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#subtractOperation" styleClass="operations_standard" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                 <HBox alignment="BOTTOM_LEFT" fillHeight="false" maxWidth="700.0" nodeOrientation="LEFT_TO_RIGHT" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <children>
-                        <Button fx:id="memoryClear" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MC" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryClear" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#memoryClearOperation" prefHeight="30.0" styleClass="memory" text="MC" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Clear all memory (Ctrl+L)" />
                             </tooltip>
@@ -129,29 +129,29 @@
                                 <Tooltip styleClass="tooltip_gray" text="Memory recall (Ctrl+R)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryAdd" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="M+" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryAdd" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#memoryAddOperation" prefHeight="30.0" styleClass="memory" text="M+" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory add (Ctrl+P)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memorySubtract" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="M-" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memorySubtract" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#memorySubtractOperation" prefHeight="30.0" styleClass="memory" text="M-" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory subtract (Ctrl+Q)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryStore" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory" text="MS" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryStore" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#memoryStoreOperation" prefHeight="30.0" styleClass="memory" text="MS" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory store (Ctrl+M)" />
                             </tooltip>
                         </Button>
-                        <Button fx:id="memoryShow" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" styleClass="memory_show" text="M" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryShow" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#memoryShowOperation" prefHeight="30.0" styleClass="memory_show" text="M" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory" />
                             </tooltip>
                         </Button>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <HBox alignment="CENTER_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#memoryRecallOperation" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <children>
                         <Label fx:id="result" alignment="TOP_LEFT" contentDisplay="TOP" minHeight="-Infinity" text="0">
                             <font>
@@ -172,7 +172,7 @@
                 <Label GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>
-        <ScrollPane fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
+        <ScrollPane fx:id="navigationPanel" fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
             <content>
                 <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
                     <children>
@@ -214,12 +214,12 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Button alignment="BASELINE_LEFT" layoutX="180.0" layoutY="501.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="About" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="456.0" />
-        <AnchorPane layoutX="-21.0" layoutY="-8.0" prefHeight="305.0" prefWidth="322.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <Button fx:id="about" alignment="BASELINE_LEFT" layoutX="180.0" layoutY="501.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" styleClass="navigation_buttons" text="About" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" />
+        <AnchorPane fx:id="historyMemoryPanel" layoutX="-21.0" layoutY="-8.0" prefHeight="305.0" prefWidth="322.0" styleClass="history_memory_panel" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
                 <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label text="There's nothing saved in memory" />
+                        <Label fx:id="historyMemoryLabel" text="There's nothing saved in memory" />
                     </children>
                 </TextFlow>
             </children>

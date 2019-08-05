@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,17 +18,29 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     /**
-     * Application buttons.
+     * Application's buttons.
      */
     @FXML
     private Button memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
-            navigation, history, close, hide, expand;
+            navigation, history, close, hide, expand, about;
 
     /**
-     * Application labels.
+     * Application's labels.
      */
     @FXML
-    private Label result;
+    private Label result, historyMemoryLabel;
+
+    /**
+     * Application's scroll pane.
+     */
+    @FXML
+    private ScrollPane navigationPanel;
+
+    /**
+     * Application's anchor pane.
+     */
+    @FXML
+    private AnchorPane historyMemoryPanel;
 
     /**
      * Zero symbol is used instead of empty string.
@@ -49,7 +63,6 @@ public class Controller implements Initializable {
     private static final String MINUS = "-";
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] buttonsWithGrayTooltip = {
@@ -65,46 +78,61 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Changes locations for gray tooltips.
-     * Gray tooltip is a tooltip with {@code styleClass = "tooltip_gray"}.
-     * Gray tooltip have to appear above the cursor.
-     *
-     * @param buttons controllers with tooltip.
+     * Opens or closes navigation bar.
      */
-    private void setGrayTooltipsLocation(Button[] buttons) {
-        final double[] currentMouseX = new double[1];
-        final double[] currentMouseY = new double[1];
-        for (Button button : buttons) {
-            button.setOnMouseMoved(m -> {
-                currentMouseX[0] = m.getScreenX();
-                currentMouseY[0] = m.getScreenY();
-            });
-            button.getTooltip().setOnShowing(s -> {
-                button.getTooltip().setX(currentMouseX[0] - button.getTooltip().getWidth() / 2);
-                button.getTooltip().setY(currentMouseY[0] - 50);
-            });
+    public void showNavigationPanel() {
+        if (navigationPanel.isVisible()) {
+            setNavigationVisible(false);
+        } else {
+            setNavigationVisible(true);
         }
     }
 
     /**
-     * Changes locations for white tooltips.
-     * White tooltip is a tooltip with {@code styleClass = "tooltip_white"}.
-     * White tooltip have to appear below the cursor.
-     *
-     * @param buttons controllers with tooltip.
+     * Opens or closes history bar.
      */
-    private void setWhiteTooltipsLocation(Button[] buttons) {
-        final double[] currentMouseX = new double[1];
-        final double[] currentMouseY = new double[1];
-        for (Button button : buttons) {
-            button.setOnMouseMoved(m -> {
-                currentMouseX[0] = m.getScreenX();
-                currentMouseY[0] = m.getScreenY();
-            });
-            button.getTooltip().setOnShowing(s -> {
-                button.getTooltip().setX(currentMouseX[0]);
-                button.getTooltip().setY(currentMouseY[0] + 6);
-            });
+    public void showHistoryPanel() {
+        String emptyHistory = "There's no history yet.";
+        if (historyMemoryPanel.isVisible()) {
+            setHistoryMemoryVisible(false, emptyHistory);
+        } else {
+            setHistoryMemoryVisible(true, emptyHistory);
+        }
+    }
+
+    public void memoryClearOperation() {
+        setMemoryDisable(true);
+    }
+
+
+    public void memoryRecallOperation() {
+
+    }
+
+    public void memoryAddOperation() {
+        if (memoryClear.isDisabled()) {
+            setMemoryDisable(false);
+        }
+    }
+
+    public void memorySubtractOperation() {
+        if (memoryClear.isDisabled()) {
+            setMemoryDisable(false);
+        }
+    }
+
+    public void memoryStoreOperation() {
+        if (memoryClear.isDisabled()) {
+            setMemoryDisable(false);
+        }
+    }
+
+    public void memoryShowOperation() {
+        String emptyMemory = "There's nothing saved in memory";
+        if (historyMemoryPanel.isVisible()) {
+            setHistoryMemoryVisible(false, emptyMemory);
+        } else {
+            setHistoryMemoryVisible(true, emptyMemory);
         }
     }
 
@@ -306,6 +334,7 @@ public class Controller implements Initializable {
 
     /**
      * Adds digit symbol to result number string.
+     *
      * @param digit symbol to add.
      */
     private void addDigitToResult(String digit) {
@@ -324,6 +353,7 @@ public class Controller implements Initializable {
 
     /**
      * Separates every three digit in number and sets this number to result label.
+     *
      * @param number number to manipulate with.
      */
     private void addCommasToResultScreen(String number) {
@@ -356,5 +386,81 @@ public class Controller implements Initializable {
         }
 
         result.setText(str.reverse().append(digitsAfterDot).toString());
+    }
+
+    /**
+     * Sets disabling for those memory buttons: clear, recall, show.
+     *
+     * @param flag flag for disabling or enabling buttons.
+     */
+    private void setMemoryDisable(boolean flag) {
+        memoryClear.setDisable(flag);
+        memoryRecall.setDisable(flag);
+        memoryShow.setDisable(flag);
+    }
+
+    /**
+     * Sets visibility for navigation bar.
+     *
+     * @param flag flag for making visible or invisible navigation bar.
+     */
+    private void setNavigationVisible(boolean flag) {
+        navigationPanel.setVisible(flag);
+        about.setVisible(flag);
+    }
+
+    /**
+     * Sets visibility for history bar.
+     *
+     * @param flag flag for making visible or invisible history bar.
+     */
+    private void setHistoryMemoryVisible(boolean flag, String text) {
+        historyMemoryPanel.setVisible(flag);
+        historyMemoryLabel.setText(text);
+    }
+
+
+    /**
+     * Changes locations for gray tooltips.
+     * Gray tooltip is a tooltip with {@code styleClass = "tooltip_gray"}.
+     * Gray tooltip have to appear above the cursor.
+     *
+     * @param buttons controllers with tooltip.
+     */
+    private void setGrayTooltipsLocation(Button[] buttons) {
+        final double[] currentMouseX = new double[1];
+        final double[] currentMouseY = new double[1];
+        for (Button button : buttons) {
+            button.setOnMouseMoved(m -> {
+                currentMouseX[0] = m.getScreenX();
+                currentMouseY[0] = m.getScreenY();
+            });
+            button.getTooltip().setOnShowing(s -> {
+                button.getTooltip().setX(currentMouseX[0] - button.getTooltip().getWidth() / 2);
+                button.getTooltip().setY(currentMouseY[0] - 50);
+            });
+        }
+    }
+
+    /**
+     * Changes locations for white tooltips.
+     * White tooltip is a tooltip with {@code styleClass = "tooltip_white"}.
+     * White tooltip have to appear below the cursor.
+     *
+     * @param buttons controllers with tooltip.
+     */
+    private void setWhiteTooltipsLocation(Button[] buttons) {
+        final double[] currentMouseX = new double[1];
+        final double[] currentMouseY = new double[1];
+        for (Button button : buttons) {
+            button.setOnMouseMoved(m -> {
+                currentMouseX[0] = m.getScreenX();
+                currentMouseY[0] = m.getScreenY();
+            });
+            button.getTooltip().setOnShowing(s -> {
+                button.getTooltip().setX(currentMouseX[0]);
+                button.getTooltip().setY(currentMouseY[0] + 6);
+            });
+        }
     }
 }

@@ -4,6 +4,10 @@
     -fx-border-width: 1;
 }
 
+.history_memory_panel {
+    -fx-background-color: #e7e7e7;
+}
+
 .digits {
     -fx-background-radius: 0;
     -fx-background-color: #fafafa;
