@@ -42,12 +42,10 @@ class ModelTest {
      */
     private static final BigDecimal NEG_TEN = new BigDecimal("-10");
 
-
     /**
      * Big decimal value of -1.
      */
     private static final BigDecimal NEG_ONE = new BigDecimal("-1");
-
 
     /**
      * Big decimal value of 100.
@@ -58,7 +56,6 @@ class ModelTest {
      * Big decimal value of 1000.
      */
     private static final BigDecimal THOUSAND = new BigDecimal("1000");
-
 
     /**
      * Big decimal value of maximal number that calculator's result label can show minus one.
@@ -84,13 +81,6 @@ class ModelTest {
      * Big decimal value of -9.9.
      */
     private static final BigDecimal NEG_NINE_AND_NINE_TENTH = new BigDecimal("-9.9");
-
-    /**
-     * Big decimal value of -0.99999999999999999.
-     * This value can not be shown in the calculator's result label.
-     */
-    private static final BigDecimal NEG_ZERO_DOT_17_NINES = new BigDecimal("-0.9999999999999999");
-
 
     /**
      * Big decimal value of -0.9999999999999999.
@@ -124,16 +114,6 @@ class ModelTest {
      * Big decimal value of -0.9.
      */
     private static final BigDecimal NEG_NINE_TENTH = new BigDecimal("-0.9");
-
-    /**
-     * Big decimal value of -1.0.
-     */
-    private static final BigDecimal NEG_ONE_DOT_ZERO = new BigDecimal("-1.0");
-
-    /**
-     * Big decimal value of -1.1.
-     */
-    private static final BigDecimal NEG_ONE_AND_ONE_TENTH = new BigDecimal("-1.1");
 
     /**
      * Big decimal value of -0.00000000000000001.
@@ -172,7 +152,6 @@ class ModelTest {
      */
     private static final BigDecimal ONE_HUNDREDTH = new BigDecimal("0.01");
 
-
     /**
      * Big decimal value of 0.0000000000000001.
      * This value is the longest that can be shown in the calculator's result label.
@@ -194,23 +173,6 @@ class ModelTest {
      * Big decimal value of 1.01.
      */
     private static final BigDecimal ONE_AND_ONE_HUNDREDTH = new BigDecimal("1.01");
-
-    /**
-     * Big decimal value of 1.000000000000001.
-     * This value is the longest that can be shown in the calculator's result label.
-     */
-    private static final BigDecimal ONE_DOT_14_ZEROS_ONE = new BigDecimal("1.000000000000001");
-
-    /**
-     * Big decimal value of 1.0000000000000001.
-     * This value can not be shown in the calculator's result label.
-     */
-    private static final BigDecimal ONE_DOT_15_ZEROS_ONE = new BigDecimal("1.0000000000000001");
-
-    /**
-     * Big decimal value of 1.0.
-     */
-    private static final BigDecimal ONE_DOT_ZERO = new BigDecimal("1.0");
 
     /**
      * Big decimal value of 0.9.
@@ -246,12 +208,6 @@ class ModelTest {
     private static final BigDecimal ZERO_DOT_16_NINES = new BigDecimal("0.9999999999999999");
 
     /**
-     * Big decimal value of 0.99999999999999999.
-     * This value can not be shown in the calculator's result label.
-     */
-    private static final BigDecimal ZERO_DOT_17_NINES = new BigDecimal("0.9999999999999999");
-
-    /**
      * Big decimal value of 9.9.
      */
     private static final BigDecimal NINE_AND_NINE_TENTH = new BigDecimal("9.9");
@@ -271,12 +227,6 @@ class ModelTest {
      * This value is the longest that can be shown in the calculator's result label.
      */
     private static final BigDecimal NINE_DOT_14_ZEROS_NINE = new BigDecimal("9.000000000000009");
-
-    /**
-     * Big decimal value of 9.0000000000000009.
-     * This value can not be shown in the calculator's result label.
-     */
-    private static final BigDecimal NINE_DOT_15_ZEROS_NINE = new BigDecimal("9.0000000000000009");
 
     @Test
     void tests() {
@@ -451,18 +401,15 @@ class ModelTest {
         //first is -9.99
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("-19.98"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_NINE_AND_NINE_TENTH, new BigDecimal("-19.89"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_17_NINES, new BigDecimal("-10.99"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_16_NINES, new BigDecimal("-10.99"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_16_ZEROS_NINE, new BigDecimal("-9.9900000000000001"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-9.990000000000001"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("-10.98"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, new BigDecimal("-10.08"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_NINE_TENTH, new BigDecimal("-10.89"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ONE_DOT_ZERO, new BigDecimal("-10.99"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ONE_AND_ONE_TENTH, new BigDecimal("-11.09"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, new BigDecimal("-10"));
+        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, NEG_TEN);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NEG_ONE_TENTH, new BigDecimal("-10.09"));
 
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ZERO_DOT_ZERO, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
@@ -473,37 +420,29 @@ class ModelTest {
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ONE_AND_ONE_TENTH, new BigDecimal("-8.89"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("-8.98"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("-8.989999999999999"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("-8.98"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ONE_DOT_ZERO, new BigDecimal("-8.99"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_TENTH,  new BigDecimal("-9.09"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_HUNDREDTH, NEG_NINE_AND_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("-9"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-9.989999999999999"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("-8.99"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("-8.99"));
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_TENTH, NEG_NINE_HUNDREDTH);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, NEG_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, BigDecimal.ZERO);
         checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("-0.989999999999991"));
-        checkAdd(NEG_NINE_AND_NINETY_NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
 
         //first is -9.9
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_NINE_AND_NINE_TENTH, new BigDecimal("-19.8"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ZERO_DOT_17_NINES, new BigDecimal("-10.9"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ZERO_DOT_16_NINES, new BigDecimal("-10.9"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINE_AND_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-9.899999999999999"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("-10.89"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_NINE_HUNDREDTH, NEG_NINE_AND_NINETY_NINE_HUNDREDTH);
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_NINE_TENTH, new BigDecimal("-10.8"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ONE_DOT_ZERO, new BigDecimal("-10.9"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ONE_AND_ONE_TENTH, new BigDecimal("-11"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_NINE_AND_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_NINE_AND_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ONE_HUNDREDTH, new BigDecimal("-9.91"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ONE_TENTH, new BigDecimal("-10"));
+        checkAdd(NEG_NINE_AND_NINE_TENTH, NEG_ONE_TENTH, NEG_TEN);
 
         checkAdd(NEG_NINE_AND_NINE_TENTH, ZERO_DOT_ZERO, NEG_NINE_AND_NINE_TENTH);
 
@@ -513,60 +452,16 @@ class ModelTest {
         checkAdd(NEG_NINE_AND_NINE_TENTH, ZERO_DOT_16_ZEROS_ONE, NEG_NINE_AND_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("-8.8"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("-8.89"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("-8.899999999999999"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, ONE_DOT_15_ZEROS_ONE, NEG_NINE_AND_NINE_TENTH);
-        checkAdd(NEG_NINE_AND_NINE_TENTH, ONE_DOT_ZERO, new BigDecimal("-8.9"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_TENTH, new BigDecimal("-9"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_HUNDREDTH, new BigDecimal("-9.81"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NINETY_NINE_HUNDREDTH, new BigDecimal("-8.91"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-9.989999999999999"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, ZERO_DOT_16_ZEROS_NINE, NEG_NINE_AND_NINE_TENTH);
         checkAdd(NEG_NINE_AND_NINE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("-8.99"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("-8.99"));
         checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_AND_NINE_TENTH, BigDecimal.ZERO);
         checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_AND_NINE_HUNDREDTH, NEG_NINE_TENTH);
-        checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
+        checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, BigDecimal.ZERO);
         checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("-0.989999999999991"));
-        checkAdd(NEG_NINE_AND_NINE_TENTH, NINE_DOT_15_ZEROS_NINE, NEG_NINE_TENTH);
-
-        //first is -0.99999999999999999
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_17_NINES, new BigDecimal("-2"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_16_NINES, new BigDecimal("-2"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-1.000000000000001"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("-1.99"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_NINE_HUNDREDTH, new BigDecimal("-1.09"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_NINE_TENTH, new BigDecimal("-1.9"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ONE_DOT_ZERO, new BigDecimal("-2"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ONE_AND_ONE_TENTH, new BigDecimal("-2.1"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-1"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ONE_HUNDREDTH, new BigDecimal("-1.01"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NEG_ONE_TENTH, new BigDecimal("-1.1"));
-
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_ZERO, NEG_ZERO_DOT_16_NINES);
-
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_TENTH, new BigDecimal("-0.8999999999999999"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_HUNDREDTH, new BigDecimal("-0.9899999999999999"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.9999999999999998"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_AND_ONE_TENTH, new BigDecimal("0.1000000000000001"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0.0100000000000001"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0.0000000000000011"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, ONE_DOT_ZERO, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_TENTH, new BigDecimal("-0.0999999999999999"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_HUNDREDTH, new BigDecimal("-0.9099999999999999"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINETY_NINE_HUNDREDTH, new BigDecimal("-0.0099999999999999"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_16_NINES, BigDecimal.ZERO);
-        checkAdd(NEG_ZERO_DOT_17_NINES, ZERO_DOT_17_NINES, BigDecimal.ZERO);
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_AND_NINE_TENTH, new BigDecimal("8.9"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_AND_NINE_HUNDREDTH, new BigDecimal("8.09"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("8.99"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_DOT_14_ZEROS_NINE, new BigDecimal("8.000000000000009"));
-        checkAdd(NEG_ZERO_DOT_17_NINES, NINE_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
 
         //first is -0.9999999999999999
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ZERO_DOT_16_NINES, new BigDecimal("-2"));
@@ -575,10 +470,8 @@ class ModelTest {
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("-1.99"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_NINE_HUNDREDTH, new BigDecimal("-1.09"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_NINE_TENTH, new BigDecimal("-1.9"));
-        checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ONE_DOT_ZERO, new BigDecimal("-2"));
-        checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ONE_AND_ONE_TENTH, new BigDecimal("-2.1"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-1"));
+        checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ONE);
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ONE_HUNDREDTH, new BigDecimal("-1.01"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NEG_ONE_TENTH, new BigDecimal("-1.1"));
 
@@ -590,322 +483,205 @@ class ModelTest {
         checkAdd(NEG_ZERO_DOT_16_NINES, ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
         checkAdd(NEG_ZERO_DOT_16_NINES, ONE_AND_ONE_TENTH, new BigDecimal("0.1000000000000001"));
         checkAdd(NEG_ZERO_DOT_16_NINES, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0.0100000000000001"));
-        checkAdd(NEG_ZERO_DOT_16_NINES, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0.0000000000000011"));
-        checkAdd(NEG_ZERO_DOT_16_NINES, ONE_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
-        checkAdd(NEG_ZERO_DOT_16_NINES, ONE_DOT_ZERO, new BigDecimal("0.0000000000000001"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NINE_TENTH, new BigDecimal("-0.0999999999999999"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NINE_HUNDREDTH, new BigDecimal("-0.9099999999999999"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NINETY_NINE_HUNDREDTH, new BigDecimal("-0.0099999999999999"));
         checkAdd(NEG_ZERO_DOT_16_NINES, ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
         checkAdd(NEG_ZERO_DOT_16_NINES, ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
         checkAdd(NEG_ZERO_DOT_16_NINES, ZERO_DOT_16_NINES, BigDecimal.ZERO);
-        checkAdd(NEG_ZERO_DOT_16_NINES, ZERO_DOT_17_NINES, BigDecimal.ZERO);
         checkAdd(NEG_ZERO_DOT_16_NINES, NINE_AND_NINE_TENTH, new BigDecimal("8.9"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NINE_AND_NINE_HUNDREDTH, new BigDecimal("8.09"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("8.99"));
         checkAdd(NEG_ZERO_DOT_16_NINES, NINE_DOT_14_ZEROS_NINE, new BigDecimal("8.000000000000009"));
-        checkAdd(NEG_ZERO_DOT_16_NINES, NINE_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_16_NINES);
-
-        /**@TODO
-         *
-         */
 
         //first is -0.00000000000000009
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_NINE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_NINE);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINETY_NINE_HUNDREDTH, NEG_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_NINE_TENTH, NEG_NINE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_ONE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ONE_HUNDREDTH, NEG_ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NEG_ONE_TENTH, NEG_ONE_TENTH);
 
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_ZERO, BigDecimal.ZERO);
 
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_TENTH, ONE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_HUNDREDTH, ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_ZEROS_ONE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_AND_ONE_TENTH, ONE_AND_ONE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ONE_AND_ONE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_TENTH, NINE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_HUNDREDTH, NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_15_ZEROS_NINE);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_ZEROS_NINE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_NINES, ZERO_DOT_16_NINES);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINE_TENTH, NINE_AND_NINE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE);
 
         //first is -0.0000000000000009
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-0.0000000000000018"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("-0.9900000000000009"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_NINE_HUNDREDTH, new BigDecimal("-0.0900000000000009"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_NINE_TENTH, new BigDecimal("-0.9000000000000009"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_NINE);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.000000000000001"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ONE_HUNDREDTH, new BigDecimal("-0.0100000000000009"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NEG_ONE_TENTH, new BigDecimal("-0.1000000000000009"));
 
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_ZERO, NEG_ZERO_DOT_15_ZEROS_NINE);
 
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_TENTH, new BigDecimal("0.0999999999999991"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_HUNDREDTH, new BigDecimal("0.0099999999999991"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.0000000000000008"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_NINE);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_AND_ONE_TENTH, new BigDecimal("1.099999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("1.009999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_TENTH, new BigDecimal("0.8999999999999991"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_HUNDREDTH, new BigDecimal("0.0899999999999991"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINETY_NINE_HUNDREDTH, new BigDecimal("0.9899999999999991"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_15_ZEROS_NINE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_15_ZEROS_NINE);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_NINES, new BigDecimal("0.999999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINE_TENTH, new BigDecimal("9.899999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("9.089999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("9.989999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("9.000000000000008"));
 
         //first is -0.99
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_NINETY_NINE_HUNDREDTH, new BigDecimal("-1.98"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, new BigDecimal("-1.08"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_NINE_TENTH, new BigDecimal("-1.89"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("-0.9900000000000001"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, NEG_ONE);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_TENTH, new BigDecimal("-1.09"));
 
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_ZERO, NEG_NINETY_NINE_HUNDREDTH);
 
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_TENTH, new BigDecimal("-0.89"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_HUNDREDTH, new BigDecimal("-0.98"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.9899999999999999"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, NEG_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_AND_ONE_TENTH, new BigDecimal("0.11"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0.02"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_TENTH, NEG_NINE_HUNDREDTH);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_HUNDREDTH, NEG_NINE_TENTH);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, BigDecimal.ZERO);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-0.9899999999999991"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, NEG_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0.0099999999999999"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("8.91"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("8.1"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("9"));
+        checkAdd(NEG_NINETY_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("8.010000000000009"));
 
         //first is -0.09
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, new BigDecimal("-0.18"));
+        checkAdd(NEG_NINE_HUNDREDTH, NEG_NINE_TENTH, NEG_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_NINE_HUNDREDTH, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_NINE_HUNDREDTH);
+        checkAdd(NEG_NINE_HUNDREDTH, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.0900000000000001"));
+        checkAdd(NEG_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, NEG_ONE_TENTH);
+        checkAdd(NEG_NINE_HUNDREDTH, NEG_ONE_TENTH, new BigDecimal("-0.19"));
 
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_ZERO, NEG_NINE_HUNDREDTH);
 
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_NINE_HUNDREDTH, ONE_TENTH, ONE_HUNDREDTH);
+        checkAdd(NEG_NINE_HUNDREDTH, ONE_HUNDREDTH, new BigDecimal("-0.08"));
+        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.0899999999999999"));
+        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, NEG_NINE_HUNDREDTH);
+        checkAdd(NEG_NINE_HUNDREDTH, ONE_AND_ONE_TENTH, ONE_AND_ONE_HUNDREDTH);
+        checkAdd(NEG_NINE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0.92"));
+        checkAdd(NEG_NINE_HUNDREDTH, NINE_TENTH, new BigDecimal("0.81"));
+        checkAdd(NEG_NINE_HUNDREDTH, NINE_HUNDREDTH, BigDecimal.ZERO);
+        checkAdd(NEG_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, NINE_TENTH);
+        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-0.0899999999999991"));
+        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("-0.0899999999999999"));
+        checkAdd(NEG_NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0.9099999999999999"));
+        checkAdd(NEG_NINE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("9.81"));
+        checkAdd(NEG_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("9"));
+        checkAdd(NEG_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_TENTH);
+        checkAdd(NEG_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("8.910000000000009"));
 
         //first is -0.9
-        checkAdd(NEG_NINE_TENTH, NEG_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NEG_ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_NINE_TENTH, NEG_NINE_TENTH, new BigDecimal("-1.8"));
+        checkAdd(NEG_NINE_TENTH, NEG_ZERO_DOT_16_ZEROS_ONE, NEG_NINE_TENTH);
+        checkAdd(NEG_NINE_TENTH, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.9000000000000001"));
+        checkAdd(NEG_NINE_TENTH, NEG_ONE_HUNDREDTH, new BigDecimal("-0.91"));
+        checkAdd(NEG_NINE_TENTH, NEG_ONE_TENTH, NEG_ONE);
 
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_NINE_TENTH, ZERO_DOT_ZERO, NEG_NINE_TENTH);
 
-        checkAdd(NEG_NINE_TENTH, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_NINE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is -1.0
-        checkAdd(NEG_ONE_DOT_ZERO, NEG_ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NEG_ONE_TENTH, new BigDecimal("0"));
-
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_ZERO, new BigDecimal("0"));
-
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_DOT_ZERO, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is -1.1
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NEG_ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NEG_ONE_TENTH, new BigDecimal("0"));
-
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_ZERO, new BigDecimal("0"));
-
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_AND_ONE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_NINE_TENTH, ONE_TENTH, new BigDecimal("-0.8"));
+        checkAdd(NEG_NINE_TENTH, ONE_HUNDREDTH, new BigDecimal("-0.89"));
+        checkAdd(NEG_NINE_TENTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.8999999999999999"));
+        checkAdd(NEG_NINE_TENTH, ZERO_DOT_16_ZEROS_ONE, NEG_NINE_TENTH);
+        checkAdd(NEG_NINE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("0.2"));
+        checkAdd(NEG_NINE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0.11"));
+        checkAdd(NEG_NINE_TENTH, NINE_TENTH, BigDecimal.ZERO);
+        checkAdd(NEG_NINE_TENTH, NINE_HUNDREDTH, new BigDecimal("-0.81"));
+        checkAdd(NEG_NINE_TENTH, NINETY_NINE_HUNDREDTH, NINE_HUNDREDTH);
+        checkAdd(NEG_NINE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("-0.8999999999999991"));
+        checkAdd(NEG_NINE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("-0.8999999999999999"));
+        checkAdd(NEG_NINE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0.0999999999999999"));
+        checkAdd(NEG_NINE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("9"));
+        checkAdd(NEG_NINE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("8.19"));
+        checkAdd(NEG_NINE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH);
+        checkAdd(NEG_NINE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("8.100000000000009"));
 
         //first is -0.00000000000000001
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_16_ZEROS_ONE, new BigDecimal("-0.00000000000000002"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.00000000000000011"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ONE_HUNDREDTH, NEG_ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NEG_ONE_TENTH, NEG_ONE_TENTH);
 
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_ZERO, NEG_ZERO_DOT_16_ZEROS_ONE);
 
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_TENTH, ONE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_HUNDREDTH, ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_ZEROS_ONE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_AND_ONE_TENTH, ONE_AND_ONE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ONE_AND_ONE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_TENTH, NINE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_HUNDREDTH, NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0.00000000000000089"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0.00000000000000008"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0.9999999999999999"));
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINE_TENTH, NINE_AND_NINE_TENTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_16_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE);
 
         //first is -0.0000000000000001
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ONE_TENTH, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, new BigDecimal("-0.0000000000000002"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ONE_HUNDREDTH, new BigDecimal("-0.0100000000000001"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ONE_TENTH, new BigDecimal("-0.1000000000000001"));
 
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_ZERO, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_ZERO, NEG_ZERO_DOT_15_ZEROS_ONE);
 
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_TENTH, new BigDecimal("0.0999999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_HUNDREDTH, new BigDecimal("0.0099999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE, BigDecimal.ZERO);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("-0.00000000000000009"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_AND_ONE_TENTH, ONE_AND_ONE_TENTH);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ONE_AND_ONE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_TENTH, new BigDecimal("0.8999999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0.0899999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0.9899999999999999"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0.0000000000000008"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, NEG_ZERO_DOT_16_ZEROS_ONE);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0.9999999999999998"));
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINE_TENTH, NINE_AND_NINE_TENTH);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH);
+        checkAdd(NEG_ZERO_DOT_15_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE);
 
         //first is -0.01
         checkAdd(NEG_ONE_HUNDREDTH, NEG_ONE_HUNDREDTH, new BigDecimal("0"));
@@ -918,22 +694,16 @@ class ModelTest {
         checkAdd(NEG_ONE_HUNDREDTH, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_HUNDREDTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_HUNDREDTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_HUNDREDTH, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINE_TENTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ONE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is -0.1
         checkAdd(NEG_ONE_TENTH, NEG_ONE_TENTH, new BigDecimal("0"));
@@ -946,21 +716,16 @@ class ModelTest {
         checkAdd(NEG_ONE_TENTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(NEG_ONE_TENTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_TENTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_TENTH, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINE_TENTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NEG_ONE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NEG_ONE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NEG_ONE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.0
         checkAdd(ZERO_DOT_ZERO, ZERO_DOT_ZERO, new BigDecimal("0"));
@@ -971,21 +736,16 @@ class ModelTest {
         checkAdd(ZERO_DOT_ZERO, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_ZERO, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_ZERO, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_ZERO, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_ZERO, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_ZERO, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_ZERO, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.1
         checkAdd(ONE_TENTH, ONE_TENTH, new BigDecimal("0"));
@@ -994,21 +754,16 @@ class ModelTest {
         checkAdd(ONE_TENTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(ONE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_TENTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_TENTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_TENTH, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.01
         checkAdd(ONE_HUNDREDTH, ONE_HUNDREDTH, new BigDecimal("0"));
@@ -1016,147 +771,74 @@ class ModelTest {
         checkAdd(ONE_HUNDREDTH, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_HUNDREDTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_HUNDREDTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_HUNDREDTH, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.0000000000000001
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_ONE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_ONE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_ONE, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_ONE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.00000000000000001
         checkAdd(ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_ZEROS_ONE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_ONE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_ONE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_ONE, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_ONE, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_ONE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 1.1
         checkAdd(ONE_AND_ONE_TENTH, ONE_AND_ONE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_TENTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_TENTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_TENTH, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 1.01
         checkAdd(ONE_AND_ONE_HUNDREDTH, ONE_AND_ONE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_HUNDREDTH, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_HUNDREDTH, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_HUNDREDTH, ONE_DOT_ZERO, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_AND_ONE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is 1.000000000000001
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ONE_DOT_14_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_14_ZEROS_ONE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is 1.0000000000000001
-        checkAdd(ONE_DOT_15_ZEROS_ONE, ONE_DOT_15_ZEROS_ONE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_15_ZEROS_ONE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is 1.0
-        checkAdd(ONE_DOT_ZERO, ONE_DOT_ZERO, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ONE_DOT_ZERO, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.9
         checkAdd(NINE_TENTH, NINE_TENTH, new BigDecimal("0"));
@@ -1165,12 +847,10 @@ class ModelTest {
         checkAdd(NINE_TENTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NINE_TENTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NINE_TENTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NINE_TENTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(NINE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(NINE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.09
         checkAdd(NINE_HUNDREDTH, NINE_HUNDREDTH, new BigDecimal("0"));
@@ -1178,87 +858,62 @@ class ModelTest {
         checkAdd(NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NINE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(NINE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.99
         checkAdd(NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(NINETY_NINE_HUNDREDTH, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINETY_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINETY_NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.0000000000000009
         checkAdd(ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_15_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_NINE, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_NINE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_15_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_15_ZEROS_NINE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.00000000000000009
         checkAdd(ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_ZEROS_NINE, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_NINE, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_NINE, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_ZEROS_NINE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 0.9999999999999999
         checkAdd(ZERO_DOT_16_NINES, ZERO_DOT_16_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_NINES, ZERO_DOT_17_NINES, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_NINES, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_NINES, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_NINES, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(ZERO_DOT_16_NINES, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_16_NINES, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is 0.99999999999999999
-        checkAdd(ZERO_DOT_17_NINES, ZERO_DOT_17_NINES, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_17_NINES, NINE_AND_NINE_TENTH, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_17_NINES, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_17_NINES, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_17_NINES, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(ZERO_DOT_17_NINES, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 9.9
         checkAdd(NINE_AND_NINE_TENTH, NINE_AND_NINE_TENTH, new BigDecimal("0"));
         checkAdd(NINE_AND_NINE_TENTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_AND_NINE_TENTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_AND_NINE_TENTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINE_AND_NINE_TENTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 9.09
         checkAdd(NINE_AND_NINE_HUNDREDTH, NINE_AND_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_AND_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_AND_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINE_AND_NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 9.99
         checkAdd(NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH, new BigDecimal("0"));
         checkAdd(NINE_AND_NINETY_NINE_HUNDREDTH, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINE_AND_NINETY_NINE_HUNDREDTH, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
 
         //first is 9.000000000000009
         checkAdd(NINE_DOT_14_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, new BigDecimal("0"));
-        checkAdd(NINE_DOT_14_ZEROS_NINE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
-
-        //first is 9.0000000000000009
-        checkAdd(NINE_DOT_14_ZEROS_NINE, NINE_DOT_15_ZEROS_NINE, new BigDecimal("0"));
     }
 
     /**
