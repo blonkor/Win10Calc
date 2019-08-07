@@ -233,15 +233,15 @@ class ModelTest {
         //add operation tests
         //integer values only
         //first is min calc value minus one
-        checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC_MINUS_ONE, bigDec("-20000000000000000"));
-        checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC, bigDec("-19999999999999999"));
-        checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC_PLUS_ONE, bigDec("-19999999999999998"));
-        checkAdd(MIN_CALC_MINUS_ONE, NEG_THOUSAND, bigDec("-10000000000001000"));
-        checkAdd(MIN_CALC_MINUS_ONE, NEG_HUNDRED, bigDec("-10000000000000100"));
-        checkAdd(MIN_CALC_MINUS_ONE, NEG_TEN, bigDec("-10000000000000010"));
-        checkAdd(MIN_CALC_MINUS_ONE, NEG_ONE, bigDec("-10000000000000001"));
+        checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC_MINUS_ONE, bigDec("-2.e+16"));
+        checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC, bigDec("-2.e+16"));
+        checkAdd(MIN_CALC_MINUS_ONE, MIN_CALC_PLUS_ONE, bigDec("-2.e+16"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_THOUSAND, bigDec("-1.0000000000001e+16"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_HUNDRED, bigDec("-1.00000000000001e+16"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_TEN, bigDec("-1.000000000000001e+16"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_ONE, bigDec("-1.e+16"));
 
-        checkAdd(MIN_CALC_MINUS_ONE, BigDecimal.ZERO, MIN_CALC_MINUS_ONE);
+        checkAdd(MIN_CALC_MINUS_ONE, BigDecimal.ZERO, bigDec("-1.e+16"));
 
         checkAdd(MIN_CALC_MINUS_ONE, BigDecimal.ONE, MIN_CALC);
         checkAdd(MIN_CALC_MINUS_ONE, BigDecimal.TEN, bigDec("-9999999999999990"));

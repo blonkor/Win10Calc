@@ -1,6 +1,7 @@
 package com.implemica.bormashenko.calculator.model;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * This utility class contains model of how the calculator works.
@@ -9,6 +10,8 @@ import java.math.BigDecimal;
  */
 public class CalculatorOperations {
 
+    private static final MathContext PRECISION = new MathContext(16);
+
     /**
      * Calculates sum of two values.
      * @param firstValue first big decimal value.
@@ -16,7 +19,7 @@ public class CalculatorOperations {
      * @return sum of those two values.
      */
     public static BigDecimal add(BigDecimal firstValue, BigDecimal secondValue) {
-        return firstValue.add(secondValue);
+        return firstValue.add(secondValue).round(PRECISION).stripTrailingZeros();
     }
 
     /**
