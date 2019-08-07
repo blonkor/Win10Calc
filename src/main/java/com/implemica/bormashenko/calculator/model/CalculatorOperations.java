@@ -1,104 +1,117 @@
 package com.implemica.bormashenko.calculator.model;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 /**
- * This utility class contains model of how the calculator works.
+ * This class contains model of how the calculator works.
  *
  * @author Mykhailo Bormashenko
  */
 public class CalculatorOperations {
 
     /**
-     * Precision for big decimal calculation.
+     * Scale for divide operation.
+     * @todo try to use 11k
      */
-    private static final MathContext PRECISION = new MathContext(16);
+    private static final int SCALE = 10000;
 
     /**
-     * Big decimal value of minimal number that calculator's result label can show.
+     * First number of expression.
      */
-    private static final BigDecimal MIN_CALC = new BigDecimal("-9999999999999999");
+    private BigDecimal first = BigDecimal.ZERO;
 
     /**
-     * Big decimal value of maximal number that calculator's result label can show.
+     * Second number of expression.
      */
-    private static final BigDecimal MAX_CALC = new BigDecimal("9999999999999999");
+    private BigDecimal second = BigDecimal.ZERO;
 
     /**
-     * Calculates sum of two values.
-     * @param firstValue first big decimal value.
-     * @param secondValue second big decimal value.
-     * @return sum of those two values.
+     * Binary operation of expression.
      */
-    public static BigDecimal add(BigDecimal firstValue, BigDecimal secondValue) {
-        BigDecimal result = firstValue.add(secondValue).round(PRECISION);
+    private BinaryOperations binaryOperation;
 
-        if (result.compareTo(MIN_CALC) < 0 || result.compareTo(MAX_CALC) > 0) {
-            return new BigDecimal(result.toEngineeringString()).stripTrailingZeros();
+    public void setFirst(BigDecimal first) {
+        this.first = first;
+    }
+
+    public BigDecimal getFirst() {
+        return first;
+    }
+
+    public void setSecond(BigDecimal second) {
+        this.second = second;
+    }
+
+    public BigDecimal getSecond() {
+        return second;
+    }
+
+    public void setBinaryOperation(BinaryOperations binaryOperation) {
+        this.binaryOperation = binaryOperation;
+    }
+
+    public BinaryOperations getBinaryOperation() {
+        return binaryOperation;
+    }
+
+    /**
+     * Calculates result using first value, binary operation and second value.
+     *
+     * @return result of expression.
+     */
+    public BigDecimal calculateBinary() {
+        if (binaryOperation == null) {
+            return BigDecimal.ZERO;
         }
 
-        return new BigDecimal(result.stripTrailingZeros().toPlainString());
+        BigDecimal result = BigDecimal.ZERO;
+
+        if (binaryOperation == BinaryOperations.ADD) {
+            result = add();
+        } else if (binaryOperation == BinaryOperations.SUBTRACT) {
+            result = subtract();
+        } else if (binaryOperation == BinaryOperations.MULTIPLY) {
+            result = multiply();
+        } else if (binaryOperation == BinaryOperations.DIVIDE) {
+            result = divide();
+        }
+
+        return result;
     }
 
     /**
-     * Calculates difference of two values.
-     * @param firstValue first big decimal value.
-     * @param secondValue second big decimal value.
-     * @return difference of those two values.
+     * Adds first number to second.
+     *
+     * @return result of adding two numbers.
      */
-    public static BigDecimal subtract(BigDecimal firstValue, BigDecimal secondValue) {
-        return firstValue.subtract(secondValue);
+    private BigDecimal add() {
+        return first.add(second);
     }
 
     /**
-     * Calculates result of multiplying two values.
-     * @param firstValue first big decimal value.
-     * @param secondValue second big decimal value.
-     * @return result of multiplying those two values.
+     * Subtracts second value from first.
+     *
+     * @return result of subtracting one number from another.
      */
-    public static BigDecimal multiply(BigDecimal firstValue, BigDecimal secondValue) {
-        return firstValue.multiply(secondValue);
+    private BigDecimal subtract() {
+        return first.subtract(second);
     }
 
     /**
-     * Calculates result of dividing two values.
-     * @param firstValue first big decimal value.
-     * @param secondValue second big decimal value.
-     * @return result of dividing those two values.
+     * Multiplies first number and second.
+     *
+     * @return result of multiplying two numbers.
      */
-    public static BigDecimal divide(BigDecimal firstValue, BigDecimal secondValue) {
-        return firstValue.divide(secondValue, BigDecimal.ROUND_CEILING);
+    private BigDecimal multiply() {
+        return first.multiply(second);
     }
 
     /**
-     * Inverses value (inversion is dividing one on the value).
-     * @param value big decimal value.
-     * @return result of inverting this value.
+     * Divides first number on second.
+     *
+     * @return result of dividing one number on another.
      */
-    public static BigDecimal inverse(BigDecimal value) {
-        return BigDecimal.ONE.divide(value, BigDecimal.ROUND_CEILING);
+    private BigDecimal divide() {
+        return first.divide(second, SCALE, BigDecimal.ROUND_HALF_UP);
     }
-
-    /**
-     * Calculates square of the value.
-     * @param value big decimal value.
-     * @return result of square operation on this value.
-     */
-    public static BigDecimal sqr(BigDecimal value) {
-        return value.multiply(value);
-    }
-
-    /**
-     * Calculates square root of the value.
-     * @param value  big decimal value.
-     * @return result of square root operation on this value.
-     */
-    public static BigDecimal sqrt(BigDecimal value) {
-        BigDecimal x = new BigDecimal(Math.sqrt(value.doubleValue()));
-        return x.add(new BigDecimal(value.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
-    }
-
-
-
 }
