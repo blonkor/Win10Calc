@@ -914,6 +914,216 @@ class ModelTest {
 
         //first is 9.000000000000009
         checkAdd(NINE_DOT_14_ZEROS_NINE, NINE_DOT_14_ZEROS_NINE, bigDec("18.00000000000002"));
+
+        //integer and decimal
+        //first is min calc value minus one
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_NINE_AND_NINE_TENTH, bigDec("-10000000000000010"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_ZERO_DOT_16_NINES, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_NINETY_NINE_HUNDREDTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_NINE_TENTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NEG_ONE_TENTH, bigDec("-10000000000000000"));
+        
+        checkAdd(MIN_CALC_MINUS_ONE, ZERO_DOT_ZERO, MIN_CALC_MINUS_ONE);
+        
+        checkAdd(MIN_CALC_MINUS_ONE, ONE_TENTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, ZERO_DOT_15_ZEROS_ONE, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, ONE_AND_ONE_TENTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NINE_TENTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NINETY_NINE_HUNDREDTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, ZERO_DOT_16_NINES, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NINE_AND_NINE_TENTH, bigDec("-10000000000000000"));
+        checkAdd(MIN_CALC_MINUS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("-10000000000000000"));
+
+        //first is min calc value
+        checkAdd(MIN_CALC, NEG_NINE_AND_NINE_TENTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NEG_ZERO_DOT_16_NINES, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NEG_NINETY_NINE_HUNDREDTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NEG_NINE_TENTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NEG_ZERO_DOT_15_ZEROS_ONE, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NEG_ONE_TENTH, bigDec("-9999999999999999"));
+
+        checkAdd(MIN_CALC, ZERO_DOT_ZERO, MIN_CALC);
+
+        checkAdd(MIN_CALC, ONE_TENTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, ZERO_DOT_15_ZEROS_ONE, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, ONE_AND_ONE_TENTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NINE_TENTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NINETY_NINE_HUNDREDTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, ZERO_DOT_16_NINES, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NINE_AND_NINE_TENTH, bigDec("-9999999999999999"));
+        checkAdd(MIN_CALC, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("-9999999999999999"));
+
+        //first is min calc value plus one
+        checkAdd(MIN_CALC_PLUS_ONE, NEG_NINE_AND_NINE_TENTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NEG_ZERO_DOT_16_NINES, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NEG_NINETY_NINE_HUNDREDTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NEG_NINE_TENTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NEG_ONE_TENTH, bigDec("-9999999999999998"));
+
+        checkAdd(MIN_CALC_PLUS_ONE, ZERO_DOT_ZERO, bigDec("-9999999999999998"));
+
+        checkAdd(MIN_CALC_PLUS_ONE, ONE_TENTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, ZERO_DOT_15_ZEROS_ONE, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, ONE_AND_ONE_TENTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NINE_TENTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NINETY_NINE_HUNDREDTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, ZERO_DOT_16_NINES, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NINE_AND_NINE_TENTH, bigDec("-9999999999999998"));
+        checkAdd(MIN_CALC_PLUS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("-9999999999999998"));
+
+        //first is -1
+        checkAdd(NEG_ONE, NEG_NINE_AND_NINE_TENTH, bigDec("-10.9"));
+        checkAdd(NEG_ONE, NEG_ZERO_DOT_16_NINES, bigDec("-2"));
+        checkAdd(NEG_ONE, NEG_NINETY_NINE_HUNDREDTH, bigDec("-1.99"));
+        checkAdd(NEG_ONE, NEG_NINE_TENTH, bigDec("-1.9"));
+        checkAdd(NEG_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ONE);
+        checkAdd(NEG_ONE, NEG_ONE_TENTH, bigDec("-1.1"));
+
+        checkAdd(NEG_ONE, ZERO_DOT_ZERO, NEG_ONE);
+
+        checkAdd(NEG_ONE, ONE_TENTH, NEG_NINE_TENTH);
+        checkAdd(NEG_ONE, ZERO_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_16_NINES);
+        checkAdd(NEG_ONE, ONE_AND_ONE_TENTH, ONE_TENTH);
+        checkAdd(NEG_ONE, NINE_TENTH, NEG_ONE_TENTH);
+        checkAdd(NEG_ONE, NINETY_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH);
+        checkAdd(NEG_ONE, ZERO_DOT_16_NINES, NEG_ZERO_DOT_15_ZEROS_ONE);
+        checkAdd(NEG_ONE, NINE_AND_NINE_TENTH, bigDec("8.9"));
+        checkAdd(NEG_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("8.99"));
+
+        //first is 0
+        checkAdd(BigDecimal.ZERO, NEG_NINE_AND_NINE_TENTH, NEG_NINE_AND_NINE_TENTH);
+        checkAdd(BigDecimal.ZERO, NEG_ZERO_DOT_16_NINES, NEG_ZERO_DOT_16_NINES);
+        checkAdd(BigDecimal.ZERO, NEG_NINETY_NINE_HUNDREDTH, NEG_NINETY_NINE_HUNDREDTH);
+        checkAdd(BigDecimal.ZERO, NEG_NINE_TENTH, NEG_NINE_TENTH);
+        checkAdd(BigDecimal.ZERO, NEG_ZERO_DOT_15_ZEROS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE);
+        checkAdd(BigDecimal.ZERO, NEG_ONE_TENTH, NEG_ONE_TENTH);
+
+        checkAdd(BigDecimal.ZERO, ZERO_DOT_ZERO, BigDecimal.ZERO);
+
+        checkAdd(BigDecimal.ZERO, ONE_TENTH, ONE_TENTH);
+        checkAdd(BigDecimal.ZERO, ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_15_ZEROS_ONE);
+        checkAdd(BigDecimal.ZERO, ONE_AND_ONE_TENTH, ONE_AND_ONE_TENTH);
+        checkAdd(BigDecimal.ZERO, NINE_TENTH, NINE_TENTH);
+        checkAdd(BigDecimal.ZERO, NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH);
+        checkAdd(BigDecimal.ZERO, ZERO_DOT_16_NINES, ZERO_DOT_16_NINES);
+        checkAdd(BigDecimal.ZERO, NINE_AND_NINE_TENTH, NINE_AND_NINE_TENTH);
+        checkAdd(BigDecimal.ZERO, NINE_AND_NINETY_NINE_HUNDREDTH, NINE_AND_NINETY_NINE_HUNDREDTH);
+
+        //first is 1
+        checkAdd(BigDecimal.ONE, NEG_NINE_AND_NINE_TENTH, bigDec("-8.9"));
+        checkAdd(BigDecimal.ONE, NEG_ZERO_DOT_16_NINES, ZERO_DOT_15_ZEROS_ONE);
+        checkAdd(BigDecimal.ONE, NEG_NINETY_NINE_HUNDREDTH, ONE_HUNDREDTH);
+        checkAdd(BigDecimal.ONE, NEG_NINE_TENTH, ONE_TENTH);
+        checkAdd(BigDecimal.ONE, NEG_ZERO_DOT_15_ZEROS_ONE, ZERO_DOT_16_NINES);
+        checkAdd(BigDecimal.ONE, NEG_ONE_TENTH, NINE_TENTH);
+
+        checkAdd(BigDecimal.ONE, ZERO_DOT_ZERO, BigDecimal.ONE);
+
+        checkAdd(BigDecimal.ONE, ONE_TENTH, ONE_AND_ONE_TENTH);
+        checkAdd(BigDecimal.ONE, ZERO_DOT_15_ZEROS_ONE, BigDecimal.ONE);
+        checkAdd(BigDecimal.ONE, ONE_AND_ONE_TENTH, bigDec("2.1"));
+        checkAdd(BigDecimal.ONE, NINE_TENTH, bigDec("1.9"));
+        checkAdd(BigDecimal.ONE, NINETY_NINE_HUNDREDTH, bigDec("1.99"));
+        checkAdd(BigDecimal.ONE, ZERO_DOT_16_NINES, bigDec("2"));
+        checkAdd(BigDecimal.ONE, NINE_AND_NINE_TENTH, bigDec("10.9"));
+        checkAdd(BigDecimal.ONE, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("10.99"));
+
+        //first is 10
+        checkAdd(BigDecimal.TEN, NEG_NINE_AND_NINE_TENTH, ONE_TENTH);
+        checkAdd(BigDecimal.TEN, NEG_ZERO_DOT_16_NINES, bigDec("9"));
+        checkAdd(BigDecimal.TEN, NEG_NINETY_NINE_HUNDREDTH, bigDec("9.01"));
+        checkAdd(BigDecimal.TEN, NEG_NINE_TENTH, bigDec("9.1"));
+        checkAdd(BigDecimal.TEN, NEG_ZERO_DOT_15_ZEROS_ONE, BigDecimal.TEN);
+        checkAdd(BigDecimal.TEN, NEG_ONE_TENTH, NINE_AND_NINE_TENTH);
+
+        checkAdd(BigDecimal.TEN, ZERO_DOT_ZERO, BigDecimal.TEN);
+
+        checkAdd(BigDecimal.TEN, ONE_TENTH, bigDec("10.1"));
+        checkAdd(BigDecimal.TEN, ZERO_DOT_15_ZEROS_ONE, BigDecimal.TEN);
+        checkAdd(BigDecimal.TEN, ONE_AND_ONE_TENTH, bigDec("11.1"));
+        checkAdd(BigDecimal.TEN, NINE_TENTH, bigDec("10.9"));
+        checkAdd(BigDecimal.TEN, NINETY_NINE_HUNDREDTH, bigDec("10.99"));
+        checkAdd(BigDecimal.TEN, ZERO_DOT_16_NINES, bigDec("11"));
+        checkAdd(BigDecimal.TEN, NINE_AND_NINE_TENTH, bigDec("19.9"));
+        checkAdd(BigDecimal.TEN, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("19.99"));
+
+        //first is 100
+        checkAdd(HUNDRED, NEG_NINE_AND_NINE_TENTH, bigDec("90.1"));
+        checkAdd(HUNDRED, NEG_ZERO_DOT_16_NINES, bigDec("99"));
+        checkAdd(HUNDRED, NEG_NINETY_NINE_HUNDREDTH, bigDec("99.01"));
+        checkAdd(HUNDRED, NEG_NINE_TENTH, bigDec("99.1"));
+        checkAdd(HUNDRED, NEG_ZERO_DOT_15_ZEROS_ONE, HUNDRED);
+        checkAdd(HUNDRED, NEG_ONE_TENTH, bigDec("99.9"));
+
+        checkAdd(HUNDRED, ZERO_DOT_ZERO, HUNDRED);
+
+        checkAdd(HUNDRED, ONE_TENTH, bigDec("100.1"));
+        checkAdd(HUNDRED, ZERO_DOT_15_ZEROS_ONE, HUNDRED);
+        checkAdd(HUNDRED, ONE_AND_ONE_TENTH, bigDec("101.1"));
+        checkAdd(HUNDRED, NINE_TENTH, bigDec("100.9"));
+        checkAdd(HUNDRED, NINETY_NINE_HUNDREDTH, bigDec("100.99"));
+        checkAdd(HUNDRED, ZERO_DOT_16_NINES, bigDec("101"));
+        checkAdd(HUNDRED, NINE_AND_NINE_TENTH, bigDec("109.9"));
+        checkAdd(HUNDRED, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("109.99"));
+
+        //first is max calc value minus one
+        checkAdd(MAX_CALC_MINUS_ONE, NEG_NINE_AND_NINE_TENTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NEG_ZERO_DOT_16_NINES, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NEG_NINETY_NINE_HUNDREDTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NEG_NINE_TENTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NEG_ONE_TENTH, bigDec("9999999999999998"));
+
+        checkAdd(MAX_CALC_MINUS_ONE, ZERO_DOT_ZERO, MAX_CALC_MINUS_ONE);
+
+        checkAdd(MAX_CALC_MINUS_ONE, ONE_TENTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, ZERO_DOT_15_ZEROS_ONE, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, ONE_AND_ONE_TENTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NINE_TENTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NINETY_NINE_HUNDREDTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, ZERO_DOT_16_NINES, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NINE_AND_NINE_TENTH, bigDec("9999999999999998"));
+        checkAdd(MAX_CALC_MINUS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("9999999999999998"));
+
+        //first is max calc value 
+        checkAdd(MAX_CALC, NEG_NINE_AND_NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NEG_ZERO_DOT_16_NINES, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NEG_NINETY_NINE_HUNDREDTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NEG_NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NEG_ZERO_DOT_15_ZEROS_ONE, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NEG_ONE_TENTH, bigDec("9999999999999999"));
+
+        checkAdd(MAX_CALC, ZERO_DOT_ZERO, MAX_CALC);
+
+        checkAdd(MAX_CALC, ONE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, ZERO_DOT_15_ZEROS_ONE, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, ONE_AND_ONE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NINETY_NINE_HUNDREDTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, ZERO_DOT_16_NINES, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NINE_AND_NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("9999999999999999"));
+
+        //first is max calc value plus one
+        checkAdd(MAX_CALC_PLUS_ONE, NEG_NINE_AND_NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NEG_ZERO_DOT_16_NINES, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NEG_NINETY_NINE_HUNDREDTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NEG_NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NEG_ZERO_DOT_15_ZEROS_ONE, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NEG_ONE_TENTH, bigDec("9999999999999999"));
+
+        checkAdd(MAX_CALC_PLUS_ONE, ZERO_DOT_ZERO, MAX_CALC_PLUS_ONE);
+
+        checkAdd(MAX_CALC_PLUS_ONE, ONE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, ZERO_DOT_15_ZEROS_ONE, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, ONE_AND_ONE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NINETY_NINE_HUNDREDTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, ZERO_DOT_16_NINES, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NINE_AND_NINE_TENTH, bigDec("9999999999999999"));
+        checkAdd(MAX_CALC_PLUS_ONE, NINE_AND_NINETY_NINE_HUNDREDTH, bigDec("9999999999999999"));
     }
 
     /**
