@@ -10,7 +10,20 @@ import java.math.MathContext;
  */
 public class CalculatorOperations {
 
+    /**
+     * Precision for big decimal calculation.
+     */
     private static final MathContext PRECISION = new MathContext(16);
+
+    /**
+     * Big decimal value of minimal number that calculator's result label can show.
+     */
+    private static final BigDecimal MIN_CALC = new BigDecimal("-9999999999999999");
+
+    /**
+     * Big decimal value of maximal number that calculator's result label can show.
+     */
+    private static final BigDecimal MAX_CALC = new BigDecimal("9999999999999999");
 
     /**
      * Calculates sum of two values.
@@ -19,7 +32,13 @@ public class CalculatorOperations {
      * @return sum of those two values.
      */
     public static BigDecimal add(BigDecimal firstValue, BigDecimal secondValue) {
-        return firstValue.add(secondValue).round(PRECISION).stripTrailingZeros();
+        BigDecimal result = firstValue.add(secondValue).round(PRECISION);
+
+        if (result.compareTo(MIN_CALC) < 0 || result.compareTo(MAX_CALC) > 0) {
+            return new BigDecimal(result.toEngineeringString()).stripTrailingZeros();
+        }
+
+        return new BigDecimal(result.stripTrailingZeros().toPlainString());
     }
 
     /**
@@ -79,5 +98,7 @@ public class CalculatorOperations {
         BigDecimal x = new BigDecimal(Math.sqrt(value.doubleValue()));
         return x.add(new BigDecimal(value.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
     }
+
+
 
 }
