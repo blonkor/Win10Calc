@@ -74,7 +74,7 @@
                 </Button>
             </children>
         </HBox>
-        <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="90.0">
+        <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="75.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
                 <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
@@ -83,7 +83,7 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="16.0" minHeight="10.0" prefHeight="16.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="48.0" valignment="TOP" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="63.0" valignment="TOP" vgrow="ALWAYS" />
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                 <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
                 <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />

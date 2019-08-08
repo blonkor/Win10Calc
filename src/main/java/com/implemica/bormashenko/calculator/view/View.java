@@ -99,7 +99,9 @@ public class View {
 
         //digits resize listener
         Label resultLabel = (Label) scene.lookup(RESULT_LABEL_ID);
-        resultLabel.textProperty().addListener(new DigitsResizeListener(scene));
+        FontResizeListener fontResizeListener = new FontResizeListener(scene);
+        resultLabel.textProperty().addListener(fontResizeListener);
+        scene.widthProperty().addListener(fontResizeListener);
 
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
