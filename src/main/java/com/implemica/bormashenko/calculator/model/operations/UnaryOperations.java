@@ -1,4 +1,4 @@
-package com.implemica.bormashenko.calculator.model;
+package com.implemica.bormashenko.calculator.model.operations;
 
 /**
  * This enum contains unary operations used in calculator.

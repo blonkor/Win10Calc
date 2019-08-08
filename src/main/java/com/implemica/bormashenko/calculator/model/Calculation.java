@@ -1,5 +1,7 @@
 package com.implemica.bormashenko.calculator.model;
 
+import com.implemica.bormashenko.calculator.model.operations.BinaryOperations;
+
 import java.math.BigDecimal;
 
 /**
@@ -7,13 +9,12 @@ import java.math.BigDecimal;
  *
  * @author Mykhailo Bormashenko
  */
-public class CalculatorOperations {
+public class Calculation {
 
     /**
      * Scale for divide operation.
-     * @todo try to use 11k
      */
-    private static final int SCALE = 10000;
+    private static final int DIVIDE_SCALE = 10000;
 
     /**
      * First number of expression.
@@ -52,6 +53,12 @@ public class CalculatorOperations {
 
     public BinaryOperations getBinaryOperation() {
         return binaryOperation;
+    }
+
+    public void resetAll() {
+        first = BigDecimal.ZERO;
+        second = BigDecimal.ZERO;
+        binaryOperation = null;
     }
 
     /**
@@ -112,6 +119,6 @@ public class CalculatorOperations {
      * @return result of dividing one number on another.
      */
     private BigDecimal divide() {
-        return first.divide(second, SCALE, BigDecimal.ROUND_HALF_UP);
+        return first.divide(second, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 }

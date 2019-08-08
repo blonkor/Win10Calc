@@ -1,12 +1,18 @@
 package com.implemica.bormashenko.calculator.controller;
 
+import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
+import com.implemica.bormashenko.calculator.controller.util.ViewFormatter;
+import com.implemica.bormashenko.calculator.model.operations.BinaryOperations;
+import com.implemica.bormashenko.calculator.model.Calculation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -62,6 +68,12 @@ public class Controller implements Initializable {
      */
     private static final String MINUS = "-";
 
+    private Calculation calculation = new Calculation();
+
+    private boolean isOperationPressed = false;
+
+    private boolean isMemoryDisabled = true;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,39 +81,31 @@ public class Controller implements Initializable {
                 memoryClear, memoryRecall, memoryAdd, memoryStore,
                 memorySubtract, memoryShow, navigation, history
         };
-        setGrayTooltipsLocation(buttonsWithGrayTooltip);
+        ViewFormatter.setGrayTooltipsLocation(buttonsWithGrayTooltip);
 
         Button[] buttonsWithWhiteTooltip = {
                 close, hide, expand
         };
-        setWhiteTooltipsLocation(buttonsWithWhiteTooltip);
+        ViewFormatter.setWhiteTooltipsLocation(buttonsWithWhiteTooltip);
     }
 
     /**
      * Opens or closes navigation bar.
      */
     public void showNavigationPanel() {
-        if (navigationPanel.isVisible()) {
-            setNavigationVisible(false);
-        } else {
-            setNavigationVisible(true);
-        }
+        ViewFormatter.showNavigationPanel(navigationPanel, about);
     }
 
     /**
      * Opens or closes history bar.
      */
     public void showHistoryPanel() {
-        String emptyHistory = "There's no history yet.";
-        if (historyMemoryPanel.isVisible()) {
-            setHistoryMemoryVisible(false, emptyHistory);
-        } else {
-            setHistoryMemoryVisible(true, emptyHistory);
-        }
+        ViewFormatter.showHistoryPanel(historyMemoryPanel, historyMemoryLabel);
     }
 
     public void memoryClearOperation() {
-        setMemoryDisable(true);
+        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+        isMemoryDisabled = true;
     }
 
 
@@ -110,30 +114,19 @@ public class Controller implements Initializable {
     }
 
     public void memoryAddOperation() {
-        if (memoryClear.isDisabled()) {
-            setMemoryDisable(false);
-        }
+        enableMemory();
     }
 
     public void memorySubtractOperation() {
-        if (memoryClear.isDisabled()) {
-            setMemoryDisable(false);
-        }
+        enableMemory();
     }
 
     public void memoryStoreOperation() {
-        if (memoryClear.isDisabled()) {
-            setMemoryDisable(false);
-        }
+        enableMemory();
     }
 
     public void memoryShowOperation() {
-        String emptyMemory = "There's nothing saved in memory";
-        if (historyMemoryPanel.isVisible()) {
-            setHistoryMemoryVisible(false, emptyMemory);
-        } else {
-            setHistoryMemoryVisible(true, emptyMemory);
-        }
+        ViewFormatter.memoryShowOperation(historyMemoryPanel, historyMemoryLabel);
     }
 
     /**
@@ -141,6 +134,15 @@ public class Controller implements Initializable {
      */
     public void clearText() {
         result.setText(ZERO);
+        isOperationPressed = false;
+    }
+
+    /**
+     * Sets text in result screen to 0.
+     */
+    public void clearAll() {
+        clearText();
+        calculation.resetAll();
     }
 
     /**
@@ -148,42 +150,35 @@ public class Controller implements Initializable {
      */
     public void backspace() {
         String number = result.getText();
-
-        if (number.length() == 1) {
-            number = ZERO;
-        } else {
-            number = number.substring(0, number.length() - 1);
-        }
-
-        addCommasToResultScreen(number);
+        result.setText(NumberFormatter.deleteLastChar(number));
     }
 
     /**
      * Sums two numbers.
      */
     public void addOperation() {
-
+        binaryOperationPressed(BinaryOperations.ADD);
     }
 
     /**
      * Subtracts two numbers.
      */
     public void subtractOperation() {
-
+        binaryOperationPressed(BinaryOperations.SUBTRACT);
     }
 
     /**
      * Multiplies two numbers.
      */
     public void multiplyOperation() {
-
+        binaryOperationPressed(BinaryOperations.MULTIPLY);
     }
 
     /**
      * Divides two numbers.
      */
     public void divideOperation() {
-
+        binaryOperationPressed(BinaryOperations.DIVIDE);
     }
 
     /**
@@ -218,7 +213,9 @@ public class Controller implements Initializable {
      * Calculates result of operation.
      */
     public void calculateResult() {
-
+        calculation.setSecond(textToBigDecimal());
+        BigDecimal res = calculation.calculateBinary();
+        result.setText(NumberFormatter.separateNumberWithCommas(res.toString()));
     }
 
     /**
@@ -226,241 +223,51 @@ public class Controller implements Initializable {
      */
     public void makeDecimal() {
         String number = result.getText();
-
-        if (number.endsWith(DOT)) {
-            number = number.replace(DOT, "");
-        } else if (!number.contains(DOT)) {
-            number += DOT;
-        }
-
-        result.setText(number);
+        result.setText(NumberFormatter.addDot(number, isOperationPressed));
     }
 
     /**
-     * Adds digit "0" to result screen while button is clicked.
+     * Adds digit from button to result screen while button is clicked.
      */
-    public void zeroClick() {
-        String digit = "0";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "1" to result screen while button is clicked.
-     */
-    public void oneClick() {
-        String digit = "1";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "2" to result screen while button is clicked.
-     */
-    public void twoClick() {
-        String digit = "2";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "3" to result screen while button is clicked.
-     */
-    public void threeClick() {
-        String digit = "3";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "4" to result screen while button is clicked.
-     */
-    public void fourClick() {
-        String digit = "4";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "5" to result screen while button is clicked.
-     */
-    public void fiveClick() {
-        String digit = "5";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "6" to result screen while button is clicked.
-     */
-    public void sixClick() {
-        String digit = "6";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "7" to result screen while button is clicked.
-     */
-    public void sevenClick() {
-        String digit = "7";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "8" to result screen while button is clicked.
-     */
-    public void eightClick() {
-        String digit = "8";
-        addDigitToResult(digit);
-    }
-
-    /**
-     * Adds digit "9" to result screen while button is clicked.
-     */
-    public void nineClick() {
-        String digit = "9";
-        addDigitToResult(digit);
+    public void addDigit(MouseEvent event) {
+        String digit = ((Button) event.getSource()).getText();
+        String currentNumber = result.getText();
+        result.setText(NumberFormatter.addDigit(currentNumber, digit, isOperationPressed));
+        isOperationPressed = false;
     }
 
     /**
      * Negates number in result screen while button is clicked.
      */
     public void negate() {
+
+    }
+
+    private void enableMemory() {
+        if (isMemoryDisabled) {
+            ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+        }
+
+        isMemoryDisabled = false;
+    }
+
+    private BigDecimal textToBigDecimal() {
         String number = result.getText();
-        if (number.equals(ZERO)) {
-
-        } else if (number.startsWith(MINUS)) {
-            number = number.substring(1);
-        } else {
-            number = MINUS + number;
-        }
-
-        result.setText(number);
-    }
-
-    /**
-     * Adds digit symbol to result number string.
-     *
-     * @param digit symbol to add.
-     */
-    private void addDigitToResult(String digit) {
-        String number = result.getText();
-        int maxSymbols = 16;
         number = number.replaceAll(COMMA, "");
-
-        if (number.equals(ZERO)) {
-            number = digit;
-        } else if (number.length() < maxSymbols) {
-            number += digit;
-        }
-
-        addCommasToResultScreen(number);
+        return new BigDecimal(number);
     }
 
-    /**
-     * Separates every three digit in number and sets this number to result label.
-     *
-     * @param number number to manipulate with.
-     */
-    private void addCommasToResultScreen(String number) {
-        boolean negative = number.startsWith(MINUS);
-        number = number.replaceAll(MINUS, "");
-        number = number.replaceAll(COMMA, "");
-        String digitsAfterDot = "";
-
-        if (number.contains(DOT)) {
-            int dotIndex = number.indexOf(DOT);
-            digitsAfterDot = number.substring(dotIndex);
-            number = number.substring(0, dotIndex);
-        }
-
-        StringBuilder str = new StringBuilder();
-        char[] chars = number.toCharArray();
-        int counter = 0;
-
-        for (int i = chars.length - 1; i >= 0; i--) {
-            if (counter == 3) {
-                str.append(COMMA);
-                counter = 0;
-            }
-            str.append(chars[i]);
-            counter++;
-        }
-
-        if (negative) {
-            str.append(MINUS);
-        }
-
-        result.setText(str.reverse().append(digitsAfterDot).toString());
-    }
-
-    /**
-     * Sets disabling for those memory buttons: clear, recall, show.
-     *
-     * @param flag flag for disabling or enabling buttons.
-     */
-    private void setMemoryDisable(boolean flag) {
-        memoryClear.setDisable(flag);
-        memoryRecall.setDisable(flag);
-        memoryShow.setDisable(flag);
-    }
-
-    /**
-     * Sets visibility for navigation bar.
-     *
-     * @param flag flag for making visible or invisible navigation bar.
-     */
-    private void setNavigationVisible(boolean flag) {
-        navigationPanel.setVisible(flag);
-        about.setVisible(flag);
-    }
-
-    /**
-     * Sets visibility for history bar.
-     *
-     * @param flag flag for making visible or invisible history bar.
-     */
-    private void setHistoryMemoryVisible(boolean flag, String text) {
-        historyMemoryPanel.setVisible(flag);
-        historyMemoryLabel.setText(text);
+    private void binaryOperationPressed(BinaryOperations operation) {
+        calculation.setFirst(textToBigDecimal());
+        calculation.setBinaryOperation(operation);
+        isOperationPressed = true;
     }
 
 
-    /**
-     * Changes locations for gray tooltips.
-     * Gray tooltip is a tooltip with {@code styleClass = "tooltip_gray"}.
-     * Gray tooltip have to appear above the cursor.
-     *
-     * @param buttons controllers with tooltip.
-     */
-    private void setGrayTooltipsLocation(Button[] buttons) {
-        final double[] currentMouseX = new double[1];
-        final double[] currentMouseY = new double[1];
-        for (Button button : buttons) {
-            button.setOnMouseMoved(m -> {
-                currentMouseX[0] = m.getScreenX();
-                currentMouseY[0] = m.getScreenY();
-            });
-            button.getTooltip().setOnShowing(s -> {
-                button.getTooltip().setX(currentMouseX[0] - button.getTooltip().getWidth() / 2);
-                button.getTooltip().setY(currentMouseY[0] - 50);
-            });
-        }
-    }
 
-    /**
-     * Changes locations for white tooltips.
-     * White tooltip is a tooltip with {@code styleClass = "tooltip_white"}.
-     * White tooltip have to appear below the cursor.
-     *
-     * @param buttons controllers with tooltip.
-     */
-    private void setWhiteTooltipsLocation(Button[] buttons) {
-        final double[] currentMouseX = new double[1];
-        final double[] currentMouseY = new double[1];
-        for (Button button : buttons) {
-            button.setOnMouseMoved(m -> {
-                currentMouseX[0] = m.getScreenX();
-                currentMouseY[0] = m.getScreenY();
-            });
-            button.getTooltip().setOnShowing(s -> {
-                button.getTooltip().setX(currentMouseX[0]);
-                button.getTooltip().setY(currentMouseY[0] + 6);
-            });
-        }
-    }
+
+
+
+
+
 }
