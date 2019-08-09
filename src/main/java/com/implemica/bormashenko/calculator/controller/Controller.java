@@ -2,7 +2,7 @@ package com.implemica.bormashenko.calculator.controller;
 
 import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
 import com.implemica.bormashenko.calculator.controller.util.ViewFormatter;
-import com.implemica.bormashenko.calculator.model.operations.BinaryOperations;
+import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +34,7 @@ public class Controller implements Initializable {
      * Application's labels.
      */
     @FXML
-    private Label result, historyMemoryLabel;
+    private Label screen, historyMemoryLabel, equation;
 
     /**
      * Application's scroll pane.
@@ -58,21 +58,15 @@ public class Controller implements Initializable {
      */
     private static final String COMMA = ",";
 
-    /**
-     * Symbol for separation every three digit in number.
-     */
-    private static final String DOT = ".";
-
-    /**
-     * Symbol for negating number.
-     */
-    private static final String MINUS = "-";
-
     private Calculation calculation = new Calculation();
 
     private boolean isOperationPressed = false;
 
     private boolean isMemoryDisabled = true;
+
+    private boolean isCalculated = true;
+
+    private boolean isEqualsPressed = false;
 
 
     @Override
@@ -133,7 +127,7 @@ public class Controller implements Initializable {
      * Sets text in result screen to 0.
      */
     public void clearText() {
-        result.setText(ZERO);
+        screen.setText(ZERO);
         isOperationPressed = false;
     }
 
@@ -143,14 +137,15 @@ public class Controller implements Initializable {
     public void clearAll() {
         clearText();
         calculation.resetAll();
+        equation.setText("");
     }
 
     /**
      * Deletes last symbol in result screen.
      */
     public void backspace() {
-        String number = result.getText();
-        result.setText(NumberFormatter.deleteLastChar(number));
+        String number = screen.getText();
+        screen.setText(NumberFormatter.deleteLastChar(number));
     }
 
     /**
@@ -215,15 +210,18 @@ public class Controller implements Initializable {
     public void calculateResult() {
         calculation.setSecond(textToBigDecimal());
         BigDecimal res = calculation.calculateBinary();
-        result.setText(NumberFormatter.separateNumberWithCommas(res.toString()));
+        screen.setText(NumberFormatter.separateNumberWithCommas(res.toString()));
+        equation.setText("");
+        isCalculated = true;
+        isEqualsPressed = true;
     }
 
     /**
      * Makes number in result screen decimal.
      */
     public void makeDecimal() {
-        String number = result.getText();
-        result.setText(NumberFormatter.addDot(number, isOperationPressed));
+        String number = screen.getText();
+        screen.setText(NumberFormatter.addDot(number, isOperationPressed));
     }
 
     /**
@@ -231,9 +229,10 @@ public class Controller implements Initializable {
      */
     public void addDigit(MouseEvent event) {
         String digit = ((Button) event.getSource()).getText();
-        String currentNumber = result.getText();
-        result.setText(NumberFormatter.addDigit(currentNumber, digit, isOperationPressed));
+        String currentNumber = screen.getText();
+        screen.setText(NumberFormatter.addDigit(currentNumber, digit, isOperationPressed, isEqualsPressed));
         isOperationPressed = false;
+        isEqualsPressed = false;
     }
 
     /**
@@ -252,22 +251,32 @@ public class Controller implements Initializable {
     }
 
     private BigDecimal textToBigDecimal() {
-        String number = result.getText();
+        String number = screen.getText();
         number = number.replaceAll(COMMA, "");
         return new BigDecimal(number);
     }
 
     private void binaryOperationPressed(BinaryOperations operation) {
-        calculation.setFirst(textToBigDecimal());
+        if (isOperationPressed) {
+            setEquationText(equation.getText().substring(0, equation.getText().length() - 1) + operation.text);
+        } else {
+            if (isCalculated) {
+                calculation.setFirst(textToBigDecimal());
+                setEquationText(calculation.getFirst().toString() + operation.text);
+            } else {
+                calculation.setSecond(textToBigDecimal());
+                calculation.setFirst(calculation.calculateBinary());
+                screen.setText(calculation.getFirst().toString());
+                setEquationText(equation.getText() + calculation.getSecond() + operation.text);
+            }
+        }
+
         calculation.setBinaryOperation(operation);
         isOperationPressed = true;
+        isCalculated = false;
     }
 
+    private void setEquationText(String text) {
 
-
-
-
-
-
-
+    }
 }

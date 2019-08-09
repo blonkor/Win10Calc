@@ -1,6 +1,6 @@
 package com.implemica.bormashenko.calculator.model;
 
-import com.implemica.bormashenko.calculator.model.operations.BinaryOperations;
+import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 
 import java.math.BigDecimal;
 
@@ -19,12 +19,12 @@ public class Calculation {
     /**
      * First number of expression.
      */
-    private BigDecimal first = BigDecimal.ZERO;
+    private BigDecimal first = null;
 
     /**
      * Second number of expression.
      */
-    private BigDecimal second = BigDecimal.ZERO;
+    private BigDecimal second = null;
 
     /**
      * Binary operation of expression.
@@ -56,8 +56,8 @@ public class Calculation {
     }
 
     public void resetAll() {
-        first = BigDecimal.ZERO;
-        second = BigDecimal.ZERO;
+        first = null;
+        second = null;
         binaryOperation = null;
     }
 

@@ -37,7 +37,7 @@ public class FontResizeListener implements InvalidationListener {
     /**
      * ID of label in which the result of operations is shown.
      */
-    private static final String RESULT_LABEL_ID = "#result";
+    private static final String RESULT_LABEL_ID = "#screen";
 
     /**
      * JavaFX scene.

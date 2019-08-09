@@ -36,8 +36,8 @@ public class NumberFormatter {
         return number;
     }
 
-    public static String addDigit(String currentNumber, String digit, boolean isOperationPressed) {
-        if (isOperationPressed) {
+    public static String addDigit(String currentNumber, String digit, boolean isOperationPressed, boolean isEqualsPressed) {
+        if (isOperationPressed || isEqualsPressed) {
             return digit;
         } else {
             return addDigitToScreen(currentNumber, digit);

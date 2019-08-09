@@ -1,4 +1,4 @@
-package com.implemica.bormashenko.calculator.model.operations;
+package com.implemica.bormashenko.calculator.model.enums;
 
 /**
  * This enum contains binary operations used in calculator.
@@ -10,25 +10,32 @@ public enum BinaryOperations {
     /**
      * This operations sums two numbers.
      */
-    ADD,
+    ADD("+"),
 
     /**
      * This operation subtracts one number from another.
      */
-    SUBTRACT,
+    SUBTRACT("-"),
 
     /**
      * This operation multiplies two numbers.
      */
-    MULTIPLY,
+    MULTIPLY("*"),
 
     /**
      * This operation divides one number to another.
      */
-    DIVIDE,
+    DIVIDE("/"),
 
     /**
      * This operation calculates percentage of one number to another.
      */
-    PERCENT
+    PERCENT("%");
+
+    public String text;
+
+    BinaryOperations(String text) {
+        this.text = text;
+    }
+
 }

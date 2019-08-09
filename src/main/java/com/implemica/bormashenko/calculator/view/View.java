@@ -61,7 +61,7 @@ public class View {
     /**
      * ID of label in which the result of operations is shown.
      */
-    private static final String RESULT_LABEL_ID = "#result";
+    private static final String RESULT_LABEL_ID = "#screen";
 
     /**
      * Initializing main view and listeners.
@@ -97,7 +97,7 @@ public class View {
         scene.setOnMouseMoved(resizeListener);
         scene.setOnMouseDragged(resizeListener);
 
-        //digits resize listener
+        //font resize listener
         Label resultLabel = (Label) scene.lookup(RESULT_LABEL_ID);
         FontResizeListener fontResizeListener = new FontResizeListener(scene);
         resultLabel.textProperty().addListener(fontResizeListener);

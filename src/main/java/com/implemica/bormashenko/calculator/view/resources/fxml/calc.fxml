@@ -151,9 +151,9 @@
                         </Button>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#memoryRecallOperation" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <HBox alignment="TOP_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#memoryRecallOperation" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <children>
-                        <Label fx:id="result" alignment="TOP_LEFT" contentDisplay="TOP" minHeight="-Infinity" text="0">
+                        <Label fx:id="screen" alignment="TOP_LEFT" contentDisplay="TOP" minHeight="-Infinity" text="0">
                             <font>
                                 <Font name="Segoe UI Semibold" size="47.0" />
                             </font>
@@ -169,7 +169,7 @@
                         <Insets />
                     </GridPane.margin>
                 </HBox>
-                <Label GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                <Label fx:id="equation" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
             </children>
         </GridPane>
         <ScrollPane fx:id="navigationPanel" fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
