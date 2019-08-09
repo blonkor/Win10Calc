@@ -58,6 +58,8 @@ public class Controller implements Initializable {
      */
     private static final String COMMA = ",";
 
+    private static final String SPACE = " ";
+
     private Calculation calculation = new Calculation();
 
     private boolean isOperationPressed = false;
@@ -138,6 +140,9 @@ public class Controller implements Initializable {
         clearText();
         calculation.resetAll();
         equation.setText("");
+        isOperationPressed = false;
+        isCalculated = true;
+        isEqualsPressed = false;
     }
 
     /**
@@ -208,12 +213,15 @@ public class Controller implements Initializable {
      * Calculates result of operation.
      */
     public void calculateResult() {
-        calculation.setSecond(textToBigDecimal());
-        BigDecimal res = calculation.calculateBinary();
-        screen.setText(NumberFormatter.separateNumberWithCommas(res.toString()));
-        equation.setText("");
+        if (calculation.getBinaryOperation() != null) {
+            calculation.setSecond(textToBigDecimal());
+            BigDecimal res = calculation.calculateBinary();
+            screen.setText(NumberFormatter.separateNumberWithCommas(res.toString()));
+            equation.setText("");
+        }
         isCalculated = true;
         isEqualsPressed = true;
+        isOperationPressed = false;
     }
 
     /**
@@ -258,16 +266,16 @@ public class Controller implements Initializable {
 
     private void binaryOperationPressed(BinaryOperations operation) {
         if (isOperationPressed) {
-            setEquationText(equation.getText().substring(0, equation.getText().length() - 1) + operation.text);
+            setEquationText(equation.getText().substring(0, equation.getText().length() - 2) + SPACE + operation.text);
         } else {
             if (isCalculated) {
                 calculation.setFirst(textToBigDecimal());
-                setEquationText(calculation.getFirst().toString() + operation.text);
+                setEquationText(calculation.getFirst().toString() + SPACE + operation.text);
             } else {
                 calculation.setSecond(textToBigDecimal());
                 calculation.setFirst(calculation.calculateBinary());
                 screen.setText(calculation.getFirst().toString());
-                setEquationText(equation.getText() + calculation.getSecond() + operation.text);
+                setEquationText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.text);
             }
         }
 
@@ -277,6 +285,6 @@ public class Controller implements Initializable {
     }
 
     private void setEquationText(String text) {
-
+        equation.setText(text);
     }
 }
