@@ -19,17 +19,30 @@ public class Calculation {
     /**
      * First number of expression.
      */
-    private BigDecimal first = null;
+    private BigDecimal first = BigDecimal.ZERO;
 
     /**
      * Second number of expression.
      */
-    private BigDecimal second = null;
+    private BigDecimal second = BigDecimal.ZERO;
+
+    /**
+     * Second number of expression.
+     */
+    private BigDecimal result = BigDecimal.ZERO;
 
     /**
      * Binary operation of expression.
      */
     private BinaryOperations binaryOperation;
+
+    public BigDecimal getResult() {
+        return result;
+    }
+
+    public void setResult(BigDecimal result) {
+        this.result = result;
+    }
 
     public void setFirst(BigDecimal first) {
         this.first = first;
@@ -56,8 +69,9 @@ public class Calculation {
     }
 
     public void resetAll() {
-        first = null;
-        second = null;
+        first = BigDecimal.ZERO;
+        second = BigDecimal.ZERO;
+        result = BigDecimal.ZERO;
         binaryOperation = null;
     }
 
@@ -66,13 +80,7 @@ public class Calculation {
      *
      * @return result of expression.
      */
-    public BigDecimal calculateBinary() {
-        if (binaryOperation == null) {
-            return BigDecimal.ZERO;
-        }
-
-        BigDecimal result = BigDecimal.ZERO;
-
+    public void calculateBinary() {
         if (binaryOperation == BinaryOperations.ADD) {
             result = add();
         } else if (binaryOperation == BinaryOperations.SUBTRACT) {
@@ -82,8 +90,6 @@ public class Calculation {
         } else if (binaryOperation == BinaryOperations.DIVIDE) {
             result = divide();
         }
-
-        return result;
     }
 
     /**

@@ -11,10 +11,12 @@ public class NumberFormatter {
     private static final String ZERO = "0";
 
     public static String deleteLastChar(String number) {
-        if (number.length() == 1) {
-            number = "0";
-        } else {
-            number = number.substring(0, number.length() - 1);
+        if (!number.contains("e")) {
+            if (number.length() == 1) {
+                number = "0";
+            } else {
+                number = number.substring(0, number.length() - 1);
+            }
         }
 
         return separateNumberWithCommas(number);
@@ -36,8 +38,8 @@ public class NumberFormatter {
         return number;
     }
 
-    public static String addDigit(String currentNumber, String digit, boolean isOperationPressed, boolean isEqualsPressed) {
-        if (isOperationPressed || isEqualsPressed) {
+    public static String addDigit(String currentNumber, String digit, boolean isEditable) {
+        if (!isEditable) {
             return digit;
         } else {
             return addDigitToScreen(currentNumber, digit);

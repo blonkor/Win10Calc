@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -60,15 +61,21 @@ public class Controller implements Initializable {
 
     private static final String SPACE = " ";
 
-    private Calculation calculation = new Calculation();
+    private static final String EMPTY_STRING = "";
 
-    private boolean isOperationPressed = false;
+    private Calculation calculation = new Calculation();
 
     private boolean isMemoryDisabled = true;
 
-    private boolean isCalculated = true;
+    private boolean isOperationPressed = false;
+
+    private boolean isEditableScreen = true;
 
     private boolean isEqualsPressed = false;
+
+    private boolean isFirstCalculated = false;
+
+    private MathContext PRECISION_TO_SHOW = new MathContext(16);
 
 
     @Override
@@ -131,6 +138,7 @@ public class Controller implements Initializable {
     public void clearText() {
         screen.setText(ZERO);
         isOperationPressed = false;
+        isEqualsPressed = false;
     }
 
     /**
@@ -139,10 +147,11 @@ public class Controller implements Initializable {
     public void clearAll() {
         clearText();
         calculation.resetAll();
-        equation.setText("");
+        equation.setText(EMPTY_STRING);
         isOperationPressed = false;
-        isCalculated = true;
+        isEditableScreen = true;
         isEqualsPressed = false;
+        isFirstCalculated = false;
     }
 
     /**
@@ -214,14 +223,22 @@ public class Controller implements Initializable {
      */
     public void calculateResult() {
         if (calculation.getBinaryOperation() != null) {
-            calculation.setSecond(textToBigDecimal());
-            BigDecimal res = calculation.calculateBinary();
-            screen.setText(NumberFormatter.separateNumberWithCommas(res.toString()));
-            equation.setText("");
+            if (isEqualsPressed) {
+                calculation.setFirst(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+                calculation.calculateBinary();
+                screen.setText(calculation.getResult().round(PRECISION_TO_SHOW).toString());
+            } else {
+                calculation.setSecond(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+                calculation.calculateBinary();
+                calculation.setFirst(calculation.getResult());
+                screen.setText(calculation.getResult().round(PRECISION_TO_SHOW).toString());
+                equation.setText(EMPTY_STRING);
+            }
         }
-        isCalculated = true;
-        isEqualsPressed = true;
+        isFirstCalculated = true;
+        isEditableScreen = false;
         isOperationPressed = false;
+        isEqualsPressed = true;
     }
 
     /**
@@ -238,9 +255,9 @@ public class Controller implements Initializable {
     public void addDigit(MouseEvent event) {
         String digit = ((Button) event.getSource()).getText();
         String currentNumber = screen.getText();
-        screen.setText(NumberFormatter.addDigit(currentNumber, digit, isOperationPressed, isEqualsPressed));
+        screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
         isOperationPressed = false;
-        isEqualsPressed = false;
+        isEditableScreen = true;
     }
 
     /**
@@ -258,30 +275,32 @@ public class Controller implements Initializable {
         isMemoryDisabled = false;
     }
 
-    private BigDecimal textToBigDecimal() {
-        String number = screen.getText();
-        number = number.replaceAll(COMMA, "");
-        return new BigDecimal(number);
-    }
-
     private void binaryOperationPressed(BinaryOperations operation) {
-        if (isOperationPressed) {
-            setEquationText(equation.getText().substring(0, equation.getText().length() - 2) + SPACE + operation.text);
-        } else {
-            if (isCalculated) {
-                calculation.setFirst(textToBigDecimal());
-                setEquationText(calculation.getFirst().toString() + SPACE + operation.text);
+        if (!isOperationPressed) {
+            if (!isFirstCalculated) {
+                calculation.setFirst(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+                calculation.setBinaryOperation(operation);
+                setEquationText(calculation.getFirst() + SPACE + operation.text);
+            } else if (!isEqualsPressed) {
+                calculation.setSecond(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+                calculation.calculateBinary();
+                calculation.setFirst(calculation.getResult());
+                calculation.setBinaryOperation(operation);
+                screen.setText(calculation.getFirst().round(PRECISION_TO_SHOW).toString());
+                equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.text);
             } else {
-                calculation.setSecond(textToBigDecimal());
-                calculation.setFirst(calculation.calculateBinary());
-                screen.setText(calculation.getFirst().toString());
-                setEquationText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.text);
+                calculation.setBinaryOperation(operation);
+                equation.setText(calculation.getFirst() + SPACE + operation.text);
             }
+        } else {
+            setEquationText(equation.getText().substring(0, equation.getText().length() - 2) + SPACE + operation.text);
+            calculation.setBinaryOperation(operation);
         }
 
-        calculation.setBinaryOperation(operation);
+        isFirstCalculated = true;
+        isEditableScreen = false;
         isOperationPressed = true;
-        isCalculated = false;
+        isEqualsPressed = false;
     }
 
     private void setEquationText(String text) {
