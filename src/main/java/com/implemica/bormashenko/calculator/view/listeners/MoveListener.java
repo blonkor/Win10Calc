@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 /**
  * Listener for moving an application.
+ * Added to top panel.
  *
  * @author Mykhailo Bormashenko
  */
@@ -27,6 +28,11 @@ public class MoveListener implements EventHandler<MouseEvent> {
      */
     private Stage stage;
 
+    /**
+     * Constructor for listener.
+     *
+     * @param stage JavaFX stage.
+     */
     public MoveListener(Stage stage) {
         this.stage = stage;
     }

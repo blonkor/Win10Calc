@@ -32,10 +32,18 @@ public enum BinaryOperations {
      */
     PERCENT("%");
 
-    public String text;
+    /**
+     * Symbol representation of operation.
+     */
+    public String symbol;
 
-    BinaryOperations(String text) {
-        this.text = text;
+    /**
+     * Constructor for enum.
+     *
+     * @param symbol Symbol representation of operation.
+     */
+    BinaryOperations(String symbol) {
+        this.symbol = symbol;
     }
 
 }

@@ -1,5 +1,11 @@
 package com.implemica.bormashenko.calculator.controller.util;
 
+import com.implemica.bormashenko.calculator.model.Calculation;
+import javafx.scene.control.Label;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 public class NumberFormatter {
 
     private static final String MINUS = "-";
@@ -9,6 +15,11 @@ public class NumberFormatter {
     private static final String COMMA = ",";
 
     private static final String ZERO = "0";
+    private static final String EMPTY_STRING = "";
+    /**
+     * Precision for rounding result, calculated in model, and showing it on screen.
+     */
+    private final static MathContext PRECISION_TO_SHOW = new MathContext(16);
 
     public static String deleteLastChar(String number) {
         if (!number.contains("e")) {
@@ -99,5 +110,14 @@ public class NumberFormatter {
         }
 
         return NumberFormatter.separateNumberWithCommas(currentNumber);
+    }
+
+
+    public static BigDecimal screenToBigDecimal(Label screen) {
+        return new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING));
+    }
+
+    public static String roundResult(Calculation calculation) {
+        return calculation.getResult().round(PRECISION_TO_SHOW).toString();
     }
 }

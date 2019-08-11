@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,28 +54,44 @@ public class Controller implements Initializable {
     private static final String ZERO = "0";
 
     /**
-     * Symbol for separation every three digit in number.
+     * Symbol for separation numbers and operations in equation.
      */
-    private static final String COMMA = ",";
-
     private static final String SPACE = " ";
 
+    /**
+     * Empty string for replacing commas in number and clearing equation.
+     */
     private static final String EMPTY_STRING = "";
 
+    /**
+     * Model of application.
+     */
     private Calculation calculation = new Calculation();
 
+    /**
+     * True if memory is empty and memory buttons such as clear, recall and show should be disabled.
+     */
     private boolean isMemoryDisabled = true;
 
-    private boolean isOperationPressed = false;
-
+    /**
+     * True if number on screen can be edited.
+     */
     private boolean isEditableScreen = true;
 
+    /**
+     * True if operation was just pressed.
+     */
+    private boolean isOperationPressed = false;
+
+    /**
+     * True if equals was just pressed.
+     */
     private boolean isEqualsPressed = false;
 
+    /**
+     * True if first number was calculated.
+     */
     private boolean isFirstCalculated = false;
-
-    private MathContext PRECISION_TO_SHOW = new MathContext(16);
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -106,30 +121,59 @@ public class Controller implements Initializable {
         ViewFormatter.showHistoryPanel(historyMemoryPanel, historyMemoryLabel);
     }
 
+    /**
+     * Clears all memory.
+     *
+     * @todo
+     */
     public void memoryClearOperation() {
         ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
         isMemoryDisabled = true;
     }
 
-
+    /**
+     * Recalls number in memory.
+     *
+     * @todo
+     */
     public void memoryRecallOperation() {
 
     }
 
+    /**
+     * Adds number to memory.
+     *
+     * @todo
+     */
     public void memoryAddOperation() {
         enableMemory();
     }
 
+    /**
+     * Subtracts number from memory.
+     *
+     * @todo
+     */
     public void memorySubtractOperation() {
         enableMemory();
     }
 
+    /**
+     * Saves number in memory.
+     *
+     * @todo
+     */
     public void memoryStoreOperation() {
         enableMemory();
     }
 
+    /**
+     * Shows memory.
+     *
+     * @todo
+     */
     public void memoryShowOperation() {
-        ViewFormatter.memoryShowOperation(historyMemoryPanel, historyMemoryLabel);
+        ViewFormatter.showMemoryPanel(historyMemoryPanel, historyMemoryLabel);
     }
 
     /**
@@ -192,6 +236,8 @@ public class Controller implements Initializable {
 
     /**
      * Inverses number.
+     *
+     * @todo
      */
     public void inverseOperation() {
 
@@ -199,6 +245,8 @@ public class Controller implements Initializable {
 
     /**
      * Calculates square of number.
+     *
+     * @todo
      */
     public void squareOperation() {
 
@@ -206,6 +254,8 @@ public class Controller implements Initializable {
 
     /**
      * Calculates square root of number.
+     *
+     * @todo
      */
     public void squareRootOperation() {
 
@@ -213,36 +263,53 @@ public class Controller implements Initializable {
 
     /**
      * Calculates percent of number.
+     *
+     * @todo
      */
     public void percentOperation() {
 
     }
 
     /**
-     * Calculates result of operation.
+     * Calculates result of operation. Calculation is possible only if operation is set.
+     * <p>
+     * If user inputs number, operation and presses calculate button (without inputting second number), second number
+     * will be the same as first.
+     * <p>
+     * If user presses calculate button several times in a row, result of every operation will be set as first number
+     * and second number will not change from the first operation, and calculation will be made again with the same
+     * operation.
+     *
+     * @see Calculation
      */
     public void calculateResult() {
         if (calculation.getBinaryOperation() != null) {
-            if (isEqualsPressed) {
-                calculation.setFirst(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
-                calculation.calculateBinary();
-                screen.setText(calculation.getResult().round(PRECISION_TO_SHOW).toString());
-            } else {
-                calculation.setSecond(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+
+            BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen);
+
+            if (!isEqualsPressed) {
+                calculation.setSecond(numberOnScreen);
                 calculation.calculateBinary();
                 calculation.setFirst(calculation.getResult());
-                screen.setText(calculation.getResult().round(PRECISION_TO_SHOW).toString());
-                equation.setText(EMPTY_STRING);
+            } else {
+                calculation.setFirst(numberOnScreen);
+                calculation.calculateBinary();
             }
+
+            screen.setText(NumberFormatter.roundResult(calculation));
+            equation.setText(EMPTY_STRING);
+
+            isFirstCalculated = true;
+            isEditableScreen = false;
+            isOperationPressed = false;
+            isEqualsPressed = true;
         }
-        isFirstCalculated = true;
-        isEditableScreen = false;
-        isOperationPressed = false;
-        isEqualsPressed = true;
     }
 
     /**
      * Makes number in result screen decimal.
+     *
+     * @todo probably does not work correctly
      */
     public void makeDecimal() {
         String number = screen.getText();
@@ -262,11 +329,16 @@ public class Controller implements Initializable {
 
     /**
      * Negates number in result screen while button is clicked.
+     *
+     * @todo
      */
     public void negate() {
 
     }
 
+    /**
+     * Enables memory buttons such as clear, recall and show.
+     */
     private void enableMemory() {
         if (isMemoryDisabled) {
             ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -275,35 +347,60 @@ public class Controller implements Initializable {
         isMemoryDisabled = false;
     }
 
+    /**
+     * Calls when any binary operation is pressed.
+     * <p>
+     * If first number is not saved, saves number on screen as first number,
+     * sets inputted binary operation to model and shows first number and operation in equation label.
+     * <p>
+     * If first number is saved and calculation was not just made, saves number on screen as second,
+     * calculates result of binary operation set in model, saves result of operation as first number,
+     * sets inputted binary operation to model, than shows result of previous operation om screen and
+     * adds second number in model and operation symbol to equation label.
+     * <p>
+     * If first number is saved and calculation was just made, sets inputted binary operation to model
+     * and shows first number and operation in equation label (this is needed because after calculation was made result
+     * of calculation is saved as first number).
+     * <p>
+     * If operation was just pressed, sets inputted binary operation to model and changes last symbol (which is a symbol
+     * of previously inputted binary operation) in equation label to actual.
+     *
+     * @param operation binary operation to set.
+     * @see BinaryOperations
+     * @see Calculation
+     */
     private void binaryOperationPressed(BinaryOperations operation) {
         if (!isOperationPressed) {
+            BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen);
+
             if (!isFirstCalculated) {
-                calculation.setFirst(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+                calculation.setFirst(numberOnScreen);
                 calculation.setBinaryOperation(operation);
-                setEquationText(calculation.getFirst() + SPACE + operation.text);
+
+                equation.setText(calculation.getFirst() + SPACE + operation.symbol);
             } else if (!isEqualsPressed) {
-                calculation.setSecond(new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING)));
+                calculation.setSecond(numberOnScreen);
                 calculation.calculateBinary();
                 calculation.setFirst(calculation.getResult());
                 calculation.setBinaryOperation(operation);
-                screen.setText(calculation.getFirst().round(PRECISION_TO_SHOW).toString());
-                equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.text);
+
+                screen.setText(NumberFormatter.roundResult(calculation));
+                equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
             } else {
                 calculation.setBinaryOperation(operation);
-                equation.setText(calculation.getFirst() + SPACE + operation.text);
+
+                equation.setText(calculation.getFirst() + SPACE + operation.symbol);
             }
+
         } else {
-            setEquationText(equation.getText().substring(0, equation.getText().length() - 2) + SPACE + operation.text);
             calculation.setBinaryOperation(operation);
+
+            equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
         }
 
         isFirstCalculated = true;
         isEditableScreen = false;
         isOperationPressed = true;
         isEqualsPressed = false;
-    }
-
-    private void setEquationText(String text) {
-        equation.setText(text);
     }
 }

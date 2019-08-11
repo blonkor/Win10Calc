@@ -27,7 +27,7 @@ public class Calculation {
     private BigDecimal second = BigDecimal.ZERO;
 
     /**
-     * Second number of expression.
+     * Result of expression.
      */
     private BigDecimal result = BigDecimal.ZERO;
 
@@ -35,14 +35,6 @@ public class Calculation {
      * Binary operation of expression.
      */
     private BinaryOperations binaryOperation;
-
-    public BigDecimal getResult() {
-        return result;
-    }
-
-    public void setResult(BigDecimal result) {
-        this.result = result;
-    }
 
     public void setFirst(BigDecimal first) {
         this.first = first;
@@ -60,6 +52,10 @@ public class Calculation {
         return second;
     }
 
+    public BigDecimal getResult() {
+        return result;
+    }
+
     public void setBinaryOperation(BinaryOperations binaryOperation) {
         this.binaryOperation = binaryOperation;
     }
@@ -68,6 +64,9 @@ public class Calculation {
         return binaryOperation;
     }
 
+    /**
+     * Resets all fields to theirs primary state.
+     */
     public void resetAll() {
         first = BigDecimal.ZERO;
         second = BigDecimal.ZERO;
@@ -77,8 +76,6 @@ public class Calculation {
 
     /**
      * Calculates result using first value, binary operation and second value.
-     *
-     * @return result of expression.
      */
     public void calculateBinary() {
         if (binaryOperation == BinaryOperations.ADD) {

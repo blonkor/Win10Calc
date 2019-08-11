@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 
 /**
  * Main class for application.
+ *
+ * @author Mykhailo Bormashenko
  */
 public class MainApp extends Application {
 
@@ -21,6 +23,7 @@ public class MainApp extends Application {
 
     /**
      * Entry point.
+     *
      * @param args command line parameters.
      */
     public static void main(String[] args) {

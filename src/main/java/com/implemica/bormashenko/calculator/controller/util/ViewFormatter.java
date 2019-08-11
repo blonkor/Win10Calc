@@ -5,7 +5,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Utility class for programmatically changing view.
+ *
+ * @author Mykhailo Bormashenko
+ */
 public class ViewFormatter {
+
+    /**
+     * This message is shown after showing history while history is empty.
+     */
+    private static final String EMPTY_HISTORY_MESSAGE = "There's no history yet.";
+
+    /**
+     * This message is shown after showing memory while memory is empty.
+     */
+    private static final String EMPTY_MEMORY_MESSAGE = "There's nothing saved in memory";
 
     /**
      * Changes locations for gray tooltips.
@@ -51,59 +66,48 @@ public class ViewFormatter {
         }
     }
 
+    /**
+     * Disables or enables buttons, passed as args.
+     *
+     * @param flag    true for disabling and false for enabling.
+     * @param buttons buttons that should change their disability.
+     */
     public static void setButtonsDisability(boolean flag, Button... buttons) {
         for (Button button : buttons) {
             button.setDisable(flag);
         }
     }
 
+    /**
+     * Shows or hides navigation panel and "about" button.
+     *
+     * @param navigationPanel scroll pane to show or hide.
+     * @param about           button to show or hide.
+     */
     public static void showNavigationPanel(ScrollPane navigationPanel, Button about) {
-        if (navigationPanel.isVisible()) {
-            setNavigationVisible(navigationPanel, about, false);
-        } else {
-            setNavigationVisible(navigationPanel, about,true);
-        }
+        navigationPanel.setVisible(!navigationPanel.isVisible());
+        about.setVisible(!about.isVisible());
     }
 
     /**
-     * Opens or closes history bar.
-     */
-    public static void showHistoryPanel(AnchorPane historyMemoryPanel, Label historyMemoryLabel) {
-        String emptyHistory = "There's no history yet.";
-        if (historyMemoryPanel.isVisible()) {
-            setHistoryMemoryVisible(historyMemoryPanel, historyMemoryLabel, false, emptyHistory);
-        } else {
-            setHistoryMemoryVisible(historyMemoryPanel, historyMemoryLabel, true, emptyHistory);
-        }
-    }
-
-    public static void memoryShowOperation(AnchorPane historyMemoryPanel, Label historyMemoryLabel) {
-        String emptyMemory = "There's nothing saved in memory";
-        if (historyMemoryPanel.isVisible()) {
-            setHistoryMemoryVisible(historyMemoryPanel, historyMemoryLabel,false, emptyMemory);
-        } else {
-            setHistoryMemoryVisible(historyMemoryPanel, historyMemoryLabel,true, emptyMemory);
-        }
-    }
-
-    /**
-     * Sets visibility for navigation bar.
+     * Opens or closes history panel.
      *
-     * @param flag flag for making visible or invisible navigation bar.
+     * @param historyPanel panel where history is shown.
+     * @param historyLabel label with history.
      */
-    private static void setNavigationVisible(ScrollPane navigationPanel, Button about, boolean flag) {
-        navigationPanel.setVisible(flag);
-        about.setVisible(flag);
+    public static void showHistoryPanel(AnchorPane historyPanel, Label historyLabel) {
+        historyPanel.setVisible(!historyPanel.isVisible());
+        historyLabel.setText(EMPTY_HISTORY_MESSAGE);
     }
 
     /**
-     * Sets visibility for history bar.
+     * Opens or closes memory panel.
      *
-     * @param flag flag for making visible or invisible history bar.
+     * @param memoryPanel panel where memory is shown.
+     * @param memoryLabel label with memory.
      */
-    private static void setHistoryMemoryVisible(AnchorPane historyMemoryPanel, Label historyMemoryLabel,
-                                         boolean flag, String text) {
-        historyMemoryPanel.setVisible(flag);
-        historyMemoryLabel.setText(text);
+    public static void showMemoryPanel(AnchorPane memoryPanel, Label memoryLabel) {
+        memoryPanel.setVisible(!memoryPanel.isVisible());
+        memoryLabel.setText(EMPTY_MEMORY_MESSAGE);
     }
 }

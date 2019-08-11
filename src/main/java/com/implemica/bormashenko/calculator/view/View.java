@@ -74,9 +74,27 @@ public class View {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource(STYLE_PATH).toExternalForm());
 
+        addListeners(primaryStage, scene);
+
+        primaryStage.setTitle(TITLE);
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
+        primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(true);
+
+        primaryStage.show();
+    }
+
+    /**
+     * Add listeners to components.
+     *
+     * @param primaryStage JavaFX stage.
+     * @param scene        JavaFX scene.
+     */
+    private void addListeners(Stage primaryStage, Scene scene) {
         //close listener
-        Button exit = (Button) scene.lookup(CLOSE_ID);
-        exit.setOnAction(new ExitListener(primaryStage));
+        Button close = (Button) scene.lookup(CLOSE_ID);
+        close.setOnAction(new ExitListener(primaryStage));
 
         //expand listener
         Button expand = (Button) scene.lookup(EXPAND_ID);
@@ -98,17 +116,9 @@ public class View {
         scene.setOnMouseDragged(resizeListener);
 
         //font resize listener
-        Label resultLabel = (Label) scene.lookup(RESULT_LABEL_ID);
+        Label screen = (Label) scene.lookup(RESULT_LABEL_ID);
         FontResizeListener fontResizeListener = new FontResizeListener(scene);
-        resultLabel.textProperty().addListener(fontResizeListener);
+        screen.textProperty().addListener(fontResizeListener);
         scene.widthProperty().addListener(fontResizeListener);
-
-        primaryStage.setTitle(TITLE);
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setResizable(true);
-
-        primaryStage.show();
     }
 }

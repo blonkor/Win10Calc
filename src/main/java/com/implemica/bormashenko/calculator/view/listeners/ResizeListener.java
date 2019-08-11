@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 
 /**
  * Listener for resizing an application.
+ * Added to scene.
  *
  * @author Mykhailo Bormashenko
  */
 public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**
-     * Border width. Resizing is possible if only the cursor is between
-     * this border and the edge of the window.
+     * Padding for scene in which resize is possible.
      */
     private static final double BORDER = 3;
 
@@ -62,6 +62,12 @@ public class ResizeListener implements EventHandler<MouseEvent> {
      */
     private Stage stage;
 
+    /**
+     * Constructor for listener.
+     *
+     * @param scene JavaFX scene.
+     * @param stage JavaFX stage.
+     */
     public ResizeListener(Scene scene, Stage stage) {
         this.scene = scene;
         this.stage = stage;
@@ -85,6 +91,9 @@ public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**
      * Changes type of cursor and enabling resizing.
+     * This code is taken from
+     * {@link <https://geektortoise.wordpress.com/2014/02/07/how-to-programmatically-resize-the-stage-in-a-javafx-app/>}
+     * and then optimized.
      *
      * @param event mouse event.
      */

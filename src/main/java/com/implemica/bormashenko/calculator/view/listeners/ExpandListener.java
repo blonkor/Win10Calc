@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 /**
  * Listener for maximizing application.
+ * Added to expand button.
  *
  * @author Mykhailo Bormashenko
  */
@@ -48,6 +49,12 @@ public class ExpandListener implements EventHandler<ActionEvent> {
      */
     private Stage stage;
 
+    /**
+     * Constructor for listener.
+     *
+     * @param scene JavaFX scene.
+     * @param stage JavaFX stage.
+     */
     public ExpandListener(Scene scene, Stage stage) {
         this.scene = scene;
         this.stage = stage;
@@ -57,7 +64,7 @@ public class ExpandListener implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         boolean isMaximized = !stage.isMaximized();
         stage.setMaximized(isMaximized);
-        Button expand = (Button)scene.lookup(EXPAND_ID);
+        Button expand = (Button) scene.lookup(EXPAND_ID);
 
         if (isMaximized) {
             expand.setText(MAXIMIZED_ICON);
