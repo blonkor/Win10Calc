@@ -95,6 +95,11 @@ public class Calculation {
         }
     }
 
+    /**
+     * Calculates result using first value and binary operation
+     *
+     * @param unaryOperation operation to perform.
+     */
     public void calculateUnary(UnaryOperations unaryOperation) {
         if (unaryOperation == UnaryOperations.NEGATE) {
             result = negate();
@@ -145,6 +150,7 @@ public class Calculation {
 
     /**
      * Calculates negated first number.
+     *
      * @return negated first number.
      */
     private BigDecimal negate() {
@@ -153,6 +159,7 @@ public class Calculation {
 
     /**
      * Calculates square of first number.
+     *
      * @return square of first number.
      */
     private BigDecimal sqr() {
@@ -161,6 +168,7 @@ public class Calculation {
 
     /**
      * Calculates square root of first number.
+     *
      * @return square root of first number.
      */
     private BigDecimal sqrt() {
@@ -170,6 +178,7 @@ public class Calculation {
 
     /**
      * Calculates inverted first number.
+     *
      * @return inverted first number.
      */
     private BigDecimal inverse() {

@@ -238,6 +238,10 @@ public class Controller implements Initializable {
             equation.setText(EMPTY_STRING);
         }
 
+        if (isEqualsPressed) {
+            isFirstCalculated = false;
+        }
+
         isBinaryOperationPressed = false;
         isUnaryOperationPressed = false;
         isPercentPressed = false;
@@ -359,7 +363,13 @@ public class Controller implements Initializable {
             BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen);
 
             if (!isEqualsPressed) {
-                calculation.setSecond(numberOnScreen);
+
+                if (!isFirstCalculated) {
+                    calculation.setFirst(numberOnScreen);
+                } else {
+                    calculation.setSecond(numberOnScreen);
+                }
+
                 calculation.calculateBinary();
                 calculation.setFirst(calculation.getResult());
             } else {
@@ -409,8 +419,8 @@ public class Controller implements Initializable {
             if (!isFirstCalculated) {
                 calculation.setFirst(numberOnScreen);
                 calculation.setBinaryOperation(operation);
-                equation.setText(calculation.getFirst() + SPACE + operation.symbol);
 
+                equation.setText(calculation.getFirst() + SPACE + operation.symbol);
             } else if (!isEqualsPressed) {
                 calculation.setSecond(numberOnScreen);
                 calculation.calculateBinary();
@@ -424,10 +434,11 @@ public class Controller implements Initializable {
                 } else {
                     equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
                 }
+
             } else {
                 calculation.setBinaryOperation(operation);
 
-                equation.setText(calculation.getFirst() + SPACE + operation.symbol);
+                equation.setText(calculation.getResult() + SPACE + operation.symbol);
             }
 
         } else {
