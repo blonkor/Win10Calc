@@ -106,7 +106,7 @@ public class NumberFormatter {
      * @param bigDecimal number to manipulate with.
      */
     public static String bigDecimalToScreen(BigDecimal bigDecimal) {
-        String number = bigDecimal.toString();
+        String number = tripZeros(bigDecimal);
         boolean negative = number.startsWith(MINUS);
         number = number.replaceAll(MINUS, EMPTY_STRING);
         number = number.replaceAll(COMMA, EMPTY_STRING);
@@ -175,5 +175,37 @@ public class NumberFormatter {
      */
     public static String roundResult(Calculation calculation) {
         return bigDecimalToScreen(calculation.getResult().round(PRECISION_TO_SHOW));
+    }
+
+    private static String tripZeros(BigDecimal bigDecimal) {
+        String number = bigDecimal.toString();
+
+        if (!number.contains(DOT)) {
+            return number;
+        } else {
+            boolean engineering = number.contains("E");
+            String engSubstring = EMPTY_STRING;
+
+            if (engineering) {
+                int engIndex = number.indexOf("E");
+                engSubstring = number.substring(engIndex + 1);
+                number = number.substring(0, engIndex);
+            }
+
+            while (true) {
+                if (number.charAt(number.length() - 1) == '0') {
+                    number = number.substring(0, number.length() - 1);
+                } else {
+                    break;
+                }
+            }
+
+            if (engineering) {
+                number += "e";
+                number += engSubstring;
+            }
+
+            return number;
+        }
     }
 }

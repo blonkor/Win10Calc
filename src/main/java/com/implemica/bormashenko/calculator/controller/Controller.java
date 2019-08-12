@@ -90,9 +90,14 @@ public class Controller implements Initializable {
     private boolean isEditableScreen = true;
 
     /**
-     * True if binaryOperation was just pressed.
+     * True if any binary operation was just pressed.
      */
     private boolean isBinaryOperationPressed = false;
+
+    /**
+     * True if any unary operation was just pressed.
+     */
+    private boolean isUnaryOperationPressed = false;
 
     /**
      * True if equals was just pressed.
@@ -199,6 +204,7 @@ public class Controller implements Initializable {
         screen.setText(ZERO);
 
         isBinaryOperationPressed = false;
+        isUnaryOperationPressed = false;
         isPercentPressed = false;
         isEqualsPressed = false;
         isEditableScreen = true;
@@ -213,6 +219,7 @@ public class Controller implements Initializable {
         equation.setText(EMPTY_STRING);
 
         isBinaryOperationPressed = false;
+        isUnaryOperationPressed = false;
         isPercentPressed = false;
         isEqualsPressed = false;
         isFirstCalculated = false;
@@ -232,6 +239,7 @@ public class Controller implements Initializable {
         }
 
         isBinaryOperationPressed = false;
+        isUnaryOperationPressed = false;
         isPercentPressed = false;
         isEqualsPressed = false;
         isEditableScreen = true;
@@ -244,7 +252,8 @@ public class Controller implements Initializable {
      */
     public void makeDecimal() {
         String number = screen.getText();
-        screen.setText(NumberFormatter.addDot(number, isBinaryOperationPressed));
+        boolean isOperationPressed = isBinaryOperationPressed && isUnaryOperationPressed && isPercentPressed;
+        screen.setText(NumberFormatter.addDot(number, isOperationPressed));
     }
 
     /**
@@ -359,14 +368,15 @@ public class Controller implements Initializable {
             }
 
             screen.setText(NumberFormatter.roundResult(calculation));
-            equation.setText(EMPTY_STRING);
-
-            isBinaryOperationPressed = false;
-            isPercentPressed = false;
-            isEqualsPressed = true;
-            isFirstCalculated = true;
-            isEditableScreen = false;
         }
+
+        isBinaryOperationPressed = false;
+        isUnaryOperationPressed = false;
+        isPercentPressed = false;
+        isEqualsPressed = true;
+        isFirstCalculated = true;
+        isEditableScreen = false;
+        equation.setText(EMPTY_STRING);
     }
 
     /**
@@ -399,8 +409,8 @@ public class Controller implements Initializable {
             if (!isFirstCalculated) {
                 calculation.setFirst(numberOnScreen);
                 calculation.setBinaryOperation(operation);
-
                 equation.setText(calculation.getFirst() + SPACE + operation.symbol);
+
             } else if (!isEqualsPressed) {
                 calculation.setSecond(numberOnScreen);
                 calculation.calculateBinary();
@@ -408,7 +418,12 @@ public class Controller implements Initializable {
                 calculation.setBinaryOperation(operation);
 
                 screen.setText(NumberFormatter.roundResult(calculation));
-                equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
+
+                if (isUnaryOperationPressed) {
+                    equation.setText(equation.getText() + SPACE + operation.symbol);
+                } else {
+                    equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
+                }
             } else {
                 calculation.setBinaryOperation(operation);
 
@@ -422,6 +437,7 @@ public class Controller implements Initializable {
         }
 
         isBinaryOperationPressed = true;
+        isUnaryOperationPressed = false;
         isPercentPressed = false;
         isEqualsPressed = false;
         isFirstCalculated = true;
@@ -457,6 +473,7 @@ public class Controller implements Initializable {
         screen.setText(NumberFormatter.roundResult(calculation));
 
         isBinaryOperationPressed = false;
+        isUnaryOperationPressed = true;
         isPercentPressed = false;
         isEqualsPressed = false;
         isFirstCalculated = true;
@@ -500,6 +517,7 @@ public class Controller implements Initializable {
         }
 
         isBinaryOperationPressed = false;
+        isUnaryOperationPressed = false;
         isPercentPressed = true;
         isEqualsPressed = false;
         isFirstCalculated = true;

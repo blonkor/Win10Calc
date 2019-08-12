@@ -21,11 +21,6 @@ public class FontResizeListener implements InvalidationListener {
     private static final int MAX_FONT_SIZE = 47;
 
     /**
-     * Min size of font.
-     */
-    private static final int MIN_FONT_SIZE = 29;
-
-    /**
      * If width of text more than scene's width minus this value, font size should be reduced.
      */
     private static final int WIDTH_DIFF_TO_REDUCE = 35;
@@ -80,10 +75,6 @@ public class FontResizeListener implements InvalidationListener {
         }
 
         //fit font size
-        if (fontSize < MIN_FONT_SIZE) {
-            fontSize = MIN_FONT_SIZE;
-        }
-
         if (fontSize > MAX_FONT_SIZE) {
             fontSize = MAX_FONT_SIZE;
         }
