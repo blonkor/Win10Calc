@@ -30,7 +30,7 @@ public class NumberFormatter {
             }
         }
 
-        return separateNumberWithCommas(number);
+        return bigDecimalToScreen(new BigDecimal(number));
     }
 
     public static String addDot(String number, boolean isOperationPressed) {
@@ -60,13 +60,14 @@ public class NumberFormatter {
     /**
      * Separates every three digit in number and sets this number to result label.
      *
-     * @param number number to manipulate with.
+     * @param bigDecimal number to manipulate with.
      */
-    public static String separateNumberWithCommas(String number) {
+    public static String bigDecimalToScreen(BigDecimal bigDecimal) {
+        String number = bigDecimal.stripTrailingZeros().toString();
         boolean negative = number.startsWith(MINUS);
-        number = number.replaceAll(MINUS, "");
-        number = number.replaceAll(COMMA, "");
-        String digitsAfterDot = "";
+        number = number.replaceAll(MINUS, EMPTY_STRING);
+        number = number.replaceAll(COMMA, EMPTY_STRING);
+        String digitsAfterDot = EMPTY_STRING;
 
         if (number.contains(DOT)) {
             int dotIndex = number.indexOf(DOT);
@@ -109,15 +110,27 @@ public class NumberFormatter {
             currentNumber += digit;
         }
 
-        return NumberFormatter.separateNumberWithCommas(currentNumber);
+        return NumberFormatter.bigDecimalToScreen(new BigDecimal(currentNumber));
     }
 
 
+    /**
+     * Converts number from label with commas to big decimal.
+     *
+     * @param screen label with number.
+     * @return big decimal value of the number.
+     */
     public static BigDecimal screenToBigDecimal(Label screen) {
         return new BigDecimal(screen.getText().replaceAll(COMMA, EMPTY_STRING));
     }
 
+    /**
+     * Rounds result from calculation model.
+     *
+     * @param calculation model of application.
+     * @return string representation of rounded big decimal.
+     */
     public static String roundResult(Calculation calculation) {
-        return calculation.getResult().round(PRECISION_TO_SHOW).toString();
+        return calculation.getResult().round(PRECISION_TO_SHOW).stripTrailingZeros().toString();
     }
 }

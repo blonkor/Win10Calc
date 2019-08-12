@@ -17,6 +17,11 @@ public class Calculation {
     private static final int DIVIDE_SCALE = 10000;
 
     /**
+     * Big decimal value of 100.
+     */
+    private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
+
+    /**
      * First number of expression.
      */
     private BigDecimal first = BigDecimal.ZERO;
@@ -123,5 +128,19 @@ public class Calculation {
      */
     private BigDecimal divide() {
         return first.divide(second, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+    }
+
+    /**
+     * Calculates second number as a percentage of the first.
+     */
+    public void percentageOfFirst() {
+        second = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+    }
+
+    /**
+     * Calculates second number as a percentage of 100.
+     */
+    public void percentageOf100() {
+        second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 }

@@ -93,6 +93,11 @@ public class Controller implements Initializable {
      */
     private boolean isFirstCalculated = false;
 
+    /**
+     * True if percent was just pressed.
+     */
+    private boolean isPercentPressed = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] buttonsWithGrayTooltip = {
@@ -181,8 +186,11 @@ public class Controller implements Initializable {
      */
     public void clearText() {
         screen.setText(ZERO);
+
         isOperationPressed = false;
+        isPercentPressed = false;
         isEqualsPressed = false;
+        isEditableScreen = true;
     }
 
     /**
@@ -192,14 +200,18 @@ public class Controller implements Initializable {
         clearText();
         calculation.resetAll();
         equation.setText(EMPTY_STRING);
+
         isOperationPressed = false;
-        isEditableScreen = true;
+        isPercentPressed = false;
         isEqualsPressed = false;
         isFirstCalculated = false;
+        isEditableScreen = true;
     }
 
     /**
      * Deletes last symbol in result screen.
+     *
+     * @todo does not works properly
      */
     public void backspace() {
         String number = screen.getText();
@@ -235,6 +247,15 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Calculates percent of number.
+     *
+     * @todo
+     */
+    public void percentOperation() {
+        calculatePercentage();
+    }
+
+    /**
      * Inverses number.
      *
      * @todo
@@ -258,15 +279,6 @@ public class Controller implements Initializable {
      * @todo
      */
     public void squareRootOperation() {
-
-    }
-
-    /**
-     * Calculates percent of number.
-     *
-     * @todo
-     */
-    public void percentOperation() {
 
     }
 
@@ -299,10 +311,11 @@ public class Controller implements Initializable {
             screen.setText(NumberFormatter.roundResult(calculation));
             equation.setText(EMPTY_STRING);
 
+            isOperationPressed = false;
+            isPercentPressed = false;
+            isEqualsPressed = true;
             isFirstCalculated = true;
             isEditableScreen = false;
-            isOperationPressed = false;
-            isEqualsPressed = true;
         }
     }
 
@@ -323,7 +336,14 @@ public class Controller implements Initializable {
         String digit = ((Button) event.getSource()).getText();
         String currentNumber = screen.getText();
         screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
+
+        if (isPercentPressed) {
+            equation.setText(EMPTY_STRING);
+        }
+
         isOperationPressed = false;
+        isPercentPressed = false;
+        isEqualsPressed = true;
         isEditableScreen = true;
     }
 
@@ -398,9 +418,39 @@ public class Controller implements Initializable {
             equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
         }
 
+        isOperationPressed = true;
+        isPercentPressed = false;
+        isEqualsPressed = false;
         isFirstCalculated = true;
         isEditableScreen = false;
-        isOperationPressed = true;
+    }
+
+    private void calculatePercentage() {
+        if (calculation.getBinaryOperation() == null) {
+            calculation.setFirst(BigDecimal.ZERO);
+
+            screen.setText(ZERO);
+            equation.setText(ZERO);
+
+        } else {
+            BinaryOperations operation = calculation.getBinaryOperation();
+            BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+            calculation.setSecond(number);
+
+            if (operation == BinaryOperations.DIVIDE || operation == BinaryOperations.MULTIPLY) {
+                calculation.percentageOf100();
+            } else {
+                calculation.percentageOfFirst();
+            }
+
+            screen.setText(NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
+            equation.setText(equation.getText() + SPACE + calculation.getSecond().toString());
+        }
+
+        isOperationPressed = false;
+        isPercentPressed = true;
         isEqualsPressed = false;
+        isFirstCalculated = true;
+        isEditableScreen = false;
     }
 }

@@ -20,17 +20,12 @@ public enum BinaryOperations {
     /**
      * This operation multiplies two numbers.
      */
-    MULTIPLY("*"),
+    MULTIPLY("×"),
 
     /**
      * This operation divides one number to another.
      */
-    DIVIDE("/"),
-
-    /**
-     * This operation calculates percentage of one number to another.
-     */
-    PERCENT("%");
+    DIVIDE("÷");
 
     /**
      * Symbol representation of operation.
