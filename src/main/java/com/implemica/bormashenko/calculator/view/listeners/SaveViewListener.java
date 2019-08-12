@@ -1,6 +1,8 @@
 package com.implemica.bormashenko.calculator.view.listeners;
 
 import com.implemica.bormashenko.calculator.view.View;
+import com.implemica.bormashenko.calculator.view.util.SerializationView;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
 
@@ -14,17 +16,12 @@ import java.io.ObjectOutputStream;
  *
  * @author Mykhailo Bormashenko
  */
-public class SaveViewListener implements EventHandler<WindowEvent> {
+public class SaveViewListener implements EventHandler<WindowEvent>{
 
     /**
      * View of application.
      */
     private View view;
-
-    /**
-     * Path to dat file.
-     */
-    private static final String FILE_PATH = "src/main/java/com/implemica/bormashenko/calculator/view/resources/dat/view.dat";
 
     /**
      * Constructor for listener.
@@ -37,10 +34,6 @@ public class SaveViewListener implements EventHandler<WindowEvent> {
 
     @Override
     public void handle(WindowEvent event) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
-            outputStream.writeObject(view);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SerializationView.saveView(view);
     }
 }

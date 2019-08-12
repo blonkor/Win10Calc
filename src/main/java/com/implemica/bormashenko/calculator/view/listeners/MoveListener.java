@@ -1,5 +1,6 @@
 package com.implemica.bormashenko.calculator.view.listeners;
 
+import com.implemica.bormashenko.calculator.view.View;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
@@ -29,12 +30,19 @@ public class MoveListener implements EventHandler<MouseEvent> {
     private Stage stage;
 
     /**
+     * View of application.
+     */
+    private View view;
+
+    /**
      * Constructor for listener.
      *
      * @param stage JavaFX stage.
+     * @param view View of application.
      */
-    public MoveListener(Stage stage) {
+    public MoveListener(Stage stage, View view) {
         this.stage = stage;
+        this.view = view;
     }
 
     @Override
@@ -48,5 +56,8 @@ public class MoveListener implements EventHandler<MouseEvent> {
             stage.setX(event.getScreenX() + currentX);
             stage.setY(event.getScreenY() + currentY);
         }
+
+        view.setLocationX(stage.getX());
+        view.setLocationY(stage.getY());
     }
 }

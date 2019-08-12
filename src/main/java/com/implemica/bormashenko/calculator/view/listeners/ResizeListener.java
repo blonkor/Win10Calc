@@ -1,5 +1,6 @@
 package com.implemica.bormashenko.calculator.view.listeners;
 
+import com.implemica.bormashenko.calculator.view.View;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Cursor;
@@ -63,29 +64,40 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     private Stage stage;
 
     /**
+     * View of application.
+     */
+    private View view;
+
+    /**
      * Constructor for listener.
      *
      * @param scene JavaFX scene.
      * @param stage JavaFX stage.
+     * @param view View of application.
      */
-    public ResizeListener(Scene scene, Stage stage) {
+    public ResizeListener(Scene scene, Stage stage, View view) {
         this.scene = scene;
         this.stage = stage;
+        this.view = view;
     }
 
     @Override
     public void handle(MouseEvent event) {
-        EventType type = event.getEventType();
+        if (!stage.isMaximized()) {
+            EventType type = event.getEventType();
 
-        if (type.equals(MouseEvent.MOUSE_MOVED)) {
-            changeCursor(event);
-        } else if (type.equals(MouseEvent.MOUSE_DRAGGED)) {
-            if (resizeH) {
-                changeWidth(event);
+            if (type.equals(MouseEvent.MOUSE_MOVED)) {
+                changeCursor(event);
+            } else if (type.equals(MouseEvent.MOUSE_DRAGGED)) {
+                if (resizeH) {
+                    changeWidth(event);
+                }
+                if (resizeV) {
+                    changeHeight(event);
+                }
             }
-            if (resizeV) {
-                changeHeight(event);
-            }
+
+            setViewParams();
         }
     }
 
@@ -238,5 +250,15 @@ public class ResizeListener implements EventHandler<MouseEvent> {
 
         stage.setHeight(newHeight);
         stage.setY(newY);
+    }
+
+    /**
+     * Sets states of view.
+     */
+    private void setViewParams() {
+        view.setWidth(scene.getWidth());
+        view.setHeight(scene.getHeight());
+        view.setLocationX(stage.getX());
+        view.setLocationY(stage.getY());
     }
 }
