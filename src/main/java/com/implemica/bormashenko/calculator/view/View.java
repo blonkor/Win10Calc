@@ -11,12 +11,39 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.*;
+
 /**
  * Main view of application.
  *
  * @author Mykhailo Bormashenko
  */
-public class View {
+public class View implements Serializable {
+
+    /**
+     * Width of application.
+     */
+    private int width = 322;
+
+    /**
+     * Height of application.
+     */
+    private int height = 501;
+
+    /**
+     * LocationX of application.
+     */
+    private int locationX = 700;
+
+    /**
+     * LocationY of application.
+     */
+    private int locationY = 150;
+
+    /**
+     * True if application is expanded.
+     */
+    private boolean isMaximized = false;
 
     /**
      * Title of the application.
@@ -79,6 +106,13 @@ public class View {
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
         primaryStage.setScene(scene);
+
+        primaryStage.setWidth(width);
+        primaryStage.setHeight(height);
+        primaryStage.setFullScreen(isMaximized);
+        primaryStage.setX(locationX);
+        primaryStage.setY(locationY);
+
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(true);
 
@@ -120,5 +154,9 @@ public class View {
         FontResizeListener fontResizeListener = new FontResizeListener(scene);
         screen.textProperty().addListener(fontResizeListener);
         scene.widthProperty().addListener(fontResizeListener);
+
+        //save view listener
+        SaveViewListener saveViewListener = new SaveViewListener(this);
+        primaryStage.setOnCloseRequest(saveViewListener);
     }
 }

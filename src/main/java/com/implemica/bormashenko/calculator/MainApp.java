@@ -4,6 +4,10 @@ import com.implemica.bormashenko.calculator.view.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 /**
  * Main class for application.
  *
@@ -12,12 +16,20 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     /**
-     * View of application.
+     * Path to dat file.
      */
-    private View view = new View();
+    private static final String DAT_PATH = "src/main/java/com/implemica/bormashenko/calculator/view/resources/dat/view.dat";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        View view;
+
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(DAT_PATH))) {
+            view = (View)objectInputStream.readObject();
+        } catch (IOException e) {
+            view = new View();
+        }
+
         view.initStage(primaryStage);
     }
 
