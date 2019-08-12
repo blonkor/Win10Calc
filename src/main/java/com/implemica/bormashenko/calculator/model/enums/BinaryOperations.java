@@ -40,5 +40,4 @@ public enum BinaryOperations {
     BinaryOperations(String symbol) {
         this.symbol = symbol;
     }
-
 }

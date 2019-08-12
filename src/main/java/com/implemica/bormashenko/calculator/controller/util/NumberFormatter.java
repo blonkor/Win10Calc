@@ -6,21 +6,49 @@ import javafx.scene.control.Label;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+/**
+ * Class for editing numbers' representation.
+ *
+ * @author Mykhailo Bormashenko
+ */
 public class NumberFormatter {
 
+    /**
+     * Negative number symbol.
+     */
     private static final String MINUS = "-";
 
+    /**
+     * Decimal symbol.
+     */
     private static final String DOT = ".";
 
+    /**
+     * Symbol for separating every three digits in number.
+     */
     private static final String COMMA = ",";
 
+    /**
+     * Origin string in screen label.
+     */
     private static final String ZERO = "0";
+
+    /**
+     * Empty string to replace commas.
+     */
     private static final String EMPTY_STRING = "";
+
     /**
      * Precision for rounding result, calculated in model, and showing it on screen.
      */
     private final static MathContext PRECISION_TO_SHOW = new MathContext(16);
 
+    /**
+     * Deletes last char in number.
+     *
+     * @param number number to edit.
+     * @return number without last char.
+     */
     public static String deleteLastChar(String number) {
         if (!number.contains("e")) {
             if (number.length() == 1) {
@@ -33,6 +61,13 @@ public class NumberFormatter {
         return bigDecimalToScreen(new BigDecimal(number));
     }
 
+    /**
+     * Adds dot to screen.
+     *
+     * @param number             current number in label.
+     * @param isOperationPressed true if operation was just pressed.
+     * @return number with dot.
+     */
     public static String addDot(String number, boolean isOperationPressed) {
         if (isOperationPressed) {
             number = ZERO + DOT;
@@ -49,6 +84,14 @@ public class NumberFormatter {
         return number;
     }
 
+    /**
+     * Adds digit to screen.
+     *
+     * @param currentNumber current number in label.
+     * @param digit         digit to add.
+     * @param isEditable    true if digit should be appended to the end of the number.
+     * @return string with added digit.
+     */
     public static String addDigit(String currentNumber, String digit, boolean isEditable) {
         if (!isEditable) {
             return digit;
@@ -63,7 +106,7 @@ public class NumberFormatter {
      * @param bigDecimal number to manipulate with.
      */
     public static String bigDecimalToScreen(BigDecimal bigDecimal) {
-        String number = bigDecimal.stripTrailingZeros().toString();
+        String number = bigDecimal.toString();
         boolean negative = number.startsWith(MINUS);
         number = number.replaceAll(MINUS, EMPTY_STRING);
         number = number.replaceAll(COMMA, EMPTY_STRING);
@@ -131,6 +174,6 @@ public class NumberFormatter {
      * @return string representation of rounded big decimal.
      */
     public static String roundResult(Calculation calculation) {
-        return calculation.getResult().round(PRECISION_TO_SHOW).stripTrailingZeros().toString();
+        return bigDecimalToScreen(calculation.getResult().round(PRECISION_TO_SHOW));
     }
 }

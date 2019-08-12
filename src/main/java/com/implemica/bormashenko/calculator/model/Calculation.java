@@ -1,6 +1,7 @@
 package com.implemica.bormashenko.calculator.model;
 
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
+import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
 
 import java.math.BigDecimal;
 
@@ -94,6 +95,18 @@ public class Calculation {
         }
     }
 
+    public void calculateUnary(UnaryOperations unaryOperation) {
+        if (unaryOperation == UnaryOperations.NEGATE) {
+            result = negate();
+        } else if (unaryOperation == UnaryOperations.SQR) {
+            result = sqr();
+        } else if (unaryOperation == UnaryOperations.SQRT) {
+            result = sqrt();
+        } else if (unaryOperation == UnaryOperations.INVERSE) {
+            result = inverse();
+        }
+    }
+
     /**
      * Adds first number to second.
      *
@@ -128,6 +141,39 @@ public class Calculation {
      */
     private BigDecimal divide() {
         return first.divide(second, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+    }
+
+    /**
+     * Calculates negated first number.
+     * @return negated first number.
+     */
+    private BigDecimal negate() {
+        return first.negate();
+    }
+
+    /**
+     * Calculates square of first number.
+     * @return square of first number.
+     */
+    private BigDecimal sqr() {
+        return first.multiply(first);
+    }
+
+    /**
+     * Calculates square root of first number.
+     * @return square root of first number.
+     */
+    private BigDecimal sqrt() {
+        BigDecimal x = new BigDecimal(Math.sqrt(first.doubleValue()));
+        return x.add(new BigDecimal(first.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
+    }
+
+    /**
+     * Calculates inverted first number.
+     * @return inverted first number.
+     */
+    private BigDecimal inverse() {
+        return BigDecimal.ONE.divide(first, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
     /**

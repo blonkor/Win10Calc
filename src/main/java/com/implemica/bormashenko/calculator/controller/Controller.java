@@ -4,6 +4,7 @@ import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
 import com.implemica.bormashenko.calculator.controller.util.ViewFormatter;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
+import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -64,6 +65,16 @@ public class Controller implements Initializable {
     private static final String EMPTY_STRING = "";
 
     /**
+     * Opens text in equation label while unary operation is pressed.
+     */
+    private static final String OPENING_BRACKET = "(";
+
+    /**
+     * Closes text in equation label while unary operation is pressed.
+     */
+    private static final String CLOSING_BRACKET = ")";
+
+    /**
      * Model of application.
      */
     private Calculation calculation = new Calculation();
@@ -79,9 +90,9 @@ public class Controller implements Initializable {
     private boolean isEditableScreen = true;
 
     /**
-     * True if operation was just pressed.
+     * True if binaryOperation was just pressed.
      */
-    private boolean isOperationPressed = false;
+    private boolean isBinaryOperationPressed = false;
 
     /**
      * True if equals was just pressed.
@@ -187,7 +198,7 @@ public class Controller implements Initializable {
     public void clearText() {
         screen.setText(ZERO);
 
-        isOperationPressed = false;
+        isBinaryOperationPressed = false;
         isPercentPressed = false;
         isEqualsPressed = false;
         isEditableScreen = true;
@@ -201,11 +212,39 @@ public class Controller implements Initializable {
         calculation.resetAll();
         equation.setText(EMPTY_STRING);
 
-        isOperationPressed = false;
+        isBinaryOperationPressed = false;
         isPercentPressed = false;
         isEqualsPressed = false;
         isFirstCalculated = false;
         isEditableScreen = true;
+    }
+
+    /**
+     * Adds digit from button to result screen while button is clicked.
+     */
+    public void addDigit(MouseEvent event) {
+        String digit = ((Button) event.getSource()).getText();
+        String currentNumber = screen.getText();
+        screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
+
+        if (isPercentPressed) {
+            equation.setText(EMPTY_STRING);
+        }
+
+        isBinaryOperationPressed = false;
+        isPercentPressed = false;
+        isEqualsPressed = false;
+        isEditableScreen = true;
+    }
+
+    /**
+     * Makes number in result screen decimal.
+     *
+     * @todo probably does not work correctly
+     */
+    public void makeDecimal() {
+        String number = screen.getText();
+        screen.setText(NumberFormatter.addDot(number, isBinaryOperationPressed));
     }
 
     /**
@@ -247,6 +286,43 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Negates number in result screen while button is clicked.
+     *
+     * @todo
+     */
+    public void negate() {
+        unaryOperationPressed(UnaryOperations.NEGATE);
+    }
+
+    /**
+     * Calculates square of number.
+     *
+     * @todo
+     */
+    public void squareOperation() {
+        unaryOperationPressed(UnaryOperations.SQR);
+    }
+
+    /**
+     * Calculates square root of number.
+     *
+     * @todo
+     */
+    public void squareRootOperation() {
+        unaryOperationPressed(UnaryOperations.SQRT);
+    }
+
+    /**
+     * Inverses number.
+     *
+     * @todo
+     */
+    public void inverseOperation() {
+        unaryOperationPressed(UnaryOperations.INVERSE);
+    }
+
+
+    /**
      * Calculates percent of number.
      *
      * @todo
@@ -256,33 +332,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Inverses number.
-     *
-     * @todo
-     */
-    public void inverseOperation() {
-
-    }
-
-    /**
-     * Calculates square of number.
-     *
-     * @todo
-     */
-    public void squareOperation() {
-
-    }
-
-    /**
-     * Calculates square root of number.
-     *
-     * @todo
-     */
-    public void squareRootOperation() {
-
-    }
-
-    /**
+     * Calls when equals button is pressed.
      * Calculates result of operation. Calculation is possible only if operation is set.
      * <p>
      * If user inputs number, operation and presses calculate button (without inputting second number), second number
@@ -311,7 +361,7 @@ public class Controller implements Initializable {
             screen.setText(NumberFormatter.roundResult(calculation));
             equation.setText(EMPTY_STRING);
 
-            isOperationPressed = false;
+            isBinaryOperationPressed = false;
             isPercentPressed = false;
             isEqualsPressed = true;
             isFirstCalculated = true;
@@ -320,54 +370,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Makes number in result screen decimal.
-     *
-     * @todo probably does not work correctly
-     */
-    public void makeDecimal() {
-        String number = screen.getText();
-        screen.setText(NumberFormatter.addDot(number, isOperationPressed));
-    }
-
-    /**
-     * Adds digit from button to result screen while button is clicked.
-     */
-    public void addDigit(MouseEvent event) {
-        String digit = ((Button) event.getSource()).getText();
-        String currentNumber = screen.getText();
-        screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
-
-        if (isPercentPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        isOperationPressed = false;
-        isPercentPressed = false;
-        isEqualsPressed = true;
-        isEditableScreen = true;
-    }
-
-    /**
-     * Negates number in result screen while button is clicked.
-     *
-     * @todo
-     */
-    public void negate() {
-
-    }
-
-    /**
-     * Enables memory buttons such as clear, recall and show.
-     */
-    private void enableMemory() {
-        if (isMemoryDisabled) {
-            ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-        }
-
-        isMemoryDisabled = false;
-    }
-
-    /**
+     * Calculates equation with binary operation.
      * Calls when any binary operation is pressed.
      * <p>
      * If first number is not saved, saves number on screen as first number,
@@ -390,7 +393,7 @@ public class Controller implements Initializable {
      * @see Calculation
      */
     private void binaryOperationPressed(BinaryOperations operation) {
-        if (!isOperationPressed) {
+        if (!isBinaryOperationPressed) {
             BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen);
 
             if (!isFirstCalculated) {
@@ -418,13 +421,62 @@ public class Controller implements Initializable {
             equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
         }
 
-        isOperationPressed = true;
+        isBinaryOperationPressed = true;
         isPercentPressed = false;
         isEqualsPressed = false;
         isFirstCalculated = true;
         isEditableScreen = false;
     }
 
+    /**
+     * Calculates equation with unary operation.
+     * Calls when any unary operation button is pressed.
+     * <p>
+     * If first number is not saved, sets number from screen as first number.
+     * <p>
+     * Calculates unary operation with first number and sets result as first number.
+     *
+     * @param operation UnaryOperation to perform.
+     */
+    private void unaryOperationPressed(UnaryOperations operation) {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+
+        if (!isFirstCalculated) {
+            calculation.setFirst(number);
+        }
+
+        calculation.calculateUnary(operation);
+        calculation.setFirst(calculation.getResult());
+
+        if (equation.getText().equals(EMPTY_STRING)) {
+            equation.setText(operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET);
+        } else {
+            equation.setText(operation.symbol + OPENING_BRACKET + equation.getText() + CLOSING_BRACKET);
+        }
+
+        screen.setText(NumberFormatter.roundResult(calculation));
+
+        isBinaryOperationPressed = false;
+        isPercentPressed = false;
+        isEqualsPressed = false;
+        isFirstCalculated = true;
+        isEditableScreen = false;
+    }
+
+    /**
+     * Calculates percentage.
+     * Calls when percent button is pressed.
+     * <p>
+     * Calculation is possible if only binary operation is set. Otherwise, sets first number in calculation model
+     * to 0, and shows it in main screen and equation label.
+     * <p>
+     * Sets number from screen as second number in calculation model. Next steps depends on which binary operation
+     * is set:
+     * If set binary operation is add or subtract, sets second number as percentage of first number.
+     * If set binary operation is multiply or divide, sets second number as percentage of 100.
+     * <p>
+     * Than shows changed second number on screen and adds it to equation label.
+     */
     private void calculatePercentage() {
         if (calculation.getBinaryOperation() == null) {
             calculation.setFirst(BigDecimal.ZERO);
@@ -437,20 +489,31 @@ public class Controller implements Initializable {
             BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
             calculation.setSecond(number);
 
-            if (operation == BinaryOperations.DIVIDE || operation == BinaryOperations.MULTIPLY) {
-                calculation.percentageOf100();
-            } else {
+            if (operation == BinaryOperations.ADD || operation == BinaryOperations.SUBTRACT) {
                 calculation.percentageOfFirst();
+            } else if (operation == BinaryOperations.MULTIPLY || operation == BinaryOperations.DIVIDE) {
+                calculation.percentageOf100();
             }
 
             screen.setText(NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
             equation.setText(equation.getText() + SPACE + calculation.getSecond().toString());
         }
 
-        isOperationPressed = false;
+        isBinaryOperationPressed = false;
         isPercentPressed = true;
         isEqualsPressed = false;
         isFirstCalculated = true;
         isEditableScreen = false;
+    }
+
+    /**
+     * Enables memory buttons such as clear, recall and show.
+     */
+    private void enableMemory() {
+        if (isMemoryDisabled) {
+            ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+        }
+
+        isMemoryDisabled = false;
     }
 }

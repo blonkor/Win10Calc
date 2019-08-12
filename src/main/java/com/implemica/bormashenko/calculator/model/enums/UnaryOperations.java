@@ -10,20 +10,34 @@ public enum UnaryOperations {
     /**
      * This operation inverses number.
      */
-    INVERSE,
+    INVERSE("1/"),
 
     /**
      * This operation calculates square of number.
      */
-    SQR,
+    SQR("sqr"),
 
     /**
      * This operation calculates square root of number.
      */
-    SQRT,
+    SQRT("√"),
 
     /**
      * This operation negates number.
      */
-    NEGATE
+    NEGATE("negate");
+
+    /**
+     * Symbol representation of operation.
+     */
+    public String symbol;
+
+    /**
+     * Constructor for enum.
+     *
+     * @param symbol Symbol representation of operation.
+     */
+    UnaryOperations(String symbol) {
+        this.symbol = symbol;
+    }
 }
