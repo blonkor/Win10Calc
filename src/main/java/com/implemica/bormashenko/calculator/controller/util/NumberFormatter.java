@@ -101,7 +101,7 @@ public class NumberFormatter {
     }
 
     /**
-     * Separates every three digit in number and sets this number to result label.
+     * Separates every three digit in number.
      *
      * @param bigDecimal number to manipulate with.
      */
@@ -171,10 +171,10 @@ public class NumberFormatter {
      * Rounds result from calculation model.
      *
      * @param calculation model of application.
-     * @return string representation of rounded big decimal.
+     * @return rounded number.
      */
-    public static String roundResult(Calculation calculation) {
-        return bigDecimalToScreen(calculation.getResult().round(PRECISION_TO_SHOW));
+    public static BigDecimal roundResult(Calculation calculation) {
+        return calculation.getResult().round(PRECISION_TO_SHOW);
     }
 
     private static String tripZeros(BigDecimal bigDecimal) {
@@ -198,6 +198,10 @@ public class NumberFormatter {
                 } else {
                     break;
                 }
+            }
+
+            if (number.endsWith(DOT)) {
+                number = number.substring(0, number.length() - 1);
             }
 
             if (engineering) {

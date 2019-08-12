@@ -234,11 +234,11 @@ public class Controller implements Initializable {
         String currentNumber = screen.getText();
         screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
 
-        if (isPercentPressed) {
+        if (isPercentPressed || isUnaryOperationPressed) {
             equation.setText(EMPTY_STRING);
         }
 
-        if (isEqualsPressed) {
+        if (isEqualsPressed || isUnaryOperationPressed) {
             isFirstCalculated = false;
         }
 
@@ -300,8 +300,6 @@ public class Controller implements Initializable {
 
     /**
      * Negates number in result screen while button is clicked.
-     *
-     * @todo
      */
     public void negate() {
         unaryOperationPressed(UnaryOperations.NEGATE);
@@ -309,8 +307,6 @@ public class Controller implements Initializable {
 
     /**
      * Calculates square of number.
-     *
-     * @todo
      */
     public void squareOperation() {
         unaryOperationPressed(UnaryOperations.SQR);
@@ -318,8 +314,6 @@ public class Controller implements Initializable {
 
     /**
      * Calculates square root of number.
-     *
-     * @todo
      */
     public void squareRootOperation() {
         unaryOperationPressed(UnaryOperations.SQRT);
@@ -327,18 +321,13 @@ public class Controller implements Initializable {
 
     /**
      * Inverses number.
-     *
-     * @todo
      */
     public void inverseOperation() {
         unaryOperationPressed(UnaryOperations.INVERSE);
     }
 
-
     /**
      * Calculates percent of number.
-     *
-     * @todo
      */
     public void percentOperation() {
         calculatePercentage();
@@ -359,10 +348,9 @@ public class Controller implements Initializable {
      */
     public void calculateResult() {
         if (calculation.getBinaryOperation() != null) {
-
             BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen);
 
-            if (!isEqualsPressed) {
+            if (!isEqualsPressed && !isUnaryOperationPressed) {
 
                 if (!isFirstCalculated) {
                     calculation.setFirst(numberOnScreen);
@@ -373,20 +361,29 @@ public class Controller implements Initializable {
                 calculation.calculateBinary();
                 calculation.setFirst(calculation.getResult());
             } else {
-                calculation.setFirst(numberOnScreen);
+
+                if (isEqualsPressed) {
+                    calculation.setFirst(numberOnScreen);
+                }
+
                 calculation.calculateBinary();
             }
 
-            screen.setText(NumberFormatter.roundResult(calculation));
+            screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.roundResult(calculation)));
+
+            isBinaryOperationPressed = false;
+            isUnaryOperationPressed = false;
+            isPercentPressed = false;
+            isEqualsPressed = true;
+            isFirstCalculated = true;
+            isEditableScreen = false;
         }
 
-        isBinaryOperationPressed = false;
-        isUnaryOperationPressed = false;
-        isPercentPressed = false;
-        isEqualsPressed = true;
-        isFirstCalculated = true;
-        isEditableScreen = false;
         equation.setText(EMPTY_STRING);
+
+        System.out.println(calculation.getFirst());
+        System.out.println(calculation.getSecond());
+        System.out.println(calculation.getResult());
     }
 
     /**
@@ -421,24 +418,25 @@ public class Controller implements Initializable {
                 calculation.setBinaryOperation(operation);
 
                 equation.setText(calculation.getFirst() + SPACE + operation.symbol);
-            } else if (!isEqualsPressed) {
+            } else if (!isEqualsPressed && !isUnaryOperationPressed) {
                 calculation.setSecond(numberOnScreen);
                 calculation.calculateBinary();
                 calculation.setFirst(calculation.getResult());
                 calculation.setBinaryOperation(operation);
 
-                screen.setText(NumberFormatter.roundResult(calculation));
-
-                if (isUnaryOperationPressed) {
-                    equation.setText(equation.getText() + SPACE + operation.symbol);
-                } else {
-                    equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
-                }
-
+                screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.roundResult(calculation)));
+                equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
             } else {
                 calculation.setBinaryOperation(operation);
 
-                equation.setText(calculation.getResult() + SPACE + operation.symbol);
+                if (isEqualsPressed) {
+                    calculation.setFirst(numberOnScreen);
+
+                    equation.setText(NumberFormatter.roundResult(calculation) + SPACE + operation.symbol);
+                } else {
+                    equation.setText(equation.getText() + SPACE + operation.symbol);
+                }
+
             }
 
         } else {
@@ -470,18 +468,55 @@ public class Controller implements Initializable {
 
         if (!isFirstCalculated) {
             calculation.setFirst(number);
-        }
+            calculation.calculateUnary(operation);
+            calculation.setFirst(calculation.getResult());
 
-        calculation.calculateUnary(operation);
-        calculation.setFirst(calculation.getResult());
+            screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.roundResult(calculation)));
+            equation.setText(operation.symbol + OPENING_BRACKET + SPACE + number.toString() +
+                    SPACE + CLOSING_BRACKET + SPACE);
+        } else if (isUnaryOperationPressed) {
+            calculation.calculateUnary(operation);
+            calculation.setFirst(calculation.getResult());
 
-        if (equation.getText().equals(EMPTY_STRING)) {
-            equation.setText(operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET);
+            screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.roundResult(calculation)));
+
+            String equationText = equation.getText();
+            int lastIndexOfOperation = 0;
+
+            String textBefore = EMPTY_STRING;
+            String textAfter = equationText;
+
+            if (equationText.contains(BinaryOperations.ADD.symbol) ||
+                    equationText.contains(BinaryOperations.SUBTRACT.symbol) ||
+                    equationText.contains(BinaryOperations.MULTIPLY.symbol) ||
+                    equationText.contains(BinaryOperations.DIVIDE.symbol)) {
+
+                int lastIndexOfAdd = equationText.lastIndexOf(BinaryOperations.ADD.symbol);
+                int lastIndexOfSubtract = equationText.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                int lastIndexOfMultiply = equationText.lastIndexOf(BinaryOperations.MULTIPLY.symbol);
+                int lastIndexOfDivide = equationText.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
+                        Math.max(lastIndexOfMultiply, lastIndexOfDivide));
+
+                textBefore = equationText.substring(0, lastIndexOfOperation);
+                textAfter = equationText.substring(lastIndexOfOperation + 1);
+            }
+
+            equationText = textBefore + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
+                    textAfter + SPACE + CLOSING_BRACKET;
+            equation.setText(equationText);
+
         } else {
-            equation.setText(operation.symbol + OPENING_BRACKET + equation.getText() + CLOSING_BRACKET);
-        }
+            calculation.setSecond(calculation.getFirst());
+            calculation.setFirst(number);
+            calculation.calculateUnary(operation);
+            calculation.setFirst(calculation.getSecond());
+            calculation.setSecond(calculation.getResult());
 
-        screen.setText(NumberFormatter.roundResult(calculation));
+            screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.roundResult(calculation)));
+            equation.setText(equation.getText() + SPACE + operation.symbol + OPENING_BRACKET + SPACE + number +
+                    SPACE + CLOSING_BRACKET);
+        }
 
         isBinaryOperationPressed = false;
         isUnaryOperationPressed = true;
