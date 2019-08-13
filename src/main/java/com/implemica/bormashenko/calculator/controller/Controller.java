@@ -2,9 +2,11 @@ package com.implemica.bormashenko.calculator.controller;
 
 import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
 import com.implemica.bormashenko.calculator.controller.util.ViewFormatter;
+import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import com.implemica.bormashenko.calculator.view.View;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -47,7 +49,7 @@ public class Controller implements Initializable {
      * Application's anchor pane.
      */
     @FXML
-    private AnchorPane historyMemoryPanel;
+    private AnchorPane historyMemoryPanel, memoryPanel;
 
     /**
      * Zero symbol is used instead of empty string.
@@ -75,14 +77,14 @@ public class Controller implements Initializable {
     private static final String CLOSING_BRACKET = ")";
 
     /**
-     * Model of application.
+     * Model of application's calculation.
      */
     private Calculation calculation = new Calculation();
 
     /**
-     * True if memory is empty and memory buttons such as clear, recall and show should be disabled.
+     * Model of application's memory.
      */
-    private boolean isMemoryDisabled = true;
+    private Memory memory = new Memory();
 
     /**
      * True if number on screen can be edited.
@@ -143,13 +145,23 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Shows memory.
+     *
+     * @todo
+     */
+    public void memoryShowOperation() {
+        ViewFormatter.showMemoryPanel(historyMemoryPanel, historyMemoryLabel);
+    }
+
+    /**
      * Clears all memory.
      *
      * @todo
      */
     public void memoryClearOperation() {
+        memory.clearMemory();
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
         ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
-        isMemoryDisabled = true;
     }
 
     /**
@@ -158,7 +170,10 @@ public class Controller implements Initializable {
      * @todo
      */
     public void memoryRecallOperation() {
+        BigDecimal number = memory.recall();
+        screen.setText(NumberFormatter.bigDecimalToScreen(number));
 
+        isEditableScreen = false;
     }
 
     /**
@@ -167,7 +182,10 @@ public class Controller implements Initializable {
      * @todo
      */
     public void memoryAddOperation() {
-        enableMemory();
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+        memory.addToMemory(number);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -176,7 +194,10 @@ public class Controller implements Initializable {
      * @todo
      */
     public void memorySubtractOperation() {
-        enableMemory();
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+        memory.subtractFromMemory(number);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -185,16 +206,10 @@ public class Controller implements Initializable {
      * @todo
      */
     public void memoryStoreOperation() {
-        enableMemory();
-    }
-
-    /**
-     * Shows memory.
-     *
-     * @todo
-     */
-    public void memoryShowOperation() {
-        ViewFormatter.showMemoryPanel(historyMemoryPanel, historyMemoryLabel);
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+        memory.storeToMemory(number);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -579,16 +594,5 @@ public class Controller implements Initializable {
         isEqualsPressed = false;
         isFirstCalculated = true;
         isEditableScreen = false;
-    }
-
-    /**
-     * Enables memory buttons such as clear, recall and show.
-     */
-    private void enableMemory() {
-        if (isMemoryDisabled) {
-            ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-        }
-
-        isMemoryDisabled = false;
     }
 }

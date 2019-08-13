@@ -1,9 +1,19 @@
 package com.implemica.bormashenko.calculator.controller.util;
 
+import com.implemica.bormashenko.calculator.model.Memory;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
+import java.math.BigDecimal;
+import java.util.Stack;
 
 /**
  * Utility class for programmatically changing view.
@@ -108,6 +118,51 @@ public class ViewFormatter {
      */
     public static void showMemoryPanel(AnchorPane memoryPanel, Label memoryLabel) {
         memoryPanel.setVisible(!memoryPanel.isVisible());
-        memoryLabel.setText(EMPTY_MEMORY_MESSAGE);
+        //memoryLabel.setText(EMPTY_MEMORY_MESSAGE);
+    }
+
+    public static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel, Label memoryLabel) {
+        Stack<BigDecimal> store = memory.getStore();
+
+        if (store.isEmpty()) {
+            memoryLabel.setText(EMPTY_MEMORY_MESSAGE);
+        } else {
+            memoryLabel.setText("");
+            memoryPanel.getChildren().removeAll(memoryPanel.getChildren());
+
+            double layoutY = 16;
+            for (int i = 0; i < store.size(); i++) {
+                Label label = new Label();
+                label.setText(store.elementAt(store.size() - i - 1).toString());
+                label.setPrefWidth(memoryPanel.getWidth());
+                label.setPrefHeight(63);
+                label.setMinHeight(label.getPrefHeight());
+                label.setMaxHeight(label.getPrefHeight());
+                label.setPadding(new Insets(0, 0, 0 ,15));
+                label.setLayoutY(layoutY);
+                layoutY += 63 + 16;
+
+                label.setStyle(setStyleForLabels());
+                label.setWrapText(true);
+                label.setOnMouseMoved(event -> label.setStyle(setStyleOnHover()));
+                label.setOnMouseExited(event -> label.setStyle(setStyleForLabels()));
+                label.setAlignment(Pos.TOP_LEFT);
+
+                memoryPanel.getChildren().add(label);
+
+            }
+        }
+    }
+
+    private static String setStyleForLabels() {
+        return "-fx-background-color: transparent;" +
+                "-fx-font-size: " + 24 + "px;" +
+                "-fx-font-family: \"Segoe UI Semibold\"";
+    }
+
+    private static String setStyleOnHover() {
+        return "-fx-background-color: #e7e7e7;" +
+                "-fx-font-size: " + 24 + "px;" +
+                "-fx-font-family: \"Segoe UI Semibold\"";
     }
 }

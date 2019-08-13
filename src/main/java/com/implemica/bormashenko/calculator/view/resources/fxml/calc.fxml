@@ -103,22 +103,22 @@
                 </Label>
             </children>
         </TextFlow>
-        <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="94.0">
+        <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="96.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="63.0" valignment="TOP" vgrow="ALWAYS" />
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="46.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints minHeight="-Infinity" prefHeight="48.0" valignment="BOTTOM" vgrow="ALWAYS" />
+                <RowConstraints minHeight="-Infinity" prefHeight="48.0" valignment="BOTTOM" vgrow="ALWAYS" />
+                <RowConstraints minHeight="-Infinity" prefHeight="48.0" valignment="BOTTOM" vgrow="ALWAYS" />
+                <RowConstraints minHeight="-Infinity" prefHeight="46.0" valignment="BOTTOM" vgrow="ALWAYS" />
+                <RowConstraints minHeight="-Infinity" prefHeight="48.0" valignment="BOTTOM" vgrow="ALWAYS" />
+                <RowConstraints minHeight="-Infinity" prefHeight="43.0" valignment="BOTTOM" vgrow="ALWAYS" />
             </rowConstraints>
             <children>
                 <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#percentOperation" text="" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -317,7 +317,7 @@
                                 <String fx:value="font_segoe_ui_semibold" />
                             </styleClass>
                         </Button>
-                        <Button fx:id="memoryRecall" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" text="MR" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryRecall" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#memoryRecallOperation" prefHeight="30.0" text="MR" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory recall (Ctrl+R)" />
                             </tooltip>
@@ -370,7 +370,7 @@
                         </Button>
                     </children>
                 </HBox>
-                <HBox alignment="TOP_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#memoryRecallOperation" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.valignment="CENTER">
+                <HBox alignment="TOP_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.valignment="CENTER">
                     <children>
                         <Label fx:id="screen" alignment="TOP_LEFT" contentDisplay="TOP" minHeight="-Infinity" styleClass="font_segoe_ui_semibold" text="0">
                             <font>
@@ -388,6 +388,20 @@
                         <Insets />
                     </GridPane.margin>
                 </HBox>
+            <AnchorPane fx:id="historyMemoryPanel" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="306.0" styleClass="gray_background" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER">
+               <children>
+                  <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="historyMemoryLabel" text="There's nothing saved in memory" />
+                     </children>
+                  </TextFlow>
+                  <ScrollPane fitToWidth="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <AnchorPane fx:id="memoryPanel" maxHeight="1.7976931348623157E308" minHeight="305.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="328.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
             </children>
         </GridPane>
         <ScrollPane fx:id="navigationPanel" fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
@@ -539,15 +553,6 @@
                 <String fx:value="gray_background" />
             </styleClass>
         </Button>
-        <AnchorPane fx:id="historyMemoryPanel" layoutX="-21.0" layoutY="-8.0" prefHeight="305.0" prefWidth="322.0" styleClass="gray_background" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <children>
-                <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <children>
-                        <Label fx:id="historyMemoryLabel" text="There's nothing saved in memory" />
-                    </children>
-                </TextFlow>
-            </children>
-        </AnchorPane>
         <HBox alignment="TOP_RIGHT" fillHeight="false" layoutX="250.0" layoutY="83.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
             <children>
                 <Label fx:id="equation" alignment="TOP_LEFT" contentDisplay="TOP" minHeight="-Infinity">
