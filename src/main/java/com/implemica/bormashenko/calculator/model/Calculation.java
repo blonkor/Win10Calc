@@ -18,6 +18,11 @@ public class Calculation {
     private static final int DIVIDE_SCALE = 10000;
 
     /**
+     * Min scale for result.
+     */
+    private static final int MAX_SCALE = 10000;
+
+    /**
      * Big decimal value of 100.
      */
     private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
@@ -93,6 +98,10 @@ public class Calculation {
         } else if (binaryOperation == BinaryOperations.DIVIDE) {
             result = divide();
         }
+
+        if (Math.abs(result.scale()) >= MAX_SCALE) {
+            throw new ArithmeticException("Overflow");
+        }
     }
 
     /**
@@ -109,6 +118,10 @@ public class Calculation {
             result = sqrt();
         } else if (unaryOperation == UnaryOperations.INVERSE) {
             result = inverse();
+        }
+
+        if (Math.abs(result.scale()) >= MAX_SCALE) {
+            throw new ArithmeticException("Overflow");
         }
     }
 
@@ -145,6 +158,15 @@ public class Calculation {
      * @return result of dividing one number on another.
      */
     private BigDecimal divide() {
+        if (second.equals(BigDecimal.ZERO)) {
+
+            if (first.equals(BigDecimal.ZERO)) {
+                throw new ArithmeticException("Result is undefined");
+            }
+
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+
         return first.divide(second, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
@@ -172,6 +194,14 @@ public class Calculation {
      * @return square root of first number.
      */
     private BigDecimal sqrt() {
+        if (first.compareTo(BigDecimal.ZERO) < 0) {
+            throw new ArithmeticException("Invalid input");
+        }
+
+        if (first.equals(BigDecimal.ZERO)) {
+            return BigDecimal.ZERO;
+        }
+
         BigDecimal x = new BigDecimal(Math.sqrt(first.doubleValue()));
         return x.add(new BigDecimal(first.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
     }
@@ -182,6 +212,10 @@ public class Calculation {
      * @return inverted first number.
      */
     private BigDecimal inverse() {
+        if (first.equals(BigDecimal.ZERO)) {
+            throw new ArithmeticException("Cannot divide by zero");
+        }
+
         return BigDecimal.ONE.divide(first, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
