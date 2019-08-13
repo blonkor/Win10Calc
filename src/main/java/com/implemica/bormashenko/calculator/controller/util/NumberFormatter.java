@@ -107,6 +107,11 @@ public class NumberFormatter {
      */
     public static String bigDecimalToScreen(BigDecimal bigDecimal) {
         String number = tripZeros(bigDecimal);
+
+        if (number.contains("e")) {
+            return number;
+        }
+
         boolean negative = number.startsWith(MINUS);
         number = number.replaceAll(MINUS, EMPTY_STRING);
         number = number.replaceAll(COMMA, EMPTY_STRING);
@@ -168,19 +173,19 @@ public class NumberFormatter {
     }
 
     /**
-     * Rounds result from calculation model.
+     * Rounds big decimal number.
      *
-     * @param calculation model of application.
+     * @param bigDecimal number to round.
      * @return rounded number.
      */
-    public static BigDecimal roundResult(Calculation calculation) {
-        return calculation.getResult().round(PRECISION_TO_SHOW);
+    public static BigDecimal round(BigDecimal bigDecimal) {
+        return bigDecimal.round(PRECISION_TO_SHOW);
     }
 
     private static String tripZeros(BigDecimal bigDecimal) {
         String number = bigDecimal.toString();
 
-        if (!number.contains(DOT)) {
+        if (!number.contains(DOT) && !number.contains("E")) {
             return number;
         } else {
             boolean engineering = number.contains("E");
@@ -200,12 +205,16 @@ public class NumberFormatter {
                 }
             }
 
-            if (number.endsWith(DOT)) {
+            if (number.endsWith(DOT) && !engineering) {
                 number = number.substring(0, number.length() - 1);
             }
 
             if (engineering) {
-                number += "e";
+                if (number.contains(DOT)) {
+                    number += "e";
+                } else {
+                    number += ".e";
+                }
                 number += engSubstring;
             }
 
