@@ -188,6 +188,9 @@ public class View implements Serializable {
 
         //save view listener
         primaryStage.setOnCloseRequest(new SaveViewListener(this));
+
+        //keyboard listener
+        scene.setOnKeyPressed(new KeyboardListener(scene));
     }
 
     /**

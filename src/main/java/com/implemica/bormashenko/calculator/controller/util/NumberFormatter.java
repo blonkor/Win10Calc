@@ -50,6 +50,8 @@ public class NumberFormatter {
      * @return number without last char.
      */
     public static String deleteLastChar(String number) {
+        number = number.replaceAll(COMMA, EMPTY_STRING);
+
         if (!number.contains("e")) {
             if (number.length() == 1) {
                 number = "0";
