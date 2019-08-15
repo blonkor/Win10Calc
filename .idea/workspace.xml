@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Several new tests for model for subtract operation created. Expected result for several model tests for subtract operation corrected. Tests for model for divide operation created (but expected result for these tests is still incorrect).">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +40,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -63,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest.multiplyOperationTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.subtractOperationTests">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.MainApp" />
       <module name="Win10Calc" />
@@ -96,8 +97,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CalculationModelTest.subtractOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="subtractOperationTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
         <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
         <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="Application.MainApp" />
@@ -435,7 +453,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="View changed. Few fields names changed. Few comments changed." />
     <MESSAGE value="View changed." />
     <MESSAGE value="Adding methods while buttons clicked." />
     <MESSAGE value="Adding model for calculator." />
@@ -460,6 +477,7 @@
     <MESSAGE value="All keyboard combinations and codes, used in calculator, realized." />
     <MESSAGE value="Tests for model for add operation created." />
     <MESSAGE value="Expected result for model tests for multiply operation corrected." />
-    <option name="LAST_COMMIT_MESSAGE" value="Expected result for model tests for multiply operation corrected." />
+    <MESSAGE value="Several new tests for model for subtract operation created. Expected result for several model tests for subtract operation corrected. Tests for model for divide operation created (but expected result for these tests is still incorrect)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Several new tests for model for subtract operation created. Expected result for several model tests for subtract operation corrected. Tests for model for divide operation created (but expected result for these tests is still incorrect)." />
   </component>
 </project>
