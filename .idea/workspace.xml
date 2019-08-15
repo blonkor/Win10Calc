@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +63,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ModelTest.multiplyOperationTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.multiplyOperationTests">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.MainApp" />
       <module name="Win10Calc" />
@@ -78,19 +77,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ModelTest" />
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelTest.multiplyOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.multiplyOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ModelTest" />
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
       <option name="METHOD_NAME" value="multiplyOperationTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -99,8 +98,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ModelTest.multiplyOperationTests" />
-        <item itemvalue="JUnit.ModelTest" />
+        <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
@@ -396,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565819775117</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Expected result for model tests for multiply operation corrected.">
+      <created>1565867581960</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1565867581960</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -429,7 +435,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Digits resize listener added." />
     <MESSAGE value="View changed. Few fields names changed. Few comments changed." />
     <MESSAGE value="View changed." />
     <MESSAGE value="Adding methods while buttons clicked." />
@@ -454,6 +459,7 @@
     <MESSAGE value="Added keyboard listener. Several keycodes realized." />
     <MESSAGE value="All keyboard combinations and codes, used in calculator, realized." />
     <MESSAGE value="Tests for model for add operation created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for model for add operation created." />
+    <MESSAGE value="Expected result for model tests for multiply operation corrected." />
+    <option name="LAST_COMMIT_MESSAGE" value="Expected result for model tests for multiply operation corrected." />
   </component>
 </project>
