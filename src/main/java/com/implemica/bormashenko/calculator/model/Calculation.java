@@ -15,7 +15,7 @@ public class Calculation {
     /**
      * Scale for divide operation.
      */
-    private static final int DIVIDE_SCALE = 10000;
+    private static final int DIVIDE_SCALE = 9999;
 
     /**
      * Min scale for result.
@@ -102,6 +102,8 @@ public class Calculation {
         if (Math.abs(result.scale()) >= MAX_SCALE) {
             throw new ArithmeticException("Overflow");
         }
+
+        result = result.stripTrailingZeros();
     }
 
     /**

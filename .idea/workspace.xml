@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Several new tests for model for subtract operation created. Expected result for several model tests for subtract operation corrected. Tests for model for divide operation created (but expected result for these tests is still incorrect).">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,7 +65,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest.subtractOperationTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest">
     <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.MainApp" />
       <module name="Win10Calc" />
@@ -87,8 +88,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CalculationModelTest.addOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="addOperationTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CalculationModelTest.multiplyOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
       <option name="METHOD_NAME" value="multiplyOperationTests" />
@@ -115,9 +138,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
-        <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
         <item itemvalue="JUnit.CalculationModelTest" />
+        <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest.addOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
         <item itemvalue="Application.MainApp" />
       </list>
     </recent_temporary>
