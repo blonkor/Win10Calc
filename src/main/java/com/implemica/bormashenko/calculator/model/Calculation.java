@@ -15,12 +15,11 @@ public class Calculation {
     /**
      * Scale for divide operation.
      */
-    private static final int DIVIDE_SCALE = 9999;
+    private static final int DIVIDE_SCALE = 10500;
 
-    /**
-     * Min scale for result.
-     */
-    private static final int MAX_SCALE = 10000;
+    private static final BigDecimal MAX_INTEGER_VALUE = new BigDecimal("1.e+10000");
+
+    private static final BigDecimal MIN_DECIMAL_VALUE = new BigDecimal("1.e-10000");
 
     /**
      * Big decimal value of 100.
@@ -99,11 +98,12 @@ public class Calculation {
             result = divide();
         }
 
-        if (Math.abs(result.scale()) >= MAX_SCALE) {
+        result = result.stripTrailingZeros();
+
+        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
+                (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)))  {
             throw new ArithmeticException("Overflow");
         }
-
-        result = result.stripTrailingZeros();
     }
 
     /**
@@ -122,7 +122,7 @@ public class Calculation {
             result = inverse();
         }
 
-        if (Math.abs(result.scale()) >= MAX_SCALE) {
+        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 || result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0)  {
             throw new ArithmeticException("Overflow");
         }
     }
@@ -160,6 +160,10 @@ public class Calculation {
      * @return result of dividing one number on another.
      */
     private BigDecimal divide() {
+        if (first.equals(BigDecimal.ZERO) && !second.equals(BigDecimal.ZERO)) {
+            return BigDecimal.ZERO;
+        }
+
         if (second.equals(BigDecimal.ZERO)) {
 
             if (first.equals(BigDecimal.ZERO)) {
