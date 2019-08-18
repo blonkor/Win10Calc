@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.implemica.bormashenko.calculator.model.enums.BinaryOperations.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class CalculationModelTest {
 
@@ -6275,6 +6276,219 @@ class CalculationModelTest {
         }
     }
 
+    @Test
+    void overflowExceptionTest() {
+        //add operation
+        {
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), BigDecimal.ZERO, ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), NEG_ONE_TENTH, ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), NEG_ONE, ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("-2"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("-9.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("-8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("-2.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), NEG_ONE_DOT_E_PLUS_9999, ADD);
+
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("-9.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("-8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("-2.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), NEG_ONE_DOT_E_PLUS_9999, ADD);
+
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("-8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("-8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("-2.e+9999"), ADD);
+
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("2.e+9999"), ADD);
+
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("9.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("2.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), ONE_DOT_E_PLUS_9999, ADD);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), BigDecimal.ZERO, ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), ONE_TENTH, ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), BigDecimal.ONE, ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("2"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("9.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("2.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), ONE_DOT_E_PLUS_9999, ADD);
+
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), BigDecimal.ZERO, ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), NEG_ONE_TENTH, ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), NEG_ONE, ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("-2"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("-9.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("-8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("-2.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), NEG_ONE_DOT_E_PLUS_9999, ADD);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), BigDecimal.ZERO, ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), ONE_TENTH, ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), BigDecimal.ONE, ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("2"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("9.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("8.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("2.e+9999"), ADD);
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), ONE_DOT_E_PLUS_9999, ADD);
+        }
+
+        //subtract operation
+        {
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), BigDecimal.ZERO, SUBTRACT);
+            checkBinaryOverFlowException(BigDecimal.ZERO, new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), ONE_TENTH, SUBTRACT);
+            checkBinaryOverFlowException(ONE_TENTH, new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), BigDecimal.ONE, SUBTRACT);
+            checkBinaryOverFlowException(BigDecimal.ONE, new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("2"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("2"), new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("9.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), new BigDecimal("2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("2.e+9999"), new BigDecimal("-1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), ONE_DOT_E_PLUS_9999, SUBTRACT);
+            checkBinaryOverFlowException(ONE_DOT_E_PLUS_9999, new BigDecimal("-1.e+10000"), SUBTRACT);
+
+
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("9.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("-9.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-9.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("2.e+9999"), new BigDecimal("-9.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), ONE_DOT_E_PLUS_9999, SUBTRACT);
+            checkBinaryOverFlowException(ONE_DOT_E_PLUS_9999, new BigDecimal("-9.e+9999"), SUBTRACT);
+
+
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-8.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-8.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("2.e+9999"), new BigDecimal("-8.e+9999"), SUBTRACT);
+
+
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-2.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
+
+
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("-9.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("9.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("-8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("9.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("-2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-2.e+9999"), new BigDecimal("9.e+9999"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), NEG_ONE_DOT_E_PLUS_9999, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE_DOT_E_PLUS_9999, new BigDecimal("9.e+9999"), SUBTRACT);
+
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), BigDecimal.ZERO, SUBTRACT);
+            checkBinaryOverFlowException(BigDecimal.ZERO, new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), NEG_ONE_TENTH, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE_TENTH, new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), NEG_ONE, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE, new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("-2"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-2"), new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("-9.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("-8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), new BigDecimal("-2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-2.e+9999"), new BigDecimal("1.e+10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e+10000"), NEG_ONE_DOT_E_PLUS_9999, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE_DOT_E_PLUS_9999, new BigDecimal("1.e+10000"), SUBTRACT);
+
+
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), BigDecimal.ZERO, SUBTRACT);
+            checkBinaryOverFlowException(BigDecimal.ZERO, new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), ONE_TENTH, SUBTRACT);
+            checkBinaryOverFlowException(ONE_TENTH, new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), BigDecimal.ONE, SUBTRACT);
+            checkBinaryOverFlowException(BigDecimal.ONE, new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("2"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("2"), new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("9.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("9.e+9999"), new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("8.e+9999"), new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), new BigDecimal("2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("2.e+9999"), new BigDecimal("-1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("-1.e-10000"), ONE_DOT_E_PLUS_9999, SUBTRACT);
+            checkBinaryOverFlowException(ONE_DOT_E_PLUS_9999, new BigDecimal("-1.e-10000"), SUBTRACT);
+
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), BigDecimal.ZERO, SUBTRACT);
+            checkBinaryOverFlowException(BigDecimal.ZERO, new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), NEG_ONE_TENTH, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE_TENTH, new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), NEG_ONE, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE, new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("-2"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-2"), new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("-9.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-9.e+9999"), new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("-8.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-8.e+9999"), new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), new BigDecimal("-2.e+9999"), SUBTRACT);
+            checkBinaryOverFlowException(new BigDecimal("-2.e+9999"), new BigDecimal("1.e-10000"), SUBTRACT);
+
+            checkBinaryOverFlowException(new BigDecimal("1.e-10000"), NEG_ONE_DOT_E_PLUS_9999, SUBTRACT);
+            checkBinaryOverFlowException(NEG_ONE_DOT_E_PLUS_9999, new BigDecimal("1.e-10000"), SUBTRACT);
+        }
+
+        //multiply operation
+        checkBinaryOverFlowException(new BigDecimal("-1.e+10000"), NEG_ONE, MULTIPLY);
+    }
+
     private void checkBinaryOperation(BigDecimal first, BigDecimal second, BinaryOperations operation, String result) {
         calculation.setFirst(first);
         calculation.setSecond(second);
@@ -6282,9 +6496,6 @@ class CalculationModelTest {
         calculation.calculateBinary();
 
         assertEquals(new BigDecimal(result), calculation.getResult());
-        assertEquals(first, calculation.getFirst());
-        assertEquals(second, calculation.getSecond());
-        assertEquals(operation, calculation.getBinaryOperation());
 
         if (operation == ADD || operation == MULTIPLY) {
             calculation.setFirst(second);
@@ -6292,9 +6503,34 @@ class CalculationModelTest {
             calculation.calculateBinary();
 
             assertEquals(new BigDecimal(result), calculation.getResult());
-            assertEquals(second, calculation.getFirst());
-            assertEquals(first, calculation.getSecond());
-            assertEquals(operation, calculation.getBinaryOperation());
+        }
+    }
+
+    private void checkBinaryOverFlowException(BigDecimal first, BigDecimal second, BinaryOperations operation) {
+        calculation.setFirst(first);
+        calculation.setSecond(second);
+        calculation.setBinaryOperation(operation);
+
+        String exceptionMessage = "Overflow";
+
+        try {
+            calculation.calculateBinary();
+            System.out.println(calculation.getResult().scale());
+            fail();
+        } catch (ArithmeticException e) {
+            assertEquals(exceptionMessage, e.getMessage());
+        }
+
+        if (operation == ADD || operation == MULTIPLY) {
+            calculation.setFirst(second);
+            calculation.setSecond(first);
+
+            try {
+                calculation.calculateBinary();
+                fail();
+            } catch (ArithmeticException e) {
+                assertEquals(exceptionMessage, e.getMessage());
+            }
         }
     }
 }

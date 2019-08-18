@@ -17,6 +17,8 @@ public class Calculation {
      */
     private static final int DIVIDE_SCALE = 10500;
 
+    private static final int MAX_PRECISION = 10000;
+
     private static final BigDecimal MAX_INTEGER_VALUE = new BigDecimal("1.e+10000");
 
     private static final BigDecimal MIN_DECIMAL_VALUE = new BigDecimal("1.e-10000");
@@ -101,7 +103,8 @@ public class Calculation {
         result = result.stripTrailingZeros();
 
         if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)))  {
+                (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)) ||
+                result.precision() >= MAX_PRECISION) {
             throw new ArithmeticException("Overflow");
         }
     }
@@ -122,7 +125,7 @@ public class Calculation {
             result = inverse();
         }
 
-        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 || result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0)  {
+        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 || result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0) {
             throw new ArithmeticException("Overflow");
         }
     }
