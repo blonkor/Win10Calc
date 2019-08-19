@@ -6437,6 +6437,929 @@ class CalculationModelTest {
     }
 
     /**
+     * Tests for percentage of first operation.
+     */
+    @Test
+    void percentageOfFirstTests() {
+        //integers only
+//        {
+//            //first is -100000000000000000
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, MIN_VALUE_ON_SCREEN_MINUS_ONE, "1.e+30");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, MIN_VALUE_ON_SCREEN, "9.999999999999999e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, MIN_VALUE_ON_SCREEN_PLUS_ONE, "9.999999999999998e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, HALF_MIN_VALUE_ON_SCREEN, "5.e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_HUNDRED, "1.e+16");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_TEN, "1.e+15");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_ONE, "1.e+14");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, BigDecimal.ONE, "-1.e+14");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, BigDecimal.TEN, "-1.e+15");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, HUNDRED, "-1.e+16");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, HALF_MAX_VALUE_ON_SCREEN, "-5.e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-9.999999999999998e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, MAX_VALUE_ON_SCREEN, "-9.999999999999999e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-1.e+30");
+//
+//            //first is -9999999999999999
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, MIN_VALUE_ON_SCREEN, "999999999999999800000000000000.01");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, MIN_VALUE_ON_SCREEN_PLUS_ONE, "999999999999999700000000000000.02");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, HALF_MIN_VALUE_ON_SCREEN, "4.9999999999999995e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_HUNDRED, "9999999999999999");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_TEN, "999999999999999.9");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_ONE, "99999999999999.99");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, BigDecimal.ONE, "-99999999999999.99");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, BigDecimal.TEN, "-999999999999999.9");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, HUNDRED, "-9999999999999999");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, HALF_MAX_VALUE_ON_SCREEN, "-4.9999999999999995e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-999999999999999700000000000000.02");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN, "-999999999999999800000000000000.01");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-9.999999999999999e+29");
+//
+//            //first is -9999999999999998
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, MIN_VALUE_ON_SCREEN_PLUS_ONE, "999999999999999600000000000000.04");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, HALF_MIN_VALUE_ON_SCREEN, "4.999999999999999e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_HUNDRED, "9999999999999998");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_TEN, "999999999999999.8");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_ONE, "99999999999999.98");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, BigDecimal.ONE, "-99999999999999.98");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, BigDecimal.TEN, "-999999999999999.8");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, HUNDRED, "-9999999999999998");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, HALF_MAX_VALUE_ON_SCREEN, "-4.999999999999999e+29");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-999999999999999600000000000000.04");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, MAX_VALUE_ON_SCREEN, "-999999999999999700000000000000.02");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-9.999999999999998e+29");
+//
+//            //first is -50000000000000000
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, HALF_MIN_VALUE_ON_SCREEN, "2.5e+29");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_HUNDRED, "5.e+15");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_TEN, "5.e+14");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_ONE, "5.e+13");
+//
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, BigDecimal.ONE, "-5.e+13");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, BigDecimal.TEN, "-5.e+14");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, HUNDRED, "-5.e+15");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, HALF_MAX_VALUE_ON_SCREEN, "-2.5e+29");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-4.999999999999999e+29");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN, "-4.9999999999999995e+29");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-5.e+29");
+//
+//            //first is -100
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_HUNDRED, "1.e+2");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_TEN, "1.e+1");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_ONE, "1");
+//
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, BigDecimal.ONE, "-1");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, BigDecimal.TEN, "-1.e+1");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, HUNDRED, "-1.e+2");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, HALF_MAX_VALUE_ON_SCREEN, "-5.e+15");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-9999999999999998");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, MAX_VALUE_ON_SCREEN, "-9999999999999999");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-1.e+16");
+//
+//            //first is -10
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_TEN, "1");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_ONE, "0.1");
+//
+//            checkPercentageOfFirstOperation(NEG_TEN, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(NEG_TEN, BigDecimal.ONE, "-0.1");
+//            checkPercentageOfFirstOperation(NEG_TEN, BigDecimal.TEN, "-1");
+//            checkPercentageOfFirstOperation(NEG_TEN, HUNDRED, "-1.e+1");
+//            checkPercentageOfFirstOperation(NEG_TEN, HALF_MAX_VALUE_ON_SCREEN, "-5.e+14");
+//            checkPercentageOfFirstOperation(NEG_TEN, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-999999999999999.8");
+//            checkPercentageOfFirstOperation(NEG_TEN, MAX_VALUE_ON_SCREEN, "-999999999999999.9");
+//            checkPercentageOfFirstOperation(NEG_TEN, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-1.e+15");
+//
+//            //first is -1
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_ONE, "0.01");
+//
+//            checkPercentageOfFirstOperation(NEG_ONE, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(NEG_ONE, BigDecimal.ONE, "-0.01");
+//            checkPercentageOfFirstOperation(NEG_ONE, BigDecimal.TEN, "-0.1");
+//            checkPercentageOfFirstOperation(NEG_ONE, HUNDRED, "-1");
+//            checkPercentageOfFirstOperation(NEG_ONE, HALF_MAX_VALUE_ON_SCREEN, "-5.e+13");
+//            checkPercentageOfFirstOperation(NEG_ONE, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-99999999999999.98");
+//            checkPercentageOfFirstOperation(NEG_ONE, MAX_VALUE_ON_SCREEN, "-99999999999999.99");
+//            checkPercentageOfFirstOperation(NEG_ONE, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-1.e+14");
+//
+//            //first is 0
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, BigDecimal.ZERO, "0");
+//
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, BigDecimal.ONE, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, BigDecimal.TEN, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, HUNDRED, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, HALF_MAX_VALUE_ON_SCREEN, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, MAX_VALUE_ON_SCREEN_MINUS_ONE, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, MAX_VALUE_ON_SCREEN, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, MAX_VALUE_ON_SCREEN_PLUS_ONE, "0");
+//
+//            //first is 1
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, BigDecimal.ONE, "0.01");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, BigDecimal.TEN, "0.1");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, HUNDRED, "1");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, HALF_MAX_VALUE_ON_SCREEN, "5.e+13");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, MAX_VALUE_ON_SCREEN_MINUS_ONE, "99999999999999.98");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, MAX_VALUE_ON_SCREEN, "99999999999999.99");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, MAX_VALUE_ON_SCREEN_PLUS_ONE, "1.e+14");
+//
+//            //first is 10
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, BigDecimal.TEN, "1");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, HUNDRED, "1.e+1");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, HALF_MAX_VALUE_ON_SCREEN, "5.e+14");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, MAX_VALUE_ON_SCREEN_MINUS_ONE, "999999999999999.8");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, MAX_VALUE_ON_SCREEN, "999999999999999.9");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, MAX_VALUE_ON_SCREEN_PLUS_ONE, "1.e+15");
+//
+//            //first is 100
+//            checkPercentageOfFirstOperation(HUNDRED, HUNDRED, "1.e+2");
+//            checkPercentageOfFirstOperation(HUNDRED, HALF_MAX_VALUE_ON_SCREEN, "5.e+15");
+//            checkPercentageOfFirstOperation(HUNDRED, MAX_VALUE_ON_SCREEN_MINUS_ONE, "9999999999999998");
+//            checkPercentageOfFirstOperation(HUNDRED, MAX_VALUE_ON_SCREEN, "9999999999999999");
+//            checkPercentageOfFirstOperation(HUNDRED, MAX_VALUE_ON_SCREEN_PLUS_ONE, "1.e+16");
+//
+//            //first is 5000000000000000
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, HALF_MAX_VALUE_ON_SCREEN, "2.5e+29");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_MINUS_ONE, "4.999999999999999e+29");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN, "4.9999999999999995e+29");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_PLUS_ONE, "5.e+29");
+//
+//            //first is 9999999999999998
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, MAX_VALUE_ON_SCREEN_MINUS_ONE, "999999999999999600000000000000.04");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, MAX_VALUE_ON_SCREEN, "999999999999999700000000000000.02");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, MAX_VALUE_ON_SCREEN_PLUS_ONE, "9.999999999999998e+29");
+//
+//            //first is 9999999999999999
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN, "999999999999999800000000000000.01");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, MAX_VALUE_ON_SCREEN_PLUS_ONE, "9.999999999999999e+29");
+//
+//            //first is 10000000000000000
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, MAX_VALUE_ON_SCREEN_PLUS_ONE, "1.e+30");
+//        }
+
+        //integer and decimal
+//        {
+//            //first is -10000000000000000
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_ZERO_DOT_17_NINES, "99999999999999.999");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_ZERO_DOT_16_NINES, "99999999999999.99");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_NINETY_NINE_HUNDREDTH, "9.9e+13");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_NINE_TENTH, "9.e+13");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_ONE_TENTH, "1.e+13");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_NINE_HUNDREDTH, "9.e+12");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEG_ONE_HUNDREDTH, "1e+12");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, ONE_HUNDREDTH, "-1.e+12");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NINE_HUNDREDTH, "-9.e+12");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, ONE_TENTH, "-1.e+13");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NINE_TENTH, "-9.e+13");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NINETY_NINE_HUNDREDTH, "-9.9e+13");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, ZERO_DOT_16_NINES, "-99999999999999.99");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, ZERO_DOT_17_NINES, "-99999999999999.999");
+//
+//            //first is -9999999999999999
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_ZERO_DOT_17_NINES, "99999999999999.9890000000000000001");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_ZERO_DOT_16_NINES, "99999999999999.980000000000000001");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_NINETY_NINE_HUNDREDTH, "98999999999999.9901");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_NINE_TENTH, "89999999999999.991");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_ONE_TENTH, "9999999999999.999");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_NINE_HUNDREDTH, "8999999999999.9991");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NEG_ONE_HUNDREDTH, "999999999999.9999");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, ONE_HUNDREDTH, "-999999999999.9999");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NINE_HUNDREDTH, "-8999999999999.9991");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, ONE_TENTH, "-9999999999999.999");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NINE_TENTH, "-89999999999999.991");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, NINETY_NINE_HUNDREDTH, "-98999999999999.9901");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, ZERO_DOT_16_NINES, "-99999999999999.980000000000000001");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN, ZERO_DOT_17_NINES, "-99999999999999.9890000000000000001");
+//
+//            //first is -9999999999999998
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_ZERO_DOT_17_NINES, "99999999999999.9790000000000000002");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_ZERO_DOT_16_NINES, "99999999999999.970000000000000002");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_NINETY_NINE_HUNDREDTH, "98999999999999.9802");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_NINE_TENTH, "89999999999999.982");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_ONE_TENTH, "9999999999999.998");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_NINE_HUNDREDTH, "8999999999999.9982");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEG_ONE_HUNDREDTH, "999999999999.9998");
+//
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, ONE_HUNDREDTH, "-999999999999.9998");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NINE_HUNDREDTH, "-8999999999999.9982");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, ONE_TENTH, "-9999999999999.998");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NINE_TENTH, "-89999999999999.982");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NINETY_NINE_HUNDREDTH, "-98999999999999.9802");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, ZERO_DOT_16_NINES, "-99999999999999.970000000000000002");
+//            checkPercentageOfFirstOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, ZERO_DOT_17_NINES, "-99999999999999.9790000000000000002");
+//
+//            //first is -5000000000000000
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_ZERO_DOT_17_NINES, "49999999999999.9995");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_ZERO_DOT_16_NINES, "49999999999999.995");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_NINETY_NINE_HUNDREDTH, "4.95e+13");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_NINE_TENTH, "4.5e+13");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_ONE_TENTH, "5.e+12");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_NINE_HUNDREDTH, "4.5e+12");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NEG_ONE_HUNDREDTH, "5.e+11");
+//
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, ONE_HUNDREDTH, "-5.e+11");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NINE_HUNDREDTH, "-4.5e+12");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, ONE_TENTH, "-5.e+12");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NINE_TENTH, "-4.5e+13");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, NINETY_NINE_HUNDREDTH, "-4.95e+13");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, ZERO_DOT_16_NINES, "-49999999999999.995");
+//            checkPercentageOfFirstOperation(HALF_MIN_VALUE_ON_SCREEN, ZERO_DOT_17_NINES, "-49999999999999.9995");
+//
+//            //first is -100
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_ZERO_DOT_17_NINES, "0.99999999999999999");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_ZERO_DOT_16_NINES, "0.9999999999999999");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_NINETY_NINE_HUNDREDTH, "0.99");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_NINE_TENTH, "0.9");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_ONE_TENTH, "0.1");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_NINE_HUNDREDTH, "0.09");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NEG_ONE_HUNDREDTH, "0.01");
+//
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, ONE_HUNDREDTH, "-0.01");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NINE_HUNDREDTH, "-0.09");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, ONE_TENTH, "-0.1");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NINE_TENTH, "-0.9");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, NINETY_NINE_HUNDREDTH, "-0.99");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, ZERO_DOT_16_NINES, "-0.9999999999999999");
+//            checkPercentageOfFirstOperation(NEG_HUNDRED, ZERO_DOT_17_NINES, "-0.99999999999999999");
+//
+//            //first is -10
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_ZERO_DOT_17_NINES, "0.099999999999999999");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_ZERO_DOT_16_NINES, "0.09999999999999999");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_NINETY_NINE_HUNDREDTH, "0.099");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_NINE_TENTH, "0.09");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_ONE_TENTH, "0.01");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_NINE_HUNDREDTH, "0.009");
+//            checkPercentageOfFirstOperation(NEG_TEN, NEG_ONE_HUNDREDTH, "0.001");
+//
+//            checkPercentageOfFirstOperation(NEG_TEN, ONE_HUNDREDTH, "-0.001");
+//            checkPercentageOfFirstOperation(NEG_TEN, NINE_HUNDREDTH, "-0.009");
+//            checkPercentageOfFirstOperation(NEG_TEN, ONE_TENTH, "-0.01");
+//            checkPercentageOfFirstOperation(NEG_TEN, NINE_TENTH, "-0.09");
+//            checkPercentageOfFirstOperation(NEG_TEN, NINETY_NINE_HUNDREDTH, "-0.099");
+//            checkPercentageOfFirstOperation(NEG_TEN, ZERO_DOT_16_NINES, "-0.09999999999999999");
+//            checkPercentageOfFirstOperation(NEG_TEN, ZERO_DOT_17_NINES, "-0.099999999999999999");
+//
+//            //first is -1
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_ZERO_DOT_17_NINES, "0.0099999999999999999");
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_ZERO_DOT_16_NINES, "0.009999999999999999");
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_NINETY_NINE_HUNDREDTH, "0.0099");
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_NINE_TENTH, "0.009");
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_ONE_TENTH, "0.001");
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_NINE_HUNDREDTH, "0.0009");
+//            checkPercentageOfFirstOperation(NEG_ONE, NEG_ONE_HUNDREDTH, "0.0001");
+//
+//            checkPercentageOfFirstOperation(NEG_ONE, ONE_HUNDREDTH, "-0.0001");
+//            checkPercentageOfFirstOperation(NEG_ONE, NINE_HUNDREDTH, "-0.0009");
+//            checkPercentageOfFirstOperation(NEG_ONE, ONE_TENTH, "-0.001");
+//            checkPercentageOfFirstOperation(NEG_ONE, NINE_TENTH, "-0.009");
+//            checkPercentageOfFirstOperation(NEG_ONE, NINETY_NINE_HUNDREDTH, "-0.0099");
+//            checkPercentageOfFirstOperation(NEG_ONE, ZERO_DOT_16_NINES, "-0.009999999999999999");
+//            checkPercentageOfFirstOperation(NEG_ONE, ZERO_DOT_17_NINES, "-0.0099999999999999999");
+//
+//            //first is 0
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_ZERO_DOT_17_NINES, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_ZERO_DOT_16_NINES, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_NINETY_NINE_HUNDREDTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_NINE_TENTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_ONE_TENTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_NINE_HUNDREDTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NEG_ONE_HUNDREDTH, "0");
+//
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, ONE_HUNDREDTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NINE_HUNDREDTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, ONE_TENTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NINE_TENTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, NINETY_NINE_HUNDREDTH, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, ZERO_DOT_16_NINES, "0");
+//            checkPercentageOfFirstOperation(BigDecimal.ZERO, ZERO_DOT_17_NINES, "0");
+//
+//            //first is 1
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_ZERO_DOT_17_NINES, "-0.0099999999999999999");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_ZERO_DOT_16_NINES, "-0.009999999999999999");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_NINETY_NINE_HUNDREDTH, "-0.0099");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_NINE_TENTH, "-0.009");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_ONE_TENTH, "-0.001");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_NINE_HUNDREDTH, "-0.0009");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NEG_ONE_HUNDREDTH, "-0.0001");
+//
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, ONE_HUNDREDTH, "0.0001");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NINE_HUNDREDTH, "0.0009");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, ONE_TENTH, "0.001");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NINE_TENTH, "0.009");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, NINETY_NINE_HUNDREDTH, "0.0099");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, ZERO_DOT_16_NINES, "0.009999999999999999");
+//            checkPercentageOfFirstOperation(BigDecimal.ONE, ZERO_DOT_17_NINES, "0.0099999999999999999");
+//
+//            //first is 10
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_ZERO_DOT_17_NINES, "-0.099999999999999999");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_ZERO_DOT_16_NINES, "-0.09999999999999999");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_NINETY_NINE_HUNDREDTH, "-0.099");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_NINE_TENTH, "-0.09");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_ONE_TENTH, "-0.01");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_NINE_HUNDREDTH, "-0.009");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NEG_ONE_HUNDREDTH, "-0.001");
+//
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, ONE_HUNDREDTH, "0.001");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NINE_HUNDREDTH, "0.009");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, ONE_TENTH, "0.01");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NINE_TENTH, "0.09");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, NINETY_NINE_HUNDREDTH, "0.099");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, ZERO_DOT_16_NINES, "0.09999999999999999");
+//            checkPercentageOfFirstOperation(BigDecimal.TEN, ZERO_DOT_17_NINES, "0.099999999999999999");
+//
+//            //first is 100
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_ZERO_DOT_17_NINES, "-0.99999999999999999");
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_ZERO_DOT_16_NINES, "-0.9999999999999999");
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_NINETY_NINE_HUNDREDTH, "-0.99");
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_NINE_TENTH, "-0.9");
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_ONE_TENTH, "-0.1");
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_NINE_HUNDREDTH, "-0.09");
+//            checkPercentageOfFirstOperation(HUNDRED, NEG_ONE_HUNDREDTH, "-0.01");
+//
+//            checkPercentageOfFirstOperation(HUNDRED, ONE_HUNDREDTH, "0.01");
+//            checkPercentageOfFirstOperation(HUNDRED, NINE_HUNDREDTH, "0.09");
+//            checkPercentageOfFirstOperation(HUNDRED, ONE_TENTH, "0.1");
+//            checkPercentageOfFirstOperation(HUNDRED, NINE_TENTH, "0.9");
+//            checkPercentageOfFirstOperation(HUNDRED, NINETY_NINE_HUNDREDTH, "0.99");
+//            checkPercentageOfFirstOperation(HUNDRED, ZERO_DOT_16_NINES, "0.9999999999999999");
+//            checkPercentageOfFirstOperation(HUNDRED, ZERO_DOT_17_NINES, "0.99999999999999999");
+//
+//            //first is 5000000000000000
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_ZERO_DOT_17_NINES, "-49999999999999.9995");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_ZERO_DOT_16_NINES, "-49999999999999.995");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_NINETY_NINE_HUNDREDTH, "-4.95e+13");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_NINE_TENTH, "-4.5e+13");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_ONE_TENTH, "-5.e+12");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_NINE_HUNDREDTH, "-4.5e+12");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NEG_ONE_HUNDREDTH, "-5.e+11");
+//
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, ONE_HUNDREDTH, "5.e+11");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NINE_HUNDREDTH, "4.5e+12");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, ONE_TENTH, "5.e+12");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NINE_TENTH, "4.5e+13");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, NINETY_NINE_HUNDREDTH, "4.95e+13");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, ZERO_DOT_16_NINES, "49999999999999.995");
+//            checkPercentageOfFirstOperation(HALF_MAX_VALUE_ON_SCREEN, ZERO_DOT_17_NINES, "49999999999999.9995");
+//
+//            //first is 9999999999999998
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_ZERO_DOT_17_NINES, "-99999999999999.9790000000000000002");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_ZERO_DOT_16_NINES, "-99999999999999.970000000000000002");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_NINETY_NINE_HUNDREDTH, "-98999999999999.9802");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_NINE_TENTH, "-89999999999999.982");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_ONE_TENTH, "-9999999999999.998");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_NINE_HUNDREDTH, "-8999999999999.9982");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEG_ONE_HUNDREDTH, "-999999999999.9998");
+//
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, ONE_HUNDREDTH, "999999999999.9998");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NINE_HUNDREDTH, "8999999999999.9982");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, ONE_TENTH, "9999999999999.998");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NINE_TENTH, "89999999999999.982");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NINETY_NINE_HUNDREDTH, "98999999999999.9802");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, ZERO_DOT_16_NINES, "99999999999999.970000000000000002");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, ZERO_DOT_17_NINES, "99999999999999.9790000000000000002");
+//
+//            //first is 9999999999999999
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_ZERO_DOT_17_NINES, "-99999999999999.9890000000000000001");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_ZERO_DOT_16_NINES, "-99999999999999.980000000000000001");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_NINETY_NINE_HUNDREDTH, "-98999999999999.9901");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_NINE_TENTH, "-89999999999999.991");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_ONE_TENTH, "-9999999999999.999");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_NINE_HUNDREDTH, "-8999999999999.9991");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NEG_ONE_HUNDREDTH, "-999999999999.9999");
+//
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, ONE_HUNDREDTH, "999999999999.9999");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NINE_HUNDREDTH, "8999999999999.9991");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, ONE_TENTH, "9999999999999.999");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NINE_TENTH, "89999999999999.991");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, NINETY_NINE_HUNDREDTH, "98999999999999.9901");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, ZERO_DOT_16_NINES, "99999999999999.980000000000000001");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN, ZERO_DOT_17_NINES, "99999999999999.9890000000000000001");
+//
+//            //first is 10000000000000000
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_ZERO_DOT_17_NINES, "-99999999999999.999");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_ZERO_DOT_16_NINES, "-99999999999999.99");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_NINETY_NINE_HUNDREDTH, "-9.9e+13");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_NINE_TENTH, "-9.e+13");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_ONE_TENTH, "-1.e+13");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_NINE_HUNDREDTH, "-9.e+12");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEG_ONE_HUNDREDTH, "-1e+12");
+//
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, ONE_HUNDREDTH, "1.e+12");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NINE_HUNDREDTH, "9.e+12");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, ONE_TENTH, "1.e+13");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NINE_TENTH, "9.e+13");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NINETY_NINE_HUNDREDTH, "9.9e+13");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, ZERO_DOT_16_NINES, "99999999999999.99");
+//            checkPercentageOfFirstOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, ZERO_DOT_17_NINES, "99999999999999.999");
+//        }
+
+        //decimals only
+        {
+            //first is -0.99999999999999999
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_17_NINES, "0.009999999999999999800000000000000001");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_ZERO_DOT_16_NINES, "0.00999999999999999890000000000000001");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_NINETY_NINE_HUNDREDTH, "0.009899999999999999901");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_NINE_TENTH, "0.00899999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_ONE_TENTH, "0.00099999999999999999");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_NINE_HUNDREDTH, "0.000899999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NEG_ONE_HUNDREDTH, "0.000099999999999999999");
+
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, ONE_HUNDREDTH, "-0.000099999999999999999");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NINE_HUNDREDTH, "-0.000899999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, ONE_TENTH, "-0.00099999999999999999");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NINE_TENTH, "-0.00899999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, NINETY_NINE_HUNDREDTH, "-0.009899999999999999901");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, ZERO_DOT_16_NINES, "-0.00999999999999999890000000000000001");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_17_NINES, ZERO_DOT_17_NINES, "-0.009999999999999999800000000000000001");
+
+            //first is -0.9999999999999999
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NEG_ZERO_DOT_16_NINES, "0.0099999999999999980000000000000001");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NEG_NINETY_NINE_HUNDREDTH, "0.00989999999999999901");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NEG_NINE_TENTH, "0.0089999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NEG_ONE_TENTH, "0.0009999999999999999");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NEG_NINE_HUNDREDTH, "0.00089999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NEG_ONE_HUNDREDTH, "0.00009999999999999999");
+
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, ONE_HUNDREDTH, "-0.00009999999999999999");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NINE_HUNDREDTH, "-0.00089999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, ONE_TENTH, "-0.0009999999999999999");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NINE_TENTH, "-0.0089999999999999991");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, NINETY_NINE_HUNDREDTH, "-0.00989999999999999901");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, ZERO_DOT_16_NINES, "-0.0099999999999999980000000000000001");
+            checkPercentageOfFirstOperation(NEG_ZERO_DOT_16_NINES, ZERO_DOT_17_NINES, "-0.00999999999999999890000000000000001");
+
+            //first is -0.99
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NEG_NINETY_NINE_HUNDREDTH, "0.009801");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NEG_NINE_TENTH, "0.00891");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_TENTH, "0.00099");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, "0.000891");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, "0.000099");
+
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, ONE_HUNDREDTH, "-0.000099");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NINE_HUNDREDTH, "-0.000891");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, ONE_TENTH, "-0.00099");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NINE_TENTH, "-0.00891");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, "-0.009801");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_16_NINES, "-0.00989999999999999901");
+            checkPercentageOfFirstOperation(NEG_NINETY_NINE_HUNDREDTH, ZERO_DOT_17_NINES, "-0.009899999999999999901");
+
+            //first is -0.9
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NEG_NINE_TENTH, "0.0081");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NEG_ONE_TENTH, "0.0009");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NEG_NINE_HUNDREDTH, "0.00081");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NEG_ONE_HUNDREDTH, "0.00009");
+
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, ONE_HUNDREDTH, "-0.00009");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NINE_HUNDREDTH, "-0.00081");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, ONE_TENTH, "-0.0009");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NINE_TENTH, "-0.0081");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, NINETY_NINE_HUNDREDTH, "-0.00891");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, ZERO_DOT_16_NINES, "-0.0089999999999999991");
+            checkPercentageOfFirstOperation(NEG_NINE_TENTH, ZERO_DOT_17_NINES, "-0.00899999999999999991");
+
+            //first is -0.1
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, NEG_ONE_TENTH, "0.0001");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, NEG_NINE_HUNDREDTH, "0.00009");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, NEG_ONE_HUNDREDTH, "0.00001");
+
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, ONE_HUNDREDTH, "-0.00001");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, NINE_HUNDREDTH, "-0.00009");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, ONE_TENTH, "-0.0001");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, NINE_TENTH, "-0.0009");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, NINETY_NINE_HUNDREDTH, "-0.00099");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, ZERO_DOT_16_NINES, "-0.0009999999999999999");
+            checkPercentageOfFirstOperation(NEG_ONE_TENTH, ZERO_DOT_17_NINES, "-0.00099999999999999999");
+
+            //first is -0.09
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, NEG_NINE_HUNDREDTH, "0.000081");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, NEG_ONE_HUNDREDTH, "0.000009");
+
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, ONE_HUNDREDTH, "-0.000009");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, NINE_HUNDREDTH, "-0.000081");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, ONE_TENTH, "-0.00009");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, NINE_TENTH, "-0.00081");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, "-0.000891");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, ZERO_DOT_16_NINES, "-0.00089999999999999991");
+            checkPercentageOfFirstOperation(NEG_NINE_HUNDREDTH, ZERO_DOT_17_NINES, "-0.000899999999999999991");
+
+            //first is -0.01
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, NEG_ONE_HUNDREDTH, "0.000001");
+
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, ONE_HUNDREDTH, "-0.000001");
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, NINE_HUNDREDTH, "-0.000009");
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, ONE_TENTH, "-0.00001");
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, NINE_TENTH, "-0.00009");
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, NINETY_NINE_HUNDREDTH, "-0.000099");
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, ZERO_DOT_16_NINES, "-0.00009999999999999999");
+            checkPercentageOfFirstOperation(NEG_ONE_HUNDREDTH, ZERO_DOT_17_NINES, "-0.000099999999999999999");
+
+            //first is 0.01
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, ONE_HUNDREDTH, "0.000001");
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, NINE_HUNDREDTH, "0.000009");
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, ONE_TENTH, "0.00001");
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, NINE_TENTH, "0.00009");
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, NINETY_NINE_HUNDREDTH, "0.000099");
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, ZERO_DOT_16_NINES, "0.00009999999999999999");
+            checkPercentageOfFirstOperation(ONE_HUNDREDTH, ZERO_DOT_17_NINES, "0.000099999999999999999");
+
+            //first is 0.09
+            checkPercentageOfFirstOperation(NINE_HUNDREDTH, NINE_HUNDREDTH, "0.000081");
+            checkPercentageOfFirstOperation(NINE_HUNDREDTH, ONE_TENTH, "0.00009");
+            checkPercentageOfFirstOperation(NINE_HUNDREDTH, NINE_TENTH, "0.00081");
+            checkPercentageOfFirstOperation(NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, "0.000891");
+            checkPercentageOfFirstOperation(NINE_HUNDREDTH, ZERO_DOT_16_NINES, "0.00089999999999999991");
+            checkPercentageOfFirstOperation(NINE_HUNDREDTH, ZERO_DOT_17_NINES, "0.000899999999999999991");
+
+            //first is 0.1
+            checkPercentageOfFirstOperation(ONE_TENTH, ONE_TENTH, "0.0001");
+            checkPercentageOfFirstOperation(ONE_TENTH, NINE_TENTH, "0.0009");
+            checkPercentageOfFirstOperation(ONE_TENTH, NINETY_NINE_HUNDREDTH, "0.00099");
+            checkPercentageOfFirstOperation(ONE_TENTH, ZERO_DOT_16_NINES, "0.0009999999999999999");
+            checkPercentageOfFirstOperation(ONE_TENTH, ZERO_DOT_17_NINES, "0.00099999999999999999");
+
+            //first is 0.9
+            checkPercentageOfFirstOperation(NINE_TENTH, NINE_TENTH, "0.0081");
+            checkPercentageOfFirstOperation(NINE_TENTH, NINETY_NINE_HUNDREDTH, "0.00891");
+            checkPercentageOfFirstOperation(NINE_TENTH, ZERO_DOT_16_NINES, "0.0089999999999999991");
+            checkPercentageOfFirstOperation(NINE_TENTH, ZERO_DOT_17_NINES, "0.00899999999999999991");
+
+            //first is 0.99
+            checkPercentageOfFirstOperation(NINETY_NINE_HUNDREDTH, NINETY_NINE_HUNDREDTH, "0.009801");
+            checkPercentageOfFirstOperation(NINETY_NINE_HUNDREDTH, ZERO_DOT_16_NINES, "0.00989999999999999901");
+            checkPercentageOfFirstOperation(NINETY_NINE_HUNDREDTH, ZERO_DOT_17_NINES, "0.009899999999999999901");
+
+            //first is 0.9999999999999999
+            checkPercentageOfFirstOperation(ZERO_DOT_16_NINES, ZERO_DOT_16_NINES, "0.0099999999999999980000000000000001");
+            checkPercentageOfFirstOperation(ZERO_DOT_16_NINES, ZERO_DOT_17_NINES, "0.00999999999999999890000000000000001");
+
+            //first is 0.99999999999999999
+            checkPercentageOfFirstOperation(ZERO_DOT_17_NINES, ZERO_DOT_17_NINES, "0.009999999999999999800000000000000001");
+        }
+
+        //engineer numbers
+        //with engineer numbers
+        {
+            //first is -1.e+9999
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9999, NEG_ONE_DOT_E_PLUS_9999, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9999, NEG_ONE_DOT_E_PLUS_9998, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9999, ONE_DOT_E_PLUS_9998, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9999, ONE_DOT_E_PLUS_9999, "-123456");
+
+            //first is -1.e+9998
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9998, NEG_ONE_DOT_E_PLUS_9998, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9998, ONE_DOT_E_PLUS_9998, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_9998, ONE_DOT_E_PLUS_9999, "-123456");
+
+            //first is 1.e+9998
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_9998, ONE_DOT_E_PLUS_9998, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_9998, ONE_DOT_E_PLUS_9999, "123456");
+
+            //first is 1.e+9999
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_9999, ONE_DOT_E_PLUS_9999, "123456");
+
+
+            //first is -1.e+17
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ONE_DOT_E_PLUS_17, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ONE_DOT_E_PLUS_16, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, ONE_DOT_E_PLUS_16, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, ONE_DOT_E_PLUS_17, "-123456");
+
+            //first is -1.e+16
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_ONE_DOT_E_PLUS_16, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, ONE_DOT_E_PLUS_16, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, ONE_DOT_E_PLUS_17, "-123456");
+
+            //first is 1.e+16
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, ONE_DOT_E_PLUS_16, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, ONE_DOT_E_PLUS_17, "123456");
+
+            //first is 1.e+17
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, ONE_DOT_E_PLUS_17, "123456");
+
+
+            //first is -1.e-9999
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, NEG_ONE_DOT_E_MINUS_9999, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, NEG_ONE_DOT_E_MINUS_9998, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, ONE_DOT_E_MINUS_9998, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, ONE_DOT_E_MINUS_9999, "-123456");
+
+            //first is -1.e-9998
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9998, NEG_ONE_DOT_E_MINUS_9998, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9998, ONE_DOT_E_MINUS_9998, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9998, ONE_DOT_E_MINUS_9999, "-123456");
+
+            //first is 1.e-9998
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9998, ONE_DOT_E_MINUS_9998, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9998, ONE_DOT_E_MINUS_9999, "123456");
+
+            //first is 1.e-9999
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, ONE_DOT_E_MINUS_9999, "123456");
+
+
+            //first is -1.e-17
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ONE_DOT_E_MINUS_17, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ONE_DOT_E_MINUS_16, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, ONE_DOT_E_MINUS_16, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, ONE_DOT_E_MINUS_17, "-123456");
+
+            //first is -1.e-16
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_ONE_DOT_E_MINUS_16, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, ONE_DOT_E_MINUS_16, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, ONE_DOT_E_MINUS_17, "-123456");
+
+            //first is 1.e-16
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, ONE_DOT_E_MINUS_16, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, ONE_DOT_E_MINUS_17, "123456");
+
+            //first is 1.e-17
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, ONE_DOT_E_MINUS_17, "123456");
+        }
+
+        //with integers
+        {
+            //first is -1.e+17
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, MIN_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, MIN_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, HALF_MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_HUNDRED, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_TEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ONE, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, BigDecimal.ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, BigDecimal.TEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, HALF_MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+
+            //first is -1.e+16
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, MIN_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, MIN_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, HALF_MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_HUNDRED, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_TEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_ONE, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, BigDecimal.ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, BigDecimal.TEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, HALF_MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+
+            //first is 1.e+16
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, MIN_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, MIN_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, HALF_MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, NEG_HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, NEG_TEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, NEG_ONE, "-123456");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, BigDecimal.ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, BigDecimal.TEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, HUNDRED, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, HALF_MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, MAX_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_16, MAX_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+
+            //first is 1.e+17
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, MIN_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, MIN_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, HALF_MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, NEG_HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, NEG_TEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, NEG_ONE, "-123456");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, BigDecimal.ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, BigDecimal.TEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, HUNDRED, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, HALF_MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, MAX_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_PLUS_17, MAX_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+
+            //first is -1.e-17
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, MIN_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, MIN_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, HALF_MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_HUNDRED, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_TEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ONE, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, BigDecimal.ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, BigDecimal.TEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, HALF_MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+
+            //first is -1.e-16
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, MIN_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, MIN_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, HALF_MIN_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_HUNDRED, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_TEN, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_ONE, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, BigDecimal.ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, BigDecimal.TEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, HALF_MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, MAX_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+
+            //first is 1.e-16
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, MIN_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, MIN_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, HALF_MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, NEG_HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, NEG_TEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, NEG_ONE, "-123456");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, BigDecimal.ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, BigDecimal.TEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, HUNDRED, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, HALF_MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, MAX_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_16, MAX_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+
+            //first is 1.e-17
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, MIN_VALUE_ON_SCREEN_MINUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, MIN_VALUE_ON_SCREEN_PLUS_ONE, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, HALF_MIN_VALUE_ON_SCREEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, NEG_HUNDRED, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, NEG_TEN, "-123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, NEG_ONE, "-123456");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, BigDecimal.ZERO, "0");
+
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, BigDecimal.ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, BigDecimal.TEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, HUNDRED, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, HALF_MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, MAX_VALUE_ON_SCREEN_MINUS_ONE, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, MAX_VALUE_ON_SCREEN, "123456");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_17, MAX_VALUE_ON_SCREEN_PLUS_ONE, "123456");
+        }
+
+        //with decimals
+        {
+            //first is -1.e+17
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ZERO_DOT_17_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ZERO_DOT_16_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_NINETY_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_NINE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ONE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NEG_ONE_HUNDREDTH, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, ONE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, ONE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NINE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, NINETY_NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, ZERO_DOT_16_NINES, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_17, ZERO_DOT_17_NINES, "-123456");
+
+            //first is -1.e+16
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_ZERO_DOT_17_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_ZERO_DOT_16_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_NINETY_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_NINE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_ONE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NEG_ONE_HUNDREDTH, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, ONE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, ONE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NINE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, NINETY_NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, ZERO_DOT_16_NINES, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_PLUS_16, ZERO_DOT_17_NINES, "-123456");
+
+            //first is -1.e-17
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ZERO_DOT_17_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ZERO_DOT_16_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_NINETY_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_NINE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ONE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NEG_ONE_HUNDREDTH, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, ONE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, ONE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NINE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, NINETY_NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, ZERO_DOT_16_NINES, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_17, ZERO_DOT_17_NINES, "-123456");
+
+            //first is -1.e-16
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_ZERO_DOT_17_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_ZERO_DOT_16_NINES, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_NINETY_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_NINE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_ONE_TENTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_NINE_HUNDREDTH, "123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NEG_ONE_HUNDREDTH, "123456");
+
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, ONE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, ONE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NINE_TENTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, NINETY_NINE_HUNDREDTH, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, ZERO_DOT_16_NINES, "-123456");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_16, ZERO_DOT_17_NINES, "-123456");
+        }
+
+        //several random values
+        {
+            checkBinaryOperation(new BigDecimal("197"), new BigDecimal("8763"), ADD, "8.96e+3");
+            checkBinaryOperation(new BigDecimal("36346"), new BigDecimal("62"), ADD, "36408");
+
+            checkBinaryOperation(new BigDecimal("62"), new BigDecimal("-542"), ADD, "-4.8e+2");
+            checkBinaryOperation(new BigDecimal("7654"), new BigDecimal("-62"), ADD, "7592");
+
+            checkBinaryOperation(new BigDecimal("-53252"), new BigDecimal("-52"), ADD, "-53304");
+            checkBinaryOperation(new BigDecimal("-1243"), new BigDecimal("-65"), ADD, "-1308");
+
+            checkBinaryOperation(new BigDecimal("623"), new BigDecimal("124.123"), ADD, "747.123");
+            checkBinaryOperation(new BigDecimal("324"), new BigDecimal("653.523"), ADD, "977.523");
+
+            checkBinaryOperation(new BigDecimal("7652"), new BigDecimal("-23.598"), ADD, "7628.402");
+            checkBinaryOperation(new BigDecimal("2431"), new BigDecimal("-123.124"), ADD, "2307.876");
+
+            checkBinaryOperation(new BigDecimal("-62"), new BigDecimal("76.43"), ADD, "14.43");
+            checkBinaryOperation(new BigDecimal("-87"), new BigDecimal("876.1"), ADD, "789.1");
+
+            checkBinaryOperation(new BigDecimal("-63"), new BigDecimal("-0.234"), ADD, "-63.234");
+            checkBinaryOperation(new BigDecimal("-1967"), new BigDecimal("-22.76"), ADD, "-1989.76");
+
+            checkBinaryOperation(new BigDecimal("53.14"), new BigDecimal("51.65"), ADD, "104.79");
+            checkBinaryOperation(new BigDecimal("75.234"), new BigDecimal("75.234"), ADD, "150.468");
+
+            checkBinaryOperation(new BigDecimal("64.26"), new BigDecimal("-25.7"), ADD, "38.56");
+            checkBinaryOperation(new BigDecimal("623.3"), new BigDecimal("-75.2"), ADD, "548.1");
+
+            checkBinaryOperation(new BigDecimal("-532.1"), new BigDecimal("-2.2"), ADD, "-534.3");
+            checkBinaryOperation(new BigDecimal("-622.2"), new BigDecimal("-25.6"), ADD, "-647.8");
+        }
+
+    }
+
+
+    /**
      * Tests for overflow exception while using binary operations in model.
      *
      * @see OverflowException
@@ -6840,6 +7763,28 @@ class CalculationModelTest {
 
             assertEquals(new BigDecimal(expectedResult), calculation.getResult());
         }
+    }
+
+    /**
+     * Method for testing percentage of first number.
+     *
+     * @param first          first value.
+     * @param second         second value.
+     * @param expectedSecond expected big decimal value of second parameter after performing percentage of first operation.
+     * @see Calculation
+     */
+    private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, String expectedSecond) {
+        calculation.setFirst(first);
+        calculation.setSecond(second);
+        calculation.percentageOfFirst();
+
+        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
+
+        calculation.setFirst(second);
+        calculation.setSecond(first);
+        calculation.percentageOfFirst();
+
+        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
     }
 
     /**

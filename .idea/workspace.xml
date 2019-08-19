@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/exceptions/OverflowException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
@@ -66,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.percentageOfFirstTests">
     <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -149,7 +147,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.subtractOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.percentageOfFirstTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -159,7 +157,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="subtractOperationTests" />
+      <option name="METHOD_NAME" value="percentageOfFirstTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -167,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstTests" />
         <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTest" />
         <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
         <item itemvalue="JUnit.CalculationModelTest.overflowExceptionTest" />
         <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
-        <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
       </list>
     </recent_temporary>
   </component>
@@ -480,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566164623561</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Tests for model for exceptions created. Bug fix with divide scale in model.">
+      <created>1566214664064</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1566214664064</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -513,7 +518,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Adding methods while buttons clicked." />
     <MESSAGE value="Adding model for calculator." />
     <MESSAGE value="Adding new tests for add operation with negative numbers." />
     <MESSAGE value="Adding JavaDoc in test class. Removing one billion value from tests." />
@@ -538,6 +542,7 @@
     <MESSAGE value="Expected result for model tests for multiply operation corrected." />
     <MESSAGE value="Several new tests for model for subtract operation created. Expected result for several model tests for subtract operation corrected. Tests for model for divide operation created (but expected result for these tests is still incorrect)." />
     <MESSAGE value="Tests for model for binary operations completed. Several bug fixes with divide operation and validation in model." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for model for binary operations completed. Several bug fixes with divide operation and validation in model." />
+    <MESSAGE value="Tests for model for exceptions created. Bug fix with divide scale in model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for model for exceptions created. Bug fix with divide scale in model." />
   </component>
 </project>
