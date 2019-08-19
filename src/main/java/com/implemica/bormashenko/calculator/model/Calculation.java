@@ -111,6 +111,26 @@ public class Calculation {
     }
 
     /**
+     * Calculates second number as a percentage of the first.
+     */
+    public void percentageOfFirst() {
+        second = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+
+        if (second.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
+                (second.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !second.equals(BigDecimal.ZERO)) ||
+                second.precision() >= MAX_PRECISION) {
+            throw new OverflowException("Overflow");
+        }
+    }
+
+    /**
+     * Calculates second number as a percentage of 100.
+     */
+    public void percentageOf100() {
+        second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+    }
+
+    /**
      * Calculates result using first value and binary operation
      *
      * @param unaryOperation operation to perform.
@@ -227,19 +247,5 @@ public class Calculation {
         }
 
         return BigDecimal.ONE.divide(first, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
-    }
-
-    /**
-     * Calculates second number as a percentage of the first.
-     */
-    public void percentageOfFirst() {
-        second = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
-    }
-
-    /**
-     * Calculates second number as a percentage of 100.
-     */
-    public void percentageOf100() {
-        second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 }
