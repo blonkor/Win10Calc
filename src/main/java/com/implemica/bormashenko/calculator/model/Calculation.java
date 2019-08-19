@@ -2,6 +2,7 @@ package com.implemica.bormashenko.calculator.model;
 
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
 
 import java.math.BigDecimal;
 
@@ -15,7 +16,7 @@ public class Calculation {
     /**
      * Scale for divide operation.
      */
-    private static final int DIVIDE_SCALE = 10500;
+    private static final int DIVIDE_SCALE = 20000;
 
     private static final int MAX_PRECISION = 10000;
 
@@ -105,7 +106,7 @@ public class Calculation {
         if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
                 (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)) ||
                 result.precision() >= MAX_PRECISION) {
-            throw new ArithmeticException("Overflow");
+            throw new OverflowException("Overflow");
         }
     }
 
