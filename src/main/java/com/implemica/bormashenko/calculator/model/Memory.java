@@ -15,12 +15,12 @@ public class Memory {
 
     private Stack<BigDecimal> store = new Stack<>();
 
-    public void storeToMemory(BigDecimal number) {
-        store.push(number);
+    public Stack<BigDecimal> getStore() {
+        return store;
     }
 
-    public void clearItem(int index) {
-        store.remove(index);
+    public void storeToMemory(BigDecimal number) {
+        store.push(number);
     }
 
     public void clearMemory() {
@@ -49,8 +49,5 @@ public class Memory {
         }
     }
 
-    public Stack<BigDecimal> getStore() {
-        return store;
-    }
 
 }

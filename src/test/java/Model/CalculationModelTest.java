@@ -264,7 +264,7 @@ class CalculationModelTest {
      * @see Calculation
      */
     @BeforeAll
-    static void setUpObject() {
+    static void setupObject() {
         calculation = new Calculation();
     }
 
