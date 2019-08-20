@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/User.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/exceptions/OverflowException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/exceptions/OverflowException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -501,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566294566216</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Bug fixes in model. Reimplementation of sqrt method (found in 9 jdk and almost implemented here). Code refactoring for model.">
+      <created>1566315864639</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1566315864639</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -534,7 +536,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Adding JavaDoc in test class. Removing one billion value from tests." />
     <MESSAGE value="Decimal constants created." />
     <MESSAGE value="Expected result for decimal test cases for add operation changed." />
     <MESSAGE value="Tests for add operation with integer and decimal numbers created." />
@@ -559,6 +560,7 @@
     <MESSAGE value="Tests for model for exceptions created. Bug fix with divide scale in model." />
     <MESSAGE value="Tests for model for percentage of first operation completed (including tests for overflow exception by using the operation)." />
     <MESSAGE value="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation)." />
+    <MESSAGE value="Bug fixes in model. Reimplementation of sqrt method (found in 9 jdk and almost implemented here). Code refactoring for model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes in model. Reimplementation of sqrt method (found in 9 jdk and almost implemented here). Code refactoring for model." />
   </component>
 </project>

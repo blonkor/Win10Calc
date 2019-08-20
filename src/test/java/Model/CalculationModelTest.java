@@ -27,6 +27,28 @@ class CalculationModelTest {
     private static Calculation calculation;
 
     /**
+     * Exception message for overflow.
+     *
+     * @see OverflowException
+     */
+    private static final String OVERFLOW_MESSAGE = "Overflow";
+
+    /**
+     * Exception message for divide by zero.
+     */
+    private static final String DIVIDE_BY_ZERO_MESSAGE = "Cannot divide by zero";
+
+    /**
+     * Exception message for divide zero by zero.
+     */
+    private static final String DIVIDE_ZERO_BY_ZERO_MESSAGE = "Result is undefined";
+
+    /**
+     * Exception message for invalid input,
+     */
+    private static final String INVALID_INPUT_MESSAGE = "Invalid input";
+
+    /**
      * Big decimal value of minimal value that can be shown in view minus one.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN_MINUS_ONE = new BigDecimal("-10000000000000000");
@@ -248,8 +270,6 @@ class CalculationModelTest {
 
     /**
      * Tests for binary add operation.
-     *
-     * @see BinaryOperations
      */
     @Test
     void addOperationTests() {
@@ -1239,8 +1259,6 @@ class CalculationModelTest {
 
     /**
      * Tests for binary subtract operation.
-     *
-     * @see BinaryOperations
      */
     @Test
     void subtractOperationTests() {
@@ -3355,8 +3373,6 @@ class CalculationModelTest {
 
     /**
      * Tests for binary multiply operation.
-     *
-     * @see BinaryOperations
      */
     @Test
     void multiplyOperationTests() {
@@ -4452,8 +4468,6 @@ class CalculationModelTest {
 
     /**
      * Tests for binary divide operation.
-     *
-     * @see BinaryOperations
      */
     @Test
     void divideOperationTests() {
@@ -7713,8 +7727,6 @@ class CalculationModelTest {
 
     /**
      * Tests for unary negate operation.
-     *
-     * @see UnaryOperations
      */
     @Test
     void negateOperationTests() {
@@ -7771,11 +7783,15 @@ class CalculationModelTest {
             checkUnaryOperation(ONE_DOT_E_PLUS_9999, NEGATE, "-1.e+9999");
 
 
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9999, NEGATE, "1.e-9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9998, NEGATE, "1.e-9998");
             checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, NEGATE, "1.e-17");
             checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, NEGATE, "1.e-16");
 
             checkUnaryOperation(ONE_DOT_E_MINUS_16, NEGATE, "-1.e-16");
             checkUnaryOperation(ONE_DOT_E_MINUS_17, NEGATE, "-1.e-17");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9998, NEGATE, "-1.e-9998");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9999, NEGATE, "-1.e-9999");
         }
 
         //several random values
@@ -7796,8 +7812,6 @@ class CalculationModelTest {
 
     /**
      * Tests for unary sqr operation.
-     *
-     * @see UnaryOperations
      */
     @Test
     void sqrOperationTests() {
@@ -7875,8 +7889,6 @@ class CalculationModelTest {
 
     /**
      * Tests for unary sqrt operation.
-     *
-     * @see UnaryOperations
      */
     @Test
     void sqrtOperationTests() {
@@ -7903,39 +7915,96 @@ class CalculationModelTest {
 
         //engineer numbers
         {
-            checkUnaryOperation(ONE_DOT_E_PLUS_16, SQRT, "-1.e+16");
-            checkUnaryOperation(ONE_DOT_E_PLUS_17, SQRT, "-1.e+17");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9998, SQRT, "-1.e+9998");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9999, SQRT, "-1.e+9999");
+            checkUnaryOperation(ONE_DOT_E_PLUS_16, SQRT, "1.e+8");
+            checkUnaryOperation(ONE_DOT_E_PLUS_17, SQRT, "316227766.0168379");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9998, SQRT, "1.e+4999");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9999, SQRT, "3.162277660168379e+4999");
 
-            checkUnaryOperation(ONE_DOT_E_MINUS_16, SQRT, "-1.e-16");
-            checkUnaryOperation(ONE_DOT_E_MINUS_17, SQRT, "-1.e-17");
+            checkUnaryOperation(ONE_DOT_E_MINUS_16, SQRT, "1.e-8");
+            checkUnaryOperation(ONE_DOT_E_MINUS_17, SQRT, "3.162277660168379e-9");
         }
 
         //several random values
         {
-            checkUnaryOperation(new BigDecimal("6324"), SQRT, "-6324");
-            checkUnaryOperation(new BigDecimal("987"), SQRT, "-987");
+            checkUnaryOperation(new BigDecimal("9132131"), SQRT, "3021.941594405822");
+            checkUnaryOperation(new BigDecimal("1235123"), SQRT, "1111.360877483097");
 
-            checkUnaryOperation(new BigDecimal("84.13"), SQRT, "-84.13");
-            checkUnaryOperation(new BigDecimal("98735.8457"), SQRT, "-98735.8457");
+            checkUnaryOperation(new BigDecimal("123.5523"), SQRT, "11.11540822462225");
+            checkUnaryOperation(new BigDecimal("123.1243"), SQRT, "11.09613896812761");
         }
     }
 
     /**
-     * Tests for overflow exception while using binary operations in model.
-     *
-     * @see OverflowException
+     * Tests for unary inverse operation.
      */
-    void unaryOverflowExceptionTests() {
-        //sqr operation
+    @Test
+    void inverseOperationTests() {
+        //integers 
+        {
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, INVERSE, "-1.e-16");
+            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, INVERSE, "-2.e-16");
+            checkUnaryOperation(NEG_HUNDRED, INVERSE, "-1.e-2");
+            checkUnaryOperation(NEG_TEN, INVERSE, "-1.e-1");
+            checkUnaryOperation(NEG_ONE, INVERSE, "-1");
 
+            checkUnaryOperation(BigDecimal.ONE, INVERSE, "1");
+            checkUnaryOperation(BigDecimal.TEN, INVERSE, "1.e-1");
+            checkUnaryOperation(HUNDRED, INVERSE, "1.e-2");
+            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, INVERSE, "2.e-16");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, INVERSE, "1.e-16");
+        }
+
+        //decimals
+        {
+            checkUnaryOperation(NEG_ONE_TENTH, INVERSE, "-1.e+1");
+            checkUnaryOperation(NEG_ONE_HUNDREDTH, INVERSE, "-1.e+2");
+
+            checkUnaryOperation(ONE_HUNDREDTH, INVERSE, "1.e+2");
+            checkUnaryOperation(ONE_TENTH, INVERSE, "1.e+1");
+        }
+
+        //engineer numbers
+        {
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9999, INVERSE, "-1.e-9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9998, INVERSE, "-1.e-9998");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, INVERSE, "-1.e-17");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, INVERSE, "-1.e-16");
+
+            checkUnaryOperation(ONE_DOT_E_PLUS_16, INVERSE, "1.e-16");
+            checkUnaryOperation(ONE_DOT_E_PLUS_17, INVERSE, "1.e-17");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9998, INVERSE, "1.e-9998");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9999, INVERSE, "1.e-9999");
+
+
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9999, INVERSE, "-1.e+9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9998, INVERSE, "-1.e+9998");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, INVERSE, "-1.e+17");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, INVERSE, "-1.e+16");
+
+            checkUnaryOperation(ONE_DOT_E_MINUS_16, INVERSE, "1.e+16");
+            checkUnaryOperation(ONE_DOT_E_MINUS_17, INVERSE, "1.e+17");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9998, INVERSE, "1.e+9998");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9999, INVERSE, "1.e+9999");
+        }
+
+        //several random values
+        {
+            checkUnaryOperation(new BigDecimal("50"), INVERSE, "0.02");
+            checkUnaryOperation(new BigDecimal("2"), INVERSE, "0.5");
+
+            checkUnaryOperation(new BigDecimal("-800"), INVERSE, "-0.00125");
+            checkUnaryOperation(new BigDecimal("-1000"), INVERSE, "-0.001");
+
+            checkUnaryOperation(new BigDecimal("0.5"), INVERSE, "2");
+            checkUnaryOperation(new BigDecimal("0.8"), INVERSE, "1.25");
+
+            checkUnaryOperation(new BigDecimal("-0.025"), INVERSE, "-4.e+1");
+            checkUnaryOperation(new BigDecimal("-6.25"), INVERSE, "-0.16");
+        }
     }
 
     /**
-     * Tests for overflow exception while using binary operations in model.
-     *
-     * @see OverflowException
+     * Tests for overflow exception while using binary operations.
      */
     @Test
     void binaryOverflowExceptionTests() {
@@ -8230,9 +8299,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for overflow exception while using percentage of first operation in model.
-     *
-     * @see OverflowException
+     * Tests for overflow exception while using percentage of first operation.
      */
     @Test
     void percentageOfFirstOverflowExceptionTests() {
@@ -8345,9 +8412,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for overflow exception while using percentage of 100 operation in model.
-     *
-     * @see OverflowException
+     * Tests for overflow exception while using percentage of 100 operation.
      */
     @Test
     void percentageOf100OverFlowExceptionTests() {
@@ -8359,7 +8424,34 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for divide by zero exception in model.
+     * Tests for overflow exception while using binary operations.
+     */
+    @Test
+    void sqrOverflowExceptionTests() {
+        checkSqrOverflowException(NEG_ONE_DOT_E_PLUS_9999);
+        checkSqrOverflowException(NEG_ONE_DOT_E_PLUS_9998);
+        checkSqrOverflowException(new BigDecimal("-1.e+7500"));
+        checkSqrOverflowException(new BigDecimal("-1.e+5000"));
+
+        checkSqrOverflowException(new BigDecimal("1.e+5000"));
+        checkSqrOverflowException(new BigDecimal("1.e+7500"));
+        checkSqrOverflowException(ONE_DOT_E_PLUS_9998);
+        checkSqrOverflowException(ONE_DOT_E_PLUS_9999);
+
+
+        checkSqrOverflowException(NEG_ONE_DOT_E_MINUS_9999);
+        checkSqrOverflowException(NEG_ONE_DOT_E_MINUS_9998);
+        checkSqrOverflowException(new BigDecimal("-1.e-7500"));
+        checkSqrOverflowException(new BigDecimal("-1.e-5000"));
+
+        checkSqrOverflowException(new BigDecimal("1.e-5000"));
+        checkSqrOverflowException(new BigDecimal("1.e-7500"));
+        checkSqrOverflowException(ONE_DOT_E_MINUS_9998);
+        checkSqrOverflowException(ONE_DOT_E_MINUS_9999);
+    }
+
+    /**
+     * Tests for divide by zero exception.
      */
     @Test
     void divideByZeroExceptionTests() {
@@ -8423,7 +8515,51 @@ class CalculationModelTest {
     }
 
     /**
-     * Test for divide zero by zero exception in model.
+     * Tests for sqrt of negative number exception.
+     */
+    @Test
+    void negativeSqrtExceptionTests() {
+        //integers 
+        {
+            checkNegativeSqrtException(NEG_ONE);
+            checkNegativeSqrtException(NEG_TEN);
+            checkNegativeSqrtException(new BigDecimal("-9"));
+            checkNegativeSqrtException(NEG_HUNDRED);
+            checkNegativeSqrtException(HALF_MIN_VALUE_ON_SCREEN);
+            checkNegativeSqrtException(new BigDecimal("-25000000000000"));
+            checkNegativeSqrtException(new BigDecimal("-11111108888889"));
+            checkNegativeSqrtException(MIN_VALUE_ON_SCREEN_PLUS_ONE);
+            checkNegativeSqrtException(MIN_VALUE_ON_SCREEN);
+            checkNegativeSqrtException(MIN_VALUE_ON_SCREEN_MINUS_ONE);
+        }
+
+        //decimals
+        {
+            checkNegativeSqrtException(NEG_ONE_HUNDREDTH);
+            checkNegativeSqrtException(NEG_NINE_HUNDREDTH);
+            checkNegativeSqrtException(NEG_ONE_TENTH);
+            checkNegativeSqrtException(NEG_NINE_TENTH);
+            checkNegativeSqrtException(NEG_NINETY_NINE_HUNDREDTH);
+            checkNegativeSqrtException(NEG_ZERO_DOT_16_NINES);
+            checkNegativeSqrtException(NEG_ZERO_DOT_17_NINES);
+        }
+
+        //engineer numbers
+        {
+            checkNegativeSqrtException(NEG_ONE_DOT_E_PLUS_16);
+            checkNegativeSqrtException(NEG_ONE_DOT_E_PLUS_17);
+            checkNegativeSqrtException(NEG_ONE_DOT_E_PLUS_9998);
+            checkNegativeSqrtException(NEG_ONE_DOT_E_PLUS_9999);
+
+            checkNegativeSqrtException(NEG_ONE_DOT_E_MINUS_9999);
+            checkNegativeSqrtException(NEG_ONE_DOT_E_MINUS_9998);
+            checkNegativeSqrtException(NEG_ONE_DOT_E_MINUS_16);
+            checkNegativeSqrtException(NEG_ONE_DOT_E_MINUS_17);
+        }
+    }
+
+    /**
+     * Test for divide zero by zero exception.
      */
     @Test
     void divideZeroByZeroExceptionTest() {
@@ -8435,13 +8571,30 @@ class CalculationModelTest {
             calculation.calculateBinary();
             fail();
         } catch (ArithmeticException e) {
-            String exceptionMessage = "Result is undefined";
-            assertEquals(exceptionMessage, e.getMessage());
+            assertEquals(DIVIDE_ZERO_BY_ZERO_MESSAGE, e.getMessage());
+        }
+    }
+
+    /**
+     * Tests for inverse by zero exception.
+     */
+    @Test
+    void inverseZeroExceptionTest() {
+        calculation.setFirst(BigDecimal.ZERO);
+
+        try {
+            calculation.calculateUnary(INVERSE);
+            fail();
+        } catch (ArithmeticException e) {
+            assertEquals(DIVIDE_BY_ZERO_MESSAGE, e.getMessage());
         }
     }
 
     /**
      * Method for testing binary operations in model.
+     * <p>
+     * For operations {@code ADD} and {@code MULTIPLY} it is possible to swap
+     * numbers of equation between each other to obtain the same result.
      *
      * @param first          first value of equation.
      * @param second         second value of equation.
@@ -8468,11 +8621,14 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing percentage of first number.
+     * Method for testing percentage of first number in model.
+     * <p>
+     * For this operation it is possible to swap numbers of equation
+     * between each other to obtain the same result.
      *
-     * @param first          first value.
-     * @param second         second value.
-     * @param expectedSecond expected big decimal value of second parameter after performing percentage of first operation.
+     * @param first          first value of equation.
+     * @param second         second value of equation.
+     * @param expectedSecond result that should be obtained and set as second number in model.
      * @see Calculation
      */
     private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, String expectedSecond) {
@@ -8490,10 +8646,10 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing percentage of 100.
+     * Method for testing percentage of 100 operation in model.
      *
-     * @param value          big decimal value.
-     * @param expectedSecond expected big decimal value of second parameter after performing percentage of 100 operation.
+     * @param value          number for operation.
+     * @param expectedSecond result that should be obtained and set as second number in model.
      * @see Calculation
      */
     private void checkPercentageOf100Operation(BigDecimal value, String expectedSecond) {
@@ -8504,9 +8660,9 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing binary operations in model.
+     * Method for testing unary operations in model.
      *
-     * @param value          big decimal value.
+     * @param value          number for operation.
      * @param operation      unary operation to use.
      * @param expectedResult result that should be obtained.
      * @see UnaryOperations
@@ -8521,6 +8677,7 @@ class CalculationModelTest {
 
     /**
      * Method for testing overflow exception while using binary operations in model.
+     * For inputted values, exception should be obtained.
      *
      * @param first     first value of equation.
      * @param second    second value of equation.
@@ -8534,14 +8691,12 @@ class CalculationModelTest {
         calculation.setSecond(second);
         calculation.setBinaryOperation(operation);
 
-        String exceptionMessage = "Overflow";
-
         try {
             calculation.calculateBinary();
             System.out.println(calculation.getResult());
             fail();
         } catch (OverflowException e) {
-            assertEquals(exceptionMessage, e.getMessage());
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
         }
 
         if (operation == ADD || operation == MULTIPLY) {
@@ -8552,16 +8707,17 @@ class CalculationModelTest {
                 calculation.calculateBinary();
                 fail();
             } catch (OverflowException e) {
-                assertEquals(exceptionMessage, e.getMessage());
+                assertEquals(OVERFLOW_MESSAGE, e.getMessage());
             }
         }
     }
 
     /**
      * Method for testing overflow exception while using percentage of first operation in model.
+     * For inputted values, exception should be obtained.
      *
-     * @param first  first value.
-     * @param second second value.
+     * @param first  first value of equation.
+     * @param second second value of equation.
      * @see OverflowException
      * @see Calculation
      */
@@ -8569,13 +8725,11 @@ class CalculationModelTest {
         calculation.setFirst(first);
         calculation.setSecond(second);
 
-        String exceptionMessage = "Overflow";
-
         try {
             calculation.percentageOfFirst();
             fail();
         } catch (OverflowException e) {
-            assertEquals(exceptionMessage, e.getMessage());
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
         }
 
         calculation.setFirst(second);
@@ -8585,18 +8739,15 @@ class CalculationModelTest {
             calculation.percentageOfFirst();
             fail();
         } catch (OverflowException e) {
-            assertEquals(exceptionMessage, e.getMessage());
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
         }
-    }
-
-    private void checkUnaryOverflowException() {
-
     }
 
     /**
      * Method for testing overflow exception while using percentage of 100 operation in model.
+     * For inputted value, exception should be obtained.
      *
-     * @param value big decimal value.
+     * @param value number for operation.
      * @see OverflowException
      * @see Calculation
      */
@@ -8607,16 +8758,36 @@ class CalculationModelTest {
             calculation.percentageOf100();
             fail();
         } catch (OverflowException e) {
-            String exceptionMessage = "Overflow";
-            assertEquals(exceptionMessage, e.getMessage());
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
         }
     }
 
     /**
-     * Method for testing divide by zero exception in model.
-     * Second value of equation is set as 0. Binary operation is set as DIVIDE.
+     * Method for testing overflow exception while using unary operations in model.
+     * For inputted value, exception should be obtained.
      *
-     * @param value first value of equation.
+     * @param value number for operation.
+     * @see OverflowException
+     * @see UnaryOperations
+     * @see Calculation
+     */
+    private void checkSqrOverflowException(BigDecimal value) {
+        calculation.setFirst(value);
+
+        try {
+            calculation.calculateUnary(UnaryOperations.SQR);
+            fail();
+        } catch (OverflowException e) {
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
+        }
+    }
+
+
+    /**
+     * Method for testing divide by zero exception in model.
+     * For inputted value, exception should be obtained.
+     *
+     * @param value number for operation.
      * @see Calculation
      */
     private void checkDivideByZeroException(BigDecimal value) {
@@ -8628,8 +8799,24 @@ class CalculationModelTest {
             calculation.calculateBinary();
             fail();
         } catch (ArithmeticException e) {
-            String exceptionMessage = "Cannot divide by zero";
-            assertEquals(exceptionMessage, e.getMessage());
+            assertEquals(DIVIDE_BY_ZERO_MESSAGE, e.getMessage());
+        }
+    }
+
+    /**
+     * Method for testing sqrt of negative number in model.
+     * For inputted value, exception should be obtained.
+     *
+     * @param value number for operation.
+     */
+    private void checkNegativeSqrtException(BigDecimal value) {
+        calculation.setFirst(value);
+
+        try {
+            calculation.calculateUnary(SQRT);
+            fail();
+        } catch (ArithmeticException e) {
+            assertEquals(INVALID_INPUT_MESSAGE, e.getMessage());
         }
     }
 }
