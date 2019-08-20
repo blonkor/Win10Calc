@@ -128,6 +128,12 @@ public class Calculation {
      */
     public void percentageOf100() {
         second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+
+        if (second.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
+                (second.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !second.equals(BigDecimal.ZERO)) ||
+                second.precision() >= MAX_PRECISION) {
+            throw new OverflowException("Overflow");
+        }
     }
 
     /**

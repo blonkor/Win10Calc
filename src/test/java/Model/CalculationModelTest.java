@@ -7628,6 +7628,87 @@ class CalculationModelTest {
         }
     }
 
+    /**
+     * Tests for percentage of 100 operation.
+     */
+    @Test
+    void percentageOf100Tests() {
+        //integers 
+        {
+            checkPercentageOf100Operation(MIN_VALUE_ON_SCREEN_MINUS_ONE, "-1.e+14");
+            checkPercentageOf100Operation(MIN_VALUE_ON_SCREEN, "-99999999999999.99");
+            checkPercentageOf100Operation(MIN_VALUE_ON_SCREEN_PLUS_ONE, "-99999999999999.98");
+            checkPercentageOf100Operation(HALF_MIN_VALUE_ON_SCREEN, "-5.e+13");
+            checkPercentageOf100Operation(NEG_HUNDRED, "-1");
+            checkPercentageOf100Operation(NEG_TEN, "-0.1");
+            checkPercentageOf100Operation(NEG_ONE, "-0.01");
+
+            checkPercentageOf100Operation(BigDecimal.ZERO, "0");
+
+            checkPercentageOf100Operation(BigDecimal.ONE, "0.01");
+            checkPercentageOf100Operation(BigDecimal.TEN, "0.1");
+            checkPercentageOf100Operation(HUNDRED, "1");
+            checkPercentageOf100Operation(HALF_MAX_VALUE_ON_SCREEN, "5.e+13");
+            checkPercentageOf100Operation(MAX_VALUE_ON_SCREEN_MINUS_ONE, "99999999999999.98");
+            checkPercentageOf100Operation(MAX_VALUE_ON_SCREEN, "99999999999999.99");
+            checkPercentageOf100Operation(MAX_VALUE_ON_SCREEN_PLUS_ONE, "1.e+14");
+        }
+
+        //decimals
+        {
+            checkPercentageOf100Operation(NEG_ZERO_DOT_17_NINES, "-0.0099999999999999999");
+            checkPercentageOf100Operation(NEG_ZERO_DOT_16_NINES, "-0.009999999999999999");
+            checkPercentageOf100Operation(NEG_NINETY_NINE_HUNDREDTH, "-0.0099");
+            checkPercentageOf100Operation(NEG_NINE_TENTH, "-0.009");
+            checkPercentageOf100Operation(NEG_ONE_TENTH, "-0.001");
+            checkPercentageOf100Operation(NEG_NINE_HUNDREDTH, "-0.0009");
+            checkPercentageOf100Operation(NEG_ONE_HUNDREDTH, "-0.0001");
+
+            checkPercentageOf100Operation(ONE_HUNDREDTH, "0.0001");
+            checkPercentageOf100Operation(NINE_HUNDREDTH, "0.0009");
+            checkPercentageOf100Operation(ONE_TENTH, "0.001");
+            checkPercentageOf100Operation(NINE_TENTH, "0.009");
+            checkPercentageOf100Operation(NINETY_NINE_HUNDREDTH, "0.0099");
+            checkPercentageOf100Operation(ZERO_DOT_16_NINES, "0.009999999999999999");
+            checkPercentageOf100Operation(ZERO_DOT_17_NINES, "0.0099999999999999999");
+        }
+
+        //engineer numbers
+        {
+            checkPercentageOf100Operation(NEG_ONE_DOT_E_PLUS_9999, "-1.e+9997");
+            checkPercentageOf100Operation(NEG_ONE_DOT_E_PLUS_9998, "-1.e+9996");
+            checkPercentageOf100Operation(NEG_ONE_DOT_E_PLUS_17, "-1.e+15");
+            checkPercentageOf100Operation(NEG_ONE_DOT_E_PLUS_16, "-1.e+14");
+
+            checkPercentageOf100Operation(ONE_DOT_E_PLUS_16, "1.e+14");
+            checkPercentageOf100Operation(ONE_DOT_E_PLUS_17, "1.e+15");
+            checkPercentageOf100Operation(ONE_DOT_E_PLUS_9998, "1.e+9996");
+            checkPercentageOf100Operation(ONE_DOT_E_PLUS_9999, "1.e+9997");
+
+
+            checkPercentageOf100Operation(NEG_ONE_DOT_E_MINUS_17, "-1.e-19");
+            checkPercentageOf100Operation(NEG_ONE_DOT_E_MINUS_16, "-1.e-18");
+
+            checkPercentageOf100Operation(ONE_DOT_E_MINUS_16, "1.e-18");
+            checkPercentageOf100Operation(ONE_DOT_E_MINUS_17, "1.e-19");
+        }
+
+        //several random values
+        {
+            checkPercentageOf100Operation(new BigDecimal("73"), "0.73");
+            checkPercentageOf100Operation(new BigDecimal("8734"), "87.34");
+
+            checkPercentageOf100Operation(new BigDecimal("-42"), "-0.42");
+            checkPercentageOf100Operation(new BigDecimal("-876"), "-8.76");
+
+            checkPercentageOf100Operation(new BigDecimal("2423.73"), "24.2373");
+            checkPercentageOf100Operation(new BigDecimal("87.234"), "0.87234");
+
+            checkPercentageOf100Operation(new BigDecimal("-123.623"), "-1.23623");
+            checkPercentageOf100Operation(new BigDecimal("-432.62"), "-4.3262");
+        }
+    }
+
 
     /**
      * Tests for overflow exception while using binary operations in model.
@@ -8042,6 +8123,20 @@ class CalculationModelTest {
     }
 
     /**
+     * Tests for overflow exception while using percentage of 100 operation in model.
+     *
+     * @see OverflowException
+     */
+    @Test
+    void percentageOf100OverFlowExceptionTests() {
+        checkPercentageOf100Overflow(NEG_ONE_DOT_E_MINUS_9999);
+        checkPercentageOf100Overflow(NEG_ONE_DOT_E_MINUS_9998);
+
+        checkPercentageOf100Overflow(ONE_DOT_E_MINUS_9998);
+        checkPercentageOf100Overflow(ONE_DOT_E_MINUS_9999);
+    }
+
+    /**
      * Tests for divide by zero exception in model.
      */
     @Test
@@ -8173,6 +8268,20 @@ class CalculationModelTest {
     }
 
     /**
+     * Method for testing percentage of 100.
+     *
+     * @param value          big decimal value.
+     * @param expectedSecond expected big decimal value of second parameter after performing percentage of 100 operation.
+     * @see Calculation
+     */
+    private void checkPercentageOf100Operation(BigDecimal value, String expectedSecond) {
+        calculation.setSecond(value);
+        calculation.percentageOf100();
+
+        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
+    }
+
+    /**
      * Method for testing overflow exception while using binary operations in model.
      *
      * @param first     first value of equation.
@@ -8240,7 +8349,25 @@ class CalculationModelTest {
         } catch (OverflowException e) {
             assertEquals(exceptionMessage, e.getMessage());
         }
+    }
 
+    /**
+     * Method for testing overflow exception while using percentage of 100 operation in model.
+     *
+     * @param value big decimal value.
+     * @see OverflowException
+     * @see Calculation
+     */
+    private void checkPercentageOf100Overflow(BigDecimal value) {
+        calculation.setSecond(value);
+
+        try {
+            calculation.percentageOf100();
+            fail();
+        } catch (OverflowException e) {
+            String exceptionMessage = "Overflow";
+            assertEquals(exceptionMessage, e.getMessage());
+        }
     }
 
     /**
