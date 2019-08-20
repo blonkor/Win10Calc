@@ -17,19 +17,50 @@ import java.math.RoundingMode;
 public class Calculation {
 
     /**
-     * Scale for divide operation.
+     * Message for divide zero by zero exception.
+     */
+    private static final String DIVIDE_ZERO_BY_ZERO_MESSAGE = "Result is undefined";
+
+    /**
+     * Message for divide by zero exception.
+     */
+    private static final String DIVIDE_BY_ZERO_MESSAGE = "Cannot divide by zero";
+
+    /**
+     * Message for invalid input exception.
+     */
+    private static final String INVALID_INPUT_MESSAGE = "Invalid input";
+
+    /**
+     * Scale for binary operation {@code DIVIDE}.
+     *
+     * @see BinaryOperations
      */
     private static final int DIVIDE_SCALE = 20000;
 
-    private static final int MAX_PRECISION = 10000;
+    /**
+     * MathContext for unary operation {@code SQRT}.
+     *
+     * @see UnaryOperations
+     */
+    private static final MathContext SQRT_CONTEXT = MathContext.DECIMAL64;
 
-    private static final BigDecimal TWO = BigDecimal.valueOf(2);
-
-    private static
-
+    /**
+     * Bound for maximal value of result;
+     * if this bound reached, overflow exception should be thrown.
+     */
     private static final BigDecimal MAX_INTEGER_VALUE = new BigDecimal("1.e+10000");
 
+    /**
+     * Bound for minimal value of result;
+     * if this bound reached, overflow exception should be thrown.
+     */
     private static final BigDecimal MIN_DECIMAL_VALUE = new BigDecimal("1.e-10000");
+
+    /**
+     * Big decimal value of 0.5.
+     */
+    private static final BigDecimal ONE_HALF = new BigDecimal("0.5");
 
     /**
      * Big decimal value of 100.
@@ -37,22 +68,24 @@ public class Calculation {
     private static final BigDecimal ONE_HUNDRED = new BigDecimal("100");
 
     /**
-     * First number of expression.
+     * First number of equation.
      */
     private BigDecimal first = BigDecimal.ZERO;
 
     /**
-     * Second number of expression.
+     * Second number of equation.
      */
     private BigDecimal second = BigDecimal.ZERO;
 
     /**
-     * Result of expression.
+     * Result of equation.
      */
     private BigDecimal result = BigDecimal.ZERO;
 
     /**
-     * Binary operation of expression.
+     * Binary operation of equation.
+     *
+     * @see BinaryOperations
      */
     private BinaryOperations binaryOperation;
 
@@ -96,9 +129,13 @@ public class Calculation {
 
     /**
      * Calculates result using first value, binary operation and second value.
+     *
+     * @see BinaryOperations
      */
     public void calculateBinary() {
-        if (binaryOperation == BinaryOperations.ADD) {
+        if (binaryOperation == null) {
+            return;
+        } else if (binaryOperation == BinaryOperations.ADD) {
             result = add();
         } else if (binaryOperation == BinaryOperations.SUBTRACT) {
             result = subtract();
@@ -110,10 +147,8 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)) ||
-                result.precision() >= MAX_PRECISION) {
-            throw new OverflowException("Overflow");
+        if (overflowValidationFailed(result)) {
+            throw new OverflowException();
         }
     }
 
@@ -123,10 +158,8 @@ public class Calculation {
     public void percentageOfFirst() {
         second = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
 
-        if (second.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (second.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !second.equals(BigDecimal.ZERO)) ||
-                second.precision() >= MAX_PRECISION) {
-            throw new OverflowException("Overflow");
+        if (overflowValidationFailed(second)) {
+            throw new OverflowException();
         }
     }
 
@@ -136,15 +169,13 @@ public class Calculation {
     public void percentageOf100() {
         second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
 
-        if (second.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (second.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !second.equals(BigDecimal.ZERO)) ||
-                second.precision() >= MAX_PRECISION) {
-            throw new OverflowException("Overflow");
+        if (overflowValidationFailed(result)) {
+            throw new OverflowException();
         }
     }
 
     /**
-     * Calculates result using first value and binary operation
+     * Calculates result using first value and unary operation
      *
      * @param unaryOperation operation to perform.
      */
@@ -161,10 +192,8 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)) ||
-                result.precision() >= MAX_PRECISION) {
-            throw new OverflowException("Overflow");
+        if (overflowValidationFailed(result)) {
+            throw new OverflowException();
         }
     }
 
@@ -208,10 +237,10 @@ public class Calculation {
         if (second.equals(BigDecimal.ZERO)) {
 
             if (first.equals(BigDecimal.ZERO)) {
-                throw new ArithmeticException("Result is undefined");
+                throw new ArithmeticException(DIVIDE_ZERO_BY_ZERO_MESSAGE);
             }
 
-            throw new ArithmeticException("Cannot divide by zero");
+            throw new ArithmeticException(DIVIDE_BY_ZERO_MESSAGE);
         }
 
         return first.divide(second, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
@@ -237,22 +266,91 @@ public class Calculation {
 
     /**
      * Calculates square root of first number.
+     * <p>
+     * This method is almost copied from JDK.9 src.
+     * All additional information You can find at
+     * {@link = "https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html#sqrt-java.math.MathContext-"}
      *
      * @return square root of first number.
      */
     private BigDecimal sqrt() {
-        BigDecimal g = x.divide(TWO, mc);
-        boolean done = false;
-        final int maxIterations = mc.getPrecision() + 1;
-        for (int i = 0; !done && i < maxIterations; i++) {
-            // r = (x/g + g) / 2
-            BigDecimal r = x.divide(g, mc);
-            r = r.add(g);
-            r = r.divide(TWO, mc);
-            done = r.equals(g);
-            g = r;
+        int signum = first.signum();
+
+        if (signum < 0) {
+            throw new ArithmeticException(INVALID_INPUT_MESSAGE);
         }
-        return g;
+
+        if (signum == 0) {
+            return BigDecimal.ZERO;
+        }
+
+        int preferredScale = first.scale() / 2;
+        BigDecimal zeroWithFinalPreferredScale = BigDecimal.valueOf(0L, preferredScale);
+        BigDecimal stripped = first.stripTrailingZeros();
+        int strippedScale = stripped.scale();
+
+        if (stripped.unscaledValue().equals(BigInteger.ONE) &&
+                strippedScale % 2 == 0) {
+            BigDecimal result = BigDecimal.valueOf(1L, strippedScale / 2);
+
+            if (result.scale() != preferredScale) {
+                result = result.add(zeroWithFinalPreferredScale, SQRT_CONTEXT);
+            }
+
+            return result;
+        }
+
+        int scaleAdjust;
+        int scale = stripped.scale() - stripped.precision() + 1;
+
+        if (scale % 2 == 0) {
+            scaleAdjust = scale;
+        } else {
+            scaleAdjust = scale - 1;
+        }
+
+        BigDecimal working = stripped.scaleByPowerOfTen(scaleAdjust);
+
+        BigDecimal guess = new BigDecimal(Math.sqrt(working.doubleValue()));
+        int guessPrecision = 15;
+        int originalPrecision = SQRT_CONTEXT.getPrecision();
+        int targetPrecision;
+
+        if (originalPrecision == 0) {
+            targetPrecision = stripped.precision() / 2 + 1;
+        } else {
+            targetPrecision = originalPrecision;
+        }
+
+        BigDecimal approx = guess;
+        int workingPrecision = working.precision();
+
+        do {
+            int tmpPrecision = Math.max(Math.max(guessPrecision, targetPrecision + 2), workingPrecision);
+            MathContext mcTmp = new MathContext(tmpPrecision, RoundingMode.HALF_EVEN);
+            approx = ONE_HALF.multiply(approx.add(working.divide(approx, mcTmp), mcTmp));
+            guessPrecision *= 2;
+        } while (guessPrecision < targetPrecision + 2);
+
+        BigDecimal result;
+        RoundingMode targetRm = SQRT_CONTEXT.getRoundingMode();
+        if (targetRm == RoundingMode.UNNECESSARY || originalPrecision == 0) {
+            RoundingMode tmpRm =
+                    (targetRm == RoundingMode.UNNECESSARY) ? RoundingMode.DOWN : targetRm;
+            MathContext mcTmp = new MathContext(targetPrecision, tmpRm);
+            result = approx.scaleByPowerOfTen(-scaleAdjust / 2).round(mcTmp);
+
+        } else {
+            result = approx.scaleByPowerOfTen(-scaleAdjust / 2).round(SQRT_CONTEXT);
+        }
+
+        if (result.scale() != preferredScale) {
+            result = result.stripTrailingZeros().
+                    add(zeroWithFinalPreferredScale,
+                            new MathContext(originalPrecision, RoundingMode.UNNECESSARY));
+        }
+
+        return result;
     }
 
     /**
@@ -262,9 +360,20 @@ public class Calculation {
      */
     private BigDecimal inverse() {
         if (first.equals(BigDecimal.ZERO)) {
-            throw new ArithmeticException("Cannot divide by zero");
+            throw new ArithmeticException(DIVIDE_BY_ZERO_MESSAGE);
         }
 
         return BigDecimal.ONE.divide(first, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+    }
+
+    /**
+     * Checks that number in range ({@code MAX_INTEGER_VALUE}, {@code MAX_INTEGER_VALUE}).
+     *
+     * @param value big decimal value to check.
+     * @return true if validation failed or false otherwise.
+     */
+    private boolean overflowValidationFailed(BigDecimal value) {
+        return value.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
+                (value.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !value.equals(BigDecimal.ZERO));
     }
 }
