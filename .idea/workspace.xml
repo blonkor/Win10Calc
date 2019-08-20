@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest.percentageOf100OverFlowExceptionTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.sqrtOperationTests">
     <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -81,7 +82,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.binaryOverflowExceptionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.negateOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -91,9 +92,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="binaryOverflowExceptionTest" />
+      <option name="METHOD_NAME" value="negateOperationTests" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -130,7 +130,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.percentageOfFirstOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.sqrOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -140,13 +140,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="percentageOfFirstOverflowExceptionTests" />
+      <option name="METHOD_NAME" value="sqrOperationTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.percentageOfFirstTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.sqrtOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -156,7 +156,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="percentageOfFirstTests" />
+      <option name="METHOD_NAME" value="sqrtOperationTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculationModelTest.sqrtOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest.sqrOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest.negateOperationTests" />
         <item itemvalue="JUnit.CalculationModelTest.percentageOf100OverFlowExceptionTests" />
         <item itemvalue="JUnit.CalculationModelTest.percentageOf100Tests" />
-        <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstOverflowExceptionTests" />
-        <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstTests" />
-        <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -491,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566251594404</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation).">
+      <created>1566294566216</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1566294566216</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -524,7 +531,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Adding new tests for add operation with negative numbers." />
     <MESSAGE value="Adding JavaDoc in test class. Removing one billion value from tests." />
     <MESSAGE value="Decimal constants created." />
     <MESSAGE value="Expected result for decimal test cases for add operation changed." />
@@ -549,6 +555,7 @@
     <MESSAGE value="Tests for model for binary operations completed. Several bug fixes with divide operation and validation in model." />
     <MESSAGE value="Tests for model for exceptions created. Bug fix with divide scale in model." />
     <MESSAGE value="Tests for model for percentage of first operation completed (including tests for overflow exception by using the operation)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for model for percentage of first operation completed (including tests for overflow exception by using the operation)." />
+    <MESSAGE value="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation)." />
   </component>
 </project>

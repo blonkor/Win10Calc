@@ -5,6 +5,9 @@ import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
 import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /**
  * This class contains model of how the calculator works.
@@ -19,6 +22,10 @@ public class Calculation {
     private static final int DIVIDE_SCALE = 20000;
 
     private static final int MAX_PRECISION = 10000;
+
+    private static final BigDecimal TWO = BigDecimal.valueOf(2);
+
+    private static
 
     private static final BigDecimal MAX_INTEGER_VALUE = new BigDecimal("1.e+10000");
 
@@ -152,8 +159,12 @@ public class Calculation {
             result = inverse();
         }
 
-        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 || result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0) {
-            throw new ArithmeticException("Overflow");
+        result = result.stripTrailingZeros();
+
+        if (result.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
+                (result.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !result.equals(BigDecimal.ZERO)) ||
+                result.precision() >= MAX_PRECISION) {
+            throw new OverflowException("Overflow");
         }
     }
 
@@ -230,16 +241,18 @@ public class Calculation {
      * @return square root of first number.
      */
     private BigDecimal sqrt() {
-        if (first.compareTo(BigDecimal.ZERO) < 0) {
-            throw new ArithmeticException("Invalid input");
+        BigDecimal g = x.divide(TWO, mc);
+        boolean done = false;
+        final int maxIterations = mc.getPrecision() + 1;
+        for (int i = 0; !done && i < maxIterations; i++) {
+            // r = (x/g + g) / 2
+            BigDecimal r = x.divide(g, mc);
+            r = r.add(g);
+            r = r.divide(TWO, mc);
+            done = r.equals(g);
+            g = r;
         }
-
-        if (first.equals(BigDecimal.ZERO)) {
-            return BigDecimal.ZERO;
-        }
-
-        BigDecimal x = new BigDecimal(Math.sqrt(first.doubleValue()));
-        return x.add(new BigDecimal(first.subtract(x.multiply(x)).doubleValue() / (x.doubleValue() * 2.0)));
+        return g;
     }
 
     /**
