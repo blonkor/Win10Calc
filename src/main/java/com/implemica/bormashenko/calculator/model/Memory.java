@@ -39,6 +39,8 @@ public class Memory {
     /**
      * Recalls last passed to memory object.
      * @return last passed to memory object or null if store is empty.
+     * @throws OverflowException while validation in calculator model for recalled value is failed.
+     * @see Calculation
      */
     public BigDecimal recall() {
         if (store.isEmpty()) {
