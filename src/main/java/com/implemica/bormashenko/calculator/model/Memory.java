@@ -1,5 +1,7 @@
 package com.implemica.bormashenko.calculator.model;
 
+import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
+
 import java.math.BigDecimal;
 import java.util.Stack;
 
@@ -39,10 +41,16 @@ public class Memory {
      * @return last passed to memory object or null if store is empty.
      */
     public BigDecimal recall() {
-        if (!store.isEmpty()) {
-            return store.peek();
-        } else {
+        if (store.isEmpty()) {
             return null;
+        } else {
+            BigDecimal recalledValue = store.peek();
+
+            if (new Calculation().overflowValidationFailed(recalledValue)) {
+                throw new OverflowException();
+            }
+
+            return recalledValue;
         }
     }
 
