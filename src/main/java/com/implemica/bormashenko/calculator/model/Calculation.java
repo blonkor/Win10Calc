@@ -321,35 +321,19 @@ public class Calculation {
         BigDecimal guess = new BigDecimal(Math.sqrt(working.doubleValue()));
         int guessPrecision = 15;
         int originalPrecision = SQRT_CONTEXT.getPrecision();
-        int targetPrecision;
-
-        if (originalPrecision == 0) {
-            targetPrecision = stripped.precision() / 2 + 1;
-        } else {
-            targetPrecision = originalPrecision;
-        }
 
         BigDecimal approx = guess;
         int workingPrecision = working.precision();
 
         do {
-            int tmpPrecision = Math.max(Math.max(guessPrecision, targetPrecision + 2), workingPrecision);
+            int tmpPrecision = Math.max(Math.max(guessPrecision, originalPrecision + 2), workingPrecision);
             MathContext mcTmp = new MathContext(tmpPrecision, RoundingMode.HALF_EVEN);
             approx = ONE_HALF.multiply(approx.add(working.divide(approx, mcTmp), mcTmp));
             guessPrecision *= 2;
-        } while (guessPrecision < targetPrecision + 2);
+        } while (guessPrecision < originalPrecision + 2);
 
         BigDecimal result;
-        RoundingMode targetRm = SQRT_CONTEXT.getRoundingMode();
-        if (targetRm == RoundingMode.UNNECESSARY || originalPrecision == 0) {
-            RoundingMode tmpRm =
-                    (targetRm == RoundingMode.UNNECESSARY) ? RoundingMode.DOWN : targetRm;
-            MathContext mcTmp = new MathContext(targetPrecision, tmpRm);
-            result = approx.scaleByPowerOfTen(-scaleAdjust / 2).round(mcTmp);
-
-        } else {
-            result = approx.scaleByPowerOfTen(-scaleAdjust / 2).round(SQRT_CONTEXT);
-        }
+        result = approx.scaleByPowerOfTen(-scaleAdjust / 2).round(SQRT_CONTEXT);
 
         if (result.scale() != preferredScale) {
             result = result.stripTrailingZeros().
