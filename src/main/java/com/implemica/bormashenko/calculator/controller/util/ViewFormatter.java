@@ -23,11 +23,6 @@ import java.util.Stack;
 public class ViewFormatter {
 
     /**
-     * This message is shown after showing history while history is empty.
-     */
-    private static final String EMPTY_HISTORY_MESSAGE = "There's no history yet.";
-
-    /**
      * This message is shown after showing memory while memory is empty.
      */
     private static final String EMPTY_MEMORY_MESSAGE = "There's nothing saved in memory";
@@ -97,17 +92,6 @@ public class ViewFormatter {
     public static void showNavigationPanel(ScrollPane navigationPanel, Button about) {
         navigationPanel.setVisible(!navigationPanel.isVisible());
         about.setVisible(!about.isVisible());
-    }
-
-    /**
-     * Opens or closes history panel.
-     *
-     * @param historyPanel panel where history is shown.
-     * @param historyLabel label with history.
-     */
-    public static void showHistoryPanel(AnchorPane historyPanel, Label historyLabel) {
-        historyPanel.setVisible(!historyPanel.isVisible());
-        historyLabel.setText(EMPTY_HISTORY_MESSAGE);
     }
 
     /**

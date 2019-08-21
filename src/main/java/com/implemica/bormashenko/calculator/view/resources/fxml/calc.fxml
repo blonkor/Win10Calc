@@ -19,7 +19,7 @@
     <children>
         <HBox layoutX="278.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
             <children>
-                <Button fx:id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showHistoryPanel" prefHeight="40.0" prefWidth="40.0" text="">
+                <Button fx:id="history" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="">
                     <tooltip>
                         <Tooltip styleClass="tooltip_gray" text="History (Ctrl+H)" />
                     </tooltip>
@@ -433,11 +433,11 @@
                         <Insets bottom="7.0" />
                     </padding>
                 </HBox>
-                <AnchorPane fx:id="historyMemoryPanel" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="306.0" styleClass="gray_background" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER">
+                <AnchorPane fx:id="memoryAnchorPane" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="306.0" styleClass="gray_background" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER">
                     <children>
                         <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Label fx:id="historyMemoryLabel" text="There's nothing saved in memory" />
+                                <Label fx:id="emptyMemoryLabel" text="There's nothing saved in memory" />
                             </children>
                         </TextFlow>
                         <ScrollPane fitToWidth="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

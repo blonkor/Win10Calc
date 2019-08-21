@@ -66,8 +66,6 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
 
     private static final String MEMORY_STORE_ID = "#memoryStore";
 
-    private static final String HISTORY_ID = "#memoryStore";
-
     private static final KeyCombination CTRL_M = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN);
 
     private static final KeyCombination CTRL_P = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
@@ -77,8 +75,6 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
     private static final KeyCombination CTRL_R = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
 
     private static final KeyCombination CTRL_L = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
-
-    private static final KeyCombination CTRL_H = new KeyCodeCombination(KeyCode.H, KeyCombination.CONTROL_DOWN);
 
     private static final KeyCombination SHIFT_TWO = new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.SHIFT_DOWN);
 
@@ -111,8 +107,6 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
                 selector = MEMORY_RECALL_ID;
             } else if (CTRL_L.match(event)) {
                 selector = MEMORY_CLEAR_ID;
-            } else if (CTRL_H.match(event)) {
-                selector = HISTORY_ID;
             }
 
         } else if (event.isShiftDown()) {

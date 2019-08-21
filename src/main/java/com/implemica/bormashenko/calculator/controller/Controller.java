@@ -37,7 +37,7 @@ public class Controller implements Initializable {
      * Application's labels.
      */
     @FXML
-    private Label screen, historyMemoryLabel, equation;
+    private Label screen, emptyMemoryLabel, equation;
 
     /**
      * Application's scroll pane.
@@ -49,7 +49,7 @@ public class Controller implements Initializable {
      * Application's anchor pane.
      */
     @FXML
-    private AnchorPane historyMemoryPanel, memoryPanel;
+    private AnchorPane memoryAnchorPane, memoryPanel;
 
     /**
      * Zero symbol is used instead of empty string.
@@ -140,19 +140,12 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Opens or closes history bar.
-     */
-    public void showHistoryPanel() {
-        ViewFormatter.showHistoryPanel(historyMemoryPanel, historyMemoryLabel);
-    }
-
-    /**
      * Shows memory.
      *
      * @todo
      */
     public void memoryShowOperation() {
-        ViewFormatter.showMemoryPanel(historyMemoryPanel, historyMemoryLabel);
+        ViewFormatter.showMemoryPanel(memoryAnchorPane, emptyMemoryLabel);
     }
 
     /**
@@ -162,7 +155,7 @@ public class Controller implements Initializable {
      */
     public void memoryClearOperation() {
         memory.clearMemory();
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
         ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -186,7 +179,7 @@ public class Controller implements Initializable {
     public void memoryAddOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
         memory.addToMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -198,7 +191,7 @@ public class Controller implements Initializable {
     public void memorySubtractOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
         memory.subtractFromMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -210,7 +203,7 @@ public class Controller implements Initializable {
     public void memoryStoreOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
         memory.storeToMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, historyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
