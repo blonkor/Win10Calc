@@ -5,35 +5,21 @@
 }
 
 /*setting up background color */
-.scroll_pane {
+.scroll_pane_navigation, .scroll_pane_memory {
     -fx-background-color: transparent;
 }
 
-.scroll-bar:vertical {
-    -fx-background-color: #e7e7e7;
+.scroll-bar .thumb {
+    -fx-background-color: #8a8a8a;
 }
 
-.scroll-bar:vertical .track {
-    -fx-background-color: #e7e7e7;
-}
-
-.scroll-bar:vertical .thumb {
-    -fx-background-color: #8a8a8a; /*b8b8b8*/
-    -fx-background-radius: 0;
-}
-
-.increment-arrow, .decrement-arrow {
-    -fx-padding: 1px;
-    -fx-shape: " ";
-}
-
-
-
-.very_light_gray_background {
+.very_light_gray_background,
+.scroll_pane_memory .scroll-bar {
     -fx-background-color: #f0f0f0;
 }
 
-.gray_background, .gray_background_on_hover:hover {
+.gray_background, .gray_background_on_hover:hover,
+.scroll_pane_navigation .scroll-bar  {
     -fx-background-color: #e7e7e7;
 }
 
@@ -52,6 +38,11 @@
 /* setting up text fill */
 .blue_hover:hover, .window_close:hover {
     -fx-text-fill: white;
+}
+
+.scroll_pane_navigation .scroll-bar:hover,
+.scroll_pane_memory .scroll-bar:hover {
+    -fx-text-fill: #b8b8b8;
 }
 
 /* setting up font family */
@@ -77,7 +68,7 @@
 
 /* setting up background radius */
 .digits, .operations, .operations_degree, .backspace, .dot, .navigation,
-.history, .memory_show, .window, .window_close, .tooltip {
+.history, .memory_show, .window, .window_close, .tooltip, .scroll-bar .thumb {
     -fx-background-radius: 0;
 }
 
@@ -115,6 +106,22 @@
     -fx-font-size: 17pt;
 }
 
+/*scroll pane*/
+.scroll_pane_navigation .scroll-bar,
+.scroll_pane_memory .scroll-bar {
+    -fx-padding: 3;
+    -fx-pref-width: 12px;
+}
+
+.scroll_pane_navigation .scroll-bar:hover,
+.scroll_pane_memory .scroll-bar:hover {
+    -fx-pref-width: 26px;
+}
+
+.increment-arrow, .decrement-arrow {
+    -fx-shape: " ";
+}
+
 /* tooltip */
 .tooltip {
     -fx-text-fill: black;
@@ -122,6 +129,7 @@
     -fx-font-family: "Segoe UI Semilight";
     -fx-effect: null;
 }
+
 .tooltip_gray {
     -fx-background-color: #e0e0e0;
     -fx-border-color: #d0d0d0;

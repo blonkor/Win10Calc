@@ -440,16 +440,16 @@
                                 <Label fx:id="emptyMemoryLabel" text="There's nothing saved in memory" />
                             </children>
                         </TextFlow>
-                        <ScrollPane fitToWidth="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="200.0" styleClass="scroll_pane_memory" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
-                                <AnchorPane fx:id="memoryPanel" maxHeight="1.7976931348623157E308" minHeight="305.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="328.0" />
+                                <AnchorPane fx:id="memoryPanel" maxHeight="1.7976931348623157E308" minHeight="300.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="328.0" />
                             </content>
                         </ScrollPane>
                     </children>
                 </AnchorPane>
             </children>
         </GridPane>
-        <ScrollPane fx:id="navigationPanel" fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
+        <ScrollPane fx:id="navigationPanel" fitToWidth="true" hmax="256.0" hmin="256.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="429.0" prefWidth="256.0" styleClass="scroll_pane_navigation" visible="false" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
             <content>
                 <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
                     <children>
