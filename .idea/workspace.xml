@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Memory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Model/MemoryModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/MemoryModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,7 +17,7 @@
     <option name="myAddOrReplace" value="0" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="184" />
+    <option name="myElementSize" value="193" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -72,7 +71,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.MemoryModelTest">
+  <component name="RunManager" selected="JUnit.MemoryModelTest.recallOverflowExceptionTests">
     <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage" runner="jacoco">
@@ -143,7 +142,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemoryModelTest.storeToMemoryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemoryModelTest.recallOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -153,7 +152,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="Model" />
       <option name="MAIN_CLASS_NAME" value="Model.MemoryModelTest" />
-      <option name="METHOD_NAME" value="storeToMemoryTests" />
+      <option name="METHOD_NAME" value="recallOverflowExceptionTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -175,13 +174,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.implemica.bormashenko.calculator.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MemoryModelTest.recallOverflowExceptionTests" />
         <item itemvalue="JUnit.MemoryModelTest" />
         <item itemvalue="JUnit.MemoryModelTest.recallFromEmptyMemory" />
         <item itemvalue="JUnit.MemoryModelTest.subtractFromMemoryTests" />
         <item itemvalue="JUnit.MemoryModelTest.addToMemoryTests" />
-        <item itemvalue="JUnit.MemoryModelTest.storeToMemoryTests" />
       </list>
     </recent_temporary>
   </component>
@@ -518,7 +534,21 @@
       <option name="project" value="LOCAL" />
       <updated>1566300262081</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Tests for memory model completed.">
+      <created>1566387306880</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1566387306880</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Bug fixes and refactoring for memory model.">
+      <created>1566387372771</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1566387372771</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -551,8 +581,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Decimal constants created." />
-    <MESSAGE value="Expected result for decimal test cases for add operation changed." />
     <MESSAGE value="Tests for add operation with integer and decimal numbers created." />
     <MESSAGE value="Test for add operation finished. Several test cases removed as necessary. Add operation in model improved." />
     <MESSAGE value="Tests commented and will be radically changed soon. Model completely redone and now consists of simple methods for binary operations. Enums for binary and unary operations created." />
@@ -576,7 +604,9 @@
     <MESSAGE value="Tests for model for percentage of first operation completed (including tests for overflow exception by using the operation)." />
     <MESSAGE value="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation)." />
     <MESSAGE value="Go-to-office-commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Go-to-office-commit" />
+    <MESSAGE value="Tests for memory model completed." />
+    <MESSAGE value="Bug fixes and refactoring for memory model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes and refactoring for memory model." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Win10Calc$MemoryModelTest.ic" NAME="MemoryModelTest Coverage Results" MODIFIED="1566384965449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">

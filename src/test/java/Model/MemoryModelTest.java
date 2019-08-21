@@ -1,7 +1,7 @@
 package Model;
 
 import com.implemica.bormashenko.calculator.model.Memory;
-import org.junit.jupiter.api.BeforeEach;
+import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -14,6 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Mykhailo Bormashenko
  */
 class MemoryModelTest {
+
+    /**
+     * Exception message for overflow.
+     *
+     * @see OverflowException
+     */
+    private static final String OVERFLOW_MESSAGE = "Overflow";
 
     /**
      * Object of memory.
@@ -287,10 +294,68 @@ class MemoryModelTest {
                 newBD("13"), newBD("1377"));
     }
 
+    /**
+     * Tests for recall from memory operation while memory is empty.
+     */
     @Test
     void recallFromEmptyMemory() {
         memory = new Memory();
         assertNull(memory.recall());
+    }
+
+    /**
+     * Tests for recall from memory operation while this operation should cause exception.
+     */
+    @Test
+    void recallOverflowExceptionTests() {
+        //one
+        checkRecallOverflowException(new BigDecimal[]{newBD("1.e+10001")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("1.e+10000")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("-1.e+10000")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("-1.e+10001")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("1.e-10001")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("1.e-10000")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("-1.e-10000")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("-1.e-10001")});
+
+        //two
+        checkRecallOverflowException(new BigDecimal[]{newBD("13563"), newBD("1.e+10001")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("-1235"), newBD("1.e+10000")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("-43653"), newBD("-1.e+10000")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("6256"), newBD("-1.e+10001")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("123456"), newBD("1.e-10001")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("0.9521"), newBD("1.e-10000")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("-9876.345"), newBD("-1.e-10000")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("748"), newBD("-1.e-10001")});
+
+        //more
+        checkRecallOverflowException(new BigDecimal[]{newBD("-76.53"), newBD("-1452"),
+                newBD("1.e+10001")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("23456"), newBD("-12456"),
+                newBD("1.e+10000")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("-8765"), newBD("2536"),
+                newBD("-1436"), newBD("-1.e+10000")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("-1237.65"), newBD("-312.5"),
+                newBD("7635"), newBD("-1.e+10001")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("123562"), newBD("-1145762"),
+                newBD("-6.511"), newBD("7653"), newBD("1.e-10001")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("-6324"), newBD("21.351"),
+                newBD("65213"), newBD("-23446.6642"), newBD("1.e-10000")});
+
+        checkRecallOverflowException(new BigDecimal[]{newBD("653.21"), newBD("543.25"),
+                newBD("-123154"), newBD("1351"), newBD("-6541.123"),
+                newBD("-1.e-10000")});
+        checkRecallOverflowException(new BigDecimal[]{newBD("132511"), newBD("-7653"),
+                newBD("-1243.5"), newBD("0.12314"), newBD("653.14"),
+                newBD("-1.e-10001")});
     }
 
     /**
@@ -355,7 +420,7 @@ class MemoryModelTest {
     /**
      * Method for testing recall from memory operation.
      *
-     * @param expectedRecalledValue as {@code Stack} used as memory store, the last added to memory
+     * @param expectedRecalledValue as {@code Stack} used as memory store, the last passed to memory
      *                              object should be returned while recall operation is performed.
      * @see Memory
      */
@@ -453,7 +518,32 @@ class MemoryModelTest {
         assertEquals(expectedFirstValue, storage[storage.length - 1]);
     }
 
+    /**
+     * Method for testing exception for recall from memory operation.
+     *
+     * @param values as {@code Stack} used as memory store, the last passed to memory
+     *                              object should throw overflow exception while recall operation is performed.
+     * @see Memory
+     * @see OverflowException
+     */
+    private void checkRecallOverflowException(BigDecimal[] values) {
+        memory = new Memory();
+        storeValuesToMemory(values);
 
+        try {
+            memory.recall();
+            fail();
+        } catch (OverflowException e) {
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
+        }
+    }
+
+
+    /**
+     * Creates new big decimal object.
+     * @param number string representation of big decimal.
+     * @return big decimal object created from string.
+     */
     private BigDecimal newBD(String number) {
         return new BigDecimal(number);
     }
