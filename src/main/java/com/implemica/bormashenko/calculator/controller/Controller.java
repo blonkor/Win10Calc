@@ -141,17 +141,13 @@ public class Controller implements Initializable {
 
     /**
      * Shows memory.
-     *
-     * @todo
      */
     public void memoryShowOperation() {
-        ViewFormatter.showMemoryPanel(memoryAnchorPane, emptyMemoryLabel);
+        ViewFormatter.showMemoryPanel(memoryAnchorPane);
     }
 
     /**
      * Clears all memory.
-     *
-     * @todo
      */
     public void memoryClearOperation() {
         memory.clearMemory();
@@ -161,8 +157,6 @@ public class Controller implements Initializable {
 
     /**
      * Recalls number in memory.
-     *
-     * @todo
      */
     public void memoryRecallOperation() {
         BigDecimal number = memory.recall();
@@ -173,8 +167,6 @@ public class Controller implements Initializable {
 
     /**
      * Adds number to memory.
-     *
-     * @todo
      */
     public void memoryAddOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
@@ -185,8 +177,6 @@ public class Controller implements Initializable {
 
     /**
      * Subtracts number from memory.
-     *
-     * @todo
      */
     public void memorySubtractOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
@@ -197,8 +187,6 @@ public class Controller implements Initializable {
 
     /**
      * Saves number in memory.
-     *
-     * @todo
      */
     public void memoryStoreOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
@@ -236,50 +224,50 @@ public class Controller implements Initializable {
         isEditableScreen = true;
     }
 
-    public void addDigitZero(ActionEvent event) {
+    public void addDigitZero() {
         addDigit("0");
     }
 
-    public void addDigitOne(ActionEvent event) {
+    public void addDigitOne() {
         addDigit("1");
     }
 
-    public void addDigitTwo(ActionEvent event) {
+    public void addDigitTwo() {
         addDigit("2");
     }
 
-    public void addDigitThree(ActionEvent event) {
+    public void addDigitThree() {
         addDigit("3");
     }
 
-    public void addDigitFour(ActionEvent event) {
+    public void addDigitFour() {
         addDigit("4");
     }
 
-    public void addDigitFive(ActionEvent event) {
+    public void addDigitFive() {
         addDigit("5");
     }
 
-    public void addDigitSix(ActionEvent event) {
+    public void addDigitSix() {
         addDigit("6");
     }
 
-    public void addDigitSeven(ActionEvent event) {
+    public void addDigitSeven() {
         addDigit("7");
     }
 
-    public void addDigitEight(ActionEvent event) {
+    public void addDigitEight() {
         addDigit("8");
     }
 
-    public void addDigitNine(ActionEvent event) {
+    public void addDigitNine() {
         addDigit("9");
     }
 
     /**
      * Adds digit from button to result screen while button is clicked.
      */
-    public void addDigit(String digit) {
+    private void addDigit(String digit) {
         String currentNumber = screen.getText();
         screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
 

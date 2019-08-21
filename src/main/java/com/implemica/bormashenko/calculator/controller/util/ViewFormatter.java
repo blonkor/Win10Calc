@@ -23,11 +23,6 @@ import java.util.Stack;
 public class ViewFormatter {
 
     /**
-     * This message is shown after showing memory while memory is empty.
-     */
-    private static final String EMPTY_MEMORY_MESSAGE = "There's nothing saved in memory";
-
-    /**
      * Changes locations for gray tooltips.
      * Gray tooltip is a tooltip with {@code styleClass = "tooltip_gray"}.
      * Gray tooltip have to appear above the cursor.
@@ -98,20 +93,16 @@ public class ViewFormatter {
      * Opens or closes memory panel.
      *
      * @param memoryPanel panel where memory is shown.
-     * @param memoryLabel label with memory.
      */
-    public static void showMemoryPanel(AnchorPane memoryPanel, Label memoryLabel) {
+    public static void showMemoryPanel(AnchorPane memoryPanel) {
         memoryPanel.setVisible(!memoryPanel.isVisible());
-        //memoryLabel.setText(EMPTY_MEMORY_MESSAGE);
     }
 
     public static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel, Label memoryLabel) {
         Stack<BigDecimal> store = memory.getStore();
 
-        if (store.isEmpty()) {
-            memoryLabel.setText(EMPTY_MEMORY_MESSAGE);
-        } else {
-            memoryLabel.setText("");
+        if (!store.isEmpty()) {
+            memoryLabel.setVisible(false);
             memoryPanel.getChildren().removeAll(memoryPanel.getChildren());
 
             double layoutY = 16;
