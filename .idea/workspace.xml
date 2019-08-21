@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Model/CalculationModelTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +68,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Model in Win10Calc">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.clearAllTest">
     <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage" runner="jacoco">
@@ -83,6 +82,22 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculationModelTest.clearAllTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Model" />
+      <option name="MAIN_CLASS_NAME" value="Model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="clearAllTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,22 +171,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemoryModelTest.subtractFromMemoryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Model" />
-      <option name="MAIN_CLASS_NAME" value="Model.MemoryModelTest" />
-      <option name="METHOD_NAME" value="subtractFromMemoryTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -191,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculationModelTest.clearAllTest" />
         <item itemvalue="JUnit.CalculationModelTest.percentageOf100OverFlowExceptionTests" />
         <item itemvalue="JUnit.MemoryModelTest.recallOverflowExceptionTests" />
         <item itemvalue="JUnit.MemoryModelTest" />
         <item itemvalue="JUnit.MemoryModelTest.recallFromEmptyMemory" />
-        <item itemvalue="JUnit.MemoryModelTest.subtractFromMemoryTests" />
       </list>
     </recent_temporary>
   </component>
@@ -209,13 +208,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Standard view filled with components.">
-      <created>1564433490291</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1564433490291</updated>
     </task>
     <task id="LOCAL-00004" summary="Changing view for several buttons.">
       <created>1564434769865</created>
@@ -553,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566389279169</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Refactoring calculation model.">
+      <created>1566390978798</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1566390978798</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -586,7 +585,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Refactoring and adding few new features. Calculation is possible by clicking buttons." />
     <MESSAGE value="View changed. Controller operations improved and now calculation model works properly (excluding rounding, unary operations still not realized)." />
     <MESSAGE value="Rounding for controller created. Several bugs in controller fixed." />
     <MESSAGE value="JavaDoc added where was missing. Code refactoring." />
@@ -611,7 +609,8 @@
     <MESSAGE value="Bug fixes and refactoring for calculation model." />
     <MESSAGE value="Overflow exception while validation is failed for recall operation for memory is now supported." />
     <MESSAGE value="New tests added for memory model. JavaDoc added where was missing." />
-    <option name="LAST_COMMIT_MESSAGE" value="New tests added for memory model. JavaDoc added where was missing." />
+    <MESSAGE value="Refactoring calculation model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring calculation model." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Win10Calc$MemoryModelTest.ic" NAME="MemoryModelTest Coverage Results" MODIFIED="1566384965449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">

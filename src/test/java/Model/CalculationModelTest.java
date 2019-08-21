@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static com.implemica.bormashenko.calculator.model.enums.BinaryOperations.*;
 import static com.implemica.bormashenko.calculator.model.enums.UnaryOperations.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for model of calculation.
@@ -8296,6 +8295,24 @@ class CalculationModelTest {
             checkBinaryOverflowException(ONE_DOT_E_MINUS_9999, NEG_TEN, DIVIDE);
             checkBinaryOverflowException(ONE_DOT_E_MINUS_9999, BigDecimal.TEN, DIVIDE);
         }
+    }
+
+    /**
+     * Test for clear all operation.
+     */
+    @Test
+    void clearAllTest() {
+        calculation.setFirst(new BigDecimal("1234"));
+        calculation.setSecond(new BigDecimal("1234"));
+        calculation.setBinaryOperation(ADD);
+        calculation.calculateBinary();
+
+        calculation.resetAll();
+
+        assertEquals(calculation.getFirst(), BigDecimal.ZERO);
+        assertEquals(calculation.getSecond(), BigDecimal.ZERO);
+        assertEquals(calculation.getResult(), BigDecimal.ZERO);
+        assertNull(calculation.getBinaryOperation());
     }
 
     /**
