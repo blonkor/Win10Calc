@@ -110,14 +110,11 @@
 .scroll_pane_navigation .scroll-bar,
 .scroll_pane_memory .scroll-bar {
     -fx-padding: 3;
-}
-
-.scroll_pane_navigation .scroll-bar,
-.scroll_pane_memory .scroll-bar {
     -fx-pref-width: 12px;
 }
 
-.scroll-bar:hover {
+.scroll_pane_navigation .scroll-bar:hover,
+.scroll_pane_memory .scroll-bar:hover {
     -fx-pref-width: 26px;
 }
 

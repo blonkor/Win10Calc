@@ -399,7 +399,7 @@
                                 <String fx:value="font_segoe_ui_semibold" />
                             </styleClass>
                         </Button>
-                        <Button fx:id="memoryShow" disable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryShowOperation" prefHeight="30.0" text="M" HBox.hgrow="ALWAYS">
+                        <Button fx:id="memoryShow" contentDisplay="RIGHT" disable="true" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#memoryShowOperation" prefHeight="30.0" text="M" HBox.hgrow="ALWAYS">
                             <tooltip>
                                 <Tooltip styleClass="tooltip_gray" text="Memory" />
                             </tooltip>
@@ -407,10 +407,23 @@
                                 <String fx:value="memory_show" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
-                                <String fx:value="font_assets" />
+                                <String fx:value="font_segoe_ui_semibold" />
                             </styleClass>
+                            <graphic>
+                                <Label text="">
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="6.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                         </Button>
                     </children>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                 </HBox>
                 <HBox alignment="TOP_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.valignment="CENTER">
                     <children>
@@ -610,6 +623,7 @@
                 </Label>
             </children>
         </HBox>
+        <AnchorPane fx:id="memoryBlock" maxHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#memoryShowOperation" prefHeight="163.0" prefWidth="322.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
     </children>
     <styleClass>
         <String fx:value="background" />

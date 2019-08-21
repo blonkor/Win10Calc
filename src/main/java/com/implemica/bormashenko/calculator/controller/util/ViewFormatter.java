@@ -94,8 +94,19 @@ public class ViewFormatter {
      *
      * @param memoryPanel panel where memory is shown.
      */
-    public static void showMemoryPanel(AnchorPane memoryPanel) {
+    public static void showMemoryPanel(AnchorPane memoryPanel, AnchorPane memoryBlock,
+                                       Button[] memoryStandardEnabledButtons, Button[] memoryStandardDisabledButtons,
+                                       boolean isEmptyMemory) {
         memoryPanel.setVisible(!memoryPanel.isVisible());
+        memoryBlock.setVisible(!memoryBlock.isVisible());
+
+        setButtonsDisability(memoryPanel.isVisible(), memoryStandardEnabledButtons);
+
+        if (memoryPanel.isVisible()) {
+            setButtonsDisability(true, memoryStandardDisabledButtons);
+        } else {
+            setButtonsDisability(isEmptyMemory, memoryStandardDisabledButtons);
+        }
     }
 
     public static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel, Label memoryLabel) {

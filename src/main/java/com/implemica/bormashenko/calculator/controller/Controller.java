@@ -6,7 +6,6 @@ import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -49,7 +48,7 @@ public class Controller implements Initializable {
      * Application's anchor pane.
      */
     @FXML
-    private AnchorPane memoryAnchorPane, memoryPanel;
+    private AnchorPane memoryAnchorPane, memoryPanel, memoryBlock;
 
     /**
      * Zero symbol is used instead of empty string.
@@ -143,7 +142,10 @@ public class Controller implements Initializable {
      * Shows memory.
      */
     public void memoryShowOperation() {
-        ViewFormatter.showMemoryPanel(memoryAnchorPane);
+        ViewFormatter.showMemoryPanel(memoryAnchorPane, memoryBlock,
+                new Button[]{memoryAdd, memorySubtract, memoryStore},
+                new Button[]{memoryClear, memoryRecall},
+                memory.getStore().isEmpty());
     }
 
     /**
