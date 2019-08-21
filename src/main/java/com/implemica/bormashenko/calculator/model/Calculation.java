@@ -130,6 +130,7 @@ public class Calculation {
     /**
      * Calculates result using first value, binary operation and second value.
      *
+     * @throws OverflowException while validation for result is failed.
      * @see BinaryOperations
      */
     public void calculateBinary() {
@@ -154,6 +155,7 @@ public class Calculation {
 
     /**
      * Calculates second number as a percentage of the first.
+     * @throws OverflowException while validation for second value is failed.
      */
     public void percentageOfFirst() {
         second = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
@@ -165,11 +167,12 @@ public class Calculation {
 
     /**
      * Calculates second number as a percentage of 100.
+     * @throws OverflowException while validation for second number is failed.
      */
     public void percentageOf100() {
         second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
 
-        if (overflowValidationFailed(result)) {
+        if (overflowValidationFailed(second)) {
             throw new OverflowException();
         }
     }
@@ -178,6 +181,8 @@ public class Calculation {
      * Calculates result using first value and unary operation
      *
      * @param unaryOperation operation to perform.
+     * @throws OverflowException while validation for result is failed.
+     * @see UnaryOperations
      */
     public void calculateUnary(UnaryOperations unaryOperation) {
         if (unaryOperation == UnaryOperations.NEGATE) {
@@ -228,6 +233,7 @@ public class Calculation {
      * Divides first number on second.
      *
      * @return result of dividing one number on another.
+     * @throws ArithmeticException while second number is 0.
      */
     private BigDecimal divide() {
         if (first.equals(BigDecimal.ZERO) && !second.equals(BigDecimal.ZERO)) {
@@ -272,6 +278,7 @@ public class Calculation {
      * {@link = "https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html#sqrt-java.math.MathContext-"}
      *
      * @return square root of first number.
+     * @throws ArithmeticException while first value is negative.
      */
     private BigDecimal sqrt() {
         int signum = first.signum();
@@ -357,6 +364,7 @@ public class Calculation {
      * Calculates inverted first number.
      *
      * @return inverted first number.
+     * @throws ArithmeticException while first number is 0.
      */
     private BigDecimal inverse() {
         if (first.equals(BigDecimal.ZERO)) {
@@ -372,7 +380,7 @@ public class Calculation {
      * @param value big decimal value to check.
      * @return true if validation failed or false otherwise.
      */
-    private boolean overflowValidationFailed(BigDecimal value) {
+     boolean overflowValidationFailed(BigDecimal value) {
         return value.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
                 (value.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !value.equals(BigDecimal.ZERO));
     }
