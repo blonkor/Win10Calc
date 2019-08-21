@@ -416,14 +416,14 @@
                                     </font>
                                 </Label>
                             </graphic>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
                         </Button>
                     </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
+                    <padding>
+                        <Insets left="5.0" right="5.0" />
+                    </padding>
                 </HBox>
                 <HBox alignment="TOP_RIGHT" fillHeight="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.valignment="CENTER">
                     <children>
@@ -474,132 +474,319 @@
                                 <Insets left="5.0" />
                             </padding>
                         </Label>
-                        <Button alignment="BASELINE_LEFT" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" text=" Standard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button alignment="BASELINE_LEFT" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" text="Standard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <font>
-                                <Font name="Segoe MDL2 Assets" size="12.0" />
+                                <Font name="Segoe UI" size="15.0" />
                             </font>
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- E8EF -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text=" Scientific" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Scientific" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- F196 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="120.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Programmer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- ECCE -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="160.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Date Calculation" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- E787 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Label layoutX="2.0" layoutY="200.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Converter" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <padding>
                                 <Insets left="5.0" />
                             </padding>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
                         </Label>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Currency" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- EB0D -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="280.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Volume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- F1AA -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="320.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Length" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- ECC6 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutY="360.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Weight and Mass" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- F4C1 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="400.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Temperature" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- E7A3 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="440.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Energy" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- ECAD -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="480.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- E809 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="520.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Speed" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- EADA -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="560.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- E917 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="600.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Power" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- E945 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutY="640.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Data" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- F20F -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="680.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Pressure" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- EC4A -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                         <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="720.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Angle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
+                                <String fx:value="font_segoe_ui" />
                             </styleClass>
+                            <graphic>
+                                <Label text=""> <!-- F515 -->
+                                    <font>
+                                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                                    </font>
+                                </Label>
+                            </graphic>
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
                         </Button>
                     </children>
                 </AnchorPane>
@@ -610,6 +797,13 @@
                 <String fx:value="navigation_buttons" />
                 <String fx:value="gray_background" />
             </styleClass>
+            <graphic>
+                <Label text=""> <!-- E946 -->
+                    <font>
+                        <Font name="Segoe MDL2 Assets" size="16.0" />
+                    </font>
+                </Label>
+            </graphic>
         </Button>
         <HBox alignment="TOP_RIGHT" fillHeight="false" layoutX="250.0" layoutY="83.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
             <children>

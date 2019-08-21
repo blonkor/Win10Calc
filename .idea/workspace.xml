@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Scroll bar (as well as whole scroll pane) customized.">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/mborm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/mborm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/dat/view.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/dat/view.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,11 +44,11 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="C:/Program Files/SceneBuilder/SceneBuilder.exe" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -126,13 +123,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00007" summary="ResizeListener added.">
-      <created>1564606999491</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1564606999491</updated>
     </task>
     <task id="LOCAL-00008" summary="MoveListener added.">
       <created>1564608863768</created>
@@ -470,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566415817554</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="View changes for memory. Several features such as memory block, memory buttons disability while memory is shown etc. realized. Text for memory show button changed (by using additional label). Few more bug fixes with view (almost about layouts).">
+      <created>1566418994160</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1566418994160</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -503,7 +500,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Serialization done." />
     <MESSAGE value="Percent operation performed." />
     <MESSAGE value="Trailing zeros deleted." />
     <MESSAGE value="Several bug fixes in binary calculation." />
@@ -528,7 +524,17 @@
     <MESSAGE value="Action for history button removed as necessary. Fields containing &quot;history&quot; string renamed." />
     <MESSAGE value="Minor refactoring for view." />
     <MESSAGE value="Scroll bar (as well as whole scroll pane) customized." />
-    <option name="LAST_COMMIT_MESSAGE" value="Scroll bar (as well as whole scroll pane) customized." />
+    <MESSAGE value="View changes for memory. Several features such as memory block, memory buttons disability while memory is shown etc. realized. Text for memory show button changed (by using additional label). Few more bug fixes with view (almost about layouts)." />
+    <option name="LAST_COMMIT_MESSAGE" value="View changes for memory. Several features such as memory block, memory buttons disability while memory is shown etc. realized. Text for memory show button changed (by using additional label). Few more bug fixes with view (almost about layouts)." />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand>
+      <path>
+        <item name="Win10Calc" type="b2602c69:ProjectViewProjectNode" />
+        <item name="Win10Calc" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Win10Calc$CalculationModelTest.ic" NAME="CalculationModelTest Coverage Results" MODIFIED="1566385063562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
