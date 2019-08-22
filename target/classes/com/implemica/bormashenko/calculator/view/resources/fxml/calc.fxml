@@ -462,7 +462,7 @@
                 </AnchorPane>
             </children>
         </GridPane>
-        <HBox alignment="TOP_RIGHT" fillHeight="false" layoutX="250.0" layoutY="83.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+        <HBox alignment="TOP_RIGHT" fillHeight="false" layoutX="250.0" layoutY="83.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
             <children>
                 <Label fx:id="equation" alignment="TOP_LEFT" contentDisplay="TOP" minHeight="-Infinity">
                     <HBox.margin>
@@ -475,7 +475,7 @@
             </children>
         </HBox>
         <AnchorPane fx:id="memoryBlock" maxHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#memoryShowOperation" prefHeight="163.0" prefWidth="322.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
-      <AnchorPane fx:id="navigationBlock" onMouseClicked="#showNavigationPanel" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
+        <AnchorPane fx:id="navigationBlock" onMouseClicked="#showNavigationPanel" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
         <ScrollPane fx:id="navigationPanel" fitToWidth="true" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="355.0" prefWidth="256.0" styleClass="scroll_pane_navigation" visible="false" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
             <content>
                 <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
@@ -498,7 +498,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- E8EF -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -512,7 +512,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- F196 -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -529,7 +529,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- ECCE -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -546,7 +546,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- E787 -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -571,7 +571,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- EB0D -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -588,7 +588,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- F1AA -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -605,7 +605,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- ECC6 -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -622,7 +622,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- F4C1 -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -639,7 +639,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- E7A3 -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -656,7 +656,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- ECAD -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -673,7 +673,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- E809 -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -690,7 +690,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- EADA -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -707,7 +707,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- E917 -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -724,7 +724,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- E945 -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -741,7 +741,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- F20F -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -758,7 +758,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label text=""> <!-- EC4A -->
+                                <Label text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -775,7 +775,7 @@
                                 <String fx:value="light_gray_background_on_hover" />
                             </styleClass>
                             <graphic>
-                                <Label styleClass="font_calc" text=""> <!-- F515 -->
+                                <Label styleClass="font_calc" text="">
                                     <font>
                                         <Font name="Segoe MDL2 Assets" size="16.0" />
                                     </font>
@@ -789,27 +789,57 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-      <AnchorPane fx:id="about" layoutY="427.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="257.0" styleClass="gray_background" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0">
-         <children>
-              <Button alignment="BASELINE_LEFT" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="About" AnchorPane.bottomAnchor="5.0">
-                  <styleClass>
-                      <String fx:value="navigation_buttons" />
-                      <String fx:value="gray_background" />
-                  <String fx:value="light_gray_background_on_hover" />
-                  </styleClass>
-                  <graphic>
-                      <Label text=""> <!-- E946 -->
-                          <font>
-                              <Font name="Segoe MDL2 Assets" size="16.0" />
-                          </font>
-                      </Label>
-                  </graphic>
-               <font>
-                  <Font name="Segoe UI" size="15.0" />
-               </font>
-              </Button>
-         </children>
-      </AnchorPane>
+        <AnchorPane fx:id="about" layoutY="427.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="257.0" styleClass="gray_background" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0">
+            <children>
+                <Button alignment="BASELINE_LEFT" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="About" AnchorPane.bottomAnchor="5.0">
+                    <styleClass>
+                        <String fx:value="navigation_buttons" />
+                        <String fx:value="gray_background" />
+                        <String fx:value="light_gray_background_on_hover" />
+                    </styleClass>
+                    <graphic>
+                        <Label text="">
+                            <font>
+                                <Font name="Segoe MDL2 Assets" size="16.0" />
+                            </font>
+                        </Label>
+                    </graphic>
+                    <font>
+                        <Font name="Segoe UI" size="15.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="17.0" prefWidth="20.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="71.0">
+            <styleClass>
+                <String fx:value="arrows" />
+                <String fx:value="gray_background" />
+            <String fx:value="light_gray_background_on_hover" />
+            </styleClass>
+         <graphic>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
+               <styleClass>
+                  <String fx:value="arrows" />
+                  <String fx:value="font_assets" />
+               </styleClass>
+            </Label>
+         </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="17.0" prefWidth="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="71.0">
+            <styleClass>
+                <String fx:value="arrows" />
+                <String fx:value="gray_background" />
+            <String fx:value="light_gray_background_on_hover" />
+            </styleClass>
+         <graphic>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
+               <styleClass>
+                  <String fx:value="arrows" />
+                  <String fx:value="font_assets" />
+               </styleClass>
+            </Label>
+         </graphic>
+        </Button>
     </children>
     <styleClass>
         <String fx:value="background" />

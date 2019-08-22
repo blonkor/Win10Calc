@@ -80,11 +80,15 @@
 
 /* setting up background radius */
 .digits, .operations, .operations_degree, .backspace, .dot, .navigation,
-.history, .memory_show, .window, .window_close, .tooltip, .scroll-bar .thumb {
+.history, .memory_show, .window, .window_close, .tooltip, .scroll-bar .thumb, .arrows {
     -fx-background-radius: 0;
 }
 
 /* setting up font size */
+.arrows {
+    -fx-font-size: 9pt;
+}
+
 .window, .window_close {
     -fx-font-size: 10px;
 }
@@ -118,6 +122,15 @@
 /* digit buttons */
 .digits {
     -fx-padding: 1;
+}
+
+/* arrow buttons */
+.arrows {
+    -fx-text-fill: #0078d7
+}
+
+.arrows:hover {
+    -fx-text-fill: black
 }
 
 /*scroll pane*/
