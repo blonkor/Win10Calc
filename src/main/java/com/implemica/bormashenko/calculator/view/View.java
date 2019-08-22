@@ -75,6 +75,8 @@ public class View implements Serializable {
      */
     private static final String RESULT_LABEL_ID = "#screen";
 
+    private static final String EQUATION_LABEL_ID = "#equation";
+
     /**
      * Minimal width of application.
      */
@@ -185,6 +187,10 @@ public class View implements Serializable {
         FontResizeListener fontResizeListener = new FontResizeListener(scene);
         screen.textProperty().addListener(fontResizeListener);
         scene.widthProperty().addListener(fontResizeListener);
+
+        //equation label length listener
+        Label equation  = (Label)scene.lookup(EQUATION_LABEL_ID);
+        equation.textProperty().addListener(new EquationLabelLengthListener(scene));
 
         //save view listener
         primaryStage.setOnCloseRequest(new SaveViewListener(this));

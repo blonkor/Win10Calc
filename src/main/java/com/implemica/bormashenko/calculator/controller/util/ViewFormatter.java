@@ -66,6 +66,47 @@ public class ViewFormatter {
         }
     }
 
+    public static void moveEquationLeft(Button leftArrow, Button rightArrow, Label equation, double sceneWidth) {
+        rightArrow.setVisible(true);
+        double offset = equation.getWidth() - sceneWidth - 10;
+        boolean canMoveNextTime = false;
+
+        if (offset > sceneWidth / 2) {
+            offset = sceneWidth / 2;
+
+            if (equation.getTranslateX() < equation.getWidth() - equation.getTranslateX()) {
+                canMoveNextTime = true;
+            }
+        }
+
+        equation.setTranslateX(equation.getTranslateX() + offset);
+
+        if (!canMoveNextTime) {
+            leftArrow.setVisible(false);
+        }
+    }
+
+    public static void moveEquationRight(Button leftArrow, Button rightArrow, Label equation, double sceneWidth) {
+        leftArrow.setVisible(true);
+
+        double offset = equation.getWidth() - sceneWidth - 10;
+        boolean canMoveNextTime = false;
+
+        if (offset > sceneWidth / 2) {
+            offset = sceneWidth / 2;
+
+            if (equation.getTranslateX() < equation.getTranslateX() - equation.getWidth()) {
+                canMoveNextTime = true;
+            }
+        }
+
+        equation.setTranslateX(equation.getTranslateX() - offset);
+
+        if (!canMoveNextTime) {
+            rightArrow.setVisible(false);
+        }
+    }
+
     /**
      * Disables or enables buttons, passed as args.
      *

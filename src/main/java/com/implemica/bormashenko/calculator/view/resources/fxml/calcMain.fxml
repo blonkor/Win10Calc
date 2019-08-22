@@ -462,9 +462,9 @@
                 </AnchorPane>
             </children>
         </GridPane>
-        <HBox alignment="TOP_RIGHT" fillHeight="false" layoutY="83.0" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefWidth="320.0" AnchorPane.leftAnchor="-1000.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
+        <HBox alignment="TOP_RIGHT" fillHeight="false" layoutX="-293.0" layoutY="83.0" maxWidth="1.7976931348623157E308" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="613.0" AnchorPane.leftAnchor="-1000.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
             <children>
-                <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" textOverrun="CLIP">
+                <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="20.0" prefWidth="489.0" textOverrun="CLIP" HBox.hgrow="ALWAYS">
                     <HBox.margin>
                         <Insets right="15.0" />
                     </HBox.margin>

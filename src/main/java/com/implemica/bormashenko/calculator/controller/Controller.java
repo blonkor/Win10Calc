@@ -30,7 +30,7 @@ public class Controller implements Initializable {
     @FXML
     private Button memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
             percent, sqrt, sqr, inverse, divide, multiply, subtract, add, negate, dot,
-            navigation, history, close, hide, expand;
+            navigation, history, close, hide, expand, leftArrow, rightArrow;
 
     /**
      * Application's labels.
@@ -48,7 +48,7 @@ public class Controller implements Initializable {
      * Application's anchor pane.
      */
     @FXML
-    private AnchorPane memoryAnchorPane, memoryPanel, memoryBlock, navigationBlock, about;
+    private AnchorPane mainAnchor, memoryAnchorPane, memoryPanel, memoryBlock, navigationBlock, about;
 
     /**
      * Zero symbol is used instead of empty string.
@@ -136,6 +136,14 @@ public class Controller implements Initializable {
      */
     public void showNavigationPanel() {
         ViewFormatter.showNavigationPanel(navigationPanel, about, navigationBlock);
+    }
+
+    public void moveEquationLeft() {
+        ViewFormatter.moveEquationLeft(leftArrow, rightArrow, equation, mainAnchor.getWidth());
+    }
+
+    public void moveEquationRight() {
+        ViewFormatter.moveEquationRight(leftArrow, rightArrow, equation, mainAnchor.getWidth());
     }
 
     /**
