@@ -462,7 +462,7 @@
                 </AnchorPane>
             </children>
         </GridPane>
-        <HBox alignment="TOP_RIGHT" fillHeight="false" layoutY="83.0" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefWidth="320.0" AnchorPane.leftAnchor="-1000.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
+        <HBox alignment="TOP_RIGHT" fillHeight="false" layoutY="83.0" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefWidth="320.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
             <children>
                 <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" textOverrun="CLIP">
                     <HBox.margin>
@@ -810,7 +810,7 @@
                 </Button>
             </children>
         </AnchorPane>
-        <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationLeft" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="76.0">
+        <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="76.0">
             <styleClass>
                 <String fx:value="arrows" />
                 <String fx:value="gray_background" />
@@ -825,7 +825,7 @@
             </Label>
          </graphic>
         </Button>
-        <Button fx:id="rightArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationRight" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+        <Button fx:id="rightArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
             <styleClass>
                 <String fx:value="arrows" />
                 <String fx:value="gray_background" />
