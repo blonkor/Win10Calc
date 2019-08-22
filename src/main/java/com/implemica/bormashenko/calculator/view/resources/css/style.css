@@ -1,3 +1,7 @@
+@font-face {
+    src: url('../fonts/calc.ttf');
+}
+
 /* main background */
 .background {
     -fx-border-color: #1883d7;
@@ -11,6 +15,10 @@
 
 .scroll-bar .thumb {
     -fx-background-color: #8a8a8a;
+}
+
+.digits {
+    -fx-background-color: #fafafa;
 }
 
 .very_light_gray_background,
@@ -54,6 +62,10 @@
     -fx-font-family: "Segoe UI";
 }
 
+.font_calc {
+    -fx-font-family: "Calculator MDL2 Assets";
+}
+
 .font_segoe_ui_semibold {
     -fx-font-family: "Segoe UI Semibold";
 }
@@ -89,6 +101,10 @@
     -fx-font-size: 15pt;
 }
 
+.digits {
+    -fx-font-size: 17pt;
+}
+
 .screen {
     -fx-font-size: 36pt;
 }
@@ -101,9 +117,7 @@
 
 /* digit buttons */
 .digits {
-    -fx-background-color: #fafafa;
     -fx-padding: 1;
-    -fx-font-size: 17pt;
 }
 
 /*scroll pane*/

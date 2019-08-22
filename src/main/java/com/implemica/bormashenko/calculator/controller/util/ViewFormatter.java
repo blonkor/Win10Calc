@@ -84,9 +84,10 @@ public class ViewFormatter {
      * @param navigationPanel scroll pane to show or hide.
      * @param about           button to show or hide.
      */
-    public static void showNavigationPanel(ScrollPane navigationPanel, Button about) {
+    public static void showNavigationPanel(ScrollPane navigationPanel, AnchorPane about, AnchorPane block) {
         navigationPanel.setVisible(!navigationPanel.isVisible());
         about.setVisible(!about.isVisible());
+        block.setVisible(!block.isVisible());
     }
 
     /**
@@ -94,11 +95,11 @@ public class ViewFormatter {
      *
      * @param memoryPanel panel where memory is shown.
      */
-    public static void showMemoryPanel(AnchorPane memoryPanel, AnchorPane memoryBlock,
+    public static void showMemoryPanel(AnchorPane memoryPanel, AnchorPane block,
                                        Button[] memoryStandardEnabledButtons, Button[] memoryStandardDisabledButtons,
                                        boolean isEmptyMemory) {
         memoryPanel.setVisible(!memoryPanel.isVisible());
-        memoryBlock.setVisible(!memoryBlock.isVisible());
+        block.setVisible(!block.isVisible());
 
         setButtonsDisability(memoryPanel.isVisible(), memoryStandardEnabledButtons);
 
