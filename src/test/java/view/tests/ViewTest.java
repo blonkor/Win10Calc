@@ -23,6 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class ViewTest extends GuiTest {
 
+    /**
+     * Double value of 2.0 for calculating center of node.
+     */
     private static final double TWO = 2.0;
 
     /**
@@ -32,157 +35,150 @@ public class ViewTest extends GuiTest {
 
     @Test
     public void checkColorTests() {
-        //digits
-        checkButtonColor(".digits", new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"},
-                "0xfafafaff", "0x333333ff",
-                new Font("Segoe UI Semibold", 22.5),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 22.5));
+        String whiteColor = "0xffffffff";
+        String mostlyWhileColor = "0xfafafaff";
+        String veryLightGrayColor = "0xf0f0f0ff";
+        String lightGrayColor = "0xe6e6e6ff";
+        String grayColor = "0xd0d0d0ff";
+        String veryDarkGrayColor = "0x333333ff";
+        String vividRedColor = "0xe9091eff";
+        String strongBlueColor = "0x0078d7ff";
 
-        //standard operations
-        checkButtonColor(".blue_hover", new String[]{"\uE94A", "\uE947", "\uE949", "\uE948", "\uE94E"}, //divide, multiply, subtract, add, equals
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 14.5),
-                "0x0078d7ff", "0xffffffff",
-                new Font("Segoe MDL2 Assets", 14.5));
+        Font system_12 = new Font("System", 12);
+        Font segoeUI_14_5 = new Font("Segoe UI", 14.5);
+        Font segoeUI_15 = new Font("Segoe UI", 15);
+        Font segoeUI_20 = new Font("Segoe UI", 20);
+        Font segoeBlack_16 = new Font("Segoe UI Black", 16);
+        Font segoeSemibold_12 = new Font("Segoe UI Semibold", 12);
+        Font segoeSemibold_22_5 = new Font("Segoe UI Semibold", 22.5);
+        Font segoeAssets_10 = new Font("Segoe MDL2 Assets", 10);
+        Font segoeAssets_14_5 = new Font("Segoe MDL2 Assets", 14.5);
+        Font segoeAssets_16 = new Font("Segoe MDL2 Assets", 16);
+
+        //digits
+        checkButtonColor(new String[]{"#zero", "#one", "#two", "#three", "#four", "#five",
+                        "#six", "#seven", "#eight", "#nine"},
+                mostlyWhileColor, veryDarkGrayColor, segoeSemibold_22_5,
+                lightGrayColor, veryDarkGrayColor, segoeSemibold_22_5);
+
+        //standard operations (divide, multiply, subtract, add, equals)
+        checkButtonColor(new String[]{"#divide", "#multiply", "#subtract", "#add", "#equals"},
+                veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
+                strongBlueColor, whiteColor, segoeAssets_14_5);
 
         //special operations
-        checkButtonColor(".font_assets", new String[]{"\uE94D", "\uE94C", "\uE94B"}, //negate, percent, sqrt
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 14.5),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 14.5));
+        checkButtonColor(new String[]{"#negate", "#percent", "#sqrt"}, //negate, percent, sqrt
+                veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
+                lightGrayColor, veryDarkGrayColor, segoeAssets_14_5);
 
         //degree operations
-        checkButtonColor(".operations_degree", new String[]{"\uD835\uDC65²", "⅟\uD835\uDC65"}, //sqr, inverse
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe UI", 20),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI", 20));
+        checkButtonColor(new String[]{"#sqr", "#inverse"}, //sqr, inverse
+                veryLightGrayColor, veryDarkGrayColor, segoeUI_20,
+                lightGrayColor, veryDarkGrayColor, segoeUI_20);
 
         //clear operations
-        checkButtonColor(".font_segoe_ui", new String[]{"CE", "C"},
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe UI", 14.5),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI", 14.5));
+        checkButtonColor(new String[]{"#clearAll", "#clearText"},
+                veryLightGrayColor, veryDarkGrayColor, segoeUI_14_5,
+                lightGrayColor, veryDarkGrayColor, segoeUI_14_5);
 
         //dot
-        checkButtonColor(".dot", new String[]{"#dot"},
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe UI Black", 16),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Black", 16));
+        checkButtonColor(new String[]{"#dot"},
+                veryLightGrayColor, veryDarkGrayColor, segoeBlack_16,
+                lightGrayColor, veryDarkGrayColor, segoeBlack_16);
 
         //backspace
-        checkButtonColor(".backspace", new String[]{"\uE94F"},
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 16),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 16));
+        checkButtonColor(new String[]{"#backspace"},
+                veryLightGrayColor, veryDarkGrayColor, segoeAssets_16,
+                lightGrayColor, veryDarkGrayColor, segoeAssets_16);
 
         //memory
-        checkButtonColor(".memory", new String[]{"MC", "MR", "M+", "M-", "MS", "M"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 12),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 12));
+        checkButtonColor(new String[]{"#memoryClear", "#memoryRecall", "#memoryAdd", "#memorySubtract",
+                        "#memoryStore", "#memoryShow"},
+                lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
+                lightGrayColor, veryDarkGrayColor, segoeSemibold_12);
 
-        setNodeDisabled(".memory", "MC", false);
-        setNodeDisabled(".memory", "MR", false);
+        setNodeDisabled("#memoryClear", false);
+        setNodeDisabled("#memoryRecall", false);
 
-        checkButtonColor(".memory", new String[]{"MC", "MR"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 12),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 12));
+        checkButtonColor(new String[]{"#memoryClear", "#memoryRecall"},
+                lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
+                lightGrayColor, veryDarkGrayColor, segoeSemibold_12);
 
-        setNodeDisabled(".memory", "MC", true);
-        setNodeDisabled(".memory", "MR", true);
+        setNodeDisabled("#memoryClear", true);
+        setNodeDisabled("#memoryRecall", true);
+        setNodeDisabled("#memoryShow", false);
 
-        setNodeDisabled(".memory", "M", false);
+        checkButtonColor(new String[]{"#memoryShow"},
+                lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
+                grayColor, veryDarkGrayColor, segoeSemibold_12);
 
-        checkButtonColor(".memory", new String[]{"M"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 12),
-                "0xd0d0d0ff", "0x333333ff",
-                new Font("Segoe UI Semibold", 12));
-
-        setNodeDisabled(".memory", "M", true);
+        setNodeDisabled("#memoryShow", true);
 
         //navigation
-        checkButtonColor(".font_assets", new String[]{"\uE700"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 16),
-                "0xd0d0d0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 16));
+        checkButtonColor(new String[]{"#navigation"},
+                lightGrayColor, veryDarkGrayColor, segoeAssets_16,
+                grayColor, veryDarkGrayColor, segoeAssets_16);
 
         //history
-        checkButtonColor(".font_assets", new String[]{"\uE81C"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 16),
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 16));
+        checkButtonColor(new String[]{"#history"},
+                lightGrayColor, veryDarkGrayColor, segoeAssets_16,
+                lightGrayColor, veryDarkGrayColor, segoeAssets_16);
 
         //minimize and expand
-        checkButtonColor(".window", new String[]{"\uE921", "\uE922"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 10),
-                "0xd0d0d0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 10));
+        checkButtonColor(new String[]{"#hide", "#expand"},
+                lightGrayColor, veryDarkGrayColor, segoeAssets_10,
+                grayColor, veryDarkGrayColor, segoeAssets_10);
 
         //close
-        checkButtonColor(".window_close", new String[]{"\uE8BB"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 10),
-                "0xe9091eff", "0xffffffff",
-                new Font("Segoe MDL2 Assets", 10));
+        checkButtonColor(new String[]{"#close"},
+                lightGrayColor, veryDarkGrayColor, segoeAssets_10,
+                vividRedColor, whiteColor, segoeAssets_10);
 
-        setNodeVisible(".scroll_pane_navigation", "#navigationPanel", true);
-        setNodeVisible(".gray_background", "#about", true);
-        setNodeVisible("", "#navigationBlock", true);
+        setNodeVisible("#navigationPanel", true);
+        setNodeVisible("#about", true);
+        setNodeVisible("#navigationBlock", true);
 
-        checkButtonColor(".navigation_buttons", new String[]{"Standard", "Scientific", "Programmer", "Date Calculation",
-                        "Currency", "Volume", "Length"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI", 15),
-                "0xd0d0d0ff", "0x333333ff",
-                new Font("Segoe UI", 15));
+        checkButtonColor(new String[]{"#standard", "#scientific", "#programmer", "#dateCalculation",
+                        "#currency", "#volume", "#length"},
+                lightGrayColor, veryDarkGrayColor, segoeUI_15,
+                grayColor, veryDarkGrayColor, segoeUI_15);
 
         robot.scroll(15, VerticalDirection.DOWN);
 
-        checkButtonColor(".navigation_buttons", new String[]{"Weight and Mass", "Temperature", "Energy", "Area",
-                        "Speed", "Time", "Power", "Data"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI", 15),
-                "0xd0d0d0ff", "0x333333ff",
-                new Font("Segoe UI", 15));
+        checkButtonColor(new String[]{"#weightAndMass", "#temperature", "#energy", "#area",
+                        "#speed", "#time", "#power", "#data"},
+                lightGrayColor, veryDarkGrayColor, segoeUI_15,
+                grayColor, veryDarkGrayColor, segoeUI_15);
 
         robot.scroll(5, VerticalDirection.DOWN);
 
-        checkButtonColor(".navigation_buttons", new String[]{"Pressure", "Angle", "About"},
-                "0xe6e6e6ff", "0x333333ff",
-                new Font("Segoe UI", 15),
-                "0xd0d0d0ff", "0x333333ff",
-                new Font("Segoe UI", 15));
+        checkButtonColor(new String[]{"#pressure", "#angle", "About"},
+                lightGrayColor, veryDarkGrayColor, segoeUI_15,
+                grayColor, veryDarkGrayColor, segoeUI_15);
 
-        checkButtonColor(".blue_hover", new String[]{"\uE94A", "\uE947", "\uE949", "\uE948", "\uE94E"}, //divide, multiply, subtract, add, equals
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 14.5),
-                "0xf0f0f0ff", "0x333333ff",
-                new Font("Segoe MDL2 Assets", 14.5));
+        checkButtonColor(new String[]{"#divide", "#multiply", "#subtract", "#add", "#equals"},
+                veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
+                veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5);
 
-        setNodeVisible(".scroll_pane_navigation", "#navigationPanel", false);
-        setNodeVisible(".gray_background", "#about", false);
-        setNodeVisible("", "#navigationBlock", false);
+        setNodeVisible("#navigationPanel", false);
+        setNodeVisible("#about", false);
+        setNodeVisible("#navigationBlock", false);
+
+        setNodeVisible("#rightArrow", true);
+        setNodeVisible("#leftArrow", true);
+
+        checkButtonColor(new String[]{"#rightArrow", "#leftArrow"},
+                lightGrayColor, strongBlueColor, system_12,
+                grayColor, veryDarkGrayColor, system_12);
+
+        setNodeVisible("#rightArrow", false);
+        setNodeVisible("#leftArrow", false);
     }
 
     /**
      * Checks that button have required color, required text color, required font, and the same information
      * while the button is hovered.
      *
-     * @param from                     string name of styleclass to which buttons belong. If it is empty,
-     *                                 searching buttons with selector only.
      * @param selectors                array where every element is text on different buttons or button's selector.
      * @param expectedColor            background color that should be set for every button in array.
      * @param expectedTextColor        text color that should be set for every button in array.
@@ -192,14 +188,14 @@ public class ViewTest extends GuiTest {
      * @param expectedTextColorOnHover text color that should be set for every button in array while button is hovered.
      * @param expectedFontOnHover      font that should be set for every button in array while button is hovered.
      */
-    private void checkButtonColor(String from, String[] selectors,
+    private void checkButtonColor(String[] selectors,
                                   String expectedColor, String expectedTextColor,
                                   Font expectedFont,
                                   String expectedColorOnHover, String expectedTextColorOnHover,
                                   Font expectedFontOnHover) {
 
         for (String selector : selectors) {
-            Button control = getButtonBySelector(from, selector);
+            Button control = getButtonBySelector(selector);
 
             assertEquals(expectedColor, control.getBackground().getFills().get(0).getFill().toString());
             assertEquals(expectedTextColor, control.getTextFill().toString());
@@ -232,65 +228,41 @@ public class ViewTest extends GuiTest {
     /**
      * Enables or disables node.
      *
-     * @param from     string name of styleclass to which buttons belong. If it is empty,
-     *                 searching buttons with selector only.
      * @param selector id of node.
      */
-    private void setNodeDisabled(String from, String selector, boolean flag) {
-        Node control = getNodeBySelector(from, selector);
+    private void setNodeDisabled(String selector, boolean flag) {
+        Node control = getNodeBySelector(selector);
         control.setDisable(flag);
     }
 
     /**
      * Makes node visible or invisible.
      *
-     * @param from     string name of styleclass to which buttons belong. If it is empty,
-     *                 searching buttons with selector only.
      * @param selector id of node.
      */
-    private void setNodeVisible(String from, String selector, boolean flag) {
-        Node control = getNodeBySelector(from, selector);
+    private void setNodeVisible(String selector, boolean flag) {
+        Node control = getNodeBySelector(selector);
         control.setVisible(flag);
     }
 
     /**
      * Looks up for node by styleclass and selector.
      *
-     * @param from     string name of styleclass to which node belongs. If it is empty,
-     *                 searching node with selector only.
      * @param selector id of node.
      * @return node.
      */
-    private Node getNodeBySelector(String from, String selector) {
-        Node control;
-
-        if (from.isEmpty()) {
-            control = robot.lookup(selector).query();
-        } else {
-            control = robot.from(robot.lookup(from).queryAll()).lookup(selector).query();
-        }
-
-        return control;
+    private Node getNodeBySelector(String selector) {
+        return robot.lookup(selector).query();
     }
 
     /**
      * Looks up for button by styleclass and selector.
      *
-     * @param from     string name of styleclass to which button belongs. If it is empty,
-     *                 searching button with selector only.
      * @param selector id of button.
      * @return button.
      */
-    private Button getButtonBySelector(String from, String selector) {
-        Button control;
-
-        if (from.isEmpty()) {
-            control = robot.lookup(selector).queryButton();
-        } else {
-            control = robot.from(robot.lookup(from).queryAll()).lookup(selector).queryButton();
-        }
-
-        return control;
+    private Button getButtonBySelector(String selector) {
+        return robot.lookup(selector).queryButton();
     }
 
 

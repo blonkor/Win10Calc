@@ -126,11 +126,11 @@
 
 /* arrow buttons */
 .arrows {
-    -fx-text-fill: #0078d7
+    -fx-text-fill: #0078d7;
 }
 
 .arrows:hover {
-    -fx-text-fill: black
+    -fx-text-fill: #333333;
 }
 
 /*scroll pane*/

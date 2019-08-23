@@ -488,7 +488,7 @@
                                 <Insets left="5.0" top="10.0" />
                             </padding>
                         </Label>
-                        <Button alignment="BASELINE_LEFT" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" text="Standard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="standard" alignment="BASELINE_LEFT" layoutY="40.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" text="Standard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <font>
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
@@ -505,7 +505,7 @@
                                 </Label>
                             </graphic>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Scientific" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="scientific" alignment="BASELINE_LEFT" layoutX="2.0" layoutY="80.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Scientific" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -522,7 +522,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="2.0" layoutY="120.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Programmer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="programmer" alignment="BASELINE_LEFT" layoutX="2.0" layoutY="120.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Programmer" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -539,7 +539,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="160.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Date Calculation" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="dateCalculation" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="160.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Date Calculation" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -564,7 +564,7 @@
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Currency" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="currency" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="240.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Currency" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -581,7 +581,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="280.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Volume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="volume" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="280.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Volume" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -598,7 +598,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="320.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Length" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="length" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="320.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Length" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -615,7 +615,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="360.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Weight and Mass" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="weightAndMass" alignment="BASELINE_LEFT" layoutY="360.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Weight and Mass" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -632,7 +632,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="400.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Temperature" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="temperature" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="400.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Temperature" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -649,7 +649,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="440.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Energy" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="energy" alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="440.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Energy" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -666,7 +666,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="480.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="area" alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="480.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -683,7 +683,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="520.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Speed" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="speed" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="520.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Speed" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -700,7 +700,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="560.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="time" alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="560.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Time" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -717,7 +717,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="600.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Power" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="power" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="600.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Power" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -734,7 +734,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutY="640.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Data" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="data" alignment="BASELINE_LEFT" layoutY="640.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Data" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -751,7 +751,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="680.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Pressure" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="pressure" alignment="BASELINE_LEFT" layoutX="-15.0" layoutY="680.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Pressure" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
@@ -768,7 +768,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="720.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Angle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Button fx:id="angle" alignment="BASELINE_LEFT" layoutX="-7.0" layoutY="720.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="Angle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <styleClass>
                                 <String fx:value="navigation_buttons" />
                                 <String fx:value="gray_background" />
