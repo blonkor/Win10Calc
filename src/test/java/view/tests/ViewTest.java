@@ -1,18 +1,10 @@
 package view.tests;
 
-import javafx.geometry.Bounds;
 import javafx.geometry.VerticalDirection;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
-import org.loadui.testfx.utils.FXTestUtils;
-import org.testfx.api.FxRobot;
-import view.util.MainTest;
-
-import java.util.concurrent.TimeUnit;
+import view.util.RobotControl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,20 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  * @author Mykhailo Bormashenko
  */
-public class ViewTest extends GuiTest {
+public class ViewTest extends RobotControl {
 
-    /**
-     * Double value of 2.0 for calculating center of node.
-     */
-    private static final double TWO = 2.0;
-
-    /**
-     * Robot for automatically control.
-     */
-    private FxRobot robot = new FxRobot();
 
     @Test
-    public void checkColorTests() {
+    public void colorAndFontTests() {
         String whiteColor = "0xffffffff";
         String mostlyWhileColor = "0xfafafaff";
         String veryLightGrayColor = "0xf0f0f0ff";
@@ -56,43 +39,43 @@ public class ViewTest extends GuiTest {
         Font segoeAssets_16 = new Font("Segoe MDL2 Assets", 16);
 
         //digits
-        checkButtonColor(new String[]{"#zero", "#one", "#two", "#three", "#four", "#five",
+        checkButtonColorAndFont(new String[]{"#zero", "#one", "#two", "#three", "#four", "#five",
                         "#six", "#seven", "#eight", "#nine"},
                 mostlyWhileColor, veryDarkGrayColor, segoeSemibold_22_5,
                 lightGrayColor, veryDarkGrayColor, segoeSemibold_22_5);
 
         //standard operations (divide, multiply, subtract, add, equals)
-        checkButtonColor(new String[]{"#divide", "#multiply", "#subtract", "#add", "#equals"},
+        checkButtonColorAndFont(new String[]{"#divide", "#multiply", "#subtract", "#add", "#equals"},
                 veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
                 strongBlueColor, whiteColor, segoeAssets_14_5);
 
         //special operations
-        checkButtonColor(new String[]{"#negate", "#percent", "#sqrt"}, //negate, percent, sqrt
+        checkButtonColorAndFont(new String[]{"#negate", "#percent", "#sqrt"}, //negate, percent, sqrt
                 veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
                 lightGrayColor, veryDarkGrayColor, segoeAssets_14_5);
 
         //degree operations
-        checkButtonColor(new String[]{"#sqr", "#inverse"}, //sqr, inverse
+        checkButtonColorAndFont(new String[]{"#sqr", "#inverse"}, //sqr, inverse
                 veryLightGrayColor, veryDarkGrayColor, segoeUI_20,
                 lightGrayColor, veryDarkGrayColor, segoeUI_20);
 
         //clear operations
-        checkButtonColor(new String[]{"#clearAll", "#clearText"},
+        checkButtonColorAndFont(new String[]{"#clearAll", "#clearText"},
                 veryLightGrayColor, veryDarkGrayColor, segoeUI_14_5,
                 lightGrayColor, veryDarkGrayColor, segoeUI_14_5);
 
         //dot
-        checkButtonColor(new String[]{"#dot"},
+        checkButtonColorAndFont(new String[]{"#dot"},
                 veryLightGrayColor, veryDarkGrayColor, segoeBlack_16,
                 lightGrayColor, veryDarkGrayColor, segoeBlack_16);
 
         //backspace
-        checkButtonColor(new String[]{"#backspace"},
+        checkButtonColorAndFont(new String[]{"#backspace"},
                 veryLightGrayColor, veryDarkGrayColor, segoeAssets_16,
                 lightGrayColor, veryDarkGrayColor, segoeAssets_16);
 
         //memory
-        checkButtonColor(new String[]{"#memoryClear", "#memoryRecall", "#memoryAdd", "#memorySubtract",
+        checkButtonColorAndFont(new String[]{"#memoryClear", "#memoryRecall", "#memoryAdd", "#memorySubtract",
                         "#memoryStore", "#memoryShow"},
                 lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
                 lightGrayColor, veryDarkGrayColor, segoeSemibold_12);
@@ -100,7 +83,7 @@ public class ViewTest extends GuiTest {
         setNodeDisabled("#memoryClear", false);
         setNodeDisabled("#memoryRecall", false);
 
-        checkButtonColor(new String[]{"#memoryClear", "#memoryRecall"},
+        checkButtonColorAndFont(new String[]{"#memoryClear", "#memoryRecall"},
                 lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
                 lightGrayColor, veryDarkGrayColor, segoeSemibold_12);
 
@@ -108,29 +91,29 @@ public class ViewTest extends GuiTest {
         setNodeDisabled("#memoryRecall", true);
         setNodeDisabled("#memoryShow", false);
 
-        checkButtonColor(new String[]{"#memoryShow"},
+        checkButtonColorAndFont(new String[]{"#memoryShow"},
                 lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
                 grayColor, veryDarkGrayColor, segoeSemibold_12);
 
         setNodeDisabled("#memoryShow", true);
 
         //navigation
-        checkButtonColor(new String[]{"#navigation"},
+        checkButtonColorAndFont(new String[]{"#navigation"},
                 lightGrayColor, veryDarkGrayColor, segoeAssets_16,
                 grayColor, veryDarkGrayColor, segoeAssets_16);
 
         //history
-        checkButtonColor(new String[]{"#history"},
+        checkButtonColorAndFont(new String[]{"#history"},
                 lightGrayColor, veryDarkGrayColor, segoeAssets_16,
                 lightGrayColor, veryDarkGrayColor, segoeAssets_16);
 
         //minimize and expand
-        checkButtonColor(new String[]{"#hide", "#expand"},
+        checkButtonColorAndFont(new String[]{"#hide", "#expand"},
                 lightGrayColor, veryDarkGrayColor, segoeAssets_10,
                 grayColor, veryDarkGrayColor, segoeAssets_10);
 
         //close
-        checkButtonColor(new String[]{"#close"},
+        checkButtonColorAndFont(new String[]{"#close"},
                 lightGrayColor, veryDarkGrayColor, segoeAssets_10,
                 vividRedColor, whiteColor, segoeAssets_10);
 
@@ -138,25 +121,25 @@ public class ViewTest extends GuiTest {
         setNodeVisible("#about", true);
         setNodeVisible("#navigationBlock", true);
 
-        checkButtonColor(new String[]{"#standard", "#scientific", "#programmer", "#dateCalculation",
+        checkButtonColorAndFont(new String[]{"#standard", "#scientific", "#programmer", "#dateCalculation",
                         "#currency", "#volume", "#length"},
                 lightGrayColor, veryDarkGrayColor, segoeUI_15,
                 grayColor, veryDarkGrayColor, segoeUI_15);
 
         robot.scroll(15, VerticalDirection.DOWN);
 
-        checkButtonColor(new String[]{"#weightAndMass", "#temperature", "#energy", "#area",
+        checkButtonColorAndFont(new String[]{"#weightAndMass", "#temperature", "#energy", "#area",
                         "#speed", "#time", "#power", "#data"},
                 lightGrayColor, veryDarkGrayColor, segoeUI_15,
                 grayColor, veryDarkGrayColor, segoeUI_15);
 
         robot.scroll(5, VerticalDirection.DOWN);
 
-        checkButtonColor(new String[]{"#pressure", "#angle", "About"},
+        checkButtonColorAndFont(new String[]{"#pressure", "#angle", "About"},
                 lightGrayColor, veryDarkGrayColor, segoeUI_15,
                 grayColor, veryDarkGrayColor, segoeUI_15);
 
-        checkButtonColor(new String[]{"#divide", "#multiply", "#subtract", "#add", "#equals"},
+        checkButtonColorAndFont(new String[]{"#divide", "#multiply", "#subtract", "#add", "#equals"},
                 veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
                 veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5);
 
@@ -167,12 +150,92 @@ public class ViewTest extends GuiTest {
         setNodeVisible("#rightArrow", true);
         setNodeVisible("#leftArrow", true);
 
-        checkButtonColor(new String[]{"#rightArrow", "#leftArrow"},
+        checkButtonColorAndFont(new String[]{"#rightArrow", "#leftArrow"},
                 lightGrayColor, strongBlueColor, system_12,
                 grayColor, veryDarkGrayColor, system_12);
 
         setNodeVisible("#rightArrow", false);
         setNodeVisible("#leftArrow", false);
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void textTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void resizeTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void moveWindowTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void serializationTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void visibleArrowsTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void exitTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void expandTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void resizeFontTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void hideTests() {
+
+    }
+
+    /**
+     * @todo
+     */
+    @Test
+    void keyBoardTests() {
+
     }
 
     /**
@@ -188,11 +251,11 @@ public class ViewTest extends GuiTest {
      * @param expectedTextColorOnHover text color that should be set for every button in array while button is hovered.
      * @param expectedFontOnHover      font that should be set for every button in array while button is hovered.
      */
-    private void checkButtonColor(String[] selectors,
-                                  String expectedColor, String expectedTextColor,
-                                  Font expectedFont,
-                                  String expectedColorOnHover, String expectedTextColorOnHover,
-                                  Font expectedFontOnHover) {
+    private void checkButtonColorAndFont(String[] selectors,
+                                         String expectedColor, String expectedTextColor,
+                                         Font expectedFont,
+                                         String expectedColorOnHover, String expectedTextColorOnHover,
+                                         Font expectedFontOnHover) {
 
         for (String selector : selectors) {
             Button control = getButtonBySelector(selector);
@@ -207,83 +270,5 @@ public class ViewTest extends GuiTest {
             assertEquals(expectedTextColorOnHover, control.getTextFill().toString());
             assertEquals(expectedFontOnHover, control.getFont());
         }
-    }
-
-    /**
-     * Moves cursor to the middle of node using robot.
-     *
-     * @param node node from view where cursor should be moved.
-     */
-    private void hoverOn(Node node) {
-        Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-
-        double centerX = (bounds.getMinX() + bounds.getMaxX()) / TWO;
-        double centerY = (bounds.getMinY() + bounds.getMaxY()) / TWO;
-
-        robot.moveTo(centerX, centerY);
-
-        FXTestUtils.awaitEvents();
-    }
-
-    /**
-     * Enables or disables node.
-     *
-     * @param selector id of node.
-     */
-    private void setNodeDisabled(String selector, boolean flag) {
-        Node control = getNodeBySelector(selector);
-        control.setDisable(flag);
-    }
-
-    /**
-     * Makes node visible or invisible.
-     *
-     * @param selector id of node.
-     */
-    private void setNodeVisible(String selector, boolean flag) {
-        Node control = getNodeBySelector(selector);
-        control.setVisible(flag);
-    }
-
-    /**
-     * Looks up for node by styleclass and selector.
-     *
-     * @param selector id of node.
-     * @return node.
-     */
-    private Node getNodeBySelector(String selector) {
-        return robot.lookup(selector).query();
-    }
-
-    /**
-     * Looks up for button by styleclass and selector.
-     *
-     * @param selector id of button.
-     * @return button.
-     */
-    private Button getButtonBySelector(String selector) {
-        return robot.lookup(selector).queryButton();
-    }
-
-
-    @Override
-    public void setupStage() {
-        FXTestUtils.launchApp(MainTest.class, "");
-
-        try {
-            stage = targetWindow(MainTest.getStageFuture().get(25, TimeUnit.SECONDS));
-            FXTestUtils.bringToFront(stage);
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to show stage", e);
-        }
-    }
-
-    @Override
-    protected Parent getRootNode() {
-        if (stage == null) {
-            setupStage();
-        }
-
-        return stage.getScene().getRoot();
     }
 }

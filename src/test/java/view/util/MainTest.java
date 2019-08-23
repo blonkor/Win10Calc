@@ -5,6 +5,7 @@ import com.implemica.bormashenko.calculator.Launcher;
 import javafx.stage.Stage;
 
 public class MainTest extends Launcher {
+
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
     public MainTest() {
