@@ -2,6 +2,7 @@
   <dictionary name="User">
     <words>
       <w>signum</w>
+      <w>styleclass</w>
     </words>
   </dictionary>
 </component>

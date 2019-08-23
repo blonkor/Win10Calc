@@ -28,7 +28,7 @@
 
 .gray_background, .gray_background_on_hover:hover,
 .scroll_pane_navigation .scroll-bar  {
-    -fx-background-color: #e7e7e7;
+    -fx-background-color: #e6e6e6;
 }
 
 .light_gray_background_on_hover:hover {
@@ -80,7 +80,7 @@
 
 /* setting up background radius */
 .digits, .operations, .operations_degree, .backspace, .dot, .navigation,
-.history, .memory_show, .window, .window_close, .tooltip, .scroll-bar .thumb, .arrows {
+.history, .window, .window_close, .tooltip, .scroll-bar .thumb, .arrows {
     -fx-background-radius: 0;
 }
 
@@ -94,19 +94,19 @@
 }
 
 .operations {
-    -fx-font-size: 11pt;
+    -fx-font-size: 14.5px;
 }
 
 .backspace, .dot, .navigation, .history {
-    -fx-font-size: 12pt;
+    -fx-font-size: 16px;
 }
 
 .operations_degree {
-    -fx-font-size: 15pt;
+    -fx-font-size: 20px;
 }
 
 .digits {
-    -fx-font-size: 17pt;
+    -fx-font-size: 22.5px;
 }
 
 .screen {
@@ -114,7 +114,7 @@
 }
 
 /* memory buttons */
-.memory, .memory_show {
+.memory {
     -fx-font-weight: bold;
     -fx-font-size: 9pt;
 }

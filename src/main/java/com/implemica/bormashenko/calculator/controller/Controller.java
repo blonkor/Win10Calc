@@ -138,6 +138,14 @@ public class Controller implements Initializable {
         ViewFormatter.showNavigationPanel(navigationPanel, about, navigationBlock);
     }
 
+    public void moveEquationLeft() {
+        ViewFormatter.moveEquationLeft();
+    }
+
+    public void moveEquationRight() {
+        ViewFormatter.moveEquationRight();
+    }
+
     /**
      * Shows memory.
      */

@@ -18,9 +18,23 @@
         </dependency>
 
         <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-core</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.loadui</groupId>
             <artifactId>testFx</artifactId>
             <version>3.1.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit5</artifactId>
+            <version>4.0.16-alpha</version>
             <scope>test</scope>
         </dependency>
 
@@ -40,6 +54,8 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.css</include>
+                    <include>**/*.dat</include>
+                    <include>**/*.ttf</include>
                     <include>**/*.fxml</include>
                     <include>**/*.png</include>
                 </includes>
@@ -54,7 +70,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
                 <configuration>
-                    <mainClass>com.implemica.bormashenko.calculator.MainApp</mainClass>
+                    <mainClass>com.implemica.bormashenko.calculator.Launcher</mainClass>
                 </configuration>
             </plugin>
 

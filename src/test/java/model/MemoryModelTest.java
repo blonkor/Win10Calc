@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;

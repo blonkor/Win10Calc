@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;

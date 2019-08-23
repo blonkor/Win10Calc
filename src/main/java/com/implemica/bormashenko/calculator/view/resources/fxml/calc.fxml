@@ -404,7 +404,7 @@
                                 <Tooltip styleClass="tooltip_gray" text="Memory" />
                             </tooltip>
                             <styleClass>
-                                <String fx:value="memory_show" />
+                                <String fx:value="memory" />
                                 <String fx:value="gray_background" />
                                 <String fx:value="light_gray_background_on_hover" />
                                 <String fx:value="font_segoe_ui_semibold" />
@@ -476,7 +476,7 @@
         </HBox>
         <AnchorPane fx:id="memoryBlock" maxHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#memoryShowOperation" prefHeight="163.0" prefWidth="322.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
         <AnchorPane fx:id="navigationBlock" onMouseClicked="#showNavigationPanel" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
-        <ScrollPane fx:id="navigationPanel" fitToWidth="true" layoutY="73.0" maxHeight="-Infinity" maxWidth="256.0" minHeight="-Infinity" minWidth="256.0" prefHeight="355.0" prefWidth="256.0" styleClass="scroll_pane_navigation" visible="false" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
+        <ScrollPane fx:id="navigationPanel" fitToWidth="true" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="256.0" styleClass="scroll_pane_navigation" visible="false" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
             <content>
                 <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
                     <children>
@@ -810,35 +810,35 @@
                 </Button>
             </children>
         </AnchorPane>
-        <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="76.0">
+        <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationLeft" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="76.0">
             <styleClass>
                 <String fx:value="arrows" />
                 <String fx:value="gray_background" />
-            <String fx:value="light_gray_background_on_hover" />
+                <String fx:value="light_gray_background_on_hover" />
             </styleClass>
-         <graphic>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
-               <styleClass>
-                  <String fx:value="arrows" />
-                  <String fx:value="font_assets" />
-               </styleClass>
-            </Label>
-         </graphic>
+            <graphic>
+                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
+                    <styleClass>
+                        <String fx:value="arrows" />
+                        <String fx:value="font_assets" />
+                    </styleClass>
+                </Label>
+            </graphic>
         </Button>
-        <Button fx:id="rightArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+        <Button fx:id="rightArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationRight" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
             <styleClass>
                 <String fx:value="arrows" />
                 <String fx:value="gray_background" />
-            <String fx:value="light_gray_background_on_hover" />
+                <String fx:value="light_gray_background_on_hover" />
             </styleClass>
-         <graphic>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
-               <styleClass>
-                  <String fx:value="arrows" />
-                  <String fx:value="font_assets" />
-               </styleClass>
-            </Label>
-         </graphic>
+            <graphic>
+                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
+                    <styleClass>
+                        <String fx:value="arrows" />
+                        <String fx:value="font_assets" />
+                    </styleClass>
+                </Label>
+            </graphic>
         </Button>
     </children>
     <styleClass>

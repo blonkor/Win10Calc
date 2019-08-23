@@ -2,6 +2,7 @@ package com.implemica.bormashenko.calculator;
 
 import com.implemica.bormashenko.calculator.view.View;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -13,7 +14,7 @@ import java.io.ObjectInputStream;
  *
  * @author Mykhailo Bormashenko
  */
-public class MainApp extends Application {
+public class Launcher extends Application {
 
     /**
      * Path to dat file.

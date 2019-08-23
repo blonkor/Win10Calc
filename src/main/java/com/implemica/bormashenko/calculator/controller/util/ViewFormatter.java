@@ -110,6 +110,14 @@ public class ViewFormatter {
         }
     }
 
+    public static void moveEquationLeft() {
+
+    }
+
+    public static void moveEquationRight() {
+
+    }
+
     public static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel, Label memoryLabel) {
         Stack<BigDecimal> store = memory.getStore();
 
