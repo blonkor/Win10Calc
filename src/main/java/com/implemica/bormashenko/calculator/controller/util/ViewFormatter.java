@@ -1,16 +1,13 @@
 package com.implemica.bormashenko.calculator.controller.util;
 
 import com.implemica.bormashenko.calculator.model.Memory;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
 
 import java.math.BigDecimal;
 import java.util.Stack;
@@ -118,11 +115,10 @@ public class ViewFormatter {
 
     }
 
-    public static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel, Label memoryLabel) {
+    public static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel) {
         Stack<BigDecimal> store = memory.getStore();
 
         if (!store.isEmpty()) {
-            memoryLabel.setVisible(false);
             memoryPanel.getChildren().removeAll(memoryPanel.getChildren());
 
             double layoutY = 16;

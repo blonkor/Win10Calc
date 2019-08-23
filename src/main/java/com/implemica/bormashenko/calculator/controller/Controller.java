@@ -36,7 +36,7 @@ public class Controller implements Initializable {
      * Application's labels.
      */
     @FXML
-    private Label screen, emptyMemoryLabel, equation;
+    private Label screen, equation;
 
     /**
      * Application's scroll pane.
@@ -161,7 +161,7 @@ public class Controller implements Initializable {
      */
     public void memoryClearOperation() {
         memory.clearMemory();
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -181,7 +181,7 @@ public class Controller implements Initializable {
     public void memoryAddOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
         memory.addToMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -191,7 +191,7 @@ public class Controller implements Initializable {
     public void memorySubtractOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
         memory.subtractFromMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -201,7 +201,7 @@ public class Controller implements Initializable {
     public void memoryStoreOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
         memory.storeToMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel, emptyMemoryLabel);
+        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 

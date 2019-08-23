@@ -74,7 +74,7 @@
                 </HBox>
                 <TextFlow layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="71.0" AnchorPane.leftAnchor="12.0" AnchorPane.topAnchor="8.0">
                     <children>
-                        <Label prefHeight="16.0" prefWidth="71.0" text="Calculator" />
+                        <Label fx:id="title" prefHeight="16.0" prefWidth="71.0" text="Calculator" />
                     </children>
                 </TextFlow>
             </children>
@@ -96,7 +96,7 @@
         </HBox>
         <TextFlow layoutX="42.0" layoutY="32.0" prefHeight="30.0" prefWidth="77.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="39.0">
             <children>
-                <Label contentDisplay="CENTER" text="Standard">
+                <Label fx:id="type" contentDisplay="CENTER" text="Standard">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -448,11 +448,6 @@
                 </HBox>
                 <AnchorPane fx:id="memoryAnchorPane" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="306.0" styleClass="gray_background" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER">
                     <children>
-                        <TextFlow layoutX="-68.0" layoutY="-47.0" prefHeight="103.0" prefWidth="322.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <children>
-                                <Label fx:id="emptyMemoryLabel" text="There's nothing saved in memory" />
-                            </children>
-                        </TextFlow>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="200.0" styleClass="scroll_pane_memory" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
                                 <AnchorPane fx:id="memoryPanel" maxHeight="1.7976931348623157E308" minHeight="300.0" minWidth="0.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="328.0" />
@@ -480,7 +475,7 @@
             <content>
                 <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
                     <children>
-                        <Label layoutY="5.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Calculator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
+                        <Label fx:id="mode" layoutY="5.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Calculator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -556,7 +551,7 @@
                                 <Font name="Segoe UI" size="15.0" />
                             </font>
                         </Button>
-                        <Label layoutX="2.0" layoutY="200.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Converter" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
+                        <Label fx:id="converter" layoutX="2.0" layoutY="200.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Converter" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0">
                             <padding>
                                 <Insets left="5.0" />
                             </padding>
