@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 
 /**
  * Listener for maximizing application.
- * Added to expand button.
  *
  * @author Mykhailo Bormashenko
  */
@@ -21,7 +20,7 @@ public class ExpandListener implements EventHandler<ActionEvent> {
     private static final String EXPAND_ID = "#expand";
 
     /**
-     * Unicode escape sequence for symbol "ChromeMaximize" in "Segoe MDL2 Assets" font representation.
+     * Unicode escape sequence for symbol "ChromeMaximize" in "Segoe MDL2 Assets" font.
      */
     private static final String MINIMIZED_ICON = "\uE922";
 
@@ -31,7 +30,7 @@ public class ExpandListener implements EventHandler<ActionEvent> {
     private static final String MINIMIZED_TOOLTIP_TEXT = "Maximize";
 
     /**
-     * Unicode escape sequence for symbol "ChromeRestore" in "Segoe MDL2 Assets" font representation.
+     * Unicode escape sequence for symbol "ChromeRestore" in "Segoe MDL2 Assets" font.
      */
     private static final String MAXIMIZED_ICON = "\uE923";
 
@@ -76,10 +75,12 @@ public class ExpandListener implements EventHandler<ActionEvent> {
         view.setMaximized(!isMaximized);
         double newWidth = scene.getWidth();
 
+        //if application was started as maximized, minimize it to default statement
         if (currentWidth == newWidth) {
             view.resetToDefault(stage, scene);
         }
 
+        //setup icons and tooltips
         Button expand = (Button) scene.lookup(EXPAND_ID);
 
         if (!isMaximized) {

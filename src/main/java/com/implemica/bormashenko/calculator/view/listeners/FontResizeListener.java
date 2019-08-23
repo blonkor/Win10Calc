@@ -9,7 +9,6 @@ import javafx.scene.text.Text;
 
 /**
  * Listener for resizing font in result label.
- * Added to scene and screen label.
  *
  * @author Mykhailo Bormashenko
  */

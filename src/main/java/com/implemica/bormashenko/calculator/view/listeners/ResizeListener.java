@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 
 /**
  * Listener for resizing an application.
- * Added to scene.
  *
  * @author Mykhailo Bormashenko
  */
@@ -103,7 +102,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**
      * Changes type of cursor and enabling resizing.
-     * This code is taken from
+     * This code was taken from
      * {@link <https://geektortoise.wordpress.com/2014/02/07/how-to-programmatically-resize-the-stage-in-a-javafx-app/>}
      * and then optimized.
      *

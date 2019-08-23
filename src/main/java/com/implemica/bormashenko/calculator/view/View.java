@@ -26,7 +26,7 @@ public class View implements Serializable {
     private static final String TITLE = "Calculator";
 
     /**
-     * Unicode escape sequence for symbol "ChromeRestore" in "Segoe MDL2 Assets" font representation.
+     * Unicode escape sequence for symbol "ChromeRestore" in "Segoe MDL2 Assets" font.
      */
     private static final String MAXIMIZED_ICON = "\uE923";
 
@@ -75,6 +75,9 @@ public class View implements Serializable {
      */
     private static final String RESULT_LABEL_ID = "#screen";
 
+    /**
+     * ID of equation label.
+     */
     private static final String EQUATION_LABEL_ID = "#equation";
 
     /**
@@ -143,11 +146,9 @@ public class View implements Serializable {
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
         primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
         setParams(primaryStage, scene);
-
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setResizable(true);
 
         primaryStage.show();
     }
@@ -189,8 +190,10 @@ public class View implements Serializable {
         scene.widthProperty().addListener(fontResizeListener);
 
         //equation label length listener
-        Label equation  = (Label)scene.lookup(EQUATION_LABEL_ID);
-        equation.textProperty().addListener(new EquationLabelLengthListener(scene));
+        Label equation = (Label) scene.lookup(EQUATION_LABEL_ID);
+        EquationLabelLengthListener equationLabelLengthListener = new EquationLabelLengthListener(scene);
+        equation.textProperty().addListener(equationLabelLengthListener);
+        scene.widthProperty().addListener(equationLabelLengthListener);
 
         //save view listener
         primaryStage.setOnCloseRequest(new SaveViewListener(this));

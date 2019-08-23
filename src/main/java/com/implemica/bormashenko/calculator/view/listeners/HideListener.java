@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 
 /**
  * Listener for minimizing an application.
- * Added to hide button.
  *
  * @author Mykhailo Bormashenko
  */

@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 /**
  * Listener for exit from an application.
- * Added to close button.
  *
  * @author Mykhailo Bormashenko
  */
@@ -28,7 +27,7 @@ public class ExitListener implements EventHandler<ActionEvent> {
      * Constructor for listener.
      *
      * @param stage JavaFX stage.
-     * @param view View of application.
+     * @param view  View of application.
      */
     public ExitListener(Stage stage, View view) {
         this.stage = stage;
