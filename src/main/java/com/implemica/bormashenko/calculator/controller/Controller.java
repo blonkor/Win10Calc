@@ -48,7 +48,7 @@ public class Controller implements Initializable {
      * Application's anchor pane.
      */
     @FXML
-    private AnchorPane mainAnchor, memoryAnchorPane, memoryPanel, memoryBlock, navigationBlock, about;
+    private AnchorPane mainAnchor, memoryAnchorPane, memoryPanel, memoryBlock, navigationBlock, aboutPanel;
 
     /**
      * Zero symbol is used instead of empty string.
@@ -135,7 +135,7 @@ public class Controller implements Initializable {
      * Opens or closes navigation bar.
      */
     public void showNavigationPanel() {
-        ViewFormatter.showNavigationPanel(navigationPanel, about, navigationBlock);
+        ViewFormatter.showNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
     }
 
     public void moveEquationLeft() {
