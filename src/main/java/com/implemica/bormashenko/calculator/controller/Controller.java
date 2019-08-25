@@ -119,16 +119,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Button[] buttonsWithGrayTooltip = {
-                memoryClear, memoryRecall, memoryAdd, memoryStore,
-                memorySubtract, memoryShow, navigation, history
-        };
-        ViewFormatter.setGrayTooltipsLocation(buttonsWithGrayTooltip);
-
-        Button[] buttonsWithWhiteTooltip = {
-                close, hide, expand
-        };
-        ViewFormatter.setWhiteTooltipsLocation(buttonsWithWhiteTooltip);
+        //no initializing is needed
     }
 
     /**

@@ -20,50 +20,6 @@ import java.util.Stack;
 public class ViewFormatter {
 
     /**
-     * Changes locations for gray tooltips.
-     * Gray tooltip is a tooltip with {@code styleClass = "tooltip_gray"}.
-     * Gray tooltip have to appear above the cursor.
-     *
-     * @param buttons controllers with tooltip.
-     */
-    public static void setGrayTooltipsLocation(Button[] buttons) {
-        final double[] currentMouseX = new double[1];
-        final double[] currentMouseY = new double[1];
-        for (Button button : buttons) {
-            button.setOnMouseMoved(m -> {
-                currentMouseX[0] = m.getScreenX();
-                currentMouseY[0] = m.getScreenY();
-            });
-            button.getTooltip().setOnShowing(s -> {
-                button.getTooltip().setX(currentMouseX[0] - button.getTooltip().getWidth() / 2);
-                button.getTooltip().setY(currentMouseY[0] - 50);
-            });
-        }
-    }
-
-    /**
-     * Changes locations for white tooltips.
-     * White tooltip is a tooltip with {@code styleClass = "tooltip_white"}.
-     * White tooltip have to appear below the cursor.
-     *
-     * @param buttons controllers with tooltip.
-     */
-    public static void setWhiteTooltipsLocation(Button[] buttons) {
-        final double[] currentMouseX = new double[1];
-        final double[] currentMouseY = new double[1];
-        for (Button button : buttons) {
-            button.setOnMouseMoved(m -> {
-                currentMouseX[0] = m.getScreenX();
-                currentMouseY[0] = m.getScreenY();
-            });
-            button.getTooltip().setOnShowing(s -> {
-                button.getTooltip().setX(currentMouseX[0]);
-                button.getTooltip().setY(currentMouseY[0] + 6);
-            });
-        }
-    }
-
-    /**
      * Disables or enables buttons, passed as args.
      *
      * @param flag    true for disabling and false for enabling.
