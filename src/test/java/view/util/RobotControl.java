@@ -445,6 +445,16 @@ public class RobotControl extends GuiTest {
     protected static final String ABOUT_SYMBOL = "\uE946";
 
     /**
+     * Unicode escape sequence of right arrow symbol in MDL2 assets.
+     */
+    protected static final String RIGHT_ARROW_SYMBOL = "\uE970";
+
+    /**
+     * Unicode escape sequence of left arrow symbol in MDL2 assets.
+     */
+    protected static final String LEFT_ARROW_SYMBOL = "\uE96F";
+
+    /**
      * Value for scroll using FxRobot.
      */
     protected static final int SCROLL_AMOUNT = 10;
@@ -472,7 +482,7 @@ public class RobotControl extends GuiTest {
     }
 
     @Override
-    protected Parent getRootNode() {
+    public Parent getRootNode() {
         if (stage == null) {
             setupStage();
         }

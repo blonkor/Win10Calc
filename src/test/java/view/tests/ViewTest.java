@@ -2,6 +2,7 @@ package view.tests;
 
 import javafx.geometry.VerticalDirection;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
 import javafx.scene.text.Font;
 import org.junit.Test;
@@ -53,132 +54,132 @@ public class ViewTest extends RobotControl {
         //buttons
         {
             //digits
-            checkButtonColorAndFont(new String[]{ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID,
+            checkColorAndFontForButtons(new String[]{ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID,
                             SEVEN_ID, EIGHT_ID, NINE_ID, ZERO_ID},
                     mostlyWhileColor, veryDarkGrayColor, segoeSemibold_22_5,
-                    lightGrayColor, veryDarkGrayColor, segoeSemibold_22_5);
+                    lightGrayColor, veryDarkGrayColor);
 
             //dot
-            checkButtonColorAndFont(new String[]{DOT_ID},
+            checkColorAndFontForButtons(new String[]{DOT_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeBlack_16,
-                    lightGrayColor, veryDarkGrayColor, segoeBlack_16);
+                    lightGrayColor, veryDarkGrayColor);
 
             //math operations
-            checkButtonColorAndFont(new String[]{DIVIDE_ID, MULTIPLY_ID, SUBTRACT_ID, ADD_ID, EQUALS_ID},
+            checkColorAndFontForButtons(new String[]{DIVIDE_ID, MULTIPLY_ID, SUBTRACT_ID, ADD_ID, EQUALS_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
-                    strongBlueColor, whiteColor, segoeAssets_14_5);
+                    strongBlueColor, whiteColor);
 
-            checkButtonColorAndFont(new String[]{NEGATE_ID, PERCENT_ID, SQRT_ID},
+            checkColorAndFontForButtons(new String[]{NEGATE_ID, PERCENT_ID, SQRT_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
-                    lightGrayColor, veryDarkGrayColor, segoeAssets_14_5);
+                    lightGrayColor, veryDarkGrayColor);
 
-            checkButtonColorAndFont(new String[]{SQR_ID, INVERSE_ID},
+            checkColorAndFontForButtons(new String[]{SQR_ID, INVERSE_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeUI_20,
-                    lightGrayColor, veryDarkGrayColor, segoeUI_20);
+                    lightGrayColor, veryDarkGrayColor);
 
             //clear operations
-            checkButtonColorAndFont(new String[]{CLEAR_ALL_ID, CLEAR_TEXT_ID},
+            checkColorAndFontForButtons(new String[]{CLEAR_ALL_ID, CLEAR_TEXT_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeUI_14_5,
-                    lightGrayColor, veryDarkGrayColor, segoeUI_14_5);
+                    lightGrayColor, veryDarkGrayColor);
 
-            checkButtonColorAndFont(new String[]{BACKSPACE_ID},
+            checkColorAndFontForButtons(new String[]{BACKSPACE_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeAssets_16,
-                    lightGrayColor, veryDarkGrayColor, segoeAssets_16);
+                    lightGrayColor, veryDarkGrayColor);
 
             //memory buttons
-            checkButtonColorAndFont(new String[]{MEMORY_CLEAR_ID, MEMORY_RECALL_ID, MEMORY_ADD_ID, MEMORY_SUBTRACT_ID,
+            checkColorAndFontForButtons(new String[]{MEMORY_CLEAR_ID, MEMORY_RECALL_ID, MEMORY_ADD_ID, MEMORY_SUBTRACT_ID,
                             MEMORY_STORE_ID, MEMORY_SHOW_ID},
                     lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
-                    lightGrayColor, veryDarkGrayColor, segoeSemibold_12);
+                    lightGrayColor, veryDarkGrayColor);
 
             setNodeDisabled(MEMORY_CLEAR_ID, false);
             setNodeDisabled(MEMORY_RECALL_ID, false);
 
-            checkButtonColorAndFont(new String[]{MEMORY_CLEAR_ID, MEMORY_RECALL_ID},
+            checkColorAndFontForButtons(new String[]{MEMORY_CLEAR_ID, MEMORY_RECALL_ID},
                     lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
-                    lightGrayColor, veryDarkGrayColor, segoeSemibold_12);
+                    lightGrayColor, veryDarkGrayColor);
 
             setNodeDisabled(MEMORY_CLEAR_ID, true);
             setNodeDisabled(MEMORY_RECALL_ID, true);
 
             setNodeDisabled(MEMORY_SHOW_ID, false);
 
-            checkButtonColorAndFont(new String[]{MEMORY_SHOW_ID},
+            checkColorAndFontForButtons(new String[]{MEMORY_SHOW_ID},
                     lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
-                    grayColor, veryDarkGrayColor, segoeSemibold_12);
+                    grayColor, veryDarkGrayColor);
 
             setNodeDisabled(MEMORY_SHOW_ID, true);
 
             //navigation
-            checkButtonColorAndFont(new String[]{NAVIGATION_ID},
+            checkColorAndFontForButtons(new String[]{NAVIGATION_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_16,
-                    grayColor, veryDarkGrayColor, segoeAssets_16);
+                    grayColor, veryDarkGrayColor);
 
             //history
-            checkButtonColorAndFont(new String[]{HISTORY_ID},
+            checkColorAndFontForButtons(new String[]{HISTORY_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_16,
-                    lightGrayColor, veryDarkGrayColor, segoeAssets_16);
+                    lightGrayColor, veryDarkGrayColor);
 
             //arrows
             setNodeVisible(RIGHT_ARROW_ID, true);
             setNodeVisible(LEFT_ARROW_ID, true);
 
-            checkButtonColorAndFont(new String[]{RIGHT_ARROW_ID, LEFT_ARROW_ID},
+            checkColorAndFontForButtons(new String[]{RIGHT_ARROW_ID, LEFT_ARROW_ID},
                     lightGrayColor, strongBlueColor, system_12,
-                    grayColor, veryDarkGrayColor, system_12);
+                    grayColor, veryDarkGrayColor);
 
             setNodeVisible(RIGHT_ARROW_ID, false);
             setNodeVisible(LEFT_ARROW_ID, false);
 
             //minimize and expand
-            checkButtonColorAndFont(new String[]{HIDE_ID, EXPAND_ID},
+            checkColorAndFontForButtons(new String[]{HIDE_ID, EXPAND_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
-                    grayColor, veryDarkGrayColor, segoeAssets_10);
+                    grayColor, veryDarkGrayColor);
 
             //close
-            checkButtonColorAndFont(new String[]{CLOSE_ID},
+            checkColorAndFontForButtons(new String[]{CLOSE_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
-                    vividRedColor, whiteColor, segoeAssets_10);
+                    vividRedColor, whiteColor);
 
             //navigation buttons in scroll pane
             setNodeVisible(NAVIGATION_PANEL_ID, true);
             setNodeVisible(ABOUT_PANEL_ID, true);
             setNodeVisible(NAVIGATION_BLOCK_ID, true);
 
-            checkButtonColorAndFont(new String[]{STANDARD_MODE_ID, SCIENTIFIC_MODE_ID, PROGRAMMER_MODE_ID,
+            checkColorAndFontForButtons(new String[]{STANDARD_MODE_ID, SCIENTIFIC_MODE_ID, PROGRAMMER_MODE_ID,
                             DATE_CALCULATION_MODE_ID, CURRENCY_MODE_ID, VOLUME_MODE_ID, LENGTH_MODE_ID},
                     lightGrayColor, veryDarkGrayColor, segoeUI_15,
-                    grayColor, veryDarkGrayColor, segoeUI_15);
+                    grayColor, veryDarkGrayColor);
 
             robot.scroll(SCROLL_AMOUNT, VerticalDirection.DOWN);
 
-            checkButtonColorAndFont(new String[]{WEIGHT_AND_MASS_MODE_ID, TEMPERATURE_MODE_ID, ENERGY_MODE_ID,
+            checkColorAndFontForButtons(new String[]{WEIGHT_AND_MASS_MODE_ID, TEMPERATURE_MODE_ID, ENERGY_MODE_ID,
                             AREA_MODE_ID},
                     lightGrayColor, veryDarkGrayColor, segoeUI_15,
-                    grayColor, veryDarkGrayColor, segoeUI_15);
+                    grayColor, veryDarkGrayColor);
 
             robot.scroll(SCROLL_AMOUNT, VerticalDirection.DOWN);
 
-            checkButtonColorAndFont(new String[]{SPEED_MODE_ID, TIME_MODE_ID, POWER_MODE_ID, DATA_MODE_ID, PRESSURE_MODE_ID,
+            checkColorAndFontForButtons(new String[]{SPEED_MODE_ID, TIME_MODE_ID, POWER_MODE_ID, DATA_MODE_ID, PRESSURE_MODE_ID,
                             ANGLE_MODE_ID, ABOUT_ID},
                     lightGrayColor, veryDarkGrayColor, segoeUI_15,
-                    grayColor, veryDarkGrayColor, segoeUI_15);
+                    grayColor, veryDarkGrayColor);
 
             //check that standard operations buttons is under the navigation block,
             // while buttons in top panel are not under the block
-            checkButtonColorAndFont(new String[]{DIVIDE_ID, MULTIPLY_ID, SUBTRACT_ID, ADD_ID, EQUALS_ID},
+            checkColorAndFontForButtons(new String[]{DIVIDE_ID, MULTIPLY_ID, SUBTRACT_ID, ADD_ID, EQUALS_ID},
                     veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
-                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5);
+                    veryLightGrayColor, veryDarkGrayColor);
 
             //minimize and expand
-            checkButtonColorAndFont(new String[]{HIDE_ID, EXPAND_ID},
+            checkColorAndFontForButtons(new String[]{HIDE_ID, EXPAND_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
-                    grayColor, veryDarkGrayColor, segoeAssets_10);
+                    grayColor, veryDarkGrayColor);
 
             //close
-            checkButtonColorAndFont(new String[]{CLOSE_ID},
+            checkColorAndFontForButtons(new String[]{CLOSE_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
-                    vividRedColor, whiteColor, segoeAssets_10);
+                    vividRedColor, whiteColor);
 
             setNodeVisible(NAVIGATION_PANEL_ID, false);
             setNodeVisible(ABOUT_PANEL_ID, false);
@@ -189,19 +190,19 @@ public class ViewTest extends RobotControl {
             setNodeVisible(MEMORY_PANEL_ID, true);
             setNodeVisible(MEMORY_BLOCK_ID, true);
 
-            checkButtonColorAndFont(new String[]{NAVIGATION_ID},
+            checkColorAndFontForButtons(new String[]{NAVIGATION_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_16,
-                    lightGrayColor, veryDarkGrayColor, segoeAssets_16);
+                    lightGrayColor, veryDarkGrayColor);
 
             //minimize and expand
-            checkButtonColorAndFont(new String[]{HIDE_ID, EXPAND_ID},
+            checkColorAndFontForButtons(new String[]{HIDE_ID, EXPAND_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
-                    grayColor, veryDarkGrayColor, segoeAssets_10);
+                    grayColor, veryDarkGrayColor);
 
             //close
-            checkButtonColorAndFont(new String[]{CLOSE_ID},
+            checkColorAndFontForButtons(new String[]{CLOSE_ID},
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
-                    vividRedColor, whiteColor, segoeAssets_10);
+                    vividRedColor, whiteColor);
 
             setNodeVisible(MEMORY_PANEL_ID, false);
             setNodeVisible(MEMORY_BLOCK_ID, false);
@@ -209,16 +210,16 @@ public class ViewTest extends RobotControl {
 
         //labels
         {
-            checkLabelColorAndFont(new String[]{TITLE_LABEL_ID}, veryDarkGrayColor, system_12);
-            checkLabelColorAndFont(new String[]{TYPE_LABEL_ID}, veryDarkGrayColor, system_18);
-            checkLabelColorAndFont(new String[]{EQUATION_LABEL_ID}, veryDarkGrayColor, segoeSemilight_14);
-            checkLabelColorAndFont(new String[]{SCREEN_LABEL_ID}, veryDarkGrayColor, segoeSemibold_47);
-            checkLabelColorAndFont(new String[]{MODE_LABEL_ID, CONVERTER_LABEL_ID}, veryDarkGrayColor, systemBold_14);
-            checkLabelColorAndFont(new String[]{MEMORY_SHOW_SYMBOL}, veryDarkGrayColor, segoeAssets_6);
-            checkLabelColorAndFont(new String[]{STANDARD_MODE_SYMBOL, DATE_CALCULATION_MODE_SYMBOL, LENGTH_MODE_SYMBOL,
+            checkColorAndFontForLabels(new String[]{TITLE_LABEL_ID}, veryDarkGrayColor, system_12);
+            checkColorAndFontForLabels(new String[]{TYPE_LABEL_ID}, veryDarkGrayColor, system_18);
+            checkColorAndFontForLabels(new String[]{EQUATION_LABEL_ID}, veryDarkGrayColor, segoeSemilight_14);
+            checkColorAndFontForLabels(new String[]{SCREEN_LABEL_ID}, veryDarkGrayColor, segoeSemibold_47);
+            checkColorAndFontForLabels(new String[]{MODE_LABEL_ID, CONVERTER_LABEL_ID}, veryDarkGrayColor, systemBold_14);
+            checkColorAndFontForLabels(new String[]{MEMORY_SHOW_SYMBOL}, veryDarkGrayColor, segoeAssets_6);
+            checkColorAndFontForLabels(new String[]{STANDARD_MODE_SYMBOL, DATE_CALCULATION_MODE_SYMBOL, LENGTH_MODE_SYMBOL,
                             AREA_MODE_SYMBOL, POWER_MODE_SYMBOL, PRESSURE_MODE_SYMBOL, ABOUT_SYMBOL},
                     veryDarkGrayColor, segoeAssets_16);
-            checkLabelColorAndFont(new String[]{SCIENTIFIC_MODE_SYMBOL, PROGRAMMER_MODE_SYMBOL, CURRENCY_MODE_SYMBOL,
+            checkColorAndFontForLabels(new String[]{SCIENTIFIC_MODE_SYMBOL, PROGRAMMER_MODE_SYMBOL, CURRENCY_MODE_SYMBOL,
                             VOLUME_MODE_SYMBOL, WEIGHT_AND_MASS_MODE_SYMBOL, TEMPERATURE_MODE_SYMBOL, ENERGY_MODE_SYMBOL,
                             SPEED_MODE_SYMBOL, TIME_MODE_SYMBOL, DATA_MODE_SYMBOL, ANGLE_MODE_SYMBOL},
                     veryDarkGrayColor, calcAssets_15);
@@ -226,11 +227,78 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * @todo
+     * Tests for text that buttons and labels contain.
      */
     @Test
     public void textTests() {
+        //buttons
+        {
+            checkTextForButton(ONE_ID, "1");
+            checkTextForButton(TWO_ID, "2");
+            checkTextForButton(THREE_ID, "3");
+            checkTextForButton(FOUR_ID, "4");
+            checkTextForButton(FIVE_ID, "5");
+            checkTextForButton(SIX_ID, "6");
+            checkTextForButton(SEVEN_ID, "7");
+            checkTextForButton(EIGHT_ID, "8");
+            checkTextForButton(NINE_ID, "9");
+            checkTextForButton(ZERO_ID, "0");
+            checkTextForButton(DOT_ID, ".");
+            checkTextForButton(ADD_ID, "\uE948");
+            checkTextForButton(SUBTRACT_ID, "\uE949");
+            checkTextForButton(MULTIPLY_ID, "\uE947");
+            checkTextForButton(DIVIDE_ID, "\uE94A");
+            checkTextForButton(EQUALS_ID, "\uE94E");
+            checkTextForButton(PERCENT_ID, "\uE94C");
+            checkTextForButton(NEGATE_ID, "\uE94D");
+            checkTextForButton(SQR_ID, "\uD835\uDC65²");
+            checkTextForButton(SQRT_ID, "\uE94B");
+            checkTextForButton(INVERSE_ID, "⅟\uD835\uDC65");
+            checkTextForButton(CLEAR_ALL_ID, "C");
+            checkTextForButton(CLEAR_TEXT_ID, "CE");
+            checkTextForButton(BACKSPACE_ID, "\uE94F");
+            checkTextForButton(MEMORY_CLEAR_ID, "MC");
+            checkTextForButton(MEMORY_RECALL_ID, "MR");
+            checkTextForButton(MEMORY_ADD_ID, "M+");
+            checkTextForButton(MEMORY_SUBTRACT_ID, "M-");
+            checkTextForButton(MEMORY_STORE_ID, "MS");
+            checkTextForButton(MEMORY_SHOW_ID, "M");
+            checkTextForButton(NAVIGATION_ID, "\uE700");
+            checkTextForButton(HISTORY_ID, "\uE81C");
+            checkTextForButton(HIDE_ID, "\uE921");
+            checkTextForButton(EXPAND_ID, "\uE922");
+            checkTextForButton(CLOSE_ID, "\uE8BB");
+            checkTextForButton(STANDARD_MODE_ID, "Standard");
+            checkTextForButton(SCIENTIFIC_MODE_ID, "Scientific");
+            checkTextForButton(PROGRAMMER_MODE_ID, "Programmer");
+            checkTextForButton(DATE_CALCULATION_MODE_ID, "Date Calculation");
+            checkTextForButton(CURRENCY_MODE_ID, "Currency");
+            checkTextForButton(VOLUME_MODE_ID, "Volume");
+            checkTextForButton(LENGTH_MODE_ID, "Length");
+            checkTextForButton(WEIGHT_AND_MASS_MODE_ID, "Weight and Mass");
+            checkTextForButton(TEMPERATURE_MODE_ID, "Temperature");
+            checkTextForButton(ENERGY_MODE_ID, "Energy");
+            checkTextForButton(AREA_MODE_ID, "Area");
+            checkTextForButton(SPEED_MODE_ID, "Speed");
+            checkTextForButton(TIME_MODE_ID, "Time");
+            checkTextForButton(POWER_MODE_ID, "Power");
+            checkTextForButton(DATA_MODE_ID, "Data");
+            checkTextForButton(PRESSURE_MODE_ID, "Pressure");
+            checkTextForButton(ANGLE_MODE_ID, "Angle");
+            checkTextForButton(ABOUT_ID, "About");
+        }
 
+        //labels
+        {
+            checkTextForLabel(TITLE_LABEL_ID, "Calculator");
+            checkTextForLabel(TYPE_LABEL_ID, "Standard");
+            checkTextForLabel(EQUATION_LABEL_ID, "");
+            checkTextForLabel(SCREEN_LABEL_ID, "0");
+            checkTextForLabel(MODE_LABEL_ID, "Calculator");
+            checkTextForLabel(CONVERTER_LABEL_ID, "Converter");
+            checkTextForLabel(RIGHT_ARROW_SYMBOL, "\uE970");
+            checkTextForLabel(LEFT_ARROW_SYMBOL, "\uE96F");
+        }
     }
 
     /**
@@ -316,26 +384,23 @@ public class ViewTest extends RobotControl {
      * @param expectedColorOnHover     background color that should be set for
      *                                 every button in array while button is hovered.
      * @param expectedTextColorOnHover text color that should be set for every button in array while button is hovered.
-     * @param expectedFontOnHover      font that should be set for every button in array while button is hovered.
      */
-    private void checkButtonColorAndFont(String[] selectors,
-                                         String expectedColor, String expectedTextColor,
-                                         Font expectedFont,
-                                         String expectedColorOnHover, String expectedTextColorOnHover,
-                                         Font expectedFontOnHover) {
+    private void checkColorAndFontForButtons(String[] selectors,
+                                             String expectedColor, String expectedTextColor,
+                                             Font expectedFont,
+                                             String expectedColorOnHover, String expectedTextColorOnHover) {
 
         for (String selector : selectors) {
-            Button control = getButtonBySelector(selector);
+            Button button = getButtonBySelector(selector);
 
-            assertEquals(expectedColor, control.getBackground().getFills().get(0).getFill().toString());
-            assertEquals(expectedTextColor, control.getTextFill().toString());
-            assertEquals(expectedFont, control.getFont());
+            assertEquals(expectedColor, button.getBackground().getFills().get(0).getFill().toString());
+            assertEquals(expectedTextColor, button.getTextFill().toString());
+            assertEquals(expectedFont, button.getFont());
 
-            hoverOn(control);
+            hoverOn(button);
 
-            assertEquals(expectedColorOnHover, control.getBackground().getFills().get(0).getFill().toString());
-            assertEquals(expectedTextColorOnHover, control.getTextFill().toString());
-            assertEquals(expectedFontOnHover, control.getFont());
+            assertEquals(expectedColorOnHover, button.getBackground().getFills().get(0).getFill().toString());
+            assertEquals(expectedTextColorOnHover, button.getTextFill().toString());
         }
     }
 
@@ -346,13 +411,35 @@ public class ViewTest extends RobotControl {
      * @param expectedTextColor text color that should be set for every label in array.
      * @param expectedFont      font that should be set for every label in array.
      */
-    private void checkLabelColorAndFont(String[] selectors, String expectedTextColor, Font expectedFont) {
+    private void checkColorAndFontForLabels(String[] selectors, String expectedTextColor, Font expectedFont) {
 
         for (String selector : selectors) {
-            Labeled control = getLabeledBySelector(selector);
+            Labeled labeled = getLabeledBySelector(selector);
 
-            assertEquals(expectedTextColor, control.getTextFill().toString());
-            assertEquals(expectedFont, control.getFont());
+            assertEquals(expectedTextColor, labeled.getTextFill().toString());
+            assertEquals(expectedFont, labeled.getFont());
         }
+    }
+
+    /**
+     * Checks that buttons has required text.
+     * @param selector button's selector.
+     * @param expectedText text that button should contain.
+     */
+    private void checkTextForButton(String selector, String expectedText) {
+        Button button = getButtonBySelector(selector);
+
+        assertEquals(expectedText, button.getText());
+    }
+
+    /**
+     * Checks that label has required text.
+     * @param selector label's selector.
+     * @param expectedText text that label should contain.
+     */
+    private void checkTextForLabel(String selector, String expectedText) {
+        Labeled labeled = getLabeledBySelector(selector);
+
+        assertEquals(expectedText, labeled.getText());
     }
 }

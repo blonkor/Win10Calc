@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ViewTest.colorAndFontTests">
+  <component name="RunManager" selected="JUnit.ViewTest.textTests">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -93,22 +94,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.checkClicks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="checkClicks" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -162,6 +147,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ViewTest.textTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="view.tests" />
+      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
+      <option name="METHOD_NAME" value="textTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -181,19 +182,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.model in Win10Calc" />
-      <item itemvalue="JUnit.ViewTest.checkClicks" />
       <item itemvalue="JUnit.ViewTest.checkHoverColorTests" />
       <item itemvalue="JUnit.ViewTest.checkColorTests" />
       <item itemvalue="JUnit.ViewTest.colorAndFontTests" />
       <item itemvalue="Application.Launcher" />
+      <item itemvalue="JUnit.ViewTest.textTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ViewTest.textTests" />
         <item itemvalue="JUnit.ViewTest.colorAndFontTests" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ViewTest.checkColorTests" />
         <item itemvalue="JUnit.ViewTest.checkHoverColorTests" />
-        <item itemvalue="JUnit.ViewTest.checkClicks" />
       </list>
     </recent_temporary>
   </component>
@@ -207,13 +208,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00016" summary="View changed. Few fields names changed. Few comments changed.">
-      <created>1564938855789</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1564938855789</updated>
     </task>
     <task id="LOCAL-00017" summary="View changed.">
       <created>1565001790584</created>
@@ -551,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566687827758</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Removing tooltips.">
+      <created>1566754099756</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1566754099757</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -585,7 +586,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for model for add operation created." />
     <MESSAGE value="Expected result for model tests for multiply operation corrected." />
     <MESSAGE value="Several new tests for model for subtract operation created. Expected result for several model tests for subtract operation corrected. Tests for model for divide operation created (but expected result for these tests is still incorrect)." />
     <MESSAGE value="Tests for model for binary operations completed. Several bug fixes with divide operation and validation in model." />
@@ -610,7 +610,8 @@
     <MESSAGE value="Created class for FxRobot methods for better code style. Added todo items in view tests." />
     <MESSAGE value="Tests for labels (color and font checking) created. Several view fixes. JavaDoc updated." />
     <MESSAGE value="View tests and view refactoring." />
-    <option name="LAST_COMMIT_MESSAGE" value="View tests and view refactoring." />
+    <MESSAGE value="Removing tooltips." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removing tooltips." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
