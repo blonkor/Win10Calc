@@ -1,13 +1,15 @@
 package view.tests;
 
-import com.implemica.bormashenko.calculator.controller.Controller;
+import com.implemica.bormashenko.calculator.view.View;
 import javafx.geometry.VerticalDirection;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
 import javafx.scene.text.Font;
+import javafx.stage.Window;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import view.util.RobotControl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +21,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see com.implemica.bormashenko.calculator.view.View
  */
 public class ViewTest extends RobotControl {
+
+    /**
+     * Default application's width.
+     */
+    private static int DEFAULT_WIDTH = 322;
+
+    /**
+     * Default application's height.
+     */
+    private static int DEFAULT_HEIGHT = 501;
+
+    /**
+     * Default application's coordinate X.
+     */
+    private static int DEFAULT_X = 700;
+
+    /**
+     * Default application's coordinate Y.
+     */
+    private static int DEFAULT_Y = 150;
 
     /**
      * Tests for background color, color of text and font for buttons and labels.
@@ -413,6 +435,132 @@ public class ViewTest extends RobotControl {
      */
     @Test
     public void resizeTests() {
+        Window window = getWindowByIndex(0);
+        restoreWindowToDefault();
+
+        int negTen = 10;
+        int negFifty = 50;
+        int negHundred = 100;
+        int negFiveHundred = 500;
+        int negThousand = 1000;
+        int ten = 10;
+        int fifty = 50;
+        int hundred = 100;
+        int fiveHundred = 500;
+        int thousand = 1000;
+        //right up corner
+        //narrow width
+        //narrow height
+//        checkResize(window.getX(), window.getY(), ten, ten,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), ten, fifty,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), ten, hundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), ten, fiveHundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), ten, thousand,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//
+//        checkResize(window.getX(), window.getY(), fifty, ten,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fifty, fifty,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fifty, hundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fifty, fiveHundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fifty, thousand,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//
+//        checkResize(window.getX(), window.getY(), hundred, ten,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), hundred, fifty,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), hundred, hundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), hundred, fiveHundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), hundred, thousand,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//
+//        checkResize(window.getX(), window.getY(), fiveHundred, ten,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fiveHundred, fifty,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fiveHundred, hundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fiveHundred, fiveHundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), fiveHundred, thousand,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//
+//        checkResize(window.getX(), window.getY(), thousand, ten,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), thousand, fifty,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), thousand, hundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), thousand, fiveHundred,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+//        checkResize(window.getX(), window.getY(), thousand, thousand,
+//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+
+        //expand height
+        checkResize(window.getX(), window.getY(), ten, negTen,
+                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
+        checkResize(window.getX(), window.getY(), ten, negFifty,
+                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
+        checkResize(window.getX(), window.getY(), ten, negHundred,
+                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
+        checkResize(window.getX(), window.getY(), ten, negFiveHundred,
+                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
+        checkResize(window.getX(), window.getY(), ten, negThousand,
+                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+
+        checkResize(window.getX(), window.getY(), fifty, negTen,
+                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
+        checkResize(window.getX(), window.getY(), fifty, negFifty,
+                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
+        checkResize(window.getX(), window.getY(), fifty, negHundred,
+                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
+        checkResize(window.getX(), window.getY(), fifty, negFiveHundred,
+                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
+        checkResize(window.getX(), window.getY(), fifty, negThousand,
+                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+
+        checkResize(window.getX(), window.getY(), hundred, negTen,
+                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
+        checkResize(window.getX(), window.getY(), hundred, negFifty,
+                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
+        checkResize(window.getX(), window.getY(), hundred, negHundred,
+                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
+        checkResize(window.getX(), window.getY(), hundred, negFiveHundred,
+                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
+        checkResize(window.getX(), window.getY(), hundred, negThousand,
+                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+
+        checkResize(window.getX(), window.getY(), fiveHundred, negTen,
+                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
+        checkResize(window.getX(), window.getY(), fiveHundred, negFifty,
+                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
+        checkResize(window.getX(), window.getY(), fiveHundred, negHundred,
+                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
+        checkResize(window.getX(), window.getY(), fiveHundred, negFiveHundred,
+                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
+        checkResize(window.getX(), window.getY(), fiveHundred, negThousand,
+                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+
+        checkResize(window.getX(), window.getY(), thousand, negTen,
+                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
+        checkResize(window.getX(), window.getY(), thousand, negFifty,
+                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
+        checkResize(window.getX(), window.getY(), thousand, negHundred,
+                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
+        checkResize(window.getX(), window.getY(), thousand, negFiveHundred,
+                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
+        checkResize(window.getX(), window.getY(), thousand, negThousand,
+                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
 
     }
 
@@ -569,5 +717,45 @@ public class ViewTest extends RobotControl {
         assertEquals(expectedWidth, control.getWidth());
         assertEquals(expectedX, control.getLayoutX());
         assertEquals(expectedY, control.getLayoutY());
+    }
+
+
+    /**
+     * Checks that window has required location and size after being resized.
+     * After each test window's size and location should be restired to default.
+     *
+     * @param fromX          coordinate X from where cursor should start resizing.
+     * @param fromY          coordinate Y from where cursor should start resizing.
+     * @param offsetX        offset for moving cursor by X coordinate.
+     * @param offsetY        offset for moving cursor by Y coordinate.
+     * @param expectedX      coordinate X that window should has after resizing.
+     * @param expectedY      coordinate Y that window should has after resizing.
+     * @param expectedHeight height that window should has after resizing.
+     * @param expectedWidth  window that window should has after resizing.
+     */
+    private void checkResize(double fromX, double fromY, double offsetX, double offsetY,
+                             double expectedX, double expectedY, double expectedWidth, double expectedHeight) {
+        dragFromTo(fromX, fromY, fromX + offsetX, fromY + offsetY);
+
+        Window window = getWindowByIndex(0);
+
+        assertEquals(expectedX, window.getX());
+        assertEquals(expectedY, window.getY());
+        assertEquals(expectedWidth, window.getWidth());
+        assertEquals(expectedHeight, window.getHeight());
+
+        restoreWindowToDefault();
+    }
+
+    /**
+     * Restores window's size and location to default.
+     */
+    private void restoreWindowToDefault() {
+        Window window = getWindowByIndex(0);
+
+        window.setWidth(DEFAULT_WIDTH);
+        window.setHeight(DEFAULT_HEIGHT);
+        window.setX(DEFAULT_X);
+        window.setY(DEFAULT_Y);
     }
 }

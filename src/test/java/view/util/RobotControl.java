@@ -3,9 +3,12 @@ package view.util;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
+import javafx.scene.input.MouseButton;
+import javafx.stage.Window;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.api.FxRobot;
@@ -472,10 +475,10 @@ public class RobotControl extends GuiTest {
 
     @Override
     public void setupStage() {
-        FXTestUtils.launchApp(MainTest.class, "");
+        FXTestUtils.launchApp(SetLauncherAppForTests.class, "");
 
         try {
-            stage = targetWindow(MainTest.getStageFuture().get(25, TimeUnit.SECONDS));
+            stage = targetWindow(SetLauncherAppForTests.getStageFuture().get(25, TimeUnit.SECONDS));
             FXTestUtils.bringToFront(stage);
         } catch (Exception e) {
             throw new RuntimeException("Unable to show stage", e);
@@ -537,11 +540,18 @@ public class RobotControl extends GuiTest {
         FXTestUtils.awaitEvents();
     }
 
+    protected void dragFromTo(double fromX, double fromY, double toX, double toY) {
+        robot.moveTo(fromX, fromY);
+        robot.press(MouseButton.PRIMARY);
+        robot.moveTo(toX, toY);
+        robot.release(MouseButton.PRIMARY);
+    }
+
     /**
      * Enables or disables node.
      *
      * @param selector id or text of node.
-     * @param flag flag for setting up disability.
+     * @param flag     flag for setting up disability.
      */
     protected void setNodeDisabled(String selector, boolean flag) {
         Node control = getNodeBySelector(selector);
@@ -552,7 +562,7 @@ public class RobotControl extends GuiTest {
      * Makes node visible or invisible.
      *
      * @param selector id of node.
-     * @param flag flag for setting visibility.
+     * @param flag     flag for setting visibility.
      */
     protected void setNodeVisible(String selector, boolean flag) {
         Node control = getNodeBySelector(selector);

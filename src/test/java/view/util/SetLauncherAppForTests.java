@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * @author Mykhailo Bormashenko
  * @see Launcher
  */
-public class MainTest extends Launcher {
+public class SetLauncherAppForTests extends Launcher {
 
     /**
      * Something that helps us to run GUI tests.
@@ -20,7 +20,7 @@ public class MainTest extends Launcher {
     /**
      * Constructor for creating application's UI.
      */
-    public MainTest() {
+    public SetLauncherAppForTests() {
         super();
     }
 
