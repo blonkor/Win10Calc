@@ -76,10 +76,10 @@
     </TextFlow>
     <GridPane alignment="CENTER" hgap="2.0" layoutX="4.0" layoutY="75.0" maxHeight="1.7976931348623157E308" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="421.0" prefWidth="314.0" vgap="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="96.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="77.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="78.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="77.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="77.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="77.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="63.0" valignment="TOP" vgrow="ALWAYS" />
@@ -91,7 +91,7 @@
             <RowConstraints minHeight="-Infinity" prefHeight="45.0" valignment="BOTTOM" vgrow="ALWAYS" />
             <RowConstraints minHeight="-Infinity" prefHeight="47.0" valignment="BOTTOM" vgrow="ALWAYS" />
         </rowConstraints>
-        <Button fx:id="percent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#percentOperation" text="" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="percent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#percentOperation" text="" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -102,7 +102,7 @@
                 <Insets left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="clearText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#clearText" text="CE" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="clearText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearText" text="CE" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -113,7 +113,7 @@
                 <Insets left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="seven" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitSeven" text="7" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="seven" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitSeven" text="7" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
@@ -123,7 +123,7 @@
                 <Insets left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="four" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitFour" text="4" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="four" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitFour" text="4" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
@@ -133,7 +133,7 @@
                 <Insets left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="one" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitOne" text="1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="one" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitOne" text="1" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
@@ -143,7 +143,7 @@
                 <Insets left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#negate" text="" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS">
+        <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#negate" text="" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -151,10 +151,10 @@
                 <String fx:value="font_assets" />
             </styleClass>
             <GridPane.margin>
-                <Insets bottom="4.0" left="2.0" />
+                <Insets bottom="2.0" left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#squareRootOperation" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="sqrt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#squareRootOperation" text="" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -162,7 +162,7 @@
                 <String fx:value="font_assets" />
             </styleClass>
         </Button>
-        <Button fx:id="sqr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onMouseClicked="#squareOperation" text="𝑥²" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="sqr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#squareOperation" text="𝑥²" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations_degree" />
                 <String fx:value="very_light_gray_background" />
@@ -181,7 +181,7 @@
                 <Insets right="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="divide" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="50.0" mnemonicParsing="false" onAction="#divideOperation" prefHeight="30.0" prefWidth="50.0" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="divide" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#divideOperation" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -192,7 +192,7 @@
                 <Insets right="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="clearAll" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#clearAll" text="C" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="clearAll" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearAll" text="C" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -200,7 +200,7 @@
                 <String fx:value="font_segoe_ui" />
             </styleClass>
         </Button>
-        <Button fx:id="backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#backspace" text="" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="backspace" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#backspace" text="" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="backspace" />
                 <String fx:value="very_light_gray_background" />
@@ -208,21 +208,21 @@
                 <String fx:value="font_assets" />
             </styleClass>
         </Button>
-        <Button fx:id="eight" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitEight" text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="eight" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitEight" text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
                 <String fx:value="font_segoe_ui_semibold" />
             </styleClass>
         </Button>
-        <Button fx:id="nine" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitNine" text="9" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="nine" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitNine" text="9" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
                 <String fx:value="font_segoe_ui_semibold" />
             </styleClass>
         </Button>
-        <Button fx:id="multiply" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#multiplyOperation" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="multiply" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#multiplyOperation" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -233,7 +233,7 @@
                 <Insets right="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="five" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitFive" text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="five" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitFive" text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
@@ -248,7 +248,7 @@
                 <String fx:value="font_assets" />
             </styleClass>
             <GridPane.margin>
-                <Insets bottom="4.0" right="2.0" />
+                <Insets bottom="2.0" right="2.0" />
             </GridPane.margin>
         </Button>
         <Button fx:id="add" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addOperation" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -262,7 +262,7 @@
                 <Insets right="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="dot" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#makeDecimal" text="." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="dot" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#makeDecimal" text="." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="dot" />
                 <String fx:value="very_light_gray_background" />
@@ -272,41 +272,41 @@
                 <Insets top="10.0" />
             </padding>
             <GridPane.margin>
-                <Insets bottom="4.0" />
+                <Insets bottom="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="zero" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitZero" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="zero" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitZero" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
                 <String fx:value="font_segoe_ui_semibold" />
             </styleClass>
             <GridPane.margin>
-                <Insets bottom="4.0" />
+                <Insets bottom="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="two" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitTwo" text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="two" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitTwo" text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
                 <String fx:value="font_segoe_ui_semibold" />
             </styleClass>
         </Button>
-        <Button fx:id="three" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitThree" text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="three" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitThree" text="3" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
                 <String fx:value="font_segoe_ui_semibold" />
             </styleClass>
         </Button>
-        <Button fx:id="six" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#addDigitSix" text="6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="six" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDigitSix" text="6" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="digits" />
                 <String fx:value="gray_background_on_hover" />
                 <String fx:value="font_segoe_ui_semibold" />
             </styleClass>
         </Button>
-        <Button fx:id="subtract" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" mnemonicParsing="false" onAction="#subtractOperation" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="subtract" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#subtractOperation" text="" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -740,7 +740,7 @@
             </font>
         </Button>
     </AnchorPane>
-    <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationLeft" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="76.0">
+    <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationLeft" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="76.0">
         <styleClass>
             <String fx:value="arrows" />
             <String fx:value="gray_background" />

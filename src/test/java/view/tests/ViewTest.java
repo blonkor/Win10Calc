@@ -1,6 +1,8 @@
 package view.tests;
 
+import com.implemica.bormashenko.calculator.controller.Controller;
 import javafx.geometry.VerticalDirection;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
@@ -244,6 +246,7 @@ public class ViewTest extends RobotControl {
             checkTextForButton(NINE_ID, "9");
             checkTextForButton(ZERO_ID, "0");
             checkTextForButton(DOT_ID, ".");
+
             checkTextForButton(ADD_ID, "\uE948");
             checkTextForButton(SUBTRACT_ID, "\uE949");
             checkTextForButton(MULTIPLY_ID, "\uE947");
@@ -257,17 +260,20 @@ public class ViewTest extends RobotControl {
             checkTextForButton(CLEAR_ALL_ID, "C");
             checkTextForButton(CLEAR_TEXT_ID, "CE");
             checkTextForButton(BACKSPACE_ID, "\uE94F");
+
             checkTextForButton(MEMORY_CLEAR_ID, "MC");
             checkTextForButton(MEMORY_RECALL_ID, "MR");
             checkTextForButton(MEMORY_ADD_ID, "M+");
             checkTextForButton(MEMORY_SUBTRACT_ID, "M-");
             checkTextForButton(MEMORY_STORE_ID, "MS");
             checkTextForButton(MEMORY_SHOW_ID, "M");
+
             checkTextForButton(NAVIGATION_ID, "\uE700");
             checkTextForButton(HISTORY_ID, "\uE81C");
             checkTextForButton(HIDE_ID, "\uE921");
             checkTextForButton(EXPAND_ID, "\uE922");
             checkTextForButton(CLOSE_ID, "\uE8BB");
+
             checkTextForButton(STANDARD_MODE_ID, "Standard");
             checkTextForButton(SCIENTIFIC_MODE_ID, "Scientific");
             checkTextForButton(PROGRAMMER_MODE_ID, "Programmer");
@@ -298,6 +304,107 @@ public class ViewTest extends RobotControl {
             checkTextForLabel(CONVERTER_LABEL_ID, "Converter");
             checkTextForLabel(RIGHT_ARROW_SYMBOL, "\uE970");
             checkTextForLabel(LEFT_ARROW_SYMBOL, "\uE96F");
+        }
+    }
+
+    /**
+     * Tests for size and layouts that buttons and labels have.
+     */
+    @Test
+    public void sizeAndLayoutTests() {
+        //buttons
+        {
+            int mainButtonsHeight = 48;
+            int fourthRowHeight = 46;
+            int memoryHeight = 30;
+            int navigationHeight = 40;
+
+            int mainButtonsWidth = 78;
+            int rightEdgeButtonsWidth = 76;
+            int navigationWidth = 257;
+
+            int firstColumnX = 2;
+            int secondColumnX = 82;
+            int thirdColumnX = 162;
+            int fourthColumnX = 242;
+
+            int memoryY = 1;
+            int thirdRowY = 100;
+            int fourthRowY = 151;
+            int fifthRowY = 200;
+            int sixthRowY = 251;
+            int seventhRowY = 302;
+            int eighthRowY = 353;
+
+            checkSizeAndLayoutForControl(ONE_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, seventhRowY);
+            checkSizeAndLayoutForControl(TWO_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, seventhRowY);
+            checkSizeAndLayoutForControl(THREE_ID, mainButtonsHeight, mainButtonsWidth, thirdColumnX, seventhRowY);
+            checkSizeAndLayoutForControl(FOUR_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, sixthRowY);
+            checkSizeAndLayoutForControl(FIVE_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, sixthRowY);
+            checkSizeAndLayoutForControl(SIX_ID, mainButtonsHeight, mainButtonsWidth, thirdColumnX, sixthRowY);
+            checkSizeAndLayoutForControl(SEVEN_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, fifthRowY);
+            checkSizeAndLayoutForControl(EIGHT_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, fifthRowY);
+            checkSizeAndLayoutForControl(NINE_ID, mainButtonsHeight, mainButtonsWidth, thirdColumnX, fifthRowY);
+            checkSizeAndLayoutForControl(ZERO_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, eighthRowY);
+            checkSizeAndLayoutForControl(DOT_ID, mainButtonsHeight, mainButtonsWidth, thirdColumnX, eighthRowY);
+
+            checkSizeAndLayoutForControl(ADD_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, seventhRowY);
+            checkSizeAndLayoutForControl(SUBTRACT_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, sixthRowY);
+            checkSizeAndLayoutForControl(MULTIPLY_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, fifthRowY);
+            checkSizeAndLayoutForControl(DIVIDE_ID, fourthRowHeight, rightEdgeButtonsWidth, fourthColumnX, fourthRowY);
+            checkSizeAndLayoutForControl(EQUALS_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, eighthRowY);
+            checkSizeAndLayoutForControl(PERCENT_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(NEGATE_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, eighthRowY);
+            checkSizeAndLayoutForControl(SQR_ID, mainButtonsHeight, mainButtonsWidth, thirdColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(SQRT_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(INVERSE_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(CLEAR_ALL_ID, fourthRowHeight, mainButtonsWidth, secondColumnX, fourthRowY);
+            checkSizeAndLayoutForControl(CLEAR_TEXT_ID, fourthRowHeight, mainButtonsWidth, firstColumnX, fourthRowY);
+            checkSizeAndLayoutForControl(BACKSPACE_ID, fourthRowHeight, mainButtonsWidth, thirdColumnX, fourthRowY);
+
+            checkSizeAndLayoutForControl(MEMORY_CLEAR_ID, memoryHeight, 53, 5, memoryY);
+            checkSizeAndLayoutForControl(MEMORY_RECALL_ID, memoryHeight, 53, 58, memoryY);
+            checkSizeAndLayoutForControl(MEMORY_ADD_ID, memoryHeight, 53, 111, memoryY);
+            checkSizeAndLayoutForControl(MEMORY_SUBTRACT_ID, memoryHeight, 49, 164, memoryY);
+            checkSizeAndLayoutForControl(MEMORY_STORE_ID, memoryHeight, 51, 213, memoryY);
+            checkSizeAndLayoutForControl(MEMORY_SHOW_ID, memoryHeight, 51, 264, memoryY);
+
+            checkSizeAndLayoutForControl(NAVIGATION_ID, navigationHeight, 40, 0, 0);
+            checkSizeAndLayoutForControl(HISTORY_ID, navigationHeight, 40, 0, 0);
+            checkSizeAndLayoutForControl(HIDE_ID, 32, 46, 2, 0);
+            checkSizeAndLayoutForControl(EXPAND_ID, 32, 46, 48, 0);
+            checkSizeAndLayoutForControl(CLOSE_ID, 32, 46, 94, 0);
+
+            checkSizeAndLayoutForControl(STANDARD_MODE_ID, navigationHeight, navigationWidth, 0, 40);
+            checkSizeAndLayoutForControl(SCIENTIFIC_MODE_ID, navigationHeight, navigationWidth, 0, 80);
+            checkSizeAndLayoutForControl(PROGRAMMER_MODE_ID, navigationHeight, navigationWidth, 0, 120);
+            checkSizeAndLayoutForControl(DATE_CALCULATION_MODE_ID, navigationHeight, navigationWidth, 0, 160);
+            checkSizeAndLayoutForControl(CURRENCY_MODE_ID, navigationHeight, navigationWidth, 0, 240);
+            checkSizeAndLayoutForControl(VOLUME_MODE_ID, navigationHeight, navigationWidth, 0, 280);
+            checkSizeAndLayoutForControl(LENGTH_MODE_ID, navigationHeight, navigationWidth, 0, 320);
+            checkSizeAndLayoutForControl(WEIGHT_AND_MASS_MODE_ID, navigationHeight, navigationWidth, 0, 360);
+            checkSizeAndLayoutForControl(TEMPERATURE_MODE_ID, navigationHeight, navigationWidth, 0, 400);
+            checkSizeAndLayoutForControl(ENERGY_MODE_ID, navigationHeight, navigationWidth, 0, 440);
+            checkSizeAndLayoutForControl(AREA_MODE_ID, navigationHeight, navigationWidth, 0, 480);
+            checkSizeAndLayoutForControl(SPEED_MODE_ID, navigationHeight, navigationWidth, 0, 520);
+            checkSizeAndLayoutForControl(TIME_MODE_ID, navigationHeight, navigationWidth, 0, 560);
+            checkSizeAndLayoutForControl(POWER_MODE_ID, navigationHeight, navigationWidth, 0, 600);
+            checkSizeAndLayoutForControl(DATA_MODE_ID, navigationHeight, navigationWidth, 0, 640);
+            checkSizeAndLayoutForControl(PRESSURE_MODE_ID, navigationHeight, navigationWidth, 0, 680);
+            checkSizeAndLayoutForControl(ANGLE_MODE_ID, navigationHeight, navigationWidth, 0, 720);
+            checkSizeAndLayoutForControl(ABOUT_ID, navigationHeight, 256, 0, 24);
+        }
+
+        //labels
+        {
+            checkSizeAndLayoutForControl(TITLE_LABEL_ID, 17, 71, 0, 0);
+            checkSizeAndLayoutForControl(TYPE_LABEL_ID, 27, 72, 0, 0);
+            checkSizeAndLayoutForControl(EQUATION_LABEL_ID, 20, 0, 301, 0);
+            checkSizeAndLayoutForControl(SCREEN_LABEL_ID, 69, 27, 283, 0);
+            checkSizeAndLayoutForControl(MODE_LABEL_ID, 40, 257, 0, 0);
+            checkSizeAndLayoutForControl(CONVERTER_LABEL_ID, 40, 257, 0, 200);
+            checkSizeAndLayoutForControl(RIGHT_ARROW_SYMBOL, 17, 20, 0, 0);
+            checkSizeAndLayoutForControl(LEFT_ARROW_SYMBOL, 17, 20, 0, 0);
         }
     }
 
@@ -423,7 +530,8 @@ public class ViewTest extends RobotControl {
 
     /**
      * Checks that buttons has required text.
-     * @param selector button's selector.
+     *
+     * @param selector     button's selector.
      * @param expectedText text that button should contain.
      */
     private void checkTextForButton(String selector, String expectedText) {
@@ -434,12 +542,32 @@ public class ViewTest extends RobotControl {
 
     /**
      * Checks that label has required text.
-     * @param selector label's selector.
+     *
+     * @param selector     label's selector.
      * @param expectedText text that label should contain.
      */
     private void checkTextForLabel(String selector, String expectedText) {
         Labeled labeled = getLabeledBySelector(selector);
 
         assertEquals(expectedText, labeled.getText());
+    }
+
+    /**
+     * Checks that control has required size and layout.
+     *
+     * @param selector       control's selector.
+     * @param expectedHeight current height that control should has.
+     * @param expectedWidth  current width that control should has.
+     * @param expectedX      current layout X that control should has.
+     * @param expectedY      current layout Y that control should has.
+     */
+    private void checkSizeAndLayoutForControl(String selector, int expectedHeight, int expectedWidth,
+                                              int expectedX, int expectedY) {
+        Control control = getControlBySelector(selector);
+
+        assertEquals(expectedHeight, control.getHeight());
+        assertEquals(expectedWidth, control.getWidth());
+        assertEquals(expectedX, control.getLayoutX());
+        assertEquals(expectedY, control.getLayoutY());
     }
 }

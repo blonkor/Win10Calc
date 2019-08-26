@@ -4,6 +4,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
@@ -508,6 +509,16 @@ public class RobotControl extends GuiTest {
      */
     protected Labeled getLabeledBySelector(String selector) {
         return robot.lookup(selector).queryLabeled();
+    }
+
+    /**
+     * Looks up for control by selector.
+     *
+     * @param selector id or text of control.
+     * @return control found by selector.
+     */
+    protected Control getControlBySelector(String selector) {
+        return robot.lookup(selector).query();
     }
 
     /**
