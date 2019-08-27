@@ -25,19 +25,9 @@ public class ExpandListener implements EventHandler<ActionEvent> {
     private static final String MINIMIZED_ICON = "\uE922";
 
     /**
-     * Text shown in tooltip while application is minimized.
-     */
-    private static final String MINIMIZED_TOOLTIP_TEXT = "Maximize";
-
-    /**
      * Unicode escape sequence for symbol "ChromeRestore" in "Segoe MDL2 Assets" font.
      */
     private static final String MAXIMIZED_ICON = "\uE923";
-
-    /**
-     * Text shown in tooltip while application is maximized.
-     */
-    private static final String MAXIMIZED_TOOLTIP_TEXT = "Restore down";
 
     /**
      * JavaFX scene.
@@ -85,10 +75,8 @@ public class ExpandListener implements EventHandler<ActionEvent> {
 
         if (!isMaximized) {
             expand.setText(MAXIMIZED_ICON);
-            expand.getTooltip().setText(MAXIMIZED_TOOLTIP_TEXT);
         } else {
             expand.setText(MINIMIZED_ICON);
-            expand.getTooltip().setText(MINIMIZED_TOOLTIP_TEXT);
         }
     }
 }

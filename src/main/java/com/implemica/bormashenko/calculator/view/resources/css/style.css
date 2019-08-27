@@ -13,6 +13,10 @@
     -fx-background-color: transparent;
 }
 
+.border_panes {
+    -fx-background-color: transparent;
+}
+
 .scroll-bar .thumb {
     -fx-background-color: #8a8a8a;
 }

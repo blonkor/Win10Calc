@@ -23,12 +23,12 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     /**
      * Minimal window width.
      */
-    private static final double MIN_WIDTH = 322;
+    private static final double MIN_WIDTH = 342;
 
     /**
      * Minimal window height.
      */
-    private static final double MIN_HEIGHT = 501;
+    private static final double MIN_HEIGHT = 521;
 
     /**
      * True if window should be moved horizontally

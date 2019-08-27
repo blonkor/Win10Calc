@@ -31,11 +31,6 @@ public class View implements Serializable {
     private static final String MAXIMIZED_ICON = "\uE923";
 
     /**
-     * Text shown in tooltip while application is maximized.
-     */
-    private static final String MAXIMIZED_TOOLTIP_TEXT = "Restore down";
-
-    /**
      * Path to fxml representation of the application.
      */
     private static final String FXML_PATH = "resources/fxml/calc.fxml";
@@ -83,12 +78,12 @@ public class View implements Serializable {
     /**
      * Minimal width of application.
      */
-    private static final double MIN_WIDTH = 322;
+    private static final double MIN_WIDTH = 342;
 
     /**
      * Maximal width of application.
      */
-    private static final double MIN_HEIGHT = 501;
+    private static final double MIN_HEIGHT = 521;
 
     /**
      * Default application's location X.
@@ -146,7 +141,7 @@ public class View implements Serializable {
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         setParams(primaryStage, scene);
 
@@ -218,7 +213,6 @@ public class View implements Serializable {
         if (isMaximized) {
             Button expand = (Button) scene.lookup(EXPAND_ID);
             expand.setText(MAXIMIZED_ICON);
-            expand.getTooltip().setText(MAXIMIZED_TOOLTIP_TEXT);
         }
     }
 
