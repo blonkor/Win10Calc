@@ -550,6 +550,18 @@ public class RobotControl extends GuiTest {
     }
 
     /**
+     * Restores window's size and location to required.
+     */
+    protected void setWindowsSizeAndLayout(double width, double height, double x, double y) {
+        Window window = getWindowByIndex(0);
+
+        window.setWidth(width);
+        window.setHeight(height);
+        window.setX(x);
+        window.setY(y);
+    }
+
+    /**
      * Enables or disables node.
      *
      * @param selector id or text of node.

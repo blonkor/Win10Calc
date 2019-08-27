@@ -149,7 +149,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
         }
         //right or left resizing
         else if (eventX < BORDER || eventX > width - BORDER) {
-            cursor = Cursor.E_RESIZE;
+            cursor = Cursor.H_RESIZE;
             resizeH = true;
             resizeV = false;
             moveH = (eventX < BORDER);
@@ -157,7 +157,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
         }
         //up or down resizing
         else if (eventY < BORDER || eventY > height - BORDER) {
-            cursor = Cursor.N_RESIZE;
+            cursor = Cursor.V_RESIZE;
             resizeH = false;
             resizeV = true;
             moveH = false;
