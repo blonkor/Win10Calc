@@ -458,15 +458,12 @@ public class RobotControl extends GuiTest {
      */
     protected static final String LEFT_ARROW_SYMBOL = "\uE96F";
 
+    protected static final String TOP_PANEL_ID = "#topPanel";
+
     /**
      * Value for scroll using FxRobot.
      */
     protected static final int SCROLL_AMOUNT = 10;
-
-    /**
-     * Double value of 2.0 for calculating center of node.
-     */
-    private static final double TWO = 2.0;
 
     /**
      * Robot for automatically control application.
@@ -532,8 +529,8 @@ public class RobotControl extends GuiTest {
     protected void hoverOn(Node node) {
         Bounds bounds = node.localToScreen(node.getBoundsInLocal());
 
-        double centerX = (bounds.getMinX() + bounds.getMaxX()) / TWO;
-        double centerY = (bounds.getMinY() + bounds.getMaxY()) / TWO;
+        double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
+        double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
 
         robot.moveTo(centerX, centerY);
 
@@ -589,7 +586,7 @@ public class RobotControl extends GuiTest {
      * @param selector id of node.
      * @return node.
      */
-    private Node getNodeBySelector(String selector) {
+    protected Node getNodeBySelector(String selector) {
         return robot.lookup(selector).query();
     }
 }
