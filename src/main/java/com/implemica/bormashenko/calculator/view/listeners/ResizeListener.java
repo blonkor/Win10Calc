@@ -18,17 +18,17 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     /**
      * Padding for scene in which resize is possible.
      */
-    private static final double BORDER = 3;
+    private static final double BORDER = 2;
 
     /**
      * Minimal window width.
      */
-    private static final double MIN_WIDTH = 342;
+    private static final double MIN_WIDTH = 322;
 
     /**
      * Minimal window height.
      */
-    private static final double MIN_HEIGHT = 521;
+    private static final double MIN_HEIGHT = 501;
 
     /**
      * True if window should be moved horizontally

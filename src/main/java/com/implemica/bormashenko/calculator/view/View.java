@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -78,12 +79,12 @@ public class View implements Serializable {
     /**
      * Minimal width of application.
      */
-    private static final double MIN_WIDTH = 342;
+    private static final double MIN_WIDTH = 322;
 
     /**
      * Maximal width of application.
      */
-    private static final double MIN_HEIGHT = 521;
+    private static final double MIN_HEIGHT = 501;
 
     /**
      * Default application's location X.
@@ -141,7 +142,7 @@ public class View implements Serializable {
         primaryStage.setTitle(TITLE);
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(ICON_PATH)));
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
         setParams(primaryStage, scene);
 

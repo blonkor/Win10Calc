@@ -1,7 +1,10 @@
 package view.tests;
 
 import com.implemica.bormashenko.calculator.view.View;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.VerticalDirection;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
@@ -9,10 +12,10 @@ import javafx.scene.control.Labeled;
 import javafx.scene.text.Font;
 import javafx.stage.Window;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import view.util.RobotControl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.loadui.testfx.GuiTest.getWindowByIndex;
 
 /**
  * Test class for testing view.
@@ -43,10 +46,20 @@ public class ViewTest extends RobotControl {
     private static int DEFAULT_Y = 150;
 
     /**
-     * Tests for background color, color of text and font for buttons and labels.
+     * Runs all tests.
      */
     @Test
-    public void colorAndFontTests() {
+    public void allTests() {
+        colorAndFontTests();
+        textTests();
+        sizeAndLayoutTests();
+        resizeTests();
+    }
+
+    /**
+     * Tests for background color, color of text and font for buttons and labels.
+     */
+    private void colorAndFontTests() {
         //colors
         String whiteColor = "0xffffffff";
         String mostlyWhileColor = "0xfafafaff";
@@ -253,8 +266,7 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for text that buttons and labels contain.
      */
-    @Test
-    public void textTests() {
+    private void textTests() {
         //buttons
         {
             checkTextForButton(ONE_ID, "1");
@@ -332,31 +344,32 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for size and layouts that buttons and labels have.
      */
-    @Test
-    public void sizeAndLayoutTests() {
+    private void sizeAndLayoutTests() {
         //buttons
         {
-            int mainButtonsHeight = 48;
-            int fourthRowHeight = 46;
+            int mainButtonsHeight = 45;
+            int upperEdgeButtonsHeight = 44;
+            int fourthRowHeight = 42;
             int memoryHeight = 30;
             int navigationHeight = 40;
 
-            int mainButtonsWidth = 78;
-            int rightEdgeButtonsWidth = 76;
+
+            int mainButtonsWidth = 79;
+            int rightEdgeButtonsWidth = 77;
             int navigationWidth = 257;
 
             int firstColumnX = 2;
-            int secondColumnX = 82;
-            int thirdColumnX = 162;
-            int fourthColumnX = 242;
+            int secondColumnX = 83;
+            int thirdColumnX = 164;
+            int fourthColumnX = 245;
 
-            int memoryY = 1;
-            int thirdRowY = 100;
-            int fourthRowY = 151;
-            int fifthRowY = 200;
-            int sixthRowY = 251;
-            int seventhRowY = 302;
-            int eighthRowY = 353;
+            int memoryY = 2;
+            int thirdRowY = 101;
+            int fourthRowY = 148;
+            int fifthRowY = 193;
+            int sixthRowY = 241;
+            int seventhRowY = 289;
+            int eighthRowY = 337;
 
             checkSizeAndLayoutForControl(ONE_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, seventhRowY);
             checkSizeAndLayoutForControl(TWO_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, seventhRowY);
@@ -375,11 +388,11 @@ public class ViewTest extends RobotControl {
             checkSizeAndLayoutForControl(MULTIPLY_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, fifthRowY);
             checkSizeAndLayoutForControl(DIVIDE_ID, fourthRowHeight, rightEdgeButtonsWidth, fourthColumnX, fourthRowY);
             checkSizeAndLayoutForControl(EQUALS_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, eighthRowY);
-            checkSizeAndLayoutForControl(PERCENT_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(PERCENT_ID, upperEdgeButtonsHeight, mainButtonsWidth, firstColumnX, thirdRowY);
             checkSizeAndLayoutForControl(NEGATE_ID, mainButtonsHeight, mainButtonsWidth, firstColumnX, eighthRowY);
-            checkSizeAndLayoutForControl(SQR_ID, mainButtonsHeight, mainButtonsWidth, thirdColumnX, thirdRowY);
-            checkSizeAndLayoutForControl(SQRT_ID, mainButtonsHeight, mainButtonsWidth, secondColumnX, thirdRowY);
-            checkSizeAndLayoutForControl(INVERSE_ID, mainButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(SQR_ID, upperEdgeButtonsHeight, mainButtonsWidth, thirdColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(SQRT_ID, upperEdgeButtonsHeight, mainButtonsWidth, secondColumnX, thirdRowY);
+            checkSizeAndLayoutForControl(INVERSE_ID, upperEdgeButtonsHeight, rightEdgeButtonsWidth, fourthColumnX, thirdRowY);
             checkSizeAndLayoutForControl(CLEAR_ALL_ID, fourthRowHeight, mainButtonsWidth, secondColumnX, fourthRowY);
             checkSizeAndLayoutForControl(CLEAR_TEXT_ID, fourthRowHeight, mainButtonsWidth, firstColumnX, fourthRowY);
             checkSizeAndLayoutForControl(BACKSPACE_ID, fourthRowHeight, mainButtonsWidth, thirdColumnX, fourthRowY);
@@ -421,7 +434,7 @@ public class ViewTest extends RobotControl {
         {
             checkSizeAndLayoutForControl(TITLE_LABEL_ID, 17, 71, 0, 0);
             checkSizeAndLayoutForControl(TYPE_LABEL_ID, 27, 72, 0, 0);
-            checkSizeAndLayoutForControl(EQUATION_LABEL_ID, 20, 0, 301, 0);
+            checkSizeAndLayoutForControl(EQUATION_LABEL_ID, 20, 0, 305, 0);
             checkSizeAndLayoutForControl(SCREEN_LABEL_ID, 69, 27, 283, 0);
             checkSizeAndLayoutForControl(MODE_LABEL_ID, 40, 257, 0, 0);
             checkSizeAndLayoutForControl(CONVERTER_LABEL_ID, 40, 257, 0, 200);
@@ -431,143 +444,2127 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * @todo
+     * Tests for resizing application.
      */
-    @Test
-    public void resizeTests() {
-        Window window = getWindowByIndex(0);
+    private void resizeTests() {
         restoreWindowToDefault();
 
-        int negTen = 10;
-        int negFifty = 50;
-        int negHundred = 100;
-        int negFiveHundred = 500;
-        int negThousand = 1000;
         int ten = 10;
         int fifty = 50;
         int hundred = 100;
         int fiveHundred = 500;
         int thousand = 1000;
+
+        //left up corner
+        {
+            //width is not changed
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+
+            //narrow width
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, thousand, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+
+            //expand width
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, 0,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, 0,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, 0,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, 0,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, 0,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, ten,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, fifty,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, hundred,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, fiveHundred,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, thousand,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, ten,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, fifty,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, hundred,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, fiveHundred,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, thousand,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, ten,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, fifty,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, hundred,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, fiveHundred,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, thousand,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, ten,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, fifty,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, hundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, fiveHundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, thousand,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, ten,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, fifty,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, hundred,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, fiveHundred,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, thousand,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, -ten,
+                    DEFAULT_X - ten, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, -fifty,
+                    DEFAULT_X - ten, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, -hundred,
+                    DEFAULT_X - ten, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, -fiveHundred,
+                    DEFAULT_X - ten, 0,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, -thousand,
+                    DEFAULT_X - ten, 0,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -ten,
+                    DEFAULT_X - fifty, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -fifty,
+                    DEFAULT_X - fifty, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -hundred,
+                    DEFAULT_X - fifty, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -fiveHundred,
+                    DEFAULT_X - fifty, 0,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -thousand,
+                    DEFAULT_X - fifty, 0,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -ten,
+                    DEFAULT_X - hundred, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -fifty,
+                    DEFAULT_X - hundred, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -hundred,
+                    DEFAULT_X - hundred, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -fiveHundred,
+                    DEFAULT_X - hundred, 0,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -thousand,
+                    DEFAULT_X - hundred, 0,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -ten,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -fifty,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -hundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -fiveHundred,
+                    DEFAULT_X - fiveHundred, 0,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -thousand,
+                    DEFAULT_X - fiveHundred, 0,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, -ten,
+                    0, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + ten,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, -fifty,
+                    0, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + fifty,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, -hundred,
+                    0, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + hundred,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, -fiveHundred,
+                    0, 0,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y, -thousand, -thousand,
+                    0, 0,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + 150,
+                    Cursor.NW_RESIZE);
+        }
+
         //right up corner
-        //narrow width
-        //narrow height
-//        checkResize(window.getX(), window.getY(), ten, ten,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), ten, fifty,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), ten, hundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), ten, fiveHundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), ten, thousand,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//
-//        checkResize(window.getX(), window.getY(), fifty, ten,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fifty, fifty,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fifty, hundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fifty, fiveHundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fifty, thousand,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//
-//        checkResize(window.getX(), window.getY(), hundred, ten,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), hundred, fifty,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), hundred, hundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), hundred, fiveHundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), hundred, thousand,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//
-//        checkResize(window.getX(), window.getY(), fiveHundred, ten,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fiveHundred, fifty,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fiveHundred, hundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fiveHundred, fiveHundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), fiveHundred, thousand,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//
-//        checkResize(window.getX(), window.getY(), thousand, ten,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), thousand, fifty,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), thousand, hundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), thousand, fiveHundred,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
-//        checkResize(window.getX(), window.getY(), thousand, thousand,
-//                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        {
+            //width is not changed
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y, 0, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NW_RESIZE);
 
-        //expand height
-        checkResize(window.getX(), window.getY(), ten, negTen,
-                window.getX(), window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
-        checkResize(window.getX(), window.getY(), ten, negFifty,
-                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
-        checkResize(window.getX(), window.getY(), ten, negHundred,
-                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
-        checkResize(window.getX(), window.getY(), ten, negFiveHundred,
-                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
-        checkResize(window.getX(), window.getY(), ten, negThousand,
-                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+            //narrow height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
 
-        checkResize(window.getX(), window.getY(), fifty, negTen,
-                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
-        checkResize(window.getX(), window.getY(), fifty, negFifty,
-                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
-        checkResize(window.getX(), window.getY(), fifty, negHundred,
-                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
-        checkResize(window.getX(), window.getY(), fifty, negFiveHundred,
-                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
-        checkResize(window.getX(), window.getY(), fifty, negThousand,
-                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+            //expand height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
 
-        checkResize(window.getX(), window.getY(), hundred, negTen,
-                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
-        checkResize(window.getX(), window.getY(), hundred, negFifty,
-                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
-        checkResize(window.getX(), window.getY(), hundred, negHundred,
-                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
-        checkResize(window.getX(), window.getY(), hundred, negFiveHundred,
-                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
-        checkResize(window.getX(), window.getY(), hundred, negThousand,
-                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
 
-        checkResize(window.getX(), window.getY(), fiveHundred, negTen,
-                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
-        checkResize(window.getX(), window.getY(), fiveHundred, negFifty,
-                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
-        checkResize(window.getX(), window.getY(), fiveHundred, negHundred,
-                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
-        checkResize(window.getX(), window.getY(), fiveHundred, negFiveHundred,
-                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
-        checkResize(window.getX(), window.getY(), fiveHundred, negThousand,
-                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+            //narrow width
+            //height is not changed
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
 
-        checkResize(window.getX(), window.getY(), thousand, negTen,
-                window.getX() + ten, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + ten);
-        checkResize(window.getX(), window.getY(), thousand, negFifty,
-                window.getX() + fifty, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty);
-        checkResize(window.getX(), window.getY(), thousand, negHundred,
-                window.getX() + hundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred);
-        checkResize(window.getX(), window.getY(), thousand, negFiveHundred,
-                window.getX() + fiveHundred, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + fiveHundred);
-        checkResize(window.getX(), window.getY(), thousand, negThousand,
-                window.getX() + thousand, window.getY(), DEFAULT_WIDTH, DEFAULT_HEIGHT + thousand);
+            //narrow height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -thousand, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+
+            //expand width
+            //height is not changed
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.NE_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, -ten,
+                    DEFAULT_X, DEFAULT_Y - ten,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + ten,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, -fifty,
+                    DEFAULT_X, DEFAULT_Y - fifty,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + fifty,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, -hundred,
+                    DEFAULT_X, DEFAULT_Y - hundred,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + hundred,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, -fiveHundred,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, thousand, -thousand,
+                    DEFAULT_X, 0,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + 150,
+                    Cursor.NE_RESIZE);
+        }
+
+        //left down corner
+        {
+            //width is not changed
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+
+            //narrow width
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+
+            //expand width
+            //height is not changed
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, 0,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, 0,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, 0,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, 0,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, 0,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -ten,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -fifty,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -hundred,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -fiveHundred,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -thousand,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -ten,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -fifty,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -hundred,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -fiveHundred,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -thousand,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -ten,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -fifty,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -hundred,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -fiveHundred,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -thousand,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -ten,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -fifty,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -hundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -fiveHundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -thousand,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -ten,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -fifty,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -hundred,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -fiveHundred,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -thousand,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT,
+                    Cursor.SW_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, ten,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, fifty,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, hundred,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, fiveHundred,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, thousand,
+                    DEFAULT_X - ten, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, ten,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, fifty,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, hundred,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, fiveHundred,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, thousand,
+                    DEFAULT_X - fifty, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, ten,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, fifty,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, hundred,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, fiveHundred,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, thousand,
+                    DEFAULT_X - hundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, ten,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, fifty,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, hundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, fiveHundred,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, thousand,
+                    DEFAULT_X - fiveHundred, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, ten,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, fifty,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, hundred,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, fiveHundred,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, thousand,
+                    0, DEFAULT_Y,
+                    DEFAULT_WIDTH + 700, DEFAULT_HEIGHT + 248,
+                    Cursor.SW_RESIZE);
+        }
+
+        //right down corner
+        {
+            //width is not changed
+            //height is not changed
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+
+            //narrow width
+            //height is not changed
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -thousand, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+
+            //expand width
+            //height is not changed
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, 0,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            //narrow height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, -thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT,
+                    Cursor.SE_RESIZE);
+
+            //expand height
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, ten,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + ten - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, fifty,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + fifty - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, hundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + hundred - 1,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, fiveHundred,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, thousand, thousand,
+                    DEFAULT_X, DEFAULT_Y,
+                    DEFAULT_WIDTH + 577, DEFAULT_HEIGHT + 248,
+                    Cursor.SE_RESIZE);
+        }
+
 
     }
 
     /**
      * @todo
      */
-    @Test
     public void moveWindowTests() {
 
     }
@@ -575,7 +2572,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void serializationTests() {
 
     }
@@ -583,7 +2579,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void visibleArrowsTests() {
 
     }
@@ -591,7 +2586,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void exitTests() {
 
     }
@@ -599,7 +2593,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void expandTests() {
 
     }
@@ -607,7 +2600,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void resizeFontTests() {
 
     }
@@ -615,7 +2607,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void hideTests() {
 
     }
@@ -623,7 +2614,6 @@ public class ViewTest extends RobotControl {
     /**
      * @todo
      */
-    @Test
     public void keyBoardTests() {
 
     }
@@ -734,15 +2724,18 @@ public class ViewTest extends RobotControl {
      * @param expectedWidth  window that window should has after resizing.
      */
     private void checkResize(double fromX, double fromY, double offsetX, double offsetY,
-                             double expectedX, double expectedY, double expectedWidth, double expectedHeight) {
+                             double expectedX, double expectedY, double expectedWidth, double expectedHeight,
+                             Cursor expectedCursor) {
         dragFromTo(fromX, fromY, fromX + offsetX, fromY + offsetY);
 
         Window window = getWindowByIndex(0);
 
+        assertEquals(expectedCursor, window.getScene().getCursor());
         assertEquals(expectedX, window.getX());
         assertEquals(expectedY, window.getY());
         assertEquals(expectedWidth, window.getWidth());
         assertEquals(expectedHeight, window.getHeight());
+        assertEquals(expectedCursor, window.getScene().getCursor());
 
         restoreWindowToDefault();
     }
@@ -757,5 +2750,7 @@ public class ViewTest extends RobotControl {
         window.setHeight(DEFAULT_HEIGHT);
         window.setX(DEFAULT_X);
         window.setY(DEFAULT_Y);
+
+
     }
 }

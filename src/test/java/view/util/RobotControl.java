@@ -545,6 +545,8 @@ public class RobotControl extends GuiTest {
         robot.press(MouseButton.PRIMARY);
         robot.moveTo(toX, toY);
         robot.release(MouseButton.PRIMARY);
+
+        FXTestUtils.awaitEvents();
     }
 
     /**

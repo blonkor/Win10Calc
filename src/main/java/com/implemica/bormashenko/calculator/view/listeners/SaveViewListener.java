@@ -10,7 +10,8 @@ import javafx.stage.WindowEvent;
  *
  * @author Mykhailo Bormashenko
  */
-public class SaveViewListener implements EventHandler<WindowEvent>{
+
+public class SaveViewListener implements EventHandler<WindowEvent> {
 
     /**
      * View of application.
