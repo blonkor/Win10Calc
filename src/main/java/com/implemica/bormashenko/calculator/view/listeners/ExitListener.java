@@ -1,7 +1,5 @@
 package com.implemica.bormashenko.calculator.view.listeners;
 
-import com.implemica.bormashenko.calculator.view.View;
-import com.implemica.bormashenko.calculator.view.util.SerializationView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -19,24 +17,16 @@ public class ExitListener implements EventHandler<ActionEvent> {
     private Stage stage;
 
     /**
-     * View of application.
-     */
-    private View view;
-
-    /**
      * Constructor for listener.
      *
      * @param stage JavaFX stage.
-     * @param view  View of application.
      */
-    public ExitListener(Stage stage, View view) {
+    public ExitListener(Stage stage) {
         this.stage = stage;
-        this.view = view;
     }
 
     @Override
     public void handle(ActionEvent event) {
-        SerializationView.saveView(view);
         stage.close();
     }
 }

@@ -40,35 +40,20 @@ public class ExpandListener implements EventHandler<ActionEvent> {
     private Stage stage;
 
     /**
-     * View of application.
-     */
-    private View view;
-
-    /**
      * Constructor for listener.
      *
      * @param scene JavaFX scene.
      * @param stage JavaFX stage.
-     * @param view  View of application.
      */
-    public ExpandListener(Scene scene, Stage stage, View view) {
+    public ExpandListener(Scene scene, Stage stage) {
         this.scene = scene;
         this.stage = stage;
-        this.view = view;
     }
 
     @Override
     public void handle(ActionEvent event) {
         boolean isMaximized = stage.isMaximized();
-        double currentWidth = scene.getWidth();
         stage.setMaximized(!isMaximized);
-        view.setMaximized(!isMaximized);
-        double newWidth = scene.getWidth();
-
-        //if application was started as maximized, minimize it to default statement
-        if (currentWidth == newWidth) {
-            view.resetToDefault(stage, scene);
-        }
 
         //setup icons and tooltips
         Button expand = (Button) scene.lookup(EXPAND_ID);

@@ -29,19 +29,12 @@ public class MoveListener implements EventHandler<MouseEvent> {
     private Stage stage;
 
     /**
-     * View of application.
-     */
-    private View view;
-
-    /**
      * Constructor for listener.
      *
      * @param stage JavaFX stage.
-     * @param view  View of application.
      */
-    public MoveListener(Stage stage, View view) {
+    public MoveListener(Stage stage) {
         this.stage = stage;
-        this.view = view;
     }
 
     @Override
@@ -55,8 +48,5 @@ public class MoveListener implements EventHandler<MouseEvent> {
             stage.setX(event.getScreenX() + currentX);
             stage.setY(event.getScreenY() + currentY);
         }
-
-        view.setLocationX(stage.getX());
-        view.setLocationY(stage.getY());
     }
 }

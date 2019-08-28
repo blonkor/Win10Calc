@@ -16,22 +16,9 @@ import java.io.ObjectInputStream;
  */
 public class Launcher extends Application {
 
-    /**
-     * Path to dat file.
-     */
-    private static final String DAT_PATH = "src/main/java/com/implemica/bormashenko/calculator/view/resources/dat/view.dat";
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        View view;
-
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(DAT_PATH))) {
-            view = (View)objectInputStream.readObject();
-        } catch (IOException e) {
-            view = new View();
-        }
-
-        view.initStage(primaryStage);
+        new View().initStage(primaryStage);
     }
 
     /**

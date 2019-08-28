@@ -3,8 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/ExitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/ExitListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/ExpandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/ExpandListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/MoveListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/MoveListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/ResizeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/ResizeListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/listeners/SaveViewListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/dat/view.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/util/SerializationView.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/View.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,20 +64,20 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.implemica.bormashenko.calculator.view.listeners" />
+      <recent name="com.implemica.bormashenko.calculator.view" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources" />
+      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\target\classes\com\implemica\bormashenko\calculator\view\resources\fonts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\test\java\view\utils" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\util" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources\images" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\target\classes\com\implemica\bormashenko\calculator\view\resources\images" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources\fonts" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources" />
-      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\target\classes\com\implemica\bormashenko\calculator\view\resources\fonts" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.implemica.bormashenko.calculator.view.listeners" />
-      <recent name="com.implemica.bormashenko.calculator.view" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -82,31 +92,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ViewTest.resizeTests">
-    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
+  <component name="RunManager" selected="JUnit.ViewTest.allTests">
+    <configuration name="RobotControl.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.implemica.bormashenko.calculator.*" />
+          <option name="PATTERN" value="view.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="view.util" />
+      <option name="MAIN_CLASS_NAME" value="view.util.RobotControl" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -127,7 +125,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ViewTest.moveWindowTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ViewTest.serializationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -137,13 +135,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="view.tests" />
       <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="moveWindowTests" />
+      <option name="METHOD_NAME" value="serializationTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ViewTest.resizeTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ViewTest.sizeAndLayoutTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -153,7 +151,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="view.tests" />
       <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="resizeTests" />
+      <option name="METHOD_NAME" value="sizeAndLayoutTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ViewTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="view.tests" />
+      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
+      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -177,20 +191,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.model in Win10Calc" />
-      <item itemvalue="JUnit.ViewTest.resizeTests" />
-      <item itemvalue="JUnit.ViewTest" />
       <item itemvalue="JUnit.ViewTest.allTests" />
-      <item itemvalue="JUnit.ViewTest.moveWindowTests" />
+      <item itemvalue="JUnit.ViewTest.serializationTests" />
+      <item itemvalue="JUnit.ViewTest.test" />
+      <item itemvalue="JUnit.RobotControl.test" />
+      <item itemvalue="JUnit.ViewTest.sizeAndLayoutTests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ViewTest.resizeTests" />
         <item itemvalue="JUnit.ViewTest.allTests" />
-        <item itemvalue="JUnit.ViewTest.moveWindowTests" />
-        <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.ViewTest" />
+        <item itemvalue="JUnit.ViewTest.sizeAndLayoutTests" />
+        <item itemvalue="JUnit.RobotControl.test" />
+        <item itemvalue="JUnit.ViewTest.test" />
+        <item itemvalue="JUnit.ViewTest.serializationTests" />
       </list>
     </recent_temporary>
   </component>
@@ -204,13 +218,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Adding new tests for add operation with negative numbers.">
-      <created>1565031725504</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1565031725504</updated>
     </task>
     <task id="LOCAL-00022" summary="Adding JavaDoc in test class. Removing one billion value from tests.">
       <created>1565032596823</created>
@@ -548,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566938313818</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Tests for moving window created.">
+      <created>1566941937282</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1566941937283</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -582,7 +596,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Go-to-office-commit" />
     <MESSAGE value="Tests for memory model completed." />
     <MESSAGE value="Bug fixes and refactoring for memory model." />
     <MESSAGE value="Bug fixes and refactoring for calculation model." />
@@ -607,7 +620,8 @@
     <MESSAGE value="Several tests for resizing window created." />
     <MESSAGE value="Trying to make better resizing." />
     <MESSAGE value="Tests for resizing for sides created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for resizing for sides created." />
+    <MESSAGE value="Tests for moving window created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for moving window created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

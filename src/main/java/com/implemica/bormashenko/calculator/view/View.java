@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -25,11 +24,6 @@ public class View implements Serializable {
      * Title of the application.
      */
     private static final String TITLE = "Calculator";
-
-    /**
-     * Unicode escape sequence for symbol "ChromeRestore" in "Segoe MDL2 Assets" font.
-     */
-    private static final String MAXIMIZED_ICON = "\uE923";
 
     /**
      * Path to fxml representation of the application.
@@ -77,56 +71,6 @@ public class View implements Serializable {
     private static final String EQUATION_LABEL_ID = "#equation";
 
     /**
-     * Minimal width of application.
-     */
-    private static final double MIN_WIDTH = 322;
-
-    /**
-     * Maximal width of application.
-     */
-    private static final double MIN_HEIGHT = 501;
-
-    /**
-     * Default application's location X.
-     */
-    private static final double DEFAULT_X = 700;
-
-    /**
-     * Default application's location Y.
-     */
-    private static final double DEFAULT_Y = 150;
-
-    /**
-     * Default application's maximize.
-     */
-    private static final boolean DEFAULT_MAXIMIZED = false;
-
-    /**
-     * Width of application.
-     */
-    private double width = MIN_WIDTH;
-
-    /**
-     * Height of application.
-     */
-    private double height = MIN_HEIGHT;
-
-    /**
-     * LocationX of application.
-     */
-    private double locationX = DEFAULT_X;
-
-    /**
-     * LocationY of application.
-     */
-    private double locationY = DEFAULT_Y;
-
-    /**
-     * True if application is maximized.
-     */
-    private boolean isMaximized = DEFAULT_MAXIMIZED;
-
-    /**
      * Initializing main view and listeners.
      *
      * @param primaryStage JavaFX stage.
@@ -144,8 +88,6 @@ public class View implements Serializable {
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        setParams(primaryStage, scene);
-
         primaryStage.show();
     }
 
@@ -158,11 +100,11 @@ public class View implements Serializable {
     private void addListeners(Stage primaryStage, Scene scene) {
         //close listener
         Button close = (Button) scene.lookup(CLOSE_ID);
-        close.setOnAction(new ExitListener(primaryStage, this));
+        close.setOnAction(new ExitListener(primaryStage));
 
         //expand listener
         Button expand = (Button) scene.lookup(EXPAND_ID);
-        expand.setOnAction(new ExpandListener(scene, primaryStage, this));
+        expand.setOnAction(new ExpandListener(scene, primaryStage));
 
         //hide listener
         Button hide = (Button) scene.lookup(HIDE_ID);
@@ -170,12 +112,12 @@ public class View implements Serializable {
 
         //move listener
         AnchorPane topPanel = (AnchorPane) scene.lookup(TOP_PANEL_ID);
-        MoveListener moveListener = new MoveListener(primaryStage, this);
+        MoveListener moveListener = new MoveListener(primaryStage);
         topPanel.setOnMousePressed(moveListener);
         topPanel.setOnMouseDragged(moveListener);
 
         //resize listener
-        ResizeListener resizeListener = new ResizeListener(scene, primaryStage, this);
+        ResizeListener resizeListener = new ResizeListener(scene, primaryStage);
         scene.setOnMouseMoved(resizeListener);
         scene.setOnMouseDragged(resizeListener);
 
@@ -191,73 +133,7 @@ public class View implements Serializable {
         equation.textProperty().addListener(equationLabelLengthListener);
         scene.widthProperty().addListener(equationLabelLengthListener);
 
-        //save view listener
-        primaryStage.setOnCloseRequest(new SaveViewListener(this));
-
         //keyboard listener
         scene.setOnKeyPressed(new KeyboardListener(scene));
-    }
-
-    /**
-     * Sets size and location for view.
-     *
-     * @param primaryStage JavaFX stage.
-     * @param scene        JavaFX scene.
-     */
-    private void setParams(Stage primaryStage, Scene scene) {
-        primaryStage.setWidth(width);
-        primaryStage.setHeight(height);
-        primaryStage.setX(locationX);
-        primaryStage.setY(locationY);
-        primaryStage.setMaximized(isMaximized);
-
-        if (isMaximized) {
-            Button expand = (Button) scene.lookup(EXPAND_ID);
-            expand.setText(MAXIMIZED_ICON);
-        }
-    }
-
-    /**
-     * Resets size and location to default.
-     *
-     * @param primaryStage JavaFX stage.
-     * @param scene        JavaFX scene.
-     */
-    public void resetToDefault(Stage primaryStage, Scene scene) {
-        width = MIN_WIDTH;
-        height = MIN_HEIGHT;
-        locationX = DEFAULT_X;
-        locationY = DEFAULT_Y;
-        isMaximized = DEFAULT_MAXIMIZED;
-
-        setParams(primaryStage, scene);
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    public void setLocationX(double locationX) {
-        if (locationX < 0) {
-            locationX = 0;
-        }
-
-        this.locationX = locationX;
-    }
-
-    public void setLocationY(double locationY) {
-        if (locationY < 0) {
-            locationY = 0;
-        }
-
-        this.locationY = locationY;
-    }
-
-    public void setMaximized(boolean maximized) {
-        isMaximized = maximized;
     }
 }

@@ -324,6 +324,11 @@ public class RobotControl extends GuiTest {
     protected static final String MEMORY_BLOCK_ID = "#memoryBlock";
 
     /**
+     * ID of top panel.
+     */
+    protected static final String TOP_PANEL_ID = "#topPanel";
+
+    /**
      * ID of title label.
      */
     protected static final String TITLE_LABEL_ID = "#title";
@@ -457,8 +462,6 @@ public class RobotControl extends GuiTest {
      * Unicode escape sequence of left arrow symbol in MDL2 assets.
      */
     protected static final String LEFT_ARROW_SYMBOL = "\uE96F";
-
-    protected static final String TOP_PANEL_ID = "#topPanel";
 
     /**
      * Value for scroll using FxRobot.
