@@ -126,9 +126,12 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Adds digit from button to result screen while button is fired.
+     * Appends digit from button to result screen if it is allowed.
+     * Otherwise, sets the digit to result screen.
+     *
+     * @param event {@code ActionEvent} that caused the method.
      */
-    public void addDigit(ActionEvent event) {
+    public void appendDigit(ActionEvent event) {
         String digit = ((Button) event.getSource()).getText();
 
         String number;
@@ -158,7 +161,8 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Makes number in result screen decimal.
+     * Makes number in result screen decimal (if not decimal yet) if it is allowed.
+     * Otherwise, sets "0." to result screen.
      */
     public void makeDecimal() {
         String number;
@@ -173,7 +177,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Deletes last symbol in result screen.
+     * Deletes last symbol in result screen if it is allowed.
      */
     public void backspace() {
         if (isEditableScreen) {

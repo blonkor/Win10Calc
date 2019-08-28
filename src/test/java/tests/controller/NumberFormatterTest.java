@@ -16,125 +16,382 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class NumberFormatterTest {
 
     /**
+     * Tests for append digit operation.
+     */
+    @Test
+    public void appendDigitTests() {
+        //can append
+        {
+            //empty string
+            checkAppendDigit("", "0", "0");
+            checkAppendDigit("", "1", "1");
+            checkAppendDigit("", "5", "5");
+            checkAppendDigit("", "8", "8");
+            checkAppendDigit("", "9", "9");
+
+            //append to zero
+            checkAppendDigit("0", "0", "0");
+            checkAppendDigit("0", "1", "1");
+            checkAppendDigit("0", "5", "5");
+            checkAppendDigit("0", "8", "8");
+            checkAppendDigit("0", "9", "9");
+
+            //append to one-digit positive integer number
+            checkAppendDigit("1", "0", "10");
+            checkAppendDigit("1", "1", "11");
+            checkAppendDigit("1", "5", "15");
+            checkAppendDigit("1", "8", "18");
+            checkAppendDigit("1", "9", "19");
+
+
+            checkAppendDigit("5", "0", "50");
+            checkAppendDigit("5", "1", "51");
+            checkAppendDigit("5", "5", "55");
+            checkAppendDigit("5", "8", "58");
+            checkAppendDigit("5", "9", "59");
+
+            checkAppendDigit("9", "0", "90");
+            checkAppendDigit("9", "1", "91");
+            checkAppendDigit("9", "5", "95");
+            checkAppendDigit("9", "8", "98");
+            checkAppendDigit("9", "9", "99");
+
+            //append to one-digit negative integer number
+            checkAppendDigit("-1", "0", "-10");
+            checkAppendDigit("-1", "1", "-11");
+            checkAppendDigit("-1", "5", "-15");
+            checkAppendDigit("-1", "8", "-18");
+            checkAppendDigit("-1", "9", "-19");
+
+            checkAppendDigit("-5", "0", "-50");
+            checkAppendDigit("-5", "1", "-51");
+            checkAppendDigit("-5", "5", "-55");
+            checkAppendDigit("-5", "8", "-58");
+            checkAppendDigit("-5", "9", "-59");
+
+            checkAppendDigit("-9", "0", "-90");
+            checkAppendDigit("-9", "1", "-91");
+            checkAppendDigit("-9", "5", "-95");
+            checkAppendDigit("-9", "8", "-98");
+            checkAppendDigit("-9", "9", "-99");
+
+            //append to one-digit positive decimal number
+            checkAppendDigit("1.", "0", "1.0");
+            checkAppendDigit("1.", "1", "1.1");
+            checkAppendDigit("1.", "5", "1.5");
+            checkAppendDigit("1.", "8", "1.8");
+            checkAppendDigit("1.", "9", "1.9");
+
+            checkAppendDigit("5.", "0", "5.0");
+            checkAppendDigit("5.", "1", "5.1");
+            checkAppendDigit("5.", "5", "5.5");
+            checkAppendDigit("5.", "8", "5.8");
+            checkAppendDigit("5.", "9", "5.9");
+
+            checkAppendDigit("9.", "0", "9.0");
+            checkAppendDigit("9.", "1", "9.1");
+            checkAppendDigit("9.", "5", "9.5");
+            checkAppendDigit("9.", "8", "9.8");
+            checkAppendDigit("9.", "9", "9.9");
+
+            //append to one-digit negative decimal number
+            checkAppendDigit("-1", "0", "-10");
+            checkAppendDigit("-1", "1", "-11");
+            checkAppendDigit("-1", "5", "-15");
+            checkAppendDigit("-1", "8", "-18");
+            checkAppendDigit("-1", "9", "-19");
+
+            checkAppendDigit("-5", "0", "-50");
+            checkAppendDigit("-5", "1", "-51");
+            checkAppendDigit("-5", "5", "-55");
+            checkAppendDigit("-5", "8", "-58");
+            checkAppendDigit("-5", "9", "-59");
+
+            checkAppendDigit("-9", "0", "-90");
+            checkAppendDigit("-9", "1", "-91");
+            checkAppendDigit("-9", "5", "-95");
+            checkAppendDigit("-9", "8", "-98");
+            checkAppendDigit("-9", "9", "-99");
+
+            //append to three-digits positive integer number
+            checkAppendDigit("934", "0", "9,340");
+            checkAppendDigit("825", "1", "8,251");
+            checkAppendDigit("230", "2", "2,302");
+            checkAppendDigit("827", "3", "8,273");
+            checkAppendDigit("828", "4", "8,284");
+            checkAppendDigit("821", "5", "8,215");
+            checkAppendDigit("997", "6", "9,976");
+            checkAppendDigit("282", "7", "2,827");
+            checkAppendDigit("962", "8", "9,628");
+            checkAppendDigit("973", "9", "9,739");
+
+            //append to three-digits negative integer number
+            checkAppendDigit("-641", "0", "-6,410");
+            checkAppendDigit("-345", "1", "-3,451");
+            checkAppendDigit("-970", "2", "-9,702");
+            checkAppendDigit("-175", "3", "-1,753");
+            checkAppendDigit("-962", "4", "-9,624");
+            checkAppendDigit("-537", "5", "-5,375");
+            checkAppendDigit("-970", "6", "-9,706");
+            checkAppendDigit("-234", "7", "-2,347");
+            checkAppendDigit("-468", "8", "-4,688");
+            checkAppendDigit("-738", "9", "-7,389");
+
+            //append to three-digits (before dot) positive decimal number
+            checkAppendDigit("623.", "0", "623.0");
+            checkAppendDigit("838.", "1", "838.1");
+            checkAppendDigit("234.", "5", "234.5");
+            checkAppendDigit("126.", "8", "126.8");
+            checkAppendDigit("967.", "9", "967.9");
+
+            checkAppendDigit("821.25", "0", "821.250");
+            checkAppendDigit("997.813489", "1", "997.8134891");
+            checkAppendDigit("282.342342", "5", "282.3423425");
+            checkAppendDigit("962.9253", "8", "962.92538");
+            checkAppendDigit("973.8234", "9", "973.82349");
+
+            //append to three-digits (before dot) negative decimal number
+            checkAppendDigit("-836.", "0", "-836.0");
+            checkAppendDigit("-822.", "1", "-822.1");
+            checkAppendDigit("-147.", "5", "-147.5");
+            checkAppendDigit("-890.", "8", "-890.8");
+            checkAppendDigit("-100.", "9", "-100.9");
+
+            checkAppendDigit("-450.74790", "0", "-450.747900");
+            checkAppendDigit("-670.9259304", "1", "-670.92593041");
+            checkAppendDigit("-532.83", "5", "-532.835");
+            checkAppendDigit("-842.82452", "8", "-842.824528");
+            checkAppendDigit("-341.72368", "9", "-341.723689");
+
+            //append to integer number with commas
+            checkAppendDigit("723,567", "0", "7,235,670");
+            checkAppendDigit("82,458", "1", "824,581");
+            checkAppendDigit("23,634", "5", "236,345");
+            checkAppendDigit("2,578", "8", "25,788");
+            checkAppendDigit("2,155,478,547", "9", "21,554,785,479");
+
+            checkAppendDigit("-457,345", "0", "-4,573,450");
+            checkAppendDigit("-73,456", "1", "-734,561");
+            checkAppendDigit("-3,457", "5", "-34,575");
+            checkAppendDigit("-25679", "8", "-256,798");
+            checkAppendDigit("-63,467,435", "9", "-634,674,359");
+
+            //append to decimal number with commas
+            checkAppendDigit("21,344.", "0", "21,344.0");
+            checkAppendDigit("7,346,346.8", "1", "7,346,346.81");
+            checkAppendDigit("83,463.375", "5", "83,463.3755");
+            checkAppendDigit("32,467,778.34678", "8", "32,467,778.346788");
+            checkAppendDigit("23,447.84365346", "9", "23,447.843653469");
+
+            checkAppendDigit("-32,567.", "0", "-32,567.0");
+            checkAppendDigit("-23,654.7", "1", "-23,654.71");
+            checkAppendDigit("-8,762,435.425", "5", "-8,762,435.4255");
+            checkAppendDigit("-34,637,457.7346", "8", "-34,637,457.73468");
+            checkAppendDigit("-3,453,635.8346346", "9", "-3,453,635.83463469");
+
+            //append to 15-digits integer number
+            checkAppendDigit("678,096,234,678,975", "0", "6,780,962,346,789,750");
+            checkAppendDigit("780,875,456,897,543", "1", "7,808,754,568,975,431");
+            checkAppendDigit("987,456,875,345,789", "5", "9,874,568,753,457,895");
+            checkAppendDigit("987,564,567,986,246", "8", "9,875,645,679,862,468");
+            checkAppendDigit("189,090,098,567,245", "9", "1,890,900,985,672,459");
+
+            checkAppendDigit("-987,456,752,346,783", "0", "-9,874,567,523,467,830");
+            checkAppendDigit("-987,567,356,782,345", "1", "-9,875,673,567,823,451");
+            checkAppendDigit("-987,457,621,103,536", "5", "-9,874,576,211,035,365");
+            checkAppendDigit("-123,567,256,721,457", "8", "-1,235,672,567,214,578");
+            checkAppendDigit("-423,767,464,768,144", "9", "-4,237,674,647,681,449");
+
+            //append to 15-digits (summary) decimal number
+            checkAppendDigit("678,987,175,238.357", "0", "678,987,175,238.3570");
+            checkAppendDigit("89,798.6297342734", "1", "89,798.62973427341");
+            checkAppendDigit("98,273,492,302.5727", "5", "98,273,492,302.57275");
+            checkAppendDigit("863.240000000023", "8", "863.2400000000238");
+            checkAppendDigit("624,592,234,242.500", "9", "624,592,234,242.5009");
+
+            checkAppendDigit("-7,862,359,237.50226", "0", "-7,862,359,237.502260");
+            checkAppendDigit("-842.789273942046", "1", "-842.7892739420461");
+            checkAppendDigit("-898,402,348,028.492", "5", "-898,402,348,028.4925");
+            checkAppendDigit("-725,836.826346363", "8", "-725,836.8263463638");
+            checkAppendDigit("-90,000,000.0000000", "9", "-90,000,000.00000009");
+
+            //append to decimal number with 16 digits summary (while integer part is 0)
+            checkAppendDigit("0.678986456781345", "0", "0.6789864567813450");
+            checkAppendDigit("0.825252834573467", "1", "0.8252528345734671");
+            checkAppendDigit("0.000000000000000", "5", "0.0000000000000005");
+            checkAppendDigit("0.845634528235992", "8", "0.8456345282359928");
+            checkAppendDigit("0.029840234005268", "9", "0.0298402340052689");
+
+            checkAppendDigit("-0.09234927358283", "0", "-0.092349273582830");
+            checkAppendDigit("-0.23492759238567", "1", "-0.234927592385671");
+            checkAppendDigit("-0.03295027359285", "5", "-0.032950273592855");
+            checkAppendDigit("-0.02934982635782", "8", "-0.029349826357828");
+            checkAppendDigit("-0.76235826754836", "9", "-0.762358267548369");
+        }
+
+        //can not append
+        {
+            //append to 16-digits integer number
+            checkAppendDigit("9,847,862,357,839,869", "0", "9,847,862,357,839,869");
+            checkAppendDigit("7,374,149,817,289,492", "1", "7,374,149,817,289,492");
+            checkAppendDigit("7,349,564,303,904,532", "5", "7,349,564,303,904,532");
+            checkAppendDigit("9,872,358,289,579,258", "8", "9,872,358,289,579,258");
+            checkAppendDigit("6,729,423,840,284,622", "9", "6,729,423,840,284,622");
+
+            checkAppendDigit("-9,239,582,957,295,726", "0", "-9,239,582,957,295,726");
+            checkAppendDigit("-7,290,000,008,234,928", "1", "-7,290,000,008,234,928");
+            checkAppendDigit("-6,666,666,666,666,666", "5", "-6,666,666,666,666,666");
+            checkAppendDigit("-2,592,838,592,590,224", "8", "-2,592,838,592,590,224");
+            checkAppendDigit("-7,535,253,536,367,367", "9", "-7,535,253,536,367,367");
+
+            //append to 16-digits (summary) decimal number
+            checkAppendDigit("6,269,657,463,635,353.", "0", "6,269,657,463,635,353.");
+            checkAppendDigit("7.334536437634563", "1", "7.334536437634563");
+            checkAppendDigit("74,564.64654646464", "5", "74,564.64654646464");
+            checkAppendDigit("966,434,529,745,647.4", "8", "966,434,529,745,647.4");
+            checkAppendDigit("84.74745745745749", "9", "84.74745745745749");
+
+            checkAppendDigit("-6,346,346,394,365,337.", "0", "-6,346,346,394,365,337.");
+            checkAppendDigit("-845,787,846,363,733.7", "1", "-845,787,846,363,733.7");
+            checkAppendDigit("-734.6367934653793", "5", "-734.6367934653793");
+            checkAppendDigit("-95,675.67568758474", "8", "-95,675.67568758474");
+            checkAppendDigit("-734,639,356,475.4563", "9", "-734,639,356,475.4563");
+
+            //append to decimal number with 17 digits summary (while integer part is 0)
+            checkAppendDigit("0.7564734634634638", "0", "0.7564734634634638");
+            checkAppendDigit("0.2359346457735875", "1", "0.2359346457735875");
+            checkAppendDigit("0.8847352526843832", "5", "0.8847352526843832");
+            checkAppendDigit("0.8457934693468346", "8", "0.8457934693468346");
+            checkAppendDigit("0.8734636834583467", "9", "0.8734636834583467");
+
+            checkAppendDigit("-0.8346362645875478", "0", "-0.8346362645875478");
+            checkAppendDigit("-0.8734634634683468", "1", "-0.8734634634683468");
+            checkAppendDigit("-0.2353645754673458", "5", "-0.2353645754673458");
+            checkAppendDigit("-0.3468435473637297", "8", "-0.3468435473637297");
+            checkAppendDigit("-0.4578657686567588", "9", "-0.4578657686567588");
+        }
+    }
+
+    /**
      * Tests for add dot operation.
      */
     @Test
-    public void addDotTests() {
+    public void appendDotTests() {
         //without dot
         //without commas
-        checkAddDot("0", "0.");
-        checkAddDot("1", "1.");
-        checkAddDot("8", "8.");
-        checkAddDot("9", "9.");
-        checkAddDot("10", "10.");
-        checkAddDot("100", "100.");
-        checkAddDot("500", "500.");
+        checkAppendDot("0", "0.");
+        checkAppendDot("1", "1.");
+        checkAppendDot("8", "8.");
+        checkAppendDot("9", "9.");
+        checkAppendDot("10", "10.");
+        checkAppendDot("100", "100.");
+        checkAppendDot("500", "500.");
 
-        checkAddDot("-0", "-0.");
-        checkAddDot("-1", "-1.");
-        checkAddDot("-8", "-8.");
-        checkAddDot("-9", "-9.");
-        checkAddDot("-10", "-10.");
-        checkAddDot("-100", "-100.");
-        checkAddDot("-500", "-500.");
+        checkAppendDot("-0", "-0.");
+        checkAppendDot("-1", "-1.");
+        checkAppendDot("-8", "-8.");
+        checkAppendDot("-9", "-9.");
+        checkAppendDot("-10", "-10.");
+        checkAppendDot("-100", "-100.");
+        checkAppendDot("-500", "-500.");
 
         //with commas
-        checkAddDot("84,357", "84,357.");
-        checkAddDot("8,762,423,634", "8,762,423,634.");
-        checkAddDot("873,283,568", "873,283,568.");
-        checkAddDot("8,235,854,645", "8,235,854,645.");
-        checkAddDot("23,482,314", "23,482,314.");
-        checkAddDot("234,643,737", "234,643,737.");
+        checkAppendDot("84,357", "84,357.");
+        checkAppendDot("8,762,423,634", "8,762,423,634.");
+        checkAppendDot("873,283,568", "873,283,568.");
+        checkAppendDot("8,235,854,645", "8,235,854,645.");
+        checkAppendDot("23,482,314", "23,482,314.");
+        checkAppendDot("234,643,737", "234,643,737.");
 
-        checkAddDot("-72,341,234", "-72,341,234.");
-        checkAddDot("-8,023,042,394", "-8,023,042,394.");
-        checkAddDot("-626,356,345", "-626,356,345.");
-        checkAddDot("-67,235,923,052", "-67,235,923,052.");
-        checkAddDot("-7,625,252,352,352", "-7,625,252,352,352.");
-        checkAddDot("-62,523,523,523,525", "-62,523,523,523,525.");
+        checkAppendDot("-72,341,234", "-72,341,234.");
+        checkAppendDot("-8,023,042,394", "-8,023,042,394.");
+        checkAppendDot("-626,356,345", "-626,356,345.");
+        checkAppendDot("-67,235,923,052", "-67,235,923,052.");
+        checkAppendDot("-7,625,252,352,352", "-7,625,252,352,352.");
+        checkAppendDot("-62,523,523,523,525", "-62,523,523,523,525.");
 
         //with dot at the end
         //without commas
-        checkAddDot("0.", "0.");
-        checkAddDot("1.", "1.");
-        checkAddDot("8.", "8.");
-        checkAddDot("9.", "9.");
-        checkAddDot("10.", "10.");
-        checkAddDot("100.", "100.");
-        checkAddDot("500.", "500.");
+        checkAppendDot("0.", "0.");
+        checkAppendDot("1.", "1.");
+        checkAppendDot("8.", "8.");
+        checkAppendDot("9.", "9.");
+        checkAppendDot("10.", "10.");
+        checkAppendDot("100.", "100.");
+        checkAppendDot("500.", "500.");
 
-        checkAddDot("-0.", "-0.");
-        checkAddDot("-1.", "-1.");
-        checkAddDot("-8.", "-8.");
-        checkAddDot("-9.", "-9.");
-        checkAddDot("-10.", "-10.");
-        checkAddDot("-100.", "-100.");
-        checkAddDot("-500.", "-500.");
+        checkAppendDot("-0.", "-0.");
+        checkAppendDot("-1.", "-1.");
+        checkAppendDot("-8.", "-8.");
+        checkAppendDot("-9.", "-9.");
+        checkAppendDot("-10.", "-10.");
+        checkAppendDot("-100.", "-100.");
+        checkAppendDot("-500.", "-500.");
 
         //with commas
-        checkAddDot("8,235.", "8,235.");
-        checkAddDot("9,342.", "9,342.");
-        checkAddDot("142,326,735.", "142,326,735.");
-        checkAddDot("9,346,843,456.", "9,346,843,456.");
-        checkAddDot("924,536,576.", "924,536,576.");
-        checkAddDot("945,358,636.", "945,358,636.");
+        checkAppendDot("8,235.", "8,235.");
+        checkAppendDot("9,342.", "9,342.");
+        checkAppendDot("142,326,735.", "142,326,735.");
+        checkAppendDot("9,346,843,456.", "9,346,843,456.");
+        checkAppendDot("924,536,576.", "924,536,576.");
+        checkAppendDot("945,358,636.", "945,358,636.");
 
-        checkAddDot("54,363,463,463.", "54,363,463,463.");
-        checkAddDot("8,846,356,367.", "8,846,356,367.");
-        checkAddDot("834,634,634,636.", "834,634,634,636.");
-        checkAddDot("8,456,363.", "8,456,363.");
-        checkAddDot("436,373,563.", "436,373,563.");
-        checkAddDot("3,643,563.", "3,643,563.");
+        checkAppendDot("54,363,463,463.", "54,363,463,463.");
+        checkAppendDot("8,846,356,367.", "8,846,356,367.");
+        checkAppendDot("834,634,634,636.", "834,634,634,636.");
+        checkAppendDot("8,456,363.", "8,456,363.");
+        checkAppendDot("436,373,563.", "436,373,563.");
+        checkAppendDot("3,643,563.", "3,643,563.");
 
         //with in the middle
         //without commas
-        checkAddDot("0.6", "0.6");
-        checkAddDot("1.235", "1.235");
-        checkAddDot("8.8236", "8.8236");
-        checkAddDot("9.8245", "9.8245");
-        checkAddDot("10.7", "10.7");
-        checkAddDot("100.3247", "100.3247");
-        checkAddDot("500.7235", "500.7235");
+        checkAppendDot("0.6", "0.6");
+        checkAppendDot("1.235", "1.235");
+        checkAppendDot("8.8236", "8.8236");
+        checkAppendDot("9.8245", "9.8245");
+        checkAppendDot("10.7", "10.7");
+        checkAppendDot("100.3247", "100.3247");
+        checkAppendDot("500.7235", "500.7235");
 
-        checkAddDot("-0.736", "-0.736");
-        checkAddDot("-1.8356", "-1.8356");
-        checkAddDot("-8.5437", "-8.5437");
-        checkAddDot("-9.7235", "-9.7235");
-        checkAddDot("-10.834", "-10.834");
-        checkAddDot("-100.01", "-100.01");
-        checkAddDot("-500.5", "-500.5");
+        checkAppendDot("-0.736", "-0.736");
+        checkAppendDot("-1.8356", "-1.8356");
+        checkAppendDot("-8.5437", "-8.5437");
+        checkAppendDot("-9.7235", "-9.7235");
+        checkAppendDot("-10.834", "-10.834");
+        checkAppendDot("-100.01", "-100.01");
+        checkAppendDot("-500.5", "-500.5");
 
         //with commas
-        checkAddDot("124513.25835", "124513.25835");
-        checkAddDot("62352.7235", "62352.7235");
-        checkAddDot("6626.8256", "6626.8256");
-        checkAddDot("2346.7925", "2346.7925");
-        checkAddDot("762462.6782", "762462.6782");
-        checkAddDot("7624623.2", "7624623.2");
-        checkAddDot("76236262.72", "76236262.72");
+        checkAppendDot("124513.25835", "124513.25835");
+        checkAppendDot("62352.7235", "62352.7235");
+        checkAppendDot("6626.8256", "6626.8256");
+        checkAppendDot("2346.7925", "2346.7925");
+        checkAppendDot("762462.6782", "762462.6782");
+        checkAppendDot("7624623.2", "7624623.2");
+        checkAppendDot("76236262.72", "76236262.72");
 
-        checkAddDot("-77322225.7", "-77322225.7");
-        checkAddDot("-823452168746.734535", "-823452168746.734535");
-        checkAddDot("-2523578.725", "-2523578.725");
-        checkAddDot("-8643.825", "-8643.825");
-        checkAddDot("-6235.725", "-6235.725");
-        checkAddDot("-734535.73", "-734535.73");
-        checkAddDot("-84564.622", "-84564.622");
+        checkAppendDot("-77322225.7", "-77322225.7");
+        checkAppendDot("-823452168746.734535", "-823452168746.734535");
+        checkAppendDot("-2523578.725", "-2523578.725");
+        checkAppendDot("-8643.825", "-8643.825");
+        checkAppendDot("-6235.725", "-6235.725");
+        checkAppendDot("-734535.73", "-734535.73");
+        checkAppendDot("-84564.622", "-84564.622");
 
         //engineer numbers
-        checkAddDot("7.e+7234", "7.e+7234");
-        checkAddDot("1.e+72", "1.e+72");
-        checkAddDot("5.e+92", "5.e+92");
-        checkAddDot("4.e-234", "4.e-234");
-        checkAddDot("8.e-19", "8.e-19");
-        checkAddDot("2.e-84", "2.e-84");
+        checkAppendDot("7.e+7234", "7.e+7234");
+        checkAppendDot("1.e+72", "1.e+72");
+        checkAppendDot("5.e+92", "5.e+92");
+        checkAppendDot("4.e-234", "4.e-234");
+        checkAppendDot("8.e-19", "8.e-19");
+        checkAppendDot("2.e-84", "2.e-84");
 
-        checkAddDot("-4.e+13", "-4.e+13");
-        checkAddDot("-2.e+126", "-2.e+126");
-        checkAddDot("-7.e+1482", "-7.e+1482");
-        checkAddDot("-6.e-723", "-6.e-723");
-        checkAddDot("-5.e-17", "-5.e-17");
-        checkAddDot("-2.e-79", "-2.e-79");
+        checkAppendDot("-4.e+13", "-4.e+13");
+        checkAppendDot("-2.e+126", "-2.e+126");
+        checkAppendDot("-7.e+1482", "-7.e+1482");
+        checkAppendDot("-6.e-723", "-6.e-723");
+        checkAppendDot("-5.e-17", "-5.e-17");
+        checkAppendDot("-2.e-79", "-2.e-79");
     }
 
     /**
@@ -267,14 +524,6 @@ public class NumberFormatterTest {
      * @todo
      */
     @Test
-    public void addDigitTests() {
-
-    }
-
-    /**
-     * @todo
-     */
-    @Test
     public void bigDecimalToScreenTests() {
 
     }
@@ -296,27 +545,37 @@ public class NumberFormatterTest {
     }
 
     /**
-     * Checks that dot is added to number.
-     * @param number number to edit.
+     * Checks that digit appended to number if it should be appended.
+     *
+     * @param number         number to edit.
+     * @param digit          digit to append.
      * @param expectedResult required result after performing operation.
      */
-    private void checkAddDot(String number, String expectedResult) {
+    private void checkAppendDigit(String number, String digit, String expectedResult) {
+        String result = NumberFormatter.appendDigit(number, digit);
+        assertEquals(expectedResult, result);
+    }
+
+    /**
+     * Checks that dot is added to number.
+     *
+     * @param number         number to edit.
+     * @param expectedResult required result after performing operation.
+     */
+    private void checkAppendDot(String number, String expectedResult) {
         String result = NumberFormatter.appendDot(number);
         assertEquals(expectedResult, result);
     }
 
     /**
      * Checks result of delete last char operation.
-     * @param number number to edit.
+     *
+     * @param number         number to edit.
      * @param expectedResult required result after performing operation.
      */
     private void checkDeleteLastChar(String number, String expectedResult) {
         String result = NumberFormatter.deleteLastChar(number);
         assertEquals(expectedResult, result);
-    }
-
-    private void checkAddDigit(String number, String digit, boolean isEditable, String expectedResult) {
-
     }
 
     private void checkBigDecimalToScreen(BigDecimal bigDecimal, String expectedResult) {
