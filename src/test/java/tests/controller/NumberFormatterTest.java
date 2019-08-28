@@ -15,16 +15,137 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class NumberFormatterTest {
 
+    /**
+     * Tests for add dot operation.
+     */
+    @Test
+    public void addDotTests() {
+        //without dot
+        //without commas
+        checkAddDot("0", "0.");
+        checkAddDot("1", "1.");
+        checkAddDot("8", "8.");
+        checkAddDot("9", "9.");
+        checkAddDot("10", "10.");
+        checkAddDot("100", "100.");
+        checkAddDot("500", "500.");
+
+        checkAddDot("-0", "-0.");
+        checkAddDot("-1", "-1.");
+        checkAddDot("-8", "-8.");
+        checkAddDot("-9", "-9.");
+        checkAddDot("-10", "-10.");
+        checkAddDot("-100", "-100.");
+        checkAddDot("-500", "-500.");
+
+        //with commas
+        checkAddDot("84,357", "84,357.");
+        checkAddDot("8,762,423,634", "8,762,423,634.");
+        checkAddDot("873,283,568", "873,283,568.");
+        checkAddDot("8,235,854,645", "8,235,854,645.");
+        checkAddDot("23,482,314", "23,482,314.");
+        checkAddDot("234,643,737", "234,643,737.");
+
+        checkAddDot("-72,341,234", "-72,341,234.");
+        checkAddDot("-8,023,042,394", "-8,023,042,394.");
+        checkAddDot("-626,356,345", "-626,356,345.");
+        checkAddDot("-67,235,923,052", "-67,235,923,052.");
+        checkAddDot("-7,625,252,352,352", "-7,625,252,352,352.");
+        checkAddDot("-62,523,523,523,525", "-62,523,523,523,525.");
+
+        //with dot at the end
+        //without commas
+        checkAddDot("0.", "0.");
+        checkAddDot("1.", "1.");
+        checkAddDot("8.", "8.");
+        checkAddDot("9.", "9.");
+        checkAddDot("10.", "10.");
+        checkAddDot("100.", "100.");
+        checkAddDot("500.", "500.");
+
+        checkAddDot("-0.", "-0.");
+        checkAddDot("-1.", "-1.");
+        checkAddDot("-8.", "-8.");
+        checkAddDot("-9.", "-9.");
+        checkAddDot("-10.", "-10.");
+        checkAddDot("-100.", "-100.");
+        checkAddDot("-500.", "-500.");
+
+        //with commas
+        checkAddDot("8,235.", "8,235.");
+        checkAddDot("9,342.", "9,342.");
+        checkAddDot("142,326,735.", "142,326,735.");
+        checkAddDot("9,346,843,456.", "9,346,843,456.");
+        checkAddDot("924,536,576.", "924,536,576.");
+        checkAddDot("945,358,636.", "945,358,636.");
+
+        checkAddDot("54,363,463,463.", "54,363,463,463.");
+        checkAddDot("8,846,356,367.", "8,846,356,367.");
+        checkAddDot("834,634,634,636.", "834,634,634,636.");
+        checkAddDot("8,456,363.", "8,456,363.");
+        checkAddDot("436,373,563.", "436,373,563.");
+        checkAddDot("3,643,563.", "3,643,563.");
+
+        //with in the middle
+        //without commas
+        checkAddDot("0.6", "0.6");
+        checkAddDot("1.235", "1.235");
+        checkAddDot("8.8236", "8.8236");
+        checkAddDot("9.8245", "9.8245");
+        checkAddDot("10.7", "10.7");
+        checkAddDot("100.3247", "100.3247");
+        checkAddDot("500.7235", "500.7235");
+
+        checkAddDot("-0.736", "-0.736");
+        checkAddDot("-1.8356", "-1.8356");
+        checkAddDot("-8.5437", "-8.5437");
+        checkAddDot("-9.7235", "-9.7235");
+        checkAddDot("-10.834", "-10.834");
+        checkAddDot("-100.01", "-100.01");
+        checkAddDot("-500.5", "-500.5");
+
+        //with commas
+        checkAddDot("124513.25835", "124513.25835");
+        checkAddDot("62352.7235", "62352.7235");
+        checkAddDot("6626.8256", "6626.8256");
+        checkAddDot("2346.7925", "2346.7925");
+        checkAddDot("762462.6782", "762462.6782");
+        checkAddDot("7624623.2", "7624623.2");
+        checkAddDot("76236262.72", "76236262.72");
+
+        checkAddDot("-77322225.7", "-77322225.7");
+        checkAddDot("-823452168746.734535", "-823452168746.734535");
+        checkAddDot("-2523578.725", "-2523578.725");
+        checkAddDot("-8643.825", "-8643.825");
+        checkAddDot("-6235.725", "-6235.725");
+        checkAddDot("-734535.73", "-734535.73");
+        checkAddDot("-84564.622", "-84564.622");
+
+        //engineer numbers
+        checkAddDot("7.e+7234", "7.e+7234");
+        checkAddDot("1.e+72", "1.e+72");
+        checkAddDot("5.e+92", "5.e+92");
+        checkAddDot("4.e-234", "4.e-234");
+        checkAddDot("8.e-19", "8.e-19");
+        checkAddDot("2.e-84", "2.e-84");
+
+        checkAddDot("-4.e+13", "-4.e+13");
+        checkAddDot("-2.e+126", "-2.e+126");
+        checkAddDot("-7.e+1482", "-7.e+1482");
+        checkAddDot("-6.e-723", "-6.e-723");
+        checkAddDot("-5.e-17", "-5.e-17");
+        checkAddDot("-2.e-79", "-2.e-79");
+    }
+
+    /**
+     * Tests for delete last char operation.
+     */
     @Test
     public void deleteLastCharTests() {
         //one-digit numbers
         checkDeleteLastChar("0", "0");
         checkDeleteLastChar("1", "0");
         checkDeleteLastChar("2", "0");
-        checkDeleteLastChar("3", "0");
-        checkDeleteLastChar("4", "0");
-        checkDeleteLastChar("5", "0");
-        checkDeleteLastChar("6", "0");
         checkDeleteLastChar("7", "0");
         checkDeleteLastChar("8", "0");
         checkDeleteLastChar("9", "0");
@@ -32,10 +153,6 @@ public class NumberFormatterTest {
         checkDeleteLastChar("-0", "0");
         checkDeleteLastChar("-1", "0");
         checkDeleteLastChar("-2", "0");
-        checkDeleteLastChar("-3", "0");
-        checkDeleteLastChar("-4", "0");
-        checkDeleteLastChar("-5", "0");
-        checkDeleteLastChar("-6", "0");
         checkDeleteLastChar("-7", "0");
         checkDeleteLastChar("-8", "0");
         checkDeleteLastChar("-9", "0");
@@ -136,22 +253,14 @@ public class NumberFormatterTest {
         checkDeleteLastChar("1.e+147", "1.e+147");
         checkDeleteLastChar("8.e-1487", "8.e-1487");
         checkDeleteLastChar("3.e-3254", "3.e-3254");
-        checkDeleteLastChar("0.e-134", "0.e-134");
+        checkDeleteLastChar("7.e-134", "7.e-134");
 
         checkDeleteLastChar("-1.e+1237", "-1.e+1237");
-        checkDeleteLastChar("-0.e+185", "-0.e+185");
+        checkDeleteLastChar("-1.e+185", "-1.e+185");
         checkDeleteLastChar("-3.e+1237", "-3.e+1237");
         checkDeleteLastChar("-8.e-123", "-8.e-123");
         checkDeleteLastChar("-3.e-85", "-3.e-85");
-        checkDeleteLastChar("-5.e-12", "-5.e-12");
-    }
-
-    /**
-     * @todo
-     */
-    @Test
-    public void addDotTests() {
-
+        checkDeleteLastChar("-5.e-29", "-5.e-29");
     }
 
     /**
@@ -187,17 +296,23 @@ public class NumberFormatterTest {
     }
 
     /**
+     * Checks that dot is added to number.
+     * @param number number to edit.
+     * @param expectedResult required result after performing operation.
+     */
+    private void checkAddDot(String number, String expectedResult) {
+        String result = NumberFormatter.addDot(number);
+        assertEquals(expectedResult, result);
+    }
+
+    /**
      * Checks result of delete last char operation.
      * @param number number to edit.
-     * @param expectedResult required result.
+     * @param expectedResult required result after performing operation.
      */
     private void checkDeleteLastChar(String number, String expectedResult) {
         String result = NumberFormatter.deleteLastChar(number);
         assertEquals(expectedResult, result);
-    }
-
-    private void checkAddDot(String number, boolean isEditable, String expectedResult) {
-
     }
 
     private void checkAddDigit(String number, String digit, boolean isEditable, String expectedResult) {

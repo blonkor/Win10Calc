@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Tests for delete last char operation created. Few bug fixes with the operation in controller.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,7 +80,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.NumberFormatterTest.deleteLastCharTests">
+  <component name="RunManager" selected="JUnit.NumberFormatterTest.addDotTests">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -93,6 +90,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NumberFormatterTest.addDotTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
+      <option name="METHOD_NAME" value="addDotTests" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -152,9 +165,11 @@
       <item itemvalue="JUnit.view in Win10Calc" />
       <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.NumberFormatterTest.deleteLastCharTests" />
+      <item itemvalue="JUnit.NumberFormatterTest.addDotTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.NumberFormatterTest.addDotTests" />
         <item itemvalue="JUnit.NumberFormatterTest.deleteLastCharTests" />
         <item itemvalue="Application.Launcher" />
       </list>
@@ -170,13 +185,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00031" summary="JavaDoc added where was missing. Code refactoring.">
-      <created>1565562221874</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1565562221874</updated>
     </task>
     <task id="LOCAL-00032" summary="Serialization done.">
       <created>1565610540052</created>
@@ -514,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567010772110</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Code refactoring for controller.">
+      <created>1567023445115</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1567023445115</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -548,7 +563,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="View changes for memory. Several features such as memory block, memory buttons disability while memory is shown etc. realized. Text for memory show button changed (by using additional label). Few more bug fixes with view (almost about layouts)." />
     <MESSAGE value="View changes for navigation panel and buttons." />
     <MESSAGE value="Methods for moving labels will created (but will be removed by next commit)" />
     <MESSAGE value="Methods for moving labels removed." />
@@ -573,7 +587,8 @@
     <MESSAGE value="NumberFormatter refactored." />
     <MESSAGE value="Test packages refactored. Test method's for controller for number formatter created." />
     <MESSAGE value="Tests for delete last char operation created. Few bug fixes with the operation in controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for delete last char operation created. Few bug fixes with the operation in controller." />
+    <MESSAGE value="Code refactoring for controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for controller." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
