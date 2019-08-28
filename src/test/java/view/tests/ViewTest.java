@@ -1,12 +1,9 @@
 package view.tests;
 
-import com.implemica.bormashenko.calculator.Launcher;
-import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.geometry.VerticalDirection;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
@@ -55,6 +52,8 @@ public class ViewTest extends RobotControl {
         moveWindowTests();
         resizeFontTests();
         visibleArrowsTests();
+        expandTest();
+        hideTest();
     }
 
     /**
@@ -2153,41 +2152,37 @@ public class ViewTest extends RobotControl {
         assertTrue(getButtonBySelector(LEFT_ARROW_ID).isVisible());
         assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
 
-        clickOn(getButtonBySelector(LEFT_ARROW_ID));
-
-        assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
-        assertTrue(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
-
-        clickOn(getButtonBySelector(RIGHT_ARROW_ID));
-
-        assertTrue(getButtonBySelector(LEFT_ARROW_ID).isVisible());
-        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
-
-        dragFromTo(DEFAULT_X, DEFAULT_Y, 0, DEFAULT_Y);
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
 
         assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
         assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
     }
 
     /**
-     * @todo
+     * Test for expanding window.
      */
-    public void exitTests() {
+    @Test
+    public void expandTest() {
+        String minimizedSymbol = "\uE922";
+        String maximizedSymbol = "\uE923";
 
+        clickOn(getButtonBySelector(EXPAND_ID));
+        assertTrue(stage.isMaximized());
+        assertEquals(getButtonBySelector(EXPAND_ID).getText(), maximizedSymbol);
+
+        clickOn(getButtonBySelector(EXPAND_ID));
+        assertFalse(stage.isMaximized());
+        assertEquals(getButtonBySelector(EXPAND_ID).getText(), minimizedSymbol);
     }
 
     /**
-     * @todo
+     * Test for hiding window.
      */
-    public void expandTests() {
+    @Test
+    public void hideTest() {
+        clickOn(getButtonBySelector(HIDE_ID));
 
-    }
-
-    /**
-     * @todo
-     */
-    public void hideTests() {
-
+        assertTrue(stage.isIconified());
     }
 
     /**
