@@ -128,6 +128,31 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Makes number in result screen decimal.
+     */
+    public void makeDecimal() {
+        String number;
+
+        if (isEditableScreen) {
+            number = screen.getText();
+        } else {
+            number = ZERO;
+        }
+
+        screen.setText(NumberFormatter.addDot(number));
+    }
+
+    /**
+     * Deletes last symbol in result screen.
+     */
+    public void backspace() {
+        if (isEditableScreen) {
+            String number = screen.getText();
+            screen.setText(NumberFormatter.deleteLastChar(number));
+        }
+    }
+
+    /**
      * Opens or closes navigation bar.
      */
     public void showNavigationPanel() {
@@ -406,23 +431,7 @@ public class Controller implements Initializable {
         isEditableScreen = true;
     }
 
-    /**
-     * Makes number in result screen decimal.
-     */
-    public void makeDecimal() {
-        String number = screen.getText();
-        screen.setText(NumberFormatter.addDot(number, isEditableScreen));
-    }
 
-    /**
-     * Deletes last symbol in result screen.
-     */
-    public void backspace() {
-        if (isEditableScreen) {
-            String number = screen.getText();
-            screen.setText(NumberFormatter.deleteLastChar(number));
-        }
-    }
 
     /**
      * Sums two numbers.

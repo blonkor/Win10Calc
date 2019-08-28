@@ -51,6 +51,20 @@ public class NumberFormatter {
     private final static MathContext PRECISION_TO_SHOW = new MathContext(MAX_SYMBOLS);
 
     /**
+     * Adds dot to number if the number does not contain dot yet.
+     *
+     * @param number number to edit.
+     * @return number with dot if it does not contain dot yet.
+     */
+    public static String addDot(String number) {
+        if (!number.contains(DOT)) {
+            number += DOT;
+        }
+
+        return number;
+    }
+
+    /**
      * Deletes last char in non-engineer number.
      *
      * @param number number to edit.
@@ -70,24 +84,6 @@ public class NumberFormatter {
         }
 
         return separateNumberWithCommas(number);
-    }
-
-    /**
-     * Adds dot to number if the number does not contain dot.
-     * If the number can not be edited, replaces number with zero with dot.
-     *
-     * @param number     number to edit.
-     * @param isEditable true if number can be edited.
-     * @return number with dot if it was possible to edit or "0." otherwise.
-     */
-    public static String addDot(String number, boolean isEditable) {
-        if (!isEditable) {
-            number = ZERO + DOT;
-        } else if (!number.endsWith(DOT) && !number.contains(DOT)) {
-            number += DOT;
-        }
-
-        return number;
     }
 
     /**
@@ -116,6 +112,12 @@ public class NumberFormatter {
         return new BigDecimal(number.replaceAll(COMMA, EMPTY_STRING));
     }
 
+    /**
+     * Separates big decimal value with commas.
+     *
+     * @param number big decimal number to separate.
+     * @return string contains big decimal number separated with commas.
+     */
     public static String bigDecimalToScreen(BigDecimal number) {
         return separateNumberWithCommas(number.toString());
     }
