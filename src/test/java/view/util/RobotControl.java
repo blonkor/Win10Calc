@@ -515,16 +515,6 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Looks up for control by selector.
-     *
-     * @param selector id or text of control.
-     * @return control found by selector.
-     */
-    protected Control getControlBySelector(String selector) {
-        return robot.lookup(selector).query();
-    }
-
-    /**
      * Moves cursor to the center of node using robot.
      *
      * @param node node where cursor should be moved.
@@ -540,6 +530,57 @@ public class RobotControl extends GuiTest {
         FXTestUtils.awaitEvents();
     }
 
+    /**
+     * Moves cursor to the center of node using robot and performs mouse click operation.
+     *
+     * @param node node where cursor should be moved.
+     */
+    protected void clickOn(Node node) {
+        hoverOn(node);
+        click(MouseButton.PRIMARY);
+
+        FXTestUtils.awaitEvents();
+    }
+
+    protected void typeText(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            String selector = null;
+
+            if (text.charAt(i) == '0') {
+                selector = ZERO_ID;
+            } else if (text.charAt(i) == '1') {
+                selector = ONE_ID;
+            } else if (text.charAt(i) == '2') {
+                selector = TWO_ID;
+            } else if (text.charAt(i) == '3') {
+                selector = THREE_ID;
+            } else if (text.charAt(i) == '4') {
+                selector = FOUR_ID;
+            } else if (text.charAt(i) == '5') {
+                selector = FIVE_ID;
+            } else if (text.charAt(i) == '6') {
+                selector = SIX_ID;
+            } else if (text.charAt(i) == '7') {
+                selector = SEVEN_ID;
+            } else if (text.charAt(i) == '8') {
+                selector = EIGHT_ID;
+            } else if (text.charAt(i) == '9') {
+                selector = NINE_ID;
+            } else if (text.charAt(i) == '.') {
+                selector = DOT_ID;
+            } else if (text.charAt(i) == '-') {
+                selector = NEGATE_ID;
+            }
+
+            if (selector == null) {
+                throw new NullPointerException("Expected: string with number only. \n" +
+                        "Got: " + text);
+            } else {
+                clickOn(getButtonBySelector(selector));
+            }
+        }
+    }
+
     protected void dragFromTo(double fromX, double fromY, double toX, double toY) {
         robot.moveTo(fromX, fromY);
         robot.press(MouseButton.PRIMARY);
@@ -550,7 +591,7 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Restores window's size and location to required.
+     * Set window's size and location to required.
      */
     protected void setWindowsSizeAndLayout(double width, double height, double x, double y) {
         Window window = getWindowByIndex(0);

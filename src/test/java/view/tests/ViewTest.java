@@ -53,6 +53,7 @@ public class ViewTest extends RobotControl {
         textTests();
         resizeTests();
         moveWindowTests();
+        resizeFontTests();
     }
 
     /**
@@ -2109,6 +2110,32 @@ public class ViewTest extends RobotControl {
     }
 
     /**
+     * Tests for resizing font in screen label.
+     *
+     * @todo controller should be done.
+     */
+    @Test
+    public void resizeFontTests() {
+        checkResizeFont("1" ,DEFAULT_WIDTH, 47);
+        checkResizeFont("12", DEFAULT_WIDTH, 47);
+        checkResizeFont("123", DEFAULT_WIDTH, 47);
+        checkResizeFont("1234", DEFAULT_WIDTH, 47);
+        checkResizeFont("12345", DEFAULT_WIDTH, 47);
+        checkResizeFont("123456", DEFAULT_WIDTH, 47);
+        checkResizeFont("1234567", DEFAULT_WIDTH, 47);
+        checkResizeFont("12345678", DEFAULT_WIDTH, 47);
+        checkResizeFont("123456789", DEFAULT_WIDTH, 47);
+        checkResizeFont("1234567890", DEFAULT_WIDTH, 46);
+        checkResizeFont("1234567890.0", DEFAULT_WIDTH, 45);
+        checkResizeFont("1234567890.01", DEFAULT_WIDTH, 44);
+        checkResizeFont("1234567890.012", DEFAULT_WIDTH, 43);
+        checkResizeFont("1234567890.0123", DEFAULT_WIDTH, 42);
+        checkResizeFont("1234567890.01234", DEFAULT_WIDTH, 41);
+        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH, 40);
+        checkResizeFont("-9999999999999999", DEFAULT_WIDTH, 39);
+    }
+
+    /**
      * @todo
      */
     public void visibleArrowsTests() {
@@ -2126,13 +2153,6 @@ public class ViewTest extends RobotControl {
      * @todo
      */
     public void expandTests() {
-
-    }
-
-    /**
-     * @todo
-     */
-    public void resizeFontTests() {
 
     }
 
@@ -2269,5 +2289,23 @@ public class ViewTest extends RobotControl {
         Window window = getWindowByIndex(0);
         assertEquals(expectedX, window.getX());
         assertEquals(expectedY, window.getY());
+    }
+
+    /**
+     * Checks that font for screen label changes while text in the label or window's width changes.
+     *
+     * @param text             text to set for label.
+     * @param dragToX          location X to drag window.
+     * @param expectedFontSize size of font that label should has.
+     */
+    private void checkResizeFont(String text, double dragToX, double expectedFontSize) {
+        setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, 0);
+        Labeled labeled = getLabeledBySelector(SCREEN_LABEL_ID);
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+
+        typeText(text);
+
+        dragFromTo(DEFAULT_WIDTH - 1, DEFAULT_HEIGHT - 1, dragToX, DEFAULT_HEIGHT);
+        assertEquals(expectedFontSize, labeled.getFont().getSize());
     }
 }
