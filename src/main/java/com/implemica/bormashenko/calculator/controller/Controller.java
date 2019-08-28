@@ -8,7 +8,6 @@ import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -290,7 +289,7 @@ public class Controller implements Initializable {
      * Adds number to memory.
      */
     public void memoryAddOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.addToMemory(number);
         ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -300,7 +299,7 @@ public class Controller implements Initializable {
      * Subtracts number from memory.
      */
     public void memorySubtractOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.subtractFromMemory(number);
         ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -310,7 +309,7 @@ public class Controller implements Initializable {
      * Saves number in memory.
      */
     public void memoryStoreOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.storeToMemory(number);
         ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -412,8 +411,7 @@ public class Controller implements Initializable {
      */
     public void makeDecimal() {
         String number = screen.getText();
-        boolean isOperationPressed = isBinaryOperationPressed && isUnaryOperationPressed && isPercentPressed;
-        screen.setText(NumberFormatter.addDot(number, isOperationPressed));
+        screen.setText(NumberFormatter.addDot(number, isEditableScreen));
     }
 
     /**
@@ -505,7 +503,7 @@ public class Controller implements Initializable {
     public void calculateResult() {
         try {
             if (calculation.getBinaryOperation() != null) {
-                BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
 
                 if (!isEqualsPressed && !isUnaryOperationPressed) {
 
@@ -569,7 +567,7 @@ public class Controller implements Initializable {
     private void binaryOperationPressed(BinaryOperations operation) {
         try {
             if (!isBinaryOperationPressed) {
-                BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen);
+                BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen.getText());
 
                 if (!isFirstCalculated) {
                     calculation.setFirst(numberOnScreen);
@@ -634,7 +632,7 @@ public class Controller implements Initializable {
     private void unaryOperationPressed(UnaryOperations operation) {
         try {
 
-            BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+            BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
 
             if (!isFirstCalculated) {
                 calculation.setFirst(number);
@@ -731,7 +729,7 @@ public class Controller implements Initializable {
 
         } else {
             BinaryOperations operation = calculation.getBinaryOperation();
-            BigDecimal number = NumberFormatter.screenToBigDecimal(screen);
+            BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
             calculation.setSecond(number);
 
             if (operation == BinaryOperations.ADD || operation == BinaryOperations.SUBTRACT) {
