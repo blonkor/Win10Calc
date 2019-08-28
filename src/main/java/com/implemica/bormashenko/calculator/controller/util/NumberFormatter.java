@@ -46,7 +46,7 @@ public class NumberFormatter {
     private final static int MAX_SYMBOLS = 16;
 
     /**
-     * Precision for rounding result, calculated in model.
+     * Precision for rounding result, calculated in tests.model.
      */
     private final static MathContext PRECISION_TO_SHOW = new MathContext(MAX_SYMBOLS);
 

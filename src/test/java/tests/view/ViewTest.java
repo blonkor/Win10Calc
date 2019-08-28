@@ -1,4 +1,4 @@
-package view.tests;
+package tests.view;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.VerticalDirection;
@@ -9,12 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Window;
 import org.junit.Test;
-import view.util.RobotControl;
+import util.RobotControl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for testing view.
+ * Test class for testing tests.view.
  *
  * @author Mykhailo Bormashenko
  * @see com.implemica.bormashenko.calculator.view.View
@@ -2113,7 +2113,7 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for resizing font in screen label.
      *
-     * @todo controller should be done.
+     * @todo tests.controller should be done.
      */
     private void resizeFontTests() {
         checkResizeFont("1", DEFAULT_WIDTH, 47);

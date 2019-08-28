@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Test packages refactored. Test method's for controller for number formatter created.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/model/MemoryModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/model/MemoryModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/view/ViewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/view/util/SetLauncherAppForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/util/SetLauncherAppForTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +107,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <configuration name="tests.model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -104,7 +115,7 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="model" />
+      <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -121,7 +132,7 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="view" />
+      <option name="PACKAGE_NAME" value="tests.view" />
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -131,7 +142,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.model in Win10Calc" />
+      <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
       <item itemvalue="Application.Launcher" />
     </list>
@@ -151,13 +162,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Refactoring and adding few new features. Calculation is possible by clicking buttons.">
-      <created>1565275147354</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1565275147354</updated>
     </task>
     <task id="LOCAL-00029" summary="View changed. Controller operations improved and now calculation model works properly (excluding rounding, unary operations still not realized).">
       <created>1565387086699</created>
@@ -495,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567002353538</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="NumberFormatter refactored.">
+      <created>1567005385609</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1567005385609</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -529,8 +540,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Action for history button removed as necessary. Fields containing &quot;history&quot; string renamed." />
-    <MESSAGE value="Minor refactoring for view." />
     <MESSAGE value="Scroll bar (as well as whole scroll pane) customized." />
     <MESSAGE value="View changes for memory. Several features such as memory block, memory buttons disability while memory is shown etc. realized. Text for memory show button changed (by using additional label). Few more bug fixes with view (almost about layouts)." />
     <MESSAGE value="View changes for navigation panel and buttons." />
@@ -554,7 +563,9 @@
     <MESSAGE value="Tests for hide and expand created." />
     <MESSAGE value="View tests refactored." />
     <MESSAGE value="Keyboard controlling removed from view listener to controller's method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Keyboard controlling removed from view listener to controller's method." />
+    <MESSAGE value="NumberFormatter refactored." />
+    <MESSAGE value="Test packages refactored. Test method's for controller for number formatter created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Test packages refactored. Test method's for controller for number formatter created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

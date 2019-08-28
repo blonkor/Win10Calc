@@ -10,7 +10,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 /**
- * This class contains model of how the calculator works.
+ * This class contains tests.model of how the calculator works.
  *
  * @author Mykhailo Bormashenko
  */

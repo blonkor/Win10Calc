@@ -1,4 +1,4 @@
-package model;
+package tests.model;
 
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
@@ -14,14 +14,14 @@ import static com.implemica.bormashenko.calculator.model.enums.UnaryOperations.*
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for model of calculation.
+ * Test class for tests.model of calculation.
  *
  * @author Mykhailo Bormashenko
  */
 class CalculationModelTest {
 
     /**
-     * Object of model.
+     * Object of tests.model.
      */
     private static Calculation calculation;
 
@@ -48,22 +48,22 @@ class CalculationModelTest {
     private static final String INVALID_INPUT_MESSAGE = "Invalid input";
 
     /**
-     * Big decimal value of minimal value that can be shown in view minus one.
+     * Big decimal value of minimal value that can be shown in tests.view minus one.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN_MINUS_ONE = new BigDecimal("-10000000000000000");
 
     /**
-     * Big decimal value of minimal value that can be shown in view.
+     * Big decimal value of minimal value that can be shown in tests.view.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN = new BigDecimal("-9999999999999999");
 
     /**
-     * Big decimal value of minimal value that can be shown in view plus one.
+     * Big decimal value of minimal value that can be shown in tests.view plus one.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN_PLUS_ONE = new BigDecimal("-9999999999999998");
 
     /**
-     * Big decimal value of minimal value that can be shown in view divide by two.
+     * Big decimal value of minimal value that can be shown in tests.view divide by two.
      */
     private static final BigDecimal HALF_MIN_VALUE_ON_SCREEN = new BigDecimal("-5000000000000000");
 
@@ -88,22 +88,22 @@ class CalculationModelTest {
     private static final BigDecimal HUNDRED = new BigDecimal("100");
 
     /**
-     * Big decimal value of maximal value that can be shown in view divide by two.
+     * Big decimal value of maximal value that can be shown in tests.view divide by two.
      */
     private static final BigDecimal HALF_MAX_VALUE_ON_SCREEN = new BigDecimal("5000000000000000");
 
     /**
-     * Big decimal value of maximal value that can be shown in view minus one.
+     * Big decimal value of maximal value that can be shown in tests.view minus one.
      */
     private static final BigDecimal MAX_VALUE_ON_SCREEN_MINUS_ONE = new BigDecimal("9999999999999998");
 
     /**
-     * Big decimal value of maximal value that can be shown in view.
+     * Big decimal value of maximal value that can be shown in tests.view.
      */
     private static final BigDecimal MAX_VALUE_ON_SCREEN = new BigDecimal("9999999999999999");
 
     /**
-     * Big decimal value of maximal value that can be shown in view plus one.
+     * Big decimal value of maximal value that can be shown in tests.view plus one.
      */
     private static final BigDecimal MAX_VALUE_ON_SCREEN_PLUS_ONE = new BigDecimal("10000000000000000");
 
@@ -258,7 +258,7 @@ class CalculationModelTest {
     private static final BigDecimal ONE_DOT_E_MINUS_17 = new BigDecimal("1.e-17");
 
     /**
-     * Setting up an object of model.
+     * Setting up an object of tests.model.
      *
      * @see Calculation
      */
@@ -8608,7 +8608,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing binary operations in model.
+     * Method for testing binary operations in tests.model.
      * <p>
      * For operations {@code ADD} and {@code MULTIPLY} it is possible to swap
      * numbers of equation between each other to obtain the same result.
@@ -8638,14 +8638,14 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing percentage of first number in model.
+     * Method for testing percentage of first number in tests.model.
      * <p>
      * For this operation it is possible to swap numbers of equation
      * between each other to obtain the same result.
      *
      * @param first          first value of equation.
      * @param second         second value of equation.
-     * @param expectedSecond result that should be obtained and set as second number in model.
+     * @param expectedSecond result that should be obtained and set as second number in tests.model.
      * @see Calculation
      */
     private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, String expectedSecond) {
@@ -8663,10 +8663,10 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing percentage of 100 operation in model.
+     * Method for testing percentage of 100 operation in tests.model.
      *
      * @param value          number for operation.
-     * @param expectedSecond result that should be obtained and set as second number in model.
+     * @param expectedSecond result that should be obtained and set as second number in tests.model.
      * @see Calculation
      */
     private void checkPercentageOf100Operation(BigDecimal value, String expectedSecond) {
@@ -8677,7 +8677,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing unary operations in model.
+     * Method for testing unary operations in tests.model.
      *
      * @param value          number for operation.
      * @param operation      unary operation to use.
@@ -8693,7 +8693,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing overflow exception while using binary operations in model.
+     * Method for testing overflow exception while using binary operations in tests.model.
      * For inputted values, exception should be obtained.
      *
      * @param first     first value of equation.
@@ -8730,7 +8730,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing overflow exception while using percentage of first operation in model.
+     * Method for testing overflow exception while using percentage of first operation in tests.model.
      * For inputted values, exception should be obtained.
      *
      * @param first  first value of equation.
@@ -8761,7 +8761,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing overflow exception while using percentage of 100 operation in model.
+     * Method for testing overflow exception while using percentage of 100 operation in tests.model.
      * For inputted value, exception should be obtained.
      *
      * @param value number for operation.
@@ -8780,7 +8780,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing overflow exception while using unary operations in model.
+     * Method for testing overflow exception while using unary operations in tests.model.
      * For inputted value, exception should be obtained.
      *
      * @param value number for operation.
@@ -8801,7 +8801,7 @@ class CalculationModelTest {
 
 
     /**
-     * Method for testing divide by zero exception in model.
+     * Method for testing divide by zero exception in tests.model.
      * For inputted value, exception should be obtained.
      *
      * @param value number for operation.
@@ -8821,7 +8821,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing sqrt of negative number in model.
+     * Method for testing sqrt of negative number in tests.model.
      * For inputted value, exception should be obtained.
      *
      * @param value number for operation.

@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
 import java.io.*;
 
 /**
- * Main view of application.
+ * Main tests.view of application.
  *
  * @author Mykhailo Bormashenko
  */
@@ -71,7 +71,7 @@ public class View implements Serializable {
     private static final String EQUATION_LABEL_ID = "#equation";
 
     /**
-     * Initializing main view and listeners.
+     * Initializing main tests.view and listeners.
      *
      * @param primaryStage JavaFX stage.
      */

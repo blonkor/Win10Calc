@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.Stack;
 
 /**
- * Utility class for programmatically changing view.
+ * Utility class for programmatically changing tests.view.
  *
  * @author Mykhailo Bormashenko
  */

@@ -1,4 +1,4 @@
-package model;
+package tests.model;
 
 import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for model of memory.
+ * Test class for tests.model of memory.
  *
  * @author Mykhailo Bormashenko
  */

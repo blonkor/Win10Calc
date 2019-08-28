@@ -1,4 +1,4 @@
-package view.util;
+package util;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Node;

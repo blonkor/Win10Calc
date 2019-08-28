@@ -546,18 +546,18 @@ public class Controller implements Initializable {
      * Calls when any binary operation is pressed.
      * <p>
      * If first number is not saved, saves number on screen as first number,
-     * sets inputted binary operation to model and shows first number and operation in equation label.
+     * sets inputted binary operation to tests.model and shows first number and operation in equation label.
      * <p>
      * If first number is saved and calculation was not just made, saves number on screen as second,
-     * calculates result of binary operation set in model, saves result of operation as first number,
-     * sets inputted binary operation to model, than shows result of previous operation om screen and
-     * adds second number in model and operation symbol to equation label.
+     * calculates result of binary operation set in tests.model, saves result of operation as first number,
+     * sets inputted binary operation to tests.model, than shows result of previous operation om screen and
+     * adds second number in tests.model and operation symbol to equation label.
      * <p>
-     * If first number is saved and calculation was just made, sets inputted binary operation to model
+     * If first number is saved and calculation was just made, sets inputted binary operation to tests.model
      * and shows first number and operation in equation label (this is needed because after calculation was made result
      * of calculation is saved as first number).
      * <p>
-     * If operation was just pressed, sets inputted binary operation to model and changes last symbol (which is a symbol
+     * If operation was just pressed, sets inputted binary operation to tests.model and changes last symbol (which is a symbol
      * of previously inputted binary operation) in equation label to actual.
      *
      * @param operation binary operation to set.
@@ -710,10 +710,10 @@ public class Controller implements Initializable {
      * Calculates percentage.
      * Calls when percent button is pressed.
      * <p>
-     * Calculation is possible if only binary operation is set. Otherwise, sets first number in calculation model
+     * Calculation is possible if only binary operation is set. Otherwise, sets first number in calculation tests.model
      * to 0, and shows it in main screen and equation label.
      * <p>
-     * Sets number from screen as second number in calculation model. Next steps depends on which binary operation
+     * Sets number from screen as second number in calculation tests.model. Next steps depends on which binary operation
      * is set:
      * If set binary operation is add or subtract, sets second number as percentage of first number.
      * If set binary operation is multiply or divide, sets second number as percentage of 100.
