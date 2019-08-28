@@ -69,7 +69,7 @@ public class NumberFormatter {
 
         }
 
-        return bigDecimalToScreen(new BigDecimal(number));
+        return separateNumberWithCommas(number);
     }
 
     /**
@@ -107,19 +107,53 @@ public class NumberFormatter {
     }
 
     /**
-     * Separates every three digit in number.
+     * Converts number with separating commas to big decimal.
      *
-     * @param bigDecimal number to manipulate with.
+     * @param number number to convert.
+     * @return big decimal value of the number.
      */
-    public static String bigDecimalToScreen(BigDecimal bigDecimal) {
-        String number;
+    public static BigDecimal screenToBigDecimal(String number) {
+        return new BigDecimal(number.replaceAll(COMMA, EMPTY_STRING));
+    }
 
-        if (bigDecimal.precision() >= MAX_SYMBOLS) {
-            number = bigDecimal.toPlainString();
-        } else {
-            number = bigDecimal.toEngineeringString();
+    public static String bigDecimalToScreen(BigDecimal number) {
+        return separateNumberWithCommas(number.toString());
+    }
+
+    /**
+     * Rounds big decimal number.
+     *
+     * @param bigDecimal number to round.
+     * @return rounded number.
+     */
+    public static BigDecimal round(BigDecimal bigDecimal) {
+        return bigDecimal.round(PRECISION_TO_SHOW);
+    }
+
+    /**
+     * Adds digit symbol to result number string.
+     *
+     * @param digit symbol to add.
+     */
+    private static String addDigitToScreen(String currentNumber, String digit) {
+        currentNumber = currentNumber.replaceAll(COMMA, EMPTY_STRING);
+
+        if (currentNumber.equals(ZERO)) {
+            currentNumber = digit;
+        } else if (currentNumber.length() < MAX_SYMBOLS) {
+            currentNumber += digit;
         }
 
+        return NumberFormatter.separateNumberWithCommas(currentNumber);
+    }
+
+
+    /**
+     * Separates every three digit in number.
+     *
+     * @param number number to edit.
+     */
+    private static String separateNumberWithCommas(String number) {
         if (number.contains(ENGINEER)) {
             return number;
         }
@@ -152,42 +186,5 @@ public class NumberFormatter {
         }
 
         return str.reverse().append(digitsAfterDot).toString();
-    }
-
-    /**
-     * Converts number with separating commas to big decimal.
-     *
-     * @param number number to convert.
-     * @return big decimal value of the number.
-     */
-    public static BigDecimal screenToBigDecimal(String number) {
-        return new BigDecimal(number.replaceAll(COMMA, EMPTY_STRING));
-    }
-
-    /**
-     * Rounds big decimal number.
-     *
-     * @param bigDecimal number to round.
-     * @return rounded number.
-     */
-    public static BigDecimal round(BigDecimal bigDecimal) {
-        return bigDecimal.round(PRECISION_TO_SHOW);
-    }
-
-    /**
-     * Adds digit symbol to result number string.
-     *
-     * @param digit symbol to add.
-     */
-    private static String addDigitToScreen(String currentNumber, String digit) {
-        currentNumber = currentNumber.replaceAll(COMMA, EMPTY_STRING);
-
-        if (currentNumber.equals(ZERO)) {
-            currentNumber = digit;
-        } else if (currentNumber.length() < MAX_SYMBOLS) {
-            currentNumber += digit;
-        }
-
-        return NumberFormatter.bigDecimalToScreen(new BigDecimal(currentNumber));
     }
 }

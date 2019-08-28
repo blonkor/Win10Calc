@@ -14,7 +14,7 @@ import util.RobotControl;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for testing tests.view.
+ * Test class for testing view.
  *
  * @author Mykhailo Bormashenko
  * @see com.implemica.bormashenko.calculator.view.View

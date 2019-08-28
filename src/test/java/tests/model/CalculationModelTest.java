@@ -14,7 +14,7 @@ import static com.implemica.bormashenko.calculator.model.enums.UnaryOperations.*
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for tests.model of calculation.
+ * Test class for model of calculation.
  *
  * @author Mykhailo Bormashenko
  */
