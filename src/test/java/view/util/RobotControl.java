@@ -3,9 +3,7 @@ package view.util;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.Labeled;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Window;
@@ -495,6 +493,16 @@ public class RobotControl extends GuiTest {
     }
 
     /**
+     * Looks up for node by styleclass and selector.
+     *
+     * @param selector id of node.
+     * @return node.
+     */
+    protected Node getNodeBySelector(String selector) {
+        return robot.lookup(selector).query();
+    }
+
+    /**
      * Looks up for button by selector.
      *
      * @param selector id or text of button.
@@ -515,33 +523,11 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Moves cursor to the center of node using robot.
+     * Clicks on buttons in application to type required text.
      *
-     * @param node node where cursor should be moved.
+     * @param text text to type by clicking buttons.
+     * @throws NullPointerException if required text is not a number.
      */
-    protected void hoverOn(Node node) {
-        Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-
-        double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
-        double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
-
-        robot.moveTo(centerX, centerY);
-
-        FXTestUtils.awaitEvents();
-    }
-
-    /**
-     * Moves cursor to the center of node using robot and performs mouse click operation.
-     *
-     * @param node node where cursor should be moved.
-     */
-    protected void clickOn(Node node) {
-        hoverOn(node);
-        click(MouseButton.PRIMARY);
-
-        FXTestUtils.awaitEvents();
-    }
-
     protected void typeText(String text) {
         for (int i = 0; i < text.length(); i++) {
             String selector = null;
@@ -581,6 +567,42 @@ public class RobotControl extends GuiTest {
         }
     }
 
+    /**
+     * Moves cursor to the center of node using robot and performs mouse click operation.
+     *
+     * @param node node where cursor should be moved.
+     */
+    protected void clickOn(Node node) {
+        hoverOn(node);
+        click(MouseButton.PRIMARY);
+
+        FXTestUtils.awaitEvents();
+    }
+
+    /**
+     * Moves cursor to the center of node using robot.
+     *
+     * @param node node where cursor should be moved.
+     */
+    protected void hoverOn(Node node) {
+        Bounds bounds = node.localToScreen(node.getBoundsInLocal());
+
+        double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
+        double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
+
+        robot.moveTo(centerX, centerY);
+
+        FXTestUtils.awaitEvents();
+    }
+
+    /**
+     * Moves cursor to required location and drags it to another location.
+     *
+     * @param fromX coordinate X to move cursor firstly.
+     * @param fromY coordinate Y to move cursor firstly.
+     * @param toX   coordinate X to drag cursor.
+     * @param toY   coordinate Y to drag cursor.
+     */
     protected void dragFromTo(double fromX, double fromY, double toX, double toY) {
         robot.moveTo(fromX, fromY);
         robot.press(MouseButton.PRIMARY);
@@ -591,7 +613,12 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Set window's size and location to required.
+     * Sets window's size and layout to required.
+     *
+     * @param width  width to set.
+     * @param height height to set.
+     * @param x      coordinate X to set.
+     * @param y      coordinate Y to set.
      */
     protected void setWindowsSizeAndLayout(double width, double height, double x, double y) {
         Window window = getWindowByIndex(0);
@@ -622,15 +649,5 @@ public class RobotControl extends GuiTest {
     protected void setNodeVisible(String selector, boolean flag) {
         Node control = getNodeBySelector(selector);
         control.setVisible(flag);
-    }
-
-    /**
-     * Looks up for node by styleclass and selector.
-     *
-     * @param selector id of node.
-     * @return node.
-     */
-    protected Node getNodeBySelector(String selector) {
-        return robot.lookup(selector).query();
     }
 }

@@ -50,7 +50,7 @@ public class ViewTest extends RobotControl {
         textTests();
         resizeTests();
         moveWindowTests();
-        resizeFontTests();
+        //resizeFontTests();
         visibleArrowsTests();
         expandTest();
         hideTest();
@@ -59,8 +59,7 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for background color, color of text and font for buttons and labels.
      */
-    @Test
-    public void colorAndFontTests() {
+    private void colorAndFontTests() {
         //colors
         String whiteColor = "0xffffffff";
         String mostlyWhileColor = "0xfafafaff";
@@ -267,8 +266,7 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for text that buttons and labels contain.
      */
-    @Test
-    public void textTests() {
+    private void textTests() {
         //buttons
         {
             checkTextForButton(ONE_ID, "1");
@@ -346,74 +344,76 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for resizing application.
      */
-    @Test
-    public void resizeTests() {
+    private void resizeTests() {
+        int zero = 0;
         int ten = 10;
         int fifty = 50;
         int hundred = 100;
+        int maxHeightOffsetUp = 150;
+        int maxHeightOffsetDown = 248;
         int fiveHundred = 500;
 
         //left up corner
         {
             //width is not changed
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
 
             //narrow height
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, ten,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, ten,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, fifty,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, fifty,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, hundred,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, hundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, fiveHundred,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
 
             //expand height
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, -ten,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, -ten,
                     DEFAULT_X, DEFAULT_Y - ten,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, -fifty,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, -fifty,
                     DEFAULT_X, DEFAULT_Y - fifty,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, -hundred,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, -hundred,
                     DEFAULT_X, DEFAULT_Y - hundred,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, -fiveHundred,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
 
             //narrow width
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y, ten, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, ten, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, fifty, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, fifty, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, hundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, hundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
@@ -501,8 +501,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, ten, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y, fifty, -ten,
@@ -518,8 +518,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, fifty, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y, hundred, -ten,
@@ -535,8 +535,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, hundred, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -ten,
@@ -552,26 +552,26 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, fiveHundred, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
 
             //expand width
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y, -ten, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, -ten, zero,
                     DEFAULT_X - ten, DEFAULT_Y,
                     DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, -fifty, zero,
                     DEFAULT_X - fifty, DEFAULT_Y,
                     DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, -hundred, zero,
                     DEFAULT_X - hundred, DEFAULT_Y,
                     DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, zero,
                     DEFAULT_X - fiveHundred, DEFAULT_Y,
                     DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
@@ -659,8 +659,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, -ten, -fiveHundred,
-                    DEFAULT_X - ten, 0,
-                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X - ten, zero,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -ten,
@@ -676,8 +676,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, -fifty, -fiveHundred,
-                    DEFAULT_X - fifty, 0,
-                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X - fifty, zero,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -ten,
@@ -693,8 +693,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, -hundred, -fiveHundred,
-                    DEFAULT_X - hundred, 0,
-                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X - hundred, zero,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -ten,
@@ -710,8 +710,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + hundred,
                     Cursor.NW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y, -fiveHundred, -fiveHundred,
-                    DEFAULT_X - fiveHundred, 0,
-                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X - fiveHundred, zero,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NW_RESIZE);
         }
 
@@ -719,63 +719,63 @@ public class ViewTest extends RobotControl {
         {
             //width is not changed
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y, 0, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y, zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NW_RESIZE);
 
             //narrow height
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, ten,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, ten,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, fifty,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, fifty,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, hundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, hundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, fiveHundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
 
             //expand height
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -ten,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, -ten,
                     DEFAULT_X, DEFAULT_Y - ten,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + ten,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -fifty,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, -fifty,
                     DEFAULT_X, DEFAULT_Y - fifty,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -hundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, -hundred,
                     DEFAULT_X, DEFAULT_Y - hundred,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, 0, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, zero, -fiveHundred,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
 
             //narrow width
             //height is not changed
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
@@ -863,8 +863,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -ten, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -ten,
@@ -880,8 +880,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fifty, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -ten,
@@ -897,8 +897,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -hundred, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -ten,
@@ -914,26 +914,26 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, -fiveHundred, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
 
             //expand width
             //height is not changed
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
                     Cursor.NE_RESIZE);
@@ -1021,8 +1021,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, ten, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -ten,
@@ -1038,8 +1038,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fifty, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -ten,
@@ -1055,8 +1055,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, hundred, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -ten,
@@ -1072,8 +1072,8 @@ public class ViewTest extends RobotControl {
                     DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + hundred,
                     Cursor.NE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y, fiveHundred, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + 150,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.NE_RESIZE);
         }
 
@@ -1081,63 +1081,63 @@ public class ViewTest extends RobotControl {
         {
             //width is not changed
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
 
             //narrow height
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -ten,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -ten,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fifty,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -fifty,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -hundred,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -hundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fiveHundred,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
 
             //expand height
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, ten,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, ten,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fifty,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, fifty,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, hundred,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, hundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fiveHundred,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
 
             //narrow width
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
@@ -1226,7 +1226,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, ten,
@@ -1243,7 +1243,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, ten,
@@ -1260,7 +1260,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, ten,
@@ -1277,25 +1277,25 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
 
             //expand width
             //height is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, zero,
                     DEFAULT_X - ten, DEFAULT_Y,
                     DEFAULT_WIDTH + ten, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, zero,
                     DEFAULT_X - fifty, DEFAULT_Y,
                     DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, zero,
                     DEFAULT_X - hundred, DEFAULT_Y,
                     DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, zero,
                     DEFAULT_X - fiveHundred, DEFAULT_Y,
                     DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
                     Cursor.SW_RESIZE);
@@ -1385,7 +1385,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, fiveHundred,
                     DEFAULT_X - ten, DEFAULT_Y,
-                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + ten, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, ten,
@@ -1402,7 +1402,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, fiveHundred,
                     DEFAULT_X - fifty, DEFAULT_Y,
-                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + fifty, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, ten,
@@ -1419,7 +1419,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, fiveHundred,
                     DEFAULT_X - hundred, DEFAULT_Y,
-                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
 
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, ten,
@@ -1436,7 +1436,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SW_RESIZE);
             checkResize(DEFAULT_X, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, fiveHundred,
                     DEFAULT_X - fiveHundred, DEFAULT_Y,
-                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SW_RESIZE);
         }
 
@@ -1444,63 +1444,63 @@ public class ViewTest extends RobotControl {
         {
             //width is not changed
             //height is not changed
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
 
             //narrow height
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -ten,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -ten,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fifty,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -fifty,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -hundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -hundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, -fiveHundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, -fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
 
             //expand height
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, ten,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, ten,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + ten - 1,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fifty,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, fifty,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + fifty - 1,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, hundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, hundred,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fiveHundred,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
 
             //narrow width
             //height is not changed
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
@@ -1589,7 +1589,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -ten, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, ten,
@@ -1606,7 +1606,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fifty, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, ten,
@@ -1623,7 +1623,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -hundred, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, ten,
@@ -1640,25 +1640,25 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, -fiveHundred, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
 
             //expand width
             //height is not changed
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
                     Cursor.SE_RESIZE);
@@ -1748,7 +1748,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, ten, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + ten - 1, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, ten,
@@ -1765,7 +1765,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fifty, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + fifty - 1, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, ten,
@@ -1782,7 +1782,7 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, hundred, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
 
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, ten,
@@ -1799,14 +1799,14 @@ public class ViewTest extends RobotControl {
                     Cursor.SE_RESIZE);
             checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + DEFAULT_HEIGHT - 1, fiveHundred, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.SE_RESIZE);
         }
 
         //left side
         {
             //width is not changed
-            checkResize(DEFAULT_X, DEFAULT_Y + (DEFAULT_HEIGHT / 2), 0, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + (DEFAULT_HEIGHT / 2), zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.H_RESIZE);
@@ -1842,7 +1842,7 @@ public class ViewTest extends RobotControl {
                     DEFAULT_X - hundred, DEFAULT_Y,
                     DEFAULT_WIDTH + hundred, DEFAULT_HEIGHT,
                     Cursor.H_RESIZE);
-            checkResize(DEFAULT_X, DEFAULT_Y + (DEFAULT_HEIGHT / 2), -fiveHundred, 0,
+            checkResize(DEFAULT_X, DEFAULT_Y + (DEFAULT_HEIGHT / 2), -fiveHundred, zero,
                     DEFAULT_X - fiveHundred, DEFAULT_Y,
                     DEFAULT_WIDTH + fiveHundred, DEFAULT_HEIGHT,
                     Cursor.H_RESIZE);
@@ -1851,7 +1851,7 @@ public class ViewTest extends RobotControl {
         //right side
         {
             //width is not changed
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + (DEFAULT_HEIGHT / 2), 0, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + (DEFAULT_HEIGHT / 2), zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.H_RESIZE);
@@ -1887,7 +1887,7 @@ public class ViewTest extends RobotControl {
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + hundred - 1, DEFAULT_HEIGHT,
                     Cursor.H_RESIZE);
-            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + (DEFAULT_HEIGHT / 2), fiveHundred, 0,
+            checkResize(DEFAULT_X + DEFAULT_WIDTH - 1, DEFAULT_Y + (DEFAULT_HEIGHT / 2), fiveHundred, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH + fiveHundred - 1, DEFAULT_HEIGHT,
                     Cursor.H_RESIZE);
@@ -1896,7 +1896,7 @@ public class ViewTest extends RobotControl {
         //top side
         {
             //height is not changed
-            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y, 0, 0,
+            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y, zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.V_RESIZE);
@@ -1932,16 +1932,16 @@ public class ViewTest extends RobotControl {
                     DEFAULT_X, DEFAULT_Y - hundred,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred,
                     Cursor.V_RESIZE);
-            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y, 0, -fiveHundred,
-                    DEFAULT_X, 0,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 150,
+            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y, zero, -fiveHundred,
+                    DEFAULT_X, zero,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetUp,
                     Cursor.V_RESIZE);
         }
 
         //bottom side
         {
             //height is not changed
-            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, 0,
+            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, zero,
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT,
                     Cursor.V_RESIZE);
@@ -1977,9 +1977,9 @@ public class ViewTest extends RobotControl {
                     DEFAULT_X, DEFAULT_Y,
                     DEFAULT_WIDTH, DEFAULT_HEIGHT + hundred - 1,
                     Cursor.V_RESIZE);
-            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y + DEFAULT_HEIGHT - 1, 0, fiveHundred,
+            checkResize(DEFAULT_X + (DEFAULT_WIDTH / 2), DEFAULT_Y + DEFAULT_HEIGHT - 1, zero, fiveHundred,
                     DEFAULT_X, DEFAULT_Y,
-                    DEFAULT_WIDTH, DEFAULT_HEIGHT + 248,
+                    DEFAULT_WIDTH, DEFAULT_HEIGHT + maxHeightOffsetDown,
                     Cursor.V_RESIZE);
         }
     }
@@ -1987,41 +1987,42 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for moving window.
      */
-    @Test
-    public void moveWindowTests() {
+    private void moveWindowTests() {
+        int locationEdge = -20;
+        int zero = 0;
         int ten = 10;
         int fifty = 50;
         int hundred = 100;
         int fiveHundred = 500;
 
         //do not move
-        checkMovingWindow(0, 0, DEFAULT_X, DEFAULT_Y);
+        checkMovingWindow(zero, zero, DEFAULT_X, DEFAULT_Y);
 
         //move horizontal
         //right
-        checkMovingWindow(ten, 0, DEFAULT_X + ten, DEFAULT_Y);
-        checkMovingWindow(fifty, 0, DEFAULT_X + fifty, DEFAULT_Y);
-        checkMovingWindow(hundred, 0, DEFAULT_X + hundred, DEFAULT_Y);
-        checkMovingWindow(fiveHundred, 0, DEFAULT_X + fiveHundred, DEFAULT_Y);
+        checkMovingWindow(ten, zero, DEFAULT_X + ten, DEFAULT_Y);
+        checkMovingWindow(fifty, zero, DEFAULT_X + fifty, DEFAULT_Y);
+        checkMovingWindow(hundred, zero, DEFAULT_X + hundred, DEFAULT_Y);
+        checkMovingWindow(fiveHundred, zero, DEFAULT_X + fiveHundred, DEFAULT_Y);
 
         //left
-        checkMovingWindow(-ten, 0, DEFAULT_X - ten, DEFAULT_Y);
-        checkMovingWindow(-fifty, 0, DEFAULT_X - fifty, DEFAULT_Y);
-        checkMovingWindow(-hundred, 0, DEFAULT_X - hundred, DEFAULT_Y);
-        checkMovingWindow(-fiveHundred, 0, DEFAULT_X - fiveHundred, DEFAULT_Y);
+        checkMovingWindow(-ten, zero, DEFAULT_X - ten, DEFAULT_Y);
+        checkMovingWindow(-fifty, zero, DEFAULT_X - fifty, DEFAULT_Y);
+        checkMovingWindow(-hundred, zero, DEFAULT_X - hundred, DEFAULT_Y);
+        checkMovingWindow(-fiveHundred, zero, DEFAULT_X - fiveHundred, DEFAULT_Y);
 
         //move vertical
         //up
-        checkMovingWindow(0, -ten, DEFAULT_X, DEFAULT_Y - ten);
-        checkMovingWindow(0, -fifty, DEFAULT_X, DEFAULT_Y - fifty);
-        checkMovingWindow(0, -hundred, DEFAULT_X, DEFAULT_Y - hundred);
-        checkMovingWindow(0, -fiveHundred, DEFAULT_X, -20);
+        checkMovingWindow(zero, -ten, DEFAULT_X, DEFAULT_Y - ten);
+        checkMovingWindow(zero, -fifty, DEFAULT_X, DEFAULT_Y - fifty);
+        checkMovingWindow(zero, -hundred, DEFAULT_X, DEFAULT_Y - hundred);
+        checkMovingWindow(zero, -fiveHundred, DEFAULT_X, locationEdge);
 
         //down
-        checkMovingWindow(0, ten, DEFAULT_X, DEFAULT_Y + ten);
-        checkMovingWindow(0, fifty, DEFAULT_X, DEFAULT_Y + fifty);
-        checkMovingWindow(0, hundred, DEFAULT_X, DEFAULT_Y + hundred);
-        checkMovingWindow(0, fiveHundred, DEFAULT_X, DEFAULT_Y + fiveHundred);
+        checkMovingWindow(zero, ten, DEFAULT_X, DEFAULT_Y + ten);
+        checkMovingWindow(zero, fifty, DEFAULT_X, DEFAULT_Y + fifty);
+        checkMovingWindow(zero, hundred, DEFAULT_X, DEFAULT_Y + hundred);
+        checkMovingWindow(zero, fiveHundred, DEFAULT_X, DEFAULT_Y + fiveHundred);
 
         //horizontal and vertical
         //right up
@@ -2040,10 +2041,10 @@ public class ViewTest extends RobotControl {
         checkMovingWindow(hundred, -hundred, DEFAULT_X + hundred, DEFAULT_Y - hundred);
         checkMovingWindow(fiveHundred, -hundred, DEFAULT_X + fiveHundred, DEFAULT_Y - hundred);
 
-        checkMovingWindow(ten, -fiveHundred, DEFAULT_X + ten, -20);
-        checkMovingWindow(fifty, -fiveHundred, DEFAULT_X + fifty, -20);
-        checkMovingWindow(hundred, -fiveHundred, DEFAULT_X + hundred, -20);
-        checkMovingWindow(fiveHundred, -fiveHundred, DEFAULT_X + fiveHundred, -20);
+        checkMovingWindow(ten, -fiveHundred, DEFAULT_X + ten, locationEdge);
+        checkMovingWindow(fifty, -fiveHundred, DEFAULT_X + fifty, locationEdge);
+        checkMovingWindow(hundred, -fiveHundred, DEFAULT_X + hundred, locationEdge);
+        checkMovingWindow(fiveHundred, -fiveHundred, DEFAULT_X + fiveHundred, locationEdge);
 
         //right down
         checkMovingWindow(ten, ten, DEFAULT_X + ten, DEFAULT_Y + ten);
@@ -2082,10 +2083,10 @@ public class ViewTest extends RobotControl {
         checkMovingWindow(-hundred, -hundred, DEFAULT_X - hundred, DEFAULT_Y - hundred);
         checkMovingWindow(-fiveHundred, -hundred, DEFAULT_X - fiveHundred, DEFAULT_Y - hundred);
 
-        checkMovingWindow(-ten, -fiveHundred, DEFAULT_X - ten, -20);
-        checkMovingWindow(-fifty, -fiveHundred, DEFAULT_X - fifty, -20);
-        checkMovingWindow(-hundred, -fiveHundred, DEFAULT_X - hundred, -20);
-        checkMovingWindow(-fiveHundred, -fiveHundred, DEFAULT_X - fiveHundred, -20);
+        checkMovingWindow(-ten, -fiveHundred, DEFAULT_X - ten, locationEdge);
+        checkMovingWindow(-fifty, -fiveHundred, DEFAULT_X - fifty, locationEdge);
+        checkMovingWindow(-hundred, -fiveHundred, DEFAULT_X - hundred, locationEdge);
+        checkMovingWindow(-fiveHundred, -fiveHundred, DEFAULT_X - fiveHundred, locationEdge);
 
         //left down
         checkMovingWindow(-ten, ten, DEFAULT_X - ten, DEFAULT_Y + ten);
@@ -2114,9 +2115,8 @@ public class ViewTest extends RobotControl {
      *
      * @todo controller should be done.
      */
-    @Test
-    public void resizeFontTests() {
-        checkResizeFont("1" ,DEFAULT_WIDTH, 47);
+    private void resizeFontTests() {
+        checkResizeFont("1", DEFAULT_WIDTH, 47);
         checkResizeFont("12", DEFAULT_WIDTH, 47);
         checkResizeFont("123", DEFAULT_WIDTH, 47);
         checkResizeFont("1234", DEFAULT_WIDTH, 47);
@@ -2133,53 +2133,136 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1234567890.01234", DEFAULT_WIDTH, 41);
         checkResizeFont("-1234567890.01234", DEFAULT_WIDTH, 40);
         checkResizeFont("-9999999999999999", DEFAULT_WIDTH, 39);
+
+        checkResizeFont("1", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("12", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("123", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("1234", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("12345", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("123456", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("1234567", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("12345678", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("123456789", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("1234567890", DEFAULT_WIDTH + 50, 46);
+        checkResizeFont("1234567890.0", DEFAULT_WIDTH + 50, 45);
+        checkResizeFont("1234567890.01", DEFAULT_WIDTH + 50, 44);
+        checkResizeFont("1234567890.012", DEFAULT_WIDTH + 50, 43);
+        checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 50, 42);
+        checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 50, 41);
+        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 50, 40);
+        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 50, 39);
+
+        checkResizeFont("1", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("12", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("123", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("1234", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("12345", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("123456", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("1234567", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("12345678", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("123456789", DEFAULT_WIDTH + 100, 47);
+        checkResizeFont("1234567890", DEFAULT_WIDTH + 100, 46);
+        checkResizeFont("1234567890.0", DEFAULT_WIDTH + 100, 45);
+        checkResizeFont("1234567890.01", DEFAULT_WIDTH + 100, 44);
+        checkResizeFont("1234567890.012", DEFAULT_WIDTH + 100, 43);
+        checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 100, 42);
+        checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 100, 41);
+        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 100, 40);
+        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 100, 39);
+
+        checkResizeFont("1", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("12", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("123", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("1234", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("12345", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("123456", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("1234567", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("12345678", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("123456789", DEFAULT_WIDTH + 250, 47);
+        checkResizeFont("1234567890", DEFAULT_WIDTH + 250, 46);
+        checkResizeFont("1234567890.0", DEFAULT_WIDTH + 250, 45);
+        checkResizeFont("1234567890.01", DEFAULT_WIDTH + 250, 44);
+        checkResizeFont("1234567890.012", DEFAULT_WIDTH + 250, 43);
+        checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 250, 42);
+        checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 250, 41);
+        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 250, 40);
+        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 250, 39);
+
+        checkResizeFont("1", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("12", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("123", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("1234", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("12345", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("123456", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("1234567", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("12345678", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("123456789", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("1234567890", DEFAULT_WIDTH + 500, 46);
+        checkResizeFont("1234567890.0", DEFAULT_WIDTH + 500, 45);
+        checkResizeFont("1234567890.01", DEFAULT_WIDTH + 500, 44);
+        checkResizeFont("1234567890.012", DEFAULT_WIDTH + 500, 43);
+        checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 500, 42);
+        checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 500, 41);
+        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 500, 40);
+        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 500, 39);
     }
 
     /**
      * Test for visibility of arrow buttons.
      */
-    @Test
-    public void visibleArrowsTests() {
+    private void visibleArrowsTests() {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
 
-        assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
-        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+        Button leftArrow = getButtonBySelector(LEFT_ARROW_ID);
+        Button rightArrow = getButtonBySelector(RIGHT_ARROW_ID);
+        
+        assertFalse(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
 
         for (int i = 0; i < 12; i++) {
             clickOn(getButtonBySelector(SQR_ID));
         }
 
-        assertTrue(getButtonBySelector(LEFT_ARROW_ID).isVisible());
-        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+        assertTrue(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
+        
+        dragFromTo(DEFAULT_X, DEFAULT_Y, 0, 0);
+
+        assertFalse(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
+
+        dragFromTo(0, 0, DEFAULT_X, DEFAULT_Y);
+
+        assertTrue(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
 
         clickOn(getButtonBySelector(CLEAR_ALL_ID));
 
-        assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
-        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+        assertFalse(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
     }
 
     /**
      * Test for expanding window.
      */
-    @Test
-    public void expandTest() {
+    private void expandTest() {
         String minimizedSymbol = "\uE922";
         String maximizedSymbol = "\uE923";
 
-        clickOn(getButtonBySelector(EXPAND_ID));
+        Button expand = getButtonBySelector(EXPAND_ID);
+        clickOn(expand);
         assertTrue(stage.isMaximized());
-        assertEquals(getButtonBySelector(EXPAND_ID).getText(), maximizedSymbol);
+        assertEquals(expand.getText(), maximizedSymbol);
 
-        clickOn(getButtonBySelector(EXPAND_ID));
+        clickOn(expand);
         assertFalse(stage.isMaximized());
-        assertEquals(getButtonBySelector(EXPAND_ID).getText(), minimizedSymbol);
+        assertEquals(expand.getText(), minimizedSymbol);
     }
 
     /**
      * Test for hiding window.
      */
-    @Test
-    public void hideTest() {
+    private void hideTest() {
         clickOn(getButtonBySelector(HIDE_ID));
 
         assertTrue(stage.isIconified());
@@ -2204,6 +2287,7 @@ public class ViewTest extends RobotControl {
 
         for (String selector : selectors) {
             Button button = getButtonBySelector(selector);
+
             assertEquals(expectedColor, button.getBackground().getFills().get(0).getFill().toString());
             assertEquals(expectedTextColor, button.getTextFill().toString());
             assertEquals(expectedFont, button.getFont());
@@ -2226,13 +2310,14 @@ public class ViewTest extends RobotControl {
 
         for (String selector : selectors) {
             Labeled labeled = getLabeledBySelector(selector);
+
             assertEquals(expectedTextColor, labeled.getTextFill().toString());
             assertEquals(expectedFont, labeled.getFont());
         }
     }
 
     /**
-     * Checks that buttons has required text.
+     * Checks that button has required text.
      *
      * @param selector     button's selector.
      * @param expectedText text that button should contain.
@@ -2255,7 +2340,6 @@ public class ViewTest extends RobotControl {
 
     /**
      * Checks that window has required location and size after being resized.
-     * After each test window's size and location should be restired to default.
      *
      * @param fromX          coordinate X from where cursor should start resizing.
      * @param fromY          coordinate Y from where cursor should start resizing.
@@ -2272,8 +2356,8 @@ public class ViewTest extends RobotControl {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
 
         dragFromTo(fromX, fromY, fromX + offsetX, fromY + offsetY);
-
         Window window = getWindowByIndex(0);
+
         assertEquals(expectedCursor, window.getScene().getCursor());
         assertEquals(expectedX, window.getX());
         assertEquals(expectedY, window.getY());
@@ -2298,10 +2382,9 @@ public class ViewTest extends RobotControl {
         double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
         double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
 
-
         dragFromTo(centerX, centerY, centerX + offsetX, centerY + offsetY);
-
         Window window = getWindowByIndex(0);
+
         assertEquals(expectedX, window.getX());
         assertEquals(expectedY, window.getY());
     }
@@ -2316,11 +2399,11 @@ public class ViewTest extends RobotControl {
     private void checkResizeFont(String text, double dragToX, double expectedFontSize) {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, 0);
         Labeled labeled = getLabeledBySelector(SCREEN_LABEL_ID);
+
         clickOn(getButtonBySelector(CLEAR_TEXT_ID));
-
         typeText(text);
-
         dragFromTo(DEFAULT_WIDTH - 1, DEFAULT_HEIGHT - 1, dragToX, DEFAULT_HEIGHT);
+
         assertEquals(expectedFontSize, labeled.getFont().getSize());
     }
 }

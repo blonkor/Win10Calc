@@ -30,9 +30,6 @@ public class SetLauncherAppForTests extends Launcher {
         stageFuture.set(primaryStage);
     }
 
-    /**
-     * Something that helps us to run GUI tests.
-     */
     static SettableFuture<Stage> getStageFuture() {
         return stageFuture;
     }
