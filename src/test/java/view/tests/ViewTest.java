@@ -14,7 +14,7 @@ import javafx.stage.Window;
 import org.junit.Test;
 import view.util.RobotControl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for testing view.
@@ -54,6 +54,7 @@ public class ViewTest extends RobotControl {
         resizeTests();
         moveWindowTests();
         resizeFontTests();
+        visibleArrowsTests();
     }
 
     /**
@@ -2136,10 +2137,36 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * @todo
+     * Test for visibility of arrow buttons.
      */
+    @Test
     public void visibleArrowsTests() {
+        setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
 
+        assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
+        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+
+        for (int i = 0; i < 12; i++) {
+            clickOn(getButtonBySelector(SQR_ID));
+        }
+
+        assertTrue(getButtonBySelector(LEFT_ARROW_ID).isVisible());
+        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+
+        clickOn(getButtonBySelector(LEFT_ARROW_ID));
+
+        assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
+        assertTrue(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+
+        clickOn(getButtonBySelector(RIGHT_ARROW_ID));
+
+        assertTrue(getButtonBySelector(LEFT_ARROW_ID).isVisible());
+        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
+
+        dragFromTo(DEFAULT_X, DEFAULT_Y, 0, DEFAULT_Y);
+
+        assertFalse(getButtonBySelector(LEFT_ARROW_ID).isVisible());
+        assertFalse(getButtonBySelector(RIGHT_ARROW_ID).isVisible());
     }
 
     /**
@@ -2160,13 +2187,6 @@ public class ViewTest extends RobotControl {
      * @todo
      */
     public void hideTests() {
-
-    }
-
-    /**
-     * @todo
-     */
-    public void keyBoardTests() {
 
     }
 
