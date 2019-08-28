@@ -11,9 +11,14 @@ import java.math.MathContext;
 public class NumberFormatter {
 
     /**
-     * Negative number symbol.
+     * Symbol for separating every three digits in number.
      */
-    private static final String MINUS = "-";
+    private static final String COMMA = ",";
+
+    /**
+     * Empty string for replacement.
+     */
+    private static final String EMPTY_STRING = "";
 
     /**
      * Decimal symbol.
@@ -21,14 +26,9 @@ public class NumberFormatter {
     private static final String DOT = ".";
 
     /**
-     * Engineer number symbol.
+     * Negative number symbol.
      */
-    private static final String ENGINEER = "e";
-
-    /**
-     * Symbol for separating every three digits in number.
-     */
-    private static final String COMMA = ",";
+    private static final String MINUS = "-";
 
     /**
      * Origin string in screen label.
@@ -36,9 +36,9 @@ public class NumberFormatter {
     private static final String ZERO = "0";
 
     /**
-     * Empty string to replace commas.
+     * Engineer number symbol.
      */
-    private static final String EMPTY_STRING = "";
+    private static final String ENGINEER_SYMBOL = "e";
 
     /**
      * Maximal amount of digit symbols that can be shown on screen.
@@ -51,12 +51,47 @@ public class NumberFormatter {
     private final static MathContext PRECISION_TO_SHOW = new MathContext(MAX_SYMBOLS);
 
     /**
+     * Appends digit to screen.
+     *
+     * @param number number to edit.
+     * @param digit  digit to add.
+     * @return number with appended digit.
+     */
+    public static String appendDigit(String number, String digit) {
+        number = number.replaceAll(COMMA, EMPTY_STRING);
+
+        if (number.equals(ZERO)) {
+            number = digit;
+        } else {
+            int additionalLength = 0;
+
+            if (number.startsWith(ZERO)) {
+                additionalLength++;
+            }
+
+            if (isDecimalNumber(number)) {
+                additionalLength++;
+            }
+
+            if (isNegativeNumber(number)) {
+                additionalLength++;
+            }
+
+            if (number.length() < MAX_SYMBOLS + additionalLength) {
+                number += digit;
+            }
+        }
+
+        return NumberFormatter.separateNumberWithCommas(number);
+    }
+
+    /**
      * Adds dot to number if the number does not contain dot yet.
      *
      * @param number number to edit.
      * @return number with dot if it does not contain dot yet.
      */
-    public static String addDot(String number) {
+    public static String appendDot(String number) {
         if (!number.contains(DOT)) {
             number += DOT;
         }
@@ -73,7 +108,7 @@ public class NumberFormatter {
     public static String deleteLastChar(String number) {
         number = number.replaceAll(COMMA, EMPTY_STRING);
 
-        if (!number.contains(ENGINEER)) {
+        if (!isEngineerNumber(number)) {
 
             if (number.length() == 1 || (number.startsWith(MINUS) && number.length() == 2)) {
                 number = ZERO;
@@ -84,22 +119,6 @@ public class NumberFormatter {
         }
 
         return separateNumberWithCommas(number);
-    }
-
-    /**
-     * Adds digit to screen if the number can be edited, otherwise returns digit.
-     *
-     * @param number     number to edit.
-     * @param digit      digit to add.
-     * @param isEditable true if number can be edited.
-     * @return number with added digit if it was possible to edit or digit otherwise.
-     */
-    public static String addDigit(String number, String digit, boolean isEditable) {
-        if (!isEditable) {
-            return digit;
-        } else {
-            return addDigitToScreen(number, digit);
-        }
     }
 
     /**
@@ -133,22 +152,34 @@ public class NumberFormatter {
     }
 
     /**
-     * Adds digit symbol to result number string.
+     * Checks if number contains engineer symbol.
      *
-     * @param digit symbol to add.
+     * @param number number to check.
+     * @return true if number contains engineer symbol or false otherwise.
      */
-    private static String addDigitToScreen(String currentNumber, String digit) {
-        currentNumber = currentNumber.replaceAll(COMMA, EMPTY_STRING);
-
-        if (currentNumber.equals(ZERO)) {
-            currentNumber = digit;
-        } else if (currentNumber.length() < MAX_SYMBOLS) {
-            currentNumber += digit;
-        }
-
-        return NumberFormatter.separateNumberWithCommas(currentNumber);
+    private static boolean isEngineerNumber(String number) {
+        return number.contains(ENGINEER_SYMBOL);
     }
 
+    /**
+     * Checks if number contains decimal symbol.
+     *
+     * @param number number to check.
+     * @return true if number contains decimal symbol or false otherwise.
+     */
+    private static boolean isDecimalNumber(String number) {
+        return number.contains(DOT);
+    }
+
+    /**
+     * Checks if number contains negative symbol.
+     *
+     * @param number number to check.
+     * @return true if number starts with minus or false otherwise.
+     */
+    private static boolean isNegativeNumber(String number) {
+        return number.startsWith(MINUS);
+    }
 
     /**
      * Separates every three digit in number.
@@ -156,7 +187,7 @@ public class NumberFormatter {
      * @param number number to edit.
      */
     private static String separateNumberWithCommas(String number) {
-        if (number.contains(ENGINEER)) {
+        if (isEngineerNumber(number)) {
             return number;
         }
 

@@ -301,7 +301,7 @@ public class NumberFormatterTest {
      * @param expectedResult required result after performing operation.
      */
     private void checkAddDot(String number, String expectedResult) {
-        String result = NumberFormatter.addDot(number);
+        String result = NumberFormatter.appendDot(number);
         assertEquals(expectedResult, result);
     }
 

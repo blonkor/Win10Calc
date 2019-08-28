@@ -6,15 +6,13 @@ import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
@@ -128,6 +126,38 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Adds digit from button to result screen while button is fired.
+     */
+    public void addDigit(ActionEvent event) {
+        String digit = ((Button) event.getSource()).getText();
+
+        String number;
+
+        if (isEditableScreen) {
+            number = screen.getText();
+        } else {
+            number = EMPTY_STRING;
+        }
+
+        screen.setText(NumberFormatter.appendDigit(number, digit));
+
+//        if (isPercentPressed || isUnaryOperationPressed) {
+//            equation.setText(EMPTY_STRING);
+//        }
+//
+//        if (isEqualsPressed || isUnaryOperationPressed) {
+//            isFirstCalculated = false;
+//        }
+
+        isBinaryOperationPressed = false;
+        isUnaryOperationPressed = false;
+        isPercentPressed = false;
+        isEqualsPressed = false;
+        isError = false;
+        isEditableScreen = true;
+    }
+
+    /**
      * Makes number in result screen decimal.
      */
     public void makeDecimal() {
@@ -139,7 +169,7 @@ public class Controller implements Initializable {
             number = ZERO;
         }
 
-        screen.setText(NumberFormatter.addDot(number));
+        screen.setText(NumberFormatter.appendDot(number));
     }
 
     /**
@@ -368,70 +398,6 @@ public class Controller implements Initializable {
         isFirstCalculated = false;
         isEditableScreen = true;
     }
-
-    public void addDigitZero() {
-        addDigit("0");
-    }
-
-    public void addDigitOne() {
-        addDigit("1");
-    }
-
-    public void addDigitTwo() {
-        addDigit("2");
-    }
-
-    public void addDigitThree() {
-        addDigit("3");
-    }
-
-    public void addDigitFour() {
-        addDigit("4");
-    }
-
-    public void addDigitFive() {
-        addDigit("5");
-    }
-
-    public void addDigitSix() {
-        addDigit("6");
-    }
-
-    public void addDigitSeven() {
-        addDigit("7");
-    }
-
-    public void addDigitEight() {
-        addDigit("8");
-    }
-
-    public void addDigitNine() {
-        addDigit("9");
-    }
-
-    /**
-     * Adds digit from button to result screen while button is clicked.
-     */
-    private void addDigit(String digit) {
-        String currentNumber = screen.getText();
-        screen.setText(NumberFormatter.addDigit(currentNumber, digit, isEditableScreen));
-
-        if (isPercentPressed || isUnaryOperationPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        if (isEqualsPressed || isUnaryOperationPressed) {
-            isFirstCalculated = false;
-        }
-
-        isBinaryOperationPressed = false;
-        isUnaryOperationPressed = false;
-        isPercentPressed = false;
-        isEqualsPressed = false;
-        isEditableScreen = true;
-    }
-
-
 
     /**
      * Sums two numbers.
