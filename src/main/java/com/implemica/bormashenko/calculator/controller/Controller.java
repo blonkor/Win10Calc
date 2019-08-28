@@ -8,9 +8,14 @@ import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
@@ -28,9 +33,10 @@ public class Controller implements Initializable {
      * Application's buttons.
      */
     @FXML
-    private Button memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
-            percent, sqrt, sqr, inverse, divide, multiply, subtract, add, negate, dot,
-            navigation, history, close, hide, expand, leftArrow, rightArrow;
+    private Button one, two, three, four, five, six, seven, eight, nine, zero,
+            memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore, memoryShow,
+            percent, sqrt, sqr, inverse, divide, multiply, subtract, add, negate, dot, backspace,
+            navigation, history, close, hide, expand, leftArrow, rightArrow, equals, clearText, clearAll;
 
     /**
      * Application's labels.
@@ -115,7 +121,7 @@ public class Controller implements Initializable {
      */
     private boolean isPercentPressed = false;
 
-    private boolean isError= false;
+    private boolean isError = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,6 +141,120 @@ public class Controller implements Initializable {
 
     public void moveEquationRight() {
         ViewFormatter.moveEquationRight();
+    }
+
+    public void keyboardHandling(KeyEvent event) {
+
+        KeyCombination ctrlM = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN);
+        KeyCombination ctrlP = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
+        KeyCombination ctrlQ = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
+        KeyCombination ctrlR = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
+        KeyCombination ctrlL = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
+        KeyCombination shiftTwo = new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.SHIFT_DOWN);
+        KeyCombination shiftFive = new KeyCodeCombination(KeyCode.DIGIT5, KeyCombination.SHIFT_DOWN);
+        KeyCombination shiftEight = new KeyCodeCombination(KeyCode.DIGIT8, KeyCombination.SHIFT_DOWN);
+        KeyCombination shiftEquals = new KeyCodeCombination(KeyCode.EQUALS, KeyCombination.SHIFT_DOWN);
+
+        KeyCode keyCode = event.getCode();
+        Button buttonToFire = null;
+
+        //combinations with ctrl
+        if (event.isControlDown()) {
+
+            if (ctrlM.match(event)) {
+                buttonToFire = memoryStore;
+            } else if (ctrlP.match(event)) {
+                buttonToFire = memoryAdd;
+            } else if (ctrlQ.match(event)) {
+                buttonToFire = memorySubtract;
+            } else if (ctrlR.match(event)) {
+                buttonToFire = memoryRecall;
+            } else if (ctrlL.match(event)) {
+                buttonToFire = memoryClear;
+            }
+
+            //combinations with shift
+        } else if (event.isShiftDown()) {
+
+            if (shiftTwo.match(event)) {
+                buttonToFire = sqrt;
+            } else if (shiftFive.match(event)) {
+                buttonToFire = percent;
+            } else if (shiftEight.match(event)) {
+                buttonToFire = multiply;
+            } else if (shiftEquals.match(event)) {
+                buttonToFire = add;
+            }
+
+            //digit symbols
+        } else if (keyCode.isDigitKey()) {
+
+            if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
+                buttonToFire = zero;
+            } else if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.NUMPAD1) {
+                buttonToFire = one;
+            } else if (keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.NUMPAD2) {
+                buttonToFire = two;
+            } else if (keyCode == KeyCode.DIGIT3 || keyCode == KeyCode.NUMPAD3) {
+                buttonToFire = three;
+            } else if (keyCode == KeyCode.DIGIT4 || keyCode == KeyCode.NUMPAD4) {
+                buttonToFire = four;
+            } else if (keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.NUMPAD5) {
+                buttonToFire = five;
+            } else if (keyCode == KeyCode.DIGIT6 || keyCode == KeyCode.NUMPAD6) {
+                buttonToFire = six;
+            } else if (keyCode == KeyCode.DIGIT7 || keyCode == KeyCode.NUMPAD7) {
+                buttonToFire = seven;
+            } else if (keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.NUMPAD8) {
+                buttonToFire = eight;
+            } else if (keyCode == KeyCode.DIGIT9 || keyCode == KeyCode.NUMPAD9) {
+                buttonToFire = nine;
+            }
+
+            //letter symbols
+        } else if (keyCode.isLetterKey()) {
+
+            if (keyCode == KeyCode.R) {
+                buttonToFire = inverse;
+            }
+
+            //f symbols
+        } else if (keyCode.isFunctionKey()) {
+
+            if (keyCode == KeyCode.F9) {
+                buttonToFire = negate;
+            }
+
+            //any else symbols
+        } else {
+
+            if (keyCode == KeyCode.PERIOD) {
+                buttonToFire = dot;
+            } else if (keyCode == KeyCode.BACK_SPACE) {
+                buttonToFire = backspace;
+            } else if (keyCode == KeyCode.PLUS || keyCode == KeyCode.ADD) {
+                buttonToFire = add;
+            } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
+                buttonToFire = subtract;
+            } else if (keyCode == KeyCode.MULTIPLY || keyCode == KeyCode.STAR) {
+                buttonToFire = multiply;
+            } else if (keyCode == KeyCode.DIVIDE || keyCode == KeyCode.SLASH) {
+                buttonToFire = divide;
+            } else if (keyCode == KeyCode.EQUALS || keyCode == KeyCode.ENTER) {
+                buttonToFire = equals;
+            } else if (keyCode == KeyCode.AT) {
+                buttonToFire = sqrt;
+            } else if (keyCode == KeyCode.DELETE) {
+                buttonToFire = clearText;
+            } else if (keyCode == KeyCode.ESCAPE) {
+                buttonToFire = clearAll;
+            }
+
+        }
+
+        if (buttonToFire != null && !memoryBlock.isVisible() && !navigationBlock.isVisible()) {
+            buttonToFire.fire();
+        }
     }
 
     /**

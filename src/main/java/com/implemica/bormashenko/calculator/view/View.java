@@ -132,8 +132,5 @@ public class View implements Serializable {
         EquationLabelLengthListener equationLabelLengthListener = new EquationLabelLengthListener(scene);
         equation.textProperty().addListener(equationLabelLengthListener);
         scene.widthProperty().addListener(equationLabelLengthListener);
-
-        //keyboard listener
-        scene.setOnKeyPressed(new KeyboardListener(scene));
     }
 }

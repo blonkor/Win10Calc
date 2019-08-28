@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/tests/ViewTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/util/RobotControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/view/util/SetLauncherAppForTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/view/util/SetLauncherAppForTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +17,7 @@
     <option name="myAddOrReplace" value="0" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="123" />
+    <option name="myElementSize" value="78" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -83,83 +83,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ViewTest.allTests">
-    <configuration name="ViewTest.allTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Launcher">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.tests.*" />
+          <option name="PATTERN" value="com.implemica.bormashenko.calculator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="allTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.exitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="exitTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.expandTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="expandTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.hideTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="hideTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.visibleArrowsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="view.tests" />
-      <option name="MAIN_CLASS_NAME" value="view.tests.ViewTest" />
-      <option name="METHOD_NAME" value="visibleArrowsTests" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -181,21 +114,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="view in Win10Calc" type="JUnit" factoryName="JUnit">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.implemica.bormashenko.calculator.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="view" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="JUnit.model in Win10Calc" />
-      <item itemvalue="JUnit.ViewTest.visibleArrowsTests" />
-      <item itemvalue="JUnit.ViewTest.expandTests" />
-      <item itemvalue="JUnit.ViewTest.hideTest" />
-      <item itemvalue="JUnit.ViewTest.exitTest" />
-      <item itemvalue="JUnit.ViewTest.allTests" />
+      <item itemvalue="JUnit.view in Win10Calc" />
+      <item itemvalue="Application.Launcher" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ViewTest.allTests" />
-        <item itemvalue="JUnit.ViewTest.exitTest" />
-        <item itemvalue="JUnit.ViewTest.hideTest" />
-        <item itemvalue="JUnit.ViewTest.visibleArrowsTests" />
-        <item itemvalue="JUnit.ViewTest.expandTests" />
+        <item itemvalue="Application.Launcher" />
       </list>
     </recent_temporary>
   </component>
@@ -209,13 +152,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Test for add operation finished. Several test cases removed as necessary. Add operation in model improved.">
-      <created>1565209068037</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1565209068037</updated>
     </task>
     <task id="LOCAL-00027" summary="Tests commented and will be radically changed soon. Model completely redone and now consists of simple methods for binary operations. Enums for binary and unary operations created.">
       <created>1565222263765</created>
@@ -553,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566995936724</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="View tests refactored.">
+      <created>1566999122186</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1566999122186</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -587,7 +530,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="New tests added for memory model. JavaDoc added where was missing." />
     <MESSAGE value="Refactoring calculation model." />
     <MESSAGE value="Action for history button removed as necessary. Fields containing &quot;history&quot; string renamed." />
     <MESSAGE value="Minor refactoring for view." />
@@ -612,7 +554,8 @@
     <MESSAGE value="Tests for resize font in screen label created, but controller should be done to test this." />
     <MESSAGE value="Tests for visibility of arrows created (but controller should be done for those tests)." />
     <MESSAGE value="Tests for hide and expand created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for hide and expand created." />
+    <MESSAGE value="View tests refactored." />
+    <option name="LAST_COMMIT_MESSAGE" value="View tests refactored." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
@@ -624,11 +567,17 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Win10Calc$view_in_Win10Calc.ic" NAME="view in Win10Calc Coverage Results" MODIFIED="1566999387518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$CalculationModelTest.ic" NAME="CalculationModelTest Coverage Results" MODIFIED="1566385063562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_checkColorTests.ic" NAME="ViewTest.checkColorTests Coverage Results" MODIFIED="1566595570493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_allTests.ic" NAME="ViewTest.allTests Coverage Results" MODIFIED="1566999141724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>view.tests.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$Model_in_Win10Calc.ic" NAME="Model in Win10Calc Coverage Results" MODIFIED="1566389321992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.model.*</FILTER>
