@@ -158,6 +158,46 @@ public class NumberFormatter {
     }
 
     /**
+     * Separates every three digit in number.
+     *
+     * @param number number to edit.
+     */
+    private static String separateNumberWithCommas(String number) {
+        if (isEngineerNumber(number)) {
+            return number;
+        }
+
+        boolean negative = isNegativeNumber(number);
+        number = number.replaceAll(MINUS, EMPTY_STRING);
+        String digitsAfterDot = EMPTY_STRING;
+
+        if (isDecimalNumber(number)) {
+            int dotIndex = number.indexOf(DOT);
+            digitsAfterDot = number.substring(dotIndex);
+            number = number.substring(0, dotIndex);
+        }
+
+        StringBuilder str = new StringBuilder();
+        char[] chars = number.toCharArray();
+        int counter = 0;
+
+        for (int i = chars.length - 1; i >= 0; i--) {
+            if (counter == 3) {
+                str.append(COMMA);
+                counter = 0;
+            }
+            str.append(chars[i]);
+            counter++;
+        }
+
+        if (negative) {
+            str.append(MINUS);
+        }
+
+        return str.reverse().append(digitsAfterDot).toString();
+    }
+
+    /**
      * Checks if number contains engineer symbol.
      *
      * @param number number to check.
@@ -185,45 +225,5 @@ public class NumberFormatter {
      */
     private static boolean isNegativeNumber(String number) {
         return number.startsWith(MINUS);
-    }
-
-    /**
-     * Separates every three digit in number.
-     *
-     * @param number number to edit.
-     */
-    private static String separateNumberWithCommas(String number) {
-        if (isEngineerNumber(number)) {
-            return number;
-        }
-
-        boolean negative = number.startsWith(MINUS);
-        number = number.replaceAll(MINUS, EMPTY_STRING);
-        String digitsAfterDot = EMPTY_STRING;
-
-        if (number.contains(DOT)) {
-            int dotIndex = number.indexOf(DOT);
-            digitsAfterDot = number.substring(dotIndex);
-            number = number.substring(0, dotIndex);
-        }
-
-        StringBuilder str = new StringBuilder();
-        char[] chars = number.toCharArray();
-        int counter = 0;
-
-        for (int i = chars.length - 1; i >= 0; i--) {
-            if (counter == 3) {
-                str.append(COMMA);
-                counter = 0;
-            }
-            str.append(chars[i]);
-            counter++;
-        }
-
-        if (negative) {
-            str.append(MINUS);
-        }
-
-        return str.reverse().append(digitsAfterDot).toString();
     }
 }
