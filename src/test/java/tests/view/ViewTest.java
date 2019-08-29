@@ -80,6 +80,7 @@ public class ViewTest extends RobotControl {
         Font segoeBlack_16 = new Font("Segoe UI Black", 16);
         Font segoeSemilight_14 = new Font("Segoe UI Semilight", 14);
         Font segoeSemibold_12 = new Font("Segoe UI Semibold", 12);
+        Font segoeSemibold_20 = new Font("Segoe UI Semibold", 20);
         Font segoeSemibold_22_5 = new Font("Segoe UI Semibold", 22.5);
         Font segoeSemibold_47 = new Font("Segoe UI Semibold", 47);
         Font segoeAssets_6 = new Font("Segoe MDL2 Assets", 6);
@@ -248,7 +249,7 @@ public class ViewTest extends RobotControl {
         //labels
         {
             checkColorAndFontForLabels(new String[]{TITLE_LABEL_ID}, veryDarkGrayColor, system_12);
-            checkColorAndFontForLabels(new String[]{TYPE_LABEL_ID}, veryDarkGrayColor, system_18);
+            checkColorAndFontForLabels(new String[]{TYPE_LABEL_ID}, veryDarkGrayColor, segoeSemibold_20);
             checkColorAndFontForLabels(new String[]{EQUATION_LABEL_ID}, veryDarkGrayColor, segoeSemilight_14);
             checkColorAndFontForLabels(new String[]{SCREEN_LABEL_ID}, veryDarkGrayColor, segoeSemibold_47);
             checkColorAndFontForLabels(new String[]{MODE_LABEL_ID, CONVERTER_LABEL_ID}, veryDarkGrayColor, systemBold_14);
