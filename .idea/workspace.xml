@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -223,13 +221,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Several bug fixes in calculation.">
-      <created>1565693763451</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1565693763452</updated>
     </task>
     <task id="LOCAL-00037" summary="View changed a bit.">
       <created>1565739334689</created>
@@ -567,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567036102610</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Tests for big decimal to screen operation created (by updating tests for screen to big decimal operation).">
+      <created>1567037385871</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1567037385871</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -601,7 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Test for view refactored. Added tests for arrow buttons." />
     <MESSAGE value="Created class for FxRobot methods for better code style. Added todo items in view tests." />
     <MESSAGE value="Tests for labels (color and font checking) created. Several view fixes. JavaDoc updated." />
     <MESSAGE value="View tests and view refactoring." />
@@ -626,7 +623,8 @@
     <MESSAGE value="Code refactoring for controller." />
     <MESSAGE value="Tests for append digit created." />
     <MESSAGE value="Tests for screen to big decimal operation created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for screen to big decimal operation created." />
+    <MESSAGE value="Tests for big decimal to screen operation created (by updating tests for screen to big decimal operation)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for big decimal to screen operation created (by updating tests for screen to big decimal operation)." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

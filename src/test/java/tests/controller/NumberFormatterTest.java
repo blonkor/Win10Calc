@@ -521,134 +521,92 @@ public class NumberFormatterTest {
     }
 
     /**
-     * Tests for screen to big decimal operation.
+     * Tests for screen to big decimal and big decimal to screen operations.
      */
     @Test
-    public void screenToBigDecimalTests() {
+    public void screenToBigDecimalTestsAndViceVersa() {
         //integers
         //without commas
-        checkScreenToBigDecimal("0", new BigDecimal("0"));
-        checkScreenToBigDecimal("1", new BigDecimal("1"));
-        checkScreenToBigDecimal("8", new BigDecimal("8"));
-        checkScreenToBigDecimal("9", new BigDecimal("9"));
-        checkScreenToBigDecimal("10", new BigDecimal("10"));
-        checkScreenToBigDecimal("100", new BigDecimal("100"));
-        checkScreenToBigDecimal("500", new BigDecimal("500"));
+        checkScreenToBigDecimalAndViceVersa("0", new BigDecimal("0"));
 
-        checkScreenToBigDecimal("-0", new BigDecimal("0"));
-        checkScreenToBigDecimal("-1", new BigDecimal("-1"));
-        checkScreenToBigDecimal("-8", new BigDecimal("-8"));
-        checkScreenToBigDecimal("-9", new BigDecimal("-9"));
-        checkScreenToBigDecimal("-10", new BigDecimal("-10"));
-        checkScreenToBigDecimal("-100", new BigDecimal("-100"));
-        checkScreenToBigDecimal("-500", new BigDecimal("-500"));
+        checkScreenToBigDecimalAndViceVersa("1", new BigDecimal("1"));
+        checkScreenToBigDecimalAndViceVersa("8", new BigDecimal("8"));
+        checkScreenToBigDecimalAndViceVersa("9", new BigDecimal("9"));
+        checkScreenToBigDecimalAndViceVersa("10", new BigDecimal("10"));
+        checkScreenToBigDecimalAndViceVersa("100", new BigDecimal("100"));
+        checkScreenToBigDecimalAndViceVersa("500", new BigDecimal("500"));
+
+        checkScreenToBigDecimalAndViceVersa("-1", new BigDecimal("-1"));
+        checkScreenToBigDecimalAndViceVersa("-8", new BigDecimal("-8"));
+        checkScreenToBigDecimalAndViceVersa("-9", new BigDecimal("-9"));
+        checkScreenToBigDecimalAndViceVersa("-10", new BigDecimal("-10"));
+        checkScreenToBigDecimalAndViceVersa("-100", new BigDecimal("-100"));
+        checkScreenToBigDecimalAndViceVersa("-500", new BigDecimal("-500"));
 
         //with commas
-        checkScreenToBigDecimal("84,357", new BigDecimal("84357"));
-        checkScreenToBigDecimal("8,762,423,634", new BigDecimal("8762423634"));
-        checkScreenToBigDecimal("873,283,568", new BigDecimal("873283568"));
-        checkScreenToBigDecimal("8,235,854,645", new BigDecimal("8235854645"));
-        checkScreenToBigDecimal("23,482,314", new BigDecimal("23482314"));
-        checkScreenToBigDecimal("234,643,737", new BigDecimal("234643737"));
+        checkScreenToBigDecimalAndViceVersa("84,357", new BigDecimal("84357"));
+        checkScreenToBigDecimalAndViceVersa("8,762,423,634", new BigDecimal("8762423634"));
+        checkScreenToBigDecimalAndViceVersa("873,283,568", new BigDecimal("873283568"));
+        checkScreenToBigDecimalAndViceVersa("8,235,854,645", new BigDecimal("8235854645"));
+        checkScreenToBigDecimalAndViceVersa("23,482,314", new BigDecimal("23482314"));
+        checkScreenToBigDecimalAndViceVersa("234,643,737", new BigDecimal("234643737"));
 
-        checkScreenToBigDecimal("-72,341,234", new BigDecimal("-72341234"));
-        checkScreenToBigDecimal("-8,023,042,394", new BigDecimal("-8023042394"));
-        checkScreenToBigDecimal("-626,356,345", new BigDecimal("-626356345"));
-        checkScreenToBigDecimal("-67,235,923,052", new BigDecimal("-67235923052"));
-        checkScreenToBigDecimal("-7,625,252,352,352", new BigDecimal("-7625252352352"));
-        checkScreenToBigDecimal("-62,523,523,523,525", new BigDecimal("-62523523523525"));
+        checkScreenToBigDecimalAndViceVersa("-72,341,234", new BigDecimal("-72341234"));
+        checkScreenToBigDecimalAndViceVersa("-8,023,042,394", new BigDecimal("-8023042394"));
+        checkScreenToBigDecimalAndViceVersa("-626,356,345", new BigDecimal("-626356345"));
+        checkScreenToBigDecimalAndViceVersa("-67,235,923,052", new BigDecimal("-67235923052"));
+        checkScreenToBigDecimalAndViceVersa("-7,625,252,352,352", new BigDecimal("-7625252352352"));
+        checkScreenToBigDecimalAndViceVersa("-62,523,523,523,525", new BigDecimal("-62523523523525"));
 
-        //decimals with dot at the end
+        //decimals
         //without commas
-        checkScreenToBigDecimal("0.", new BigDecimal("0"));
-        checkScreenToBigDecimal("1.", new BigDecimal("1"));
-        checkScreenToBigDecimal("8.", new BigDecimal("8"));
-        checkScreenToBigDecimal("9.", new BigDecimal("9"));
-        checkScreenToBigDecimal("10.", new BigDecimal("10"));
-        checkScreenToBigDecimal("100.", new BigDecimal("100"));
-        checkScreenToBigDecimal("500.", new BigDecimal("500"));
+        checkScreenToBigDecimalAndViceVersa("0.6", new BigDecimal("0.6"));
+        checkScreenToBigDecimalAndViceVersa("1.235", new BigDecimal("1.235"));
+        checkScreenToBigDecimalAndViceVersa("8.8236", new BigDecimal("8.8236"));
+        checkScreenToBigDecimalAndViceVersa("9.8245", new BigDecimal("9.8245"));
+        checkScreenToBigDecimalAndViceVersa("10.7", new BigDecimal("10.7"));
+        checkScreenToBigDecimalAndViceVersa("100.3247", new BigDecimal("100.3247"));
+        checkScreenToBigDecimalAndViceVersa("500.7235", new BigDecimal("500.7235"));
 
-        checkScreenToBigDecimal("-0.", new BigDecimal("-0"));
-        checkScreenToBigDecimal("-1.", new BigDecimal("-1"));
-        checkScreenToBigDecimal("-8.", new BigDecimal("-8"));
-        checkScreenToBigDecimal("-9.", new BigDecimal("-9"));
-        checkScreenToBigDecimal("-10.", new BigDecimal("-10"));
-        checkScreenToBigDecimal("-100.", new BigDecimal("-100"));
-        checkScreenToBigDecimal("-500.", new BigDecimal("-500"));
-
-        //with commas
-        checkScreenToBigDecimal("8,235.", new BigDecimal("8235"));
-        checkScreenToBigDecimal("9,342.", new BigDecimal("9342"));
-        checkScreenToBigDecimal("142,326,735.", new BigDecimal("142326735"));
-        checkScreenToBigDecimal("9,346,843,456.", new BigDecimal("9346843456"));
-        checkScreenToBigDecimal("924,536,576.", new BigDecimal("924536576"));
-        checkScreenToBigDecimal("945,358,636.", new BigDecimal("945358636"));
-
-        checkScreenToBigDecimal("54,363,463,463.", new BigDecimal("54363463463"));
-        checkScreenToBigDecimal("8,846,356,367.", new BigDecimal("8846356367"));
-        checkScreenToBigDecimal("834,634,634,636.", new BigDecimal("834634634636"));
-        checkScreenToBigDecimal("8,456,363.", new BigDecimal("8456363"));
-        checkScreenToBigDecimal("436,373,563.", new BigDecimal("436373563"));
-        checkScreenToBigDecimal("3,643,563.", new BigDecimal("3643563"));
-
-        //decimals with dot in the middle
-        //without commas
-        checkScreenToBigDecimal("0.6", new BigDecimal("0.6"));
-        checkScreenToBigDecimal("1.235", new BigDecimal("1.235"));
-        checkScreenToBigDecimal("8.8236", new BigDecimal("8.8236"));
-        checkScreenToBigDecimal("9.8245", new BigDecimal("9.8245"));
-        checkScreenToBigDecimal("10.7", new BigDecimal("10.7"));
-        checkScreenToBigDecimal("100.3247", new BigDecimal("100.3247"));
-        checkScreenToBigDecimal("500.7235", new BigDecimal("500.7235"));
-
-        checkScreenToBigDecimal("-0.736", new BigDecimal("-0.736"));
-        checkScreenToBigDecimal("-1.8356", new BigDecimal("-1.8356"));
-        checkScreenToBigDecimal("-8.5437", new BigDecimal("-8.5437"));
-        checkScreenToBigDecimal("-9.7235", new BigDecimal("-9.7235"));
-        checkScreenToBigDecimal("-10.834", new BigDecimal("-10.834"));
-        checkScreenToBigDecimal("-100.01", new BigDecimal("-100.01"));
-        checkScreenToBigDecimal("-500.5", new BigDecimal("-500.5"));
+        checkScreenToBigDecimalAndViceVersa("-0.736", new BigDecimal("-0.736"));
+        checkScreenToBigDecimalAndViceVersa("-1.8356", new BigDecimal("-1.8356"));
+        checkScreenToBigDecimalAndViceVersa("-8.5437", new BigDecimal("-8.5437"));
+        checkScreenToBigDecimalAndViceVersa("-9.7235", new BigDecimal("-9.7235"));
+        checkScreenToBigDecimalAndViceVersa("-10.834", new BigDecimal("-10.834"));
+        checkScreenToBigDecimalAndViceVersa("-100.01", new BigDecimal("-100.01"));
+        checkScreenToBigDecimalAndViceVersa("-500.5", new BigDecimal("-500.5"));
 
         //with commas
-        checkScreenToBigDecimal("124,513.25835", new BigDecimal("124513.25835"));
-        checkScreenToBigDecimal("62,352.7235", new BigDecimal("62352.7235"));
-        checkScreenToBigDecimal("6,626.8256", new BigDecimal("6626.8256"));
-        checkScreenToBigDecimal("2,346.7925", new BigDecimal("2346.7925"));
-        checkScreenToBigDecimal("762,462.6782", new BigDecimal("762462.6782"));
-        checkScreenToBigDecimal("7,624,623.2", new BigDecimal("7624623.2"));
-        checkScreenToBigDecimal("76,236,262.72", new BigDecimal("76236262.72"));
+        checkScreenToBigDecimalAndViceVersa("124,513.25835", new BigDecimal("124513.25835"));
+        checkScreenToBigDecimalAndViceVersa("62,352.7235", new BigDecimal("62352.7235"));
+        checkScreenToBigDecimalAndViceVersa("6,626.8256", new BigDecimal("6626.8256"));
+        checkScreenToBigDecimalAndViceVersa("2,346.7925", new BigDecimal("2346.7925"));
+        checkScreenToBigDecimalAndViceVersa("762,462.6782", new BigDecimal("762462.6782"));
+        checkScreenToBigDecimalAndViceVersa("7,624,623.2", new BigDecimal("7624623.2"));
+        checkScreenToBigDecimalAndViceVersa("76,236,262.72", new BigDecimal("76236262.72"));
 
-        checkScreenToBigDecimal("-77,322,225.7", new BigDecimal("-77322225.7"));
-        checkScreenToBigDecimal("-823,452,168,746.734535", new BigDecimal("-823452168746.734535"));
-        checkScreenToBigDecimal("-2,523,578.725", new BigDecimal("-2523578.725"));
-        checkScreenToBigDecimal("-8,643.825", new BigDecimal("-8643.825"));
-        checkScreenToBigDecimal("-6,235.725", new BigDecimal("-6235.725"));
-        checkScreenToBigDecimal("-734,535.73", new BigDecimal("-734535.73"));
-        checkScreenToBigDecimal("-84,564.622", new BigDecimal("-84564.622"));
+        checkScreenToBigDecimalAndViceVersa("-77,322,225.7", new BigDecimal("-77322225.7"));
+        checkScreenToBigDecimalAndViceVersa("-823,452,168,746.734535", new BigDecimal("-823452168746.734535"));
+        checkScreenToBigDecimalAndViceVersa("-2,523,578.725", new BigDecimal("-2523578.725"));
+        checkScreenToBigDecimalAndViceVersa("-8,643.825", new BigDecimal("-8643.825"));
+        checkScreenToBigDecimalAndViceVersa("-6,235.725", new BigDecimal("-6235.725"));
+        checkScreenToBigDecimalAndViceVersa("-734,535.73", new BigDecimal("-734535.73"));
+        checkScreenToBigDecimalAndViceVersa("-84,564.622", new BigDecimal("-84564.622"));
 
         //engineer numbers
-        checkScreenToBigDecimal("7.e+7234", new BigDecimal("7.e+7234"));
-        checkScreenToBigDecimal("1.e+72", new BigDecimal("1.e+72"));
-        checkScreenToBigDecimal("5.e+92", new BigDecimal("5.e+92"));
-        checkScreenToBigDecimal("4.e-234", new BigDecimal("4.e-234"));
-        checkScreenToBigDecimal("8.e-19", new BigDecimal("8.e-19"));
-        checkScreenToBigDecimal("2.e-84", new BigDecimal("2.e-84"));
+        checkScreenToBigDecimalAndViceVersa("7.e+7234", new BigDecimal("7.e+7234"));
+        checkScreenToBigDecimalAndViceVersa("1.e+72", new BigDecimal("1.e+72"));
+        checkScreenToBigDecimalAndViceVersa("5.e+92", new BigDecimal("5.e+92"));
+        checkScreenToBigDecimalAndViceVersa("4.e-234", new BigDecimal("4.e-234"));
+        checkScreenToBigDecimalAndViceVersa("8.e-19", new BigDecimal("8.e-19"));
+        checkScreenToBigDecimalAndViceVersa("2.e-84", new BigDecimal("2.e-84"));
 
-        checkScreenToBigDecimal("-4.e+13", new BigDecimal("-4.e+13"));
-        checkScreenToBigDecimal("-2.e+126", new BigDecimal("-2.e+126"));
-        checkScreenToBigDecimal("-7.e+1482", new BigDecimal("-7.e+1482"));
-        checkScreenToBigDecimal("-6.e-723", new BigDecimal("-6.e-723"));
-        checkScreenToBigDecimal("-5.e-17", new BigDecimal("-5.e-17"));
-        checkScreenToBigDecimal("-2.e-79", new BigDecimal("-2.e-79"));
-    }
-
-
-    /**
-     * @todo
-     */
-    @Test
-    public void bigDecimalToScreenTests() {
-
+        checkScreenToBigDecimalAndViceVersa("-4.e+13", new BigDecimal("-4.e+13"));
+        checkScreenToBigDecimalAndViceVersa("-2.e+126", new BigDecimal("-2.e+126"));
+        checkScreenToBigDecimalAndViceVersa("-7.e+1482", new BigDecimal("-7.e+1482"));
+        checkScreenToBigDecimalAndViceVersa("-6.e-723", new BigDecimal("-6.e-723"));
+        checkScreenToBigDecimalAndViceVersa("-5.e-17", new BigDecimal("-5.e-17"));
+        checkScreenToBigDecimalAndViceVersa("-2.e-79", new BigDecimal("-2.e-79"));
     }
 
     /**
@@ -694,18 +652,18 @@ public class NumberFormatterTest {
     }
 
     /**
-     * Check result of screen to big decimal operation.
-     * @param number number to convert.
-     * @param expectedResult required big decimal result.
+     * Check result of screen to big decimal and big decimal to screen operations.
+     * @param string number to convert.
+     * @param bigDecimal required big decimal result.
      */
-    private void checkScreenToBigDecimal(String number, BigDecimal expectedResult) {
-        BigDecimal result = NumberFormatter.screenToBigDecimal(number);
-        assertEquals(expectedResult, result);
+    private void checkScreenToBigDecimalAndViceVersa(String string, BigDecimal bigDecimal) {
+        BigDecimal bigDecimalResult = NumberFormatter.screenToBigDecimal(string);
+        assertEquals(bigDecimal, bigDecimalResult);
+
+        String stringResult = NumberFormatter.bigDecimalToScreen(bigDecimal);
+        assertEquals(string, stringResult);
     }
 
-    private void checkBigDecimalToScreen(BigDecimal bigDecimal, String expectedResult) {
-
-    }
 
 
 
