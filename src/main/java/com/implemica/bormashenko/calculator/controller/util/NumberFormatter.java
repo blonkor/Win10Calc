@@ -128,6 +128,16 @@ public class NumberFormatter {
     }
 
     /**
+     * Rounds big decimal number.
+     *
+     * @param bigDecimal number to round.
+     * @return rounded number.
+     */
+    public static BigDecimal round(BigDecimal bigDecimal) {
+        return stripZeros(bigDecimal.round(PRECISION_TO_SHOW));
+    }
+
+    /**
      * Converts number with separating commas to big decimal.
      *
      * @param number number to convert.
@@ -146,28 +156,39 @@ public class NumberFormatter {
     public static String bigDecimalToScreen(BigDecimal number) {
         String stringNumber = number.toString();
 
-        if (stringNumber.contains(BIG_DEC_ENGINEER_SYMBOL)) {
-
-            if (Character.toString(stringNumber.charAt(1)).equals(BIG_DEC_ENGINEER_SYMBOL) ||
-                    (Character.toString(stringNumber.charAt(2)).equals(BIG_DEC_ENGINEER_SYMBOL) &&
-                            isNegativeNumber(stringNumber))) {
-                stringNumber = stringNumber.replaceAll(BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL);
-            } else {
-                stringNumber = stringNumber.replaceAll(BIG_DEC_ENGINEER_SYMBOL, CALC_ENGINEER_SYMBOL);
-            }
+        if (isEngineerNumber(stringNumber)) {
+            stringNumber = replaceEngineerSymbol(stringNumber);
         }
 
         return separateNumberWithCommas(stringNumber);
     }
 
     /**
-     * Rounds big decimal number.
+     * Replaces big decimal's engineer number representation to calculator's engineer number representation.
+     * If number starts with "_E" or "-_E", replace "E" with ".e", otherwise replace "E" with "e".
      *
-     * @param bigDecimal number to round.
-     * @return rounded number.
+     * @param number number to edit.
+     * @return edited number.
      */
-    public static BigDecimal round(BigDecimal bigDecimal) {
-        return stripZeros(bigDecimal.round(PRECISION_TO_SHOW));
+    private static String replaceEngineerSymbol(String number) {
+        if (isOneDigitUnscaledValue(number)) {
+            number = number.replaceAll(BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL);
+        } else {
+            number = number.replaceAll(BIG_DEC_ENGINEER_SYMBOL, CALC_ENGINEER_SYMBOL);
+        }
+
+        return number;
+    }
+
+    /**
+     * Checks if number starts with "_E" or "-_E".
+     *
+     * @param number number to check.
+     * @return true if number starts with "_E" or "-_E" or false otherwise.
+     */
+    private static boolean isOneDigitUnscaledValue(String number) {
+        return Character.toString(number.charAt(1)).equals(BIG_DEC_ENGINEER_SYMBOL) ||
+                (Character.toString(number.charAt(2)).equals(BIG_DEC_ENGINEER_SYMBOL) && isNegativeNumber(number));
     }
 
     /**
@@ -186,14 +207,26 @@ public class NumberFormatter {
         }
 
         if (isDecimalNumber(stripped)) {
-            while (stripped.endsWith(ZERO) && !stripped.equals(ZERO)) {
-                stripped = stripped.substring(0, stripped.length() - 1);
-            }
+            stripped = stripLastZeros(stripped);
 
             return new BigDecimal(stripped);
-        } else {
-            return bigDecimal;
         }
+
+        return bigDecimal;
+    }
+
+    /**
+     * Deletes last char if it is zero and it is not the only char.
+     *
+     * @param string string to edit.
+     * @return string without zeros at the end.
+     */
+    private static String stripLastZeros(String string) {
+        while (string.endsWith(ZERO) && !string.equals(ZERO)) {
+            string = string.substring(0, string.length() - 1);
+        }
+
+        return string;
     }
 
     /**
@@ -230,6 +263,19 @@ public class NumberFormatter {
             number = number.substring(0, dotIndex);
         }
 
+        return separate(number, digitsAfterDot, negative);
+    }
+
+    /**
+     * Separates every three digits in number with comma and appends required digits after dot to the result and
+     * prepends minus if needed.
+     *
+     * @param number         number to edit.
+     * @param digitsAfterDot digits that should be added to the result without separating after dot.
+     * @param negative       true if minus should be prepended to the result.
+     * @return edited number.
+     */
+    private static String separate(String number, String digitsAfterDot, boolean negative) {
         StringBuilder str = new StringBuilder();
         char[] chars = number.toCharArray();
         int counter = 0;
