@@ -368,7 +368,7 @@ public class NumberFormatterTest {
         checkAppendDot("2,346.7925", "2,346.7925");
         checkAppendDot("762,462.6782", "762,462.6782");
         checkAppendDot("7,624,623.2", "7,624,623.2");
-        checkAppendDot("762,362,62.72", "76,236,262.72");
+        checkAppendDot("762,362,62.72", "762,362,62.72");
 
         checkAppendDot("-77,322,225.7", "-77,322,225.7");
         checkAppendDot("-823,452,168,746.734535", "-823,452,168,746.734535");

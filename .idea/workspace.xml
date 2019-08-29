@@ -80,7 +80,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa">
+  <component name="RunManager" selected="JUnit.NumberFormatterTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -94,7 +94,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NumberFormatterTest.addDotTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NumberFormatterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -104,8 +104,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
-      <option name="METHOD_NAME" value="addDotTests" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,18 +195,18 @@
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
       <item itemvalue="Application.Launcher" />
-      <item itemvalue="JUnit.NumberFormatterTest.addDotTests" />
       <item itemvalue="JUnit.NumberFormatterTest.appendDigitTests" />
       <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTests" />
       <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" />
+      <item itemvalue="JUnit.NumberFormatterTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.NumberFormatterTest" />
         <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" />
         <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTests" />
         <item itemvalue="JUnit.NumberFormatterTest.appendDigitTests" />
         <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.NumberFormatterTest.addDotTests" />
       </list>
     </recent_temporary>
   </component>
