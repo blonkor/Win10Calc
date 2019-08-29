@@ -652,11 +652,258 @@ public class NumberFormatterTest {
     }
 
     /**
-     * @todo
+     * Tests for round operation.
      */
     @Test
     public void roundTests() {
+        //integers
+        {
+            //less that 16 digits
+            checkRound(new BigDecimal("0"), new BigDecimal("0"));
 
+            checkRound(new BigDecimal("1"), new BigDecimal("1"));
+            checkRound(new BigDecimal("2"), new BigDecimal("2"));
+            checkRound(new BigDecimal("15"), new BigDecimal("15"));
+            checkRound(new BigDecimal("25"), new BigDecimal("25"));
+            checkRound(new BigDecimal("100"), new BigDecimal("100"));
+            checkRound(new BigDecimal("5000"), new BigDecimal("5000"));
+            checkRound(new BigDecimal("62368"), new BigDecimal("62368"));
+            checkRound(new BigDecimal("73737375"), new BigDecimal("73737375"));
+            checkRound(new BigDecimal("42989024782"), new BigDecimal("42989024782"));
+            checkRound(new BigDecimal("3252652632693"), new BigDecimal("3252652632693"));
+            checkRound(new BigDecimal("736346834"), new BigDecimal("736346834"));
+            checkRound(new BigDecimal("1267983456891567"), new BigDecimal("1267983456891567"));
+
+            checkRound(new BigDecimal("-1"), new BigDecimal("-1"));
+            checkRound(new BigDecimal("-2"), new BigDecimal("-2"));
+            checkRound(new BigDecimal("-15"), new BigDecimal("-15"));
+            checkRound(new BigDecimal("-25"), new BigDecimal("-25"));
+            checkRound(new BigDecimal("-100"), new BigDecimal("-100"));
+            checkRound(new BigDecimal("-5000"), new BigDecimal("-5000"));
+            checkRound(new BigDecimal("-137687"), new BigDecimal("-137687"));
+            checkRound(new BigDecimal("-1236879000"), new BigDecimal("-1236879000"));
+            checkRound(new BigDecimal("-8910"), new BigDecimal("-8910"));
+            checkRound(new BigDecimal("-72523"), new BigDecimal("-72523"));
+            checkRound(new BigDecimal("-52134234"), new BigDecimal("-52134234"));
+            checkRound(new BigDecimal("-7345298761213"), new BigDecimal("-7345298761213"));
+
+            //16 digits
+            checkRound(new BigDecimal("7891236742367892"), new BigDecimal("7891236742367892"));
+            checkRound(new BigDecimal("8914815712245616"), new BigDecimal("8914815712245616"));
+            checkRound(new BigDecimal("5731897581912065"), new BigDecimal("5731897581912065"));
+            checkRound(new BigDecimal("1385219952592750"), new BigDecimal("1385219952592750"));
+            checkRound(new BigDecimal("2345678614899523"), new BigDecimal("2345678614899523"));
+            checkRound(new BigDecimal("1472184129453219"), new BigDecimal("1472184129453219"));
+
+            checkRound(new BigDecimal("-1237894562345678"), new BigDecimal("-1237894562345678"));
+            checkRound(new BigDecimal("-7123912369284216"), new BigDecimal("-7123912369284216"));
+            checkRound(new BigDecimal("-1237891401000000"), new BigDecimal("-1237891401000000"));
+            checkRound(new BigDecimal("-1324587652332142"), new BigDecimal("-1324587652332142"));
+            checkRound(new BigDecimal("-1823194986032146"), new BigDecimal("-1823194986032146"));
+            checkRound(new BigDecimal("-1328959285727529"), new BigDecimal("-1328959285727529"));
+
+            //more than 16 digits
+            checkRound(new BigDecimal("354678126471241518756213"), new BigDecimal("3.546781264712415e+23"));
+            checkRound(new BigDecimal("86583242839429024222221664265286"), new BigDecimal("8.658324283942902e+31"));
+            checkRound(new BigDecimal("123121238535432345324235"), new BigDecimal("1.231212385354323e+23"));
+            checkRound(new BigDecimal("13657532425234753632"), new BigDecimal("1.365753242523475e+19"));
+            checkRound(new BigDecimal("23456786148995237"), new BigDecimal("2.345678614899524e+16"));
+            checkRound(new BigDecimal("982147981274912749812748912749"), new BigDecimal("9.821479812749127e+29"));
+
+            checkRound(new BigDecimal("-141298172396321459238752"), new BigDecimal("-1.412981723963215e+23"));
+            checkRound(new BigDecimal("-6315214812841571983251953218198156"), new BigDecimal("-6.315214812841572e+33"));
+            checkRound(new BigDecimal("-63562342573463436343535"), new BigDecimal("-6.356234257346344e+22"));
+            checkRound(new BigDecimal("-1231238456344543890000000000"), new BigDecimal("-1.231238456344544e+27"));
+            checkRound(new BigDecimal("-123123873543259234234873"), new BigDecimal("-1.231238735432592e+23"));
+            checkRound(new BigDecimal("-3123137862452352347899"), new BigDecimal("-3.123137862452352e+21"));
+        }
+
+        //decimals
+        {
+            //less that 16 digits (summary)
+            checkRound(new BigDecimal("13.16325"), new BigDecimal("13.16325"));
+            checkRound(new BigDecimal("0.724658"), new BigDecimal("0.724658"));
+            checkRound(new BigDecimal("12383254.8234324"), new BigDecimal("12383254.8234324"));
+            checkRound(new BigDecimal("12312476.2434"), new BigDecimal("12312476.2434"));
+            checkRound(new BigDecimal("1316.123"), new BigDecimal("1316.123"));
+            checkRound(new BigDecimal("625.72"), new BigDecimal("625.72"));
+
+            checkRound(new BigDecimal("-14312.73"), new BigDecimal("-14312.73"));
+            checkRound(new BigDecimal("-552.43521"), new BigDecimal("-552.43521"));
+            checkRound(new BigDecimal("-23425252.25"), new BigDecimal("-23425252.25"));
+            checkRound(new BigDecimal("-12.1"), new BigDecimal("-12.1"));
+            checkRound(new BigDecimal("-21437.73"), new BigDecimal("-21437.73"));
+            checkRound(new BigDecimal("-0.721111"), new BigDecimal("-0.721111"));
+
+            //16 digits (summary) and starts with 0.
+            checkRound(new BigDecimal("0.765986234567097"), new BigDecimal("0.765986234567097"));
+            checkRound(new BigDecimal("0.172841949812748"), new BigDecimal("0.172841949812748"));
+            checkRound(new BigDecimal("0.198379513179088"), new BigDecimal("0.198379513179088"));
+            checkRound(new BigDecimal("0.132918479185915"), new BigDecimal("0.132918479185915"));
+            checkRound(new BigDecimal("0.987187591481567"), new BigDecimal("0.987187591481567"));
+            checkRound(new BigDecimal("0.123689238599145"), new BigDecimal("0.123689238599145"));
+
+            checkRound(new BigDecimal("-0.126789043256784"), new BigDecimal("-0.126789043256784"));
+            checkRound(new BigDecimal("-0.213123099852516"), new BigDecimal("-0.213123099852516"));
+            checkRound(new BigDecimal("-0.918237192749815"), new BigDecimal("-0.918237192749815"));
+            checkRound(new BigDecimal("-0.328957983257892"), new BigDecimal("-0.328957983257892"));
+            checkRound(new BigDecimal("-0.123091875127591"), new BigDecimal("-0.123091875127591"));
+            checkRound(new BigDecimal("-0.123886598000012"), new BigDecimal("-0.123886598000012"));
+
+            //16 digits (summary) and does not start with 0.
+            checkRound(new BigDecimal("765678.6786785423"), new BigDecimal("765678.6786785423"));
+            checkRound(new BigDecimal("988624352525.7111"), new BigDecimal("988624352525.7111"));
+            checkRound(new BigDecimal("3192831937198.355"), new BigDecimal("3192831937198.355"));
+            checkRound(new BigDecimal("174.9164914921961"), new BigDecimal("174.9164914921961"));
+            checkRound(new BigDecimal("68789921739.82145"), new BigDecimal("68789921739.82145"));
+            checkRound(new BigDecimal("8.721681581259151"), new BigDecimal("8.721681581259151"));
+
+            checkRound(new BigDecimal("-98.12748917915915"), new BigDecimal("-98.12748917915915"));
+            checkRound(new BigDecimal("-1235823.592917895"), new BigDecimal("-1235823.592917895"));
+            checkRound(new BigDecimal("-31293874177.81938"), new BigDecimal("-31293874177.81938"));
+            checkRound(new BigDecimal("-1287.382142174858"), new BigDecimal("-1287.382142174858"));
+            checkRound(new BigDecimal("-103198237917576.1"), new BigDecimal("-103198237917576.1"));
+            checkRound(new BigDecimal("-12936661991.79419"), new BigDecimal("-12936661991.79419"));
+
+            //17 digits (summary) and starts with 0.
+            checkRound(new BigDecimal("0.7634568901234567"), new BigDecimal("0.7634568901234567"));
+            checkRound(new BigDecimal("0.8269023457876125"), new BigDecimal("0.8269023457876125"));
+            checkRound(new BigDecimal("0.1234567891234567"), new BigDecimal("0.1234567891234567"));
+            checkRound(new BigDecimal("0.4197492149146879"), new BigDecimal("0.4197492149146879"));
+            checkRound(new BigDecimal("0.9001013124014956"), new BigDecimal("0.9001013124014956"));
+            checkRound(new BigDecimal("0.1465698791749184"), new BigDecimal("0.1465698791749184"));
+
+            checkRound(new BigDecimal("-0.123123213698235"), new BigDecimal("-0.123123213698235"));
+            checkRound(new BigDecimal("-0.102398019815789"), new BigDecimal("-0.102398019815789"));
+            checkRound(new BigDecimal("-0.876523452349824"), new BigDecimal("-0.876523452349824"));
+            checkRound(new BigDecimal("-0.123629867292267"), new BigDecimal("-0.123629867292267"));
+            checkRound(new BigDecimal("-0.123147194519916"), new BigDecimal("-0.123147194519916"));
+            checkRound(new BigDecimal("-0.123985025329267"), new BigDecimal("-0.123985025329267"));
+
+            //17 digits (summary) and does not start with 0.
+            checkRound(new BigDecimal("1237894445.6723489"), new BigDecimal("1237894445.672349"));
+            checkRound(new BigDecimal("73463.632980090322"), new BigDecimal("73463.63298009032"));
+            checkRound(new BigDecimal("926598259202.22578"), new BigDecimal("926598259202.2258"));
+            checkRound(new BigDecimal("219.88371948157672"), new BigDecimal("219.8837194815767"));
+            checkRound(new BigDecimal("193195717917.59185"), new BigDecimal("193195717917.5919"));
+            checkRound(new BigDecimal("991.20391000151356"), new BigDecimal("991.2039100015136"));
+
+            checkRound(new BigDecimal("-1238091250715979.8"), new BigDecimal("-1238091250715980"));
+            checkRound(new BigDecimal("-723.52358725265225"), new BigDecimal("-723.5235872526523"));
+            checkRound(new BigDecimal("-3447.7789023345812"), new BigDecimal("-3447.778902334581"));
+            checkRound(new BigDecimal("-1985815792362.6785"), new BigDecimal("-1985815792362.679"));
+            checkRound(new BigDecimal("-139878.98175981956"), new BigDecimal("-139878.9817598196"));
+            checkRound(new BigDecimal("-123995921352.35267"), new BigDecimal("-123995921352.3527"));
+
+            //more than 17 digits (summary) and starts with 0.
+            checkRound(new BigDecimal("0.9418724917491750150179815191"), new BigDecimal("0.941872491749175"));
+            checkRound(new BigDecimal("0.5418715871759237626982786206123"), new BigDecimal("0.5418715871759238"));
+            checkRound(new BigDecimal("0.982137987150875380173258619"), new BigDecimal("0.9821379871508754"));
+            checkRound(new BigDecimal("0.1259817598315098175983215916"), new BigDecimal("0.1259817598315098"));
+            checkRound(new BigDecimal("0.1242128798215709184178957195713"), new BigDecimal("0.1242128798215709"));
+            checkRound(new BigDecimal("0.12351791951090870987519832759266"), new BigDecimal("0.1235179195109087"));
+
+            checkRound(new BigDecimal("-0.198471895719857193751084791"), new BigDecimal("-0.1984718957198572"));
+            checkRound(new BigDecimal("-0.12310958190357878062046206"), new BigDecimal("-0.1231095819035788"));
+            checkRound(new BigDecimal("-0.13109870600000000003252525"), new BigDecimal("-0.131098706"));
+            checkRound(new BigDecimal("-0.124560283765098276022256"), new BigDecimal("-0.1245602837650983"));
+            checkRound(new BigDecimal("-0.1415400000000000000000000000918"), new BigDecimal("-0.14154"));
+            checkRound(new BigDecimal("-0.12465982153209520592805"), new BigDecimal("-0.1246598215320952"));
+
+            //more than 17 digits (summary) and does not start with 0.
+            checkRound(new BigDecimal("128419581095019580128.75019875"), new BigDecimal("1.284195810950196e+20"));
+            checkRound(new BigDecimal("128758.917509715091750128750175"), new BigDecimal("128758.9175097151"));
+            checkRound(new BigDecimal("876210983758927.650828750275820"), new BigDecimal("876210983758927.7"));
+            checkRound(new BigDecimal("14819.98572882827452001"), new BigDecimal("14819.98572882827"));
+            checkRound(new BigDecimal("1235187829570201.92843"), new BigDecimal("1235187829570202"));
+            checkRound(new BigDecimal("1235992.1347819991923816"), new BigDecimal("1235992.134781999"));
+
+            checkRound(new BigDecimal("-1312981740181908.0985023"), new BigDecimal("-1312981740181908"));
+            checkRound(new BigDecimal("-1240982.74065829052808833"), new BigDecimal("-1240982.740658291"));
+            checkRound(new BigDecimal("-12318275.021850219840184"), new BigDecimal("-12318275.02185022"));
+            checkRound(new BigDecimal("-1231585919918347140194194114.14141"), new BigDecimal("-1.231585919918347e+27"));
+            checkRound(new BigDecimal("-51351309848719847109847109.7431098471984"), new BigDecimal("-5.135130984871985e+25"));
+            checkRound(new BigDecimal("-124189579327598.4325798327592769"), new BigDecimal("-124189579327598.4"));
+        }
+
+        //engineer
+        {
+            //e+
+            checkRound(new BigDecimal("1.e+1"), new BigDecimal("10"));
+            checkRound(new BigDecimal("1.e+2"), new BigDecimal("100"));
+            checkRound(new BigDecimal("5.e+5"), new BigDecimal("500000"));
+            checkRound(new BigDecimal("6.e+15"), new BigDecimal("6000000000000000"));
+            checkRound(new BigDecimal("9.e+16"), new BigDecimal("9.e+16"));
+
+            checkRound(new BigDecimal("1.5e+1"), new BigDecimal("15"));
+            checkRound(new BigDecimal("1.68e+2"), new BigDecimal("168"));
+            checkRound(new BigDecimal("5.25e+5"), new BigDecimal("525000"));
+            checkRound(new BigDecimal("6.73e+15"), new BigDecimal("6730000000000000"));
+            checkRound(new BigDecimal("9.74e+16"), new BigDecimal("9.74e+16"));
+
+            checkRound(new BigDecimal("1.3e+67"), new BigDecimal("1.3e+67"));
+            checkRound(new BigDecimal("1.6128e+22"), new BigDecimal("1.6128e+22"));
+            checkRound(new BigDecimal("5.21235e+1235"), new BigDecimal("5.21235e+1235"));
+            checkRound(new BigDecimal("6.71563e+1213"), new BigDecimal("6.71563e+1213"));
+            checkRound(new BigDecimal("9.744e+156"), new BigDecimal("9.744e+156"));
+
+            //-e+
+            checkRound(new BigDecimal("-1.e+1"), new BigDecimal("-10"));
+            checkRound(new BigDecimal("-1.e+2"), new BigDecimal("-100"));
+            checkRound(new BigDecimal("-5.e+5"), new BigDecimal("-500000"));
+            checkRound(new BigDecimal("-6.e+15"), new BigDecimal("-6000000000000000"));
+            checkRound(new BigDecimal("-9.e+16"), new BigDecimal("-9.e+16"));
+
+            checkRound(new BigDecimal("-1.5e+1"), new BigDecimal("-15"));
+            checkRound(new BigDecimal("-1.68e+2"), new BigDecimal("-168"));
+            checkRound(new BigDecimal("-5.25e+5"), new BigDecimal("-525000"));
+            checkRound(new BigDecimal("-6.73e+15"), new BigDecimal("-6730000000000000"));
+            checkRound(new BigDecimal("-9.74e+16"), new BigDecimal("-9.74e+16"));
+
+            checkRound(new BigDecimal("-1.3e+67"), new BigDecimal("-1.3e+67"));
+            checkRound(new BigDecimal("-1.6128e+22"), new BigDecimal("-1.6128e+22"));
+            checkRound(new BigDecimal("-5.21235e+1235"), new BigDecimal("-5.21235e+1235"));
+            checkRound(new BigDecimal("-6.71563e+1213"), new BigDecimal("-6.71563e+1213"));
+            checkRound(new BigDecimal("-9.744e+156"), new BigDecimal("-9.744e+156"));
+
+            //e-
+            checkRound(new BigDecimal("1.e-1"), new BigDecimal("0.1"));
+            checkRound(new BigDecimal("1.e-2"), new BigDecimal("0.01"));
+            checkRound(new BigDecimal("5.e-5"), new BigDecimal("0.00005"));
+            checkRound(new BigDecimal("6.e-15"), new BigDecimal("0.000000000000006"));
+            checkRound(new BigDecimal("9.e-16"), new BigDecimal("9.e-16"));
+
+            checkRound(new BigDecimal("1.5e-1"), new BigDecimal("0.15"));
+            checkRound(new BigDecimal("1.68e-2"), new BigDecimal("0.0168"));
+            checkRound(new BigDecimal("5.25e-5"), new BigDecimal("0.0000525"));
+            checkRound(new BigDecimal("6.73e-15"), new BigDecimal("6.73e-15"));
+            checkRound(new BigDecimal("9.74e-16"), new BigDecimal("9.74e-16"));
+
+            checkRound(new BigDecimal("1.3e-67"), new BigDecimal("1.3e-67"));
+            checkRound(new BigDecimal("1.6128e-22"), new BigDecimal("1.6128e-22"));
+            checkRound(new BigDecimal("5.21235e-1235"), new BigDecimal("5.21235e-1235"));
+            checkRound(new BigDecimal("6.71563e-1213"), new BigDecimal("6.71563e-1213"));
+            checkRound(new BigDecimal("9.744e-156"), new BigDecimal("9.744e-156"));
+
+            //-e-
+            checkRound(new BigDecimal("-1.e-1"), new BigDecimal("-0.1"));
+            checkRound(new BigDecimal("-1.e-2"), new BigDecimal("-0.01"));
+            checkRound(new BigDecimal("-5.e-5"), new BigDecimal("-0.00005"));
+            checkRound(new BigDecimal("-6.e-15"), new BigDecimal("-0.000000000000006"));
+            checkRound(new BigDecimal("-9.e-16"), new BigDecimal("-0.0000000000000009"));
+
+            checkRound(new BigDecimal("-1.5e-1"), new BigDecimal("-0.15"));
+            checkRound(new BigDecimal("-1.68e-2"), new BigDecimal("-0.0168"));
+            checkRound(new BigDecimal("-5.25e-5"), new BigDecimal("-0.0000525"));
+            checkRound(new BigDecimal("-6.73e-15"), new BigDecimal("-6.73e-15"));
+            checkRound(new BigDecimal("-9.74e-16"), new BigDecimal("-9.74e-16"));
+
+            checkRound(new BigDecimal("-1.3e-67"), new BigDecimal("-1.3e-67"));
+            checkRound(new BigDecimal("-1.6128e-22"), new BigDecimal("-1.6128e-22"));
+            checkRound(new BigDecimal("-5.21235e-1235"), new BigDecimal("-5.21235e-1235"));
+            checkRound(new BigDecimal("-6.71563e-1213"), new BigDecimal("-6.71563e-1213"));
+            checkRound(new BigDecimal("-9.744e-156"), new BigDecimal("-9.744e-156"));
+        }
     }
 
     /**
@@ -695,7 +942,8 @@ public class NumberFormatterTest {
 
     /**
      * Check result of screen to big decimal and big decimal to screen operations.
-     * @param string number to convert.
+     *
+     * @param string     number to convert.
      * @param bigDecimal required big decimal result.
      */
     private void checkScreenToBigDecimalAndViceVersa(String string, BigDecimal bigDecimal) {
@@ -706,11 +954,15 @@ public class NumberFormatterTest {
         assertEquals(string, stringResult);
     }
 
-
-
-
-    private void checkRound(BigDecimal bigDecimal, BigDecimal expectedNumber) {
-
+    /**
+     * Checks result of round operation for big decimal.
+     *
+     * @param bigDecimal     number to convert.
+     * @param expectedResult required big decimal result.
+     */
+    private void checkRound(BigDecimal bigDecimal, BigDecimal expectedResult) {
+        BigDecimal result = NumberFormatter.round(bigDecimal);
+        assertEquals(expectedResult, result);
     }
 
 }
