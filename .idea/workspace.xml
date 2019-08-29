@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ViewFormatterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,13 +219,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Tests for memory model completed.">
-      <created>1566387306880</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1566387306880</updated>
     </task>
     <task id="LOCAL-00048" summary="Bug fixes and refactoring for memory model.">
       <created>1566387372771</created>
@@ -567,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567107748685</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Code refactoring for controller.">
+      <created>1567109795047</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1567109795047</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -612,7 +608,6 @@
     <MESSAGE value="Test packages refactored. Test method's for controller for number formatter created." />
     <MESSAGE value="Tests for delete last char operation created. Few bug fixes with the operation in controller." />
     <MESSAGE value="Tests for add dot operation created." />
-    <MESSAGE value="Code refactoring for controller." />
     <MESSAGE value="Tests for append digit created." />
     <MESSAGE value="Tests for screen to big decimal operation created." />
     <MESSAGE value="Tests for big decimal to screen operation created (by updating tests for screen to big decimal operation)." />
@@ -626,7 +621,8 @@
     <MESSAGE value="Tests for view updated." />
     <MESSAGE value="Added scroll pane for moving equation label." />
     <MESSAGE value="Methods for moving equation label created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Methods for moving equation label created." />
+    <MESSAGE value="Code refactoring for controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for controller." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
