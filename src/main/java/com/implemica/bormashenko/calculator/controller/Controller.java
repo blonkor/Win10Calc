@@ -726,6 +726,10 @@ public class Controller implements Initializable {
 
             setFlags(false, false, true, false,
                     true, false, false);
+
+            if (operation == UnaryOperations.NEGATE) {
+                isEditableScreen = true;
+            }
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
