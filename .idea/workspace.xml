@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/view/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/view/ViewTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.tests in Win10Calc">
+  <component name="RunManager" selected="Application.Launcher">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -203,8 +206,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.tests in Win10Calc" />
         <item itemvalue="Application.Launcher" />
+        <item itemvalue="JUnit.tests in Win10Calc" />
         <item itemvalue="JUnit.NumberFormatterTest" />
         <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
         <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" />
@@ -221,13 +224,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Tests for model for percentage of first operation completed (including tests for overflow exception by using the operation).">
-      <created>1566251594404</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1566251594404</updated>
     </task>
     <task id="LOCAL-00045" summary="Tests for model for percentage of 100 operation created and completed (including tests for overflow exception by using the operation).">
       <created>1566294566216</created>
@@ -565,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567086822495</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Tests for view updated.">
+      <created>1567088308741</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1567088308741</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -599,7 +602,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Several tests for resizing window created." />
     <MESSAGE value="Trying to make better resizing." />
     <MESSAGE value="Tests for resizing for sides created." />
     <MESSAGE value="Tests for moving window created." />
@@ -624,7 +626,8 @@
     <MESSAGE value="Code refactoring for NumberFormatter." />
     <MESSAGE value="Code refactoring for ViewFormatter." />
     <MESSAGE value="View changed." />
-    <option name="LAST_COMMIT_MESSAGE" value="View changed." />
+    <MESSAGE value="Tests for view updated." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for view updated." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

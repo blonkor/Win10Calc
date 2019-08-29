@@ -3,10 +3,12 @@ package com.implemica.bormashenko.calculator.controller.util;
 import com.implemica.bormashenko.calculator.model.Memory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 
 import java.math.BigDecimal;
@@ -42,7 +44,19 @@ public class ViewFormatter {
     /**
      * @todo
      */
-    public static void moveEquationLeft() {
+    public static void moveEquationLeft(Label equation, Button leftArrow, Button rightArrow) {
+        rightArrow.setVisible(true);
+
+        Text text = new Text(equation.getText());
+        text.setFont(equation.getFont());
+
+        double width = text.getBoundsInLocal().getWidth();
+
+        Scene scene = leftArrow.getScene();
+
+        equation.setText(equation.getText().substring(1));
+
+
 
     }
 

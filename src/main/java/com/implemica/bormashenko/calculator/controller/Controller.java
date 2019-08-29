@@ -88,6 +88,8 @@ public class Controller implements Initializable {
      */
     private Memory memory = new Memory();
 
+    private String equationText;
+
     /**
      * True if number on screen can be edited.
      */
@@ -146,6 +148,7 @@ public class Controller implements Initializable {
 
 //        if (isPercentPressed || isUnaryOperationPressed) {
 //            equation.setText(EMPTY_STRING);
+        //    equationText = EMPTY_STRING;
 //        }
 //
 //        if (isEqualsPressed || isUnaryOperationPressed) {
@@ -194,7 +197,7 @@ public class Controller implements Initializable {
     }
 
     public void moveEquationLeft() {
-        ViewFormatter.moveEquationLeft();
+        ViewFormatter.moveEquationLeft(equation, leftArrow, rightArrow);
     }
 
     public void moveEquationRight() {
@@ -393,6 +396,7 @@ public class Controller implements Initializable {
         clearText();
         calculation.resetAll();
         equation.setText(EMPTY_STRING);
+        equationText = EMPTY_STRING;
 
         isBinaryOperationPressed = false;
         isUnaryOperationPressed = false;
@@ -512,6 +516,7 @@ public class Controller implements Initializable {
             }
 
             equation.setText(EMPTY_STRING);
+            equationText = EMPTY_STRING;
 
             isEditableScreen = false;
         } catch (ArithmeticException e) {
@@ -552,6 +557,7 @@ public class Controller implements Initializable {
                     calculation.setBinaryOperation(operation);
 
                     equation.setText(calculation.getFirst() + SPACE + operation.symbol);
+                    equationText = calculation.getFirst() + SPACE + operation.symbol;
                 } else if (!isEqualsPressed && !isUnaryOperationPressed) {
                     calculation.setSecond(numberOnScreen);
                     calculation.calculateBinary();
@@ -560,6 +566,7 @@ public class Controller implements Initializable {
 
                     screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
                     equation.setText(equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol);
+                    equationText = equation.getText() + SPACE + calculation.getSecond() + SPACE + operation.symbol;
                 } else {
 
                     if (isUnaryOperationPressed) {
@@ -574,8 +581,10 @@ public class Controller implements Initializable {
                         calculation.setFirst(numberOnScreen);
 
                         equation.setText(NumberFormatter.round(calculation.getResult()) + SPACE + operation.symbol);
+                        equationText = NumberFormatter.round(calculation.getResult()) + SPACE + operation.symbol;
                     } else {
                         equation.setText(equation.getText() + SPACE + operation.symbol);
+                        equationText = equation.getText() + SPACE + operation.symbol;
                     }
 
                 }
@@ -584,6 +593,7 @@ public class Controller implements Initializable {
                 calculation.setBinaryOperation(operation);
 
                 equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
+                equationText = equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol;
             }
 
             isBinaryOperationPressed = true;
@@ -620,6 +630,8 @@ public class Controller implements Initializable {
                 screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
                 equation.setText(operation.symbol + OPENING_BRACKET + SPACE + number.toString() +
                         SPACE + CLOSING_BRACKET + SPACE);
+                equationText = operation.symbol + OPENING_BRACKET + SPACE + number.toString() +
+                        SPACE + CLOSING_BRACKET + SPACE;
 
             } else if (isUnaryOperationPressed) {
                 calculation.setSecond(calculation.getFirst());
@@ -629,31 +641,32 @@ public class Controller implements Initializable {
 
                 screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
 
-                String equationText = equation.getText();
+                String equationTextToSet = equation.getText();
                 int lastIndexOfOperation;
 
                 String textBefore = EMPTY_STRING;
-                String textAfter = equationText;
+                String textAfter = equationTextToSet;
 
-                if (equationText.contains(BinaryOperations.ADD.symbol) ||
-                        equationText.contains(BinaryOperations.SUBTRACT.symbol) ||
-                        equationText.contains(BinaryOperations.MULTIPLY.symbol) ||
-                        equationText.contains(BinaryOperations.DIVIDE.symbol)) {
+                if (equationTextToSet.contains(BinaryOperations.ADD.symbol) ||
+                        equationTextToSet.contains(BinaryOperations.SUBTRACT.symbol) ||
+                        equationTextToSet.contains(BinaryOperations.MULTIPLY.symbol) ||
+                        equationTextToSet.contains(BinaryOperations.DIVIDE.symbol)) {
 
-                    int lastIndexOfAdd = equationText.lastIndexOf(BinaryOperations.ADD.symbol);
-                    int lastIndexOfSubtract = equationText.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
-                    int lastIndexOfMultiply = equationText.lastIndexOf(BinaryOperations.MULTIPLY.symbol);
-                    int lastIndexOfDivide = equationText.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                    int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperations.ADD.symbol);
+                    int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                    int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperations.MULTIPLY.symbol);
+                    int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
                     lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
                             Math.max(lastIndexOfMultiply, lastIndexOfDivide));
 
-                    textBefore = equationText.substring(0, lastIndexOfOperation + 1);
-                    textAfter = equationText.substring(lastIndexOfOperation + 1);
+                    textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
+                    textAfter = equationTextToSet.substring(lastIndexOfOperation + 1);
                 }
 
-                equationText = textBefore + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
+                equationTextToSet = textBefore + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
                         textAfter + SPACE + CLOSING_BRACKET;
-                equation.setText(equationText);
+                equation.setText(equationTextToSet);
+                equationText = equationTextToSet;
 
             } else {
                 calculation.setSecond(calculation.getFirst());
@@ -670,6 +683,8 @@ public class Controller implements Initializable {
                 screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
                 equation.setText(equation.getText() + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
                         NumberFormatter.bigDecimalToScreen(NumberFormatter.round(number)) + SPACE + CLOSING_BRACKET);
+                equationText = equation.getText() + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
+                        NumberFormatter.bigDecimalToScreen(NumberFormatter.round(number)) + SPACE + CLOSING_BRACKET;
             }
 
 
@@ -704,6 +719,7 @@ public class Controller implements Initializable {
 
             screen.setText(ZERO);
             equation.setText(ZERO);
+            equationText = ZERO;
 
         } else {
             BinaryOperations operation = calculation.getBinaryOperation();
@@ -718,6 +734,7 @@ public class Controller implements Initializable {
 
             screen.setText(NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
             equation.setText(equation.getText() + SPACE + NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
+            equationText = equation.getText() + SPACE + NumberFormatter.bigDecimalToScreen(calculation.getSecond());
         }
 
         isBinaryOperationPressed = false;
