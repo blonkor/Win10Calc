@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -66,9 +67,9 @@ public class View implements Serializable {
     private static final String RESULT_LABEL_ID = "#screen";
 
     /**
-     * ID of equation label.
+     * ID of equation scroll pane.
      */
-    private static final String EQUATION_LABEL_ID = "#equation";
+    private static final String EQUATION_SCROLL_ID = "#equationScroll";
 
     /**
      * Initializing main tests.view and listeners.
@@ -128,9 +129,10 @@ public class View implements Serializable {
         scene.widthProperty().addListener(fontResizeListener);
 
         //equation label length listener
-        Label equation = (Label) scene.lookup(EQUATION_LABEL_ID);
+        ScrollPane scrollPaneEquation = (ScrollPane) scene.lookup(EQUATION_SCROLL_ID);
+        Label equation = (Label) scrollPaneEquation.getContent();
         EquationLabelLengthListener equationLabelLengthListener = new EquationLabelLengthListener(scene);
-        //equation.textProperty().addListener(equationLabelLengthListener);
+        equation.textProperty().addListener(equationLabelLengthListener);
         scene.widthProperty().addListener(equationLabelLengthListener);
     }
 }

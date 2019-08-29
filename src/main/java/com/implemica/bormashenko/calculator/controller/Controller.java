@@ -197,12 +197,52 @@ public class Controller implements Initializable {
         ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
     }
 
+    /**
+     * Moves text in equation label to the left.
+     */
     public void moveEquationLeft() {
-        //equationScroll.setHvalue(equationScroll.getHvalue() + 0.5);
+        rightArrow.setVisible(true);
+
+        Text text = new Text(equation.getText());
+        text.setFont(equation.getFont());
+
+        double newHValue = equationScroll.getHvalue();
+
+        if (text.getBoundsInLocal().getWidth() > leftArrow.getScene().getWidth() * 1.5) {
+            newHValue += text.getBoundsInLocal().getWidth() / leftArrow.getScene().getWidth() / 2 * 0.1;
+        } else {
+            newHValue = equationScroll.getHmax();
+        }
+
+        equationScroll.setHvalue(newHValue);
+
+        if (equationScroll.getHvalue() == equationScroll.getHmax()) {
+            leftArrow.setVisible(false);
+        }
     }
 
+    /**
+     * Moves text in equation label to the right.
+     */
     public void moveEquationRight() {
-        ViewFormatter.moveEquationRight();
+        leftArrow.setVisible(true);
+
+        Text text = new Text(equation.getText());
+        text.setFont(equation.getFont());
+
+        double newHValue = equationScroll.getHvalue();
+
+        if (text.getBoundsInLocal().getWidth() > rightArrow.getScene().getWidth() * 1.5) {
+            newHValue -= text.getBoundsInLocal().getWidth() / rightArrow.getScene().getWidth() / 2 * 0.1;
+        } else {
+            newHValue = equationScroll.getHmin();
+        }
+
+        equationScroll.setHvalue(newHValue);
+
+        if (equationScroll.getHvalue() == equationScroll.getHmin()) {
+            rightArrow.setVisible(false);
+        }
     }
 
     public void keyboardHandling(KeyEvent event) {

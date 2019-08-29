@@ -411,6 +411,9 @@
                </font>
            </Label>
       </content>
+      <padding>
+         <Insets left="15.0" right="15.0" />
+      </padding>
    </ScrollPane>
     <AnchorPane fx:id="memoryBlock" maxHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#memoryShowOperation" prefHeight="163.0" prefWidth="322.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
     <AnchorPane fx:id="navigationBlock" onMouseClicked="#showNavigationPanel" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
