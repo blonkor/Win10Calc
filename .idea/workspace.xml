@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -218,13 +219,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Action for history button removed as necessary. Fields containing &quot;history&quot; string renamed.">
-      <created>1566397114445</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1566397114445</updated>
     </task>
     <task id="LOCAL-00054" summary="Minor refactoring for view.">
       <created>1566397606681</created>
@@ -562,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567117283092</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Bug fix with appending digit after negate operation.">
+      <created>1567117454465</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1567117454465</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -596,7 +597,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Keyboard controlling removed from view listener to controller's method." />
     <MESSAGE value="NumberFormatter refactored." />
     <MESSAGE value="Test packages refactored. Test method's for controller for number formatter created." />
     <MESSAGE value="Tests for delete last char operation created. Few bug fixes with the operation in controller." />
@@ -621,7 +621,8 @@
     <MESSAGE value="Updating memory labels so it works." />
     <MESSAGE value="Updating memory labels so it works correctly" />
     <MESSAGE value="Several tests for controller for append digit operation created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Several tests for controller for append digit operation created." />
+    <MESSAGE value="Bug fix with appending digit after negate operation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix with appending digit after negate operation." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

@@ -59,34 +59,65 @@ public class ControllerTest extends RobotControl {
 //        checkAppendDigits("5893127592375922", "5,893,127,592,375,922");
 //        checkAppendDigits("3250293850723580", "3,250,293,850,723,580");
 //        checkAppendDigits("3259000234000023", "3,259,000,234,000,023");
+//
+//
+//        //with negated number (minus should be saved)
+//        //no commas
+//        checkAppendDigits("1~1", "-11");
+//        checkAppendDigits("5~5", "-55");
+//        checkAppendDigits("8~7", "-87");
+//        checkAppendDigits("6~78", "-678");
+//        checkAppendDigits("8~27", "-827");
+//        checkAppendDigits("2~36", "-236");
+//        checkAppendDigits("7~82", "-782");
+//        checkAppendDigits("8~96", "-896");
+//
+//        //commas
+//        checkAppendDigits("6~1237", "-61,237");
+//        checkAppendDigits("8~734", "-8,734");
+//        checkAppendDigits("8~8632463", "-88,632,463");
+//        checkAppendDigits("7~8436346", "-78,436,346");
+//        checkAppendDigits("2~25834535", "-225,834,535");
+//        checkAppendDigits("1~7346456252", "-17,346,456,252");
+//        checkAppendDigits("2~6234626", "-26,234,626");
+//        checkAppendDigits("3~7774236523452", "-37,774,236,523,452");
+//
+//        //16 digits
+//        checkAppendDigits("7~890635789000000", "-7,890,635,789,000,000");
+//        checkAppendDigits("1~765323523658345", "-1,765,323,523,658,345");
+//        checkAppendDigits("8~234876435942583", "-8,234,876,435,942,583");
+//        checkAppendDigits("6~235483463468345", "-6,235,483,463,468,345");
+//
+//        //after unary (but not negate) operation pressed
+//        checkAppendDigits("1^752", "752");
+//        checkAppendDigits("79^234", "234");
+//        checkAppendDigits("682^2124", "2,124");
+//        checkAppendDigits("7238^14785", "14,785");
+//
+//        checkAppendDigits("9@825", "825");
+//        checkAppendDigits("2148@213", "213");
+//        checkAppendDigits("345724@23478", "23,478");
+//        checkAppendDigits("325273@72352525", "72,352,525");
+//
+//        checkAppendDigits("717;7", "7");
+//        checkAppendDigits("72358;123", "123");
+//        checkAppendDigits("124135;3252362367", "3,252,362,367");
+//        checkAppendDigits("7235;12453476436", "12,453,476,436");
 
+        //after binary operations
 
-        //with negated number (minus should be saved)
-        //no commas
-        checkAppendDigits("1~1", "-11");
-        checkAppendDigits("5~5", "-55");
-        checkAppendDigits("8~7", "-87");
-        checkAppendDigits("6~78", "-678");
-        checkAppendDigits("8~27", "-827");
-        checkAppendDigits("2~36", "-236");
-        checkAppendDigits("7~82", "-782");
-        checkAppendDigits("8~96", "-896");
+        //after equals
 
-        //commas
-        checkAppendDigits("6~1237", "-61,237");
-        checkAppendDigits("8~734", "-8,734");
-        checkAppendDigits("8~8632463", "-88,632,463");
-        checkAppendDigits("7~8436346", "-78,436,346");
-        checkAppendDigits("2~25834535", "-225,834,535");
-        checkAppendDigits("1~7346456252", "-17,346,456,252");
-        checkAppendDigits("2~6234626", "-26,234,626");
-        checkAppendDigits("3~7774236523452", "-37,774,236,523,452");
+        //after error
 
-        //16 digits
-        checkAppendDigits("7~890635789000000", "-7,890,635,789,000,000");
-        checkAppendDigits("1~765323523658345", "-1,765,323,523,658,345");
-        checkAppendDigits("8~234876435942583", "-8,234,876,435,942,583");
-        checkAppendDigits("6~235483463468345", "-6,235,483,463,468,345");
+        //after dot
+
+        //after backspace
+
+        //after clear text
+
+        //after clear all
+
     }
 
     /**
