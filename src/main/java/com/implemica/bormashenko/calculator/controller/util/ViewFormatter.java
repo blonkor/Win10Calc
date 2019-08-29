@@ -36,20 +36,22 @@ public class ViewFormatter {
     /**
      * Insets for memory labels.
      */
-    private static final Insets MEMORY_LABELS_INSETS = new Insets(0, 0, 0, 15);
+    private static final Insets MEMORY_LABELS_INSETS = new Insets(0, 15, 0, 15);
 
     /**
      * Shows or hides memory panel.
      *
-     * @param memory      model of memory.
-     * @param memoryPanel memory panel that should be shown.
-     * @param block       invisible block for other buttons in calculator.
+     * @param memoryAnchorPane memory panel that should be shown or hided.
+     * @param memoryPanel      memory panel that contains labels.
+     * @param block            invisible block for other buttons in calculator.
+     * @param memory           model of memory.
      */
-    public static void showOrHideMemoryPanel(AnchorPane memoryPanel, AnchorPane block, Memory memory) {
-        memoryPanel.setVisible(!memoryPanel.isVisible());
+    public static void showOrHideMemoryPanel(AnchorPane memoryAnchorPane, AnchorPane memoryPanel, AnchorPane block,
+                                             Memory memory) {
+        memoryAnchorPane.setVisible(!memoryAnchorPane.isVisible());
         block.setVisible(!block.isVisible());
 
-        if (memoryPanel.isVisible()) {
+        if (memoryAnchorPane.isVisible()) {
             updateMemoryLabels(memory, memoryPanel);
         }
     }
@@ -68,18 +70,6 @@ public class ViewFormatter {
     }
 
     /**
-     * Disables or enables buttons, passed as args.
-     *
-     * @param flag    true for disabling and false for enabling.
-     * @param buttons buttons that should change their disability.
-     */
-    public static void setButtonsDisability(boolean flag, Button... buttons) {
-        for (Button button : buttons) {
-            button.setDisable(flag);
-        }
-    }
-
-    /**
      * Creates memory labels for each memory cell.
      *
      * @param memory      model of memory.
@@ -88,17 +78,31 @@ public class ViewFormatter {
     private static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel) {
         Stack<BigDecimal> store = memory.getStore();
 
-        memoryPanel.getChildren().removeAll(memoryPanel.getChildren());
+        if (!store.isEmpty()) {
+            memoryPanel.getChildren().removeAll(memoryPanel.getChildren());
 
-        double layoutY = MEMORY_LABELS_LAYOUT;
+            double layoutY = MEMORY_LABELS_LAYOUT;
 
-        for (int i = 0; i < store.size(); i++) {
-            Label label = new Label();
-            label.setText(store.elementAt(store.size() - i - 1).toString());
-            configureMemoryLabel(label, memoryPanel, layoutY);
+            for (int i = 0; i < store.size(); i++) {
+                Label label = new Label();
+                label.setText(store.elementAt(store.size() - i - 1).toString());
+                configureMemoryLabel(label, memoryPanel, layoutY);
 
-            memoryPanel.getChildren().add(label);
-            layoutY += MEMORY_LABELS_HEIGHT + MEMORY_LABELS_LAYOUT;
+                memoryPanel.getChildren().add(label);
+                layoutY += MEMORY_LABELS_HEIGHT + MEMORY_LABELS_LAYOUT;
+            }
+        }
+    }
+
+    /**
+     * Disables or enables buttons, passed as args.
+     *
+     * @param flag    true for disabling and false for enabling.
+     * @param buttons buttons that should change their disability.
+     */
+    public static void setButtonsDisability(boolean flag, Button... buttons) {
+        for (Button button : buttons) {
+            button.setDisable(flag);
         }
     }
 

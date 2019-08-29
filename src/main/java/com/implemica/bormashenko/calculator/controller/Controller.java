@@ -6,7 +6,6 @@ import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
-import com.implemica.bormashenko.calculator.view.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,7 +46,7 @@ public class Controller implements Initializable {
      * Application's anchor panes used in controller.
      */
     @FXML
-    private AnchorPane memoryAnchorPane, memoryBlock, navigationBlock, aboutPanel;
+    private AnchorPane memoryAnchorPane, memoryPanel, memoryBlock, navigationBlock, aboutPanel;
 
     /**
      * Application's scroll panes used in controller.
@@ -152,8 +151,6 @@ public class Controller implements Initializable {
         }
 
         screen.setText(NumberFormatter.appendDigit(number, digit));
-
-
 
         if (isPercentPressed || isUnaryOperationPressed) {
             equation.setText(EMPTY_STRING);
@@ -381,7 +378,7 @@ public class Controller implements Initializable {
      * Shows memory.
      */
     public void memoryShowOperation() {
-        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryBlock, memory);
+        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
     }
 
     /**
