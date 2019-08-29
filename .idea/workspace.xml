@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
@@ -196,12 +200,12 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
       <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" />
       <item itemvalue="JUnit.NumberFormatterTest" />
       <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
-      <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.tests in Win10Calc" />
     </list>
     <recent_temporary>
@@ -639,29 +643,29 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Win10Calc$view_in_Win10Calc.ic" NAME="view in Win10Calc Coverage Results" MODIFIED="1566999387518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$CalculationModelTest.ic" NAME="CalculationModelTest Coverage Results" MODIFIED="1566385063562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$NumberFormatterTest.ic" NAME="NumberFormatterTest Coverage Results" MODIFIED="1567081388430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.controller.util.NumberFormatter</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_checkColorTests.ic" NAME="ViewTest.checkColorTests Coverage Results" MODIFIED="1566595570493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_allTests.ic" NAME="ViewTest.allTests Coverage Results" MODIFIED="1566999141724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>view.tests.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$Model_in_Win10Calc.ic" NAME="Model in Win10Calc Coverage Results" MODIFIED="1566389321992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$MemoryModelTest.ic" NAME="MemoryModelTest Coverage Results" MODIFIED="1566384965449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>Model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$MemoryModelTest.exec" NAME="MemoryModelTest Coverage Results" MODIFIED="1566387259477" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="jacoco" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Win10Calc$view_in_Win10Calc.ic" NAME="view in Win10Calc Coverage Results" MODIFIED="1566999387518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_checkColorTests.ic" NAME="ViewTest.checkColorTests Coverage Results" MODIFIED="1566595570493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Win10Calc$CalculationModelTest.ic" NAME="CalculationModelTest Coverage Results" MODIFIED="1566385063562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Win10Calc$Model_in_Win10Calc.ic" NAME="Model in Win10Calc Coverage Results" MODIFIED="1566389321992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.implemica.bormashenko.calculator.model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Win10Calc$NumberFormatterTest.ic" NAME="NumberFormatterTest Coverage Results" MODIFIED="1567081388430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.implemica.bormashenko.calculator.controller.util.NumberFormatter</FILTER>
     </SUITE>
   </component>
 </project>

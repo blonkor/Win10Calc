@@ -130,7 +130,7 @@ public class View implements Serializable {
         //equation label length listener
         Label equation = (Label) scene.lookup(EQUATION_LABEL_ID);
         EquationLabelLengthListener equationLabelLengthListener = new EquationLabelLengthListener(scene);
-        equation.textProperty().addListener(equationLabelLengthListener);
+        //equation.textProperty().addListener(equationLabelLengthListener);
         scene.widthProperty().addListener(equationLabelLengthListener);
     }
 }

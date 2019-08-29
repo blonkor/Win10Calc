@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -45,7 +46,7 @@ public class Controller implements Initializable {
      * Application's scroll pane.
      */
     @FXML
-    private ScrollPane navigationPanel;
+    private ScrollPane navigationPanel, equationScroll;
 
     /**
      * Application's anchor pane.
@@ -197,7 +198,7 @@ public class Controller implements Initializable {
     }
 
     public void moveEquationLeft() {
-        ViewFormatter.moveEquationLeft(equation, leftArrow, rightArrow);
+        //equationScroll.setHvalue(equationScroll.getHvalue() + 0.5);
     }
 
     public void moveEquationRight() {

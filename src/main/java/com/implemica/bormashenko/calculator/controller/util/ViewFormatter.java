@@ -44,7 +44,7 @@ public class ViewFormatter {
     /**
      * @todo
      */
-    public static void moveEquationLeft(Label equation, Button leftArrow, Button rightArrow) {
+    public static void moveEquationLeft(String equationText, Label equation, Button leftArrow, Button rightArrow) {
         rightArrow.setVisible(true);
 
         Text text = new Text(equation.getText());

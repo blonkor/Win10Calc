@@ -67,10 +67,10 @@
             </styleClass>
         </Button>
     </HBox>
-    <TextFlow layoutX="42.0" layoutY="32.0" prefHeight="30.0" prefWidth="77.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="37.0">
+    <TextFlow layoutX="42.0" layoutY="32.0" prefHeight="30.0" prefWidth="77.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="39.0">
         <Label fx:id="type" contentDisplay="CENTER" text="Standard">
             <font>
-                <Font name="Segoe UI Semibold" size="20.0" />
+                <Font size="18.0" />
             </font>
         </Label>
     </TextFlow>
@@ -403,16 +403,15 @@
             </ScrollPane>
         </AnchorPane>
     </GridPane>
-    <HBox alignment="TOP_RIGHT" fillHeight="false" layoutY="83.0" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefWidth="320.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
-        <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" textOverrun="CLIP">
-            <HBox.margin>
-                <Insets right="15.0" />
-            </HBox.margin>
-            <font>
-                <Font name="Segoe UI Semilight" size="14.0" />
-            </font>
-        </Label>
-    </HBox>
+   <ScrollPane fx:id="equationScroll" hbarPolicy="NEVER" layoutX="2.0" layoutY="74.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefWidth="318.0" styleClass="scroll_pane_equation" vbarPolicy="NEVER" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
+      <content>
+           <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" textFill="#5b5b5b" textOverrun="CLIP">
+               <font>
+                   <Font name="Segoe UI Semilight" size="14.0" />
+               </font>
+           </Label>
+      </content>
+   </ScrollPane>
     <AnchorPane fx:id="memoryBlock" maxHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#memoryShowOperation" prefHeight="163.0" prefWidth="322.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
     <AnchorPane fx:id="navigationBlock" onMouseClicked="#showNavigationPanel" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
     <AnchorPane fx:id="aboutPanel" layoutY="427.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="257.0" styleClass="gray_background" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0">

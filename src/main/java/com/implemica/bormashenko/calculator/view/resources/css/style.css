@@ -9,11 +9,7 @@
 }
 
 /*setting up background color */
-.scroll_pane_navigation, .scroll_pane_memory {
-    -fx-background-color: transparent;
-}
-
-.border_panes {
+.scroll_pane_navigation, .scroll_pane_memory, .scroll_pane_equation {
     -fx-background-color: transparent;
 }
 
@@ -31,7 +27,7 @@
 }
 
 .gray_background, .gray_background_on_hover:hover,
-.scroll_pane_navigation .scroll-bar  {
+.scroll_pane_navigation .scroll-bar {
     -fx-background-color: #e6e6e6;
 }
 
@@ -137,7 +133,7 @@
     -fx-text-fill: #333333;
 }
 
-/*scroll pane*/
+/*scroll panes*/
 .scroll_pane_navigation .scroll-bar,
 .scroll_pane_memory .scroll-bar {
     -fx-padding: 3;
@@ -151,6 +147,10 @@
 
 .increment-arrow, .decrement-arrow {
     -fx-shape: " ";
+}
+
+.scroll_pane_equation {
+    -fx-background: transparent;
 }
 
 /* tooltip */
