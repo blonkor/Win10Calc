@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -226,13 +227,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Expected result for model tests for multiply operation corrected.">
-      <created>1565867581960</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1565867581960</updated>
     </task>
     <task id="LOCAL-00042" summary="Tests for model for binary operations completed. Several bug fixes with divide operation and validation in model.">
       <created>1566164623561</created>
@@ -570,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567081349718</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Code refactoring for NumberFormatter.">
+      <created>1567083465544</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1567083465544</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -604,7 +605,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for text on buttons and controls created." />
     <MESSAGE value="Tests for size and layouts on buttons and labels created." />
     <MESSAGE value="Tests for size and layouts for buttons and labels created." />
     <MESSAGE value="Several tests for resizing window created." />
@@ -629,7 +629,8 @@
     <MESSAGE value="Several tests cases added. Bug fix with converting big decimal to string operation with engineer number." />
     <MESSAGE value="Tests for round operation created." />
     <MESSAGE value="Bug fixes in round operation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes in round operation." />
+    <MESSAGE value="Code refactoring for NumberFormatter." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for NumberFormatter." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

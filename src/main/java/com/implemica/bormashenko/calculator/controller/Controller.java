@@ -190,7 +190,7 @@ public class Controller implements Initializable {
      * Opens or closes navigation bar.
      */
     public void showNavigationPanel() {
-        ViewFormatter.showNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
+        ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
     }
 
     public void moveEquationLeft() {
@@ -319,10 +319,9 @@ public class Controller implements Initializable {
      * Shows memory.
      */
     public void memoryShowOperation() {
-        ViewFormatter.showMemoryPanel(memoryAnchorPane, memoryBlock,
+        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryBlock,
                 new Button[]{memoryAdd, memorySubtract, memoryStore},
-                new Button[]{memoryClear, memoryRecall},
-                memory.getStore().isEmpty());
+                new Button[]{memoryClear, memoryRecall});
     }
 
     /**
