@@ -36,9 +36,14 @@ public class NumberFormatter {
     private static final String ZERO = "0";
 
     /**
-     * Engineer number symbol.
+     * Engineer number symbol in calculator.
      */
-    private static final String ENGINEER_SYMBOL = "e";
+    private static final String CALC_ENGINEER_SYMBOL = "e";
+
+    /**
+     * Engineer number symbol in big decimal.
+     */
+    private static final String BIG_DEC_ENGINEER_SYMBOL = "E";
 
     /**
      * Maximal amount of digit symbols that can be shown on screen.
@@ -138,7 +143,8 @@ public class NumberFormatter {
      * @return string contains big decimal number separated with commas.
      */
     public static String bigDecimalToScreen(BigDecimal number) {
-        return separateNumberWithCommas(number.toString());
+        return separateNumberWithCommas(number.toString().replaceAll(
+                BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL));
     }
 
     /**
@@ -158,7 +164,7 @@ public class NumberFormatter {
      * @return true if number contains engineer symbol or false otherwise.
      */
     private static boolean isEngineerNumber(String number) {
-        return number.contains(ENGINEER_SYMBOL);
+        return number.contains(CALC_ENGINEER_SYMBOL);
     }
 
     /**
