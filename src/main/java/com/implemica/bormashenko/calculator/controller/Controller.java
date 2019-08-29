@@ -156,12 +156,8 @@ public class Controller implements Initializable {
             isFirstCalculated = false;
         }
 
-        isBinaryOperationPressed = false;
-        isUnaryOperationPressed = false;
-        isPercentPressed = false;
-        isEqualsPressed = false;
-        isError = false;
-        isEditableScreen = true;
+        setFlags(true, false, false, false,
+                isFirstCalculated, false, false);
     }
 
     /**
@@ -178,6 +174,17 @@ public class Controller implements Initializable {
         }
 
         screen.setText(NumberFormatter.appendDot(number));
+
+        if (isPercentPressed || isUnaryOperationPressed) {
+            equation.setText(EMPTY_STRING);
+        }
+
+        if (isEqualsPressed || isUnaryOperationPressed) {
+            isFirstCalculated = false;
+        }
+
+        setFlags(true, false, false, false,
+                isFirstCalculated, false, false);
     }
 
     /**
@@ -417,11 +424,8 @@ public class Controller implements Initializable {
     public void clearText() {
         screen.setText(ZERO);
 
-        isBinaryOperationPressed = false;
-        isUnaryOperationPressed = false;
-        isPercentPressed = false;
-        isEqualsPressed = false;
-        isEditableScreen = true;
+        setFlags(true, false, false, false,
+                isFirstCalculated, false, false);
     }
 
     /**
@@ -432,12 +436,8 @@ public class Controller implements Initializable {
         calculation.resetAll();
         equation.setText(EMPTY_STRING);
 
-        isBinaryOperationPressed = false;
-        isUnaryOperationPressed = false;
-        isPercentPressed = false;
-        isEqualsPressed = false;
-        isFirstCalculated = false;
-        isEditableScreen = true;
+        setFlags(true, false, false, false,
+                false, false, false);
     }
 
     /**
@@ -542,11 +542,8 @@ public class Controller implements Initializable {
 
                 screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
 
-                isBinaryOperationPressed = false;
-                isUnaryOperationPressed = false;
-                isPercentPressed = false;
-                isEqualsPressed = true;
-                isFirstCalculated = true;
+                setFlags(false, false, false, true,
+                        true, false, false);
             }
 
             equation.setText(EMPTY_STRING);
@@ -624,12 +621,9 @@ public class Controller implements Initializable {
                 equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
             }
 
-            isBinaryOperationPressed = true;
-            isUnaryOperationPressed = false;
-            isPercentPressed = false;
-            isEqualsPressed = false;
-            isFirstCalculated = true;
-            isEditableScreen = false;
+            setFlags(false, true, false, false,
+                    true, false, false);
+
         } catch (ArithmeticException e) {
             exceptionThrown(e.getMessage());
         }
@@ -710,13 +704,8 @@ public class Controller implements Initializable {
                         NumberFormatter.bigDecimalToScreen(NumberFormatter.round(number)) + SPACE + CLOSING_BRACKET);
             }
 
-
-            isBinaryOperationPressed = false;
-            isUnaryOperationPressed = true;
-            isPercentPressed = false;
-            isEqualsPressed = false;
-            isFirstCalculated = true;
-            isEditableScreen = false;
+            setFlags(false, false, true, false,
+                    true, false, false);
         } catch (ArithmeticException e) {
             exceptionThrown(e.getMessage());
         }
@@ -758,12 +747,8 @@ public class Controller implements Initializable {
             equation.setText(equation.getText() + SPACE + NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
         }
 
-        isBinaryOperationPressed = false;
-        isUnaryOperationPressed = false;
-        isPercentPressed = true;
-        isEqualsPressed = false;
-        isFirstCalculated = true;
-        isEditableScreen = false;
+        setFlags(false, false, false, false,
+                true, true, false);
     }
 
     private void exceptionThrown(String message) {
@@ -775,6 +760,30 @@ public class Controller implements Initializable {
         };
         ViewFormatter.setButtonsDisability(true, buttonsToDisable);
 
-        isError = true;
+        setFlags(false, false, false, false,
+                false, false, true);
+    }
+
+    /**
+     * Sets flags for boolean fields of controller.
+     *
+     * @param isEditableScreen         true if digit should be appended to screen number.
+     * @param isBinaryOperationPressed true if binary operation was just pressed.
+     * @param isUnaryOperationPressed  true if unary operation was just pressed.
+     * @param isEqualsPressed          true if equals was just pressed.
+     * @param isFirstCalculated        true if first operand for model is calculated.
+     * @param isPercentPressed         true if percent was just pressed.
+     * @param isError                  true if is error was just happened.
+     */
+    private void setFlags(boolean isEditableScreen, boolean isBinaryOperationPressed, boolean isUnaryOperationPressed,
+                          boolean isEqualsPressed, boolean isFirstCalculated, boolean isPercentPressed,
+                          boolean isError) {
+        this.isEditableScreen = isEditableScreen;
+        this.isBinaryOperationPressed = isBinaryOperationPressed;
+        this.isUnaryOperationPressed = isUnaryOperationPressed;
+        this.isEqualsPressed = isEqualsPressed;
+        this.isFirstCalculated = isFirstCalculated;
+        this.isPercentPressed = isPercentPressed;
+        this.isError = isError;
     }
 }
