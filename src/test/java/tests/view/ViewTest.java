@@ -50,7 +50,7 @@ public class ViewTest extends RobotControl {
         textTests();
         resizeTests();
         moveWindowTests();
-        //resizeFontTests();
+        resizeFontTests();
         visibleArrowsTests();
         expandTest();
         hideTest();
@@ -2132,8 +2132,8 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1234567890.012", DEFAULT_WIDTH, 43);
         checkResizeFont("1234567890.0123", DEFAULT_WIDTH, 42);
         checkResizeFont("1234567890.01234", DEFAULT_WIDTH, 41);
-        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH, 40);
-        checkResizeFont("-9999999999999999", DEFAULT_WIDTH, 39);
+        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH, 40);
+        checkResizeFont("~9999999999999999", DEFAULT_WIDTH, 39);
 
         checkResizeFont("1", DEFAULT_WIDTH + 50, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 50, 47);
@@ -2150,8 +2150,8 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1234567890.012", DEFAULT_WIDTH + 50, 43);
         checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 50, 42);
         checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 50, 41);
-        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 50, 40);
-        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 50, 39);
+        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH + 50, 40);
+        checkResizeFont("~9999999999999999", DEFAULT_WIDTH + 50, 39);
 
         checkResizeFont("1", DEFAULT_WIDTH + 100, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 100, 47);
@@ -2168,8 +2168,8 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1234567890.012", DEFAULT_WIDTH + 100, 43);
         checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 100, 42);
         checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 100, 41);
-        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 100, 40);
-        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 100, 39);
+        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH + 100, 40);
+        checkResizeFont("~9999999999999999", DEFAULT_WIDTH + 100, 39);
 
         checkResizeFont("1", DEFAULT_WIDTH + 250, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 250, 47);
@@ -2186,8 +2186,8 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1234567890.012", DEFAULT_WIDTH + 250, 43);
         checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 250, 42);
         checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 250, 41);
-        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 250, 40);
-        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 250, 39);
+        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH + 250, 40);
+        checkResizeFont("~9999999999999999", DEFAULT_WIDTH + 250, 39);
 
         checkResizeFont("1", DEFAULT_WIDTH + 500, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 500, 47);
@@ -2204,8 +2204,8 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1234567890.012", DEFAULT_WIDTH + 500, 43);
         checkResizeFont("1234567890.0123", DEFAULT_WIDTH + 500, 42);
         checkResizeFont("1234567890.01234", DEFAULT_WIDTH + 500, 41);
-        checkResizeFont("-1234567890.01234", DEFAULT_WIDTH + 500, 40);
-        checkResizeFont("-9999999999999999", DEFAULT_WIDTH + 500, 39);
+        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH + 500, 40);
+        checkResizeFont("~9999999999999999", DEFAULT_WIDTH + 500, 39);
     }
 
     /**
@@ -2401,8 +2401,8 @@ public class ViewTest extends RobotControl {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, 0);
         Labeled labeled = getLabeledBySelector(SCREEN_LABEL_ID);
 
-        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
-        typeText(text);
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons(text);
         dragFromTo(DEFAULT_WIDTH - 1, DEFAULT_HEIGHT - 1, dragToX, DEFAULT_HEIGHT);
 
         assertEquals(expectedFontSize, labeled.getFont().getSize());

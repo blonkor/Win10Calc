@@ -528,34 +528,53 @@ public class RobotControl extends GuiTest {
      * @param text text to type by clicking buttons.
      * @throws NullPointerException if required text is not a number.
      */
-    protected void typeText(String text) {
+    protected void clickButtons(String text) {
         for (int i = 0; i < text.length(); i++) {
             String selector = null;
+            char charAtI = text.charAt(i);
 
-            if (text.charAt(i) == '0') {
+            if (charAtI == '0') {
                 selector = ZERO_ID;
-            } else if (text.charAt(i) == '1') {
+            } else if (charAtI == '1') {
                 selector = ONE_ID;
-            } else if (text.charAt(i) == '2') {
+            } else if (charAtI == '2') {
                 selector = TWO_ID;
-            } else if (text.charAt(i) == '3') {
+            } else if (charAtI == '3') {
                 selector = THREE_ID;
-            } else if (text.charAt(i) == '4') {
+            } else if (charAtI == '4') {
                 selector = FOUR_ID;
-            } else if (text.charAt(i) == '5') {
+            } else if (charAtI == '5') {
                 selector = FIVE_ID;
-            } else if (text.charAt(i) == '6') {
+            } else if (charAtI == '6') {
                 selector = SIX_ID;
-            } else if (text.charAt(i) == '7') {
+            } else if (charAtI == '7') {
                 selector = SEVEN_ID;
-            } else if (text.charAt(i) == '8') {
+            } else if (charAtI == '8') {
                 selector = EIGHT_ID;
-            } else if (text.charAt(i) == '9') {
+            } else if (charAtI == '9') {
                 selector = NINE_ID;
-            } else if (text.charAt(i) == '.') {
+            } else if (charAtI == '.') {
                 selector = DOT_ID;
-            } else if (text.charAt(i) == '-') {
+            } else if (charAtI == '+') {
+                selector = ADD_ID;
+            } else if (charAtI == '-') {
+                selector = SUBTRACT_ID;
+            } else if (charAtI == '*') {
+                selector = MULTIPLY_ID;
+            } else if (charAtI == '/') {
+                selector = DIVIDE_ID;
+            } else if (charAtI == '=') {
+                selector = EQUALS_ID;
+            } else if (charAtI == '%') {
+                selector = PERCENT_ID;
+            } else if (charAtI == '~') {
                 selector = NEGATE_ID;
+            } else if (charAtI == '^') {
+                selector = SQR_ID;
+            } else if (charAtI == '@') {
+                selector = SQRT_ID;
+            } else if (charAtI == ';') {
+                selector = INVERSE_ID;
             }
 
             if (selector == null) {
