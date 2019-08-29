@@ -143,8 +143,20 @@ public class NumberFormatter {
      * @return string contains big decimal number separated with commas.
      */
     public static String bigDecimalToScreen(BigDecimal number) {
-        return separateNumberWithCommas(number.toString().replaceAll(
-                BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL));
+        String stringNumber = number.toString();
+
+        if (stringNumber.contains(BIG_DEC_ENGINEER_SYMBOL)) {
+
+            if (Character.toString(stringNumber.charAt(1)).equals(BIG_DEC_ENGINEER_SYMBOL) ||
+                    (Character.toString(stringNumber.charAt(2)).equals(BIG_DEC_ENGINEER_SYMBOL) &&
+                            isNegativeNumber(stringNumber))) {
+                stringNumber = stringNumber.replaceAll(BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL);
+            } else {
+                stringNumber = stringNumber.replaceAll(BIG_DEC_ENGINEER_SYMBOL, CALC_ENGINEER_SYMBOL);
+            }
+        }
+
+        return separateNumberWithCommas(stringNumber);
     }
 
     /**

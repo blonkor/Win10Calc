@@ -392,6 +392,20 @@ public class NumberFormatterTest {
         checkAppendDot("-6.e-723", "-6.e-723");
         checkAppendDot("-5.e-17", "-5.e-17");
         checkAppendDot("-2.e-79", "-2.e-79");
+
+        checkAppendDot("6.21e+24", "6.21e+24");
+        checkAppendDot("3.762e+789", "3.762e+789");
+        checkAppendDot("1.627e+25", "1.627e+25");
+        checkAppendDot("7.831e-19", "7.831e-19");
+        checkAppendDot("9.1346e-3216", "9.1346e-3216");
+        checkAppendDot("1.143e-1446", "1.143e-1446");
+
+        checkAppendDot("-8.09e+74", "-8.09e+74");
+        checkAppendDot("-6.863e+835", "-6.863e+835");
+        checkAppendDot("-4.325e+7267", "-4.325e+7267");
+        checkAppendDot("-2.13e-874", "-2.13e-874");
+        checkAppendDot("-2.126e-1353", "-2.126e-1353");
+        checkAppendDot("-1.73e-735", "-1.73e-735");
     }
 
     /**
@@ -518,6 +532,20 @@ public class NumberFormatterTest {
         checkDeleteLastChar("-8.e-123", "-8.e-123");
         checkDeleteLastChar("-3.e-85", "-3.e-85");
         checkDeleteLastChar("-5.e-29", "-5.e-29");
+
+        checkDeleteLastChar("6.21e+24", "6.21e+24");
+        checkDeleteLastChar("3.762e+789", "3.762e+789");
+        checkDeleteLastChar("1.627e+25", "1.627e+25");
+        checkDeleteLastChar("7.831e-19", "7.831e-19");
+        checkDeleteLastChar("9.1346e-3216", "9.1346e-3216");
+        checkDeleteLastChar("1.143e-1446", "1.143e-1446");
+
+        checkDeleteLastChar("-8.09e+74", "-8.09e+74");
+        checkDeleteLastChar("-6.863e+835", "-6.863e+835");
+        checkDeleteLastChar("-4.325e+7267", "-4.325e+7267");
+        checkDeleteLastChar("-2.13e-874", "-2.13e-874");
+        checkDeleteLastChar("-2.126e-1353", "-2.126e-1353");
+        checkDeleteLastChar("-1.73e-735", "-1.73e-735");
     }
 
     /**
@@ -607,6 +635,20 @@ public class NumberFormatterTest {
         checkScreenToBigDecimalAndViceVersa("-6.e-723", new BigDecimal("-6.e-723"));
         checkScreenToBigDecimalAndViceVersa("-5.e-17", new BigDecimal("-5.e-17"));
         checkScreenToBigDecimalAndViceVersa("-2.e-79", new BigDecimal("-2.e-79"));
+
+        checkScreenToBigDecimalAndViceVersa("6.21e+24", new BigDecimal("6.21e+24"));
+        checkScreenToBigDecimalAndViceVersa("3.762e+789", new BigDecimal("3.762e+789"));
+        checkScreenToBigDecimalAndViceVersa("1.627e+25", new BigDecimal("1.627e+25"));
+        checkScreenToBigDecimalAndViceVersa("7.831e-19", new BigDecimal("7.831e-19"));
+        checkScreenToBigDecimalAndViceVersa("9.1346e-3216", new BigDecimal("9.1346e-3216"));
+        checkScreenToBigDecimalAndViceVersa("1.143e-1446", new BigDecimal("1.143e-1446"));
+
+        checkScreenToBigDecimalAndViceVersa("-8.09e+74", new BigDecimal("-8.09e+74"));
+        checkScreenToBigDecimalAndViceVersa("-6.863e+835", new BigDecimal("-6.863e+835"));
+        checkScreenToBigDecimalAndViceVersa("-4.325e+7267", new BigDecimal("-4.325e+7267"));
+        checkScreenToBigDecimalAndViceVersa("-2.13e-874", new BigDecimal("-2.13e-874"));
+        checkScreenToBigDecimalAndViceVersa("-2.126e-1353", new BigDecimal("-2.126e-1353"));
+        checkScreenToBigDecimalAndViceVersa("-1.73e-735", new BigDecimal("-1.73e-735"));
     }
 
     /**
