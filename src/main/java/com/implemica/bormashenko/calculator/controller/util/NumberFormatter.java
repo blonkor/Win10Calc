@@ -1,6 +1,7 @@
 package com.implemica.bormashenko.calculator.controller.util;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 
 /**
@@ -51,7 +52,7 @@ public class NumberFormatter {
     private final static int MAX_SYMBOLS = 16;
 
     /**
-     * Precision for rounding result, calculated in tests.model.
+     * Precision for rounding result, calculated in model.
      */
     private final static MathContext PRECISION_TO_SHOW = new MathContext(MAX_SYMBOLS);
 
@@ -166,7 +167,47 @@ public class NumberFormatter {
      * @return rounded number.
      */
     public static BigDecimal round(BigDecimal bigDecimal) {
-        return bigDecimal.round(PRECISION_TO_SHOW);
+        return stripZeros(bigDecimal.round(PRECISION_TO_SHOW));
+    }
+
+    /**
+     * Strips trailing zeros for decimal numbers or converts engineer numbers.
+     *
+     * @param bigDecimal number to edit.
+     * @return number with stripped zeros.
+     */
+    private static BigDecimal stripZeros(BigDecimal bigDecimal) {
+        String stripped = bigDecimal.toString();
+
+        if (isEngineerNumber(stripped)) {
+            return convert(new BigDecimal(stripped));
+        } else {
+            stripped = bigDecimal.toPlainString();
+        }
+
+        if (isDecimalNumber(stripped)) {
+            while (stripped.endsWith(ZERO) && !stripped.equals(ZERO)) {
+                stripped = stripped.substring(0, stripped.length() - 1);
+            }
+
+            return new BigDecimal(stripped);
+        } else {
+            return bigDecimal;
+        }
+    }
+
+    /**
+     * Converts engineer number to plain string if it can be shown on screen.
+     *
+     * @param number number to edit.
+     * @return edited number.
+     */
+    private static BigDecimal convert(BigDecimal number) {
+        if (Math.abs(number.precision()) + Math.abs(number.scale()) <= MAX_SYMBOLS) {
+            return new BigDecimal(number.toPlainString());
+        } else {
+            return number;
+        }
     }
 
     /**
@@ -216,7 +257,7 @@ public class NumberFormatter {
      * @return true if number contains engineer symbol or false otherwise.
      */
     private static boolean isEngineerNumber(String number) {
-        return number.contains(CALC_ENGINEER_SYMBOL);
+        return number.contains(CALC_ENGINEER_SYMBOL) || number.contains(BIG_DEC_ENGINEER_SYMBOL);
     }
 
     /**
