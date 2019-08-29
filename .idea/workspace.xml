@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ViewFormatterTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/ViewFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Launcher">
+  <component name="RunManager" selected="JUnit.ViewFormatterTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -118,7 +115,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NumberFormatterTest.roundTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ViewFormatterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -127,14 +124,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
-      <option name="METHOD_NAME" value="roundTests" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ViewFormatterTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ViewFormatterTest.showOrHideMemoryPanelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -143,8 +139,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
-      <option name="METHOD_NAME" value="screenToBigDecimalTestsAndViceVersa" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ViewFormatterTest" />
+      <option name="METHOD_NAME" value="showOrHideMemoryPanelTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -202,18 +198,18 @@
       <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" />
       <item itemvalue="JUnit.NumberFormatterTest" />
-      <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
       <item itemvalue="JUnit.tests in Win10Calc" />
+      <item itemvalue="JUnit.ViewFormatterTest.showOrHideMemoryPanelTest" />
+      <item itemvalue="JUnit.ViewFormatterTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ViewFormatterTest" />
+        <item itemvalue="JUnit.ViewFormatterTest.showOrHideMemoryPanelTest" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.tests in Win10Calc" />
         <item itemvalue="JUnit.NumberFormatterTest" />
-        <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
-        <item itemvalue="JUnit.NumberFormatterTest.screenToBigDecimalTestsAndViceVersa" />
       </list>
     </recent_temporary>
   </component>
@@ -227,13 +223,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Go-to-office-commit">
-      <created>1566300262081</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1566300262081</updated>
     </task>
     <task id="LOCAL-00047" summary="Tests for memory model completed.">
       <created>1566387306880</created>
@@ -571,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567099073670</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="Methods for moving equation label created.">
+      <created>1567107748684</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1567107748685</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -605,7 +601,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for resizing for sides created." />
     <MESSAGE value="Tests for moving window created." />
     <MESSAGE value="Serialization removed. Size and layout tests removed." />
     <MESSAGE value="Tests for resize font in screen label created, but controller should be done to test this." />
@@ -630,7 +625,8 @@
     <MESSAGE value="View changed." />
     <MESSAGE value="Tests for view updated." />
     <MESSAGE value="Added scroll pane for moving equation label." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added scroll pane for moving equation label." />
+    <MESSAGE value="Methods for moving equation label created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Methods for moving equation label created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

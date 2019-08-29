@@ -363,9 +363,7 @@ public class Controller implements Initializable {
      * Shows memory.
      */
     public void memoryShowOperation() {
-        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryBlock,
-                new Button[]{memoryAdd, memorySubtract, memoryStore},
-                new Button[]{memoryClear, memoryRecall});
+        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryBlock, memory);
     }
 
     /**
@@ -373,7 +371,6 @@ public class Controller implements Initializable {
      */
     public void memoryClearOperation() {
         memory.clearMemory();
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -393,7 +390,6 @@ public class Controller implements Initializable {
     public void memoryAddOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.addToMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -403,7 +399,6 @@ public class Controller implements Initializable {
     public void memorySubtractOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.subtractFromMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
@@ -413,7 +408,6 @@ public class Controller implements Initializable {
     public void memoryStoreOperation() {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.storeToMemory(number);
-        ViewFormatter.updateMemoryLabels(memory, memoryPanel);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
