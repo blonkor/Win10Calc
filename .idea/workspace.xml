@@ -4,6 +4,7 @@
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/controller/Controller.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +82,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ViewFormatterTest">
+  <component name="RunManager" selected="Application.Launcher">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -202,9 +203,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ViewFormatterTest" />
         <item itemvalue="JUnit.ViewFormatterTest.showOrHideMemoryPanelTest" />
-        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.tests in Win10Calc" />
         <item itemvalue="JUnit.NumberFormatterTest" />
       </list>
@@ -220,13 +221,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Bug fixes and refactoring for calculation model.">
-      <created>1566389188526</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1566389188526</updated>
     </task>
     <task id="LOCAL-00050" summary="Overflow exception while validation is failed for recall operation for memory is now supported.">
       <created>1566389244269</created>
@@ -564,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567110640118</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Code refactoring for controller for setting up boolean states.">
+      <created>1567111706845</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1567111706845</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -598,7 +599,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Serialization removed. Size and layout tests removed." />
     <MESSAGE value="Tests for resize font in screen label created, but controller should be done to test this." />
     <MESSAGE value="Tests for visibility of arrows created (but controller should be done for those tests)." />
     <MESSAGE value="Tests for hide and expand created." />
@@ -623,7 +623,8 @@
     <MESSAGE value="Methods for moving equation label created." />
     <MESSAGE value="Code refactoring for controller." />
     <MESSAGE value="Code refactoring for controller's fields." />
-    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for controller's fields." />
+    <MESSAGE value="Code refactoring for controller for setting up boolean states." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for controller for setting up boolean states." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

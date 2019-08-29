@@ -6,6 +6,7 @@ import com.implemica.bormashenko.calculator.model.Memory;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
 import com.implemica.bormashenko.calculator.model.Calculation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import com.implemica.bormashenko.calculator.view.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -146,7 +147,13 @@ public class Controller implements Initializable {
             number = EMPTY_STRING;
         }
 
+        if (isError) {
+            returnAfterError();
+        }
+
         screen.setText(NumberFormatter.appendDigit(number, digit));
+
+
 
         if (isPercentPressed || isUnaryOperationPressed) {
             equation.setText(EMPTY_STRING);
@@ -191,6 +198,10 @@ public class Controller implements Initializable {
      * Deletes last symbol in result screen if it is allowed.
      */
     public void backspace() {
+        if (isError) {
+            returnAfterError();
+        }
+
         if (isEditableScreen) {
             String number = screen.getText();
             screen.setText(NumberFormatter.deleteLastChar(number));
@@ -422,6 +433,10 @@ public class Controller implements Initializable {
      * Sets text in result screen to 0.
      */
     public void clearText() {
+        if (isError) {
+            returnAfterError();
+        }
+
         screen.setText(ZERO);
 
         setFlags(true, false, false, false,
@@ -432,6 +447,10 @@ public class Controller implements Initializable {
      * Sets text in result screen to 0.
      */
     public void clearAll() {
+        if (isError) {
+            returnAfterError();
+        }
+
         clearText();
         calculation.resetAll();
         equation.setText(EMPTY_STRING);
@@ -517,6 +536,10 @@ public class Controller implements Initializable {
      * @see Calculation
      */
     public void calculateResult() {
+        if (isError) {
+            returnAfterError();
+        }
+
         try {
             if (calculation.getBinaryOperation() != null) {
                 BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
@@ -549,7 +572,7 @@ public class Controller implements Initializable {
             equation.setText(EMPTY_STRING);
 
             isEditableScreen = false;
-        } catch (ArithmeticException e) {
+        } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
     }
@@ -624,7 +647,7 @@ public class Controller implements Initializable {
             setFlags(false, true, false, false,
                     true, false, false);
 
-        } catch (ArithmeticException e) {
+        } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
     }
@@ -706,7 +729,7 @@ public class Controller implements Initializable {
 
             setFlags(false, false, true, false,
                     true, false, false);
-        } catch (ArithmeticException e) {
+        } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
     }
@@ -762,6 +785,23 @@ public class Controller implements Initializable {
 
         setFlags(false, false, false, false,
                 false, false, true);
+    }
+
+    private void returnAfterError() {
+        screen.setText(ZERO);
+        equation.setText(EMPTY_STRING);
+
+        Button[] buttonsToEnable = {
+                memoryAdd, memorySubtract, memoryStore,
+                percent, sqrt, sqr, inverse, divide, multiply, subtract, add, negate, dot
+        };
+
+        Button[] memoryStandardDisabledButtons = {
+                memoryClear, memoryRecall, memoryShow
+        };
+
+        ViewFormatter.setButtonsDisability(false, buttonsToEnable);
+        ViewFormatter.setButtonsDisability(memory.getStore().isEmpty(), memoryStandardDisabledButtons);
     }
 
     /**
