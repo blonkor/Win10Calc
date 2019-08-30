@@ -14,10 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ControllerTest extends RobotControl {
 
     /**
-     * Tests for appending digits.
+     * Runs al tests
      */
     @Test
-    public void appendDigitTests() {
+    public void allTests() {
+        appendDigitTests();
+        appendDotTests();
+    }
+
+    /**
+     * Tests for appending digits.
+     */
+    private void appendDigitTests() {
         //can append
         {
             //without operations
@@ -207,8 +215,7 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for appending dot.
      */
-    @Test
-    public void appendDotTests() {
+    private void appendDotTests() {
         //can append
         {
             //without operations
