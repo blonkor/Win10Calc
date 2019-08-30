@@ -168,7 +168,7 @@ public class Controller implements Initializable {
      * Makes number in result screen decimal (if not decimal yet) if it is allowed.
      * Otherwise, sets "0." to result screen.
      */
-    public void makeDecimal() {
+    public void appendDot() {
         String number;
 
         if (isEditableScreen) {

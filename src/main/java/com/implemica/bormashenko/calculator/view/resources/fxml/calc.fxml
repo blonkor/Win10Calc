@@ -262,7 +262,7 @@
                 <Insets right="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="dot" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#makeDecimal" text="." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Button fx:id="dot" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#appendDot" text="." GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="dot" />
                 <String fx:value="very_light_gray_background" />
