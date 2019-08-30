@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Code refactoring for tests.">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +82,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.backspaceTests">
+  <component name="RunManager" selected="JUnit.ControllerTest.clearTests">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.implemica.bormashenko.calculator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -99,38 +113,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.appendDigitTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="appendDigitTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.appendDotTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="appendDotTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ControllerTest.backspaceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -142,6 +124,22 @@
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
       <option name="METHOD_NAME" value="backspaceTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.clearTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="clearTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -199,18 +197,18 @@
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
       <item itemvalue="JUnit.tests in Win10Calc" />
-      <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
-      <item itemvalue="JUnit.ControllerTest.appendDotTests" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.ControllerTest.backspaceTests" />
+      <item itemvalue="JUnit.ControllerTest.clearTests" />
+      <item itemvalue="Application.Launcher" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControllerTest.clearTests" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ControllerTest.backspaceTests" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.tests in Win10Calc" />
-        <item itemvalue="JUnit.ControllerTest.appendDotTests" />
-        <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
       </list>
     </recent_temporary>
   </component>
@@ -224,13 +222,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Test for view refactored. Added tests for arrow buttons.">
-      <created>1566595497863</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1566595497863</updated>
     </task>
     <task id="LOCAL-00062" summary="Created class for FxRobot methods for better code style. Added todo items in view tests.">
       <created>1566596513118</created>
@@ -568,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567169092046</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Code refactoring for tests and controller.">
+      <created>1567171319343</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1567171319343</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -602,7 +600,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Code refactoring." />
     <MESSAGE value="Several tests cases added. Bug fix with converting big decimal to string operation with engineer number." />
     <MESSAGE value="Tests for round operation created." />
     <MESSAGE value="Bug fixes in round operation." />
@@ -627,7 +624,8 @@
     <MESSAGE value="Editing JavaDocs." />
     <MESSAGE value="Tests for append dot created." />
     <MESSAGE value="Code refactoring for tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for tests." />
+    <MESSAGE value="Code refactoring for tests and controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code refactoring for tests and controller." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

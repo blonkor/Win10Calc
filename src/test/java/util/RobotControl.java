@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Window;
 import org.loadui.testfx.GuiTest;
@@ -493,13 +494,23 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Looks up for node by styleclass and selector.
+     * Looks up for node by selector.
      *
      * @param selector id of node.
      * @return node.
      */
     protected Node getNodeBySelector(String selector) {
         return robot.lookup(selector).query();
+    }
+
+    /**
+     * Looks up for scroll pane by selector.
+     *
+     * @param selector id of node.
+     * @return node.
+     */
+    protected ScrollPane getScrollPaneBySelector(String selector) {
+        return (ScrollPane)robot.lookup(selector).queryParent();
     }
 
     /**

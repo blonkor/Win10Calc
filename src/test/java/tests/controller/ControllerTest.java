@@ -1,7 +1,11 @@
 package tests.controller;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import org.junit.Test;
 import util.RobotControl;
+
+import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,6 +25,7 @@ public class ControllerTest extends RobotControl {
         appendDigitTests();
         appendDotTests();
         backspaceTests();
+        clearTests();
     }
 
     /**
@@ -93,8 +98,8 @@ public class ControllerTest extends RobotControl {
             checkTyped("765452452=13131331521325", "13,131,331,521,325");
 
             //after error
-            checkTyped("/0123", "123");
-            checkTyped("/08234629", "8,234,629");
+            checkTyped("/0=123", "123");
+            checkTyped("/0=8234629", "8,234,629");
 
             //after dot
             checkTyped("123.98714", "123.98714");
@@ -308,7 +313,7 @@ public class ControllerTest extends RobotControl {
             checkTyped("823526/24362=.", "0.");
 
             //after error
-            checkTyped("/0.", "0.");
+            checkTyped("/0=.", "0.");
             checkTyped("13/0.", "0.");
 
             //after backspace
@@ -449,7 +454,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("4121414=<", "4,121,414");
 
         //after error
-        checkTyped("/0<", "0");
+        checkTyped("/0=<", "0");
         checkTyped("13/0<", "0");
 
         //after backspace
@@ -475,7 +480,105 @@ public class ControllerTest extends RobotControl {
         checkTyped("<", "0");
     }
 
+    /**
+     * Tests for clear operations (clear text and clear all).
+     */
+    private void clearTests() {
 
+        //without operations
+        checkClear("");
+        checkClear("0");
+        checkClear("1");
+        checkClear("2");
+        checkClear("3");
+        checkClear("4");
+        checkClear("5");
+        checkClear("6");
+        checkClear("7");
+        checkClear("8");
+        checkClear("9");
+
+        checkClear("123");
+        checkClear("12312414515");
+
+        checkClear("1.23");
+        checkClear("12312.414515");
+
+        //negate
+        checkClear("123~");
+        checkClear("12312414515~");
+
+        //unary
+        checkClear("12^");
+        checkClear("12312@");
+        checkClear("3816298431299;");
+
+        //binary
+        checkClear("123+");
+        checkClear("1412912491264951-");
+        checkClear("3124152165315151*");
+        checkClear("15981759195871329571935791759175981/");
+
+        //percent
+        checkClear("12%");
+        checkClear("12312%");
+
+        //equals
+        checkClear("12=");
+        checkClear("12312=");
+
+        //backspace
+        checkClear("12<");
+        checkClear("12312<");
+
+        //after clear text
+        clickButtons("561235");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        checkClear("");
+
+        //after clear all
+        clickButtons("213");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        checkClear("");
+
+
+        //error
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("/=0");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("/=0");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons(";0");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons(";0");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("5~@");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("5~@");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
 
     /**
      * Checks that screen label has required text after clicking on buttons.
@@ -488,5 +591,31 @@ public class ControllerTest extends RobotControl {
         clickButtons(buttons);
 
         assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
+    }
+
+    /**
+     * Checks that text in screen label is cleared but not in equation label after clear text operation.
+     * Then checks that  text in screen label is cleared as well as in equation label after clear all operation.
+     *
+     * @param buttons buttons that should be clicked before clearing.
+     */
+    private void checkClear(String buttons) {
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+
+        Label screenLabel = (Label) getLabeledBySelector(SCREEN_LABEL_ID);
+        Label equationLabel = (Label) getLabeledBySelector(EQUATION_LABEL_ID);
+
+        clickButtons(buttons);
+        String expectedEquationText = equationLabel.getText();
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+
+        assertEquals("0", screenLabel.getText());
+        assertEquals(expectedEquationText, equationLabel.getText());
+
+        clickButtons(buttons);
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+
+        assertEquals("0", screenLabel.getText());
+        assertEquals("", equationLabel.getText());
     }
 }
