@@ -623,9 +623,9 @@ public class ControllerTest extends RobotControl {
         checkTyped("8^+", "64", "sqr(8) +");
         checkTyped("123^+", "15,129", "sqr(123) +");
         checkTyped("49@+", "7", "√(49) +");
-        checkTyped("3600000000@+", "15,129", "√(3600000000) +");
+        checkTyped("3600000000@+", "60,000", "√(3600000000) +");
         checkTyped("1;+", "1", "1/(1) +");
-        checkTyped("0.000001;+", "1,000,000", "1/(0.000001)");
+        checkTyped("0.000001;+", "1,000,000", "1/(0.000001) +");
 
         //in a row
         checkTyped("55++", "55", "55 +");
@@ -637,7 +637,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("564*+", "564", "564 +");
         checkTyped("6522456*+", "6,522,456", "6522456 +");
         checkTyped("12/+", "12", "12 +");
-        checkTyped("344363/+", "344,363", "526 +");
+        checkTyped("344363/+", "344,363", "344363 +");
 
         //after percent
         checkTyped("78%+", "0", "0 +");
