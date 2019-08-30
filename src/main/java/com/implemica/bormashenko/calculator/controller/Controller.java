@@ -206,6 +206,36 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Sets text in result screen to 0.
+     */
+    public void clearText() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        screen.setText(ZERO);
+
+        setFlags(true, false, false, false,
+                isFirstCalculated, false, false);
+    }
+
+    /**
+     * Sets text in result screen to 0.
+     */
+    public void clearAll() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        clearText();
+        calculation.resetAll();
+        equation.setText(EMPTY_STRING);
+
+        setFlags(true, false, false, false,
+                false, false, false);
+    }
+
+    /**
      * Opens or closes navigation bar.
      */
     public void showNavigationPanel() {
@@ -424,36 +454,6 @@ public class Controller implements Initializable {
         BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
         memory.storeToMemory(number);
         ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Sets text in result screen to 0.
-     */
-    public void clearText() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        screen.setText(ZERO);
-
-        setFlags(true, false, false, false,
-                isFirstCalculated, false, false);
-    }
-
-    /**
-     * Sets text in result screen to 0.
-     */
-    public void clearAll() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        clearText();
-        calculation.resetAll();
-        equation.setText(EMPTY_STRING);
-
-        setFlags(true, false, false, false,
-                false, false, false);
     }
 
     /**
