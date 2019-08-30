@@ -70,7 +70,7 @@
     <TextFlow layoutX="42.0" layoutY="32.0" prefHeight="30.0" prefWidth="77.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="39.0">
         <Label fx:id="type" contentDisplay="CENTER" text="Standard">
             <font>
-                <Font size="18.0" />
+                <Font name="Segoe UI Semibold" size="20.0" />
             </font>
         </Label>
     </TextFlow>

@@ -3,6 +3,8 @@ package com.implemica.bormashenko.calculator.controller.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class for editing numbers' representation.
@@ -71,7 +73,7 @@ public class NumberFormatter {
         } else {
             int additionalLength = 0;
 
-            if (number.startsWith(ZERO)) {
+            if (number.replace(MINUS, EMPTY_STRING).startsWith(ZERO)) {
                 additionalLength++;
             }
 
@@ -128,16 +130,6 @@ public class NumberFormatter {
     }
 
     /**
-     * Rounds big decimal number.
-     *
-     * @param bigDecimal number to round.
-     * @return rounded number.
-     */
-    public static BigDecimal round(BigDecimal bigDecimal) {
-        return stripZeros(bigDecimal.round(PRECISION_TO_SHOW));
-    }
-
-    /**
      * Converts number with separating commas to big decimal.
      *
      * @param number number to convert.
@@ -145,6 +137,16 @@ public class NumberFormatter {
      */
     public static BigDecimal screenToBigDecimal(String number) {
         return new BigDecimal(number.replaceAll(COMMA, EMPTY_STRING));
+    }
+
+    /**
+     * Rounds big decimal number.
+     *
+     * @param bigDecimal number to round.
+     * @return rounded number.
+     */
+    public static BigDecimal round(BigDecimal bigDecimal) {
+        return stripZeros(bigDecimal.round(PRECISION_TO_SHOW));
     }
 
     /**
@@ -175,20 +177,24 @@ public class NumberFormatter {
             number = number.replaceAll(BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL);
         } else {
             number = number.replaceAll(BIG_DEC_ENGINEER_SYMBOL, CALC_ENGINEER_SYMBOL);
+            number = stripEngineerZeros(number);
         }
 
         return number;
     }
 
-    /**
-     * Checks if number starts with "_E" or "-_E".
-     *
-     * @param number number to check.
-     * @return true if number starts with "_E" or "-_E" or false otherwise.
-     */
-    private static boolean isOneDigitUnscaledValue(String number) {
-        return Character.toString(number.charAt(1)).equals(BIG_DEC_ENGINEER_SYMBOL) ||
-                (Character.toString(number.charAt(2)).equals(BIG_DEC_ENGINEER_SYMBOL) && isNegativeNumber(number));
+    private static String stripEngineerZeros(String number) {
+        int engIndex = number.indexOf(CALC_ENGINEER_SYMBOL);
+        String engSubstring = number.substring(engIndex);
+        String stripped = number.substring(0, engIndex);
+
+        while (stripped.endsWith(ZERO)) {
+            stripped = stripped.substring(0, stripped.length() - 1);
+        }
+
+        stripped += engSubstring;
+
+        return stripped;
     }
 
     /**
@@ -324,5 +330,16 @@ public class NumberFormatter {
      */
     private static boolean isNegativeNumber(String number) {
         return number.startsWith(MINUS);
+    }
+
+    /**
+     * Checks if number starts with "_E" or "-_E".
+     *
+     * @param number number to check.
+     * @return true if number starts with "_E" or "-_E" or false otherwise.
+     */
+    private static boolean isOneDigitUnscaledValue(String number) {
+        return Character.toString(number.charAt(1)).equals(BIG_DEC_ENGINEER_SYMBOL) ||
+                (Character.toString(number.charAt(2)).equals(BIG_DEC_ENGINEER_SYMBOL) && isNegativeNumber(number));
     }
 }
