@@ -18,10 +18,6 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void appendDigitTests() {
-        checkAppendDigits("", "0");
-        checkAppendDigits("0", "0");
-        checkAppendDigits("00", "0");
-
         //can append
         {
             //without operations
@@ -219,7 +215,59 @@ public class ControllerTest extends RobotControl {
         }
 
         //can not append
+        {
+            checkAppendDigits("", "0");
+            checkAppendDigits("0", "0");
+            checkAppendDigits("00", "0");
 
+            //17 digits
+            checkAppendDigits("12345678901234567", "1,234,567,890,123,456");
+            checkAppendDigits("87984719571987591", "8,798,471,957,198,759");
+
+            //more than 17 digits
+            checkAppendDigits("2198370919080518325071051", "2,198,370,919,080,518");
+            checkAppendDigits("1209847102458012850932805824092", "1,209,847,102,458,012");
+
+            //17 and negate
+            checkAppendDigits("123456789~01234567", "-1,234,567,890,123,456");
+            checkAppendDigits("87984~719571987591", "-8,798,471,957,198,759");
+
+            //more than 17 and negate
+            checkAppendDigits("219~8370919080518325071051", "-2,198,370,919,080,518");
+            checkAppendDigits("120984710245~8012850932805824092", "-1,209,847,102,458,012");
+
+            //17 and dot
+            checkAppendDigits("123456789.01234567", "123,456,789.0123456");
+            checkAppendDigits("87984.719571987591", "87,984.71957198759");
+
+            //more than 17 and dot
+            checkAppendDigits("219.8370919080518325071051", "219.8370919080518");
+            checkAppendDigits("120984710245.8012850932805824092", "120,984,710,245.8012");
+
+            //17 and dot and negate
+            checkAppendDigits("123456~789.01234567", "-123,456,789.0123456");
+            checkAppendDigits("879~84.719571987591", "-87,984.71957198759");
+
+            //more than 17 and dot and negate
+            checkAppendDigits("219.837~0919080518325071051", "-219.8370919080518");
+            checkAppendDigits("120~984710245.8012850932805824092", "-120,984,710,245.8012");
+
+            //18 and dot and starts with 0.
+            checkAppendDigits("0.87523456890076345", "0.8752345689007634");
+            checkAppendDigits("0.74363738736363636", "0.7436373873636363");
+
+            //more than 18 and dot and starts with 0.
+            checkAppendDigits("0.19878913759321752430626236525", "0.1987891375932175");
+            checkAppendDigits("0.3242384729375982760260286", "0.3242384729375982");
+
+            //18 and dot and starts with 0. and negate
+            checkAppendDigits("0.8752345~6890076345", "-0.8752345689007634");
+            checkAppendDigits("0.74~363738736363636", "-0.7436373873636363");
+
+            //more than 18 and dot and starts with 0. and negate
+            checkAppendDigits("0.19878~913759321752430626236525", "-0.1987891375932175");
+            checkAppendDigits("0.3~242384729375982760260286", "-0.3242384729375982");
+        }
     }
 
     /**
