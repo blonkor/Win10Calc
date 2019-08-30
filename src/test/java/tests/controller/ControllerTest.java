@@ -24,6 +24,7 @@ public class ControllerTest extends RobotControl {
         appendDotTests();
         backspaceTests();
         clearTests();
+        addTests();
     }
 
     /**
@@ -575,6 +576,130 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
+     * Tests for add operation.
+     */
+    @Test
+    public void addTests() {
+        //standard cases
+        checkTyped("+", "0", "0 +");
+        checkTyped("0+", "0", "0 +");
+        checkTyped("1+", "1", "1 +");
+        checkTyped("2+", "2", "2 +");
+        checkTyped("3+", "3", "3 +");
+        checkTyped("4+", "4", "4 +");
+        checkTyped("5+", "5", "5 +");
+        checkTyped("6+", "6", "6 +");
+        checkTyped("7+", "7", "7 +");
+        checkTyped("8+", "8", "8 +");
+        checkTyped("9+", "9", "9 +");
+
+        //without comma
+        checkTyped("17+", "17", "17 +");
+        checkTyped("256+", "256", "256 +");
+
+        //with comma
+        checkTyped("11515+", "11,515", "11515 +");
+        checkTyped("734347956+", "734,347,956", "734347956 +");
+
+        //several add operations
+        checkTyped("1+2+3", "3",
+                "1 + 2 +");
+        checkTyped("1+2+3+", "6",
+                "1 + 2 + 3 +");
+        checkTyped("100+1000+10000+100000", "100,000",
+                "100 + 1000 + 10000 +");
+        checkTyped("100+1000+10000+100000+", "111,100",
+                "100 + 1000 + 10000 + 100000 +");
+
+        //after dot
+        checkTyped("62.+", "62", "62 +");
+        checkTyped("623626.+", "623,626", "623626 +");
+
+        //after negate
+        checkTyped("866~+", "-866", "-866 +");
+        checkTyped("98791480~+", "-98,791,480", "-98791480 +");
+
+        //after another unary
+        checkTyped("8^+", "64", "sqr(8) +");
+        checkTyped("123^+", "15,129", "sqr(123) +");
+        checkTyped("49@+", "7", "√(49) +");
+        checkTyped("3600000000@+", "15,129", "√(3600000000) +");
+        checkTyped("1;+", "1", "1/(1) +");
+        checkTyped("0.000001;+", "1,000,000", "1/(0.000001)");
+
+        //in a row
+        checkTyped("55++", "55", "55 +");
+        checkTyped("1567+++++", "1,567", "1567 +");
+
+        //after another binary
+        checkTyped("16-+", "16", "16 +");
+        checkTyped("7624-+", "7,624", "7624 +");
+        checkTyped("564*+", "564", "564 +");
+        checkTyped("6522456*+", "6,522,456", "6522456 +");
+        checkTyped("12/+", "12", "12 +");
+        checkTyped("344363/+", "344,363", "526 +");
+
+        //after percent
+        checkTyped("78%+", "0", "0 +");
+        checkTyped("56245%+", "0", "0 +");
+
+        //after equals
+        checkTyped("73=+", "73", "73 +");
+        checkTyped("532626=+", "532,626", "532626 +");
+
+        //calculating
+        checkTyped("92+54+", "146", "92 + 54 +");
+        checkTyped("8898+123+", "9,021", "8898 + 123 +");
+
+        checkTyped("913+14.1+", "927.1", "913 + 14.1 +");
+        checkTyped("7362.5+638.1+", "8,000.6", "7362.5 + 638.1 +");
+
+        //engineers
+        checkTyped("9000000000000000+1000000000000000+", "1.e+16",
+                "9000000000000000 + 1000000000000000 +");
+        checkTyped("9000000000000000+1000000000000000+1+", "1.e+16",
+                "9000000000000000 + 1000000000000000 + 1 +");
+        checkTyped("9000000000000000+1000000000000000+4+", "1.e+16",
+                "9000000000000000 + 1000000000000000 + 4 +");
+        checkTyped("9000000000000000+1000000000000000+4+1+", "1.000000000000001e+16",
+                "9000000000000000 + 1000000000000000 + 4 + 1 +");
+        checkTyped("9000000000000000+1000000000000000+5+", "1.000000000000001e+16",
+                "9000000000000000 + 1000000000000000 + 5 +");
+        checkTyped("9999999999999999+9999999999999999+", "2.e+16",
+                "9999999999999999 + 9999999999999999 +");
+
+        //after clear text
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("+");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0 +", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564+");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("+");
+        assertEquals("564", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("564 + 0 +", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        //after clear all
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("+");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0 +", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564+");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("+");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0 +", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
      * Checks that screen label has required text after clicking on buttons.
      *
      * @param buttons            buttons that should be clicked.
@@ -586,6 +711,19 @@ public class ControllerTest extends RobotControl {
 
         assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
     }
+
+    /**
+     * Checks that screen label and equation label have required texts after clicking on buttons.
+     *
+     * @param buttons              buttons that should be clicked.
+     * @param expectedScreenText   required text on screen after clicking.
+     * @param expectedEquationText required text on equation label after clicking.
+     */
+    private void checkTyped(String buttons, String expectedScreenText, String expectedEquationText) {
+        checkTyped(buttons, expectedScreenText);
+        assertEquals(expectedEquationText, getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
 
     /**
      * Checks that text in screen label is cleared but not in equation label after clear text operation.
