@@ -595,6 +595,10 @@ public class Controller implements Initializable {
      * @see Calculation
      */
     private void binaryOperationPressed(BinaryOperations operation) {
+        if (screen.getText().endsWith(".")) {
+            screen.setText(screen.getText().replace(".", ""));
+        }
+
         try {
             if (!isBinaryOperationPressed) {
                 BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen.getText());
@@ -667,8 +671,12 @@ public class Controller implements Initializable {
                 calculation.setFirst(calculation.getResult());
 
                 screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
-                equation.setText(operation.symbol + OPENING_BRACKET + SPACE + number.toString() +
-                        SPACE + CLOSING_BRACKET + SPACE);
+
+                if (operation == UnaryOperations.NEGATE) {
+                    equation.setText("-" + number.toString());
+                } else {
+                    equation.setText(operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET);
+                }
 
             } else if (isUnaryOperationPressed) {
                 calculation.setSecond(calculation.getFirst());
@@ -753,6 +761,7 @@ public class Controller implements Initializable {
             screen.setText(ZERO);
             equation.setText(ZERO);
 
+            isFirstCalculated = false;
         } else {
             BinaryOperations operation = calculation.getBinaryOperation();
             BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
@@ -766,10 +775,12 @@ public class Controller implements Initializable {
 
             screen.setText(NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
             equation.setText(equation.getText() + SPACE + NumberFormatter.bigDecimalToScreen(calculation.getSecond()));
+
+            isFirstCalculated = true;
         }
 
         setFlags(false, false, false, false,
-                true, true, false);
+                isFirstCalculated, true, false);
     }
 
     private void exceptionThrown(String message) {
