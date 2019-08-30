@@ -69,10 +69,10 @@ public class ViewTest extends RobotControl {
         String veryDarkGrayColor = "0x333333ff";
         String vividRedColor = "0xe9091eff";
         String strongBlueColor = "0x0078d7ff";
+        String equationLabelColor = "0x5b5b5bff";
 
         //fonts
         Font system_12 = new Font("System", 12);
-        Font system_18 = new Font("System", 18);
         Font systemBold_14 = new Font("System Bold", 14);
         Font segoeUI_14_5 = new Font("Segoe UI", 14.5);
         Font segoeUI_15 = new Font("Segoe UI", 15);
@@ -250,7 +250,7 @@ public class ViewTest extends RobotControl {
         {
             checkColorAndFontForLabels(new String[]{TITLE_LABEL_ID}, veryDarkGrayColor, system_12);
             checkColorAndFontForLabels(new String[]{TYPE_LABEL_ID}, veryDarkGrayColor, segoeSemibold_20);
-            checkColorAndFontForLabels(new String[]{EQUATION_LABEL_ID}, veryDarkGrayColor, segoeSemilight_14);
+            checkColorAndFontForLabels(new String[]{EQUATION_LABEL_ID}, equationLabelColor, segoeSemilight_14);
             checkColorAndFontForLabels(new String[]{SCREEN_LABEL_ID}, veryDarkGrayColor, segoeSemibold_47);
             checkColorAndFontForLabels(new String[]{MODE_LABEL_ID, CONVERTER_LABEL_ID}, veryDarkGrayColor, systemBold_14);
             checkColorAndFontForLabels(new String[]{MEMORY_SHOW_SYMBOL}, veryDarkGrayColor, segoeAssets_6);

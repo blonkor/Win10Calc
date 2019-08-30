@@ -575,6 +575,8 @@ public class RobotControl extends GuiTest {
                 selector = SQRT_ID;
             } else if (charAtI == ';') {
                 selector = INVERSE_ID;
+            } else if (charAtI == '<') {
+                selector = BACKSPACE_ID;
             }
 
             if (selector == null) {
