@@ -63,7 +63,7 @@ public class NumberFormatter {
      *
      * @param number number to edit.
      * @param digit  digit to add.
-     * @return number with appended digit.
+     * @return edited number.
      */
     public static String appendDigit(String number, String digit) {
         number = number.replaceAll(COMMA, EMPTY_STRING);

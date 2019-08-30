@@ -133,7 +133,7 @@ public class Controller implements Initializable {
      * Appends digit from button to result screen if it is allowed.
      * Otherwise, sets the digit to result screen.
      *
-     * @param event {@code ActionEvent} that caused the method.
+     * @param event {@code ActionEvent} that called the method.
      */
     public void appendDigit(ActionEvent event) {
         String digit = ((Button) event.getSource()).getText();
