@@ -1,11 +1,9 @@
 package tests.controller;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import org.junit.Test;
 import util.RobotControl;
 
-import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

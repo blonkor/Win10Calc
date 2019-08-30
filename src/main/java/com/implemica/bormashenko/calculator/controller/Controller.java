@@ -1,11 +1,8 @@
 package com.implemica.bormashenko.calculator.controller;
 
-import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
-import com.implemica.bormashenko.calculator.controller.util.ViewFormatter;
-import com.implemica.bormashenko.calculator.model.Memory;
-import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
-import com.implemica.bormashenko.calculator.model.Calculation;
-import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import com.implemica.bormashenko.calculator.controller.util.*;
+import com.implemica.bormashenko.calculator.model.*;
+import com.implemica.bormashenko.calculator.model.enums.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -236,6 +233,176 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Sums two numbers.
+     */
+    public void addOperation() {
+        binaryOperationPressed(BinaryOperations.ADD);
+    }
+
+    /**
+     * Subtracts two numbers.
+     */
+    public void subtractOperation() {
+        binaryOperationPressed(BinaryOperations.SUBTRACT);
+    }
+
+    /**
+     * Multiplies two numbers.
+     */
+    public void multiplyOperation() {
+        binaryOperationPressed(BinaryOperations.MULTIPLY);
+    }
+
+    /**
+     * Divides two numbers.
+     */
+    public void divideOperation() {
+        binaryOperationPressed(BinaryOperations.DIVIDE);
+    }
+
+    /**
+     * Negates number in result screen while button is clicked.
+     */
+    public void negate() {
+        unaryOperationPressed(UnaryOperations.NEGATE);
+    }
+
+    /**
+     * Calculates square of number.
+     */
+    public void squareOperation() {
+        unaryOperationPressed(UnaryOperations.SQR);
+    }
+
+    /**
+     * Calculates square root of number.
+     */
+    public void squareRootOperation() {
+        unaryOperationPressed(UnaryOperations.SQRT);
+    }
+
+    /**
+     * Inverses number.
+     */
+    public void inverseOperation() {
+        unaryOperationPressed(UnaryOperations.INVERSE);
+    }
+
+    /**
+     * Calculates percent of number.
+     */
+    public void percentOperation() {
+        calculatePercentage();
+    }
+
+    /**
+     * Calls when equals button is pressed.
+     * Calculates result of operation. Calculation is possible only if operation is set.
+     * <p>
+     * If user inputs number, operation and presses calculate button (without inputting second number), second number
+     * will be the same as first.
+     * <p>
+     * If user presses calculate button several times in a row, result of every operation will be set as first number
+     * and second number will not change from the first operation, and calculation will be made again with the same
+     * operation.
+     *
+     * @see Calculation
+     */
+    public void calculateResult() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        try {
+            if (calculation.getBinaryOperation() != null) {
+                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+
+                if (!isEqualsPressed && !isUnaryOperationPressed) {
+
+                    if (!isFirstCalculated) {
+                        calculation.setFirst(number);
+                    } else {
+                        calculation.setSecond(number);
+                    }
+
+                    calculation.calculateBinary();
+                    calculation.setFirst(calculation.getResult());
+                } else {
+
+                    if (isEqualsPressed) {
+                        calculation.setFirst(number);
+                    }
+
+                    calculation.calculateBinary();
+                }
+
+                screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
+
+                setFlags(false, false, false, true,
+                        true, false, false);
+            }
+
+            equation.setText(EMPTY_STRING);
+
+            isEditableScreen = false;
+        } catch (Exception e) {
+            exceptionThrown(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows memory.
+     */
+    public void memoryShowOperation() {
+        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
+    }
+
+    /**
+     * Clears all memory.
+     */
+    public void memoryClearOperation() {
+        memory.clearMemory();
+        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Recalls number in memory.
+     */
+    public void memoryRecallOperation() {
+        BigDecimal number = memory.recall();
+        screen.setText(NumberFormatter.bigDecimalToScreen(number));
+
+        isEditableScreen = false;
+    }
+
+    /**
+     * Adds number to memory.
+     */
+    public void memoryAddOperation() {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+        memory.addToMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Subtracts number from memory.
+     */
+    public void memorySubtractOperation() {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+        memory.subtractFromMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Saves number in memory.
+     */
+    public void memoryStoreOperation() {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+        memory.storeToMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
      * Opens or closes navigation bar.
      */
     public void showNavigationPanel() {
@@ -401,176 +568,6 @@ public class Controller implements Initializable {
 
         if (buttonToFire != null && !memoryBlock.isVisible() && !navigationBlock.isVisible()) {
             buttonToFire.fire();
-        }
-    }
-
-    /**
-     * Shows memory.
-     */
-    public void memoryShowOperation() {
-        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
-    }
-
-    /**
-     * Clears all memory.
-     */
-    public void memoryClearOperation() {
-        memory.clearMemory();
-        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Recalls number in memory.
-     */
-    public void memoryRecallOperation() {
-        BigDecimal number = memory.recall();
-        screen.setText(NumberFormatter.bigDecimalToScreen(number));
-
-        isEditableScreen = false;
-    }
-
-    /**
-     * Adds number to memory.
-     */
-    public void memoryAddOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.addToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Subtracts number from memory.
-     */
-    public void memorySubtractOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.subtractFromMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Saves number in memory.
-     */
-    public void memoryStoreOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.storeToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Sums two numbers.
-     */
-    public void addOperation() {
-        binaryOperationPressed(BinaryOperations.ADD);
-    }
-
-    /**
-     * Subtracts two numbers.
-     */
-    public void subtractOperation() {
-        binaryOperationPressed(BinaryOperations.SUBTRACT);
-    }
-
-    /**
-     * Multiplies two numbers.
-     */
-    public void multiplyOperation() {
-        binaryOperationPressed(BinaryOperations.MULTIPLY);
-    }
-
-    /**
-     * Divides two numbers.
-     */
-    public void divideOperation() {
-        binaryOperationPressed(BinaryOperations.DIVIDE);
-    }
-
-    /**
-     * Negates number in result screen while button is clicked.
-     */
-    public void negate() {
-        unaryOperationPressed(UnaryOperations.NEGATE);
-    }
-
-    /**
-     * Calculates square of number.
-     */
-    public void squareOperation() {
-        unaryOperationPressed(UnaryOperations.SQR);
-    }
-
-    /**
-     * Calculates square root of number.
-     */
-    public void squareRootOperation() {
-        unaryOperationPressed(UnaryOperations.SQRT);
-    }
-
-    /**
-     * Inverses number.
-     */
-    public void inverseOperation() {
-        unaryOperationPressed(UnaryOperations.INVERSE);
-    }
-
-    /**
-     * Calculates percent of number.
-     */
-    public void percentOperation() {
-        calculatePercentage();
-    }
-
-    /**
-     * Calls when equals button is pressed.
-     * Calculates result of operation. Calculation is possible only if operation is set.
-     * <p>
-     * If user inputs number, operation and presses calculate button (without inputting second number), second number
-     * will be the same as first.
-     * <p>
-     * If user presses calculate button several times in a row, result of every operation will be set as first number
-     * and second number will not change from the first operation, and calculation will be made again with the same
-     * operation.
-     *
-     * @see Calculation
-     */
-    public void calculateResult() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        try {
-            if (calculation.getBinaryOperation() != null) {
-                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-
-                if (!isEqualsPressed && !isUnaryOperationPressed) {
-
-                    if (!isFirstCalculated) {
-                        calculation.setFirst(number);
-                    } else {
-                        calculation.setSecond(number);
-                    }
-
-                    calculation.calculateBinary();
-                    calculation.setFirst(calculation.getResult());
-                } else {
-
-                    if (isEqualsPressed) {
-                        calculation.setFirst(number);
-                    }
-
-                    calculation.calculateBinary();
-                }
-
-                screen.setText(NumberFormatter.bigDecimalToScreen(NumberFormatter.round(calculation.getResult())));
-
-                setFlags(false, false, false, true,
-                        true, false, false);
-            }
-
-            equation.setText(EMPTY_STRING);
-
-            isEditableScreen = false;
-        } catch (Exception e) {
-            exceptionThrown(e.getMessage());
         }
     }
 
