@@ -312,10 +312,6 @@ public class ControllerTest extends RobotControl {
             checkTyped("11+67=.", "0.");
             checkTyped("823526/24362=.", "0.");
 
-            //after error
-            checkTyped("/0=.", "0.");
-            checkTyped("13/0.", "0.");
-
             //after backspace
             checkTyped("123<.", "12.");
             checkTyped("2152343<.", "215,234.");

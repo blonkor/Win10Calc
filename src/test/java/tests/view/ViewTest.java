@@ -2113,10 +2113,9 @@ public class ViewTest extends RobotControl {
 
     /**
      * Tests for resizing font in screen label.
-     *
-     * @todo tests.controller should be done.
      */
-    private void resizeFontTests() {
+    @Test
+    public void resizeFontTests() {
         checkResizeFont("1", DEFAULT_WIDTH, 47);
         checkResizeFont("12", DEFAULT_WIDTH, 47);
         checkResizeFont("123", DEFAULT_WIDTH, 47);
@@ -2127,13 +2126,13 @@ public class ViewTest extends RobotControl {
         checkResizeFont("12345678", DEFAULT_WIDTH, 47);
         checkResizeFont("123456789", DEFAULT_WIDTH, 47);
         checkResizeFont("1234567890", DEFAULT_WIDTH, 46);
-        checkResizeFont("1234567890.0", DEFAULT_WIDTH, 45);
-        checkResizeFont("1234567890.01", DEFAULT_WIDTH, 44);
-        checkResizeFont("1234567890.012", DEFAULT_WIDTH, 43);
-        checkResizeFont("1234567890.0123", DEFAULT_WIDTH, 42);
-        checkResizeFont("1234567890.01234", DEFAULT_WIDTH, 41);
-        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH, 40);
-        checkResizeFont("~9999999999999999", DEFAULT_WIDTH, 39);
+        checkResizeFont("1234567890.0", DEFAULT_WIDTH, 41);
+        checkResizeFont("1234567890.01", DEFAULT_WIDTH, 38);
+        checkResizeFont("1234567890.012", DEFAULT_WIDTH, 35);
+        checkResizeFont("1234567890.0123", DEFAULT_WIDTH, 33);
+        checkResizeFont("1234567890.01234", DEFAULT_WIDTH, 31);
+        checkResizeFont("~1234567890.01234", DEFAULT_WIDTH, 31);
+        checkResizeFont("~9999999999999999", DEFAULT_WIDTH, 28);
 
         checkResizeFont("1", DEFAULT_WIDTH + 50, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 50, 47);
