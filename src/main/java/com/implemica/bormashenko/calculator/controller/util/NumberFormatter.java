@@ -1,10 +1,10 @@
 package com.implemica.bormashenko.calculator.controller.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 /**
  * Class for editing numbers' representation.
@@ -14,19 +14,65 @@ import java.util.regex.Pattern;
 public class NumberFormatter {
 
     /**
-     * Symbol for separating every three digits in number.
+     * Maximal amount of digit symbols that can be shown on screen.
      */
-    private static final String COMMA = ",";
+    private final static int MAX_SYMBOLS = 16;
 
     /**
-     * Empty string for replacement.
+     * Minimal value that can be shown on screen without using engineer representation.
      */
-    private static final String EMPTY_STRING = "";
+    private static final BigDecimal MIN_PLAIN_VALUE = new BigDecimal("0.0000000000000001");
 
     /**
-     * Decimal symbol.
+     * Decimal formatter for formatting output.
      */
-    private static final String DOT = ".";
+    private static final DecimalFormat format = new DecimalFormat();
+
+    /**
+     * Symbol for separating every three digits in integer number.
+     */
+    private static final char GROUPING_SEPARATOR = ',';
+
+    /**
+     * Symbol for separating integer and decimal parts of number.
+     */
+    private static final char DECIMAL_SEPARATOR = '.';
+
+    /**
+     * Symbol for separating exponent part of number if number is decimal.
+     */
+    private static final String DECIMAL_EXPONENT_SEPARATOR = "e";
+
+    /**
+     * Symbol for separating exponent part of number if number is integer.
+     */
+    private static final String INTEGER_EXPONENT_SEPARATOR = "e+";
+
+    /**
+     * Pattern string for 15 digits if they exist.
+     */
+    private static final String PATTERN_15_DIGITS = "###############";
+
+    /**
+     * Pattern string for splitting integer group.
+     */
+    private static final String PATTERN_SPLIT_GROUP = "###" + GROUPING_SEPARATOR + "###" + DECIMAL_SEPARATOR;
+
+    /**
+     * Pattern for exponent symbol.
+     */
+    private static final String PATTERN_EXPONENT = "E";
+
+    /**
+     * Pattern for digit if it exists.
+     */
+    private static final String PATTERN_DIGIT = "#";
+
+    /**
+     * Origin string in screen label.
+     * Also used as symbol-or-zero part of pattern.
+     */
+    private static final String ZERO = "0";
 
     /**
      * Negative number symbol.
@@ -34,39 +80,24 @@ public class NumberFormatter {
     private static final String MINUS = "-";
 
     /**
-     * Origin string in screen label.
+     * Empty string for replacement.
      */
-    private static final String ZERO = "0";
+    private static final String EMPTY_STRING = "";
 
     /**
-     * Engineer number symbol in calculator.
-     */
-    private static final String CALC_ENGINEER_SYMBOL = "e";
-
-    /**
-     * Engineer number symbol in big decimal.
-     */
-    private static final String BIG_DEC_ENGINEER_SYMBOL = "E";
-
-    /**
-     * Maximal amount of digit symbols that can be shown on screen.
-     */
-    private final static int MAX_SYMBOLS = 16;
-
-    /**
-     * Precision for rounding result, calculated in model.
-     */
-    private final static MathContext PRECISION_TO_SHOW = new MathContext(MAX_SYMBOLS);
-
-    /**
-     * Appends digit to screen.
+     * Appends digit to number.
+     * <p>
+     * If number is 0, replaces it with inputted digit.
+     * Otherwise, checks if the digit can be appended.
+     * <p>
+     * If number already contains 16 digits (or 17 if it starts with 0. or -0.), digit can not be appended.
      *
      * @param number number to edit.
-     * @param digit  digit to add.
-     * @return edited number.
+     * @param digit  digit to append.
+     * @return edited number if it was possible to edit.
      */
     public static String appendDigit(String number, String digit) {
-        number = number.replaceAll(COMMA, EMPTY_STRING);
+        number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
 
         if (number.equals(ZERO)) {
             number = digit;
@@ -90,207 +121,225 @@ public class NumberFormatter {
             }
         }
 
-        return NumberFormatter.separateNumberWithCommas(number);
+        return NumberFormatter.separateNumberGroups(number);
     }
 
     /**
-     * Adds dot to number if the number does not contain dot yet.
+     * Appends decimal separator to number.
+     * <p>
+     * If number already has decimal separator, it can not be appended.
      *
      * @param number number to edit.
-     * @return number with dot if it does not contain dot yet.
+     * @return edited number if it was possible to edit.
      */
-    public static String appendDot(String number) {
-        if (!number.contains(DOT)) {
-            number += DOT;
+    public static String appendDecimalSeparator(String number) {
+        if (!number.contains(String.valueOf(DECIMAL_SEPARATOR))) {
+            number += DECIMAL_SEPARATOR;
         }
 
         return number;
     }
 
     /**
-     * Deletes last char in non-engineer number.
+     * Deletes last char in number.
+     * <p>
+     * Last char for engineer numbers can not be deleted.
+     * <p>
+     * If number contains only one digit, this operation will replace the number with 0.
      *
      * @param number number to edit.
-     * @return number without last char if it was possible to edit or origin number otherwise.
+     * @return edited number if it was possible to edit.
      */
     public static String deleteLastChar(String number) {
-        number = number.replaceAll(COMMA, EMPTY_STRING);
+        number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
 
         if (!isEngineerNumber(number)) {
 
-            if (number.length() == 1 || (number.startsWith(MINUS) && number.length() == 2)) {
+            if (isOneDigitNumber(number)) {
                 number = ZERO;
             } else {
-                number = number.substring(0, number.length() - 1);
+                number = StringUtils.chop(number);
             }
 
         }
 
-        return separateNumberWithCommas(number);
+        return separateNumberGroups(number);
     }
 
     /**
-     * Converts number with separating commas to big decimal.
+     * Converts number with grouping separators to big decimal.
      *
      * @param number number to convert.
      * @return big decimal value of the number.
      */
     public static BigDecimal screenToBigDecimal(String number) {
-        return new BigDecimal(number.replaceAll(COMMA, EMPTY_STRING));
+        return new BigDecimal(number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING));
     }
 
     /**
-     * Rounds big decimal number.
+     * Formats number using {@link DecimalFormat}.
+     * <p>
+     * If number is less than minimal plain value and it's scale is more than can be shown (16),
+     * shows number with one-digit integer part and 16-digits decimal part in engineer representation.
+     * <p>
+     * The same pattern applied if integer part of number is more than can be shown (16) and scale
+     * is non positive or more than can be shown (16).
+     * <p>
+     * If integer part of number is more than can be shown (16) and scale is between 0 and can be shown (16),
+     * shows number with one-digit integer part and scale-digits decimal part in engineer representation.
+     * <p>
+     * If number is less than can be shown, shows number in usual way with group separator.
      *
-     * @param bigDecimal number to round.
-     * @return rounded number.
+     * @param number number to format.
+     * @return formatted number.
      */
-    public static BigDecimal round(BigDecimal bigDecimal) {
-        return stripZeros(bigDecimal.round(PRECISION_TO_SHOW));
-    }
+    public static String formatNumber(BigDecimal number) {
+        setFormatSymbols(number.abs().compareTo(BigDecimal.ONE) >= 0);
 
-    /**
-     * Separates big decimal value with commas.
-     *
-     * @param number big decimal number to separate.
-     * @return string contains big decimal number separated with commas.
-     */
-    public static String bigDecimalToScreen(BigDecimal number) {
-        String stringNumber = number.toString();
+        int scale = number.scale();
+        int precision = number.precision();
 
-        if (isEngineerNumber(stringNumber)) {
-            stringNumber = replaceEngineerSymbol(stringNumber);
+        StringBuilder pattern;
+
+        if (number.abs().compareTo(MIN_PLAIN_VALUE) < 0 && scale > MAX_SYMBOLS) {
+            pattern = new StringBuilder(ZERO + DECIMAL_SEPARATOR + PATTERN_15_DIGITS + PATTERN_EXPONENT + ZERO);
+        } else {
+            int integerPartLength = precision - scale;
+
+            if (integerPartLength > MAX_SYMBOLS) {
+                pattern = new StringBuilder(ZERO + DECIMAL_SEPARATOR);
+
+                if (scale > 0 && scale < MAX_SYMBOLS) {
+                    for (int i = 0; i < scale; i++) {
+                        pattern.append(ZERO);
+                    }
+                } else {
+                    pattern.append(PATTERN_15_DIGITS);
+                }
+
+                pattern.append(PATTERN_EXPONENT + ZERO);
+            } else {
+                pattern = new StringBuilder(PATTERN_SPLIT_GROUP);
+
+                for (int i = 0; i < MAX_SYMBOLS - integerPartLength; i++) {
+                    pattern.append(PATTERN_DIGIT);
+                }
+
+                number = number.setScale(MAX_SYMBOLS, BigDecimal.ROUND_HALF_UP);
+            }
         }
 
-        return separateNumberWithCommas(stringNumber);
+        format.applyPattern(pattern.toString());
+        return finalFormat(format.format(number));
     }
 
     /**
-     * Replaces big decimal's engineer number representation to calculator's engineer number representation.
-     * If number starts with "_E" or "-_E", replace "E" with ".e", otherwise replace "E" with "e".
+     * Formats number using {@link DecimalFormat} without using group separator.
+     * <p>
+     * If number is less than minimal plain value and it's scale is more than can be shown (16),
+     * shows number with one-digit integer part and 16-digits decimal part in engineer representation.
+     * <p>
+     * The same pattern applied if integer part of number is more than can be shown (16) and scale
+     * is non positive or more than can be shown (16).
+     * <p>
+     * If integer part of number is more than can be shown (16) and scale is between 0 and can be shown (16),
+     * shows number with one-digit integer part and scale-digits decimal part in engineer representation.
+     * <p>
+     * If number is less than can be shown, shows number in usual way.
      *
-     * @param number number to edit.
-     * @return edited number.
+     * @param number number to format.
+     * @return formatted number without group separator.
      */
-    private static String replaceEngineerSymbol(String number) {
-        if (isOneDigitUnscaledValue(number)) {
-            number = number.replaceAll(BIG_DEC_ENGINEER_SYMBOL, DOT + CALC_ENGINEER_SYMBOL);
-        } else {
-            number = number.replaceAll(BIG_DEC_ENGINEER_SYMBOL, CALC_ENGINEER_SYMBOL);
-            number = stripEngineerZeros(number);
+    public static String formatWithoutGroupSeparator(BigDecimal number) {
+        return formatNumber(number).replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+    }
+
+    /**
+     * Sets up symbols for formatter.
+     *
+     * @param isIntegerSeparator true if number is engineering and integer or false if decimal.
+     */
+    private static void setFormatSymbols(boolean isIntegerSeparator) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setExponentSeparator(isIntegerSeparator ? INTEGER_EXPONENT_SEPARATOR : DECIMAL_EXPONENT_SEPARATOR);
+        symbols.setGroupingSeparator(GROUPING_SEPARATOR);
+        symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
+        format.setDecimalFormatSymbols(symbols);
+        format.setParseBigDecimal(true);
+    }
+
+    /**
+     * Corrects formatted number.
+     * <p>
+     * If engineer number is not formatted correctly (no decimal separator in engineer number),
+     * prepends decimal separator before engineer separator.
+     * <p>
+     * If the last symbol of number is decimal separator, removes it.
+     *
+     * @param number number that was formatted.
+     * @return corrected number if it was necessary to correct.
+     */
+    private static String finalFormat(String number) {
+        if (isSecondCharEngineer(number)) {
+            number = number.replace(DECIMAL_EXPONENT_SEPARATOR, DECIMAL_SEPARATOR + DECIMAL_EXPONENT_SEPARATOR);
+        }
+
+        if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
+            number = number.replace(String.valueOf(DECIMAL_SEPARATOR), EMPTY_STRING);
         }
 
         return number;
     }
 
-    private static String stripEngineerZeros(String number) {
-        int engIndex = number.indexOf(CALC_ENGINEER_SYMBOL);
-        String engSubstring = number.substring(engIndex);
-        String stripped = number.substring(0, engIndex);
-
-        while (stripped.endsWith(ZERO)) {
-            stripped = stripped.substring(0, stripped.length() - 1);
-        }
-
-        stripped += engSubstring;
-
-        return stripped;
-    }
-
-    /**
-     * Strips trailing zeros for decimal numbers or converts engineer numbers.
-     *
-     * @param bigDecimal number to edit.
-     * @return number with stripped zeros.
-     */
-    private static BigDecimal stripZeros(BigDecimal bigDecimal) {
-        String stripped = bigDecimal.toString();
-
-        if (isEngineerNumber(stripped)) {
-            return convert(new BigDecimal(stripped));
-        } else {
-            stripped = bigDecimal.toPlainString();
-        }
-
-        if (isDecimalNumber(stripped)) {
-            stripped = stripLastZeros(stripped);
-
-            return new BigDecimal(stripped);
-        }
-
-        return bigDecimal;
-    }
-
-    /**
-     * Deletes last char if it is zero and it is not the only char.
-     *
-     * @param string string to edit.
-     * @return string without zeros at the end.
-     */
-    private static String stripLastZeros(String string) {
-        while (string.endsWith(ZERO) && !string.equals(ZERO)) {
-            string = string.substring(0, string.length() - 1);
-        }
-
-        return string;
-    }
-
-    /**
-     * Converts engineer number to plain string if it can be shown on screen.
-     *
-     * @param number number to edit.
-     * @return edited number.
-     */
-    private static BigDecimal convert(BigDecimal number) {
-        if (Math.abs(number.precision()) + Math.abs(number.scale()) <= MAX_SYMBOLS) {
-            return new BigDecimal(number.toPlainString());
-        } else {
-            return number;
-        }
-    }
-
     /**
      * Separates every three digit in number.
+     * <p>
+     * Separation is made only for non-engineer numbers.
+     * <p>
+     * Decimal part should not be separated.
      *
      * @param number number to edit.
+     * @return edited number if it was possible to edit.
      */
-    private static String separateNumberWithCommas(String number) {
+    private static String separateNumberGroups(String number) {
         if (isEngineerNumber(number)) {
             return number;
         }
 
         boolean negative = isNegativeNumber(number);
         number = number.replaceAll(MINUS, EMPTY_STRING);
-        String digitsAfterDot = EMPTY_STRING;
+        String digitsAfterDecimal = EMPTY_STRING;
 
         if (isDecimalNumber(number)) {
-            int dotIndex = number.indexOf(DOT);
-            digitsAfterDot = number.substring(dotIndex);
-            number = number.substring(0, dotIndex);
+            int decimalIndex = number.indexOf(DECIMAL_SEPARATOR);
+            digitsAfterDecimal = number.substring(decimalIndex);
+            number = number.substring(0, decimalIndex);
         }
 
-        return separate(number, digitsAfterDot, negative);
+        return separate(number, digitsAfterDecimal, negative);
     }
 
     /**
-     * Separates every three digits in number with comma and appends required digits after dot to the result and
-     * prepends minus if needed.
+     * Separates every three digits in number with group separator and appends required digits after decimal
+     * to the result and prepends minus if needed.
      *
-     * @param number         number to edit.
-     * @param digitsAfterDot digits that should be added to the result without separating after dot.
-     * @param negative       true if minus should be prepended to the result.
-     * @return edited number.
+     * @param number             number to edit.
+     * @param digitsAfterDecimal digits that should be appended to the result after decimal separator.
+     * @param negative           true if minus should be prepended to the result.
+     * @return edited number if it was possible to edit.
      */
-    private static String separate(String number, String digitsAfterDot, boolean negative) {
+    private static String separate(String number, String digitsAfterDecimal, boolean negative) {
         StringBuilder str = new StringBuilder();
         char[] chars = number.toCharArray();
         int counter = 0;
 
         for (int i = chars.length - 1; i >= 0; i--) {
+
             if (counter == 3) {
-                str.append(COMMA);
+                str.append(GROUPING_SEPARATOR);
                 counter = 0;
             }
+
             str.append(chars[i]);
             counter++;
         }
@@ -299,17 +348,7 @@ public class NumberFormatter {
             str.append(MINUS);
         }
 
-        return str.reverse().append(digitsAfterDot).toString();
-    }
-
-    /**
-     * Checks if number contains engineer symbol.
-     *
-     * @param number number to check.
-     * @return true if number contains engineer symbol or false otherwise.
-     */
-    private static boolean isEngineerNumber(String number) {
-        return number.contains(CALC_ENGINEER_SYMBOL) || number.contains(BIG_DEC_ENGINEER_SYMBOL);
+        return str.reverse().append(digitsAfterDecimal).toString();
     }
 
     /**
@@ -319,11 +358,11 @@ public class NumberFormatter {
      * @return true if number contains decimal symbol or false otherwise.
      */
     private static boolean isDecimalNumber(String number) {
-        return number.contains(DOT);
+        return number.contains(String.valueOf(DECIMAL_SEPARATOR));
     }
 
     /**
-     * Checks if number contains negative symbol.
+     * Checks if number starts with minus.
      *
      * @param number number to check.
      * @return true if number starts with minus or false otherwise.
@@ -333,13 +372,33 @@ public class NumberFormatter {
     }
 
     /**
-     * Checks if number starts with "_E" or "-_E".
+     * Checks if number contains engineer symbol.
      *
      * @param number number to check.
-     * @return true if number starts with "_E" or "-_E" or false otherwise.
+     * @return true if number contains engineer symbol or false otherwise.
      */
-    private static boolean isOneDigitUnscaledValue(String number) {
-        return Character.toString(number.charAt(1)).equals(BIG_DEC_ENGINEER_SYMBOL) ||
-                (Character.toString(number.charAt(2)).equals(BIG_DEC_ENGINEER_SYMBOL) && isNegativeNumber(number));
+    private static boolean isEngineerNumber(String number) {
+        return number.contains(DECIMAL_EXPONENT_SEPARATOR);
+    }
+
+    /**
+     * Checks if number contains only one digit.
+     *
+     * @param number number to check.
+     * @return true if number contains only one digit or false otherwise.
+     */
+    private static boolean isOneDigitNumber(String number) {
+        return number.length() == 1 || (number.startsWith(MINUS) && number.length() == 2);
+    }
+
+    /**
+     * Checks if second char of unsigned number is engineer symbol.
+     *
+     * @param number number to check.
+     * @return true if number contains engineer symbol or false otherwise.
+     */
+    private static boolean isSecondCharEngineer(String number) {
+        number = number.replaceAll(MINUS, EMPTY_STRING);
+        return number.length() > 1 && String.valueOf(number.charAt(1)).equals(DECIMAL_EXPONENT_SEPARATOR);
     }
 }

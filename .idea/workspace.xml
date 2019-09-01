@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4332921686e4c680e0998e7f75a1e7197.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" afterDir="false" />
+    </list>
+    <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +33,33 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+      <ranges>
+        <range start1="3" end1="4" start2="3" end2="4" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="5" end1="7" start2="5" end2="5" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="9" end1="9" start2="7" end2="10" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="34" end1="34" start2="35" end2="62" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="86" end1="87" start2="114" end2="115" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="100" end1="101" start2="128" end2="129" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="110" end1="112" start2="138" end2="139" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="132" end1="133" start2="159" end2="160" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="141" end1="144" start2="168" end2="170" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="148" end1="149" start2="174" end2="175" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="158" end1="159" start2="184" end2="186" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="198" end1="198" start2="225" end2="226" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="200" end1="203" start2="228" end2="228" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="204" end1="205" start2="229" end2="232" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="208" end1="210" start2="235" end2="238" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="212" end1="213" start2="240" end2="240" changelist="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" />
+        <range start1="227" end1="227" start2="254" end2="275" changelist="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" />
+        <range start1="549" end1="571" start2="597" end2="598" changelist="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" />
+        <range start1="604" end1="604" start2="631" end2="635" changelist="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" />
+        <range start1="625" end1="630" start2="656" end2="657" changelist="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" />
+      </ranges>
+    </file>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -84,7 +112,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.divideTests">
+  <component name="RunManager" selected="JUnit.ControllerTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -98,7 +126,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.addTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -108,8 +136,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="addTests" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -130,22 +157,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.divideTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="divideTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="NumberFormatterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -157,6 +168,22 @@
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NumberFormatterTest.roundTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
+      <option name="METHOD_NAME" value="roundTests" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,21 +223,21 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="Application.Launcher" />
-      <item itemvalue="JUnit.NumberFormatterTest" />
-      <item itemvalue="JUnit.ControllerTest.divideTests" />
       <item itemvalue="JUnit.ControllerTest.allTests" />
-      <item itemvalue="JUnit.ControllerTest.addTests" />
+      <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
+      <item itemvalue="JUnit.NumberFormatterTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ControllerTest.divideTests" />
-        <item itemvalue="JUnit.ControllerTest.addTests" />
+        <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.NumberFormatterTest" />
+        <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
-        <item itemvalue="JUnit.NumberFormatterTest" />
       </list>
     </recent_temporary>
   </component>
