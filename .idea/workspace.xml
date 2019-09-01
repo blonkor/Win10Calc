@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,20 +56,20 @@
     <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.implemica.bormashenko.calculator.view.listeners" />
-      <recent name="com.implemica.bormashenko.calculator.view" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources" />
-      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\target\classes\com\implemica\bormashenko\calculator\view\resources\fonts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\test\java\view\utils" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\util" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources\images" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\target\classes\com\implemica\bormashenko\calculator\view\resources\images" />
       <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources\fonts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\src\main\java\com\implemica\bormashenko\calculator\view\resources" />
+      <recent name="C:\Users\User\Documents\GitHub\Win10Calc\target\classes\com\implemica\bormashenko\calculator\view\resources\fonts" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.implemica.bormashenko.calculator.view.listeners" />
+      <recent name="com.implemica.bormashenko.calculator.view" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -84,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.NumberFormatterTest">
+  <component name="RunManager" selected="JUnit.ControllerTest.divideTests">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -98,7 +98,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.addTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -108,7 +108,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="addTests" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -129,6 +130,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ControllerTest.divideTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="divideTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NumberFormatterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -140,22 +157,6 @@
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NumberFormatterTest.roundTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
-      <option name="METHOD_NAME" value="roundTests" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -197,19 +198,19 @@
     <list>
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="JUnit.ControllerTest.allTests" />
       <item itemvalue="Application.Launcher" />
-      <item itemvalue="JUnit.ControllerTest" />
-      <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
       <item itemvalue="JUnit.NumberFormatterTest" />
+      <item itemvalue="JUnit.ControllerTest.divideTests" />
+      <item itemvalue="JUnit.ControllerTest.allTests" />
+      <item itemvalue="JUnit.ControllerTest.addTests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.NumberFormatterTest" />
-        <item itemvalue="JUnit.NumberFormatterTest.roundTests" />
+        <item itemvalue="JUnit.ControllerTest.divideTests" />
+        <item itemvalue="JUnit.ControllerTest.addTests" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
-        <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.NumberFormatterTest" />
       </list>
     </recent_temporary>
   </component>
@@ -223,27 +224,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Tests for resizing for sides created.">
-      <created>1566938313818</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1566938313818</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Tests for moving window created.">
-      <created>1566941937282</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1566941937283</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Serialization removed. Size and layout tests removed.">
-      <created>1566950867758</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1566950867759</updated>
     </task>
     <task id="LOCAL-00072" summary="Tests for resize font in screen label created, but controller should be done to test this.">
       <created>1566993777509</created>
@@ -567,7 +547,28 @@
       <option name="project" value="LOCAL" />
       <updated>1567209458820</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Tests for number formatter operations changed.">
+      <created>1567256913247</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1567256913247</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Tests for controller updated.">
+      <created>1567279268034</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1567279268034</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Tests for controller for typing text and binary operations completed.">
+      <created>1567291937579</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1567291937579</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -601,10 +602,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Added scroll pane for moving equation label." />
-    <MESSAGE value="Methods for moving equation label created." />
-    <MESSAGE value="Code refactoring for controller." />
-    <MESSAGE value="Code refactoring for controller's fields." />
     <MESSAGE value="Code refactoring for controller for setting up boolean states." />
     <MESSAGE value="Handling exceptions in controller." />
     <MESSAGE value="Updating memory labels so it works." />
@@ -626,7 +623,11 @@
     <MESSAGE value="Bug fixes in controller." />
     <MESSAGE value="Tests for subtract operation created." />
     <MESSAGE value="Tests for multiply operation created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for multiply operation created." />
+    <MESSAGE value="Tests for number formatter operations changed." />
+    <MESSAGE value="Tests for controller updated." />
+    <MESSAGE value="Tests for controller updated and refactored." />
+    <MESSAGE value="Tests for controller for typing text and binary operations completed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for controller for typing text and binary operations completed." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
