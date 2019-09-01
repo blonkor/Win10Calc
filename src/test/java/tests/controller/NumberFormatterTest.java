@@ -8,10 +8,9 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test class for testing {@code NumberFormatter} in controller.
+ * Test class for testing {@link NumberFormatter}.
  *
  * @author Mykhailo Bormashenko
- * @see NumberFormatter
  */
 public class NumberFormatterTest {
 
@@ -276,136 +275,136 @@ public class NumberFormatterTest {
      * Tests for add dot operation.
      */
     @Test
-    public void appendDotTests() {
+    public void appendDecimalSeparatorTests() {
         //without dot
         //without commas
-        checkAppendDot("0", "0.");
-        checkAppendDot("1", "1.");
-        checkAppendDot("8", "8.");
-        checkAppendDot("9", "9.");
-        checkAppendDot("10", "10.");
-        checkAppendDot("100", "100.");
-        checkAppendDot("500", "500.");
+        checkAppendDecimalSeparator("0", "0.");
+        checkAppendDecimalSeparator("1", "1.");
+        checkAppendDecimalSeparator("8", "8.");
+        checkAppendDecimalSeparator("9", "9.");
+        checkAppendDecimalSeparator("10", "10.");
+        checkAppendDecimalSeparator("100", "100.");
+        checkAppendDecimalSeparator("500", "500.");
 
-        checkAppendDot("-0", "-0.");
-        checkAppendDot("-1", "-1.");
-        checkAppendDot("-8", "-8.");
-        checkAppendDot("-9", "-9.");
-        checkAppendDot("-10", "-10.");
-        checkAppendDot("-100", "-100.");
-        checkAppendDot("-500", "-500.");
+        checkAppendDecimalSeparator("-0", "-0.");
+        checkAppendDecimalSeparator("-1", "-1.");
+        checkAppendDecimalSeparator("-8", "-8.");
+        checkAppendDecimalSeparator("-9", "-9.");
+        checkAppendDecimalSeparator("-10", "-10.");
+        checkAppendDecimalSeparator("-100", "-100.");
+        checkAppendDecimalSeparator("-500", "-500.");
 
         //with commas
-        checkAppendDot("84,357", "84,357.");
-        checkAppendDot("8,762,423,634", "8,762,423,634.");
-        checkAppendDot("873,283,568", "873,283,568.");
-        checkAppendDot("8,235,854,645", "8,235,854,645.");
-        checkAppendDot("23,482,314", "23,482,314.");
-        checkAppendDot("234,643,737", "234,643,737.");
+        checkAppendDecimalSeparator("84,357", "84,357.");
+        checkAppendDecimalSeparator("8,762,423,634", "8,762,423,634.");
+        checkAppendDecimalSeparator("873,283,568", "873,283,568.");
+        checkAppendDecimalSeparator("8,235,854,645", "8,235,854,645.");
+        checkAppendDecimalSeparator("23,482,314", "23,482,314.");
+        checkAppendDecimalSeparator("234,643,737", "234,643,737.");
 
-        checkAppendDot("-72,341,234", "-72,341,234.");
-        checkAppendDot("-8,023,042,394", "-8,023,042,394.");
-        checkAppendDot("-626,356,345", "-626,356,345.");
-        checkAppendDot("-67,235,923,052", "-67,235,923,052.");
-        checkAppendDot("-7,625,252,352,352", "-7,625,252,352,352.");
-        checkAppendDot("-62,523,523,523,525", "-62,523,523,523,525.");
+        checkAppendDecimalSeparator("-72,341,234", "-72,341,234.");
+        checkAppendDecimalSeparator("-8,023,042,394", "-8,023,042,394.");
+        checkAppendDecimalSeparator("-626,356,345", "-626,356,345.");
+        checkAppendDecimalSeparator("-67,235,923,052", "-67,235,923,052.");
+        checkAppendDecimalSeparator("-7,625,252,352,352", "-7,625,252,352,352.");
+        checkAppendDecimalSeparator("-62,523,523,523,525", "-62,523,523,523,525.");
 
         //with dot at the end
         //without commas
-        checkAppendDot("0.", "0.");
-        checkAppendDot("1.", "1.");
-        checkAppendDot("8.", "8.");
-        checkAppendDot("9.", "9.");
-        checkAppendDot("10.", "10.");
-        checkAppendDot("100.", "100.");
-        checkAppendDot("500.", "500.");
+        checkAppendDecimalSeparator("0.", "0.");
+        checkAppendDecimalSeparator("1.", "1.");
+        checkAppendDecimalSeparator("8.", "8.");
+        checkAppendDecimalSeparator("9.", "9.");
+        checkAppendDecimalSeparator("10.", "10.");
+        checkAppendDecimalSeparator("100.", "100.");
+        checkAppendDecimalSeparator("500.", "500.");
 
-        checkAppendDot("-0.", "-0.");
-        checkAppendDot("-1.", "-1.");
-        checkAppendDot("-8.", "-8.");
-        checkAppendDot("-9.", "-9.");
-        checkAppendDot("-10.", "-10.");
-        checkAppendDot("-100.", "-100.");
-        checkAppendDot("-500.", "-500.");
+        checkAppendDecimalSeparator("-0.", "-0.");
+        checkAppendDecimalSeparator("-1.", "-1.");
+        checkAppendDecimalSeparator("-8.", "-8.");
+        checkAppendDecimalSeparator("-9.", "-9.");
+        checkAppendDecimalSeparator("-10.", "-10.");
+        checkAppendDecimalSeparator("-100.", "-100.");
+        checkAppendDecimalSeparator("-500.", "-500.");
 
         //with commas
-        checkAppendDot("8,235.", "8,235.");
-        checkAppendDot("9,342.", "9,342.");
-        checkAppendDot("142,326,735.", "142,326,735.");
-        checkAppendDot("9,346,843,456.", "9,346,843,456.");
-        checkAppendDot("924,536,576.", "924,536,576.");
-        checkAppendDot("945,358,636.", "945,358,636.");
+        checkAppendDecimalSeparator("8,235.", "8,235.");
+        checkAppendDecimalSeparator("9,342.", "9,342.");
+        checkAppendDecimalSeparator("142,326,735.", "142,326,735.");
+        checkAppendDecimalSeparator("9,346,843,456.", "9,346,843,456.");
+        checkAppendDecimalSeparator("924,536,576.", "924,536,576.");
+        checkAppendDecimalSeparator("945,358,636.", "945,358,636.");
 
-        checkAppendDot("54,363,463,463.", "54,363,463,463.");
-        checkAppendDot("8,846,356,367.", "8,846,356,367.");
-        checkAppendDot("834,634,634,636.", "834,634,634,636.");
-        checkAppendDot("8,456,363.", "8,456,363.");
-        checkAppendDot("436,373,563.", "436,373,563.");
-        checkAppendDot("3,643,563.", "3,643,563.");
+        checkAppendDecimalSeparator("54,363,463,463.", "54,363,463,463.");
+        checkAppendDecimalSeparator("8,846,356,367.", "8,846,356,367.");
+        checkAppendDecimalSeparator("834,634,634,636.", "834,634,634,636.");
+        checkAppendDecimalSeparator("8,456,363.", "8,456,363.");
+        checkAppendDecimalSeparator("436,373,563.", "436,373,563.");
+        checkAppendDecimalSeparator("3,643,563.", "3,643,563.");
 
         //with dot in the middle
         //without commas
-        checkAppendDot("0.6", "0.6");
-        checkAppendDot("1.235", "1.235");
-        checkAppendDot("8.8236", "8.8236");
-        checkAppendDot("9.8245", "9.8245");
-        checkAppendDot("10.7", "10.7");
-        checkAppendDot("100.3247", "100.3247");
-        checkAppendDot("500.7235", "500.7235");
+        checkAppendDecimalSeparator("0.6", "0.6");
+        checkAppendDecimalSeparator("1.235", "1.235");
+        checkAppendDecimalSeparator("8.8236", "8.8236");
+        checkAppendDecimalSeparator("9.8245", "9.8245");
+        checkAppendDecimalSeparator("10.7", "10.7");
+        checkAppendDecimalSeparator("100.3247", "100.3247");
+        checkAppendDecimalSeparator("500.7235", "500.7235");
 
-        checkAppendDot("-0.736", "-0.736");
-        checkAppendDot("-1.8356", "-1.8356");
-        checkAppendDot("-8.5437", "-8.5437");
-        checkAppendDot("-9.7235", "-9.7235");
-        checkAppendDot("-10.834", "-10.834");
-        checkAppendDot("-100.01", "-100.01");
-        checkAppendDot("-500.5", "-500.5");
+        checkAppendDecimalSeparator("-0.736", "-0.736");
+        checkAppendDecimalSeparator("-1.8356", "-1.8356");
+        checkAppendDecimalSeparator("-8.5437", "-8.5437");
+        checkAppendDecimalSeparator("-9.7235", "-9.7235");
+        checkAppendDecimalSeparator("-10.834", "-10.834");
+        checkAppendDecimalSeparator("-100.01", "-100.01");
+        checkAppendDecimalSeparator("-500.5", "-500.5");
 
         //with commas
-        checkAppendDot("124,513.25835", "124,513.25835");
-        checkAppendDot("62,352.7235", "62,352.7235");
-        checkAppendDot("6,626.8256", "6,626.8256");
-        checkAppendDot("2,346.7925", "2,346.7925");
-        checkAppendDot("762,462.6782", "762,462.6782");
-        checkAppendDot("7,624,623.2", "7,624,623.2");
-        checkAppendDot("762,362,62.72", "762,362,62.72");
+        checkAppendDecimalSeparator("124,513.25835", "124,513.25835");
+        checkAppendDecimalSeparator("62,352.7235", "62,352.7235");
+        checkAppendDecimalSeparator("6,626.8256", "6,626.8256");
+        checkAppendDecimalSeparator("2,346.7925", "2,346.7925");
+        checkAppendDecimalSeparator("762,462.6782", "762,462.6782");
+        checkAppendDecimalSeparator("7,624,623.2", "7,624,623.2");
+        checkAppendDecimalSeparator("762,362,62.72", "762,362,62.72");
 
-        checkAppendDot("-77,322,225.7", "-77,322,225.7");
-        checkAppendDot("-823,452,168,746.734535", "-823,452,168,746.734535");
-        checkAppendDot("-2,523,578.725", "-2,523,578.725");
-        checkAppendDot("-8,643.825", "-8,643.825");
-        checkAppendDot("-6,235.725", "-6,235.725");
-        checkAppendDot("-734,535.73", "-734,535.73");
-        checkAppendDot("-84,564.622", "-84,564.622");
+        checkAppendDecimalSeparator("-77,322,225.7", "-77,322,225.7");
+        checkAppendDecimalSeparator("-823,452,168,746.734535", "-823,452,168,746.734535");
+        checkAppendDecimalSeparator("-2,523,578.725", "-2,523,578.725");
+        checkAppendDecimalSeparator("-8,643.825", "-8,643.825");
+        checkAppendDecimalSeparator("-6,235.725", "-6,235.725");
+        checkAppendDecimalSeparator("-734,535.73", "-734,535.73");
+        checkAppendDecimalSeparator("-84,564.622", "-84,564.622");
 
         //engineer numbers
-        checkAppendDot("7.e+7234", "7.e+7234");
-        checkAppendDot("1.e+72", "1.e+72");
-        checkAppendDot("5.e+92", "5.e+92");
-        checkAppendDot("4.e-234", "4.e-234");
-        checkAppendDot("8.e-19", "8.e-19");
-        checkAppendDot("2.e-84", "2.e-84");
+        checkAppendDecimalSeparator("7.e+7234", "7.e+7234");
+        checkAppendDecimalSeparator("1.e+72", "1.e+72");
+        checkAppendDecimalSeparator("5.e+92", "5.e+92");
+        checkAppendDecimalSeparator("4.e-234", "4.e-234");
+        checkAppendDecimalSeparator("8.e-19", "8.e-19");
+        checkAppendDecimalSeparator("2.e-84", "2.e-84");
 
-        checkAppendDot("-4.e+13", "-4.e+13");
-        checkAppendDot("-2.e+126", "-2.e+126");
-        checkAppendDot("-7.e+1482", "-7.e+1482");
-        checkAppendDot("-6.e-723", "-6.e-723");
-        checkAppendDot("-5.e-17", "-5.e-17");
-        checkAppendDot("-2.e-79", "-2.e-79");
+        checkAppendDecimalSeparator("-4.e+13", "-4.e+13");
+        checkAppendDecimalSeparator("-2.e+126", "-2.e+126");
+        checkAppendDecimalSeparator("-7.e+1482", "-7.e+1482");
+        checkAppendDecimalSeparator("-6.e-723", "-6.e-723");
+        checkAppendDecimalSeparator("-5.e-17", "-5.e-17");
+        checkAppendDecimalSeparator("-2.e-79", "-2.e-79");
 
-        checkAppendDot("6.21e+24", "6.21e+24");
-        checkAppendDot("3.762e+789", "3.762e+789");
-        checkAppendDot("1.627e+25", "1.627e+25");
-        checkAppendDot("7.831e-19", "7.831e-19");
-        checkAppendDot("9.1346e-3216", "9.1346e-3216");
-        checkAppendDot("1.143e-1446", "1.143e-1446");
+        checkAppendDecimalSeparator("6.21e+24", "6.21e+24");
+        checkAppendDecimalSeparator("3.762e+789", "3.762e+789");
+        checkAppendDecimalSeparator("1.627e+25", "1.627e+25");
+        checkAppendDecimalSeparator("7.831e-19", "7.831e-19");
+        checkAppendDecimalSeparator("9.1346e-3216", "9.1346e-3216");
+        checkAppendDecimalSeparator("1.143e-1446", "1.143e-1446");
 
-        checkAppendDot("-8.09e+74", "-8.09e+74");
-        checkAppendDot("-6.863e+835", "-6.863e+835");
-        checkAppendDot("-4.325e+7267", "-4.325e+7267");
-        checkAppendDot("-2.13e-874", "-2.13e-874");
-        checkAppendDot("-2.126e-1353", "-2.126e-1353");
-        checkAppendDot("-1.73e-735", "-1.73e-735");
+        checkAppendDecimalSeparator("-8.09e+74", "-8.09e+74");
+        checkAppendDecimalSeparator("-6.863e+835", "-6.863e+835");
+        checkAppendDecimalSeparator("-4.325e+7267", "-4.325e+7267");
+        checkAppendDecimalSeparator("-2.13e-874", "-2.13e-874");
+        checkAppendDecimalSeparator("-2.126e-1353", "-2.126e-1353");
+        checkAppendDecimalSeparator("-1.73e-735", "-1.73e-735");
     }
 
     /**
@@ -655,7 +654,7 @@ public class NumberFormatterTest {
      * Tests for round operation.
      */
     @Test
-    public void roundTests() {
+    public void formatTests() {
         //integers
         {
             //less that 16 digits
@@ -863,13 +862,13 @@ public class NumberFormatterTest {
     }
 
     /**
-     * Checks that dot is added to number.
+     * Checks that dot is appended to number.
      *
      * @param number         number to edit.
      * @param expectedResult required result after performing operation.
      */
-    private void checkAppendDot(String number, String expectedResult) {
-        String result = NumberFormatter.appendDot(number);
+    private void checkAppendDecimalSeparator(String number, String expectedResult) {
+        String result = NumberFormatter.appendDecimalSeparator(number);
         assertEquals(expectedResult, result);
     }
 
