@@ -1070,6 +1070,115 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
+     * Tests for negate operation.
+     */
+    @Test
+    public void negateTests() {
+        //standard cases
+        checkTyped("~", "0", "");
+        checkTyped("0~", "0", "");
+        checkTyped("1~", "-1", "");
+        checkTyped("2~", "-2", "");
+        checkTyped("3~", "-3", "");
+        checkTyped("4~", "-4", "");
+        checkTyped("5~", "-5", "");
+        checkTyped("6~", "-6", "");
+        checkTyped("7~", "-7", "");
+        checkTyped("8~", "-8", "");
+        checkTyped("9~", "-9", "");
+
+        //without comma
+        checkTyped("17~", "-17", "");
+        checkTyped("256~", "-256", "");
+
+        //with comma
+        checkTyped("11515~", "-11,515", "");
+        checkTyped("734347956~", "-734,347,956", "");
+
+        //several negate operations
+        checkTyped("1~2~3", "123", "");
+        checkTyped("1~2~3~", "-123","");
+        checkTyped("100~1000~10000~100000", "-1,001,000,100,001,000", "");
+        checkTyped("100~1000~10000~100000~", "1,001,000,100,001,000", "");
+
+        //after dot
+        checkTyped("62.~", "-62.", "");
+        checkTyped("623626.~", "-623,626.", "");
+
+        //in a row
+        checkTyped("866~~~~~", "-866", "");
+        checkTyped("98791480~~~~~~", "98,791,480", "");
+
+        //after another unary
+        checkTyped("8^~", "-64", "negate(sqr(8))");
+        checkTyped("123^~", "-15,129", "negate(sqr(123))");
+        checkTyped("49@~", "-7", "negate(√(49))");
+        checkTyped("3600000000@~", "-60,000", "negate(√(3600000000))");
+        checkTyped("1;~", "-1", "negate(1/(1))");
+        checkTyped("0.000001;~", "-1,000,000", "negate(1/(0.000001))");
+
+        //after binary
+        checkTyped("16+~", "-16", "16 + negate(16)");
+        checkTyped("7624+~", "-7,624", "7624 + negate(7624)");
+        checkTyped("564-~", "-564", "564 - negate(564)");
+        checkTyped("6522456-~", "-6,522,456", "6522456 - negate(6522456)");
+        checkTyped("12*~", "-12", "12 × negate(12)");
+        checkTyped("344363*~", "-344,363", "344363 × negate(344363)");
+        checkTyped("55/~", "-55", "55 ÷ negate(55)");
+        checkTyped("1567/~", "-1,567", "1567 ÷ negate(1567)");
+
+        //after percent
+        checkTyped("78%~", "0", "negate(0)");
+        checkTyped("56245%~", "0", "negate(0)");
+
+        //after equals
+        checkTyped("73=~", "-73", "negate(73)");
+        checkTyped("532626=~", "-532,626", "negate(532626)");
+
+        //negating negated
+        checkTyped("92/5=~~", "18.4", "negate(negate(18.4))");
+        checkTyped("8898+123=~~~", "-9,021", "negate(negate(negate(9021)))");
+
+        //negating after second inputted
+        checkTyped("8*6~", "-6", "8 ×");
+        checkTyped("856-30~", "-30", "856 -");
+
+        //after second calculating
+        checkTyped("8*6^~", "-36", "8 × negate(sqr(6))");
+        checkTyped("1+2+3+4^^~", "-256", "1 + 2 + 3 + negate(sqr(sqr(4)))");
+
+        //after clear text
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("~");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("~");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        //after clear all
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("~");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564*");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("~");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
      * Checks that screen label has required text after clicking on buttons.
      *
      * @param buttons            buttons that should be clicked.
