@@ -55,22 +55,22 @@ public class FontResizeListener implements InvalidationListener {
         //get text width
         Text text = new Text(label.getText());
         text.setFont(label.getFont());
-        double width = text.getBoundsInLocal().getWidth();
+        int width = (int) text.getBoundsInLocal().getWidth();
 
-        double fontSize = label.getFont().getSize();
+        int fontSize = (int) label.getFont().getSize();
 
         //reduce font size
-        double widthToReduce = scene.getWidth() - WIDTH_DIFF_TO_REDUCE;
+        int widthToReduce = (int) (scene.getWidth() - WIDTH_DIFF_TO_REDUCE);
         while (width > widthToReduce) {
             text.setFont(new Font(fontSize--));
-            width = text.getBoundsInLocal().getWidth();
+            width = (int) text.getBoundsInLocal().getWidth();
         }
 
         //increase font size
-        double widthToIncrease = scene.getWidth() - WIDTH_DIFF_TO_INCREASE;
+        int widthToIncrease = (int) (scene.getWidth() - WIDTH_DIFF_TO_INCREASE);
         while (width < widthToIncrease) {
             text.setFont(new Font(fontSize++));
-            width = text.getBoundsInLocal().getWidth();
+            width = (int) text.getBoundsInLocal().getWidth();
         }
 
         //fit font size
