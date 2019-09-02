@@ -6,7 +6,9 @@ import java.math.BigDecimal;
 import java.util.Stack;
 
 /**
- * Model of memory.
+ * Model of memory for calculator.
+ * <p>
+ * Allows user to save values in memory, and to recall them later.
  *
  * @author Mykhailo Bormashenko
  */
@@ -22,8 +24,9 @@ public class Memory {
     }
 
     /**
-     * Passes object to memory.
-     * @param number object to pass.
+     * Saves object in memory.
+     *
+     * @param number object to save.
      */
     public void storeToMemory(BigDecimal number) {
         store.push(number);
@@ -37,10 +40,10 @@ public class Memory {
     }
 
     /**
-     * Recalls last passed to memory object.
-     * @return last passed to memory object or null if store is empty.
-     * @throws OverflowException while validation in calculator tests.model for recalled value is failed.
-     * @see Calculation
+     * Recalls last saved in memory object.
+     *
+     * @return last saved in memory object or null if store is empty.
+     * @throws OverflowException while validation in {@link Calculation} for recalled value is failed.
      */
     public BigDecimal recall() {
         if (store.isEmpty()) {
@@ -57,10 +60,12 @@ public class Memory {
     }
 
     /**
-     * Adds value to last passed to memory. Result of adding will be set instead of
-     * current last passed to memory object.
-     * If store is empty, this operation is similar to store to memory operation.
-     * @param number value to add to last passed to memory.
+     * Adds value to the last saved in memory object.
+     *
+     * Result of adding will be set instead of current last passed to memory object.
+     * If store is empty, this operation will save the value in the memory.
+     *
+     * @param number value to add to the last saved in memory object.
      */
     public void addToMemory(BigDecimal number) {
         if (store.isEmpty()) {
@@ -72,14 +77,16 @@ public class Memory {
     }
 
     /**
-     * Subtracts value from last passed to memory. Result of subtracting will be set instead of
-     * current last passed to memory object.
-     * If store is empty, this operation is similar to store to memory operation.
-     * @param number value to subtract from last passed to memory.
+     * Subtracts value from the last saved in memory object.
+     *
+     * Result of subtracting will be set instead of current last passed to memory object.
+     * If store is empty, this operation will save the negated value in the memory.
+     *
+     * @param number value to subtract from last saved in memory object.
      */
     public void subtractFromMemory(BigDecimal number) {
         if (store.isEmpty()) {
-            storeToMemory(number);
+            storeToMemory(number.negate());
         } else {
             BigDecimal memory = store.pop();
             store.push(memory.subtract(number).stripTrailingZeros());
