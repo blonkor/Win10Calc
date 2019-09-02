@@ -9,28 +9,33 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for model of memory.
+ * Test class for {@link Memory}.
  *
  * @author Mykhailo Bormashenko
  */
 class MemoryModelTest {
 
     /**
-     * Exception message for overflow.
+     * Exception message for {@code OverflowException}.
      *
      * @see OverflowException
      */
     private static final String OVERFLOW_MESSAGE = "Overflow";
 
     /**
-     * Object of memory.
-     *
-     * @see Memory
+     * Object of {@code Memory}.
      */
     private static Memory memory;
 
     /**
      * Tests for operations with store.
+     * <p>
+     * Includes next operations:
+     * store to memory;
+     * recall from memory;
+     * clear memory;
+     * add to empty memory;
+     * subtract from empty memory.
      */
     @Test
     void operationsWithStoreTests() {
@@ -61,8 +66,10 @@ class MemoryModelTest {
         checkOperationsWithStore(new BigDecimal[]{newBD("-234.234"), newBD("235")});
 
         //more
-        checkOperationsWithStore(new BigDecimal[]{newBD("765.3"), newBD("-23.56"), newBD("65363")});
-        checkOperationsWithStore(new BigDecimal[]{newBD("1324"), newBD("-124"), newBD("652523.5")});
+        checkOperationsWithStore(new BigDecimal[]{newBD("765.3"), newBD("-23.56"),
+                newBD("65363")});
+        checkOperationsWithStore(new BigDecimal[]{newBD("1324"), newBD("-124"),
+                newBD("652523.5")});
 
         checkOperationsWithStore(new BigDecimal[]{newBD("-436834"), newBD("7347357"),
                 newBD("-2676856"), newBD("-34696")});
@@ -301,10 +308,15 @@ class MemoryModelTest {
     void recallFromEmptyMemory() {
         memory = new Memory();
         assertNull(memory.recall());
+
+        memory.addToMemory(newBD("545"));
+        memory.clearMemory();
+
+        assertNull(memory.recall());
     }
 
     /**
-     * Tests for recall from memory operation while this operation should cause exception.
+     * Tests for recall from memory operation while this operation should cause {@code OverflowException}.
      */
     @Test
     void recallOverflowExceptionTests() {
@@ -360,6 +372,7 @@ class MemoryModelTest {
 
     /**
      * Method for testing operations with store.
+     * <p>
      * Includes next operations:
      * store to memory;
      * recall from memory;
@@ -367,10 +380,9 @@ class MemoryModelTest {
      * add to empty memory;
      * subtract from empty memory.
      *
-     * @param values             at least one big decimal object that should be passed to memory. If there are more
-     *                           than one object, they should be passed to memory in the same order that
-     *                           they are stored in array. With this objects all operation will be performed.
-     * @see Memory
+     * @param values at least one {@code BigDecimal} object that should be saved in memory. If there are more
+     *               than one object, they should be saved in memory in the same order that they are stored in
+     *               array. With this objects all operation will be performed.
      */
     private void checkOperationsWithStore(BigDecimal[] values) {
         memory = new Memory();
@@ -385,10 +397,9 @@ class MemoryModelTest {
     /**
      * Method for testing store to memory operation.
      *
-     * @param values             at least one big decimal object that should be passed to memory. If there are more
-     *                           than one object, they should be passed to memory in the same order that
-     *                           they are stored in array.
-     * @see Memory
+     * @param values at least one {@code BigDecimal} object that should be saved in memory. If there are more
+     *               than one object, they should be saved in memory in the same order that they are stored in
+     *               array. With this objects all operation will be performed.
      */
     private void checkStoreToMemory(BigDecimal[] values) {
         storeValuesToMemory(values);
@@ -405,11 +416,11 @@ class MemoryModelTest {
     }
 
     /**
-     * Method for passing objects to memory's store.
+     * Method for saving objects in memory's store.
      *
-     * @param values             at least one big decimal object that should be passed to memory. If there are more
-     *                           than one object, they should be passed to memory in the same order that
-     *                           they are stored in array.
+     * @param values at least one {@code BigDecimal} object that should be saved in memory. If there are more
+     *               than one object, they should be saved in memory in the same order that they are stored in
+     *               array. With this objects all operation will be performed.
      */
     private void storeValuesToMemory(BigDecimal[] values) {
         for (BigDecimal value : values) {
@@ -420,9 +431,8 @@ class MemoryModelTest {
     /**
      * Method for testing recall from memory operation.
      *
-     * @param expectedRecalledValue as {@code Stack} used as memory store, the last passed to memory
+     * @param expectedRecalledValue as {@code Stack} used as memory store, the last saved in memory
      *                              object should be returned while recall operation is performed.
-     * @see Memory
      */
     private void checkRecall(BigDecimal expectedRecalledValue) {
         assertEquals(expectedRecalledValue, memory.recall());
@@ -430,9 +440,8 @@ class MemoryModelTest {
 
     /**
      * Method for testing clear memory operation.
+     * <p>
      * After performing this operation, memory should be empty.
-     *
-     * @see Memory
      */
     private void checkClearMemory() {
         memory.clearMemory();
@@ -441,10 +450,10 @@ class MemoryModelTest {
 
     /**
      * Method for testing add to memory operation while memory store is empty.
+     * <p>
      * While memory store is empty, this operation is similar to memory store operation.
      *
-     * @param valueToAdd big decimal object that should be added to empty memory.
-     * @see Memory
+     * @param valueToAdd {@code BidDecimal} object that should be added to empty memory.
      */
     private void checkAddToEmptyMemory(BigDecimal valueToAdd) {
         memory = new Memory();
@@ -457,31 +466,30 @@ class MemoryModelTest {
 
     /**
      * Method for testing subtract from memory operation while memory store is empty.
+     * <p>
      * While memory store is empty, this operation is similar to memory store operation.
      *
-     * @param valueToAdd big decimal object that should be subtract from empty memory.
-     * @see Memory
+     * @param valueToSubtract {@code BidDecimal} object that should be subtract from empty memory.
      */
-    private void checkSubtractFromEmptyMemory(BigDecimal valueToAdd) {
+    private void checkSubtractFromEmptyMemory(BigDecimal valueToSubtract) {
         memory = new Memory();
 
-        memory.subtractFromMemory(valueToAdd);
+        memory.subtractFromMemory(valueToSubtract);
         Object[] storage = memory.getStore().toArray();
 
-        assertEquals(valueToAdd, storage[0]);
+        assertEquals(valueToSubtract.negate(), storage[0]);
     }
 
     /**
      * Method for testing add to memory operation while memory store is not empty.
      *
-     * @param values             at least one big decimal object that should be passed to memory. If there are more
-     *                           than one object, they should be passed to memory in the same order that
+     * @param values             at least one {@code BidDecimal} object that should be saved in memory. If there
+     *                           are more than one object, they should be saved in memory in the same order that
      *                           they are stored in array.
-     * @param valueToAdd         big decimal object that should be added to non-empty memory.
-     * @param expectedFirstValue expected last value in memory store after performing add to memory operation.
-     *                           Note that there is {@code Stack} used as memory store, so the last passed to memory
+     * @param valueToAdd         {@code BigDecimal} object that should be added to the last saved in memory object.
+     * @param expectedFirstValue expected first value in memory store after performing add to memory operation.
+     *                           Note that there is {@code Stack} used as memory store, so the last saved in memory
      *                           store object is the object with which the add to memory operation should be performed.
-     * @see Memory
      */
     private void checkAddToMemory(BigDecimal[] values, BigDecimal valueToAdd, BigDecimal expectedFirstValue) {
         memory = new Memory();
@@ -497,15 +505,14 @@ class MemoryModelTest {
     /**
      * Method for testing subtract from memory operation while memory store is not empty.
      *
-     * @param values             at least one big decimal object that should be passed to memory. If there are more
-     *                           than one object, they should be passed to memory in the same order that
+     * @param values             at least one {@code BidDecimal} object that should be saved in memory. If there are
+     *                           more than one object, they should be saved in memory in the same order that
      *                           they are stored in array.
-     * @param valueToAdd         big decimal object that should be subtracted from non-empty memory.
+     * @param valueToAdd         {@code BidDecimal} object that should be subtracted from non-empty memory.
      * @param expectedFirstValue expected last value in memory store after performing subtract from memory operation.
-     *                           Note that there is {@code Stack} used as memory store, so the last passed to memory
-     *                           store object is the object with which the subtract from memory
-     *                           operation should be performed.
-     * @see Memory
+     *                           Note that there is {@code Stack} used as memory store, so the last saved in memory
+     *                           store object is the object with which the subtract from memory operation should be
+     *                           performed.
      */
     private void checkSubtractFromMemory(BigDecimal[] values, BigDecimal valueToAdd, BigDecimal expectedFirstValue) {
         memory = new Memory();
@@ -521,9 +528,8 @@ class MemoryModelTest {
     /**
      * Method for testing exception for recall from memory operation.
      *
-     * @param values as {@code Stack} used as memory store, the last passed to memory
-     *                              object should throw overflow exception while recall operation is performed.
-     * @see Memory
+     * @param values as {@code Stack} used as memory store, the last saved in memory object should throw
+     *               {@code OverflowException} while recall operation is performed.
      * @see OverflowException
      */
     private void checkRecallOverflowException(BigDecimal[] values) {
@@ -538,11 +544,11 @@ class MemoryModelTest {
         }
     }
 
-
     /**
-     * Creates new big decimal object.
-     * @param number string representation of big decimal.
-     * @return big decimal object created from string.
+     * Creates new {@code BidDecimal} object.
+     *
+     * @param number string representation of {@code BidDecimal}.
+     * @return {@code BidDecimal} object created from string.
      */
     private BigDecimal newBD(String number) {
         return new BigDecimal(number);
