@@ -27,6 +27,7 @@ public class ControllerTest extends RobotControl {
         subtractTests();
         multiplyTests();
         divideTests();
+        negateTests();
     }
 
     /**
@@ -1072,8 +1073,7 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for negate operation.
      */
-    @Test
-    public void negateTests() {
+    private void negateTests() {
         //standard cases
         checkTyped("~", "0", "");
         checkTyped("0~", "0", "");
