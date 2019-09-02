@@ -165,7 +165,7 @@ public class Controller implements Initializable {
      * Makes number in result screen decimal (if not decimal yet) if it is allowed.
      * Otherwise, sets "0." to result screen.
      */
-    public void appendDot() {
+    public void appendDecimalSeparator() {
         String number;
 
         if (isEditableScreen) {
@@ -264,7 +264,11 @@ public class Controller implements Initializable {
      * Negates number in result screen while button is clicked.
      */
     public void negate() {
-        unaryOperationPressed(UnaryOperations.NEGATE);
+        if (isEditableScreen) {
+            screen.setText(NumberFormatter.changeSign(screen.getText()));
+        } else {
+            unaryOperationPressed(UnaryOperations.NEGATE);
+        }
     }
 
     /**
@@ -345,6 +349,7 @@ public class Controller implements Initializable {
             equation.setText(EMPTY_STRING);
 
             isEditableScreen = false;
+            isFirstCalculated = true;
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
@@ -672,14 +677,9 @@ public class Controller implements Initializable {
                 calculation.setFirst(number);
                 calculation.calculateUnary(operation);
                 calculation.setFirst(calculation.getResult());
-
                 screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
 
-                if (operation == UnaryOperations.NEGATE) {
-                    equation.setText("-" + number.toString());
-                } else {
-                    equation.setText(operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET);
-                }
+                equation.setText(operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET);
 
             } else if (isUnaryOperationPressed) {
                 calculation.setSecond(calculation.getFirst());
@@ -708,11 +708,15 @@ public class Controller implements Initializable {
                             Math.max(lastIndexOfMultiply, lastIndexOfDivide));
 
                     textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
-                    textAfter = equationTextToSet.substring(lastIndexOfOperation + 1);
+                    textAfter = equationTextToSet.substring(lastIndexOfOperation + 2);
                 }
 
-                equationTextToSet = textBefore + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
-                        textAfter + SPACE + CLOSING_BRACKET;
+                if (textBefore.equals(EMPTY_STRING)) {
+                    equationTextToSet = operation.symbol + OPENING_BRACKET + textAfter + CLOSING_BRACKET;
+                } else {
+                    equationTextToSet = textBefore + SPACE + operation.symbol + OPENING_BRACKET + textAfter + CLOSING_BRACKET;
+                }
+
                 equation.setText(equationTextToSet);
 
             } else {
@@ -728,16 +732,24 @@ public class Controller implements Initializable {
                 }
 
                 screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
-                equation.setText(equation.getText() + SPACE + operation.symbol + OPENING_BRACKET + SPACE +
-                        NumberFormatter.formatWithoutGroupSeparator(number) + SPACE + CLOSING_BRACKET);
+
+                if (isPercentPressed && equation.getText().equals(ZERO)) {
+                    equation.setText(operation.symbol + OPENING_BRACKET +
+                            NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET);
+                } else {
+
+                    if (equation.getText().equals(EMPTY_STRING)) {
+                        equation.setText(operation.symbol + OPENING_BRACKET +
+                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET);
+                    } else {
+                        equation.setText(equation.getText() + SPACE + operation.symbol + OPENING_BRACKET +
+                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET);
+                    }
+                }
             }
 
             setFlags(false, false, true, false,
                     true, false, false);
-
-            if (operation == UnaryOperations.NEGATE) {
-                isEditableScreen = true;
-            }
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
@@ -763,8 +775,6 @@ public class Controller implements Initializable {
 
             screen.setText(ZERO);
             equation.setText(ZERO);
-
-            isFirstCalculated = false;
         } else {
             BinaryOperations operation = calculation.getBinaryOperation();
             BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
@@ -778,12 +788,10 @@ public class Controller implements Initializable {
 
             screen.setText(NumberFormatter.formatNumber(calculation.getSecond()));
             equation.setText(equation.getText() + SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()));
-
-            isFirstCalculated = true;
         }
 
         setFlags(false, false, false, false,
-                isFirstCalculated, true, false);
+                true, true, false);
     }
 
     private void exceptionThrown(String message) {

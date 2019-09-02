@@ -167,6 +167,28 @@ public class NumberFormatter {
     }
 
     /**
+     * Changes sign of number.
+     * <p>
+     * Prepends minus if number is positive or removes it otherwise.
+     * <p>
+     * If number is zero, returns zero.
+     *
+     * @param number number to edit.
+     * @return edited number.
+     */
+    public static String changeSign(String number) {
+        if (!number.equals(ZERO)) {
+            if (!isNegativeNumber(number)) {
+                number = StringUtils.prependIfMissing(number, MINUS);
+            } else {
+                number = number.replace(MINUS, EMPTY_STRING);
+            }
+        }
+
+        return number;
+    }
+
+    /**
      * Converts number with grouping separators to big decimal.
      *
      * @param number number to convert.
