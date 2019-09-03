@@ -35,6 +35,7 @@ public class ControllerTest extends RobotControl {
         negateTests();
         sqrTests();
         sqrtTests();
+        inverseTests();
     }
 
     /**
@@ -1221,9 +1222,9 @@ public class ControllerTest extends RobotControl {
         checkTyped("623626.^", "388,909,387,876", "sqr(623626)");
 
         //in a row
-        checkTyped("866^^^^^", "1.001319201940001e+94",
+        checkTyped("866^^^^^", "1.00131920194e+94",
                 "sqr(sqr(sqr(sqr(sqr(866)))))");
-        checkTyped("98791480^^^^^^", "4.59248204140236e+511",
+        checkTyped("98791480^^^^^^", "4.592482041402361e+511",
                 "sqr(sqr(sqr(sqr(sqr(sqr(98791480))))))");
 
         //after another unary
@@ -1395,6 +1396,112 @@ public class ControllerTest extends RobotControl {
         clickButtons("@");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("√(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
+     * Tests for inverse operation.
+     */
+    private void inverseTests() {
+        //standard cases
+        checkTyped(";", "Cannot divide by zero", "1/(0)");
+        checkTyped("0;", "Cannot divide by zero", "1/(0)");
+        checkTyped("1;", "1", "1/(1)");
+        checkTyped("2;", "0.5", "1/(2)");
+        checkTyped("3;", "0.3333333333333333", "1/(3)");
+        checkTyped("4;", "0.25", "1/(4)");
+        checkTyped("5;", "0.2", "1/(5)");
+        checkTyped("6;", "0.1666666666666667", "1/(6)");
+        checkTyped("7;", "0.1428571428571429", "1/(7)");
+        checkTyped("8;", "0.125", "1/(8)");
+        checkTyped("9;", "0.1111111111111111", "1/(9)");
+
+        //without comma
+        checkTyped("17;", "0.0588235294117647", "1/(17)");
+        checkTyped("256;", "0.00390625", "1/(256)");
+
+        //with comma
+        checkTyped("11515;", "8.684324793747286e-5", "1/(11515)");
+        checkTyped("734347956;", "1.361752275375027e-9", "1/(734347956)");
+
+        //several inverse operations
+        checkTyped("1;2;3", "3", "");
+        checkTyped("1;2;3;", "0.3333333333333333","1/(3)");
+        checkTyped("100;1000;10000;100000", "100,000", "");
+        checkTyped("100;1000;10000;100000;", "0.00001", "1/(100000)");
+
+        //after dot
+        checkTyped("62.;", "0.0161290322580645", "1/(62)");
+        checkTyped("623626.;", "1.603525189777206e-6", "1/(623626)");
+
+        //in a row
+        checkTyped("866;;;;;", "0.0011547344110855",
+                "1/(1/(1/(1/(1/(866)))))");
+        checkTyped("98791480;;;;;;", "98,791,480",
+                "1/(1/(1/(1/(1/(1/(98791480))))))");
+
+        //after another unary
+        checkTyped("8~;", "-0.125", "1/(-8)");
+        checkTyped("123~;", "-0.008130081300813", "1/(-123)");
+        checkTyped("49^;", "4.164931278633903e-4", "1/(sqr(49))");
+        checkTyped("3600000000^;", "7.716049382716049e-20", "1/(sqr(3600000000))");
+        checkTyped("1@;", "1", "1/(√(1))");
+        checkTyped("0.000001@;", "1,000", "1/(√(0.000001))");
+
+        //after binary
+        checkTyped("16+;", "0.0625", "16 + 1/(16)");
+        checkTyped("7624+;", "1.311647429171039e-4", "7624 + 1/(7624)");
+        checkTyped("564-;", "0.0017730496453901", "564 - 1/(564)");
+        checkTyped("6522456-;", "1.533164807857654e-7", "6522456 - 1/(6522456)");
+        checkTyped("12*;", "0.0833333333333333", "12 × 1/(12)");
+        checkTyped("344363*;", "2.903912441232072e-6", "344363 × 1/(344363)");
+        checkTyped("55/;", "0.0181818181818182", "55 ÷ 1/(55)");
+        checkTyped("1567/;", "6.381620931716656e-4", "1567 ÷ 1/(1567)");
+
+        //after percent
+        checkTyped("78%;", "Cannot divide by zero", "1/(0)");
+        checkTyped("56245%;", "Cannot divide by zero", "1/(0)");
+
+        //after equals
+        checkTyped("73=;", "0.0136986301369863", "1/(73)");
+        checkTyped("532626=;", "1.877490021140538e-6", "1/(532626)");
+
+        //inverse after second inputted
+        checkTyped("8*6;", "0.1666666666666667", "8 × 1/(6)");
+        checkTyped("856-30;", "0.0333333333333333", "856 - 1/(30)");
+
+        //after second calculating
+        checkTyped("8*6^;", "0.0277777777777778", "8 × 1/(sqr(6))");
+        checkTyped("1+2+3+4;;", "4", "1 + 2 + 3 + 1/(1/(4))");
+
+        //after clear text
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons(";");
+        assertEquals("Cannot divide by zero", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("1/(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons(";");
+        assertEquals("Cannot divide by zero", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("1/(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        //after clear all
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons(";");
+        assertEquals("Cannot divide by zero", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("1/(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564*");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons(";");
+        assertEquals("Cannot divide by zero", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("1/(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
 
     /**

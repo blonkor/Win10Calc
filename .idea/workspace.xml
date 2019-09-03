@@ -4,6 +4,7 @@
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
@@ -101,6 +102,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ControllerTest.inverseTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="inverseTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerTest.sqrTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -148,22 +165,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ViewFormatterTest.showOrHideMemoryPanel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ViewFormatterTest" />
-      <option name="METHOD_NAME" value="showOrHideMemoryPanel" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="tests.model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -201,19 +202,19 @@
     <list>
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="JUnit.ViewFormatterTest.showOrHideMemoryPanel" />
       <item itemvalue="JUnit.MemoryModelTest" />
       <item itemvalue="JUnit.ControllerTest.allTests" />
       <item itemvalue="JUnit.ControllerTest.sqrTests" />
       <item itemvalue="JUnit.ControllerTest.sqrtTests" />
+      <item itemvalue="JUnit.ControllerTest.inverseTests" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerTest.allTests" />
+        <item itemvalue="JUnit.ControllerTest.inverseTests" />
         <item itemvalue="JUnit.ControllerTest.sqrtTests" />
         <item itemvalue="JUnit.ControllerTest.sqrTests" />
         <item itemvalue="JUnit.MemoryModelTest" />
-        <item itemvalue="JUnit.ViewFormatterTest.showOrHideMemoryPanel" />
       </list>
     </recent_temporary>
   </component>
@@ -227,20 +228,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Tests for hide and expand created.">
-      <created>1566995936724</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1566995936724</updated>
-    </task>
-    <task id="LOCAL-00075" summary="View tests refactored.">
-      <created>1566999122186</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1566999122186</updated>
     </task>
     <task id="LOCAL-00076" summary="Keyboard controlling removed from view listener to controller's method.">
       <created>1567002353538</created>
@@ -571,7 +558,21 @@
       <option name="project" value="LOCAL" />
       <updated>1567511710839</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Tests for sqrt operation created.">
+      <created>1567517398574</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1567517398574</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Bug fix in controller with equation label text after error.">
+      <created>1567517426416</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1567517426416</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -605,8 +606,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Handling exceptions in controller." />
-    <MESSAGE value="Updating memory labels so it works." />
     <MESSAGE value="Updating memory labels so it works correctly" />
     <MESSAGE value="Several tests for controller for append digit operation created." />
     <MESSAGE value="Bug fix with appending digit after negate operation." />
@@ -630,7 +629,9 @@
     <MESSAGE value="Refactoring memory model." />
     <MESSAGE value="Optimizing tests." />
     <MESSAGE value="Tests for sqr operation created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for sqr operation created." />
+    <MESSAGE value="Tests for sqrt operation created." />
+    <MESSAGE value="Bug fix in controller with equation label text after error." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix in controller with equation label text after error." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
