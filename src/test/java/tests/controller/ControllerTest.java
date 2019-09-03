@@ -4,6 +4,8 @@ import javafx.scene.control.Label;
 import org.junit.Test;
 import util.RobotControl;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -13,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see com.implemica.bormashenko.calculator.controller.Controller
  */
 public class ControllerTest extends RobotControl {
+
+    public ControllerTest() throws AWTException {
+    }
 
     /**
      * Runs al tests

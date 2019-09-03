@@ -11,6 +11,8 @@ import javafx.stage.Window;
 import org.junit.Test;
 import util.RobotControl;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -40,6 +42,9 @@ public class ViewTest extends RobotControl {
      * Default application's coordinate Y.
      */
     private static int DEFAULT_Y = 150;
+
+    public ViewTest() throws AWTException {
+    }
 
     /**
      * Runs all tests.

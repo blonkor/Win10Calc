@@ -11,6 +11,7 @@ import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.api.FxRobot;
 
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -471,6 +472,11 @@ public class RobotControl extends GuiTest {
      */
     protected FxRobot robot = new FxRobot();
 
+    protected Robot awtRobot = new Robot();
+
+    public RobotControl() throws AWTException {
+    }
+
     @Override
     public void setupStage() {
         FXTestUtils.launchApp(SetLauncherAppForTests.class, "");
@@ -608,10 +614,10 @@ public class RobotControl extends GuiTest {
     protected void hoverOn(Node node) {
         Bounds bounds = node.localToScreen(node.getBoundsInLocal());
 
-        double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
-        double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
+        int centerX = (int) ((bounds.getMinX() + bounds.getMaxX()) / 2);
+        int centerY = (int) ((bounds.getMinY() + bounds.getMaxY()) / 2);
 
-        robot.moveTo(centerX, centerY);
+        awtRobot.mouseMove(centerX, centerY);
 
         FXTestUtils.awaitEvents();
     }

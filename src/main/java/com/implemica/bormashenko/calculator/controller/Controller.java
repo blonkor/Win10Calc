@@ -349,6 +349,7 @@ public class Controller implements Initializable {
             equation.setText(EMPTY_STRING);
 
             isEditableScreen = false;
+            isEqualsPressed = true;
             isFirstCalculated = true;
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
@@ -621,8 +622,14 @@ public class Controller implements Initializable {
                     calculation.setBinaryOperation(operation);
 
                     screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
-                    equation.setText(equation.getText() + SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond())
-                            + SPACE + operation.symbol);
+
+                    if (isPercentPressed && equation.getText().equals(ZERO)) {
+                        equation.setText(NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
+                                SPACE + operation.symbol);
+                    } else {
+                        equation.setText(equation.getText() + SPACE +
+                                NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) + SPACE + operation.symbol);
+                    }
                 } else {
 
                     if (isUnaryOperationPressed) {
@@ -631,17 +638,20 @@ public class Controller implements Initializable {
                         screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
                     }
 
-                    calculation.setBinaryOperation(operation);
-
                     if (isEqualsPressed) {
                         calculation.setFirst(numberOnScreen);
 
-                        equation.setText(NumberFormatter.formatWithoutGroupSeparator(calculation.getResult()) +
-                                SPACE + operation.symbol);
+                        if (calculation.getBinaryOperation() == null) {
+                            equation.setText(numberOnScreen + SPACE + operation.symbol);
+                        } else {
+                            equation.setText(NumberFormatter.formatWithoutGroupSeparator(calculation.getResult()) +
+                                    SPACE + operation.symbol);
+                        }
                     } else {
                         equation.setText(equation.getText() + SPACE + operation.symbol);
                     }
 
+                    calculation.setBinaryOperation(operation);
                 }
 
             } else {
