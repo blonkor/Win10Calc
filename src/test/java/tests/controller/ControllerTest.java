@@ -34,6 +34,7 @@ public class ControllerTest extends RobotControl {
         divideTests();
         negateTests();
         sqrTests();
+        sqrtTests();
     }
 
     /**
@@ -1185,7 +1186,7 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
-     * Tests for square root operation.
+     * Tests for square operation.
      */
     private void sqrTests() {
         //standard cases
@@ -1288,6 +1289,112 @@ public class ControllerTest extends RobotControl {
         clickButtons("^");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("sqr(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
+     * Tests for square root operation.
+     */
+    private void sqrtTests() {
+        //standard cases
+        checkTyped("@", "0", "√(0)");
+        checkTyped("0@", "0", "√(0)");
+        checkTyped("1@", "1", "√(1)");
+        checkTyped("2@", "1.414213562373095", "√(2)");
+        checkTyped("3@", "1.732050807568877", "√(3)");
+        checkTyped("4@", "2", "√(4)");
+        checkTyped("5@", "2.23606797749979", "√(5)");
+        checkTyped("6@", "2.449489742783178", "√(6)");
+        checkTyped("7@", "2.645751311064591", "√(7)");
+        checkTyped("8@", "2.82842712474619", "√(8)");
+        checkTyped("9@", "3", "√(9)");
+
+        //without comma
+        checkTyped("17@", "4.123105625617661", "√(17)");
+        checkTyped("256@", "16", "√(256)");
+
+        //with comma
+        checkTyped("11515@", "107.3079680172912", "√(11515)");
+        checkTyped("734347956@", "27,098.85525257478", "√(734347956)");
+
+        //several sqrt operations
+        checkTyped("1@2@3", "3", "");
+        checkTyped("1@2@3@", "1.732050807568877","√(3)");
+        checkTyped("100@1000@10000@100000", "100,000", "");
+        checkTyped("100@1000@10000@100000@", "316.2277660168379", "√(100000)");
+
+        //after dot
+        checkTyped("62.@", "7.874007874011811", "√(62)");
+        checkTyped("623626.@", "789.6999430163333", "√(623626)");
+
+        //in a row
+        checkTyped("866@@@@@", "1.235371090882345",
+                "√(√(√(√(√(866)))))");
+        checkTyped("98791480@@@@@@", "1.333268111746662",
+                "√(√(√(√(√(√(98791480))))))");
+
+        //after another unary
+        checkTyped("8~@", "Invalid input", "√(-8)");
+        checkTyped("123~@", "Invalid input", "√(-123)");
+        checkTyped("49^@", "49", "√(sqr(49))");
+        checkTyped("3600000000^@", "3,600,000,000", "√(sqr(3600000000))");
+        checkTyped("1;@", "1", "√(1/(1))");
+        checkTyped("0.000001;@", "1,000", "√(1/(0.000001))");
+
+        //after binary
+        checkTyped("16+@", "4", "16 + √(16)");
+        checkTyped("7624+@", "87.31551981177229", "7624 + √(7624)");
+        checkTyped("564-@", "23.74868417407583", "564 - √(564)");
+        checkTyped("6522456-@", "2,553.909943596289", "6522456 - √(6522456)");
+        checkTyped("12*@", "3.464101615137755", "12 × √(12)");
+        checkTyped("344363*@", "586.8245052824567", "344363 × √(344363)");
+        checkTyped("55/@", "7.416198487095663", "55 ÷ √(55)");
+        checkTyped("1567/@", "39.58535082577897", "1567 ÷ √(1567)");
+
+        //after percent
+        checkTyped("78%@", "0", "√(0)");
+        checkTyped("56245%@", "0", "√(0)");
+
+        //after equals
+        checkTyped("73=@", "8.544003745317531", "√(73)");
+        checkTyped("532626=@", "729.8123046372951", "√(532626)");
+
+        //sqrt after second inputted
+        checkTyped("8*6@", "2.449489742783178", "8 × √(6)");
+        checkTyped("856-30@", "5.477225575051661", "856 - √(30)");
+
+        //after second calculating
+        checkTyped("8*6^@", "6", "8 × √(sqr(6))");
+        checkTyped("1+2+3+4;@", "0.5", "1 + 2 + 3 + √(1/(4))");
+
+        //after clear text
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("@");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("√(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("@");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("√(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        //after clear all
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("@");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("√(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564*");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("@");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("√(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
 
     /**
