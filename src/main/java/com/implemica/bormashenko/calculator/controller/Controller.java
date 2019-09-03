@@ -605,6 +605,8 @@ public class Controller implements Initializable {
             screen.setText(screen.getText().replace(".", ""));
         }
 
+        String equationTextToSet = "";
+
         try {
             if (!isBinaryOperationPressed) {
                 BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen.getText());
@@ -613,23 +615,26 @@ public class Controller implements Initializable {
                     calculation.setFirst(numberOnScreen);
                     calculation.setBinaryOperation(operation);
 
-                    equation.setText(NumberFormatter.formatWithoutGroupSeparator(calculation.getFirst())
-                            + SPACE + operation.symbol);
+                    equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getFirst())
+                            + SPACE + operation.symbol;
                 } else if (!isEqualsPressed && !isUnaryOperationPressed) {
                     calculation.setSecond(numberOnScreen);
+
+                    if (isPercentPressed && equation.getText().equals(ZERO)) {
+                        equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
+                                SPACE + operation.symbol;
+                    } else {
+                        equationTextToSet = equation.getText() + SPACE +
+                                NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
+                                SPACE + operation.symbol;
+                    }
+
                     calculation.calculateBinary();
                     calculation.setFirst(calculation.getResult());
                     calculation.setBinaryOperation(operation);
 
                     screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
 
-                    if (isPercentPressed && equation.getText().equals(ZERO)) {
-                        equation.setText(NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
-                                SPACE + operation.symbol);
-                    } else {
-                        equation.setText(equation.getText() + SPACE +
-                                NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) + SPACE + operation.symbol);
-                    }
                 } else {
 
                     if (isUnaryOperationPressed) {
@@ -642,13 +647,13 @@ public class Controller implements Initializable {
                         calculation.setFirst(numberOnScreen);
 
                         if (calculation.getBinaryOperation() == null) {
-                            equation.setText(numberOnScreen + SPACE + operation.symbol);
+                            equationTextToSet = numberOnScreen + SPACE + operation.symbol;
                         } else {
-                            equation.setText(NumberFormatter.formatWithoutGroupSeparator(calculation.getResult()) +
-                                    SPACE + operation.symbol);
+                            equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getResult()) +
+                                    SPACE + operation.symbol;
                         }
                     } else {
-                        equation.setText(equation.getText() + SPACE + operation.symbol);
+                        equationTextToSet = equation.getText() + SPACE + operation.symbol;
                     }
 
                     calculation.setBinaryOperation(operation);
@@ -657,7 +662,7 @@ public class Controller implements Initializable {
             } else {
                 calculation.setBinaryOperation(operation);
 
-                equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
+                equationTextToSet = equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol;
             }
 
             setFlags(false, true, false, false,
@@ -665,6 +670,8 @@ public class Controller implements Initializable {
 
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
+        } finally {
+            equation.setText(equationTextToSet);
         }
     }
 
@@ -679,27 +686,26 @@ public class Controller implements Initializable {
      * @param operation UnaryOperation to perform.
      */
     private void unaryOperationPressed(UnaryOperations operation) {
-        try {
+        String equationTextToSet = "";
 
+        try {
             BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
 
             if (!isFirstCalculated) {
                 calculation.setFirst(number);
+
+                equationTextToSet = operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET;
+
                 calculation.calculateUnary(operation);
                 calculation.setFirst(calculation.getResult());
                 screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
-
-                equation.setText(operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET);
 
             } else if (isUnaryOperationPressed) {
                 calculation.setSecond(calculation.getFirst());
                 calculation.setFirst(number);
-                calculation.calculateUnary(operation);
-                calculation.setFirst(calculation.getResult());
 
-                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                equationTextToSet = equation.getText();
 
-                String equationTextToSet = equation.getText();
                 int lastIndexOfOperation;
 
                 String textBefore = EMPTY_STRING;
@@ -727,11 +733,29 @@ public class Controller implements Initializable {
                     equationTextToSet = textBefore + SPACE + operation.symbol + OPENING_BRACKET + textAfter + CLOSING_BRACKET;
                 }
 
-                equation.setText(equationTextToSet);
+                calculation.calculateUnary(operation);
+                calculation.setFirst(calculation.getResult());
+
+                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
 
             } else {
                 calculation.setSecond(calculation.getFirst());
                 calculation.setFirst(number);
+
+                if (isPercentPressed && equation.getText().equals(ZERO)) {
+                    equationTextToSet = operation.symbol + OPENING_BRACKET +
+                            NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                } else {
+
+                    if (equation.getText().equals(EMPTY_STRING)) {
+                        equationTextToSet = operation.symbol + OPENING_BRACKET +
+                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                    } else {
+                        equationTextToSet = equation.getText() + SPACE + operation.symbol + OPENING_BRACKET +
+                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                    }
+                }
+
                 calculation.calculateUnary(operation);
 
                 if (isEqualsPressed) {
@@ -742,26 +766,14 @@ public class Controller implements Initializable {
                 }
 
                 screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
-
-                if (isPercentPressed && equation.getText().equals(ZERO)) {
-                    equation.setText(operation.symbol + OPENING_BRACKET +
-                            NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET);
-                } else {
-
-                    if (equation.getText().equals(EMPTY_STRING)) {
-                        equation.setText(operation.symbol + OPENING_BRACKET +
-                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET);
-                    } else {
-                        equation.setText(equation.getText() + SPACE + operation.symbol + OPENING_BRACKET +
-                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET);
-                    }
-                }
             }
 
             setFlags(false, false, true, false,
                     true, false, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
+        } finally {
+            equation.setText(equationTextToSet);
         }
     }
 
