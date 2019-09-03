@@ -143,7 +143,7 @@
                 <Insets left="2.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#negate" text="" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS">
+        <Button fx:id="negate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#negateOperation" text="" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS">
             <styleClass>
                 <String fx:value="operations" />
                 <String fx:value="very_light_gray_background" />
@@ -404,13 +404,11 @@
         </AnchorPane>
     </GridPane>
    <ScrollPane fx:id="equationScroll" hbarPolicy="NEVER" layoutX="2.0" layoutY="74.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefWidth="318.0" styleClass="scroll_pane_equation" vbarPolicy="NEVER" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
-      <content>
            <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" textFill="#5b5b5b" textOverrun="CLIP">
                <font>
                    <Font name="Segoe UI Semilight" size="14.0" />
                </font>
            </Label>
-      </content>
       <padding>
          <Insets left="15.0" right="15.0" />
       </padding>

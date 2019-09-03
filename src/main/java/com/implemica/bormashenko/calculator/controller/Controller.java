@@ -263,7 +263,7 @@ public class Controller implements Initializable {
     /**
      * Negates number in result screen while button is clicked.
      */
-    public void negate() {
+    public void negateOperation() {
         if (isEditableScreen) {
             screen.setText(NumberFormatter.changeSign(screen.getText()));
         } else {
