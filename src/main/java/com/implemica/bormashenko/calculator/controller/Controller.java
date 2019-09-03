@@ -796,20 +796,13 @@ public class Controller implements Initializable {
         String equationTextToSet = equation.getText();
 
         if (calculation.getBinaryOperation() == null) {
-            calculation.setFirst(BigDecimal.ZERO);
-
             screen.setText(ZERO);
             equationTextToSet = ZERO;
         } else {
-            BinaryOperations operation = calculation.getBinaryOperation();
             BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
             calculation.setSecond(number);
 
-            if (operation == BinaryOperations.ADD || operation == BinaryOperations.SUBTRACT) {
-                calculation.percentageOfFirst();
-            } else if (operation == BinaryOperations.MULTIPLY || operation == BinaryOperations.DIVIDE) {
-                calculation.percentageOf100();
-            }
+            calculation.calculatePercentage();
 
             screen.setText(NumberFormatter.formatNumber(calculation.getSecond()));
 

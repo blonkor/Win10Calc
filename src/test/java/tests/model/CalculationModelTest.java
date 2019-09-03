@@ -8019,6 +8019,21 @@ class CalculationModelTest {
     }
 
     /**
+     * Test for percentage operation while {@code BinaryOperations} in {@code Calculation} is set to null.
+     */
+    @Test
+    void percentageForBinaryNull() {
+        calculation.setBinaryOperation(null);
+        calculation.setFirst(HUNDRED);
+        calculation.setSecond(BigDecimal.TEN);
+
+        calculation.calculatePercentage();
+
+        assertEquals(BigDecimal.ZERO, calculation.getFirst());
+        assertEquals(BigDecimal.ZERO, calculation.getSecond());
+    }
+
+    /**
      * Tests for {@code OverflowException} while using {@code BinaryOperations}.
      */
     @Test
@@ -8660,13 +8675,14 @@ class CalculationModelTest {
     private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, String expectedSecond) {
         calculation.setFirst(first);
         calculation.setSecond(second);
-        calculation.percentageOfFirst();
+        calculation.setBinaryOperation(ADD);
+        calculation.calculatePercentage();
 
         assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
 
         calculation.setFirst(second);
         calculation.setSecond(first);
-        calculation.percentageOfFirst();
+        calculation.calculatePercentage();
 
         assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
     }
@@ -8679,7 +8695,8 @@ class CalculationModelTest {
      */
     private void checkPercentageOf100Operation(BigDecimal second, String expectedSecond) {
         calculation.setSecond(second);
-        calculation.percentageOf100();
+        calculation.setBinaryOperation(MULTIPLY);
+        calculation.calculatePercentage();
 
         assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
     }
@@ -8754,9 +8771,10 @@ class CalculationModelTest {
     private void checkPercentageOfFirstOverflowException(BigDecimal first, BigDecimal second) {
         calculation.setFirst(first);
         calculation.setSecond(second);
+        calculation.setBinaryOperation(ADD);
 
         try {
-            calculation.percentageOfFirst();
+            calculation.calculatePercentage();
             fail();
         } catch (OverflowException e) {
             assertEquals(OVERFLOW_MESSAGE, e.getMessage());
@@ -8764,9 +8782,10 @@ class CalculationModelTest {
 
         calculation.setFirst(second);
         calculation.setSecond(first);
+        calculation.setBinaryOperation(ADD);
 
         try {
-            calculation.percentageOfFirst();
+            calculation.calculatePercentage();
             fail();
         } catch (OverflowException e) {
             assertEquals(OVERFLOW_MESSAGE, e.getMessage());
@@ -8782,9 +8801,10 @@ class CalculationModelTest {
      */
     private void checkPercentageOf100OverflowException(BigDecimal second) {
         calculation.setSecond(second);
+        calculation.setBinaryOperation(MULTIPLY);
 
         try {
-            calculation.percentageOf100();
+            calculation.calculatePercentage();
             fail();
         } catch (OverflowException e) {
             assertEquals(OVERFLOW_MESSAGE, e.getMessage());
