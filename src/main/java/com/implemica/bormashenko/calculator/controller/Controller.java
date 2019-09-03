@@ -617,17 +617,13 @@ public class Controller implements Initializable {
 
                     equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getFirst())
                             + SPACE + operation.symbol;
-                } else if (!isEqualsPressed && !isUnaryOperationPressed) {
+                } else if (!isEqualsPressed && !isUnaryOperationPressed && !isPercentPressed) {
                     calculation.setSecond(numberOnScreen);
 
-                    if (isPercentPressed && equation.getText().equals(ZERO)) {
-                        equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
-                                SPACE + operation.symbol;
-                    } else {
-                        equationTextToSet = equation.getText() + SPACE +
-                                NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
-                                SPACE + operation.symbol;
-                    }
+                    equationTextToSet = equation.getText() + SPACE +
+                            NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
+                            SPACE + operation.symbol;
+
 
                     calculation.calculateBinary();
                     calculation.setFirst(calculation.getResult());
@@ -637,8 +633,12 @@ public class Controller implements Initializable {
 
                 } else {
 
-                    if (isUnaryOperationPressed) {
+                    if (isUnaryOperationPressed || isPercentPressed) {
+                        calculation.setSecond(calculation.getResult());
+
                         calculation.calculateBinary();
+
+                        calculation.setFirst(calculation.getResult());
 
                         screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
                     }
@@ -790,13 +790,16 @@ public class Controller implements Initializable {
      * If set binary operation is multiply or divide, sets second number as percentage of 100.
      * <p>
      * Than shows changed second number on screen and adds it to equation label.
+     * @todo add try catch
      */
     private void calculatePercentage() {
+        String equationTextToSet = equation.getText();
+
         if (calculation.getBinaryOperation() == null) {
             calculation.setFirst(BigDecimal.ZERO);
 
             screen.setText(ZERO);
-            equation.setText(ZERO);
+            equationTextToSet = ZERO;
         } else {
             BinaryOperations operation = calculation.getBinaryOperation();
             BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
@@ -809,8 +812,26 @@ public class Controller implements Initializable {
             }
 
             screen.setText(NumberFormatter.formatNumber(calculation.getSecond()));
-            equation.setText(equation.getText() + SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()));
+
+            if (isUnaryOperationPressed || isPercentPressed) {
+                String textBefore;
+                int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperations.ADD.symbol);
+                int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperations.MULTIPLY.symbol);
+                int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
+                        Math.max(lastIndexOfMultiply, lastIndexOfDivide));
+
+                textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
+
+                equationTextToSet = textBefore + SPACE +
+                        NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+            } else {
+                equationTextToSet += SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+            }
         }
+
+        equation.setText(equationTextToSet);
 
         setFlags(false, false, false, false,
                 true, true, false);
