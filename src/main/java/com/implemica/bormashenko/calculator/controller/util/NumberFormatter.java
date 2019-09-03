@@ -21,7 +21,7 @@ public class NumberFormatter {
     /**
      * Minimal value that can be shown on screen without using engineer representation.
      */
-    private static final BigDecimal MIN_PLAIN_VALUE = new BigDecimal("0.0000000000000001");
+    private static final BigDecimal MIN_PLAIN_VALUE = new BigDecimal("0.001");
 
     /**
      * Decimal formatter for formatting output.

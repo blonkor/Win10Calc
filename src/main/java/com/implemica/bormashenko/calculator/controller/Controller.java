@@ -701,8 +701,8 @@ public class Controller implements Initializable {
                 screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
 
             } else if (isUnaryOperationPressed) {
-                calculation.setSecond(calculation.getFirst());
-                calculation.setFirst(number);
+                //calculation.setSecond(calculation.getFirst());
+                calculation.setFirst(calculation.getResult());
 
                 equationTextToSet = equation.getText();
 
