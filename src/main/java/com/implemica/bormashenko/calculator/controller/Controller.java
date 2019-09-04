@@ -317,6 +317,10 @@ public class Controller implements Initializable {
             returnAfterError();
         }
 
+        if (screen.getText().endsWith(".")) {
+            screen.setText(screen.getText().replace(".", ""));
+        }
+
         try {
             if (calculation.getBinaryOperation() != null) {
                 BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());

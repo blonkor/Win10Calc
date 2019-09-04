@@ -37,6 +37,7 @@ public class ControllerTest extends RobotControl {
         sqrtTests();
         inverseTests();
         percentageTests();
+        equalsTests();
     }
 
     /**
@@ -1606,6 +1607,150 @@ public class ControllerTest extends RobotControl {
         clickButtons("%");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("0", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
+     * Tests for equals operation.
+     */
+    private void equalsTests() {
+        //standard cases
+        checkTyped("=", "0", "");
+        checkTyped("0=", "0", "");
+        checkTyped("1=", "1", "");
+        checkTyped("2=", "2", "");
+        checkTyped("3=", "3", "");
+        checkTyped("4=", "4", "");
+        checkTyped("5=", "5", "");
+        checkTyped("6=", "6", "");
+        checkTyped("7=", "7", "");
+        checkTyped("8=", "8", "");
+        checkTyped("9=", "9", "");
+
+        //without comma
+        checkTyped("17=", "17", "");
+        checkTyped("256=", "256", "");
+
+        //with comma
+        checkTyped("11515=", "11,515", "");
+        checkTyped("734347956=", "734,347,956", "");
+
+        //several equals operations
+        checkTyped("1=2=3", "3", "");
+        checkTyped("1=2=3=", "3","");
+        checkTyped("100=1000=10000=100000", "100,000", "");
+        checkTyped("100=1000=10000=100000=", "100,000", "");
+
+        //after dot
+        checkTyped("62.=", "62", "");
+        checkTyped("623626.=", "623,626", "");
+
+        //in a row without binary set
+        checkTyped("866=====", "866","");
+        checkTyped("98791480======", "98,791,480","");
+
+        //in a row with binary set
+        checkTyped("866+123=====", "1,481","");
+        checkTyped("98791480/10======", "98.79148","");
+
+        //after unary without binary set
+        checkTyped("8~=", "-8", "");
+        checkTyped("123~=", "-123", "");
+        checkTyped("49^=", "2,401", "");
+        checkTyped("3600000000^=", "1.296e+19", "");
+        checkTyped("64@=", "8", "");
+        checkTyped("1234@=", "35.12833614050059", "");
+        checkTyped("1;=", "1", "");
+        checkTyped("0.000001;=", "1,000,000", "");
+
+        //after unary with binary set
+        checkTyped("5+8~=", "-3", "");
+        checkTyped("13-123~=", "136", "");
+        checkTyped("7543*49^=", "18,110,743", "");
+        checkTyped("0/3600000000^=", "0", "");
+        checkTyped("55+64@=", "63", "");
+        checkTyped("2134-1234@=", "2,098.871663859499", "");
+        checkTyped("213*1;=", "213", "");
+        checkTyped("1000/0.000001;=", "0.001", "");
+
+        //several in a row after unary with binary set
+        checkTyped("5+8~=====", "-35", "");
+        checkTyped("13-123~====", "505", "");
+        checkTyped("7543*49^======", "1.445097228303612e+24", "");
+        checkTyped("0/3600000000^====", "0", "");
+        checkTyped("55+64@====", "87", "");
+        checkTyped("2134-1234@==", "2,063.743327718998", "");
+        checkTyped("213*1;====", "213", "");
+        checkTyped("1000/0.000001;=======", "1.e-39", "");
+
+        //after binary
+        checkTyped("16+=", "32", "");
+        checkTyped("7624+=", "15,248", "");
+        checkTyped("564-=", "0", "");
+        checkTyped("6522456-=", "0", "");
+        checkTyped("12*=", "144", "");
+        checkTyped("344363*=", "118,585,875,769", "");
+        checkTyped("55/=", "1", "");
+        checkTyped("1567/=", "1", "");
+
+        //several in a row after binary
+        checkTyped("16+==", "48", "");
+        checkTyped("7624+===", "30,496", "");
+        checkTyped("564-====", "-1,692", "");
+        checkTyped("6522456-=====", "-26,089,824", "");
+        checkTyped("12*=====", "2,985,984", "");
+        checkTyped("344363*===", "1.40626099319007e+22", "");
+        checkTyped("55/====", "6.010518407212627e-6", "");
+        checkTyped("1567/==", "6.381620931716656e-4", "");
+
+        //after percent
+        checkTyped("6%=", "0", "");
+        checkTyped("730%=", "0", "");
+
+        //after percent with binary set
+        checkTyped("5+6%=", "5.3", "");
+        checkTyped("123*730%=", "897.9", "");
+
+        //several in a row after percent with binary set
+        checkTyped("5+6%====", "6.2", "");
+        checkTyped("123*730%===", "47,849.091", "");
+
+        //equals after second inputted
+        checkTyped("8*6=", "48", "");
+        checkTyped("856-30=", "826", "");
+
+        //after error
+        checkTyped("/0==", "0", "");
+        checkTyped(";=", "0", "");
+
+        //after clear text
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("=");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("=");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        //after clear all
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("=");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564*");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("=");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
 
     /**
