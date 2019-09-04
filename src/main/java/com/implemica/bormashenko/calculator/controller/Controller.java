@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     /**
-     * Application's buttons used in controller.
+     * Application's {@code Button} used in controller.
      */
     @FXML
     private Button one, two, three, four, five, six, seven, eight, nine, zero, dot,
@@ -34,55 +34,55 @@ public class Controller implements Initializable {
             clearAll, clearText, backspace, leftArrow, rightArrow;
 
     /**
-     * Application's labels used in controller.
+     * Application's {@code Label} used in controller.
      */
     @FXML
     private Label screen, equation;
 
     /**
-     * Application's anchor panes used in controller.
+     * Application's {@code AnchorPane} used in controller.
      */
     @FXML
     private AnchorPane memoryAnchorPane, memoryPanel, memoryBlock, navigationBlock, aboutPanel;
 
     /**
-     * Application's scroll panes used in controller.
+     * Application's {@code ScrollPane} used in controller.
      */
     @FXML
     private ScrollPane navigationPanel, equationScroll;
 
     /**
-     * Zero symbol is used instead of empty string.
+     * Zero symbol is primary number in screen {@code Label}.
      */
     private static final String ZERO = "0";
 
     /**
-     * Symbol for separation numbers and operations in equation.
+     * Symbol for separation numbers and operations in equation {@code Label}.
      */
     private static final String SPACE = " ";
 
     /**
-     * Empty string for replacing commas in number and clearing equation.
+     * Empty string is primary string in equation {@code Label}.
      */
     private static final String EMPTY_STRING = "";
 
     /**
-     * Opens text in equation label while unary operation is pressed.
+     * Symbol for separating number and operation's symbol while using {@code UnaryOperation} (before number).
      */
     private static final String OPENING_BRACKET = "(";
 
     /**
-     * Closes text in equation label while unary operation is pressed.
+     * Symbol for separating number and operation's symbol while using {@code UnaryOperation} (after number).
      */
     private static final String CLOSING_BRACKET = ")";
 
     /**
-     * Model of application's calculation.
+     * {@link Calculation} model of application.
      */
     private Calculation calculation = new Calculation();
 
     /**
-     * Model of application's memory.
+     * {@link Memory} model of application.
      */
     private Memory memory = new Memory();
 
@@ -99,7 +99,7 @@ public class Controller implements Initializable {
     /**
      * True if any unary operation was just pressed.
      */
-    private boolean isUnaryOperationPressed = false;
+    private boolean isUnaryOrPercentOperationPressed = false;
 
     /**
      * True if equals was just pressed.
@@ -112,11 +112,6 @@ public class Controller implements Initializable {
     private boolean isFirstCalculated = false;
 
     /**
-     * True if percent was just pressed.
-     */
-    private boolean isPercentPressed = false;
-
-    /**
      * True if error was just happened.
      */
     private boolean isError = false;
@@ -124,299 +119,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //no initializing is needed
-    }
-
-    /**
-     * Appends digit from button to result screen if it is allowed.
-     * Otherwise, sets the digit to result screen.
-     *
-     * @param event {@code ActionEvent} that called the method.
-     */
-    public void appendDigit(ActionEvent event) {
-        String digit = ((Button) event.getSource()).getText();
-
-        String number;
-
-        if (isEditableScreen) {
-            number = screen.getText();
-        } else {
-            number = EMPTY_STRING;
-        }
-
-        if (isError) {
-            returnAfterError();
-        }
-
-        screen.setText(NumberFormatter.appendDigit(number, digit));
-
-        if (isPercentPressed || isUnaryOperationPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        if (isEqualsPressed || isUnaryOperationPressed) {
-            isFirstCalculated = false;
-        }
-
-        setFlags(true, false, false, false,
-                isFirstCalculated, false, false);
-    }
-
-    /**
-     * Makes number in result screen decimal (if not decimal yet) if it is allowed.
-     * Otherwise, sets "0." to result screen.
-     */
-    public void appendDecimalSeparator() {
-        String number;
-
-        if (isEditableScreen) {
-            number = screen.getText();
-        } else {
-            number = ZERO;
-        }
-
-        screen.setText(NumberFormatter.appendDecimalSeparator(number));
-
-        if (isPercentPressed || isUnaryOperationPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        if (isEqualsPressed || isUnaryOperationPressed) {
-            isFirstCalculated = false;
-        }
-
-        setFlags(true, false, false, false,
-                isFirstCalculated, false, false);
-    }
-
-    /**
-     * Deletes last symbol in result screen if it is allowed.
-     */
-    public void backspace() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        if (isEditableScreen) {
-            String number = screen.getText();
-            screen.setText(NumberFormatter.deleteLastChar(number));
-        }
-    }
-
-    /**
-     * Sets text in result screen to 0.
-     */
-    public void clearText() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        screen.setText(ZERO);
-
-        setFlags(true, false, false, false,
-                isFirstCalculated, false, false);
-    }
-
-    /**
-     * Sets text in result screen to 0.
-     */
-    public void clearAll() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        clearText();
-        calculation.resetAll();
-        equation.setText(EMPTY_STRING);
-
-        setFlags(true, false, false, false,
-                false, false, false);
-    }
-
-    /**
-     * Sums two numbers.
-     */
-    public void addOperation() {
-        binaryOperationPressed(BinaryOperations.ADD);
-    }
-
-    /**
-     * Subtracts two numbers.
-     */
-    public void subtractOperation() {
-        binaryOperationPressed(BinaryOperations.SUBTRACT);
-    }
-
-    /**
-     * Multiplies two numbers.
-     */
-    public void multiplyOperation() {
-        binaryOperationPressed(BinaryOperations.MULTIPLY);
-    }
-
-    /**
-     * Divides two numbers.
-     */
-    public void divideOperation() {
-        binaryOperationPressed(BinaryOperations.DIVIDE);
-    }
-
-    /**
-     * Negates number in result screen while button is clicked.
-     */
-    public void negateOperation() {
-        if (isEditableScreen) {
-            screen.setText(NumberFormatter.changeSign(screen.getText()));
-        } else {
-            unaryOperationPressed(UnaryOperations.NEGATE);
-        }
-    }
-
-    /**
-     * Calculates square of number.
-     */
-    public void squareOperation() {
-        unaryOperationPressed(UnaryOperations.SQR);
-    }
-
-    /**
-     * Calculates square root of number.
-     */
-    public void squareRootOperation() {
-        unaryOperationPressed(UnaryOperations.SQRT);
-    }
-
-    /**
-     * Inverses number.
-     */
-    public void inverseOperation() {
-        unaryOperationPressed(UnaryOperations.INVERSE);
-    }
-
-    /**
-     * Calculates percent of number.
-     */
-    public void percentOperation() {
-        calculatePercentage();
-    }
-
-    /**
-     * Calls when equals button is pressed.
-     * Calculates result of operation. Calculation is possible only if operation is set.
-     * <p>
-     * If user inputs number, operation and presses calculate button (without inputting second number), second number
-     * will be the same as first.
-     * <p>
-     * If user presses calculate button several times in a row, result of every operation will be set as first number
-     * and second number will not change from the first operation, and calculation will be made again with the same
-     * operation.
-     *
-     * @see Calculation
-     */
-    public void calculateResult() {
-        if (isError) {
-            returnAfterError();
-        }
-
-        if (screen.getText().endsWith(".")) {
-            screen.setText(screen.getText().replace(".", ""));
-        }
-
-        try {
-            if (calculation.getBinaryOperation() != null) {
-                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-
-                if (!isEqualsPressed && !isUnaryOperationPressed) {
-
-                    if (!isFirstCalculated) {
-                        calculation.setFirst(number);
-                    } else {
-                        calculation.setSecond(number);
-                    }
-
-                    calculation.calculateBinary();
-                    calculation.setFirst(calculation.getResult());
-                } else {
-
-                    if (isEqualsPressed) {
-                        calculation.setFirst(number);
-                    }
-
-                    calculation.calculateBinary();
-                }
-
-                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
-
-                setFlags(false, false, false, true,
-                        true, false, false);
-            }
-
-            equation.setText(EMPTY_STRING);
-
-            isEditableScreen = false;
-            isEqualsPressed = true;
-            isFirstCalculated = true;
-        } catch (Exception e) {
-            exceptionThrown(e.getMessage());
-        }
-    }
-
-    /**
-     * Shows memory.
-     */
-    public void memoryShowOperation() {
-        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
-    }
-
-    /**
-     * Clears all memory.
-     */
-    public void memoryClearOperation() {
-        memory.clearMemory();
-        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Recalls number in memory.
-     */
-    public void memoryRecallOperation() {
-        BigDecimal number = memory.recall();
-        screen.setText(NumberFormatter.formatNumber(number));
-
-        isEditableScreen = false;
-    }
-
-    /**
-     * Adds number to memory.
-     */
-    public void memoryAddOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.addToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Subtracts number from memory.
-     */
-    public void memorySubtractOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.subtractFromMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Saves number in memory.
-     */
-    public void memoryStoreOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.storeToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Opens or closes navigation bar.
-     */
-    public void showNavigationPanel() {
-        ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
     }
 
     /**
@@ -582,6 +284,298 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Appends digit from {@code Button} to screen {@code Label} if it is allowed.
+     * Otherwise, sets the digit to screen {@code Label}.
+     *
+     * @param event {@code ActionEvent} that called the method.
+     */
+    public void appendDigit(ActionEvent event) {
+        if (isError) {
+            returnAfterError();
+        }
+
+        String digit = ((Button) event.getSource()).getText();
+        String number;
+
+        if (isEditableScreen) {
+            number = screen.getText();
+        } else {
+            number = EMPTY_STRING;
+        }
+
+        screen.setText(NumberFormatter.appendDigit(number, digit));
+
+        if (isUnaryOrPercentOperationPressed) {
+            equation.setText(EMPTY_STRING);
+        }
+
+        if (isEqualsPressed || isUnaryOrPercentOperationPressed) {
+            isFirstCalculated = false;
+        }
+
+        setFlags(true, false, false, false,
+                isFirstCalculated, false);
+    }
+
+    /**
+     * Makes number in screen {@code Label} decimal (if not decimal yet) if it is allowed.
+     * Otherwise, sets "0." to screen {@code Label}.
+     */
+    public void appendDecimalSeparator() {
+        String number;
+
+        if (isEditableScreen) {
+            number = screen.getText();
+        } else {
+            number = ZERO;
+        }
+
+        screen.setText(NumberFormatter.appendDecimalSeparator(number));
+
+        if (isUnaryOrPercentOperationPressed) {
+            equation.setText(EMPTY_STRING);
+        }
+
+        if (isEqualsPressed || isUnaryOrPercentOperationPressed) {
+            isFirstCalculated = false;
+        }
+
+        setFlags(true, false, false, false,
+                isFirstCalculated, false);
+    }
+
+    /**
+     * Deletes last symbol in screen {@code Label} if it is allowed.
+     */
+    public void backspace() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        if (isEditableScreen) {
+            String number = screen.getText();
+            screen.setText(NumberFormatter.deleteLastChar(number));
+        }
+    }
+
+    /**
+     * Sets text in screen {@code Label} to 0.
+     */
+    public void clearText() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        screen.setText(ZERO);
+
+        setFlags(true, false, false, false,
+                isFirstCalculated, false);
+    }
+
+    /**
+     * Resets application to it's primary.
+     */
+    public void resetAll() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        clearText();
+        calculation.resetAll();
+        equation.setText(EMPTY_STRING);
+
+        setFlags(true, false, false, false,
+                false, false);
+    }
+
+    /**
+     * Performs add operation from {@code Calculation}.
+     */
+    public void addOperation() {
+        binaryOperationPressed(BinaryOperations.ADD);
+    }
+
+    /**
+     * Performs subtract operation from {@code Calculation}.
+     */
+    public void subtractOperation() {
+        binaryOperationPressed(BinaryOperations.SUBTRACT);
+    }
+
+    /**
+     * Performs multiply operation from {@code Calculation}.
+     */
+    public void multiplyOperation() {
+        binaryOperationPressed(BinaryOperations.MULTIPLY);
+    }
+
+    /**
+     * Performs dibide operation from {@code Calculation}.
+     */
+    public void divideOperation() {
+        binaryOperationPressed(BinaryOperations.DIVIDE);
+    }
+
+    /**
+     * Performs negate operation from {@code Calculation}.
+     */
+    public void negateOperation() {
+        if (isEditableScreen) {
+            screen.setText(NumberFormatter.changeSign(screen.getText()));
+        } else {
+            unaryOperationPressed(UnaryOperations.NEGATE);
+        }
+    }
+
+    /**
+     * Performs sqr operation from {@code Calculation}.
+     */
+    public void squareOperation() {
+        unaryOperationPressed(UnaryOperations.SQR);
+    }
+
+    /**
+     * Performs sqrt operation from {@code Calculation}.
+     */
+    public void squareRootOperation() {
+        unaryOperationPressed(UnaryOperations.SQRT);
+    }
+
+    /**
+     * Performs inverse operation from {@code Calculation}.
+     */
+    public void inverseOperation() {
+        unaryOperationPressed(UnaryOperations.INVERSE);
+    }
+
+    /**
+     * Performs percentage operation from {@code Calculation}.
+     */
+    public void percentOperation() {
+        calculatePercentage();
+    }
+
+    /**
+     * Calls when equals button is pressed.
+     * Calculates result of operation. Calculation is possible only if operation is set.
+     * <p>
+     * If user inputs number, operation and presses calculate button (without inputting second number), second number
+     * will be the same as first.
+     * <p>
+     * If user presses calculate button several times in a row, result of every operation will be set as first number
+     * and second number will not change from the first operation, and calculation will be made again with the same
+     * operation.
+     *
+     * @see Calculation
+     */
+    public void calculateResult() {
+        if (isError) {
+            returnAfterError();
+        }
+
+        if (screen.getText().endsWith(".")) {
+            screen.setText(screen.getText().replace(".", ""));
+        }
+
+        try {
+            if (calculation.getBinaryOperation() != null) {
+                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+
+                if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
+
+                    if (!isFirstCalculated) {
+                        calculation.setFirst(number);
+                    } else {
+                        calculation.setSecond(number);
+                    }
+
+                    calculation.calculateBinary();
+                    calculation.setFirst(calculation.getResult());
+                } else {
+
+                    if (isEqualsPressed) {
+                        calculation.setFirst(calculation.getResult());
+                    }
+
+                    calculation.calculateBinary();
+                }
+
+                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+
+                setFlags(false, false, false, true,
+                        true, false);
+            }
+
+            equation.setText(EMPTY_STRING);
+
+            isEditableScreen = false;
+            isEqualsPressed = true;
+            isFirstCalculated = true;
+        } catch (Exception e) {
+            exceptionThrown(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows memory.
+     */
+    public void memoryShowOperation() {
+        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
+    }
+
+    /**
+     * Clears all memory.
+     */
+    public void memoryClearOperation() {
+        memory.clearMemory();
+        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Recalls number in memory.
+     */
+    public void memoryRecallOperation() {
+        BigDecimal number = memory.recall();
+        screen.setText(NumberFormatter.formatNumber(number));
+
+        isEditableScreen = false;
+    }
+
+    /**
+     * Adds number to memory.
+     */
+    public void memoryAddOperation() {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+        memory.addToMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Subtracts number from memory.
+     */
+    public void memorySubtractOperation() {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+        memory.subtractFromMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Saves number in memory.
+     */
+    public void memoryStoreOperation() {
+        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+        memory.storeToMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Opens or closes navigation bar.
+     */
+    public void showNavigationPanel() {
+        ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
+    }
+
+    /**
      * Calculates equation with binary operation.
      * Calls when any binary operation is pressed.
      * <p>
@@ -621,7 +615,8 @@ public class Controller implements Initializable {
 
                     equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getFirst())
                             + SPACE + operation.symbol;
-                } else if (!isEqualsPressed && !isUnaryOperationPressed && !isPercentPressed) {
+
+                } else if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
                     calculation.setSecond(numberOnScreen);
 
                     equationTextToSet = equation.getText() + SPACE +
@@ -637,7 +632,7 @@ public class Controller implements Initializable {
 
                 } else {
 
-                    if (isUnaryOperationPressed || isPercentPressed) {
+                    if (isUnaryOrPercentOperationPressed) {
                         calculation.setSecond(calculation.getResult());
 
                         calculation.calculateBinary();
@@ -656,6 +651,7 @@ public class Controller implements Initializable {
                             equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getResult()) +
                                     SPACE + operation.symbol;
                         }
+
                     } else {
                         equationTextToSet = equation.getText() + SPACE + operation.symbol;
                     }
@@ -670,7 +666,7 @@ public class Controller implements Initializable {
             }
 
             setFlags(false, true, false, false,
-                    true, false, false);
+                    true, false);
 
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
@@ -704,8 +700,7 @@ public class Controller implements Initializable {
                 calculation.setFirst(calculation.getResult());
                 screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
 
-            } else if (isUnaryOperationPressed) {
-                //calculation.setSecond(calculation.getFirst());
+            } else if (isUnaryOrPercentOperationPressed) {
                 calculation.setFirst(calculation.getResult());
 
                 equationTextToSet = equation.getText();
@@ -746,7 +741,7 @@ public class Controller implements Initializable {
                 calculation.setSecond(calculation.getFirst());
                 calculation.setFirst(number);
 
-                if (isPercentPressed && equation.getText().equals(ZERO)) {
+                if (isUnaryOrPercentOperationPressed && equation.getText().equals(ZERO)) {
                     equationTextToSet = operation.symbol + OPENING_BRACKET +
                             NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
                 } else {
@@ -773,7 +768,7 @@ public class Controller implements Initializable {
             }
 
             setFlags(false, false, true, false,
-                    true, false, false);
+                    true,  false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         } finally {
@@ -794,7 +789,6 @@ public class Controller implements Initializable {
      * If set binary operation is multiply or divide, sets second number as percentage of 100.
      * <p>
      * Than shows changed second number on screen and adds it to equation label.
-     * @todo add try catch
      */
     private void calculatePercentage() {
         String equationTextToSet = equation.getText();
@@ -803,35 +797,44 @@ public class Controller implements Initializable {
             screen.setText(ZERO);
             equationTextToSet = ZERO;
         } else {
-            BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-            calculation.setSecond(number);
 
-            calculation.calculatePercentage();
+            try {
+                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+                calculation.setSecond(number);
 
-            screen.setText(NumberFormatter.formatNumber(calculation.getSecond()));
+                calculation.calculatePercentage();
 
-            if (isUnaryOperationPressed || isPercentPressed) {
-                String textBefore;
-                int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperations.ADD.symbol);
-                int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
-                int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperations.MULTIPLY.symbol);
-                int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
-                int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
-                        Math.max(lastIndexOfMultiply, lastIndexOfDivide));
+                screen.setText(NumberFormatter.formatNumber(calculation.getSecond()));
 
-                textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
+                if (isUnaryOrPercentOperationPressed) {
+                    String textBefore;
+                    int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperations.ADD.symbol);
+                    int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                    int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperations.MULTIPLY.symbol);
+                    int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperations.SUBTRACT.symbol);
+                    int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
+                            Math.max(lastIndexOfMultiply, lastIndexOfDivide));
 
-                equationTextToSet = textBefore + SPACE +
-                        NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
-            } else {
-                equationTextToSet += SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+                    textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
+
+                    equationTextToSet = textBefore + SPACE +
+                            NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+                } else {
+                    equationTextToSet += SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+                }
+
+            } catch (Exception e) {
+                exceptionThrown(e.getMessage());
+            } finally {
+                equation.setText(equationTextToSet);
             }
+
         }
 
         equation.setText(equationTextToSet);
 
-        setFlags(false, false, false, false,
-                true, true, false);
+        setFlags(false, false, true, false,
+                true, false);
     }
 
     private void exceptionThrown(String message) {
@@ -844,7 +847,7 @@ public class Controller implements Initializable {
         ViewFormatter.setButtonsDisability(true, buttonsToDisable);
 
         setFlags(false, false, false, false,
-                false, false, true);
+                false, true);
     }
 
     private void returnAfterError() {
@@ -869,21 +872,19 @@ public class Controller implements Initializable {
      *
      * @param isEditableScreen         true if digit should be appended to screen number.
      * @param isBinaryOperationPressed true if binary operation was just pressed.
-     * @param isUnaryOperationPressed  true if unary operation was just pressed.
+     * @param isUnaryOrPercentOperationPressed  true if unary operation was just pressed.
      * @param isEqualsPressed          true if equals was just pressed.
      * @param isFirstCalculated        true if first operand for model is calculated.
-     * @param isPercentPressed         true if percent was just pressed.
      * @param isError                  true if is error was just happened.
      */
-    private void setFlags(boolean isEditableScreen, boolean isBinaryOperationPressed, boolean isUnaryOperationPressed,
-                          boolean isEqualsPressed, boolean isFirstCalculated, boolean isPercentPressed,
+    private void setFlags(boolean isEditableScreen, boolean isBinaryOperationPressed,
+                          boolean isUnaryOrPercentOperationPressed, boolean isEqualsPressed, boolean isFirstCalculated,
                           boolean isError) {
         this.isEditableScreen = isEditableScreen;
         this.isBinaryOperationPressed = isBinaryOperationPressed;
-        this.isUnaryOperationPressed = isUnaryOperationPressed;
+        this.isUnaryOrPercentOperationPressed = isUnaryOrPercentOperationPressed;
         this.isEqualsPressed = isEqualsPressed;
         this.isFirstCalculated = isFirstCalculated;
-        this.isPercentPressed = isPercentPressed;
         this.isError = isError;
     }
 }

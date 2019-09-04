@@ -133,9 +133,7 @@ public class Calculation {
      * @throws OverflowException while validation for result is failed.
      */
     public void calculateBinary() {
-        if (binaryOperation == null) {
-            return;
-        } else if (binaryOperation == BinaryOperations.ADD) {
+        if (binaryOperation == BinaryOperations.ADD) {
             result = add();
         } else if (binaryOperation == BinaryOperations.SUBTRACT) {
             result = subtract();
