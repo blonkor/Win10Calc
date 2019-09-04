@@ -14,251 +14,249 @@ import static com.implemica.bormashenko.calculator.model.enums.UnaryOperations.*
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for model of calculation.
+ * Test class for {@link Calculation}.
  *
  * @author Mykhailo Bormashenko
  */
 class CalculationModelTest {
 
     /**
-     * Object of tests.model.
-     */
-    private static Calculation calculation;
-
-    /**
-     * Exception message for overflow.
-     *
-     * @see OverflowException
+     * Exception message for {@link OverflowException}.
      */
     private static final String OVERFLOW_MESSAGE = "Overflow";
 
     /**
-     * Exception message for divide by zero.
+     * Exception message for divide by zero {@link ArithmeticException}.
      */
     private static final String DIVIDE_BY_ZERO_MESSAGE = "Cannot divide by zero";
 
     /**
-     * Exception message for divide zero by zero.
+     * Exception message for divide zero by zero {@link ArithmeticException}.
      */
     private static final String DIVIDE_ZERO_BY_ZERO_MESSAGE = "Result is undefined";
 
     /**
-     * Exception message for invalid input,
+     * Exception message for invalid input {@link ArithmeticException}.
      */
     private static final String INVALID_INPUT_MESSAGE = "Invalid input";
 
     /**
-     * Big decimal value of minimal value that can be shown in tests.view minus one.
+     * {@code BigDecimal} minimal plain value that can be shown on screen minus one.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN_MINUS_ONE = new BigDecimal("-10000000000000000");
 
     /**
-     * Big decimal value of minimal value that can be shown in tests.view.
+     * {@code BigDecimal} minimal plain value that can be shown om screen.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN = new BigDecimal("-9999999999999999");
 
     /**
-     * Big decimal value of minimal value that can be shown in tests.view plus one.
+     * {@code BigDecimal} minimal plain value that can be shown on screen plus one.
      */
     private static final BigDecimal MIN_VALUE_ON_SCREEN_PLUS_ONE = new BigDecimal("-9999999999999998");
 
     /**
-     * Big decimal value of minimal value that can be shown in tests.view divide by two.
+     * {@code BigDecimal} minimal plain value that can be shown on screen minus one divide by two.
      */
     private static final BigDecimal HALF_MIN_VALUE_ON_SCREEN = new BigDecimal("-5000000000000000");
 
     /**
-     * Big decimal value of -100.
+     * {@code BigDecimal} value of -100.
      */
     private static final BigDecimal NEG_HUNDRED = new BigDecimal("-100");
 
     /**
-     * Big decimal value of -10.
+     * {@code BigDecimal} of -10.
      */
     private static final BigDecimal NEG_TEN = new BigDecimal("-10");
 
     /**
-     * Big decimal value of -1.
+     * {@code BigDecimal} value of -1.
      */
     private static final BigDecimal NEG_ONE = new BigDecimal("-1");
 
     /**
-     * Big decimal value of 100.
+     * {@code BigDecimal} value of 100.
      */
     private static final BigDecimal HUNDRED = new BigDecimal("100");
 
     /**
-     * Big decimal value of maximal value that can be shown in tests.view divide by two.
+     * {@code BigDecimal} maximal plain value that can be shown on screen plus one divide by two.
      */
     private static final BigDecimal HALF_MAX_VALUE_ON_SCREEN = new BigDecimal("5000000000000000");
 
     /**
-     * Big decimal value of maximal value that can be shown in tests.view minus one.
+     * {@code BigDecimal} maximal plain value that can be shown on screen minus one.
      */
     private static final BigDecimal MAX_VALUE_ON_SCREEN_MINUS_ONE = new BigDecimal("9999999999999998");
 
     /**
-     * Big decimal value of maximal value that can be shown in tests.view.
+     * {@code BigDecimal} maximal plain value that can be shown on screen.
      */
     private static final BigDecimal MAX_VALUE_ON_SCREEN = new BigDecimal("9999999999999999");
 
     /**
-     * Big decimal value of maximal value that can be shown in tests.view plus one.
+     * {@code BigDecimal} maximal plain value that can be shown on screen plus one.
      */
     private static final BigDecimal MAX_VALUE_ON_SCREEN_PLUS_ONE = new BigDecimal("10000000000000000");
 
     /**
-     * Big decimal value of -0.99999999999999999.
+     * {@code BigDecimal} value of -0.99999999999999999.
      */
     private static final BigDecimal NEG_ZERO_DOT_17_NINES = new BigDecimal("-0.99999999999999999");
 
     /**
-     * Big decimal value of -0.9999999999999999.
+     * {@code BigDecimal} value of -0.9999999999999999.
      */
     private static final BigDecimal NEG_ZERO_DOT_16_NINES = new BigDecimal("-0.9999999999999999");
 
     /**
-     * Big decimal value of -0.99.
+     * {@code BigDecimal} value of -0.99.
      */
     private static final BigDecimal NEG_NINETY_NINE_HUNDREDTH = new BigDecimal("-0.99");
 
     /**
-     * Big decimal value of -0.9.
+     * {@code BigDecimal} value of -0.9.
      */
     private static final BigDecimal NEG_NINE_TENTH = new BigDecimal("-0.9");
 
     /**
-     * Big decimal value of -0.1.
+     * {@code BigDecimal} value of -0.1.
      */
     private static final BigDecimal NEG_ONE_TENTH = new BigDecimal("-0.1");
 
     /**
-     * Big decimal value of -0.09.
+     * {@code BigDecimal} value of -0.09.
      */
     private static final BigDecimal NEG_NINE_HUNDREDTH = new BigDecimal("-0.09");
 
     /**
-     * Big decimal value of -0.01.
+     * {@code BigDecimal} value of -0.01.
      */
     private static final BigDecimal NEG_ONE_HUNDREDTH = new BigDecimal("-0.01");
 
     /**
-     * Big decimal value of 0.01.
+     * {@code BigDecimal} value of 0.01.
      */
     private static final BigDecimal ONE_HUNDREDTH = new BigDecimal("0.01");
 
     /**
-     * Big decimal value of 0.09.
+     * {@code BigDecimal} value of 0.09.
      */
     private static final BigDecimal NINE_HUNDREDTH = new BigDecimal("0.09");
 
     /**
-     * Big decimal value of 0.1.
+     * {@code BigDecimal} value of 0.1.
      */
     private static final BigDecimal ONE_TENTH = new BigDecimal("0.1");
 
     /**
-     * Big decimal value of 0.9.
+     * {@code BigDecimal} value of 0.9.
      */
     private static final BigDecimal NINE_TENTH = new BigDecimal("0.9");
 
     /**
-     * Big decimal value of 0.99.
+     * {@code BigDecimal} value of 0.99.
      */
     private static final BigDecimal NINETY_NINE_HUNDREDTH = new BigDecimal("0.99");
 
     /**
-     * Big decimal value of 0.9999999999999999.
+     * {@code BigDecimal} value of 0.9999999999999999.
      */
     private static final BigDecimal ZERO_DOT_16_NINES = new BigDecimal("0.9999999999999999");
 
     /**
-     * Big decimal value of 0.99999999999999999.
+     * {@code BigDecimal} value of 0.99999999999999999.
      */
     private static final BigDecimal ZERO_DOT_17_NINES = new BigDecimal("0.99999999999999999");
 
     /**
-     * Big decimal value of -1.e+9999 as engineering string.
+     * {@code BigDecimal} value of -1.e+9999.
      */
     private static final BigDecimal NEG_ONE_DOT_E_PLUS_9999 = new BigDecimal("-1.e+9999");
 
     /**
-     * Big decimal value of -1.e+9998 as engineering string.
+     * {@code BigDecimal} value of -1.e+9998.
      */
     private static final BigDecimal NEG_ONE_DOT_E_PLUS_9998 = new BigDecimal("-1.e+9998");
 
     /**
-     * Big decimal value of 1.e+9998 as engineering string.
+     * {@code BigDecimal} value of 1.e+9998.
      */
     private static final BigDecimal ONE_DOT_E_PLUS_9998 = new BigDecimal("1.e+9998");
 
     /**
-     * Big decimal value of 1.e+9999 as engineering string.
+     * {@code BigDecimal} value of 1.e+9999.
      */
     private static final BigDecimal ONE_DOT_E_PLUS_9999 = new BigDecimal("1.e+9999");
 
     /**
-     * Big decimal value of -1.e+17 as engineering string.
+     * {@code BigDecimal} value of -1.e+17.
      */
     private static final BigDecimal NEG_ONE_DOT_E_PLUS_17 = new BigDecimal("-1.e+17");
 
     /**
-     * Big decimal value of -1.e+16 as engineering string.
+     * {@code BigDecimal} value of -1.e+16.
      */
     private static final BigDecimal NEG_ONE_DOT_E_PLUS_16 = new BigDecimal("-1.e+16");
 
     /**
-     * Big decimal value of 1.e+16 as engineering string.
+     * {@code BigDecimal} value of 1.e+16.
      */
     private static final BigDecimal ONE_DOT_E_PLUS_16 = new BigDecimal("1.e+16");
 
     /**
-     * Big decimal value of 1.e+17 as engineering string.
+     * {@code BigDecimal} value of 1.e+17.
      */
     private static final BigDecimal ONE_DOT_E_PLUS_17 = new BigDecimal("1.e+17");
 
     /**
-     * Big decimal value of -1.e-9999 as engineering string.
+     * {@code BigDecimal} value of -1.e-9999.
      */
     private static final BigDecimal NEG_ONE_DOT_E_MINUS_9999 = new BigDecimal("-1.e-9999");
 
     /**
-     * Big decimal value of -1.e-9998 as engineering string.
+     * {@code BigDecimal} value of -1.e-9998.
      */
     private static final BigDecimal NEG_ONE_DOT_E_MINUS_9998 = new BigDecimal("-1.e-9998");
 
     /**
-     * Big decimal value of 1.e-9998 as engineering string.
+     * {@code BigDecimal} value of 1.e-9998.
      */
     private static final BigDecimal ONE_DOT_E_MINUS_9998 = new BigDecimal("1.e-9998");
 
     /**
-     * Big decimal value of 1.e-9999 as engineering string.
+     * {@code BigDecimal} value of 1.e-9999.
      */
     private static final BigDecimal ONE_DOT_E_MINUS_9999 = new BigDecimal("1.e-9999");
 
     /**
-     * Big decimal value of -1.e-17 as engineering string.
+     * {@code BigDecimal} value of -1.e-17.
      */
     private static final BigDecimal NEG_ONE_DOT_E_MINUS_17 = new BigDecimal("-1.e-17");
 
     /**
-     * Big decimal value of -1.e-16 as engineering string.
+     * {@code BigDecimal} value of -1.e-16.
      */
     private static final BigDecimal NEG_ONE_DOT_E_MINUS_16 = new BigDecimal("-1.e-16");
 
     /**
-     * Big decimal value of 1.e-16 as engineering string.
+     * {@code BigDecimal} value of 1.e-16.
      */
     private static final BigDecimal ONE_DOT_E_MINUS_16 = new BigDecimal("1.e-16");
 
     /**
-     * Big decimal value of 1.e-16 as engineering string.
+     * {@code BigDecimal} value of 1.e-16.
      */
     private static final BigDecimal ONE_DOT_E_MINUS_17 = new BigDecimal("1.e-17");
 
     /**
-     * Setting up an object of tests.model.
+     * Object of {@code Calculation}.
+     */
+    private static Calculation calculation;
+
+    /**
+     * Setting up an object of {@code Calculation}.
      *
      * @see Calculation
      */
@@ -268,7 +266,25 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for binary add operation.
+     * Test for reset all operation.
+     */
+    @Test
+    void resetAllTests() {
+        calculation.setFirst(new BigDecimal("1234"));
+        calculation.setSecond(new BigDecimal("1234"));
+        calculation.setBinaryOperation(ADD);
+        calculation.calculateBinary();
+
+        calculation.resetAll();
+
+        assertEquals(calculation.getFirst(), BigDecimal.ZERO);
+        assertEquals(calculation.getSecond(), BigDecimal.ZERO);
+        assertEquals(calculation.getResult(), BigDecimal.ZERO);
+        assertNull(calculation.getBinaryOperation());
+    }
+
+    /**
+     * Tests for add operation.
      */
     @Test
     void addOperationTests() {
@@ -1257,7 +1273,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for binary subtract operation.
+     * Tests for subtract operation.
      */
     @Test
     void subtractOperationTests() {
@@ -3371,7 +3387,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for binary multiply operation.
+     * Tests for multiply operation.
      */
     @Test
     void multiplyOperationTests() {
@@ -4466,7 +4482,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for binary divide operation.
+     * Tests for divide operation.
      */
     @Test
     void divideOperationTests() {
@@ -6452,6 +6468,284 @@ class CalculationModelTest {
     }
 
     /**
+     * Tests for negate operation.
+     */
+    @Test
+    void negateOperationTests() {
+        //integers 
+        {
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEGATE, "1.e+16");
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN, NEGATE, "9999999999999999");
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEGATE, "9999999999999998");
+            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, NEGATE, "5.e+15");
+            checkUnaryOperation(NEG_HUNDRED, NEGATE, "1.e+2");
+            checkUnaryOperation(NEG_TEN, NEGATE, "1.e+1");
+            checkUnaryOperation(NEG_ONE, NEGATE, "1");
+
+            checkUnaryOperation(BigDecimal.ZERO, NEGATE, "0");
+
+            checkUnaryOperation(BigDecimal.ONE, NEGATE, "-1");
+            checkUnaryOperation(BigDecimal.TEN, NEGATE, "-1.e+1");
+            checkUnaryOperation(HUNDRED, NEGATE, "-1.e+2");
+            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, NEGATE, "-5.e+15");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEGATE, "-9999999999999998");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN, NEGATE, "-9999999999999999");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEGATE, "-1.e+16");
+        }
+
+        //decimals
+        {
+            checkUnaryOperation(NEG_ZERO_DOT_17_NINES, NEGATE, "0.99999999999999999");
+            checkUnaryOperation(NEG_ZERO_DOT_16_NINES, NEGATE, "0.9999999999999999");
+            checkUnaryOperation(NEG_NINETY_NINE_HUNDREDTH, NEGATE, "0.99");
+            checkUnaryOperation(NEG_NINE_TENTH, NEGATE, "0.9");
+            checkUnaryOperation(NEG_ONE_TENTH, NEGATE, "0.1");
+            checkUnaryOperation(NEG_NINE_HUNDREDTH, NEGATE, "0.09");
+            checkUnaryOperation(NEG_ONE_HUNDREDTH, NEGATE, "0.01");
+
+            checkUnaryOperation(ONE_HUNDREDTH, NEGATE, "-0.01");
+            checkUnaryOperation(NINE_HUNDREDTH, NEGATE, "-0.09");
+            checkUnaryOperation(ONE_TENTH, NEGATE, "-0.1");
+            checkUnaryOperation(NINE_TENTH, NEGATE, "-0.9");
+            checkUnaryOperation(NINETY_NINE_HUNDREDTH, NEGATE, "-0.99");
+            checkUnaryOperation(ZERO_DOT_16_NINES, NEGATE, "-0.9999999999999999");
+            checkUnaryOperation(ZERO_DOT_17_NINES, NEGATE, "-0.99999999999999999");
+        }
+
+        //engineer numbers
+        {
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9999, NEGATE, "1.e+9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9998, NEGATE, "1.e+9998");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, NEGATE, "1.e+17");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, NEGATE, "1.e+16");
+
+            checkUnaryOperation(ONE_DOT_E_PLUS_16, NEGATE, "-1.e+16");
+            checkUnaryOperation(ONE_DOT_E_PLUS_17, NEGATE, "-1.e+17");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9998, NEGATE, "-1.e+9998");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9999, NEGATE, "-1.e+9999");
+
+
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9999, NEGATE, "1.e-9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9998, NEGATE, "1.e-9998");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, NEGATE, "1.e-17");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, NEGATE, "1.e-16");
+
+            checkUnaryOperation(ONE_DOT_E_MINUS_16, NEGATE, "-1.e-16");
+            checkUnaryOperation(ONE_DOT_E_MINUS_17, NEGATE, "-1.e-17");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9998, NEGATE, "-1.e-9998");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9999, NEGATE, "-1.e-9999");
+        }
+
+        //several random values
+        {
+            checkUnaryOperation(new BigDecimal("6324"), NEGATE, "-6324");
+            checkUnaryOperation(new BigDecimal("987"), NEGATE, "-987");
+
+            checkUnaryOperation(new BigDecimal("-213"), NEGATE, "213");
+            checkUnaryOperation(new BigDecimal("-6512"), NEGATE, "6512");
+
+            checkUnaryOperation(new BigDecimal("84.13"), NEGATE, "-84.13");
+            checkUnaryOperation(new BigDecimal("98735.8457"), NEGATE, "-98735.8457");
+
+            checkUnaryOperation(new BigDecimal("-234.123"), NEGATE, "234.123");
+            checkUnaryOperation(new BigDecimal("-6434.213"), NEGATE, "6434.213");
+        }
+    }
+
+    /**
+     * Tests for square operation.
+     */
+    @Test
+    void sqrOperationTests() {
+        //integers 
+        {
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, SQR, "1.e+32");
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN, SQR, "99999999999999980000000000000001");
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, SQR, "99999999999999960000000000000004");
+            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, SQR, "2.5e+31");
+            checkUnaryOperation(NEG_HUNDRED, SQR, "1.e+4");
+            checkUnaryOperation(NEG_TEN, SQR, "1.e+2");
+            checkUnaryOperation(NEG_ONE, SQR, "1");
+
+            checkUnaryOperation(BigDecimal.ZERO, SQR, "0");
+
+            checkUnaryOperation(BigDecimal.ONE, SQR, "1");
+            checkUnaryOperation(BigDecimal.TEN, SQR, "1.e+2");
+            checkUnaryOperation(HUNDRED, SQR, "1.e+4");
+            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, SQR, "2.5e+31");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, SQR, "99999999999999960000000000000004");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN, SQR, "99999999999999980000000000000001");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, SQR, "1.e+32");
+        }
+
+        //decimals
+        {
+            checkUnaryOperation(NEG_ZERO_DOT_17_NINES, SQR, "0.9999999999999999800000000000000001");
+            checkUnaryOperation(NEG_ZERO_DOT_16_NINES, SQR, "0.99999999999999980000000000000001");
+            checkUnaryOperation(NEG_NINETY_NINE_HUNDREDTH, SQR, "0.9801");
+            checkUnaryOperation(NEG_NINE_TENTH, SQR, "0.81");
+            checkUnaryOperation(NEG_ONE_TENTH, SQR, "0.01");
+            checkUnaryOperation(NEG_NINE_HUNDREDTH, SQR, "0.0081");
+            checkUnaryOperation(NEG_ONE_HUNDREDTH, SQR, "0.0001");
+
+            checkUnaryOperation(ONE_HUNDREDTH, SQR, "0.0001");
+            checkUnaryOperation(NINE_HUNDREDTH, SQR, "0.0081");
+            checkUnaryOperation(ONE_TENTH, SQR, "0.01");
+            checkUnaryOperation(NINE_TENTH, SQR, "0.81");
+            checkUnaryOperation(NINETY_NINE_HUNDREDTH, SQR, "0.9801");
+            checkUnaryOperation(ZERO_DOT_16_NINES, SQR, "0.99999999999999980000000000000001");
+            checkUnaryOperation(ZERO_DOT_17_NINES, SQR, "0.9999999999999999800000000000000001");
+        }
+
+        //engineer numbers
+        {
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, SQR, "1.e+34");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, SQR, "1.e+32");
+
+            checkUnaryOperation(ONE_DOT_E_PLUS_16, SQR, "1.e+32");
+            checkUnaryOperation(ONE_DOT_E_PLUS_17, SQR, "1.e+34");
+
+
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, SQR, "1.e-34");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, SQR, "1.e-32");
+
+            checkUnaryOperation(ONE_DOT_E_MINUS_16, SQR, "1.e-32");
+            checkUnaryOperation(ONE_DOT_E_MINUS_17, SQR, "1.e-34");
+        }
+
+        //several random values
+        {
+            checkUnaryOperation(new BigDecimal("743"), SQR, "552049");
+            checkUnaryOperation(new BigDecimal("324"), SQR, "104976");
+
+            checkUnaryOperation(new BigDecimal("-87634"), SQR, "7679717956");
+            checkUnaryOperation(new BigDecimal("-234"), SQR, "54756");
+
+            checkUnaryOperation(new BigDecimal("987.12"), SQR, "974405.8944");
+            checkUnaryOperation(new BigDecimal("1.2"), SQR, "1.44");
+
+            checkUnaryOperation(new BigDecimal("-31.62"), SQR, "999.8244");
+            checkUnaryOperation(new BigDecimal("-65.123"), SQR, "4241.005129");
+        }
+    }
+
+    /**
+     * Tests for square root operation.
+     */
+    @Test
+    void sqrtOperationTests() {
+        //integers 
+        {
+            checkUnaryOperation(BigDecimal.ZERO, SQRT, "0");
+
+            checkUnaryOperation(BigDecimal.ONE, SQRT, "1");
+            checkUnaryOperation(new BigDecimal("9"), SQRT, "3");
+            checkUnaryOperation(HUNDRED, SQRT, "1.e+1");
+            checkUnaryOperation(new BigDecimal("25000000000000"), SQRT, "5.e+6");
+            checkUnaryOperation(new BigDecimal("11111108888889"), SQRT, "3333333");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, SQRT, "1.e+8");
+        }
+
+        //decimals
+        {
+            checkUnaryOperation(ONE_HUNDREDTH, SQRT, "0.1");
+            checkUnaryOperation(new BigDecimal("0.015625"), SQRT, "0.125");
+            checkUnaryOperation(new BigDecimal("0.04"), SQRT, "0.2");
+            checkUnaryOperation(new BigDecimal("0.36"), SQRT, "0.6");
+            checkUnaryOperation(NINE_HUNDREDTH, SQRT, "0.3");
+        }
+
+        //engineer numbers
+        {
+            checkUnaryOperation(ONE_DOT_E_PLUS_16, SQRT, "1.e+8");
+            checkUnaryOperation(ONE_DOT_E_PLUS_17, SQRT, "316227766.0168379");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9998, SQRT, "1.e+4999");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9999, SQRT, "3.162277660168379e+4999");
+
+            checkUnaryOperation(ONE_DOT_E_MINUS_16, SQRT, "1.e-8");
+            checkUnaryOperation(ONE_DOT_E_MINUS_17, SQRT, "3.162277660168379e-9");
+        }
+
+        //several random values
+        {
+            checkUnaryOperation(new BigDecimal("9132131"), SQRT, "3021.941594405822");
+            checkUnaryOperation(new BigDecimal("1235123"), SQRT, "1111.360877483097");
+
+            checkUnaryOperation(new BigDecimal("123.5523"), SQRT, "11.11540822462225");
+            checkUnaryOperation(new BigDecimal("123.1243"), SQRT, "11.09613896812761");
+        }
+    }
+
+    /**
+     * Tests for inverse operation.
+     */
+    @Test
+    void inverseOperationTests() {
+        //integers 
+        {
+            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, INVERSE, "-1.e-16");
+            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, INVERSE, "-2.e-16");
+            checkUnaryOperation(NEG_HUNDRED, INVERSE, "-1.e-2");
+            checkUnaryOperation(NEG_TEN, INVERSE, "-1.e-1");
+            checkUnaryOperation(NEG_ONE, INVERSE, "-1");
+
+            checkUnaryOperation(BigDecimal.ONE, INVERSE, "1");
+            checkUnaryOperation(BigDecimal.TEN, INVERSE, "1.e-1");
+            checkUnaryOperation(HUNDRED, INVERSE, "1.e-2");
+            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, INVERSE, "2.e-16");
+            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, INVERSE, "1.e-16");
+        }
+
+        //decimals
+        {
+            checkUnaryOperation(NEG_ONE_TENTH, INVERSE, "-1.e+1");
+            checkUnaryOperation(NEG_ONE_HUNDREDTH, INVERSE, "-1.e+2");
+
+            checkUnaryOperation(ONE_HUNDREDTH, INVERSE, "1.e+2");
+            checkUnaryOperation(ONE_TENTH, INVERSE, "1.e+1");
+        }
+
+        //engineer numbers
+        {
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9999, INVERSE, "-1.e-9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9998, INVERSE, "-1.e-9998");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, INVERSE, "-1.e-17");
+            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, INVERSE, "-1.e-16");
+
+            checkUnaryOperation(ONE_DOT_E_PLUS_16, INVERSE, "1.e-16");
+            checkUnaryOperation(ONE_DOT_E_PLUS_17, INVERSE, "1.e-17");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9998, INVERSE, "1.e-9998");
+            checkUnaryOperation(ONE_DOT_E_PLUS_9999, INVERSE, "1.e-9999");
+
+
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9999, INVERSE, "-1.e+9999");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9998, INVERSE, "-1.e+9998");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, INVERSE, "-1.e+17");
+            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, INVERSE, "-1.e+16");
+
+            checkUnaryOperation(ONE_DOT_E_MINUS_16, INVERSE, "1.e+16");
+            checkUnaryOperation(ONE_DOT_E_MINUS_17, INVERSE, "1.e+17");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9998, INVERSE, "1.e+9998");
+            checkUnaryOperation(ONE_DOT_E_MINUS_9999, INVERSE, "1.e+9999");
+        }
+
+        //several random values
+        {
+            checkUnaryOperation(new BigDecimal("50"), INVERSE, "0.02");
+            checkUnaryOperation(new BigDecimal("2"), INVERSE, "0.5");
+
+            checkUnaryOperation(new BigDecimal("-800"), INVERSE, "-0.00125");
+            checkUnaryOperation(new BigDecimal("-1000"), INVERSE, "-0.001");
+
+            checkUnaryOperation(new BigDecimal("0.5"), INVERSE, "2");
+            checkUnaryOperation(new BigDecimal("0.8"), INVERSE, "1.25");
+
+            checkUnaryOperation(new BigDecimal("-0.025"), INVERSE, "-4.e+1");
+            checkUnaryOperation(new BigDecimal("-6.25"), INVERSE, "-0.16");
+        }
+    }
+
+    /**
      * Tests for percentage of first operation.
      */
     @Test
@@ -7648,7 +7942,7 @@ class CalculationModelTest {
      */
     @Test
     void percentageOf100Tests() {
-        //integers 
+        //integers
         {
             checkPercentageOf100Operation(MIN_VALUE_ON_SCREEN_MINUS_ONE, "-1.e+14");
             checkPercentageOf100Operation(MIN_VALUE_ON_SCREEN, "-99999999999999.99");
@@ -7725,285 +8019,22 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for unary negate operation.
+     * Test for percentage operation while {@code BinaryOperations} in {@code Calculation} is set to null.
      */
     @Test
-    void negateOperationTests() {
-        //integers 
-        {
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, NEGATE, "1.e+16");
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN, NEGATE, "9999999999999999");
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, NEGATE, "9999999999999998");
-            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, NEGATE, "5.e+15");
-            checkUnaryOperation(NEG_HUNDRED, NEGATE, "1.e+2");
-            checkUnaryOperation(NEG_TEN, NEGATE, "1.e+1");
-            checkUnaryOperation(NEG_ONE, NEGATE, "1");
+    void percentageForBinaryNull() {
+        calculation.setBinaryOperation(null);
+        calculation.setFirst(HUNDRED);
+        calculation.setSecond(BigDecimal.TEN);
 
-            checkUnaryOperation(BigDecimal.ZERO, NEGATE, "0");
+        calculation.calculatePercentage();
 
-            checkUnaryOperation(BigDecimal.ONE, NEGATE, "-1");
-            checkUnaryOperation(BigDecimal.TEN, NEGATE, "-1.e+1");
-            checkUnaryOperation(HUNDRED, NEGATE, "-1.e+2");
-            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, NEGATE, "-5.e+15");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, NEGATE, "-9999999999999998");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN, NEGATE, "-9999999999999999");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, NEGATE, "-1.e+16");
-        }
-
-        //decimals
-        {
-            checkUnaryOperation(NEG_ZERO_DOT_17_NINES, NEGATE, "0.99999999999999999");
-            checkUnaryOperation(NEG_ZERO_DOT_16_NINES, NEGATE, "0.9999999999999999");
-            checkUnaryOperation(NEG_NINETY_NINE_HUNDREDTH, NEGATE, "0.99");
-            checkUnaryOperation(NEG_NINE_TENTH, NEGATE, "0.9");
-            checkUnaryOperation(NEG_ONE_TENTH, NEGATE, "0.1");
-            checkUnaryOperation(NEG_NINE_HUNDREDTH, NEGATE, "0.09");
-            checkUnaryOperation(NEG_ONE_HUNDREDTH, NEGATE, "0.01");
-
-            checkUnaryOperation(ONE_HUNDREDTH, NEGATE, "-0.01");
-            checkUnaryOperation(NINE_HUNDREDTH, NEGATE, "-0.09");
-            checkUnaryOperation(ONE_TENTH, NEGATE, "-0.1");
-            checkUnaryOperation(NINE_TENTH, NEGATE, "-0.9");
-            checkUnaryOperation(NINETY_NINE_HUNDREDTH, NEGATE, "-0.99");
-            checkUnaryOperation(ZERO_DOT_16_NINES, NEGATE, "-0.9999999999999999");
-            checkUnaryOperation(ZERO_DOT_17_NINES, NEGATE, "-0.99999999999999999");
-        }
-
-        //engineer numbers
-        {
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9999, NEGATE, "1.e+9999");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9998, NEGATE, "1.e+9998");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, NEGATE, "1.e+17");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, NEGATE, "1.e+16");
-
-            checkUnaryOperation(ONE_DOT_E_PLUS_16, NEGATE, "-1.e+16");
-            checkUnaryOperation(ONE_DOT_E_PLUS_17, NEGATE, "-1.e+17");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9998, NEGATE, "-1.e+9998");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9999, NEGATE, "-1.e+9999");
-
-
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9999, NEGATE, "1.e-9999");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9998, NEGATE, "1.e-9998");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, NEGATE, "1.e-17");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, NEGATE, "1.e-16");
-
-            checkUnaryOperation(ONE_DOT_E_MINUS_16, NEGATE, "-1.e-16");
-            checkUnaryOperation(ONE_DOT_E_MINUS_17, NEGATE, "-1.e-17");
-            checkUnaryOperation(ONE_DOT_E_MINUS_9998, NEGATE, "-1.e-9998");
-            checkUnaryOperation(ONE_DOT_E_MINUS_9999, NEGATE, "-1.e-9999");
-        }
-
-        //several random values
-        {
-            checkUnaryOperation(new BigDecimal("6324"), NEGATE, "-6324");
-            checkUnaryOperation(new BigDecimal("987"), NEGATE, "-987");
-
-            checkUnaryOperation(new BigDecimal("-213"), NEGATE, "213");
-            checkUnaryOperation(new BigDecimal("-6512"), NEGATE, "6512");
-
-            checkUnaryOperation(new BigDecimal("84.13"), NEGATE, "-84.13");
-            checkUnaryOperation(new BigDecimal("98735.8457"), NEGATE, "-98735.8457");
-
-            checkUnaryOperation(new BigDecimal("-234.123"), NEGATE, "234.123");
-            checkUnaryOperation(new BigDecimal("-6434.213"), NEGATE, "6434.213");
-        }
+        assertEquals(BigDecimal.ZERO, calculation.getFirst());
+        assertEquals(BigDecimal.ZERO, calculation.getSecond());
     }
 
     /**
-     * Tests for unary sqr operation.
-     */
-    @Test
-    void sqrOperationTests() {
-        //integers 
-        {
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, SQR, "1.e+32");
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN, SQR, "99999999999999980000000000000001");
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN_PLUS_ONE, SQR, "99999999999999960000000000000004");
-            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, SQR, "2.5e+31");
-            checkUnaryOperation(NEG_HUNDRED, SQR, "1.e+4");
-            checkUnaryOperation(NEG_TEN, SQR, "1.e+2");
-            checkUnaryOperation(NEG_ONE, SQR, "1");
-
-            checkUnaryOperation(BigDecimal.ZERO, SQR, "0");
-
-            checkUnaryOperation(BigDecimal.ONE, SQR, "1");
-            checkUnaryOperation(BigDecimal.TEN, SQR, "1.e+2");
-            checkUnaryOperation(HUNDRED, SQR, "1.e+4");
-            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, SQR, "2.5e+31");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN_MINUS_ONE, SQR, "99999999999999960000000000000004");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN, SQR, "99999999999999980000000000000001");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, SQR, "1.e+32");
-        }
-
-        //decimals
-        {
-            checkUnaryOperation(NEG_ZERO_DOT_17_NINES, SQR, "0.9999999999999999800000000000000001");
-            checkUnaryOperation(NEG_ZERO_DOT_16_NINES, SQR, "0.99999999999999980000000000000001");
-            checkUnaryOperation(NEG_NINETY_NINE_HUNDREDTH, SQR, "0.9801");
-            checkUnaryOperation(NEG_NINE_TENTH, SQR, "0.81");
-            checkUnaryOperation(NEG_ONE_TENTH, SQR, "0.01");
-            checkUnaryOperation(NEG_NINE_HUNDREDTH, SQR, "0.0081");
-            checkUnaryOperation(NEG_ONE_HUNDREDTH, SQR, "0.0001");
-
-            checkUnaryOperation(ONE_HUNDREDTH, SQR, "0.0001");
-            checkUnaryOperation(NINE_HUNDREDTH, SQR, "0.0081");
-            checkUnaryOperation(ONE_TENTH, SQR, "0.01");
-            checkUnaryOperation(NINE_TENTH, SQR, "0.81");
-            checkUnaryOperation(NINETY_NINE_HUNDREDTH, SQR, "0.9801");
-            checkUnaryOperation(ZERO_DOT_16_NINES, SQR, "0.99999999999999980000000000000001");
-            checkUnaryOperation(ZERO_DOT_17_NINES, SQR, "0.9999999999999999800000000000000001");
-        }
-
-        //engineer numbers
-        {
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, SQR, "1.e+34");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, SQR, "1.e+32");
-
-            checkUnaryOperation(ONE_DOT_E_PLUS_16, SQR, "1.e+32");
-            checkUnaryOperation(ONE_DOT_E_PLUS_17, SQR, "1.e+34");
-
-
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, SQR, "1.e-34");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, SQR, "1.e-32");
-
-            checkUnaryOperation(ONE_DOT_E_MINUS_16, SQR, "1.e-32");
-            checkUnaryOperation(ONE_DOT_E_MINUS_17, SQR, "1.e-34");
-        }
-
-        //several random values
-        {
-            checkUnaryOperation(new BigDecimal("743"), SQR, "552049");
-            checkUnaryOperation(new BigDecimal("324"), SQR, "104976");
-
-            checkUnaryOperation(new BigDecimal("-87634"), SQR, "7679717956");
-            checkUnaryOperation(new BigDecimal("-234"), SQR, "54756");
-
-            checkUnaryOperation(new BigDecimal("987.12"), SQR, "974405.8944");
-            checkUnaryOperation(new BigDecimal("1.2"), SQR, "1.44");
-
-            checkUnaryOperation(new BigDecimal("-31.62"), SQR, "999.8244");
-            checkUnaryOperation(new BigDecimal("-65.123"), SQR, "4241.005129");
-        }
-    }
-
-    /**
-     * Tests for unary sqrt operation.
-     */
-    @Test
-    void sqrtOperationTests() {
-        //integers 
-        {
-            checkUnaryOperation(BigDecimal.ZERO, SQRT, "0");
-
-            checkUnaryOperation(BigDecimal.ONE, SQRT, "1");
-            checkUnaryOperation(new BigDecimal("9"), SQRT, "3");
-            checkUnaryOperation(HUNDRED, SQRT, "1.e+1");
-            checkUnaryOperation(new BigDecimal("25000000000000"), SQRT, "5.e+6");
-            checkUnaryOperation(new BigDecimal("11111108888889"), SQRT, "3333333");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, SQRT, "1.e+8");
-        }
-
-        //decimals
-        {
-            checkUnaryOperation(ONE_HUNDREDTH, SQRT, "0.1");
-            checkUnaryOperation(new BigDecimal("0.015625"), SQRT, "0.125");
-            checkUnaryOperation(new BigDecimal("0.04"), SQRT, "0.2");
-            checkUnaryOperation(new BigDecimal("0.36"), SQRT, "0.6");
-            checkUnaryOperation(NINE_HUNDREDTH, SQRT, "0.3");
-        }
-
-        //engineer numbers
-        {
-            checkUnaryOperation(ONE_DOT_E_PLUS_16, SQRT, "1.e+8");
-            checkUnaryOperation(ONE_DOT_E_PLUS_17, SQRT, "316227766.0168379");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9998, SQRT, "1.e+4999");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9999, SQRT, "3.162277660168379e+4999");
-
-            checkUnaryOperation(ONE_DOT_E_MINUS_16, SQRT, "1.e-8");
-            checkUnaryOperation(ONE_DOT_E_MINUS_17, SQRT, "3.162277660168379e-9");
-        }
-
-        //several random values
-        {
-            checkUnaryOperation(new BigDecimal("9132131"), SQRT, "3021.941594405822");
-            checkUnaryOperation(new BigDecimal("1235123"), SQRT, "1111.360877483097");
-
-            checkUnaryOperation(new BigDecimal("123.5523"), SQRT, "11.11540822462225");
-            checkUnaryOperation(new BigDecimal("123.1243"), SQRT, "11.09613896812761");
-        }
-    }
-
-    /**
-     * Tests for unary inverse operation.
-     */
-    @Test
-    void inverseOperationTests() {
-        //integers 
-        {
-            checkUnaryOperation(MIN_VALUE_ON_SCREEN_MINUS_ONE, INVERSE, "-1.e-16");
-            checkUnaryOperation(HALF_MIN_VALUE_ON_SCREEN, INVERSE, "-2.e-16");
-            checkUnaryOperation(NEG_HUNDRED, INVERSE, "-1.e-2");
-            checkUnaryOperation(NEG_TEN, INVERSE, "-1.e-1");
-            checkUnaryOperation(NEG_ONE, INVERSE, "-1");
-
-            checkUnaryOperation(BigDecimal.ONE, INVERSE, "1");
-            checkUnaryOperation(BigDecimal.TEN, INVERSE, "1.e-1");
-            checkUnaryOperation(HUNDRED, INVERSE, "1.e-2");
-            checkUnaryOperation(HALF_MAX_VALUE_ON_SCREEN, INVERSE, "2.e-16");
-            checkUnaryOperation(MAX_VALUE_ON_SCREEN_PLUS_ONE, INVERSE, "1.e-16");
-        }
-
-        //decimals
-        {
-            checkUnaryOperation(NEG_ONE_TENTH, INVERSE, "-1.e+1");
-            checkUnaryOperation(NEG_ONE_HUNDREDTH, INVERSE, "-1.e+2");
-
-            checkUnaryOperation(ONE_HUNDREDTH, INVERSE, "1.e+2");
-            checkUnaryOperation(ONE_TENTH, INVERSE, "1.e+1");
-        }
-
-        //engineer numbers
-        {
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9999, INVERSE, "-1.e-9999");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_9998, INVERSE, "-1.e-9998");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_17, INVERSE, "-1.e-17");
-            checkUnaryOperation(NEG_ONE_DOT_E_PLUS_16, INVERSE, "-1.e-16");
-
-            checkUnaryOperation(ONE_DOT_E_PLUS_16, INVERSE, "1.e-16");
-            checkUnaryOperation(ONE_DOT_E_PLUS_17, INVERSE, "1.e-17");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9998, INVERSE, "1.e-9998");
-            checkUnaryOperation(ONE_DOT_E_PLUS_9999, INVERSE, "1.e-9999");
-
-
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9999, INVERSE, "-1.e+9999");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_9998, INVERSE, "-1.e+9998");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_17, INVERSE, "-1.e+17");
-            checkUnaryOperation(NEG_ONE_DOT_E_MINUS_16, INVERSE, "-1.e+16");
-
-            checkUnaryOperation(ONE_DOT_E_MINUS_16, INVERSE, "1.e+16");
-            checkUnaryOperation(ONE_DOT_E_MINUS_17, INVERSE, "1.e+17");
-            checkUnaryOperation(ONE_DOT_E_MINUS_9998, INVERSE, "1.e+9998");
-            checkUnaryOperation(ONE_DOT_E_MINUS_9999, INVERSE, "1.e+9999");
-        }
-
-        //several random values
-        {
-            checkUnaryOperation(new BigDecimal("50"), INVERSE, "0.02");
-            checkUnaryOperation(new BigDecimal("2"), INVERSE, "0.5");
-
-            checkUnaryOperation(new BigDecimal("-800"), INVERSE, "-0.00125");
-            checkUnaryOperation(new BigDecimal("-1000"), INVERSE, "-0.001");
-
-            checkUnaryOperation(new BigDecimal("0.5"), INVERSE, "2");
-            checkUnaryOperation(new BigDecimal("0.8"), INVERSE, "1.25");
-
-            checkUnaryOperation(new BigDecimal("-0.025"), INVERSE, "-4.e+1");
-            checkUnaryOperation(new BigDecimal("-6.25"), INVERSE, "-0.16");
-        }
-    }
-
-    /**
-     * Tests for overflow exception while using binary operations.
+     * Tests for {@code OverflowException} while using {@code BinaryOperations}.
      */
     @Test
     void binaryOverflowExceptionTests() {
@@ -8012,7 +8043,7 @@ class CalculationModelTest {
             checkBinaryOverflowException(new BigDecimal("-9.e+9999"), new BigDecimal("-9.e+9999"), ADD);
             checkBinaryOverflowException(new BigDecimal("-9.e+9999"), new BigDecimal("-8.e+9999"), ADD);
             checkBinaryOverflowException(new BigDecimal("-9.e+9999"), new BigDecimal("-2.e+9999"), ADD);
-            checkBinaryOverflowException(new BigDecimal("-9.e+9999"), NEG_ONE_DOT_E_PLUS_9999, ADD);
+            checkBinaryOverflowException(new BigDecimal("-9.e+9999"), new BigDecimal("-1.e+9999"), ADD);
 
             checkBinaryOverflowException(new BigDecimal("-8.e+9999"), new BigDecimal("-8.e+9999"), ADD);
             checkBinaryOverflowException(new BigDecimal("-8.e+9999"), new BigDecimal("-8.e+9999"), ADD);
@@ -8025,7 +8056,7 @@ class CalculationModelTest {
             checkBinaryOverflowException(new BigDecimal("9.e+9999"), new BigDecimal("9.e+9999"), ADD);
             checkBinaryOverflowException(new BigDecimal("9.e+9999"), new BigDecimal("8.e+9999"), ADD);
             checkBinaryOverflowException(new BigDecimal("9.e+9999"), new BigDecimal("2.e+9999"), ADD);
-            checkBinaryOverflowException(new BigDecimal("9.e+9999"), ONE_DOT_E_PLUS_9999, ADD);
+            checkBinaryOverflowException(new BigDecimal("9.e+9999"), new BigDecimal("1.e+9999"), ADD);
         }
 
         //subtract operation
@@ -8039,8 +8070,8 @@ class CalculationModelTest {
             checkBinaryOverflowException(new BigDecimal("-9.e+9999"), new BigDecimal("2.e+9999"), SUBTRACT);
             checkBinaryOverflowException(new BigDecimal("2.e+9999"), new BigDecimal("-9.e+9999"), SUBTRACT);
 
-            checkBinaryOverflowException(new BigDecimal("-9.e+9999"), ONE_DOT_E_PLUS_9999, SUBTRACT);
-            checkBinaryOverflowException(ONE_DOT_E_PLUS_9999, new BigDecimal("-9.e+9999"), SUBTRACT);
+            checkBinaryOverflowException(new BigDecimal("-9.e+9999"), new BigDecimal("1.e+9999"), SUBTRACT);
+            checkBinaryOverflowException(new BigDecimal("1.e+9999"), new BigDecimal("-9.e+9999"), SUBTRACT);
 
 
             checkBinaryOverflowException(new BigDecimal("-8.e+9999"), new BigDecimal("8.e+9999"), SUBTRACT);
@@ -8072,8 +8103,8 @@ class CalculationModelTest {
             checkBinaryOverflowException(new BigDecimal("9.e+9999"), new BigDecimal("-2.e+9999"), SUBTRACT);
             checkBinaryOverflowException(new BigDecimal("-2.e+9999"), new BigDecimal("9.e+9999"), SUBTRACT);
 
-            checkBinaryOverflowException(new BigDecimal("9.e+9999"), NEG_ONE_DOT_E_PLUS_9999, SUBTRACT);
-            checkBinaryOverflowException(NEG_ONE_DOT_E_PLUS_9999, new BigDecimal("9.e+9999"), SUBTRACT);
+            checkBinaryOverflowException(new BigDecimal("9.e+9999"), new BigDecimal("-1.e+9999"), SUBTRACT);
+            checkBinaryOverflowException(new BigDecimal("-1.e+9999"), new BigDecimal("9.e+9999"), SUBTRACT);
         }
 
         //multiply operation
@@ -8298,25 +8329,34 @@ class CalculationModelTest {
     }
 
     /**
-     * Test for clear all operation.
+     * Tests for {@code OverflowException} while using {@code UnaryOperations.SQR} operation.
      */
     @Test
-    void clearAllTest() {
-        calculation.setFirst(new BigDecimal("1234"));
-        calculation.setSecond(new BigDecimal("1234"));
-        calculation.setBinaryOperation(ADD);
-        calculation.calculateBinary();
+    void sqrOverflowExceptionTests() {
+        checkSqrOverflowException(NEG_ONE_DOT_E_PLUS_9999);
+        checkSqrOverflowException(NEG_ONE_DOT_E_PLUS_9998);
+        checkSqrOverflowException(new BigDecimal("-1.e+7500"));
+        checkSqrOverflowException(new BigDecimal("-1.e+5000"));
 
-        calculation.resetAll();
+        checkSqrOverflowException(new BigDecimal("1.e+5000"));
+        checkSqrOverflowException(new BigDecimal("1.e+7500"));
+        checkSqrOverflowException(ONE_DOT_E_PLUS_9998);
+        checkSqrOverflowException(ONE_DOT_E_PLUS_9999);
 
-        assertEquals(calculation.getFirst(), BigDecimal.ZERO);
-        assertEquals(calculation.getSecond(), BigDecimal.ZERO);
-        assertEquals(calculation.getResult(), BigDecimal.ZERO);
-        assertNull(calculation.getBinaryOperation());
+
+        checkSqrOverflowException(NEG_ONE_DOT_E_MINUS_9999);
+        checkSqrOverflowException(NEG_ONE_DOT_E_MINUS_9998);
+        checkSqrOverflowException(new BigDecimal("-1.e-7500"));
+        checkSqrOverflowException(new BigDecimal("-1.e-5000"));
+
+        checkSqrOverflowException(new BigDecimal("1.e-5000"));
+        checkSqrOverflowException(new BigDecimal("1.e-7500"));
+        checkSqrOverflowException(ONE_DOT_E_MINUS_9998);
+        checkSqrOverflowException(ONE_DOT_E_MINUS_9999);
     }
 
     /**
-     * Tests for overflow exception while using percentage of first operation.
+     * Tests for {@code OverflowException} while using percentage of first operation.
      */
     @Test
     void percentageOfFirstOverflowExceptionTests() {
@@ -8429,42 +8469,15 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for overflow exception while using percentage of 100 operation.
+     * Tests for {@code OverflowException} while using percentage of 100 operation.
      */
     @Test
     void percentageOf100OverFlowExceptionTests() {
-        checkPercentageOf100Overflow(NEG_ONE_DOT_E_MINUS_9999);
-        checkPercentageOf100Overflow(NEG_ONE_DOT_E_MINUS_9998);
+        checkPercentageOf100OverflowException(NEG_ONE_DOT_E_MINUS_9999);
+        checkPercentageOf100OverflowException(NEG_ONE_DOT_E_MINUS_9998);
 
-        checkPercentageOf100Overflow(ONE_DOT_E_MINUS_9998);
-        checkPercentageOf100Overflow(ONE_DOT_E_MINUS_9999);
-    }
-
-    /**
-     * Tests for overflow exception while using binary operations.
-     */
-    @Test
-    void sqrOverflowExceptionTests() {
-        checkSqrOverflowException(NEG_ONE_DOT_E_PLUS_9999);
-        checkSqrOverflowException(NEG_ONE_DOT_E_PLUS_9998);
-        checkSqrOverflowException(new BigDecimal("-1.e+7500"));
-        checkSqrOverflowException(new BigDecimal("-1.e+5000"));
-
-        checkSqrOverflowException(new BigDecimal("1.e+5000"));
-        checkSqrOverflowException(new BigDecimal("1.e+7500"));
-        checkSqrOverflowException(ONE_DOT_E_PLUS_9998);
-        checkSqrOverflowException(ONE_DOT_E_PLUS_9999);
-
-
-        checkSqrOverflowException(NEG_ONE_DOT_E_MINUS_9999);
-        checkSqrOverflowException(NEG_ONE_DOT_E_MINUS_9998);
-        checkSqrOverflowException(new BigDecimal("-1.e-7500"));
-        checkSqrOverflowException(new BigDecimal("-1.e-5000"));
-
-        checkSqrOverflowException(new BigDecimal("1.e-5000"));
-        checkSqrOverflowException(new BigDecimal("1.e-7500"));
-        checkSqrOverflowException(ONE_DOT_E_MINUS_9998);
-        checkSqrOverflowException(ONE_DOT_E_MINUS_9999);
+        checkPercentageOf100OverflowException(ONE_DOT_E_MINUS_9998);
+        checkPercentageOf100OverflowException(ONE_DOT_E_MINUS_9999);
     }
 
     /**
@@ -8532,7 +8545,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for sqrt of negative number exception.
+     * Tests for {@code UnaryOperations.SQRT} of negative number exception.
      */
     @Test
     void negativeSqrtExceptionTests() {
@@ -8608,19 +8621,18 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing binary operations in tests.model.
+     * Method for testing {@link BinaryOperations} in {@link Calculation}.
      * <p>
-     * For operations {@code ADD} and {@code MULTIPLY} it is possible to swap
-     * numbers of equation between each other to obtain the same result.
+     * For operations {@code BinaryOperations.ADD} and {@code BinaryOperations.MULTIPLY} it is possible to swap numbers
+     * of equation between each other to obtain the same result.
      *
-     * @param first          first value of equation.
-     * @param second         second value of equation.
-     * @param operation      binary operation to use.
+     * @param first          first number of equation.
+     * @param second         second number of equation.
+     * @param operation      {@code BinaryOperations} to use.
      * @param expectedResult result that should be obtained.
-     * @see BinaryOperations
-     * @see Calculation
      */
-    private void checkBinaryOperation(BigDecimal first, BigDecimal second, BinaryOperations operation, String expectedResult) {
+    private void checkBinaryOperation(BigDecimal first, BigDecimal second, BinaryOperations operation,
+                                      String expectedResult) {
         calculation.setFirst(first);
         calculation.setSecond(second);
         calculation.setBinaryOperation(operation);
@@ -8638,70 +8650,68 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing percentage of first number in tests.model.
-     * <p>
-     * For this operation it is possible to swap numbers of equation
-     * between each other to obtain the same result.
+     * Method for testing {@link UnaryOperations} in {@link Calculation}.
      *
-     * @param first          first value of equation.
-     * @param second         second value of equation.
-     * @param expectedSecond result that should be obtained and set as second number in tests.model.
-     * @see Calculation
-     */
-    private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, String expectedSecond) {
-        calculation.setFirst(first);
-        calculation.setSecond(second);
-        calculation.percentageOfFirst();
-
-        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
-
-        calculation.setFirst(second);
-        calculation.setSecond(first);
-        calculation.percentageOfFirst();
-
-        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
-    }
-
-    /**
-     * Method for testing percentage of 100 operation in tests.model.
-     *
-     * @param value          number for operation.
-     * @param expectedSecond result that should be obtained and set as second number in tests.model.
-     * @see Calculation
-     */
-    private void checkPercentageOf100Operation(BigDecimal value, String expectedSecond) {
-        calculation.setSecond(value);
-        calculation.percentageOf100();
-
-        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
-    }
-
-    /**
-     * Method for testing unary operations in tests.model.
-     *
-     * @param value          number for operation.
-     * @param operation      unary operation to use.
+     * @param first          first number of equation.
+     * @param operation      {@code UnaryOperations} to use.
      * @param expectedResult result that should be obtained.
-     * @see UnaryOperations
-     * @see Calculation
      */
-    private void checkUnaryOperation(BigDecimal value, UnaryOperations operation, String expectedResult) {
-        calculation.setFirst(value);
+    private void checkUnaryOperation(BigDecimal first, UnaryOperations operation, String expectedResult) {
+        calculation.setFirst(first);
         calculation.calculateUnary(operation);
 
         assertEquals(new BigDecimal(expectedResult), calculation.getResult());
     }
 
     /**
-     * Method for testing overflow exception while using binary operations in tests.model.
-     * For inputted values, exception should be obtained.
+     * Method for testing percentage of first number in {@link Calculation}.
+     * <p>
+     * For this operation it is possible to swap numbers of equation between each other to obtain the same result.
      *
-     * @param first     first value of equation.
-     * @param second    second value of equation.
-     * @param operation binary operation to use.
-     * @see OverflowException
-     * @see BinaryOperations
-     * @see Calculation
+     * @param first          first number of equation.
+     * @param second         second number of equation.
+     * @param expectedSecond result that should be obtained and set as second number in {@code Calculation}.
+     */
+    private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, String expectedSecond) {
+        calculation.setFirst(first);
+        calculation.setSecond(second);
+        calculation.setBinaryOperation(ADD);
+        calculation.calculatePercentage();
+
+        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
+
+        calculation.setFirst(second);
+        calculation.setSecond(first);
+        calculation.calculatePercentage();
+
+        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
+    }
+
+    /**
+     * Method for testing percentage of 100 operation in {@link Calculation}.
+     *
+     * @param second         second number of equation.
+     * @param expectedSecond result that should be obtained and set as second number in {@code Calculation}.
+     */
+    private void checkPercentageOf100Operation(BigDecimal second, String expectedSecond) {
+        calculation.setSecond(second);
+        calculation.setBinaryOperation(MULTIPLY);
+        calculation.calculatePercentage();
+
+        assertEquals(new BigDecimal(expectedSecond), calculation.getSecond());
+    }
+
+    /**
+     * Method for testing {@link OverflowException} while using {@link BinaryOperations} in {@link Calculation}
+     * <p>
+     * For inputted values, {@code OverflowException} should be thrown.
+     * <p>
+     * For operations {@code BinaryOperations.ADD} and {@code BinaryOperations.MULTIPLY} it is possible to swap numbers
+     * of equation between each other to obtain the same result.
+     *
+     * @param first     first number of equation.
+     * @param second    second number of equation.
+     * @param operation {@code BinaryOperations} to use.
      */
     private void checkBinaryOverflowException(BigDecimal first, BigDecimal second, BinaryOperations operation) {
         calculation.setFirst(first);
@@ -8730,66 +8740,15 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing overflow exception while using percentage of first operation in tests.model.
-     * For inputted values, exception should be obtained.
+     * Method for testing {@link OverflowException} while using {@code UnaryOperations.SQRT} in {@link Calculation}.
+     * <p>
+     * For inputted value, {@code OverflowException} should be thrown.
      *
-     * @param first  first value of equation.
-     * @param second second value of equation.
-     * @see OverflowException
-     * @see Calculation
-     */
-    private void checkPercentageOfFirstOverflowException(BigDecimal first, BigDecimal second) {
-        calculation.setFirst(first);
-        calculation.setSecond(second);
-
-        try {
-            calculation.percentageOfFirst();
-            fail();
-        } catch (OverflowException e) {
-            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
-        }
-
-        calculation.setFirst(second);
-        calculation.setSecond(first);
-
-        try {
-            calculation.percentageOfFirst();
-            fail();
-        } catch (OverflowException e) {
-            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
-        }
-    }
-
-    /**
-     * Method for testing overflow exception while using percentage of 100 operation in tests.model.
-     * For inputted value, exception should be obtained.
-     *
-     * @param value number for operation.
-     * @see OverflowException
-     * @see Calculation
-     */
-    private void checkPercentageOf100Overflow(BigDecimal value) {
-        calculation.setSecond(value);
-
-        try {
-            calculation.percentageOf100();
-            fail();
-        } catch (OverflowException e) {
-            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
-        }
-    }
-
-    /**
-     * Method for testing overflow exception while using unary operations in tests.model.
-     * For inputted value, exception should be obtained.
-     *
-     * @param value number for operation.
-     * @see OverflowException
+     * @param first first number of equation.
      * @see UnaryOperations
-     * @see Calculation
      */
-    private void checkSqrOverflowException(BigDecimal value) {
-        calculation.setFirst(value);
+    private void checkSqrOverflowException(BigDecimal first) {
+        calculation.setFirst(first);
 
         try {
             calculation.calculateUnary(UnaryOperations.SQR);
@@ -8799,16 +8758,68 @@ class CalculationModelTest {
         }
     }
 
+    /**
+     * Method for testing {@link OverflowException} while using percentage of first operation in {@link Calculation}.
+     * <p>
+     * For inputted values, {@code OverflowException} should be thrown.
+     * <p>
+     * For this operation it is possible to swap numbers of equation between each other to obtain the same result.
+     *
+     * @param first  first number of equation.
+     * @param second second number of equation.
+     */
+    private void checkPercentageOfFirstOverflowException(BigDecimal first, BigDecimal second) {
+        calculation.setFirst(first);
+        calculation.setSecond(second);
+        calculation.setBinaryOperation(ADD);
+
+        try {
+            calculation.calculatePercentage();
+            fail();
+        } catch (OverflowException e) {
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
+        }
+
+        calculation.setFirst(second);
+        calculation.setSecond(first);
+        calculation.setBinaryOperation(ADD);
+
+        try {
+            calculation.calculatePercentage();
+            fail();
+        } catch (OverflowException e) {
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
+        }
+    }
 
     /**
-     * Method for testing divide by zero exception in tests.model.
-     * For inputted value, exception should be obtained.
+     * Method for testing {@link OverflowException} while using percentage of 100 operation in {@link Calculation}.
+     * <p>
+     * For inputted values, {@code OverflowException} should be thrown.
      *
-     * @param value number for operation.
-     * @see Calculation
+     * @param second second number of equation.
      */
-    private void checkDivideByZeroException(BigDecimal value) {
-        calculation.setFirst(value);
+    private void checkPercentageOf100OverflowException(BigDecimal second) {
+        calculation.setSecond(second);
+        calculation.setBinaryOperation(MULTIPLY);
+
+        try {
+            calculation.calculatePercentage();
+            fail();
+        } catch (OverflowException e) {
+            assertEquals(OVERFLOW_MESSAGE, e.getMessage());
+        }
+    }
+
+    /**
+     * Method for testing divide by zero exception in {@link Calculation}.
+     * <p>
+     * For inputted value, {@code ArithmeticException} should be thrown.
+     *
+     * @param first first number of equation.
+     */
+    private void checkDivideByZeroException(BigDecimal first) {
+        calculation.setFirst(first);
         calculation.setSecond(BigDecimal.ZERO);
         calculation.setBinaryOperation(DIVIDE);
 
@@ -8821,14 +8832,14 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing sqrt of negative number in tests.model.
-     * For inputted value, exception should be obtained.
+     * Method for testing negative sqrt (invalid input) exception in {@link Calculation}.
+     * <p>
+     * For inputted value, {@code ArithmeticException} should be thrown.
      *
-     * @param value number for operation.
-     * @see Calculation
+     * @param first first number of equation.
      */
-    private void checkNegativeSqrtException(BigDecimal value) {
-        calculation.setFirst(value);
+    private void checkNegativeSqrtException(BigDecimal first) {
+        calculation.setFirst(first);
 
         try {
             calculation.calculateUnary(SQRT);

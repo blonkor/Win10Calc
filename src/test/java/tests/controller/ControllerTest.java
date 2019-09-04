@@ -36,6 +36,7 @@ public class ControllerTest extends RobotControl {
         sqrTests();
         sqrtTests();
         inverseTests();
+        percentageTests();
     }
 
     /**
@@ -1502,6 +1503,109 @@ public class ControllerTest extends RobotControl {
         clickButtons(";");
         assertEquals("Cannot divide by zero", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("1/(0)", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
+     * Tests for percentage operation.
+     */
+    private void percentageTests() {
+        //standard cases
+        checkTyped("%", "0", "0");
+        checkTyped("0%", "0", "0");
+        checkTyped("1%", "0", "0");
+        checkTyped("2%", "0", "0");
+        checkTyped("3%", "0", "0");
+        checkTyped("4%", "0", "0");
+        checkTyped("5%", "0", "0");
+        checkTyped("6%", "0", "0");
+        checkTyped("7%", "0", "0");
+        checkTyped("8%", "0", "0");
+        checkTyped("9%", "0", "0");
+
+        //without comma
+        checkTyped("17%", "0", "0");
+        checkTyped("256%", "0", "0");
+
+        //with comma
+        checkTyped("11515%", "0", "0");
+        checkTyped("734347956%", "0", "0");
+
+        //several sqrt operations
+        checkTyped("1%2%3", "3", "");
+        checkTyped("1%2%3%", "0","0");
+        checkTyped("100%1000%10000%100000", "100,000", "");
+        checkTyped("100%1000%10000%100000%", "0", "0");
+
+        //after dot
+        checkTyped("62.%", "0", "0");
+        checkTyped("623626.%", "0", "0");
+
+        //in a row
+        checkTyped("866%%%%%", "0","0");
+        checkTyped("98791480%%%%%%", "0","0");
+
+        //after unary
+        checkTyped("8~%", "0", "0");
+        checkTyped("123~%", "0", "0");
+        checkTyped("49^%", "0", "0");
+        checkTyped("3600000000^%", "0", "0");
+        checkTyped("64@%", "0", "0");
+        checkTyped("1234@%", "0", "0");
+        checkTyped("1;%", "0", "0");
+        checkTyped("0.000001;%", "0", "0");
+
+        //after binary
+        checkTyped("16+%", "2.56", "16 + 2.56");
+        checkTyped("7624+%", "581,253.76", "7624 + 581253.76");
+        checkTyped("564-%", "3,180.96", "564 - 3180.96");
+        checkTyped("6522456-%", "425,424,322,719.36",
+                "6522456 - 425424322719.36");
+        checkTyped("12*%", "0.12", "12 × 0.12");
+        checkTyped("344363*%", "3,443.63", "344363 × 3443.63");
+        checkTyped("55/%", "0.55", "55 ÷ 0.55");
+        checkTyped("1567/%", "15.67", "1567 ÷ 15.67");
+
+        //after equals
+        checkTyped("73=%", "0", "0");
+        checkTyped("532626=%", "0", "0");
+
+        //percent after second inputted
+        checkTyped("8*6%", "0.06", "8 × 0.06");
+        checkTyped("856-30%", "256.8", "856 - 256.8");
+
+        //after second calculating
+        checkTyped("8*6^%", "0.36", "8 × 0.36");
+        checkTyped("1+2+3+4;%", "0.015", "1 + 2 + 3 + 0.015");
+
+        //after clear text
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("%");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564");
+        clickOn(getButtonBySelector(CLEAR_TEXT_ID));
+        clickButtons("%");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        //after clear all
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("124");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("%");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0", getLabeledBySelector(EQUATION_LABEL_ID).getText());
+
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("564*");
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickButtons("%");
+        assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals("0", getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
 
     /**

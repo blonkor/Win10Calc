@@ -16,9 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemoryModelTest {
 
     /**
-     * Exception message for {@code OverflowException}.
-     *
-     * @see OverflowException
+     * Exception message for {@link OverflowException}.
      */
     private static final String OVERFLOW_MESSAGE = "Overflow";
 
