@@ -7,12 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
 import java.util.Stack;
 
 /**
- * Utility class for programmatically changing view.
+ * Utility class for programmatically changing {@link com.implemica.bormashenko.calculator.view.View}.
  *
  * @author Mykhailo Bormashenko
  */
@@ -34,9 +35,71 @@ public class ViewFormatter {
     private static final int MEMORY_LABELS_FONT_SIZE = 24;
 
     /**
+     * Multiplicand for {@code Text} used in moving the {@code Text} in {@code Label}.
+     */
+    private static final double MULTIPLICAND_FOR_TEXT_WIDTH = 1.5;
+
+    /**
+     * Divisor for {@code Scene} width used in moving the {@code Text} in {@code Label}.
+     */
+    private static final double DIVISOR_FOR_SCENE_WIDTH = 2;
+
+    /**
+     * Multiplicand for {@code Scene} width used in moving the {@code Text} in {@code Label}.
+     */
+    private static final double MULTIPLICAND_FOR_SCENE_WIDTH = 0.1;
+
+    /**
      * Insets for memory labels.
      */
     private static final Insets MEMORY_LABELS_INSETS = new Insets(0, 15, 0, 15);
+
+    /**
+     * Moves {@code Text} in {@code Label} to the right or left.
+     *
+     * The {@code Label} should be wrapped into {@code ScrollPane}.
+     *
+     * @param clickedButton {@code Button} that should move {@code Text} to the specific side.
+     * @param oppositeButton {@code Button} that should move {@code Text} to the opposite of clicked button side.
+     * @param label {@code Label} that contains {@code Text} that should be moved.
+     * @param labelScroll {@code ScrollPane} that contains required {@code Label}.
+     * @param moveLeft true if moving left or false if moving right.
+     */
+    public static void moveTextInLabel(Button clickedButton, Button oppositeButton, Label label,
+                                       ScrollPane labelScroll, boolean moveLeft) {
+        oppositeButton.setVisible(true);
+
+        Text text = new Text(label.getText());
+        text.setFont(label.getFont());
+
+        double newHValue = labelScroll.getHvalue();
+
+        if (text.getBoundsInLocal().getWidth() > clickedButton.getScene().getWidth() * MULTIPLICAND_FOR_TEXT_WIDTH) {
+            double offset = text.getBoundsInLocal().getWidth() / oppositeButton.getScene().getWidth() /
+                    DIVISOR_FOR_SCENE_WIDTH * MULTIPLICAND_FOR_SCENE_WIDTH;
+
+            if (moveLeft) {
+                newHValue += offset;
+            } else {
+                newHValue -= offset;
+            }
+
+        } else {
+
+            if (moveLeft) {
+                newHValue = labelScroll.getHmax();
+            } else {
+                newHValue = labelScroll.getHmin();
+            }
+
+        }
+
+        labelScroll.setHvalue(newHValue);
+
+        if (labelScroll.getHvalue() == labelScroll.getHmax()) {
+            clickedButton.setVisible(false);
+        }
+    }
 
     /**
      * Shows or hides memory panel.
