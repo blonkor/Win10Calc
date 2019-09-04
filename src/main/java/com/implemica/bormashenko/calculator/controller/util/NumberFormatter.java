@@ -10,6 +10,7 @@ import java.text.DecimalFormatSymbols;
  * Class for editing numbers' representation.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactor
  */
 public class NumberFormatter {
 
@@ -96,7 +97,7 @@ public class NumberFormatter {
      * @param digit  digit to append.
      * @return edited number if it was possible to edit.
      */
-    public static String appendDigit(String number, String digit) {
+    public static String appendDigitToNumber(String number, String digit) {
         number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
 
         if (number.equals(ZERO)) {
@@ -132,7 +133,7 @@ public class NumberFormatter {
      * @param number number to edit.
      * @return edited number if it was possible to edit.
      */
-    public static String appendDecimalSeparator(String number) {
+    public static String appendDecimalSeparatorIfMissed(String number) {
         if (!number.contains(String.valueOf(DECIMAL_SEPARATOR))) {
             number += DECIMAL_SEPARATOR;
         }
@@ -175,6 +176,7 @@ public class NumberFormatter {
      *
      * @param number number to edit.
      * @return edited number.
+     * @todo tests
      */
     public static String changeSign(String number) {
         if (!number.equals(ZERO)) {
@@ -271,6 +273,7 @@ public class NumberFormatter {
      *
      * @param number number to format.
      * @return formatted number without group separator.
+     * @todo tests
      */
     public static String formatWithoutGroupSeparator(BigDecimal number) {
         return formatNumber(number).replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
