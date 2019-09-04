@@ -795,7 +795,11 @@ public class Controller implements Initializable {
 
         if (calculation.getBinaryOperation() == null) {
             screen.setText(ZERO);
-            equationTextToSet = ZERO;
+
+            equation.setText(ZERO);
+
+            setFlags(false, false, true, false,
+                    true, false);
         } else {
 
             try {
@@ -823,18 +827,15 @@ public class Controller implements Initializable {
                     equationTextToSet += SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
                 }
 
+                setFlags(false, false, true, false,
+                        true, false);
+
             } catch (Exception e) {
                 exceptionThrown(e.getMessage());
             } finally {
                 equation.setText(equationTextToSet);
             }
-
         }
-
-        equation.setText(equationTextToSet);
-
-        setFlags(false, false, true, false,
-                true, false);
     }
 
     private void exceptionThrown(String message) {
