@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/implemica/bormashenko/calculator/view/resources/fxml/calc.fxml" afterDir="false" />
     </list>
@@ -86,7 +87,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.equalsTests">
+  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -208,10 +209,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ControllerTest.equalsTests" />
-        <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
         <item itemvalue="Application.Launcher" />
+        <item itemvalue="JUnit.ControllerTest.equalsTests" />
+        <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="JUnit.ControllerTest.percentageTests" />
       </list>
     </recent_temporary>
@@ -226,13 +227,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Code refactoring for controller.">
-      <created>1567028806364</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1567028806364</updated>
     </task>
     <task id="LOCAL-00083" summary="Tests for append digit created.">
       <created>1567035103993</created>
@@ -570,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567548936937</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="Tests for equals operation created.">
+      <created>1567592359339</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1567592359339</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -604,7 +605,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for append digit operation updated." />
     <MESSAGE value="Editing JavaDocs." />
     <MESSAGE value="Tests for append dot created." />
     <MESSAGE value="Code refactoring for tests." />
@@ -629,7 +629,8 @@
     <MESSAGE value="Tests for percentage operation created." />
     <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Refactoring model tests and adding tests for percentage operation while binary operation is null." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring model tests and adding tests for percentage operation while binary operation is null." />
+    <MESSAGE value="Tests for equals operation created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for equals operation created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

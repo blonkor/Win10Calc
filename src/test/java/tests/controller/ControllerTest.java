@@ -1678,7 +1678,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("7543*49^======", "1.445097228303612e+24", "");
         checkTyped("0/3600000000^====", "0", "");
         checkTyped("55+64@====", "87", "");
-        checkTyped("2134-1234@==", "2,063.743327718998", "");
+        checkTyped("2134-1234@==", "2,063.743327718999", "");
         checkTyped("213*1;====", "213", "");
         checkTyped("1000/0.000001;=======", "1.e-39", "");
 
@@ -1699,7 +1699,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("6522456-=====", "-26,089,824", "");
         checkTyped("12*=====", "2,985,984", "");
         checkTyped("344363*===", "1.40626099319007e+22", "");
-        checkTyped("55/====", "6.010518407212627e-6", "");
+        checkTyped("55/====", "6.010518407212622e-6", "");
         checkTyped("1567/==", "6.381620931716656e-4", "");
 
         //after percent
