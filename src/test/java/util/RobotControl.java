@@ -472,9 +472,9 @@ public class RobotControl extends GuiTest {
      */
     protected FxRobot robot = new FxRobot();
 
-    protected Robot awtRobot = new Robot();
+    private Robot awtRobot = new Robot();
 
-    public RobotControl() throws AWTException {
+    protected RobotControl() throws AWTException {
     }
 
     @Override
@@ -516,6 +516,16 @@ public class RobotControl extends GuiTest {
      */
     protected Button getButtonBySelector(String selector) {
         return robot.lookup(selector).queryButton();
+    }
+
+    protected Button[] getSeveralButtonsBySelector(String... selectors) {
+        Button[] buttons = new Button[selectors.length];
+
+        for (int i = 0; i < selectors.length; i++) {
+            buttons[i] = getButtonBySelector(selectors[i]);
+        }
+
+        return buttons;
     }
 
     /**

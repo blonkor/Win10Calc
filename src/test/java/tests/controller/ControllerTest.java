@@ -1,12 +1,13 @@
 package tests.controller;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.junit.Test;
 import util.RobotControl;
 
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for controller.
@@ -1754,6 +1755,53 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
+     * Tests for exceptions.
+     */
+    @Test
+    public void exceptionTests() {
+        //overflow
+        //add
+        checkException("1000000000^^^^^^^^^^*1000000000000000====================================================*" +
+                "10===+=========", "Overflow");
+
+        //subtract
+        checkException("1000000000^^^^^^^^^^*1000000000000000====================================================*" +
+                "10===-===========", "Overflow");
+
+        //multiply
+        checkException("1000000000^^^^^^^^^^*1000000000000000====================================================*" +
+                "10====", "Overflow");
+
+        //divide
+        checkException("0.000000001^^^^^^^^^^*0.000000000000001====================================================/" +
+                "10====", "Overflow");
+
+        //sqr
+        checkException("1000000000^^^^^^^^^^^", "Overflow");
+        checkException("0.000000001^^^^^^^^^^^", "Overflow");
+
+        //percentage
+        checkException("1000000000^^^^^^^^^^*1000000000000000====================================================*" +
+                "10===+%", "Overflow");
+        checkException("0.000000001^^^^^^^^^^*0.000000000000001====================================================/" +
+                "10===*%", "Overflow");
+
+        //invalid input
+        checkException("8~@", "Invalid input");
+        checkException("100~@", "Invalid input");
+        checkException("252362623~@", "Invalid input");
+
+        //divide by zero
+        checkException("14/0=", "Cannot divide by zero");
+        checkException("531515/0=", "Cannot divide by zero");
+        checkException("0.132/0=", "Cannot divide by zero");
+        checkException("0;", "Cannot divide by zero");
+
+        //divide zero by zero
+        checkException("0/0=", "Result is undefined");
+    }
+
+    /**
      * Checks that screen label has required text after clicking on buttons.
      *
      * @param buttons            buttons that should be clicked.
@@ -1802,5 +1850,26 @@ public class ControllerTest extends RobotControl {
 
         assertEquals("0", screenLabel.getText());
         assertEquals("", equationLabel.getText());
+    }
+
+    private void checkException(String buttons, String expectedScreenText) {
+        checkTyped(buttons, expectedScreenText);
+
+        Button[] enabledButtons = getSeveralButtonsBySelector(CLEAR_ALL_ID, CLEAR_TEXT_ID, BACKSPACE_ID,
+                ZERO_ID, ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID, SEVEN_ID, EIGHT_ID, NINE_ID, EQUALS_ID);
+        Button[] disabledButtons = getSeveralButtonsBySelector(MEMORY_SHOW_ID, MEMORY_CLEAR_ID, MEMORY_RECALL_ID,
+                MEMORY_ADD_ID, MEMORY_SUBTRACT_ID, MEMORY_STORE_ID, PERCENT_ID, SQRT_ID, SQR_ID, INVERSE_ID, DIVIDE_ID, MULTIPLY_ID,
+                SUBTRACT_ID, ADD_ID, NEGATE_ID, DOT_ID);
+
+        for (Button button : enabledButtons) {
+            assertFalse(button.isDisabled());
+        }
+
+        for (Button button : disabledButtons) {
+            assertTrue(button.isDisabled());
+        }
+
+        //heckTyped();
+
     }
 }
