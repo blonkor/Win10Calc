@@ -4,6 +4,7 @@ package com.implemica.bormashenko.calculator.model.enums;
  * This enum contains unary operations used in calculator.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public enum UnaryOperations {
 

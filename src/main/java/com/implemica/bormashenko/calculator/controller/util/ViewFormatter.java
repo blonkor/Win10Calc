@@ -16,6 +16,7 @@ import java.util.Stack;
  * Utility class for programmatically changing {@link com.implemica.bormashenko.calculator.view.View}.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class ViewFormatter {
 

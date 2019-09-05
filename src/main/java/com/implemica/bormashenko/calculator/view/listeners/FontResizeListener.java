@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
  * Listener for resizing font in result label.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class FontResizeListener implements InvalidationListener {
 

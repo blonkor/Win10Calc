@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Mykhailo Bormashenko
  * @see com.implemica.bormashenko.calculator.view.View
+ * @todo refactoring
  */
 public class ViewTest extends RobotControl {
 

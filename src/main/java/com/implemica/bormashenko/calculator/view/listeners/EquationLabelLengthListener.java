@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
  * This listener turns on buttons for moving text in equation label.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class EquationLabelLengthListener implements InvalidationListener {
 

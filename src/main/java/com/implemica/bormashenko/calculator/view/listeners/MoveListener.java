@@ -10,6 +10,7 @@ import javafx.stage.Stage;
  * Listener for moving an application.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class MoveListener implements EventHandler<MouseEvent> {
 

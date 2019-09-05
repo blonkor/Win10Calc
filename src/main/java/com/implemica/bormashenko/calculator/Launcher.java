@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
  * Main class for application.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class Launcher extends Application {
 
