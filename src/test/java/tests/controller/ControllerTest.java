@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Mykhailo Bormashenko
  * @see com.implemica.bormashenko.calculator.controller.Controller
+ * @todo refactoring
  */
 public class ControllerTest extends RobotControl {
 
@@ -25,6 +26,7 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void allTests() {
+        keyboardTests();
         appendDigitTests();
         appendDotTests();
         backspaceTests();
@@ -39,6 +41,77 @@ public class ControllerTest extends RobotControl {
         inverseTests();
         percentageTests();
         equalsTests();
+        exceptionTests();
+    }
+
+    /**
+     * Tests for keyboard handling.
+     */
+    private void keyboardTests() {
+        //digits
+        checkKeyboardForOperations("1 2 3 4 5 6 7 8 9 0 .",
+                "1,234,567,890.", "");
+
+        checkKeyboardForOperations("num1 num2 num3 num4 num5 num6 num7 num8 num9 num0 ",
+                "1,234,567,890", "");
+
+        //clearing
+        checkKeyboardForOperations("1 2 3 4 5 < < <", "12", "");
+        checkKeyboardForOperations("1 2 3 4 5 shift+= del", "0",
+                "12345 +");
+        checkKeyboardForOperations("1 2 3 4 5 shift+= esc", "0", "");
+
+        //operations
+        //add
+        checkKeyboardForOperations("1 2 3 4 5 shift+= 1 2 3 4 5 shift+=", "24,690",
+                "12345 + 12345 +");
+        checkKeyboardForOperations("1 2 3 4 5 num+ 1 2 3 4 5 num+", "24,690",
+                "12345 + 12345 +");
+
+        //subtract
+        checkKeyboardForOperations("9 8 7 6 5 - 1 2 3 4 5 -", "86,420",
+                "98765 - 12345 -");
+        checkKeyboardForOperations("9 8 7 6 5 num- 1 2 3 4 5 num-", "86,420",
+                "98765 - 12345 -");
+
+        //multiply
+        checkKeyboardForOperations("1 2 3 4 5 shift+8 1 2 3 4 5 shift+8",
+                "152,399,025", "12345 × 12345 ×");
+        checkKeyboardForOperations("1 2 3 4 5 num* 1 2 3 4 5 num*",
+                "152,399,025", "12345 × 12345 ×");
+
+        //divide
+        checkKeyboardForOperations("5 0 0 0 / 5 /",
+                "1,000", "5000 ÷ 5 ÷");
+        checkKeyboardForOperations("5 0 0 0 num/ 5 num/",
+                "1,000", "5000 ÷ 5 ÷");
+
+        //negate
+        checkKeyboardForOperations("1 2 3 4 5 F9","-12,345", "");
+        checkKeyboardForOperations("1 2 3 4 5 shift+= F9","-12,345",
+                "12345 + negate(12345)");
+
+        //sqrt
+        checkKeyboardForOperations("1 0 0 shift+2", "10", "√(100)");
+        checkKeyboardForOperations("1 F9 shift+2", "Invalid input",
+                "√(-1)");
+
+        //inverse
+        checkKeyboardForOperations("0 . 1 R", "10", "1/(0.1)");
+        checkKeyboardForOperations("R", "Cannot divide by zero",
+                "1/(0)");
+
+        //percent
+        checkKeyboardForOperations("5 shift+= 5 shift+5", "0.25",
+                "5 + 0.25");
+        checkKeyboardForOperations("1 5 0 shift+8 2 1 0 shift+5", "2.1",
+                "150 × 2.1");
+
+        //equals
+        checkKeyboardForOperations("1 2 3 4 5 shift+= = = =", "49,380",
+                "");
+        checkKeyboardForOperations("1 2 3 4 5 shift+= enter enter enter", "49,380",
+                "");
     }
 
     /**
@@ -1757,8 +1830,7 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for exceptions.
      */
-    @Test
-    public void exceptionTests() {
+    private void exceptionTests() {
         //overflow
         //add
         checkException("1000000000^^^^^^^^^^*1000000000000000====================================================*" +
@@ -1799,6 +1871,16 @@ public class ControllerTest extends RobotControl {
 
         //divide zero by zero
         checkException("0/0=", "Result is undefined");
+    }
+
+    private void checkKeyboardForOperations(String keyboardButtons, String expectedScreenText,
+                                            String expectedEquationText) {
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+
+        pressKeyboard(keyboardButtons);
+
+        assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        assertEquals(expectedEquationText, getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
 
     /**
@@ -1868,8 +1950,5 @@ public class ControllerTest extends RobotControl {
         for (Button button : disabledButtons) {
             assertTrue(button.isDisabled());
         }
-
-        //heckTyped();
-
     }
 }
