@@ -16,11 +16,9 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for testing view.
+ * Test class for testing {@link com.implemica.bormashenko.calculator.view.View}.
  *
  * @author Mykhailo Bormashenko
- * @see com.implemica.bormashenko.calculator.view.View
- * @todo refactoring
  */
 public class ViewTest extends RobotControl {
 
@@ -44,11 +42,19 @@ public class ViewTest extends RobotControl {
      */
     private static int DEFAULT_Y = 150;
 
+    /**
+     * Constructor needed to extend {@link RobotControl}
+     *
+     * @throws AWTException signals that an Abstract Window Toolkit exception has occurred.
+     */
     public ViewTest() throws AWTException {
+        //nothing to construct
     }
 
     /**
      * Runs all tests.
+     *
+     * @todo separate tests
      */
     @Test
     public void allTests() {
@@ -63,7 +69,7 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Tests for background color, color of text and font for buttons and labels.
+     * Tests for background color, color of text and font for {@code Button} and {@code Label}.
      */
     private void colorAndFontTests() {
         //colors
@@ -84,7 +90,7 @@ public class ViewTest extends RobotControl {
         Font segoeUI_15 = new Font("Segoe UI", 15);
         Font segoeUI_20 = new Font("Segoe UI", 20);
         Font segoeBlack_16 = new Font("Segoe UI Black", 16);
-        Font segoeSemilight_14 = new Font("Segoe UI Semilight", 14);
+        Font segoeSemilight_15 = new Font("Segoe UI Semilight", 15);
         Font segoeSemibold_12 = new Font("Segoe UI Semibold", 12);
         Font segoeSemibold_20 = new Font("Segoe UI Semibold", 20);
         Font segoeSemibold_22_5 = new Font("Segoe UI Semibold", 22.5);
@@ -98,8 +104,8 @@ public class ViewTest extends RobotControl {
         //buttons
         {
             //digits
-            checkColorAndFontForButtons(new String[]{ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID,
-                            SEVEN_ID, EIGHT_ID, NINE_ID, ZERO_ID},
+            checkColorAndFontForButtons(new String[]{ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID, SEVEN_ID,
+                            EIGHT_ID, NINE_ID, ZERO_ID},
                     mostlyWhileColor, veryDarkGrayColor, segoeSemibold_22_5,
                     lightGrayColor, veryDarkGrayColor);
 
@@ -131,8 +137,8 @@ public class ViewTest extends RobotControl {
                     lightGrayColor, veryDarkGrayColor);
 
             //memory buttons
-            checkColorAndFontForButtons(new String[]{MEMORY_CLEAR_ID, MEMORY_RECALL_ID, MEMORY_ADD_ID, MEMORY_SUBTRACT_ID,
-                            MEMORY_STORE_ID, MEMORY_SHOW_ID},
+            checkColorAndFontForButtons(new String[]{MEMORY_CLEAR_ID, MEMORY_RECALL_ID, MEMORY_ADD_ID,
+                            MEMORY_SUBTRACT_ID, MEMORY_STORE_ID, MEMORY_SHOW_ID},
                     lightGrayColor, veryDarkGrayColor, segoeSemibold_12,
                     lightGrayColor, veryDarkGrayColor);
 
@@ -204,8 +210,8 @@ public class ViewTest extends RobotControl {
 
             robot.scroll(SCROLL_AMOUNT, VerticalDirection.DOWN);
 
-            checkColorAndFontForButtons(new String[]{SPEED_MODE_ID, TIME_MODE_ID, POWER_MODE_ID, DATA_MODE_ID, PRESSURE_MODE_ID,
-                            ANGLE_MODE_ID, ABOUT_ID},
+            checkColorAndFontForButtons(new String[]{SPEED_MODE_ID, TIME_MODE_ID, POWER_MODE_ID, DATA_MODE_ID,
+                            PRESSURE_MODE_ID, ANGLE_MODE_ID, ABOUT_ID},
                     lightGrayColor, veryDarkGrayColor, segoeUI_15,
                     grayColor, veryDarkGrayColor);
 
@@ -256,22 +262,24 @@ public class ViewTest extends RobotControl {
         {
             checkColorAndFontForLabels(new String[]{TITLE_LABEL_ID}, veryDarkGrayColor, system_12);
             checkColorAndFontForLabels(new String[]{TYPE_LABEL_ID}, veryDarkGrayColor, segoeSemibold_20);
-            checkColorAndFontForLabels(new String[]{EQUATION_LABEL_ID}, equationLabelColor, segoeSemilight_14);
+            checkColorAndFontForLabels(new String[]{EQUATION_LABEL_ID}, equationLabelColor, segoeSemilight_15);
             checkColorAndFontForLabels(new String[]{SCREEN_LABEL_ID}, veryDarkGrayColor, segoeSemibold_47);
             checkColorAndFontForLabels(new String[]{MODE_LABEL_ID, CONVERTER_LABEL_ID}, veryDarkGrayColor, systemBold_14);
             checkColorAndFontForLabels(new String[]{MEMORY_SHOW_SYMBOL}, veryDarkGrayColor, segoeAssets_6);
-            checkColorAndFontForLabels(new String[]{STANDARD_MODE_SYMBOL, DATE_CALCULATION_MODE_SYMBOL, LENGTH_MODE_SYMBOL,
-                            AREA_MODE_SYMBOL, POWER_MODE_SYMBOL, PRESSURE_MODE_SYMBOL, ABOUT_SYMBOL},
+            checkColorAndFontForLabels(new String[]{STANDARD_MODE_SYMBOL, DATE_CALCULATION_MODE_SYMBOL,
+                            LENGTH_MODE_SYMBOL, AREA_MODE_SYMBOL, POWER_MODE_SYMBOL, PRESSURE_MODE_SYMBOL,
+                            ABOUT_SYMBOL},
                     veryDarkGrayColor, segoeAssets_16);
-            checkColorAndFontForLabels(new String[]{SCIENTIFIC_MODE_SYMBOL, PROGRAMMER_MODE_SYMBOL, CURRENCY_MODE_SYMBOL,
-                            VOLUME_MODE_SYMBOL, WEIGHT_AND_MASS_MODE_SYMBOL, TEMPERATURE_MODE_SYMBOL, ENERGY_MODE_SYMBOL,
-                            SPEED_MODE_SYMBOL, TIME_MODE_SYMBOL, DATA_MODE_SYMBOL, ANGLE_MODE_SYMBOL},
+            checkColorAndFontForLabels(new String[]{SCIENTIFIC_MODE_SYMBOL, PROGRAMMER_MODE_SYMBOL,
+                            CURRENCY_MODE_SYMBOL, VOLUME_MODE_SYMBOL, WEIGHT_AND_MASS_MODE_SYMBOL,
+                            TEMPERATURE_MODE_SYMBOL, ENERGY_MODE_SYMBOL, SPEED_MODE_SYMBOL, TIME_MODE_SYMBOL,
+                            DATA_MODE_SYMBOL, ANGLE_MODE_SYMBOL},
                     veryDarkGrayColor, calcAssets_15);
         }
     }
 
     /**
-     * Tests for text that buttons and labels contain.
+     * Tests for text that {@code Button} and {@code Label} contain.
      */
     private void textTests() {
         //buttons
@@ -350,6 +358,7 @@ public class ViewTest extends RobotControl {
 
     /**
      * Tests for resizing application.
+     * @todo optimize
      */
     private void resizeTests() {
         int zero = 0;
@@ -2118,10 +2127,9 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Tests for resizing font in screen label.
+     * Tests for resizing font in screen {@code Label}.
      */
-    @Test
-    public void resizeFontTests() {
+    private void resizeFontTests() {
         checkResizeFont("1", DEFAULT_WIDTH, 47);
         checkResizeFont("12", DEFAULT_WIDTH, 47);
         checkResizeFont("123456789", DEFAULT_WIDTH, 47);
@@ -2142,9 +2150,11 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Test for visibility of arrow buttons.
+     * Test for visibility of arrow {@code Button}.
      */
     private void visibleArrowsTests() {
+        int numberOfSqrClicks = 12;
+
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
 
         Button leftArrow = getButtonBySelector(LEFT_ARROW_ID);
@@ -2153,7 +2163,7 @@ public class ViewTest extends RobotControl {
         assertFalse(leftArrow.isVisible());
         assertFalse(rightArrow.isVisible());
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < numberOfSqrClicks; i++) {
             clickOn(getButtonBySelector(SQR_ID));
         }
 
@@ -2177,7 +2187,7 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Test for expanding window.
+     * Test for expanding application.
      */
     private void expandTest() {
         String minimizedSymbol = "\uE922";
@@ -2194,7 +2204,7 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Test for hiding window.
+     * Test for hiding application.
      */
     private void hideTest() {
         clickOn(getButtonBySelector(HIDE_ID));
@@ -2203,16 +2213,17 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Checks that buttons have required color, required text color, required font, and the same information
-     * while the button is hovered.
+     * Checks that {@code Button} has required color, required text color, required font, and the same information
+     * while the {@code Button} is hovered.
      *
-     * @param selectors                array with buttons's selectors.
-     * @param expectedColor            background color that should be set for every button in array.
-     * @param expectedTextColor        text color that should be set for every button in array.
-     * @param expectedFont             font that should be set for every button in array.
-     * @param expectedColorOnHover     background color that should be set for
-     *                                 every button in array while button is hovered.
-     * @param expectedTextColorOnHover text color that should be set for every button in array while button is hovered.
+     * @param selectors                array with {@code Button}'s selectors.
+     * @param expectedColor            background color that should be set for every {@code Button} in array.
+     * @param expectedTextColor        text color that should be set for every {@code Button} in array.
+     * @param expectedFont             font that should be set for every {@code Button} in array.
+     * @param expectedColorOnHover     background color that should be set for every {@code Button} in array while
+     *                                 the {@code Button} is hovered.
+     * @param expectedTextColorOnHover text color that should be set for every {@code Button} in array while the
+     *                                 {@code Button} is hovered.
      */
     private void checkColorAndFontForButtons(String[] selectors,
                                              String expectedColor, String expectedTextColor,
@@ -2234,11 +2245,11 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Checks that labels have required text color and font.
+     * Checks that {@code Label} have required text color and font.
      *
-     * @param selectors         array with labels' selectors.
-     * @param expectedTextColor text color that should be set for every label in array.
-     * @param expectedFont      font that should be set for every label in array.
+     * @param selectors         array with {@code Label}'s selectors.
+     * @param expectedTextColor text color that should be set for every {@code Label} in array.
+     * @param expectedFont      font that should be set for every {@code Label} in array.
      */
     private void checkColorAndFontForLabels(String[] selectors, String expectedTextColor, Font expectedFont) {
 
@@ -2251,10 +2262,10 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Checks that button has required text.
+     * Checks that {@code Button} has required text.
      *
-     * @param selector     button's selector.
-     * @param expectedText text that button should contain.
+     * @param selector     {@code Button}'s selector.
+     * @param expectedText text that {@code Button} should contain.
      */
     private void checkTextForButton(String selector, String expectedText) {
         Button button = getButtonBySelector(selector);
@@ -2262,10 +2273,10 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Checks that label has required text.
+     * Checks that {@code Label} has required text.
      *
-     * @param selector     label's selector.
-     * @param expectedText text that label should contain.
+     * @param selector     {@code Label}'s selector.
+     * @param expectedText text that {@code Label} should contain.
      */
     private void checkTextForLabel(String selector, String expectedText) {
         Labeled labeled = getLabeledBySelector(selector);
@@ -2324,11 +2335,11 @@ public class ViewTest extends RobotControl {
     }
 
     /**
-     * Checks that font for screen label changes while text in the label or window's width changes.
+     * Checks that font for screen {@code Label} changes while text in the {@code Label} or window's width changes.
      *
-     * @param text             text to set for label.
+     * @param text             text to set for {@code Label}.
      * @param dragToX          location X to drag window.
-     * @param expectedFontSize size of font that label should has.
+     * @param expectedFontSize size of font that {@code Label} should has.
      */
     private void checkResizeFont(String text, double dragToX, double expectedFontSize) {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, 0);
