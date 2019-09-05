@@ -668,6 +668,7 @@ public class Controller implements Initializable {
      *
      * @param operation UnaryOperation to perform.
      * @todo refactor
+     * @todo 0.0000 equation
      */
     private void unaryOperationPressed(UnaryOperations operation) {
         String equationTextToSet = "";
@@ -678,8 +679,8 @@ public class Controller implements Initializable {
             if (!isFirstCalculated) {
                 calculation.setFirst(number);
 
-                equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + number.toString() + NARROW_SPACE +
-                        CLOSING_BRACKET;
+                equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                        formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
 
                 calculation.calculateUnary(operation);
                 calculation.setFirst(calculation.getResult());
@@ -715,8 +716,8 @@ public class Controller implements Initializable {
                     equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
                             CLOSING_BRACKET;
                 } else {
-                    equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter +
-                            NARROW_SPACE + CLOSING_BRACKET;
+                    equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                            textAfter + NARROW_SPACE + CLOSING_BRACKET;
                 }
 
                 calculation.calculateUnary(operation);
