@@ -61,7 +61,7 @@ public class Controller implements Initializable {
     /**
      * Symbol for separation numbers and operations in equation {@code Label}.
      */
-    private static final String SPACE = " ";
+    private static final String NARROW_SPACE = "\u2009";
 
     /**
      * Empty string is primary string in equation {@code Label}.
@@ -596,14 +596,14 @@ public class Controller implements Initializable {
                     calculation.setBinaryOperation(operation);
 
                     equationTextToSet = formatWithoutGroupSeparator(calculation.getFirst())
-                            + SPACE + operation.symbol;
+                            + NARROW_SPACE + operation.symbol;
 
                 } else if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
                     calculation.setSecond(numberOnScreen);
 
-                    equationTextToSet = equation.getText() + SPACE +
+                    equationTextToSet = equation.getText() + NARROW_SPACE +
                             formatWithoutGroupSeparator(calculation.getSecond()) +
-                            SPACE + operation.symbol;
+                            NARROW_SPACE + operation.symbol;
 
 
                     calculation.calculateBinary();
@@ -629,14 +629,14 @@ public class Controller implements Initializable {
 
                         if (calculation.getBinaryOperation() == null) {
                             equationTextToSet = formatWithoutGroupSeparator(numberOnScreen) +
-                                    SPACE + operation.symbol;
+                                    NARROW_SPACE + operation.symbol;
                         } else {
                             equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
-                                    SPACE + operation.symbol;
+                                    NARROW_SPACE + operation.symbol;
                         }
 
                     } else {
-                        equationTextToSet = equation.getText() + SPACE + operation.symbol;
+                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
                     }
 
                     calculation.setBinaryOperation(operation);
@@ -678,7 +678,8 @@ public class Controller implements Initializable {
             if (!isFirstCalculated) {
                 calculation.setFirst(number);
 
-                equationTextToSet = operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET;
+                equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + number.toString() + NARROW_SPACE +
+                        CLOSING_BRACKET;
 
                 calculation.calculateUnary(operation);
                 calculation.setFirst(calculation.getResult());
@@ -711,10 +712,11 @@ public class Controller implements Initializable {
                 }
 
                 if (textBefore.equals(EMPTY_STRING)) {
-                    equationTextToSet = operation.symbol + OPENING_BRACKET + textAfter + CLOSING_BRACKET;
-                } else {
-                    equationTextToSet = textBefore + SPACE + operation.symbol + OPENING_BRACKET + textAfter +
+                    equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
                             CLOSING_BRACKET;
+                } else {
+                    equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter +
+                            NARROW_SPACE + CLOSING_BRACKET;
                 }
 
                 calculation.calculateUnary(operation);
@@ -727,16 +729,16 @@ public class Controller implements Initializable {
                 calculation.setFirst(number);
 
                 if (isUnaryOrPercentOperationPressed && equation.getText().equals(ZERO)) {
-                    equationTextToSet = operation.symbol + OPENING_BRACKET +
-                            formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                    equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                            formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                 } else {
 
                     if (equation.getText().equals(EMPTY_STRING)) {
-                        equationTextToSet = operation.symbol + OPENING_BRACKET +
-                                formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                        equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                                formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                     } else {
-                        equationTextToSet = equation.getText() + SPACE + operation.symbol + OPENING_BRACKET +
-                                formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                                formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                     }
                 }
 
@@ -807,10 +809,10 @@ public class Controller implements Initializable {
 
                     textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
 
-                    equationTextToSet = textBefore + SPACE +
+                    equationTextToSet = textBefore + NARROW_SPACE +
                             formatWithoutGroupSeparator(calculation.getSecond());
                 } else {
-                    equationTextToSet += SPACE + formatWithoutGroupSeparator(calculation.getSecond());
+                    equationTextToSet += NARROW_SPACE + formatWithoutGroupSeparator(calculation.getSecond());
                 }
 
                 setFlags(false, false, true, false,

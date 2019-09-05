@@ -403,10 +403,10 @@
             </ScrollPane>
         </AnchorPane>
     </GridPane>
-   <ScrollPane fx:id="equationScroll" hbarPolicy="NEVER" layoutX="2.0" layoutY="74.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefWidth="318.0" styleClass="scroll_pane_equation" vbarPolicy="NEVER" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="74.0">
+   <ScrollPane fx:id="equationScroll" hbarPolicy="NEVER" layoutX="2.0" layoutY="74.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefWidth="318.0" styleClass="scroll_pane_equation" vbarPolicy="NEVER" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="71.0">
            <Label fx:id="equation" alignment="TOP_RIGHT" contentDisplay="TOP" maxWidth="1.7976931348623157E308" minHeight="-Infinity" textFill="#5b5b5b" textOverrun="CLIP">
                <font>
-                   <Font name="Segoe UI Semilight" size="14.0" />
+                   <Font name="Segoe UI Semilight" size="15.0" />
                </font>
            </Label>
       <padding>
@@ -434,6 +434,36 @@
             </font>
         </Button>
     </AnchorPane>
+    <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationLeft" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="76.0">
+        <styleClass>
+            <String fx:value="arrows" />
+            <String fx:value="gray_background" />
+            <String fx:value="light_gray_background_on_hover" />
+        </styleClass>
+        <graphic>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
+                <styleClass>
+                    <String fx:value="arrows" />
+                    <String fx:value="font_assets" />
+                </styleClass>
+            </Label>
+        </graphic>
+    </Button>
+    <Button fx:id="rightArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationRight" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+        <styleClass>
+            <String fx:value="arrows" />
+            <String fx:value="gray_background" />
+            <String fx:value="light_gray_background_on_hover" />
+        </styleClass>
+        <graphic>
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
+                <styleClass>
+                    <String fx:value="arrows" />
+                    <String fx:value="font_assets" />
+                </styleClass>
+            </Label>
+        </graphic>
+    </Button>
     <ScrollPane fx:id="navigationPanel" fitToWidth="true" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0" styleClass="scroll_pane_navigation" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="73.0">
         <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
             <Label fx:id="mode" layoutY="5.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Calculator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
@@ -743,36 +773,6 @@
             </Button>
         </AnchorPane>
     </ScrollPane>
-    <Button fx:id="leftArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-16.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationLeft" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="76.0">
-        <styleClass>
-            <String fx:value="arrows" />
-            <String fx:value="gray_background" />
-            <String fx:value="light_gray_background_on_hover" />
-        </styleClass>
-        <graphic>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
-                <styleClass>
-                    <String fx:value="arrows" />
-                    <String fx:value="font_assets" />
-                </styleClass>
-            </Label>
-        </graphic>
-    </Button>
-    <Button fx:id="rightArrow" alignment="CENTER" contentDisplay="CENTER" layoutX="-6.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#moveEquationRight" prefHeight="17.0" prefWidth="20.0" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
-        <styleClass>
-            <String fx:value="arrows" />
-            <String fx:value="gray_background" />
-            <String fx:value="light_gray_background_on_hover" />
-        </styleClass>
-        <graphic>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="20.0" text="" textOverrun="CLIP">
-                <styleClass>
-                    <String fx:value="arrows" />
-                    <String fx:value="font_assets" />
-                </styleClass>
-            </Label>
-        </graphic>
-    </Button>
     <styleClass>
         <String fx:value="background" />
         <String fx:value="gray_background" />
