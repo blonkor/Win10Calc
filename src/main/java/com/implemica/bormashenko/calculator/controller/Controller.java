@@ -127,7 +127,6 @@ public class Controller implements Initializable {
      * Handles keyboard input and fires required {@code Button}.
      *
      * @param event keyboard code or combination that was/were pressed.
-     * @todo tests
      */
     public void keyboardHandling(KeyEvent event) {
 
@@ -218,18 +217,16 @@ public class Controller implements Initializable {
                 buttonToFire = dot;
             } else if (keyCode == KeyCode.BACK_SPACE) {
                 buttonToFire = backspace;
-            } else if (keyCode == KeyCode.PLUS || keyCode == KeyCode.ADD) {
+            } else if (keyCode == KeyCode.ADD) {
                 buttonToFire = add;
             } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
                 buttonToFire = subtract;
-            } else if (keyCode == KeyCode.MULTIPLY || keyCode == KeyCode.STAR) {
+            } else if (keyCode == KeyCode.MULTIPLY) {
                 buttonToFire = multiply;
             } else if (keyCode == KeyCode.DIVIDE || keyCode == KeyCode.SLASH) {
                 buttonToFire = divide;
             } else if (keyCode == KeyCode.EQUALS || keyCode == KeyCode.ENTER) {
                 buttonToFire = equals;
-            } else if (keyCode == KeyCode.AT) {
-                buttonToFire = sqrt;
             } else if (keyCode == KeyCode.DELETE) {
                 buttonToFire = clearText;
             } else if (keyCode == KeyCode.ESCAPE) {
