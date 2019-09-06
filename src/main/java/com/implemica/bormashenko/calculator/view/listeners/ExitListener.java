@@ -8,6 +8,7 @@ import javafx.stage.Stage;
  * Listener for exit from an application.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class ExitListener implements EventHandler<ActionEvent> {
 

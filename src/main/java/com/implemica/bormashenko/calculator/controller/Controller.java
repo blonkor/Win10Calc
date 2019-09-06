@@ -3,6 +3,7 @@ package com.implemica.bormashenko.calculator.controller;
 import com.implemica.bormashenko.calculator.controller.util.*;
 import com.implemica.bormashenko.calculator.model.*;
 import com.implemica.bormashenko.calculator.model.enums.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.implemica.bormashenko.calculator.controller.util.NumberFormatter.*;
 
 /**
  * Controller for application.
@@ -58,7 +61,7 @@ public class Controller implements Initializable {
     /**
      * Symbol for separation numbers and operations in equation {@code Label}.
      */
-    private static final String SPACE = " ";
+    private static final String NARROW_SPACE = "\u2009";
 
     /**
      * Empty string is primary string in equation {@code Label}.
@@ -121,19 +124,10 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Moves text in equation {@code Label} to the left.
+     * Handles keyboard input and fires required {@code Button}.
+     *
+     * @param event keyboard code or combination that was/were pressed.
      */
-    public void moveEquationLeft() {
-        ViewFormatter.moveTextInLabel(leftArrow, rightArrow, equation, equationScroll, true);
-    }
-
-    /**
-     * Moves text in equation {@code Label} to the right.
-     */
-    public void moveEquationRight() {
-        ViewFormatter.moveTextInLabel(rightArrow, leftArrow, equation, equationScroll, false);
-    }
-
     public void keyboardHandling(KeyEvent event) {
 
         KeyCombination ctrlM = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN);
@@ -177,7 +171,7 @@ public class Controller implements Initializable {
                 buttonToFire = add;
             }
 
-            //digit symbols
+            //digit buttons
         } else if (keyCode.isDigitKey()) {
 
             if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
@@ -202,39 +196,37 @@ public class Controller implements Initializable {
                 buttonToFire = nine;
             }
 
-            //letter symbols
+            //letter buttons
         } else if (keyCode.isLetterKey()) {
 
             if (keyCode == KeyCode.R) {
                 buttonToFire = inverse;
             }
 
-            //f symbols
+            //f buttons
         } else if (keyCode.isFunctionKey()) {
 
             if (keyCode == KeyCode.F9) {
                 buttonToFire = negate;
             }
 
-            //any else symbols
+            //any else buttons
         } else {
 
             if (keyCode == KeyCode.PERIOD) {
                 buttonToFire = dot;
             } else if (keyCode == KeyCode.BACK_SPACE) {
                 buttonToFire = backspace;
-            } else if (keyCode == KeyCode.PLUS || keyCode == KeyCode.ADD) {
+            } else if (keyCode == KeyCode.ADD) {
                 buttonToFire = add;
             } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
                 buttonToFire = subtract;
-            } else if (keyCode == KeyCode.MULTIPLY || keyCode == KeyCode.STAR) {
+            } else if (keyCode == KeyCode.MULTIPLY) {
                 buttonToFire = multiply;
             } else if (keyCode == KeyCode.DIVIDE || keyCode == KeyCode.SLASH) {
                 buttonToFire = divide;
             } else if (keyCode == KeyCode.EQUALS || keyCode == KeyCode.ENTER) {
                 buttonToFire = equals;
-            } else if (keyCode == KeyCode.AT) {
-                buttonToFire = sqrt;
             } else if (keyCode == KeyCode.DELETE) {
                 buttonToFire = clearText;
             } else if (keyCode == KeyCode.ESCAPE) {
@@ -246,6 +238,88 @@ public class Controller implements Initializable {
         if (buttonToFire != null && !memoryBlock.isVisible() && !navigationBlock.isVisible()) {
             buttonToFire.fire();
         }
+    }
+
+    /**
+     * Opens or closes navigation bar.
+     * @todo tests
+     */
+    public void showNavigationPanel() {
+        ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
+    }
+
+    /**
+     * Moves text in equation {@code Label} to the left.
+     * @todo tests
+     */
+    public void moveEquationLeft() {
+        ViewFormatter.moveTextInLabel(leftArrow, rightArrow, equation, equationScroll, true);
+    }
+
+    /**
+     * Moves text in equation {@code Label} to the right.
+     * @todo tests
+     */
+    public void moveEquationRight() {
+        ViewFormatter.moveTextInLabel(rightArrow, leftArrow, equation, equationScroll, false);
+    }
+
+    /**
+     * Shows memory.
+     * @todo tests
+     */
+    public void memoryShowOperation() {
+        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
+    }
+
+    /**
+     * Clears all memory.
+     * @todo tests
+     */
+    public void memoryClearOperation() {
+        memory.clearMemory();
+        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Recalls number in memory.
+     * @todo tests
+     */
+    public void memoryRecallOperation() {
+        BigDecimal number = memory.recall();
+        screen.setText(formatNumber(number));
+
+        isEditableScreen = false;
+    }
+
+    /**
+     * Adds number to memory.
+     * @todo tests
+     */
+    public void memoryAddOperation() {
+        BigDecimal number = screenToBigDecimal(screen.getText());
+        memory.addToMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Subtracts number from memory.
+     * @todo tests
+     */
+    public void memorySubtractOperation() {
+        BigDecimal number = screenToBigDecimal(screen.getText());
+        memory.subtractFromMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+    }
+
+    /**
+     * Saves number in memory.
+     * @todo tests
+     */
+    public void memoryStoreOperation() {
+        BigDecimal number = screenToBigDecimal(screen.getText());
+        memory.storeToMemory(number);
+        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -268,7 +342,7 @@ public class Controller implements Initializable {
             number = EMPTY_STRING;
         }
 
-        screen.setText(NumberFormatter.appendDigit(number, digit));
+        screen.setText(appendDigitToNumber(number, digit));
 
         if (isUnaryOrPercentOperationPressed) {
             equation.setText(EMPTY_STRING);
@@ -278,8 +352,8 @@ public class Controller implements Initializable {
             isFirstCalculated = false;
         }
 
-        setFlags(true, false, false, false,
-                isFirstCalculated, false);
+        setFlags(true, false, false,
+                false, isFirstCalculated, false);
     }
 
     /**
@@ -295,7 +369,7 @@ public class Controller implements Initializable {
             number = ZERO;
         }
 
-        screen.setText(NumberFormatter.appendDecimalSeparator(number));
+        screen.setText(appendDecimalSeparatorIfMissed(number));
 
         if (isUnaryOrPercentOperationPressed) {
             equation.setText(EMPTY_STRING);
@@ -305,8 +379,8 @@ public class Controller implements Initializable {
             isFirstCalculated = false;
         }
 
-        setFlags(true, false, false, false,
-                isFirstCalculated, false);
+        setFlags(true, false, false,
+                false, isFirstCalculated, false);
     }
 
     /**
@@ -319,7 +393,7 @@ public class Controller implements Initializable {
 
         if (isEditableScreen) {
             String number = screen.getText();
-            screen.setText(NumberFormatter.deleteLastChar(number));
+            screen.setText(deleteLastChar(number));
         }
     }
 
@@ -333,8 +407,8 @@ public class Controller implements Initializable {
 
         screen.setText(ZERO);
 
-        setFlags(true, false, false, false,
-                isFirstCalculated, false);
+        setFlags(true, false, false,
+                false, isFirstCalculated, false);
     }
 
     /**
@@ -349,8 +423,8 @@ public class Controller implements Initializable {
         calculation.resetAll();
         equation.setText(EMPTY_STRING);
 
-        setFlags(true, false, false, false,
-                false, false);
+        setFlags(true, false, false,
+                false,false, false);
     }
 
     /**
@@ -375,7 +449,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Performs dibide operation from {@code Calculation}.
+     * Performs divide operation from {@code Calculation}.
      */
     public void divideOperation() {
         binaryOperationPressed(BinaryOperations.DIVIDE);
@@ -386,7 +460,7 @@ public class Controller implements Initializable {
      */
     public void negateOperation() {
         if (isEditableScreen) {
-            screen.setText(NumberFormatter.changeSign(screen.getText()));
+            screen.setText(changeSign(screen.getText()));
         } else {
             unaryOperationPressed(UnaryOperations.NEGATE);
         }
@@ -432,6 +506,7 @@ public class Controller implements Initializable {
      * operation.
      *
      * @see Calculation
+     * @todo refactor
      */
     public void calculateResult() {
         if (isError) {
@@ -444,7 +519,7 @@ public class Controller implements Initializable {
 
         try {
             if (calculation.getBinaryOperation() != null) {
-                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+                BigDecimal number = screenToBigDecimal(screen.getText());
 
                 if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
 
@@ -465,10 +540,10 @@ public class Controller implements Initializable {
                     calculation.calculateBinary();
                 }
 
-                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                screen.setText(formatNumber(calculation.getResult()));
 
-                setFlags(false, false, false, true,
-                        true, false);
+                setFlags(false, false, false,
+                        true, true, false);
             }
 
             equation.setText(EMPTY_STRING);
@@ -479,65 +554,6 @@ public class Controller implements Initializable {
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
-    }
-
-    /**
-     * Shows memory.
-     */
-    public void memoryShowOperation() {
-        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
-    }
-
-    /**
-     * Clears all memory.
-     */
-    public void memoryClearOperation() {
-        memory.clearMemory();
-        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Recalls number in memory.
-     */
-    public void memoryRecallOperation() {
-        BigDecimal number = memory.recall();
-        screen.setText(NumberFormatter.formatNumber(number));
-
-        isEditableScreen = false;
-    }
-
-    /**
-     * Adds number to memory.
-     */
-    public void memoryAddOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.addToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Subtracts number from memory.
-     */
-    public void memorySubtractOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.subtractFromMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Saves number in memory.
-     */
-    public void memoryStoreOperation() {
-        BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
-        memory.storeToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-    }
-
-    /**
-     * Opens or closes navigation bar.
-     */
-    public void showNavigationPanel() {
-        ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
     }
 
     /**
@@ -562,6 +578,7 @@ public class Controller implements Initializable {
      * @param operation binary operation to set.
      * @see BinaryOperations
      * @see Calculation
+     * @todo refactor
      */
     private void binaryOperationPressed(BinaryOperations operation) {
         if (screen.getText().endsWith(".")) {
@@ -572,28 +589,28 @@ public class Controller implements Initializable {
 
         try {
             if (!isBinaryOperationPressed) {
-                BigDecimal numberOnScreen = NumberFormatter.screenToBigDecimal(screen.getText());
+                BigDecimal numberOnScreen = screenToBigDecimal(screen.getText());
 
                 if (!isFirstCalculated) {
                     calculation.setFirst(numberOnScreen);
                     calculation.setBinaryOperation(operation);
 
-                    equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getFirst())
-                            + SPACE + operation.symbol;
+                    equationTextToSet = formatWithoutGroupSeparator(calculation.getFirst())
+                            + NARROW_SPACE + operation.symbol;
 
                 } else if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
                     calculation.setSecond(numberOnScreen);
 
-                    equationTextToSet = equation.getText() + SPACE +
-                            NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond()) +
-                            SPACE + operation.symbol;
+                    equationTextToSet = equation.getText() + NARROW_SPACE +
+                            formatWithoutGroupSeparator(calculation.getSecond()) +
+                            NARROW_SPACE + operation.symbol;
 
 
                     calculation.calculateBinary();
                     calculation.setFirst(calculation.getResult());
                     calculation.setBinaryOperation(operation);
 
-                    screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                    screen.setText(formatNumber(calculation.getResult()));
 
                 } else {
 
@@ -604,21 +621,22 @@ public class Controller implements Initializable {
 
                         calculation.setFirst(calculation.getResult());
 
-                        screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                        screen.setText(formatNumber(calculation.getResult()));
                     }
 
                     if (isEqualsPressed) {
                         calculation.setFirst(numberOnScreen);
 
                         if (calculation.getBinaryOperation() == null) {
-                            equationTextToSet = numberOnScreen + SPACE + operation.symbol;
+                            equationTextToSet = formatWithoutGroupSeparator(numberOnScreen) +
+                                    NARROW_SPACE + operation.symbol;
                         } else {
-                            equationTextToSet = NumberFormatter.formatWithoutGroupSeparator(calculation.getResult()) +
-                                    SPACE + operation.symbol;
+                            equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
+                                    NARROW_SPACE + operation.symbol;
                         }
 
                     } else {
-                        equationTextToSet = equation.getText() + SPACE + operation.symbol;
+                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
                     }
 
                     calculation.setBinaryOperation(operation);
@@ -649,21 +667,24 @@ public class Controller implements Initializable {
      * Calculates unary operation with first number and sets result as first number.
      *
      * @param operation UnaryOperation to perform.
+     * @todo refactor
+     * @todo 0.0000 equation
      */
     private void unaryOperationPressed(UnaryOperations operation) {
         String equationTextToSet = "";
 
         try {
-            BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+            BigDecimal number = screenToBigDecimal(screen.getText());
 
             if (!isFirstCalculated) {
                 calculation.setFirst(number);
 
-                equationTextToSet = operation.symbol + OPENING_BRACKET + number.toString() + CLOSING_BRACKET;
+                equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                        formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
 
                 calculation.calculateUnary(operation);
                 calculation.setFirst(calculation.getResult());
-                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                screen.setText(formatNumber(calculation.getResult()));
 
             } else if (isUnaryOrPercentOperationPressed) {
                 calculation.setFirst(calculation.getResult());
@@ -692,31 +713,33 @@ public class Controller implements Initializable {
                 }
 
                 if (textBefore.equals(EMPTY_STRING)) {
-                    equationTextToSet = operation.symbol + OPENING_BRACKET + textAfter + CLOSING_BRACKET;
+                    equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
+                            CLOSING_BRACKET;
                 } else {
-                    equationTextToSet = textBefore + SPACE + operation.symbol + OPENING_BRACKET + textAfter + CLOSING_BRACKET;
+                    equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                            textAfter + NARROW_SPACE + CLOSING_BRACKET;
                 }
 
                 calculation.calculateUnary(operation);
                 calculation.setFirst(calculation.getResult());
 
-                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                screen.setText(formatNumber(calculation.getResult()));
 
             } else {
                 calculation.setSecond(calculation.getFirst());
                 calculation.setFirst(number);
 
                 if (isUnaryOrPercentOperationPressed && equation.getText().equals(ZERO)) {
-                    equationTextToSet = operation.symbol + OPENING_BRACKET +
-                            NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                    equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                            formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                 } else {
 
                     if (equation.getText().equals(EMPTY_STRING)) {
-                        equationTextToSet = operation.symbol + OPENING_BRACKET +
-                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                        equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                                formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                     } else {
-                        equationTextToSet = equation.getText() + SPACE + operation.symbol + OPENING_BRACKET +
-                                NumberFormatter.formatWithoutGroupSeparator(number) + CLOSING_BRACKET;
+                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                                formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                     }
                 }
 
@@ -729,11 +752,11 @@ public class Controller implements Initializable {
                     calculation.setSecond(calculation.getResult());
                 }
 
-                screen.setText(NumberFormatter.formatNumber(calculation.getResult()));
+                screen.setText(formatNumber(calculation.getResult()));
             }
 
             setFlags(false, false, true, false,
-                    true,  false);
+                    true, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         } finally {
@@ -754,6 +777,7 @@ public class Controller implements Initializable {
      * If set binary operation is multiply or divide, sets second number as percentage of 100.
      * <p>
      * Than shows changed second number on screen and adds it to equation label.
+     * @todo refactor
      */
     private void calculatePercentage() {
         String equationTextToSet = equation.getText();
@@ -768,12 +792,12 @@ public class Controller implements Initializable {
         } else {
 
             try {
-                BigDecimal number = NumberFormatter.screenToBigDecimal(screen.getText());
+                BigDecimal number = screenToBigDecimal(screen.getText());
                 calculation.setSecond(number);
 
                 calculation.calculatePercentage();
 
-                screen.setText(NumberFormatter.formatNumber(calculation.getSecond()));
+                screen.setText(formatNumber(calculation.getSecond()));
 
                 if (isUnaryOrPercentOperationPressed) {
                     String textBefore;
@@ -786,10 +810,10 @@ public class Controller implements Initializable {
 
                     textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
 
-                    equationTextToSet = textBefore + SPACE +
-                            NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+                    equationTextToSet = textBefore + NARROW_SPACE +
+                            formatWithoutGroupSeparator(calculation.getSecond());
                 } else {
-                    equationTextToSet += SPACE + NumberFormatter.formatWithoutGroupSeparator(calculation.getSecond());
+                    equationTextToSet += NARROW_SPACE + formatWithoutGroupSeparator(calculation.getSecond());
                 }
 
                 setFlags(false, false, true, false,
@@ -803,6 +827,10 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * @todo refactor
+     * @param message
+     */
     private void exceptionThrown(String message) {
         calculation.resetAll();
         screen.setText(message);
@@ -816,6 +844,9 @@ public class Controller implements Initializable {
                 false, true);
     }
 
+    /**
+     * @todo refactor
+     */
     private void returnAfterError() {
         screen.setText(ZERO);
         equation.setText(EMPTY_STRING);
@@ -836,12 +867,12 @@ public class Controller implements Initializable {
     /**
      * Sets flags for boolean fields of controller.
      *
-     * @param isEditableScreen         true if digit should be appended to screen number.
-     * @param isBinaryOperationPressed true if binary operation was just pressed.
-     * @param isUnaryOrPercentOperationPressed  true if unary operation was just pressed.
-     * @param isEqualsPressed          true if equals was just pressed.
-     * @param isFirstCalculated        true if first operand for model is calculated.
-     * @param isError                  true if is error was just happened.
+     * @param isEditableScreen                 true if digit should be appended to screen number.
+     * @param isBinaryOperationPressed         true if binary operation was just pressed.
+     * @param isUnaryOrPercentOperationPressed true if unary operation was just pressed.
+     * @param isEqualsPressed                  true if equals was just pressed.
+     * @param isFirstCalculated                true if first operand for model is calculated.
+     * @param isError                          true if is error was just happened.
      */
     private void setFlags(boolean isEditableScreen, boolean isBinaryOperationPressed,
                           boolean isUnaryOrPercentOperationPressed, boolean isEqualsPressed, boolean isFirstCalculated,

@@ -18,6 +18,7 @@ import java.io.*;
  * Main tests.view of application.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class View implements Serializable {
 

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  * Listener for maximizing application.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class ExpandListener implements EventHandler<ActionEvent> {
 

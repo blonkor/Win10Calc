@@ -9,6 +9,7 @@ import javafx.stage.Stage;
  *
  * @author Mykhailo Bormashenko
  * @see Launcher
+ * @todo refactoring
  */
 public class SetLauncherAppForTests extends Launcher {
 

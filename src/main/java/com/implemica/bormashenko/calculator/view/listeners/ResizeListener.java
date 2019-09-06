@@ -11,6 +11,7 @@ import javafx.stage.Stage;
  * Listener for resizing an application.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class ResizeListener implements EventHandler<MouseEvent> {
 

@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Test class for testing {@link NumberFormatter}.
  *
  * @author Mykhailo Bormashenko
+ * @todo refactoring
  */
 public class NumberFormatterTest {
 
@@ -857,7 +858,7 @@ public class NumberFormatterTest {
      * @param expectedResult required result after performing operation.
      */
     private void checkAppendDigit(String number, String digit, String expectedResult) {
-        String result = NumberFormatter.appendDigit(number, digit);
+        String result = NumberFormatter.appendDigitToNumber(number, digit);
         assertEquals(expectedResult, result);
     }
 
@@ -868,7 +869,7 @@ public class NumberFormatterTest {
      * @param expectedResult required result after performing operation.
      */
     private void checkAppendDecimalSeparator(String number, String expectedResult) {
-        String result = NumberFormatter.appendDecimalSeparator(number);
+        String result = NumberFormatter.appendDecimalSeparatorIfMissed(number);
         assertEquals(expectedResult, result);
     }
 

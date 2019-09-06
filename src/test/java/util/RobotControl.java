@@ -5,13 +5,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Labeled;
-import javafx.scene.input.MouseButton;
+import javafx.scene.input.*;
 import javafx.stage.Window;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.api.FxRobot;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Mykhailo Bormashenko.
  * @see com.implemica.bormashenko.calculator.view.View
+ * @todo refactoring
  */
 public class RobotControl extends GuiTest {
 
@@ -546,7 +548,7 @@ public class RobotControl extends GuiTest {
      */
     protected void clickButtons(String text) {
         for (int i = 0; i < text.length(); i++) {
-            String selector = null;
+            String selector;
             char charAtI = text.charAt(i);
 
             if (charAtI == '0') {
@@ -593,14 +595,149 @@ public class RobotControl extends GuiTest {
                 selector = INVERSE_ID;
             } else if (charAtI == '<') {
                 selector = BACKSPACE_ID;
+            } else {
+                throw new IllegalArgumentException("Expected: string with correct buttons representation only. \n" +
+                        "Got: " + charAtI);
             }
 
-            if (selector == null) {
-                throw new NullPointerException("Expected: string with number only. \n" +
-                        "Got: " + text);
+            clickOn(getButtonBySelector(selector));
+        }
+    }
+
+    protected void pressKeyboard(String text) {
+        String[] codes = text.split(" ");
+
+        for (String code : codes) {
+
+            int additionalKey = 0;
+            int mainKey;
+
+            //ctrl combinations
+            if (code.equals("ctrl+M")) {
+                additionalKey = KeyEvent.VK_CONTROL;
+                mainKey = KeyEvent.VK_M;
+            } else if (code.equals("ctrl+P")) {
+                additionalKey = KeyEvent.VK_CONTROL;
+                mainKey = KeyEvent.VK_P;
+            } else if (code.equals("ctrl+Q")) {
+                additionalKey = KeyEvent.VK_CONTROL;
+                mainKey = KeyEvent.VK_Q;
+            } else if (code.equals("ctrl+R")) {
+                additionalKey = KeyEvent.VK_CONTROL;
+                mainKey = KeyEvent.VK_R;
+            } else if (code.equals("ctrl+L")) {
+                additionalKey = KeyEvent.VK_CONTROL;
+                mainKey = KeyEvent.VK_L;
+
+                //shift combinations
+            } else if (code.equals("shift+2")) {
+                additionalKey = KeyEvent.VK_SHIFT;
+                mainKey = KeyEvent.VK_2;
+            } else if (code.equals("shift+5")) {
+                additionalKey = KeyEvent.VK_SHIFT;
+                mainKey = KeyEvent.VK_5;
+            } else if (code.equals("shift+8")) {
+                additionalKey = KeyEvent.VK_SHIFT;
+                mainKey = KeyEvent.VK_8;
+            } else if (code.equals("shift+=")) {
+                additionalKey = KeyEvent.VK_SHIFT;
+                mainKey = KeyEvent.VK_EQUALS;
+
+                //digits
+            } else if (code.equals("0")) {
+                mainKey = KeyEvent.VK_0;
+            } else if (code.equals("1")) {
+                mainKey = KeyEvent.VK_1;
+            } else if (code.equals("2")) {
+                mainKey = KeyEvent.VK_2;
+            } else if (code.equals("3")) {
+                mainKey = KeyEvent.VK_3;
+            } else if (code.equals("4")) {
+                mainKey = KeyEvent.VK_4;
+            } else if (code.equals("5")) {
+                mainKey = KeyEvent.VK_5;
+            } else if (code.equals("6")) {
+                mainKey = KeyEvent.VK_6;
+            } else if (code.equals("7")) {
+                mainKey = KeyEvent.VK_7;
+            } else if (code.equals("8")) {
+                mainKey = KeyEvent.VK_8;
+            } else if (code.equals("9")) {
+                mainKey = KeyEvent.VK_9;
+
+                //num digits
+            } else if (code.equals("num0")) {
+                mainKey = KeyEvent.VK_NUMPAD0;
+            } else if (code.equals("num1")) {
+                mainKey = KeyEvent.VK_NUMPAD1;
+            } else if (code.equals("num2")) {
+                mainKey = KeyEvent.VK_NUMPAD2;
+            } else if (code.equals("num3")) {
+                mainKey = KeyEvent.VK_NUMPAD3;
+            } else if (code.equals("num4")) {
+                mainKey = KeyEvent.VK_NUMPAD4;
+            } else if (code.equals("num5")) {
+                mainKey = KeyEvent.VK_NUMPAD5;
+            } else if (code.equals("num6")) {
+                mainKey = KeyEvent.VK_NUMPAD6;
+            } else if (code.equals("num7")) {
+                mainKey = KeyEvent.VK_NUMPAD7;
+            } else if (code.equals("num8")) {
+                mainKey = KeyEvent.VK_NUMPAD8;
+            } else if (code.equals("num9")) {
+                mainKey = KeyEvent.VK_NUMPAD9;
+
+                //letters
+            } else if (code.equals("R")) {
+                mainKey = KeyEvent.VK_R;
+
+                //function
+            } else if (code.equals("F9")) {
+                mainKey = KeyEvent.VK_F9;
+
+                //else
+            } else if (code.equals(".")) {
+                mainKey = KeyEvent.VK_PERIOD;
+            } else if (code.equals("<")) {
+                mainKey = KeyEvent.VK_BACK_SPACE;
+            } else if (code.equals("num+")) {
+                mainKey = KeyEvent.VK_ADD;
+            } else if (code.equals("-")) {
+                mainKey = KeyEvent.VK_MINUS;
+            } else if (code.equals("num-")) {
+                mainKey = KeyEvent.VK_SUBTRACT;
+            } else if (code.equals("num*")) {
+                mainKey = KeyEvent.VK_MULTIPLY;
+            } else if (code.equals("/")) {
+                mainKey = KeyEvent.VK_SLASH;
+            } else if (code.equals("num/")) {
+                mainKey = KeyEvent.VK_DIVIDE;
+            } else if (code.equals("=")) {
+                mainKey = KeyEvent.VK_EQUALS;
+            } else if (code.equals("enter")) {
+                mainKey = KeyEvent.VK_ENTER;
+            } else if (code.equals("del")) {
+                mainKey = KeyEvent.VK_DELETE;
+            } else if (code.equals("esc")) {
+                mainKey = KeyEvent.VK_ESCAPE;
             } else {
-                clickOn(getButtonBySelector(selector));
+                throw new IllegalArgumentException("Expected: string with correct keypad representation only. \n" +
+                        "Got: " + code);
             }
+
+            if (additionalKey != 0) {
+                awtRobot.keyPress(additionalKey);
+            }
+
+            awtRobot.keyPress(mainKey);
+
+            if (additionalKey != 0) {
+                awtRobot.keyRelease(additionalKey);
+            }
+
+            awtRobot.keyRelease(mainKey);
+
+            FXTestUtils.awaitEvents();
         }
     }
 
