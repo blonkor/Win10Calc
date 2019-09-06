@@ -737,7 +737,7 @@ public class RobotControl extends GuiTest {
                 //else
             } else if (code.equals(".")) {
                 mainKey = KeyEvent.VK_PERIOD;
-            } else if (code.equals("<")) {
+            } else if (code.equals("backspace")) {
                 mainKey = KeyEvent.VK_BACK_SPACE;
             } else if (code.equals("num+")) {
                 mainKey = KeyEvent.VK_ADD;
