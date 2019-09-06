@@ -1,7 +1,7 @@
 package com.implemica.bormashenko.calculator.model;
 
-import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
-import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import com.implemica.bormashenko.calculator.model.enums.BinaryOperation;
+import com.implemica.bormashenko.calculator.model.enums.UnaryOperation;
 import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
 
 import java.math.BigDecimal;
@@ -32,16 +32,16 @@ public class Calculation {
     private static final String INVALID_INPUT_MESSAGE = "Invalid input";
 
     /**
-     * Scale for {@code BinaryOperations.DIVIDE}.
+     * Scale for {@code BinaryOperation.DIVIDE}.
      *
-     * @see BinaryOperations
+     * @see BinaryOperation
      */
     private static final int DIVIDE_SCALE = 20000;
 
     /**
-     * MathContext for {@code UnaryOperations.SQRT}.
+     * MathContext for {@code UnaryOperation.SQRT}.
      *
-     * @see UnaryOperations
+     * @see UnaryOperation
      */
     private static final MathContext SQRT_CONTEXT = MathContext.DECIMAL64;
 
@@ -85,9 +85,9 @@ public class Calculation {
     private BigDecimal result = BigDecimal.ZERO;
 
     /**
-     * {@link BinaryOperations} of equation.
+     * {@link BinaryOperation} of equation.
      */
-    private BinaryOperations binaryOperation;
+    private BinaryOperation binaryOperation;
 
     public void setFirst(BigDecimal first) {
         this.first = first;
@@ -109,11 +109,11 @@ public class Calculation {
         return result;
     }
 
-    public void setBinaryOperation(BinaryOperations binaryOperation) {
+    public void setBinaryOperation(BinaryOperation binaryOperation) {
         this.binaryOperation = binaryOperation;
     }
 
-    public BinaryOperations getBinaryOperation() {
+    public BinaryOperation getBinaryOperation() {
         return binaryOperation;
     }
 
@@ -128,18 +128,18 @@ public class Calculation {
     }
 
     /**
-     * Calculates result using first value, {@link BinaryOperations} and second value.
+     * Calculates result using first value, {@link BinaryOperation} and second value.
      *
      * @throws OverflowException while validation for result is failed.
      */
     public void calculateBinary() {
-        if (binaryOperation == BinaryOperations.ADD) {
+        if (binaryOperation == BinaryOperation.ADD) {
             result = add();
-        } else if (binaryOperation == BinaryOperations.SUBTRACT) {
+        } else if (binaryOperation == BinaryOperation.SUBTRACT) {
             result = subtract();
-        } else if (binaryOperation == BinaryOperations.MULTIPLY) {
+        } else if (binaryOperation == BinaryOperation.MULTIPLY) {
             result = multiply();
-        } else if (binaryOperation == BinaryOperations.DIVIDE) {
+        } else if (binaryOperation == BinaryOperation.DIVIDE) {
             result = divide();
         }
 
@@ -151,19 +151,19 @@ public class Calculation {
     }
 
     /**
-     * Calculates result using first value and {@link UnaryOperations}.
+     * Calculates result using first value and {@link UnaryOperation}.
      *
      * @param unaryOperation operation to perform.
      * @throws OverflowException while validation for result is failed.
      */
-    public void calculateUnary(UnaryOperations unaryOperation) {
-        if (unaryOperation == UnaryOperations.NEGATE) {
+    public void calculateUnary(UnaryOperation unaryOperation) {
+        if (unaryOperation == UnaryOperation.NEGATE) {
             result = negate();
-        } else if (unaryOperation == UnaryOperations.SQR) {
+        } else if (unaryOperation == UnaryOperation.SQR) {
             result = sqr();
-        } else if (unaryOperation == UnaryOperations.SQRT) {
+        } else if (unaryOperation == UnaryOperation.SQRT) {
             result = sqrt();
-        } else if (unaryOperation == UnaryOperations.INVERSE) {
+        } else if (unaryOperation == UnaryOperation.INVERSE) {
             result = inverse();
         }
 
@@ -175,18 +175,18 @@ public class Calculation {
     }
 
     /**
-     * Calculates second number as a percentage of first number if current {@code BinaryOperations} is
-     * {@code BinaryOperations.ADD} or {@code BinaryOperations.SUBTRACT}, or as a percentage of 100 if current
-     * {@code BinaryOperations} is {@code BinaryOperations.MULTIPLY} or {@code BinaryOperations.DIVIDE}
+     * Calculates second number as a percentage of first number if current {@code BinaryOperation} is
+     * {@code BinaryOperation.ADD} or {@code BinaryOperation.SUBTRACT}, or as a percentage of 100 if current
+     * {@code BinaryOperation} is {@code BinaryOperation.MULTIPLY} or {@code BinaryOperation.DIVIDE}
      *
      * @throws OverflowException while validation for result is failed.
      */
     public void calculatePercentage() {
         if (binaryOperation == null) {
             resetAll();
-        } else if (binaryOperation == BinaryOperations.ADD || binaryOperation == BinaryOperations.SUBTRACT) {
+        } else if (binaryOperation == BinaryOperation.ADD || binaryOperation == BinaryOperation.SUBTRACT) {
             percentageOfFirst();
-        } else if (binaryOperation == BinaryOperations.MULTIPLY || binaryOperation == BinaryOperations.DIVIDE) {
+        } else if (binaryOperation == BinaryOperation.MULTIPLY || binaryOperation == BinaryOperation.DIVIDE) {
             percentageOf100();
         }
 

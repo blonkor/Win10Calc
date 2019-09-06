@@ -14,6 +14,11 @@ import java.text.DecimalFormatSymbols;
 public class NumberFormatter {
 
     /**
+     * Symbol for separating integer and decimal parts of number.
+     */
+    public static final char DECIMAL_SEPARATOR = '.';
+
+    /**
      * Maximal amount of digit symbols that can be shown on screen {@code Label}.
      */
     private final static int MAX_SYMBOLS = 16;
@@ -32,11 +37,6 @@ public class NumberFormatter {
      * Symbol for separating every three digits in integer number.
      */
     private static final char GROUPING_SEPARATOR = ',';
-
-    /**
-     * Symbol for separating integer and decimal parts of number.
-     */
-    private static final char DECIMAL_SEPARATOR = '.';
 
     /**
      * Symbol for separating exponent part of number if number is decimal.
