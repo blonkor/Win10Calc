@@ -1,32 +1,31 @@
 package com.implemica.bormashenko.calculator.model.enums;
 
 /**
- * This enum contains unary operations used in calculator.
+ * This enum contains unary operations used in {@link com.implemica.bormashenko.calculator.model.Calculation}.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public enum UnaryOperations {
 
     /**
-     * This operation inverses number.
+     * Negates number.
      */
-    INVERSE("1/"),
+    NEGATE("negate"),
 
     /**
-     * This operation calculates square of number.
+     * Calculates square of number.
      */
     SQR("sqr"),
 
     /**
-     * This operation calculates square root of number.
+     * Calculates square root of number.
      */
     SQRT("√"),
 
     /**
-     * This operation negates number.
+     * Inverses number.
      */
-    NEGATE("negate");
+    INVERSE("1/");
 
     /**
      * Symbol representation of operation.

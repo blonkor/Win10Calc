@@ -1,30 +1,29 @@
 package com.implemica.bormashenko.calculator.model.enums;
 
 /**
- * This enum contains binary operations used in calculator.
+ * This enum contains binary operations used in {@link com.implemica.bormashenko.calculator.model.Calculation}.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public enum BinaryOperations {
 
     /**
-     * This operations sums two numbers.
+     * Sums two numbers.
      */
     ADD("+"),
 
     /**
-     * This operation subtracts one number from another.
+     * Subtracts one number from another.
      */
     SUBTRACT("-"),
 
     /**
-     * This operation multiplies two numbers.
+     * Multiplies two numbers.
      */
     MULTIPLY("×"),
 
     /**
-     * This operation divides one number to another.
+     * Divides one number to another.
      */
     DIVIDE("÷");
 
@@ -34,9 +33,9 @@ public enum BinaryOperations {
     public String symbol;
 
     /**
-     * Constructor for enum.
+     * Constructor for the enum.
      *
-     * @param symbol Symbol representation of operation.
+     * @param symbol symbol representation of operation.
      */
     BinaryOperations(String symbol) {
         this.symbol = symbol;
