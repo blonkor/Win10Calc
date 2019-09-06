@@ -764,7 +764,11 @@ public class RobotControl extends GuiTest {
         int centerX = (int) ((bounds.getMinX() + bounds.getMaxX()) / 2);
         int centerY = (int) ((bounds.getMinY() + bounds.getMaxY()) / 2);
 
-        awtRobot.mouseMove(centerX, centerY);
+        hoverOn(centerX, centerY);
+    }
+
+    protected void hoverOn(int x, int y) {
+        awtRobot.mouseMove(x, y);
 
         FXTestUtils.awaitEvents();
     }
@@ -777,10 +781,10 @@ public class RobotControl extends GuiTest {
      * @param toX   coordinate X to drag cursor.
      * @param toY   coordinate Y to drag cursor.
      */
-    protected void dragFromTo(double fromX, double fromY, double toX, double toY) {
-        robot.moveTo(fromX, fromY);
+    protected void dragFromTo(int fromX, int fromY, int toX, int toY) {
+        awtRobot.mouseMove(fromX, fromY);
         robot.press(MouseButton.PRIMARY);
-        robot.moveTo(toX, toY);
+        awtRobot.mouseMove(toX, toY);
         robot.release(MouseButton.PRIMARY);
 
         FXTestUtils.awaitEvents();
@@ -801,6 +805,8 @@ public class RobotControl extends GuiTest {
         window.setHeight(height);
         window.setX(x);
         window.setY(y);
+
+        FXTestUtils.awaitEvents();
     }
 
     /**

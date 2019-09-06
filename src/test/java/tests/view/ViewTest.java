@@ -358,7 +358,6 @@ public class ViewTest extends RobotControl {
 
     /**
      * Tests for resizing application.
-     * @todo optimize
      */
     private void resizeTests() {
         int zero = 0;
@@ -2140,8 +2139,7 @@ public class ViewTest extends RobotControl {
         checkResizeFont("1", DEFAULT_WIDTH + 50, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 50, 47);
         checkResizeFont("12345678901", DEFAULT_WIDTH + 50, 47);
-        checkResizeFont("1234567890123", DEFAULT_WIDTH + 50, 42);
-        checkResizeFont("0.1~234567890123456", DEFAULT_WIDTH + 50, 33);
+        checkResizeFont("0.1~234567890123456", DEFAULT_WIDTH + 50, 34);
 
         checkResizeFont("1", DEFAULT_WIDTH + 500, 47);
         checkResizeFont("12", DEFAULT_WIDTH + 500, 47);
@@ -2295,15 +2293,18 @@ public class ViewTest extends RobotControl {
      * @param expectedHeight height that window should has after resizing.
      * @param expectedWidth  window that window should has after resizing.
      */
-    private void checkResize(double fromX, double fromY, double offsetX, double offsetY,
+    private void checkResize(int fromX, int fromY, int offsetX, int offsetY,
                              double expectedX, double expectedY, double expectedWidth, double expectedHeight,
                              Cursor expectedCursor) {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
 
-        dragFromTo(fromX, fromY, fromX + offsetX, fromY + offsetY);
+        hoverOn(fromX, fromY);
         Window window = getWindowByIndex(0);
 
         assertEquals(expectedCursor, window.getScene().getCursor());
+
+        dragFromTo(fromX, fromY, fromX + offsetX, fromY + offsetY);
+
         assertEquals(expectedX, window.getX());
         assertEquals(expectedY, window.getY());
         assertEquals(expectedWidth, window.getWidth());
@@ -2318,14 +2319,14 @@ public class ViewTest extends RobotControl {
      * @param expectedX coordinate X that window should has after moving.
      * @param expectedY coordinate Y that window should has after moving.
      */
-    private void checkMovingWindow(double offsetX, double offsetY, double expectedX, double expectedY) {
+    private void checkMovingWindow(int offsetX, int offsetY, double expectedX, double expectedY) {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
 
         AnchorPane topPanel = (AnchorPane) getNodeBySelector(TOP_PANEL_ID);
         Bounds bounds = topPanel.localToScreen(topPanel.getBoundsInLocal());
 
-        double centerX = (bounds.getMinX() + bounds.getMaxX()) / 2;
-        double centerY = (bounds.getMinY() + bounds.getMaxY()) / 2;
+        int centerX = (int) (bounds.getMinX() + bounds.getMaxX()) / 2;
+        int centerY = (int) (bounds.getMinY() + bounds.getMaxY()) / 2;
 
         dragFromTo(centerX, centerY, centerX + offsetX, centerY + offsetY);
         Window window = getWindowByIndex(0);
@@ -2341,7 +2342,7 @@ public class ViewTest extends RobotControl {
      * @param dragToX          location X to drag window.
      * @param expectedFontSize size of font that {@code Label} should has.
      */
-    private void checkResizeFont(String text, double dragToX, double expectedFontSize) {
+    private void checkResizeFont(String text, int dragToX, double expectedFontSize) {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, 0);
         Labeled labeled = getLabeledBySelector(SCREEN_LABEL_ID);
 
