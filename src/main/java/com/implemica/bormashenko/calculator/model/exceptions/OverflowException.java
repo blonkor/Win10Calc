@@ -1,10 +1,9 @@
 package com.implemica.bormashenko.calculator.model.exceptions;
 
 /**
- * Custom made exception which shows that args are out of range.
+ * Custom made exception which shows that something is out of range.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class OverflowException extends RuntimeException{
 
