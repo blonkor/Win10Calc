@@ -53,8 +53,6 @@ public class ViewTest extends RobotControl {
 
     /**
      * Runs all tests.
-     *
-     * @todo separate tests
      */
     @Test
     public void allTests() {
