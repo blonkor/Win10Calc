@@ -16,467 +16,475 @@ import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Class for controlling FxRobot. Extending it allows to automatically control mouse and keypad.
+ * Class for controlling {@code FxRobot}. Extending it allows to automatically control mouse and keypad.
  *
  * @author Mykhailo Bormashenko.
  * @see com.implemica.bormashenko.calculator.view.View
- * @todo refactoring
  */
 public class RobotControl extends GuiTest {
 
     /**
-     * ID of one button.
+     * ID of one {@code Button}.
      */
     protected static final String ONE_ID = "#one";
 
     /**
-     * ID of two button.
+     * ID of two {@code Button}.
      */
     protected static final String TWO_ID = "#two";
 
     /**
-     * ID of three button.
+     * ID of three {@code Button}.
      */
     protected static final String THREE_ID = "#three";
 
     /**
-     * ID of four button.
+     * ID of four {@code Button}.
      */
     protected static final String FOUR_ID = "#four";
 
     /**
-     * ID of five button.
+     * ID of five {@code Button}.
      */
     protected static final String FIVE_ID = "#five";
 
     /**
-     * ID of six button.
+     * ID of six {@code Button}.
      */
     protected static final String SIX_ID = "#six";
 
     /**
-     * ID of seven button.
+     * ID of seven {@code Button}.
      */
     protected static final String SEVEN_ID = "#seven";
 
     /**
-     * ID of eight button.
+     * ID of eight {@code Button}.
      */
     protected static final String EIGHT_ID = "#eight";
 
     /**
-     * ID of nine button.
+     * ID of nine {@code Button}.
      */
     protected static final String NINE_ID = "#nine";
 
     /**
-     * ID of zero button.
+     * ID of zero {@code Button}.
      */
     protected static final String ZERO_ID = "#zero";
 
     /**
-     * ID of dot button.
+     * ID of dot {@code Button}.
      */
     protected static final String DOT_ID = "#dot";
 
     /**
-     * ID of add button.
+     * ID of add {@code Button}.
      */
     protected static final String ADD_ID = "#add";
 
     /**
-     * ID of subtract button.
+     * ID of subtract {@code Button}.
      */
     protected static final String SUBTRACT_ID = "#subtract";
 
     /**
-     * ID of multiply button.
+     * ID of multiply {@code Button}.
      */
     protected static final String MULTIPLY_ID = "#multiply";
 
     /**
-     * ID of divide button.
+     * ID of divide {@code Button}.
      */
     protected static final String DIVIDE_ID = "#divide";
 
     /**
-     * ID of equals button.
+     * ID of equals {@code Button}.
      */
     protected static final String EQUALS_ID = "#equals";
 
     /**
-     * ID of percent button.
+     * ID of percent {@code Button}.
      */
     protected static final String PERCENT_ID = "#percent";
 
     /**
-     * ID of negate button.
+     * ID of negate {@code Button}.
      */
     protected static final String NEGATE_ID = "#negate";
 
     /**
-     * ID of sqr button.
+     * ID of sqr {@code Button}.
      */
     protected static final String SQR_ID = "#sqr";
 
     /**
-     * ID of sqrt button.
+     * ID of sqrt {@code Button}.
      */
     protected static final String SQRT_ID = "#sqrt";
 
     /**
-     * ID of inverse button.
+     * ID of inverse {@code Button}.
      */
     protected static final String INVERSE_ID = "#inverse";
 
     /**
-     * ID of clear all button.
+     * ID of clear all {@code Button}.
      */
     protected static final String CLEAR_ALL_ID = "#clearAll";
 
     /**
-     * ID of clear text button.
+     * ID of clear text {@code Button}.
      */
     protected static final String CLEAR_TEXT_ID = "#clearText";
 
     /**
-     * ID of backspace button.
+     * ID of backspace {@code Button}.
      */
     protected static final String BACKSPACE_ID = "#backspace";
 
     /**
-     * ID of memory clear button.
+     * ID of memory clear {@code Button}.
      */
     protected static final String MEMORY_CLEAR_ID = "#memoryClear";
 
     /**
-     * ID of memory recall button.
+     * ID of memory recall {@code Button}.
      */
     protected static final String MEMORY_RECALL_ID = "#memoryRecall";
 
     /**
-     * ID of memory add button.
+     * ID of memory add {@code Button}.
      */
     protected static final String MEMORY_ADD_ID = "#memoryAdd";
 
     /**
-     * ID of memory subtract button.
+     * ID of memory subtract {@code Button}.
      */
     protected static final String MEMORY_SUBTRACT_ID = "#memorySubtract";
 
     /**
-     * ID of memory store button.
+     * ID of memory store {@code Button}.
      */
     protected static final String MEMORY_STORE_ID = "#memoryStore";
 
     /**
-     * ID of memory show button.
+     * ID of memory show {@code Button}.
      */
     protected static final String MEMORY_SHOW_ID = "#memoryShow";
 
     /**
-     * ID of navigation button.
+     * ID of navigation {@code Button}.
      */
     protected static final String NAVIGATION_ID = "#navigation";
 
     /**
-     * ID of history button.
+     * ID of history {@code Button}.
      */
     protected static final String HISTORY_ID = "#history";
 
     /**
-     * ID of right arrow button.
+     * ID of right arrow {@code Button}.
      */
     protected static final String RIGHT_ARROW_ID = "#rightArrow";
 
     /**
-     * ID of left arrow button.
+     * ID of left arrow {@code Button}.
      */
     protected static final String LEFT_ARROW_ID = "#leftArrow";
 
     /**
-     * ID of hide button.
+     * ID of hide {@code Button}.
      */
     protected static final String HIDE_ID = "#hide";
 
     /**
-     * ID of expand button.
+     * ID of expand {@code Button}.
      */
     protected static final String EXPAND_ID = "#expand";
 
     /**
-     * ID of close button.
+     * ID of close {@code Button}.
      */
     protected static final String CLOSE_ID = "#close";
 
     /**
-     * ID of navigation panel (scroll pane).
+     * ID of navigation panel {@code ScrollPane}.
      */
     protected static final String NAVIGATION_PANEL_ID = "#navigationPanel";
 
     /**
-     * ID of about panel (anchor pane).
+     * ID of about panel {@code AnchorPane}.
      */
     protected static final String ABOUT_PANEL_ID = "#aboutPanel";
 
     /**
-     * ID of navigation block (anchor pane).
+     * ID of navigation block {@code AnchorPane}.
      */
     protected static final String NAVIGATION_BLOCK_ID = "#navigationBlock";
 
     /**
-     * ID of standard mode button.
+     * ID of standard mode {@code Button}.
      */
     protected static final String STANDARD_MODE_ID = "#standard";
 
     /**
-     * ID of scientific mode button.
+     * ID of scientific mode {@code Button}.
      */
     protected static final String SCIENTIFIC_MODE_ID = "#scientific";
 
     /**
-     * ID of programmer mode button.
+     * ID of programmer mode {@code Button}.
      */
     protected static final String PROGRAMMER_MODE_ID = "#programmer";
 
     /**
-     * ID of date calculation mode button.
+     * ID of date calculation mode {@code Button}.
      */
     protected static final String DATE_CALCULATION_MODE_ID = "#dateCalculation";
 
     /**
-     * ID of currency mode button.
+     * ID of currency mode {@code Button}.
      */
     protected static final String CURRENCY_MODE_ID = "#currency";
 
     /**
-     * ID of volume mode button.
+     * ID of volume mode {@code Button}.
      */
     protected static final String VOLUME_MODE_ID = "#volume";
 
     /**
-     * ID of length mode button.
+     * ID of length mode {@code Button}.
      */
     protected static final String LENGTH_MODE_ID = "#length";
 
     /**
-     * ID of weight and mass mode button.
+     * ID of weight and mass mode {@code Button}.
      */
     protected static final String WEIGHT_AND_MASS_MODE_ID = "#weightAndMass";
 
     /**
-     * ID of temperature mode button.
+     * ID of temperature mode {@code Button}.
      */
     protected static final String TEMPERATURE_MODE_ID = "#temperature";
 
     /**
-     * ID of energy mode button.
+     * ID of energy mode {@code Button}.
      */
     protected static final String ENERGY_MODE_ID = "#energy";
 
     /**
-     * ID of area mode button.
+     * ID of area mode {@code Button}.
      */
     protected static final String AREA_MODE_ID = "#area";
 
     /**
-     * ID of speed mode button.
+     * ID of speed mode {@code Button}.
      */
     protected static final String SPEED_MODE_ID = "#speed";
 
     /**
-     * ID of time mode button.
+     * ID of time mode {@code Button}.
      */
     protected static final String TIME_MODE_ID = "#time";
 
     /**
-     * ID of power mode button.
+     * ID of power mode {@code Button}.
      */
     protected static final String POWER_MODE_ID = "#power";
 
     /**
-     * ID of data mode button.
+     * ID of data mode {@code Button}.
      */
     protected static final String DATA_MODE_ID = "#data";
 
     /**
-     * ID of pressure mode button.
+     * ID of pressure mode {@code Button}.
      */
     protected static final String PRESSURE_MODE_ID = "#pressure";
 
     /**
-     * ID of angle mode button.
+     * ID of angle mode {@code Button}.
      */
     protected static final String ANGLE_MODE_ID = "#angle";
 
     /**
-     * ID of about button.
+     * ID of about {@code Button}.
      */
     protected static final String ABOUT_ID = "#about";
 
     /**
-     * ID of memory panel (anchor pane).
+     * ID of memory panel {@code AnchorPane}.
      */
     protected static final String MEMORY_PANEL_ID = "#memoryAnchorPane";
 
     /**
-     * ID of memory block (anchor pane).
+     * ID of memory block {@code AnchorPane}.
      */
     protected static final String MEMORY_BLOCK_ID = "#memoryBlock";
 
     /**
-     * ID of top panel.
+     * ID of top panel {@code AnchorPane}.
      */
     protected static final String TOP_PANEL_ID = "#topPanel";
 
     /**
-     * ID of title label.
+     * ID of title {@code Label}.
      */
     protected static final String TITLE_LABEL_ID = "#title";
 
     /**
-     * ID of type label.
+     * ID of type {@code Label}.
      */
     protected static final String TYPE_LABEL_ID = "#type";
 
     /**
-     * ID of equation label.
+     * ID of equation {@code Label}.
      */
     protected static final String EQUATION_LABEL_ID = "#equation";
 
     /**
-     * ID of screen label.
+     * ID of screen {@code Label}.
      */
     protected static final String SCREEN_LABEL_ID = "#screen";
 
     /**
-     * ID of mode label.
+     * ID of mode {@code Label}.
      */
     protected static final String MODE_LABEL_ID = "#mode";
 
     /**
-     * ID of converter label.
+     * ID of converter {@code Label}.
      */
     protected static final String CONVERTER_LABEL_ID = "#converter";
 
     /**
-     * Unicode escape sequence of flick down symbol in MDL2 assets.
+     * Unicode escape sequence of flick down symbol in MDL2 assets font.
      */
     protected static final String MEMORY_SHOW_SYMBOL = "\uE936";
 
     /**
-     * Unicode escape sequence of flick up symbol in MDL2 assets.
+     * Unicode escape sequence of flick up symbol in MDL2 assets font.
      */
     protected static final String STANDARD_MODE_SYMBOL = "\uE8EF";
 
     /**
-     * Unicode escape sequence of scientific symbol in MDL2 assets.
+     * Unicode escape sequence of scientific symbol in MDL2 assets font.
      */
     protected static final String SCIENTIFIC_MODE_SYMBOL = "\uF196";
 
     /**
-     * Unicode escape sequence of programmer symbol in MDL2 assets.
+     * Unicode escape sequence of programmer symbol in MDL2 assets font.
      */
     protected static final String PROGRAMMER_MODE_SYMBOL = "\uECCE";
 
     /**
-     * Unicode escape sequence of date calculation symbol in MDL2 assets.
+     * Unicode escape sequence of date calculation symbol in MDL2 assets font.
      */
     protected static final String DATE_CALCULATION_MODE_SYMBOL = "\uE787";
 
     /**
-     * Unicode escape sequence of currency symbol in MDL2 assets.
+     * Unicode escape sequence of currency symbol in MDL2 assets font.
      */
     protected static final String CURRENCY_MODE_SYMBOL = "\uEB0D";
 
     /**
-     * Unicode escape sequence of volume symbol in MDL2 assets.
+     * Unicode escape sequence of volume symbol in MDL2 assets font.
      */
     protected static final String VOLUME_MODE_SYMBOL = "\uF1AA";
 
     /**
-     * Unicode escape sequence of length symbol in MDL2 assets.
+     * Unicode escape sequence of length symbol in MDL2 assets font.
      */
     protected static final String LENGTH_MODE_SYMBOL = "\uECC6";
 
     /**
-     * Unicode escape sequence of weight and mass symbol in MDL2 assets.
+     * Unicode escape sequence of weight and mass symbol in MDL2 assets font.
      */
     protected static final String WEIGHT_AND_MASS_MODE_SYMBOL = "\uF4C1";
 
     /**
-     * Unicode escape sequence of temperature symbol in MDL2 assets.
+     * Unicode escape sequence of temperature symbol in MDL2 assets font.
      */
     protected static final String TEMPERATURE_MODE_SYMBOL = "\uE7A3";
 
     /**
-     * Unicode escape sequence of energy symbol in MDL2 assets.
+     * Unicode escape sequence of energy symbol in MDL2 assets font.
      */
     protected static final String ENERGY_MODE_SYMBOL = "\uECAD";
 
     /**
-     * Unicode escape sequence of area symbol in MDL2 assets.
+     * Unicode escape sequence of area symbol in MDL2 assets font.
      */
     protected static final String AREA_MODE_SYMBOL = "\uE809";
 
     /**
-     * Unicode escape sequence of speed symbol in MDL2 assets.
+     * Unicode escape sequence of speed symbol in MDL2 assets font.
      */
     protected static final String SPEED_MODE_SYMBOL = "\uEADA";
 
     /**
-     * Unicode escape sequence of time symbol in MDL2 assets.
+     * Unicode escape sequence of time symbol in MDL2 assets font.
      */
     protected static final String TIME_MODE_SYMBOL = "\uE917";
 
     /**
-     * Unicode escape sequence of power symbol in MDL2 assets.
+     * Unicode escape sequence of power symbol in MDL2 assets font.
      */
     protected static final String POWER_MODE_SYMBOL = "\uE945";
 
     /**
-     * Unicode escape sequence of data symbol in MDL2 assets.
+     * Unicode escape sequence of data symbol in MDL2 assets font.
      */
     protected static final String DATA_MODE_SYMBOL = "\uF20F";
 
     /**
-     * Unicode escape sequence of pressure symbol in MDL2 assets.
+     * Unicode escape sequence of pressure symbol in MDL2 assets font.
      */
     protected static final String PRESSURE_MODE_SYMBOL = "\uEC4A";
 
     /**
-     * Unicode escape sequence of angle symbol in MDL2 assets.
+     * Unicode escape sequence of angle symbol in MDL2 assets font.
      */
     protected static final String ANGLE_MODE_SYMBOL = "\uF515";
 
     /**
-     * Unicode escape sequence of about symbol in MDL2 assets.
+     * Unicode escape sequence of about symbol in MDL2 assets font.
      */
     protected static final String ABOUT_SYMBOL = "\uE946";
 
     /**
-     * Unicode escape sequence of right arrow symbol in MDL2 assets.
+     * Unicode escape sequence of right arrow symbol in MDL2 assets font.
      */
     protected static final String RIGHT_ARROW_SYMBOL = "\uE970";
 
     /**
-     * Unicode escape sequence of left arrow symbol in MDL2 assets.
+     * Unicode escape sequence of left arrow symbol in MDL2 assets font.
      */
     protected static final String LEFT_ARROW_SYMBOL = "\uE96F";
 
     /**
-     * Value for scroll using FxRobot.
+     * Value for scroll using {@code FxRobot}.
      */
     protected static final int SCROLL_AMOUNT = 10;
 
     /**
-     * Robot for automatically control application.
+     * Robot for automatically pressing buttons and looking for nodes in application.
      */
     protected FxRobot robot = new FxRobot();
 
+    /**
+     * Robot for moving cursor. Allows to move it faster than {@code FxRobot}.
+     */
     private Robot awtRobot = new Robot();
 
+    /**
+     * Constructor needed to initialize {@code Robot}.
+     *
+     * @throws AWTException signals that an Abstract Window Toolkit exception has occurred.
+     */
     protected RobotControl() throws AWTException {
+        //nothing to construct
     }
 
     @Override
@@ -501,25 +509,31 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Looks up for node by selector.
+     * Looks up for {@code Node} by selector.
      *
-     * @param selector id of node.
-     * @return node.
+     * @param selector id of {@code Node}.
+     * @return {@code Node} found by selector.
      */
     protected Node getNodeBySelector(String selector) {
         return robot.lookup(selector).query();
     }
 
     /**
-     * Looks up for button by selector.
+     * Looks up for {@code Button} by selector.
      *
-     * @param selector id or text of button.
-     * @return button found by selector.
+     * @param selector id or text of {@code Button}.
+     * @return {@code Button} found by selector.
      */
     protected Button getButtonBySelector(String selector) {
         return robot.lookup(selector).queryButton();
     }
 
+    /**
+     * Looks up for several {@code Button} by selectors.
+     *
+     * @param selectors array with ids or texts of {@code Button}
+     * @return array with {@code Button} found by selectors.
+     */
     protected Button[] getSeveralButtonsBySelector(String... selectors) {
         Button[] buttons = new Button[selectors.length];
 
@@ -531,79 +545,104 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Looks up for label by selector.
+     * Looks up for {@code Label} by selector.
      *
-     * @param selector id or text of label.
-     * @return label found by selector.
+     * @param selector id or text of {@code Label}.
+     * @return {@code Label} found by selector.
      */
     protected Labeled getLabeledBySelector(String selector) {
         return robot.lookup(selector).queryLabeled();
     }
 
     /**
-     * Clicks on buttons in application to type required text.
+     * Clicks on {@code Button} in application.
      *
-     * @param text text to type by clicking buttons.
-     * @throws NullPointerException if required text is not a number.
+     * @param text string where every symbol is {@code Button} representation.
+     * @throws IllegalArgumentException if required text is not a {@code Button} representation.
      */
     protected void clickButtons(String text) {
-        for (int i = 0; i < text.length(); i++) {
-            String selector;
-            char charAtI = text.charAt(i);
+        String[] buttons = text.split(" ");
 
-            if (charAtI == '0') {
+        for (String button : buttons) {
+
+            String selector;
+
+            //memory
+            if (button.equals("MC")) {
+                selector = MEMORY_CLEAR_ID;
+            } else if (button.equals("MR")) {
+                selector = MEMORY_RECALL_ID;
+            } else if (button.equals("M+")) {
+                selector = MEMORY_ADD_ID;
+            } else if (button.equals("M-")) {
+                selector = MEMORY_SUBTRACT_ID;
+            } else if (button.equals("MS")) {
+                selector = MEMORY_STORE_ID;
+            } else if (button.equals("MShow")) {
+                selector = MEMORY_SHOW_ID;
+
+                //text
+            } else if (button.equals("0")) {
                 selector = ZERO_ID;
-            } else if (charAtI == '1') {
+            } else if (button.equals("1")) {
                 selector = ONE_ID;
-            } else if (charAtI == '2') {
+            } else if (button.equals("2")) {
                 selector = TWO_ID;
-            } else if (charAtI == '3') {
+            } else if (button.equals("3")) {
                 selector = THREE_ID;
-            } else if (charAtI == '4') {
+            } else if (button.equals("4")) {
                 selector = FOUR_ID;
-            } else if (charAtI == '5') {
+            } else if (button.equals("5")) {
                 selector = FIVE_ID;
-            } else if (charAtI == '6') {
+            } else if (button.equals("6")) {
                 selector = SIX_ID;
-            } else if (charAtI == '7') {
+            } else if (button.equals("7")) {
                 selector = SEVEN_ID;
-            } else if (charAtI == '8') {
+            } else if (button.equals("8")) {
                 selector = EIGHT_ID;
-            } else if (charAtI == '9') {
+            } else if (button.equals("9")) {
                 selector = NINE_ID;
-            } else if (charAtI == '.') {
+            } else if (button.equals(".")) {
                 selector = DOT_ID;
-            } else if (charAtI == '+') {
-                selector = ADD_ID;
-            } else if (charAtI == '-') {
-                selector = SUBTRACT_ID;
-            } else if (charAtI == '*') {
-                selector = MULTIPLY_ID;
-            } else if (charAtI == '/') {
-                selector = DIVIDE_ID;
-            } else if (charAtI == '=') {
-                selector = EQUALS_ID;
-            } else if (charAtI == '%') {
-                selector = PERCENT_ID;
-            } else if (charAtI == '~') {
-                selector = NEGATE_ID;
-            } else if (charAtI == '^') {
-                selector = SQR_ID;
-            } else if (charAtI == '@') {
-                selector = SQRT_ID;
-            } else if (charAtI == ';') {
-                selector = INVERSE_ID;
-            } else if (charAtI == '<') {
+            } else if (button.equals("backspace")) {
                 selector = BACKSPACE_ID;
+
+                //operations
+            } else if (button.equals("+")) {
+                selector = ADD_ID;
+            } else if (button.equals("-")) {
+                selector = SUBTRACT_ID;
+            } else if (button.equals("*")) {
+                selector = MULTIPLY_ID;
+            } else if (button.equals("/")) {
+                selector = DIVIDE_ID;
+            } else if (button.equals("=")) {
+                selector = EQUALS_ID;
+            } else if (button.equals("%")) {
+                selector = PERCENT_ID;
+            } else if (button.equals("neg")) {
+                selector = NEGATE_ID;
+            } else if (button.equals("sqr")) {
+                selector = SQR_ID;
+            } else if (button.equals("sqrt")) {
+                selector = SQRT_ID;
+            } else if (button.equals("inverse")) {
+                selector = INVERSE_ID;
             } else {
                 throw new IllegalArgumentException("Expected: string with correct buttons representation only. \n" +
-                        "Got: " + charAtI);
+                        "Got: " + button);
             }
 
             clickOn(getButtonBySelector(selector));
         }
     }
 
+    /**
+     * Presses on keyboard buttons.
+     *
+     * @param text string where every symbol is keypad button representation.
+     * @throws IllegalArgumentException if required text is not a keypad button representation.
+     */
     protected void pressKeyboard(String text) {
         String[] codes = text.split(" ");
 
@@ -739,6 +778,13 @@ public class RobotControl extends GuiTest {
 
             FXTestUtils.awaitEvents();
         }
+    }
+
+    /**
+     * Clicks on reset all {@code Button}.
+     */
+    protected void resetAll() {
+        clickOn(getNodeBySelector(CLEAR_ALL_ID));
     }
 
     /**

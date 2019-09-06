@@ -2130,21 +2130,21 @@ public class ViewTest extends RobotControl {
      */
     private void resizeFontTests() {
         checkResizeFont("1", DEFAULT_WIDTH, 47);
-        checkResizeFont("12", DEFAULT_WIDTH, 47);
-        checkResizeFont("123456789", DEFAULT_WIDTH, 47);
-        checkResizeFont("1234567890", DEFAULT_WIDTH, 46);
-        checkResizeFont("0.1234567890123456", DEFAULT_WIDTH, 29);
-        checkResizeFont("0.1~234567890123456", DEFAULT_WIDTH, 28);
+        checkResizeFont("1 2", DEFAULT_WIDTH, 47);
+        checkResizeFont("1 2 3 4 5 6 7 8 9", DEFAULT_WIDTH, 47);
+        checkResizeFont("1 2 3 4 5 6 7 8 9 0", DEFAULT_WIDTH, 46);
+        checkResizeFont("0 . 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6", DEFAULT_WIDTH, 29);
+        checkResizeFont("0 . 1 neg 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6", DEFAULT_WIDTH, 28);
 
         checkResizeFont("1", DEFAULT_WIDTH + 50, 47);
-        checkResizeFont("12", DEFAULT_WIDTH + 50, 47);
-        checkResizeFont("12345678901", DEFAULT_WIDTH + 50, 47);
-        checkResizeFont("0.1~234567890123456", DEFAULT_WIDTH + 50, 34);
+        checkResizeFont("1 2", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("1 2 3 4 5 6 7 8 9 0 1", DEFAULT_WIDTH + 50, 47);
+        checkResizeFont("0 . 1 neg 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6", DEFAULT_WIDTH + 50, 34);
 
         checkResizeFont("1", DEFAULT_WIDTH + 500, 47);
-        checkResizeFont("12", DEFAULT_WIDTH + 500, 47);
-        checkResizeFont("0.1234567890123456", DEFAULT_WIDTH + 500, 47);
-        checkResizeFont("0.1~234567890123456", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("1 2", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("0 . 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6", DEFAULT_WIDTH + 500, 47);
+        checkResizeFont("0 . 1 neg 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6", DEFAULT_WIDTH + 500, 47);
     }
 
     /**
@@ -2178,7 +2178,7 @@ public class ViewTest extends RobotControl {
         assertTrue(leftArrow.isVisible());
         assertFalse(rightArrow.isVisible());
 
-        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        resetAll();
 
         assertFalse(leftArrow.isVisible());
         assertFalse(rightArrow.isVisible());
@@ -2346,7 +2346,7 @@ public class ViewTest extends RobotControl {
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, 0);
         Labeled labeled = getLabeledBySelector(SCREEN_LABEL_ID);
 
-        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        resetAll();
         clickButtons(text);
         dragFromTo(DEFAULT_WIDTH - 1, DEFAULT_HEIGHT - 1, dragToX, DEFAULT_HEIGHT);
 
