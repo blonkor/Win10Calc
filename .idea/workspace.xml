@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -225,13 +224,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00099" summary="Handling exceptions in controller.">
-      <created>1567112571566</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1567112571566</updated>
     </task>
     <task id="LOCAL-00100" summary="Updating memory labels so it works correctly">
       <created>1567114504222</created>
@@ -569,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567763597256</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="Bug fix with RobotController.">
+      <created>1567783079201</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1567783079201</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -603,7 +602,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for sqrt operation created." />
     <MESSAGE value="Bug fix in controller with equation label text after error." />
     <MESSAGE value="Tests for inverse operation created." />
     <MESSAGE value="Bug fixes with shown result." />
@@ -628,7 +626,8 @@
     <MESSAGE value="Launcher for tests refactored." />
     <MESSAGE value="Enums in model refactored." />
     <MESSAGE value="Overflow exception refactored." />
-    <option name="LAST_COMMIT_MESSAGE" value="Overflow exception refactored." />
+    <MESSAGE value="Bug fix with RobotController." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix with RobotController." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
