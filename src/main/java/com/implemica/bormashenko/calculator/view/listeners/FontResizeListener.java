@@ -8,10 +8,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * Listener for resizing font in result label.
+ * Listener for resizing font in screen {@code Label}.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class FontResizeListener implements InvalidationListener {
 
@@ -21,29 +20,34 @@ public class FontResizeListener implements InvalidationListener {
     private static final int MAX_FONT_SIZE = 47;
 
     /**
-     * If width of text more than scene's width minus this value, font size should be reduced.
+     * If width of text in {@code Label} more than application's width minus this value, font size should be reduced.
      */
     private static final int WIDTH_DIFF_TO_REDUCE = 35;
 
     /**
-     * If width of text less than scene's width minus this value, font size should be increased.
+     * If width of text in {@code Label} less than applications's width minus this value, font size should be increased.
      */
     private static final int WIDTH_DIFF_TO_INCREASE = 50;
 
     /**
-     * ID of label in which the result of operations is shown.
+     * Value for changing font size.
      */
-    private static final String RESULT_LABEL_ID = "#screen";
+    private static final double FONT_SIZE_OFFSET = 0.5;
 
     /**
-     * JavaFX scene.
+     * ID of screen {@code Label}.
+     */
+    private static final String SCREEN_LABEL_ID = "#screen";
+
+    /**
+     * JavaFX {@code Scene}.
      */
     private Scene scene;
 
     /**
      * Constructor for listener.
      *
-     * @param scene JavaFX scene.
+     * @param scene JavaFX {@code Scene}.
      */
     public FontResizeListener(Scene scene) {
         this.scene = scene;
@@ -51,7 +55,7 @@ public class FontResizeListener implements InvalidationListener {
 
     @Override
     public void invalidated(Observable observable) {
-        Label label = (Label) scene.lookup(RESULT_LABEL_ID);
+        Label label = (Label) scene.lookup(SCREEN_LABEL_ID);
 
         //get text width
         Text text = new Text(label.getText());

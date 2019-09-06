@@ -53,6 +53,14 @@
     -fx-text-fill: #b8b8b8;
 }
 
+.arrows {
+    -fx-text-fill: #0078d7;
+}
+
+.arrows:hover {
+    -fx-text-fill: #333333;
+}
+
 /* setting up font family */
 .font_assets {
     -fx-font-family: "Segoe MDL2 Assets";
@@ -85,7 +93,7 @@
 }
 
 /* setting up font size */
-.arrows {
+.arrows, .memory {
     -fx-font-size: 9pt;
 }
 
@@ -116,21 +124,11 @@
 /* memory buttons */
 .memory {
     -fx-font-weight: bold;
-    -fx-font-size: 9pt;
 }
 
 /* digit buttons */
 .digits {
     -fx-padding: 1;
-}
-
-/* arrow buttons */
-.arrows {
-    -fx-text-fill: #0078d7;
-}
-
-.arrows:hover {
-    -fx-text-fill: #333333;
 }
 
 /*scroll panes*/
@@ -151,25 +149,4 @@
 
 .scroll_pane_equation {
     -fx-background: transparent;
-}
-
-/* tooltip */
-.tooltip {
-    -fx-text-fill: black;
-    -fx-border-width: 1pt;
-    -fx-font-family: "Segoe UI Semilight";
-    -fx-effect: null;
-}
-
-.tooltip_gray {
-    -fx-background-color: #e0e0e0;
-    -fx-border-color: #d0d0d0;
-    -fx-font-size: 12px;
-}
-
-.tooltip_white {
-    -fx-padding: 2 2 2 2;
-    -fx-background-color: #f9fedf;
-    -fx-border-color: black;
-    -fx-font-size: 11px;
 }

@@ -11,34 +11,31 @@ import javafx.stage.Stage;
  * Listener for resizing an application.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**
-     * Padding for scene in which resize is possible.
+     * Padding for application in which resize is possible.
      */
     private static final double BORDER = 2;
 
     /**
-     * Minimal window width.
+     * Minimal application's width.
      */
     private static final double MIN_WIDTH = 322;
 
     /**
-     * Minimal window height.
+     * Minimal application's height.
      */
     private static final double MIN_HEIGHT = 501;
 
     /**
-     * True if window should be moved horizontally
-     * (when the cursor is on the left edge of the window).
+     * True if application should be moved horizontally (when the cursor is on the left edge of the window).
      */
     private boolean moveH;
 
     /**
-     * True if window should be moved vertically
-     * (when the cursor is on the top edge of the window).
+     * True if application should be moved vertically (when the cursor is on the top edge of the window).
      */
     private boolean moveV;
 
@@ -53,20 +50,20 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     private boolean resizeV = false;
 
     /**
-     * JavaFX scene.
+     * JavaFX {@code Scene}.
      */
     private Scene scene;
 
     /**
-     * JavaFX stage.
+     * JavaFX {@code Stage}.
      */
     private Stage stage;
 
     /**
      * Constructor for listener.
      *
-     * @param scene JavaFX scene.
-     * @param stage JavaFX stage.
+     * @param scene JavaFX {@code Scene}.
+     * @param stage JavaFX {@code Stage}.
      */
     public ResizeListener(Scene scene, Stage stage) {
         this.scene = scene;
@@ -93,11 +90,12 @@ public class ResizeListener implements EventHandler<MouseEvent> {
 
     /**
      * Changes type of cursor and enabling resizing.
+     *
      * This code was taken from
      * {@link <https://geektortoise.wordpress.com/2014/02/07/how-to-programmatically-resize-the-stage-in-a-javafx-app/>}
      * and then optimized.
      *
-     * @param event mouse event.
+     * @param event mouse event that have appeared.
      */
     private void changeCursor(MouseEvent event) {
         Cursor cursor;
@@ -114,6 +112,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             moveH = true;
             moveV = true;
         }
+
         //down and left resizing
         else if (eventX < BORDER && eventY > height - BORDER) {
             cursor = Cursor.SW_RESIZE;
@@ -122,6 +121,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             moveH = true;
             moveV = false;
         }
+
         //up and right resizing
         else if (eventX > width - BORDER && eventY < BORDER) {
             cursor = Cursor.NE_RESIZE;
@@ -130,6 +130,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             moveH = false;
             moveV = true;
         }
+
         //down and right resizing
         else if (eventX > width - BORDER && eventY > height - BORDER) {
             cursor = Cursor.SE_RESIZE;
@@ -138,6 +139,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             moveH = false;
             moveV = false;
         }
+
         //right or left resizing
         else if (eventX < BORDER || eventX > width - BORDER) {
             cursor = Cursor.H_RESIZE;
@@ -146,6 +148,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             moveH = (eventX < BORDER);
             moveV = false;
         }
+
         //up or down resizing
         else if (eventY < BORDER || eventY > height - BORDER) {
             cursor = Cursor.V_RESIZE;
@@ -154,6 +157,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
             moveH = false;
             moveV = (eventY < BORDER);
         }
+
         //not a resizing
         else {
             cursor = Cursor.DEFAULT;
@@ -169,7 +173,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     /**
      * Right or left resizing.
      *
-     * @param event mouse event.
+     * @param event mouse event that have appeared.
      */
     private void changeWidth(MouseEvent event) {
         double deltaX = stage.getX() - event.getScreenX();
@@ -207,7 +211,7 @@ public class ResizeListener implements EventHandler<MouseEvent> {
     /**
      * Up or down resizing.
      *
-     * @param event mouse event.
+     * @param event mouse event that have appeared.
      */
     private void changeHeight(MouseEvent event) {
         double deltaY = stage.getY() - event.getScreenY();

@@ -8,19 +8,18 @@ import javafx.stage.Stage;
  * Listener for minimizing an application.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class HideListener implements EventHandler<ActionEvent> {
 
     /**
-     * JavaFX stage.
+     * JavaFX {@code Stage}.
      */
     private Stage stage;
 
     /**
      * Constructor for listener.
      *
-     * @param stage JavaFX stage.
+     * @param stage JavaFX {@code Stage}.
      */
     public HideListener(Stage stage) {
         this.stage = stage;

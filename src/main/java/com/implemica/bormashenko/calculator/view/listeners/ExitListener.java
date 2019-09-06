@@ -8,19 +8,18 @@ import javafx.stage.Stage;
  * Listener for exit from an application.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class ExitListener implements EventHandler<ActionEvent> {
 
     /**
-     * JavaFX stage.
+     * JavaFX {@code Stage}.
      */
     private Stage stage;
 
     /**
      * Constructor for listener.
      *
-     * @param stage JavaFX stage.
+     * @param stage JavaFX {@code Stage}.
      */
     public ExitListener(Stage stage) {
         this.stage = stage;

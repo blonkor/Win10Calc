@@ -8,42 +8,44 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 /**
- * This listener turns on buttons for moving text in equation label.
+ * This listener sets visibility for arrow {@code Button}.
+ * <p>
+ * The visibility of the {@code Button} depends on {@code Label}'s and application's width.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class EquationLabelLengthListener implements InvalidationListener {
 
     /**
-     * ID of equation label.
+     * ID of equation {@code Label}.
      */
     private static final String EQUATION_LABEL_ID = "#equation";
 
     /**
-     * ID of button that allows to move text left.
+     * ID of left arrow {@code Button}.
      */
     private static final String LEFT_ARROW_ID = "#leftArrow";
 
     /**
-     * ID of button that allows to move text right.
+     * ID of right arrow {@code Button}.
      */
     private static final String RIGHT_ARROW_ID = "#rightArrow";
 
     /**
-     * If width of text more than scene's width minus this value, left arrow button should appear.
+     * If width of text in {@code Label} more than applications's width minus this value, left arrow {@code Button}
+     * should be visible.
      */
     private static final double WIDTH_DIFF_TO_SHOW = 50;
 
     /**
-     * JavaFX scene.
+     * JavaFX {@code Scene}.
      */
     private Scene scene;
 
     /**
      * Constructor for listener.
      *
-     * @param scene JavaFX scene.
+     * @param scene JavaFX {@code Scene}.
      */
     public EquationLabelLengthListener(Scene scene) {
         this.scene = scene;
@@ -56,10 +58,10 @@ public class EquationLabelLengthListener implements InvalidationListener {
         //get text width
         Text text = new Text(label.getText());
         text.setFont(label.getFont());
-        double width = text.getBoundsInLocal().getWidth();
+        int width = (int) text.getBoundsInLocal().getWidth();
 
         //check condition for appearing or disappearing buttons
-        double widthToShowLeftArrow = scene.getWidth() - WIDTH_DIFF_TO_SHOW;
+        int widthToShowLeftArrow = (int) (scene.getWidth() - WIDTH_DIFF_TO_SHOW);
         Button leftArrow = (Button) scene.lookup(LEFT_ARROW_ID);
         Button rightArrow = (Button) scene.lookup(RIGHT_ARROW_ID);
 

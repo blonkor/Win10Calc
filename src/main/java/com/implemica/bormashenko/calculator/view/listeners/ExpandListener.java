@@ -1,6 +1,5 @@
 package com.implemica.bormashenko.calculator.view.listeners;
 
-import com.implemica.bormashenko.calculator.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,12 +10,11 @@ import javafx.stage.Stage;
  * Listener for maximizing application.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class ExpandListener implements EventHandler<ActionEvent> {
 
     /**
-     * ID of expand button.
+     * ID of expand {@code Button}.
      */
     private static final String EXPAND_ID = "#expand";
 
@@ -31,20 +29,20 @@ public class ExpandListener implements EventHandler<ActionEvent> {
     private static final String MAXIMIZED_ICON = "\uE923";
 
     /**
-     * JavaFX scene.
+     * JavaFX {@code Scene}.
      */
     private Scene scene;
 
     /**
-     * JavaFX stage.
+     * JavaFX {@code Stage}.
      */
     private Stage stage;
 
     /**
      * Constructor for listener.
      *
-     * @param scene JavaFX scene.
-     * @param stage JavaFX stage.
+     * @param scene JavaFX {@code Scene}.
+     * @param stage JavaFX {@code Stage}.
      */
     public ExpandListener(Scene scene, Stage stage) {
         this.scene = scene;

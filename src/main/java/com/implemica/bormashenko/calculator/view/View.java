@@ -15,10 +15,9 @@ import javafx.stage.StageStyle;
 import java.io.*;
 
 /**
- * Main tests.view of application.
+ * View of application.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class View implements Serializable {
 
@@ -43,17 +42,17 @@ public class View implements Serializable {
     private static final String ICON_PATH = "resources/images/icon.png";
 
     /**
-     * ID of exit button that closes the application.
+     * ID of exit {@code Button} that closes the application.
      */
     private static final String CLOSE_ID = "#close";
 
     /**
-     * ID of expand button that maximizes the application.
+     * ID of expand {@code Button} that maximizes the application.
      */
     private static final String EXPAND_ID = "#expand";
 
     /**
-     * ID of hide button that minimizes the application.
+     * ID of hide {@code Button} that minimizes the application.
      */
     private static final String HIDE_ID = "#hide";
 
@@ -63,21 +62,22 @@ public class View implements Serializable {
     private static final String TOP_PANEL_ID = "#topPanel";
 
     /**
-     * ID of label in which the result of operations is shown.
+     * ID of {@code Label} in which the result of operations is shown.
      */
     private static final String RESULT_LABEL_ID = "#screen";
 
     /**
-     * ID of equation scroll pane.
+     * ID of equation {@code Scroll Pane}.
      */
     private static final String EQUATION_SCROLL_ID = "#equationScroll";
 
     /**
-     * Initializing main tests.view and listeners.
+     * Initializing view and listeners.
      *
-     * @param primaryStage JavaFX stage.
+     * @param primaryStage JavaFX {@code Stage}.
+     * @throws IOException signals that an I/O exception of some sort has occurred.
      */
-    public void initStage(Stage primaryStage) throws Exception {
+    public void initStage(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         Parent root = loader.load(getClass().getResourceAsStream(FXML_PATH));
         Scene scene = new Scene(root);
