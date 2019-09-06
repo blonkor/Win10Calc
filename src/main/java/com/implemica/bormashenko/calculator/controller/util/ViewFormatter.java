@@ -16,22 +16,22 @@ import java.util.Stack;
  * Utility class for programmatically changing {@link com.implemica.bormashenko.calculator.view.View}.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
+ * @todo  tests
  */
 public class ViewFormatter {
 
     /**
-     * Layout for memory labels.
+     * Layout for memory {@code Label}.
      */
     private static final int MEMORY_LABELS_LAYOUT = 16;
 
     /**
-     * Pref height for memory labels.
+     * Pref height for memory {@code Label}.
      */
     private static final int MEMORY_LABELS_HEIGHT = 63;
 
     /**
-     * Font size for memory labels.
+     * Font size for memory {@code Label}.
      */
     private static final int MEMORY_LABELS_FONT_SIZE = 24;
 
@@ -51,20 +51,20 @@ public class ViewFormatter {
     private static final double MULTIPLICAND_FOR_SCENE_WIDTH = 0.1;
 
     /**
-     * Insets for memory labels.
+     * Insets for memory {@code Label}.
      */
     private static final Insets MEMORY_LABELS_INSETS = new Insets(0, 15, 0, 15);
 
     /**
      * Moves {@code Text} in {@code Label} to the right or left.
-     *
+     * <p>
      * The {@code Label} should be wrapped into {@code ScrollPane}.
      *
-     * @param clickedButton {@code Button} that should move {@code Text} to the specific side.
+     * @param clickedButton  {@code Button} that should move {@code Text} to the specific side.
      * @param oppositeButton {@code Button} that should move {@code Text} to the opposite of clicked button side.
-     * @param label {@code Label} that contains {@code Text} that should be moved.
-     * @param labelScroll {@code ScrollPane} that contains required {@code Label}.
-     * @param moveLeft true if moving left or false if moving right.
+     * @param label          {@code Label} that contains {@code Text} that should be moved.
+     * @param labelScroll    {@code ScrollPane} that contains required {@code Label}.
+     * @param moveLeft       true if moving left or false if moving right.
      */
     public static void moveTextInLabel(Button clickedButton, Button oppositeButton, Label label,
                                        ScrollPane labelScroll, boolean moveLeft) {
@@ -106,8 +106,8 @@ public class ViewFormatter {
      * Shows or hides memory panel.
      *
      * @param memoryAnchorPane memory panel that should be shown or hided.
-     * @param memoryPanel      memory panel that contains labels.
-     * @param block            invisible block for other buttons in calculator.
+     * @param memoryPanel      memory panel that contains {@code Label}.
+     * @param block            invisible block for other {@code Button} in calculator.
      * @param memory           model of memory.
      */
     public static void showOrHideMemoryPanel(AnchorPane memoryAnchorPane, AnchorPane memoryPanel, AnchorPane block,
@@ -121,11 +121,11 @@ public class ViewFormatter {
     }
 
     /**
-     * Shows or hides navigation panel and about button.
+     * Shows or hides navigation panel and about {@code Button}.
      *
      * @param navigationPanel navigation panel that should be shown.
-     * @param about           panel with about button that should be shown.
-     * @param block           invisible block for other buttons in calculator.
+     * @param about           panel with about {@code Button} that should be shown.
+     * @param block           invisible block for other {@code Button} in calculator.
      */
     public static void showOrHideNavigationPanel(ScrollPane navigationPanel, AnchorPane about, AnchorPane block) {
         navigationPanel.setVisible(!navigationPanel.isVisible());
@@ -134,10 +134,10 @@ public class ViewFormatter {
     }
 
     /**
-     * Creates memory labels for each memory cell.
+     * Creates memory {@code Label} for each {@link Memory} cell.
      *
-     * @param memory      model of memory.
-     * @param memoryPanel parent for labels.
+     * @param memory      model of {@link Memory}.
+     * @param memoryPanel parent for {@code Label}.
      */
     private static void updateMemoryLabels(Memory memory, AnchorPane memoryPanel) {
         Stack<BigDecimal> store = memory.getStore();
@@ -159,10 +159,10 @@ public class ViewFormatter {
     }
 
     /**
-     * Disables or enables buttons, passed as args.
+     * Disables or enables several {@code Button}, passed as args.
      *
      * @param flag    true for disabling and false for enabling.
-     * @param buttons buttons that should change their disability.
+     * @param buttons several {@code Button} that should change their disability.
      */
     public static void setButtonsDisability(boolean flag, Button... buttons) {
         for (Button button : buttons) {
@@ -171,11 +171,11 @@ public class ViewFormatter {
     }
 
     /**
-     * Sets configuration such as size, layout and style for memory label.
+     * Sets configuration such as size, layout and style for memory {@code Label}.
      *
-     * @param label       label to edit.
-     * @param memoryPanel parent for label.
-     * @param layoutY     coordinate Y for the label.
+     * @param label       {@code Label} to edit.
+     * @param memoryPanel parent for {@code Label}.
+     * @param layoutY     coordinate Y for the {@code Label}.
      */
     private static void configureMemoryLabel(Label label, AnchorPane memoryPanel, double layoutY) {
         label.setPrefWidth(memoryPanel.getWidth());
@@ -192,7 +192,7 @@ public class ViewFormatter {
     }
 
     /**
-     * Sets style for memory label.
+     * Sets style for memory {@code Label}.
      *
      * @return style (as css representation).
      */
@@ -203,7 +203,7 @@ public class ViewFormatter {
     }
 
     /**
-     * Sets style for memory label on hover.
+     * Sets style for memory {@code Label} on hover.
      *
      * @return style (as css representation).
      */
