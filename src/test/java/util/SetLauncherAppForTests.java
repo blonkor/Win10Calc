@@ -9,7 +9,6 @@ import javafx.stage.Stage;
  *
  * @author Mykhailo Bormashenko
  * @see Launcher
- * @todo refactoring
  */
 public class SetLauncherAppForTests extends Launcher {
 
@@ -31,6 +30,10 @@ public class SetLauncherAppForTests extends Launcher {
         stageFuture.set(primaryStage);
     }
 
+    /**
+     * Allows to run tests for applications.
+     * @return {@link SettableFuture<Stage>}
+     */
     static SettableFuture<Stage> getStageFuture() {
         return stageFuture;
     }
