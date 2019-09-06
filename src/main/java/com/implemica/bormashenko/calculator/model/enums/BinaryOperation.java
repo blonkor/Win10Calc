@@ -5,7 +5,7 @@ package com.implemica.bormashenko.calculator.model.enums;
  *
  * @author Mykhailo Bormashenko
  */
-public enum BinaryOperations {
+public enum BinaryOperation {
 
     /**
      * Sums two numbers.
@@ -37,7 +37,7 @@ public enum BinaryOperations {
      *
      * @param symbol symbol representation of operation.
      */
-    BinaryOperations(String symbol) {
+    BinaryOperation(String symbol) {
         this.symbol = symbol;
     }
 }

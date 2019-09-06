@@ -1,16 +1,16 @@
 package tests.model;
 
 import com.implemica.bormashenko.calculator.model.Calculation;
-import com.implemica.bormashenko.calculator.model.enums.BinaryOperations;
-import com.implemica.bormashenko.calculator.model.enums.UnaryOperations;
+import com.implemica.bormashenko.calculator.model.enums.BinaryOperation;
+import com.implemica.bormashenko.calculator.model.enums.UnaryOperation;
 import com.implemica.bormashenko.calculator.model.exceptions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static com.implemica.bormashenko.calculator.model.enums.BinaryOperations.*;
-import static com.implemica.bormashenko.calculator.model.enums.UnaryOperations.*;
+import static com.implemica.bormashenko.calculator.model.enums.BinaryOperation.*;
+import static com.implemica.bormashenko.calculator.model.enums.UnaryOperation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -8019,7 +8019,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Test for percentage operation while {@code BinaryOperations} in {@code Calculation} is set to null.
+     * Test for percentage operation while {@code BinaryOperation} in {@code Calculation} is set to null.
      */
     @Test
     void percentageForBinaryNull() {
@@ -8034,7 +8034,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for {@code OverflowException} while using {@code BinaryOperations}.
+     * Tests for {@code OverflowException} while using {@code BinaryOperation}.
      */
     @Test
     void binaryOverflowExceptionTests() {
@@ -8329,7 +8329,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for {@code OverflowException} while using {@code UnaryOperations.SQR} operation.
+     * Tests for {@code OverflowException} while using {@code UnaryOperation.SQR} operation.
      */
     @Test
     void sqrOverflowExceptionTests() {
@@ -8545,7 +8545,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for {@code UnaryOperations.SQRT} of negative number exception.
+     * Tests for {@code UnaryOperation.SQRT} of negative number exception.
      */
     @Test
     void negativeSqrtExceptionTests() {
@@ -8621,17 +8621,17 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing {@link BinaryOperations} in {@link Calculation}.
+     * Method for testing {@link BinaryOperation} in {@link Calculation}.
      * <p>
-     * For operations {@code BinaryOperations.ADD} and {@code BinaryOperations.MULTIPLY} it is possible to swap numbers
+     * For operations {@code BinaryOperation.ADD} and {@code BinaryOperation.MULTIPLY} it is possible to swap numbers
      * of equation between each other to obtain the same result.
      *
      * @param first          first number of equation.
      * @param second         second number of equation.
-     * @param operation      {@code BinaryOperations} to use.
+     * @param operation      {@code BinaryOperation} to use.
      * @param expectedResult result that should be obtained.
      */
-    private void checkBinaryOperation(BigDecimal first, BigDecimal second, BinaryOperations operation,
+    private void checkBinaryOperation(BigDecimal first, BigDecimal second, BinaryOperation operation,
                                       String expectedResult) {
         calculation.setFirst(first);
         calculation.setSecond(second);
@@ -8650,13 +8650,13 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing {@link UnaryOperations} in {@link Calculation}.
+     * Method for testing {@link UnaryOperation} in {@link Calculation}.
      *
      * @param first          first number of equation.
-     * @param operation      {@code UnaryOperations} to use.
+     * @param operation      {@code UnaryOperation} to use.
      * @param expectedResult result that should be obtained.
      */
-    private void checkUnaryOperation(BigDecimal first, UnaryOperations operation, String expectedResult) {
+    private void checkUnaryOperation(BigDecimal first, UnaryOperation operation, String expectedResult) {
         calculation.setFirst(first);
         calculation.calculateUnary(operation);
 
@@ -8702,18 +8702,18 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing {@link OverflowException} while using {@link BinaryOperations} in {@link Calculation}
+     * Method for testing {@link OverflowException} while using {@link BinaryOperation} in {@link Calculation}
      * <p>
      * For inputted values, {@code OverflowException} should be thrown.
      * <p>
-     * For operations {@code BinaryOperations.ADD} and {@code BinaryOperations.MULTIPLY} it is possible to swap numbers
+     * For operations {@code BinaryOperation.ADD} and {@code BinaryOperation.MULTIPLY} it is possible to swap numbers
      * of equation between each other to obtain the same result.
      *
      * @param first     first number of equation.
      * @param second    second number of equation.
-     * @param operation {@code BinaryOperations} to use.
+     * @param operation {@code BinaryOperation} to use.
      */
-    private void checkBinaryOverflowException(BigDecimal first, BigDecimal second, BinaryOperations operation) {
+    private void checkBinaryOverflowException(BigDecimal first, BigDecimal second, BinaryOperation operation) {
         calculation.setFirst(first);
         calculation.setSecond(second);
         calculation.setBinaryOperation(operation);
@@ -8740,18 +8740,18 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing {@link OverflowException} while using {@code UnaryOperations.SQRT} in {@link Calculation}.
+     * Method for testing {@link OverflowException} while using {@code UnaryOperation.SQRT} in {@link Calculation}.
      * <p>
      * For inputted value, {@code OverflowException} should be thrown.
      *
      * @param first first number of equation.
-     * @see UnaryOperations
+     * @see UnaryOperation
      */
     private void checkSqrOverflowException(BigDecimal first) {
         calculation.setFirst(first);
 
         try {
-            calculation.calculateUnary(UnaryOperations.SQR);
+            calculation.calculateUnary(UnaryOperation.SQR);
             fail();
         } catch (OverflowException e) {
             assertEquals(OVERFLOW_MESSAGE, e.getMessage());

@@ -5,7 +5,7 @@ package com.implemica.bormashenko.calculator.model.enums;
  *
  * @author Mykhailo Bormashenko
  */
-public enum UnaryOperations {
+public enum UnaryOperation {
 
     /**
      * Negates number.
@@ -37,7 +37,7 @@ public enum UnaryOperations {
      *
      * @param symbol Symbol representation of operation.
      */
-    UnaryOperations(String symbol) {
+    UnaryOperation(String symbol) {
         this.symbol = symbol;
     }
 }
