@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Test class for testing {@link NumberFormatter}.
  *
  * @author Mykhailo Bormashenko
- * @todo refactoring
  */
 public class NumberFormatterTest {
 
@@ -652,7 +651,7 @@ public class NumberFormatterTest {
     }
 
     /**
-     * Tests for round operation.
+     * Tests for format operation.
      */
     @Test
     public void formatTests() {
@@ -855,7 +854,7 @@ public class NumberFormatterTest {
      *
      * @param number         number to edit.
      * @param digit          digit to append.
-     * @param expectedResult required result after performing operation.
+     * @param expectedResult expected result after performing operation.
      */
     private void checkAppendDigit(String number, String digit, String expectedResult) {
         String result = NumberFormatter.appendDigitToNumber(number, digit);
@@ -866,7 +865,7 @@ public class NumberFormatterTest {
      * Checks that dot is appended to number.
      *
      * @param number         number to edit.
-     * @param expectedResult required result after performing operation.
+     * @param expectedResult expected result after performing operation.
      */
     private void checkAppendDecimalSeparator(String number, String expectedResult) {
         String result = NumberFormatter.appendDecimalSeparatorIfMissed(number);
@@ -877,7 +876,7 @@ public class NumberFormatterTest {
      * Checks result of delete last char operation.
      *
      * @param number         number to edit.
-     * @param expectedResult required result after performing operation.
+     * @param expectedResult expected result after performing operation.
      */
     private void checkDeleteLastChar(String number, String expectedResult) {
         String result = NumberFormatter.deleteLastChar(number);
@@ -888,7 +887,7 @@ public class NumberFormatterTest {
      * Check result of screen to big decimal operation.
      *
      * @param string     number to convert.
-     * @param bigDecimal required big decimal result.
+     * @param bigDecimal expected result after performing operation.
      */
     private void checkScreenToBigDecimal(String string, BigDecimal bigDecimal) {
         BigDecimal bigDecimalResult = NumberFormatter.screenToBigDecimal(string);
