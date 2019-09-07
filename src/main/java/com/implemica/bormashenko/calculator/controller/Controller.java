@@ -728,7 +728,8 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Updates text set in equation {@code Label} after several unary or percentage operations in a row and returns it.
+     * Updates text set in equation {@code Label} after several unary or percentage operations in a row (but the last
+     * one is percentage) and returns it.
      * <p>
      * First of all, looks for the last {@code BinaryOperation} symbol in equation {@code Label}. If it was found,
      * separates text in equation {@code Label} into two parts: text before the last {@code BinaryOperation} symbol
@@ -827,69 +828,93 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Calculates percentage.
-     * Calls when percent button is pressed.
+     * Called when percentage {@code Buttons} is pressed.
      * <p>
-     * Calculation is possible if only binary operation is set. Otherwise, sets first number in calculation tests.model
-     * to 0, and shows it in main screen and equation label.
+     * If number in screen {@code Label} ends with {@code DECIMAL_SEPARATOR}, removes it.
      * <p>
-     * Sets number from screen as second number in calculation tests.model. Next steps depends on which binary operation
-     * is set:
-     * If set binary operation is add or subtract, sets second number as percentage of first number.
-     * If set binary operation is multiply or divide, sets second number as percentage of 100.
+     * Calculation is possible if only binary operation is set. Otherwise, shows {@code ZERO} in screen and equation
+     * {@code Label}.
      * <p>
-     * Than shows changed second number on screen and adds it to equation label.
-     *
-     * @todo refactor
+     * Sets number from screen {@code Label} as second number and performs calculate percentage operation from
+     * {@link Calculation}. Then sets received result as second number and shows it in screen {@code Label}.
+     * <p>
+     * Also appends result to equation {@code Label}.
+     * <p>
+     * If any exception was thrown during calculating, it's message will be shown in screen {@code Label}.
      */
     private void calculatePercentage() {
-        String equationTextToSet = equation.getText();
+        removeLastDecimalSeparator();
 
         if (calculation.getBinaryOperation() == null) {
-            screen.setText(ZERO);
-
-            equation.setText(ZERO);
-
-            setFlags(false, false, true,
-                    false, true, false);
+            percentageWithoutBinary();
         } else {
+            String equationTextToSet = equation.getText();
 
             try {
-                BigDecimal number = screenToBigDecimal(screen.getText());
-                calculation.setSecond(number);
-
-                calculation.calculatePercentage();
-                calculation.setSecond(calculation.getResult());
-
-                screen.setText(formatNumber(calculation.getResult()));
+                percentageWithBinary();
 
                 if (isUnaryOrPercentPressed) {
-                    String textBefore;
-                    int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
-                    int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-                    int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-                    int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-                    int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
-                            Math.max(lastIndexOfMultiply, lastIndexOfDivide));
-
-                    textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
-
-                    equationTextToSet = textBefore + NARROW_SPACE +
-                            formatWithoutGroupSeparator(calculation.getResult());
+                    equationTextToSet = equationTextToSetAfterSeveralPercentage(equationTextToSet);
                 } else {
                     equationTextToSet += NARROW_SPACE + formatWithoutGroupSeparator(calculation.getResult());
                 }
 
                 setFlags(false, false, true,
-                        false,
-                        true, false);
-
+                        false, true, false);
             } catch (Exception e) {
                 exceptionThrown(e.getMessage());
             } finally {
                 equation.setText(equationTextToSet);
             }
         }
+    }
+
+    /**
+     * Shows {@code ZERO} in screen and equation {@code Label} and updates flags.
+     */
+    private void percentageWithoutBinary() {
+        screen.setText(ZERO);
+        equation.setText(ZERO);
+
+        setFlags(false, false, true,
+                false, true, false);
+    }
+
+    /**
+     * Sets number in screen {@code Label} as second number and performs calculate percentage operation from
+     * {@link Calculation}. Then sets received result as second nu,ber and shows it in screen {@code Label}.
+     */
+    private void percentageWithBinary() {
+        BigDecimal number = screenToBigDecimal(screen.getText());
+        calculation.setSecond(number);
+        calculation.calculatePercentage();
+        calculation.setSecond(calculation.getResult());
+        screen.setText(formatNumber(calculation.getResult()));
+    }
+
+    /**
+     * Updates text set in equation {@code Label} after several unary or percentage operations in a row (but the last
+     * one is percentage) and returns it.
+     * <p>
+     * Looks for the last {@code BinaryOperation} symbol in equation {@code Label} and appends to text before the last
+     * symbol result of calculation.
+     *
+     * @param equationTextToSet text to update.
+     * @return updated text.
+     */
+    private String equationTextToSetAfterSeveralPercentage(String equationTextToSet) {
+        String textBefore;
+
+        int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
+        int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+        int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
+        int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+        int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
+                Math.max(lastIndexOfMultiply, lastIndexOfDivide));
+
+        textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
+
+        return textBefore + NARROW_SPACE + formatWithoutGroupSeparator(calculation.getResult());
     }
 
     /**
