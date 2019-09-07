@@ -513,85 +513,152 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @param operation binary operation to set.
-     * @todo refactor
+     * Called when any {@code BinaryOperation} {@code Button} is pressed.
+     * <p>
+     * If number in screen {@code Label} ends with {@code DECIMAL_SEPARATOR}, removes it.
+     * <p>
+     * If {@code BinaryOperation} {@code Button} was not just pressed, performs binary not after binary operation.
+     * Otherwise, performs binary after binary operation.
+     *
+     * @param operation {@link BinaryOperation} that should be set.
      */
     private void binaryOperationPressed(BinaryOperation operation) {
-        if (screen.getText().endsWith(".")) {
-            screen.setText(screen.getText().replace(".", ""));
-        }
+        removeLastDecimalSeparator();
 
-        String equationTextToSet = "";
+        if (!isBinaryOperationPressed) {
+            binaryNotAfterBinary(operation);
+        } else {
+            binaryAfterBinary(operation);
+        }
+    }
+
+    /**
+     * Performs {@code BinaryOperation} if any {@code BinaryOperation} was not just pressed.
+     * <p>
+     * If first number is not set, sets number in screen {@code Label} as first number. Also sets number in screen
+     * {@code Label} with operation's symbol after it to equation {@code Label}.
+     * <p>
+     * If equals or unary or percent operation was not just performed, calculates result with first number, previously
+     * set {@code BinaryOperation} and number in screen {@code Label} as second number. Result of calculation is shown
+     * on screen {@code Label}. Also appends to current equation {@code Label} text number in screen {@code Label} and
+     * new operation's symbol.
+     * <p>
+     * Otherwise, if equals was just pressed, sets number in screen {@code Label} as first number. Also, sets result of
+     * calculation (or number in screen {@code Label} if current {@code BinaryOperation} is null) with new operation's
+     * symbol to equation {@code Label}.
+     * <p>
+     * If equals was not just pressed, just appends operation's symbol to equation {@code Label}.
+     * <p>
+     * Also, if unary or percent operation was just performed, sets result of calculation as second number and performs
+     * calculating with previously set {@code BinaryOperation}. Result of calculation is shown on screen {@code Label}.
+     * <p>
+     * After successfully performing any of steps below, {@code BinaryOperation} in {@code Calculation} is updated.
+     * <p>
+     * If any exception was thrown during calculating, it's message will be shown in screen {@code Label}.
+     *
+     * @param operation new operation to sen in {@code Calculation}.
+     */
+    private void binaryNotAfterBinary(BinaryOperation operation) {
+        BigDecimal number = screenToBigDecimal(screen.getText());
+        String equationTextToSet = EMPTY_STRING;
 
         try {
-            if (!isBinaryOperationPressed) {
-                BigDecimal numberOnScreen = screenToBigDecimal(screen.getText());
 
-                if (!isFirstCalculated) {
-                    calculation.setFirst(numberOnScreen);
-                    calculation.setBinaryOperation(operation);
+            if (!isFirstCalculated) {
+                equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE + operation.symbol;
 
-                    equationTextToSet = formatWithoutGroupSeparator(calculation.getFirst())
-                            + NARROW_SPACE + operation.symbol;
+                setBinaryAndFirst(operation, number);
 
-                } else if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
-                    calculation.setSecond(numberOnScreen);
+            } else if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
+                equationTextToSet = equation.getText() + NARROW_SPACE + formatWithoutGroupSeparator(number) +
+                        NARROW_SPACE + operation.symbol;
 
-                    equationTextToSet = equation.getText() + NARROW_SPACE +
-                            formatWithoutGroupSeparator(calculation.getSecond()) +
-                            NARROW_SPACE + operation.symbol;
-
-
-                    calculation.calculateBinary();
-                    calculation.setFirst(calculation.getResult());
-                    calculation.setBinaryOperation(operation);
-
-                    screen.setText(formatNumber(calculation.getResult()));
-
-                } else {
-
-                    if (isUnaryOrPercentOperationPressed) {
-                        calculation.setSecond(calculation.getResult());
-
-                        calculation.calculateBinary();
-
-                        calculation.setFirst(calculation.getResult());
-
-                        screen.setText(formatNumber(calculation.getResult()));
-                    }
-
-                    if (isEqualsPressed) {
-                        calculation.setFirst(numberOnScreen);
-
-                        if (calculation.getBinaryOperation() == null) {
-                            equationTextToSet = formatWithoutGroupSeparator(numberOnScreen) +
-                                    NARROW_SPACE + operation.symbol;
-                        } else {
-                            equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
-                                    NARROW_SPACE + operation.symbol;
-                        }
-
-                    } else {
-                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
-                    }
-
-                    calculation.setBinaryOperation(operation);
-                }
+                calculateBinaryAndSetNewBinary(operation, number);
 
             } else {
-                calculation.setBinaryOperation(operation);
 
-                equationTextToSet = equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol;
+                if (isEqualsPressed) {
+                    equationTextToSet = binaryAfterEquals(operation, number);
+                } else {
+                    equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
+                }
+
+                if (isUnaryOrPercentOperationPressed) {
+                    calculateBinaryAndSetNewBinary(operation, calculation.getResult());
+                }
             }
 
-            setFlags(false, true, false, false,
-                    true, false);
-
+            setFlags(false, true, false,
+                    false, true, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         } finally {
             equation.setText(equationTextToSet);
         }
+    }
+
+    /**
+     * Sets {@code BinaryOperation} and first number in {@code Calculation}.
+     *
+     * @param operation {@code BinaryOperation} to set.
+     * @param first     {@code BigDecimal} number to set as first.
+     */
+    private void setBinaryAndFirst(BinaryOperation operation, BigDecimal first) {
+        calculation.setBinaryOperation(operation);
+        calculation.setFirst(first);
+    }
+
+    /**
+     * Sets second number and performs binary calculating. Then sets result as first number, sets
+     * {@code BinaryOperation} and shows result in screen {@code Label}.
+     *
+     * @param operation {@code BinaryOperation} to set.
+     * @param second    {@code BigDecimal} number to set as second.
+     */
+    private void calculateBinaryAndSetNewBinary(BinaryOperation operation, BigDecimal second) {
+        calculation.setSecond(second);
+        calculation.calculateBinary();
+
+        setBinaryAndFirst(operation, calculation.getResult());
+
+        screen.setText(formatNumber(calculation.getResult()));
+    }
+
+    /**
+     * Builds string for equation {@code Label} with number (that is in screen {@code Label} or calculated in
+     * {@code Calculation}) and operation's symbol. Then sets {@code BinaryOperation} and first number in
+     * {@code Calculation}.
+     * @param operation {@code BinaryOperation} to set.
+     * @param number {@code BigDecimal} number to set as first.
+     * @return string that should be set in equation {@code Label}.
+     */
+    private String binaryAfterEquals(BinaryOperation operation, BigDecimal number) {
+        String equationTextToSet;
+
+        if (calculation.getBinaryOperation() == null) {
+            equationTextToSet = formatWithoutGroupSeparator(number) +
+                    NARROW_SPACE + operation.symbol;
+        } else {
+            equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
+                    NARROW_SPACE + operation.symbol;
+        }
+
+        setBinaryAndFirst(operation, number);
+
+        return equationTextToSet;
+    }
+
+    /**
+     * Sets new {@code BinaryOperation} and changes last symbol in equation {@code Label}.
+     * @param operation {@code BinaryOperation} to set.
+     */
+    private void binaryAfterBinary(BinaryOperation operation) {
+        calculation.setBinaryOperation(operation);
+
+        equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
+
+        setFlags(false, true, false,
+                false, true, false);
     }
 
     /**
@@ -673,7 +740,8 @@ public class Controller implements Initializable {
                         equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
                                 formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                     } else {
-                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET +
+                                NARROW_SPACE +
                                 formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
                     }
                 }
@@ -690,7 +758,8 @@ public class Controller implements Initializable {
                 screen.setText(formatNumber(calculation.getResult()));
             }
 
-            setFlags(false, false, true, false,
+            setFlags(false, false, true,
+                    false,
                     true, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
@@ -723,8 +792,8 @@ public class Controller implements Initializable {
 
             equation.setText(ZERO);
 
-            setFlags(false, false, true, false,
-                    true, false);
+            setFlags(false, false, true,
+                    false, true, false);
         } else {
 
             try {
@@ -732,8 +801,9 @@ public class Controller implements Initializable {
                 calculation.setSecond(number);
 
                 calculation.calculatePercentage();
+                calculation.setSecond(calculation.getResult());
 
-                screen.setText(formatNumber(calculation.getSecond()));
+                screen.setText(formatNumber(calculation.getResult()));
 
                 if (isUnaryOrPercentOperationPressed) {
                     String textBefore;
@@ -747,12 +817,13 @@ public class Controller implements Initializable {
                     textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
 
                     equationTextToSet = textBefore + NARROW_SPACE +
-                            formatWithoutGroupSeparator(calculation.getSecond());
+                            formatWithoutGroupSeparator(calculation.getResult());
                 } else {
-                    equationTextToSet += NARROW_SPACE + formatWithoutGroupSeparator(calculation.getSecond());
+                    equationTextToSet += NARROW_SPACE + formatWithoutGroupSeparator(calculation.getResult());
                 }
 
-                setFlags(false, false, true, false,
+                setFlags(false, false, true,
+                        false,
                         true, false);
 
             } catch (Exception e) {
@@ -797,7 +868,6 @@ public class Controller implements Initializable {
      * Calculates result for {@link Calculation} if {@code BinaryOperation} is set.
      * <p>
      * If equals or unary or percent operation was not just performed, calculates result not after those operations.
-     * <p>
      * Otherwise, calculates result after those operations.
      * <p>
      * Sets result to screen {@code Label}.
@@ -817,11 +887,9 @@ public class Controller implements Initializable {
     /**
      * Calculates result not after equals or unary or percent operation just performed.
      * <p>
-     * If first number is not set, sets passed number as first.
+     * If first number is not set, sets passed number as first. Otherwise, sets passed number as second.
      * <p>
-     * Otherwise, sets passed number as second.
-     * <p>
-     * Then performs {@code calculateBinary} operation from {@link Calculation} and sets result as first number.
+     * Then performs {@code calculateBinary} operation from {@code Calculation} and sets result as first number.
      *
      * @param number {@code BigDecimal} number with which calculation should be performed.
      */
@@ -839,9 +907,9 @@ public class Controller implements Initializable {
     /**
      * Calculates result after equals or unary or percent operation just performed.
      * <p>
-     * If equals operation was just performed, sets result from {@link Calculation} as first number.
+     * If equals operation was just performed, sets result from {@code Calculation} as first number.
      * <p>
-     * {@code calculateBinary} operation from {@link Calculation}.
+     * {@code calculateBinary} operation from {@code Calculation} is performed.
      */
     private void calculateResultAfterEqualsOrUnaryOrPercentage() {
         if (isEqualsPressed) {
@@ -863,7 +931,8 @@ public class Controller implements Initializable {
         };
         ViewFormatter.setButtonsDisability(true, buttonsToDisable);
 
-        setFlags(false, false, false, false,
+        setFlags(false, false, false,
+                false,
                 false, true);
     }
 
