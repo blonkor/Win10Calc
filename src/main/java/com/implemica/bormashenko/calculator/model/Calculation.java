@@ -190,9 +190,9 @@ public class Calculation {
             percentageOf100();
         }
 
-        second = second.stripTrailingZeros();
+        result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(second)) {
+        if (overflowValidationFailed(result)) {
             throw new OverflowException();
         }
     }
@@ -370,7 +370,7 @@ public class Calculation {
      * @throws OverflowException while validation for second value is failed.
      */
     private void percentageOfFirst() {
-        second = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        result = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
     /**
@@ -379,6 +379,6 @@ public class Calculation {
      * @throws OverflowException while validation for second number is failed.
      */
     private void percentageOf100() {
-        second = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        result = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 }
