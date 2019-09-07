@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -101,7 +102,7 @@ public class Controller implements Initializable {
     /**
      * True if any unary operation was just pressed.
      */
-    private boolean isUnaryOrPercentOperationPressed = false;
+    private boolean isUnaryOrPercentPressed = false;
 
     /**
      * True if equals was just pressed.
@@ -111,7 +112,7 @@ public class Controller implements Initializable {
     /**
      * True if first number was calculated.
      */
-    private boolean isFirstCalculated = false;
+    private boolean isFirstSet = false;
 
     /**
      * True if error was just happened.
@@ -353,16 +354,16 @@ public class Controller implements Initializable {
 
         screen.setText(appendDigitToNumber(number, digit));
 
-        if (isUnaryOrPercentOperationPressed) {
+        if (isUnaryOrPercentPressed) {
             equation.setText(EMPTY_STRING);
         }
 
-        if (isEqualsPressed || isUnaryOrPercentOperationPressed) {
-            isFirstCalculated = false;
+        if (isEqualsPressed || isUnaryOrPercentPressed) {
+            isFirstSet = false;
         }
 
         setFlags(true, false, false,
-                false, isFirstCalculated, false);
+                false, isFirstSet, false);
     }
 
     /**
@@ -380,16 +381,16 @@ public class Controller implements Initializable {
 
         screen.setText(appendDecimalSeparatorIfMissed(number));
 
-        if (isUnaryOrPercentOperationPressed) {
+        if (isUnaryOrPercentPressed) {
             equation.setText(EMPTY_STRING);
         }
 
-        if (isEqualsPressed || isUnaryOrPercentOperationPressed) {
-            isFirstCalculated = false;
+        if (isEqualsPressed || isUnaryOrPercentPressed) {
+            isFirstSet = false;
         }
 
         setFlags(true, false, false,
-                false, isFirstCalculated, false);
+                false, isFirstSet, false);
     }
 
     /**
@@ -417,7 +418,7 @@ public class Controller implements Initializable {
         screen.setText(ZERO);
 
         setFlags(true, false, false,
-                false, isFirstCalculated, false);
+                false, isFirstSet, false);
     }
 
     /**
@@ -559,17 +560,17 @@ public class Controller implements Initializable {
      * @param operation new operation to sen in {@code Calculation}.
      */
     private void binaryNotAfterBinary(BinaryOperation operation) {
-        BigDecimal number = screenToBigDecimal(screen.getText());
         String equationTextToSet = EMPTY_STRING;
 
         try {
+            BigDecimal number = screenToBigDecimal(screen.getText());
 
-            if (!isFirstCalculated) {
+            if (!isFirstSet) {
                 equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE + operation.symbol;
 
                 setBinaryAndFirst(operation, number);
 
-            } else if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
+            } else if (!isEqualsPressed && !isUnaryOrPercentPressed) {
                 equationTextToSet = equation.getText() + NARROW_SPACE + formatWithoutGroupSeparator(number) +
                         NARROW_SPACE + operation.symbol;
 
@@ -583,7 +584,7 @@ public class Controller implements Initializable {
                     equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
                 }
 
-                if (isUnaryOrPercentOperationPressed) {
+                if (isUnaryOrPercentPressed) {
                     calculateBinaryAndSetNewBinary(operation, calculation.getResult());
                 }
             }
@@ -618,9 +619,7 @@ public class Controller implements Initializable {
     private void calculateBinaryAndSetNewBinary(BinaryOperation operation, BigDecimal second) {
         calculation.setSecond(second);
         calculation.calculateBinary();
-
         setBinaryAndFirst(operation, calculation.getResult());
-
         screen.setText(formatNumber(calculation.getResult()));
     }
 
@@ -628,8 +627,9 @@ public class Controller implements Initializable {
      * Builds string for equation {@code Label} with number (that is in screen {@code Label} or calculated in
      * {@code Calculation}) and operation's symbol. Then sets {@code BinaryOperation} and first number in
      * {@code Calculation}.
+     *
      * @param operation {@code BinaryOperation} to set.
-     * @param number {@code BigDecimal} number to set as first.
+     * @param number    {@code BigDecimal} number to set as first.
      * @return string that should be set in equation {@code Label}.
      */
     private String binaryAfterEquals(BinaryOperation operation, BigDecimal number) {
@@ -650,122 +650,180 @@ public class Controller implements Initializable {
 
     /**
      * Sets new {@code BinaryOperation} and changes last symbol in equation {@code Label}.
+     *
      * @param operation {@code BinaryOperation} to set.
      */
     private void binaryAfterBinary(BinaryOperation operation) {
         calculation.setBinaryOperation(operation);
-
-        equation.setText(equation.getText().substring(0, equation.getText().length() - 1) + operation.symbol);
+        equation.setText(StringUtils.chop(equation.getText()) + operation.symbol);
 
         setFlags(false, true, false,
                 false, true, false);
     }
 
     /**
-     * Calculates equation with unary operation.
-     * Calls when any unary operation button is pressed.
+     * Called when any {@code UnaryOperation} {@code Button} is pressed.
      * <p>
-     * If first number is not saved, sets number from screen as first number.
+     * If number in screen {@code Label} ends with {@code DECIMAL_SEPARATOR}, removes it.
      * <p>
-     * Calculates unary operation with first number and sets result as first number.
+     * If first number is not set, sets number in screen {@code Label} as first and performs the {@code UnaryOperation}.
+     * Also, sets operation's symbol and number in screen {@code Label} (wrapped in brackets) to equation {@code Label}.
+     * <p>
+     * If unary or percentage operation was just performed, sets result from {@code Calculation} as first and performs
+     * the {@code UnaryOperation}. Also, wraps last {@code UnaryOperation} representation in equation {@code Label} into
+     * new operation's symbol and brackets.
+     * <p>
+     * Otherwise, performs the operation with number in screen {@code Label} and appends operation's symbol and number
+     * in screen {@code Label} (wrapped in brackets) to equation {@code Label}.
+     * <p>
+     * If any exception was thrown during calculating, it's message will be shown in screen {@code Label}.
      *
-     * @param operation UnaryOperation to perform.
-     * @todo refactor
+     * @param operation {@link UnaryOperation} that should be performed.
      */
     private void unaryOperationPressed(UnaryOperation operation) {
-        String equationTextToSet = "";
+        removeLastDecimalSeparator();
+        String equationTextToSet = EMPTY_STRING;
 
         try {
             BigDecimal number = screenToBigDecimal(screen.getText());
 
-            if (!isFirstCalculated) {
-                calculation.setFirst(number);
-
+            if (!isFirstSet) {
                 equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
                         formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
 
-                calculation.calculateUnary(operation);
-                calculation.setFirst(calculation.getResult());
-                screen.setText(formatNumber(calculation.getResult()));
+                setFirstAndCalculateUnary(operation, number);
 
-            } else if (isUnaryOrPercentOperationPressed) {
-                calculation.setFirst(calculation.getResult());
+            } else if (isUnaryOrPercentPressed) {
+                equationTextToSet = setEquationAfterSeveralUnaryOrPercentage(operation);
 
-                equationTextToSet = equation.getText();
-
-                int lastIndexOfOperation;
-
-                String textBefore = EMPTY_STRING;
-                String textAfter = equationTextToSet;
-
-                if (equationTextToSet.contains(BinaryOperation.ADD.symbol) ||
-                        equationTextToSet.contains(BinaryOperation.SUBTRACT.symbol) ||
-                        equationTextToSet.contains(BinaryOperation.MULTIPLY.symbol) ||
-                        equationTextToSet.contains(BinaryOperation.DIVIDE.symbol)) {
-
-                    int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
-                    int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-                    int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-                    int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-                    lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
-                            Math.max(lastIndexOfMultiply, lastIndexOfDivide));
-
-                    textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
-                    textAfter = equationTextToSet.substring(lastIndexOfOperation + 2);
-                }
-
-                if (textBefore.equals(EMPTY_STRING)) {
-                    equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
-                            CLOSING_BRACKET;
-                } else {
-                    equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
-                            textAfter + NARROW_SPACE + CLOSING_BRACKET;
-                }
-
-                calculation.calculateUnary(operation);
-                calculation.setFirst(calculation.getResult());
-
-                screen.setText(formatNumber(calculation.getResult()));
+                setFirstAndCalculateUnary(operation, calculation.getResult());
 
             } else {
-                calculation.setSecond(calculation.getFirst());
-                calculation.setFirst(number);
+                equationTextToSet = setEquationAfterUnary(operation, number);
 
-                if (isUnaryOrPercentOperationPressed && equation.getText().equals(ZERO)) {
-                    equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
-                            formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
-                } else {
-
-                    if (equation.getText().equals(EMPTY_STRING)) {
-                        equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
-                                formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
-                    } else {
-                        equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET +
-                                NARROW_SPACE +
-                                formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
-                    }
-                }
-
-                calculation.calculateUnary(operation);
-
-                if (isEqualsPressed) {
-                    calculation.setFirst(calculation.getResult());
-                } else {
-                    calculation.setFirst(calculation.getSecond());
-                    calculation.setSecond(calculation.getResult());
-                }
-
-                screen.setText(formatNumber(calculation.getResult()));
+                calculateUnaryFirstIsSet(operation, number);
             }
 
             setFlags(false, false, true,
-                    false,
-                    true, false);
+                    false, true, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         } finally {
             equation.setText(equationTextToSet);
         }
+    }
+
+    /**
+     * Sets first number, performs {@code UnaryOperation} and sets result of it as first number. Also shows result in
+     * screen {@code Label}.
+     *
+     * @param operation {@code UnaryOperation} to perform.
+     * @param first     {@code BigDecimal} number to set as first.
+     */
+    private void setFirstAndCalculateUnary(UnaryOperation operation, BigDecimal first) {
+        calculation.setFirst(first);
+        calculation.calculateUnary(operation);
+        calculation.setFirst(calculation.getResult());
+        screen.setText(formatNumber(calculation.getResult()));
+    }
+
+    /**
+     * Updates text set in equation {@code Label} after several unary or percentage operations in a row and returns it.
+     * <p>
+     * First of all, looks for the last {@code BinaryOperation} symbol in equation {@code Label}. If it was found,
+     * separates text in equation {@code Label} into two parts: text before the last {@code BinaryOperation} symbol
+     * (including it) and text after. Then wraps "text after" into brackets and operation's symbol, and appends received
+     * string to "text after".
+     * <p>
+     * If equation {@code Label} does not contain any {@code BinaryOperation} symbol, wraps text in equation
+     * {@code Label} into brackets and operation's symbol.
+     *
+     * @param operation {@code UnaryOperation} that was performed.
+     * @return string that was received after operations described below.
+     */
+    private String setEquationAfterSeveralUnaryOrPercentage(UnaryOperation operation) {
+        String equationTextToSet = equation.getText();
+
+        int lastIndexOfOperation;
+
+        String textBefore = EMPTY_STRING;
+        String textAfter = equationTextToSet;
+
+        if (equationTextToSet.contains(BinaryOperation.ADD.symbol) ||
+                equationTextToSet.contains(BinaryOperation.SUBTRACT.symbol) ||
+                equationTextToSet.contains(BinaryOperation.MULTIPLY.symbol) ||
+                equationTextToSet.contains(BinaryOperation.DIVIDE.symbol)) {
+
+            int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
+            int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+            int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
+            int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+            lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
+                    Math.max(lastIndexOfMultiply, lastIndexOfDivide)) + 1;
+
+            textBefore = equationTextToSet.substring(0, lastIndexOfOperation);
+            textAfter = equationTextToSet.substring(lastIndexOfOperation + 1);
+        }
+
+        if (textBefore.equals(EMPTY_STRING)) {
+            equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
+                    CLOSING_BRACKET;
+        } else {
+            equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                    textAfter + NARROW_SPACE + CLOSING_BRACKET;
+        }
+
+        return equationTextToSet;
+    }
+
+    /**
+     * Updates text set in equation {@code Label} after {@code UnaryOperation} performed and returns it.
+     * <p>
+     * Appends operation's symbol with wrapped into brackets number to current text in equation {@code Label}.
+     *
+     * @param operation {@code UnaryOperation} that was performed.
+     * @param number    {@code BigDecimal} number to wrap into brackets.
+     * @return string that was received after operations described below.
+     */
+    private String setEquationAfterUnary(UnaryOperation operation, BigDecimal number) {
+        String equationTextToSet;
+
+        if (equation.getText().equals(EMPTY_STRING)) {
+            equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                    formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
+        } else {
+            equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET +
+                    NARROW_SPACE + formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
+        }
+
+        return equationTextToSet;
+    }
+
+    /**
+     * Performs {@code UnaryOperation} while first number is set.
+     * <p>
+     * Sets current first number as second number (for not loosing it), sets number with which the operation should be
+     * performed as first number and performs {@code UnaryOperation}.
+     * <p>
+     * If equals was just pressed before the operation, set received result as first number, otherwise sets second
+     * number as first number and received result as second number.
+     *
+     * @param operation {@code UnaryOperation} to perform.
+     * @param number    {@code BigDecimal} number with which the operation should be performed.
+     */
+    private void calculateUnaryFirstIsSet(UnaryOperation operation, BigDecimal number) {
+        calculation.setSecond(calculation.getFirst());
+        calculation.setFirst(number);
+        calculation.calculateUnary(operation);
+
+        if (isEqualsPressed) {
+            calculation.setFirst(calculation.getResult());
+        } else {
+            calculation.setFirst(calculation.getSecond());
+            calculation.setSecond(calculation.getResult());
+        }
+
+        screen.setText(formatNumber(calculation.getResult()));
     }
 
     /**
@@ -805,7 +863,7 @@ public class Controller implements Initializable {
 
                 screen.setText(formatNumber(calculation.getResult()));
 
-                if (isUnaryOrPercentOperationPressed) {
+                if (isUnaryOrPercentPressed) {
                     String textBefore;
                     int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
                     int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
@@ -875,7 +933,7 @@ public class Controller implements Initializable {
     private void calculateResultForBinaryNotNull() {
         BigDecimal number = screenToBigDecimal(screen.getText());
 
-        if (!isEqualsPressed && !isUnaryOrPercentOperationPressed) {
+        if (!isEqualsPressed && !isUnaryOrPercentPressed) {
             calculateResultNotAfterEqualsOrUnaryOrPercentage(number);
         } else {
             calculateResultAfterEqualsOrUnaryOrPercentage();
@@ -894,7 +952,7 @@ public class Controller implements Initializable {
      * @param number {@code BigDecimal} number with which calculation should be performed.
      */
     private void calculateResultNotAfterEqualsOrUnaryOrPercentage(BigDecimal number) {
-        if (!isFirstCalculated) {
+        if (!isFirstSet) {
             calculation.setFirst(number);
         } else {
             calculation.setSecond(number);
@@ -979,9 +1037,9 @@ public class Controller implements Initializable {
                           boolean isError) {
         this.isEditableScreen = isEditableScreen;
         this.isBinaryOperationPressed = isBinaryOperationPressed;
-        this.isUnaryOrPercentOperationPressed = isUnaryOrPercentOperationPressed;
+        this.isUnaryOrPercentPressed = isUnaryOrPercentOperationPressed;
         this.isEqualsPressed = isEqualsPressed;
-        this.isFirstCalculated = isFirstCalculated;
+        this.isFirstSet = isFirstCalculated;
         this.isError = isError;
     }
 }

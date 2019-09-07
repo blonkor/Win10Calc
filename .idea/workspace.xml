@@ -4,7 +4,6 @@
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
@@ -85,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest">
+  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -114,6 +113,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ControllerTest.allTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="allTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerTest.keyboardTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -126,21 +141,6 @@
       <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
       <option name="METHOD_NAME" value="keyboardTests" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -198,19 +198,19 @@
     <list>
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="JUnit.ViewTest" />
       <item itemvalue="JUnit.ViewTest.allTests" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.ControllerTest.keyboardTests" />
       <item itemvalue="Application.Launcher" />
+      <item itemvalue="JUnit.ControllerTest.allTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControllerTest.allTests" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ViewTest.allTests" />
         <item itemvalue="JUnit.ControllerTest.keyboardTests" />
-        <item itemvalue="JUnit.ViewTest" />
       </list>
     </recent_temporary>
   </component>
@@ -224,20 +224,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00105" summary="New test cases added.">
-      <created>1567164843768</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1567164843768</updated>
-    </task>
-    <task id="LOCAL-00106" summary="Tests for append digit operation updated.">
-      <created>1567165829664</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1567165829664</updated>
     </task>
     <task id="LOCAL-00107" summary="Editing JavaDocs.">
       <created>1567166021245</created>
@@ -568,7 +554,21 @@
       <option name="project" value="LOCAL" />
       <updated>1567801856957</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="Refactoring binary operation in controller.">
+      <created>1567882517005</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1567882517005</updated>
+    </task>
+    <task id="LOCAL-00155" summary="Bug fix with percentage operation in model.">
+      <created>1567882537066</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1567882537066</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -602,8 +602,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Refactoring model tests." />
-    <MESSAGE value="Refactoring model tests and adding tests for percentage operation while binary operation is null." />
     <MESSAGE value="Tests for equals operation created." />
     <MESSAGE value="Tests for controller updated." />
     <MESSAGE value="Code refactoring for calculating." />
@@ -627,7 +625,9 @@
     <MESSAGE value="Refactoring ViewFormatter." />
     <MESSAGE value="Renaming enums." />
     <MESSAGE value="Refactoring calculate result operation in controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring calculate result operation in controller." />
+    <MESSAGE value="Refactoring binary operation in controller." />
+    <MESSAGE value="Bug fix with percentage operation in model." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix with percentage operation in model." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

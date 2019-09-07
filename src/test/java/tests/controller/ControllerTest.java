@@ -40,11 +40,11 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void allTests() {
-        keyboardTests();
-        appendDigitTests();
-        appendDotTests();
-        backspaceTests();
-        clearTests();
+//        keyboardTests();
+//        appendDigitTests();
+//        appendDotTests();
+//        backspaceTests();
+//        clearTests();
         addTests();
         subtractTests();
         multiplyTests();
