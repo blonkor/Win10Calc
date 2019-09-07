@@ -1003,24 +1003,32 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @todo refactor
+     * Performs reset all operation in {@link Calculation} and sets message to screen {@code Label}.
+     * Also disables mostly all {@code Button}.
+     *
+     * @param message message of exception to set as screen {@code Label} text.
      */
     private void exceptionThrown(String message) {
         calculation.resetAll();
         screen.setText(message);
+
         Button[] buttonsToDisable = {
                 memoryClear, memoryRecall, memoryAdd, memorySubtract, memoryStore,
                 percent, sqrt, sqr, inverse, divide, multiply, subtract, add, negate, dot
         };
+
         ViewFormatter.setButtonsDisability(true, buttonsToDisable);
 
         setFlags(false, false, false,
-                false,
-                false, true);
+                false,false, true);
     }
 
     /**
-     * @todo refactor
+     * Returns to normal state after any exception was thrown.
+     *
+     * Sets text in screen and equation {@code Label} to default. Enables all disabled {@code Button} (but memory
+     * {@code Button} such as {@code memoryClear}, {@code memoryRecall}, {@code memoryShow} enabled only if there is
+     * anything stored in memory).
      */
     private void returnAfterError() {
         if (isError) {
@@ -1041,16 +1049,19 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Removes last char in screen {@code Label} if it is a {@code DECIMAL_SEPARATOR}.
+     */
     private void removeLastDecimalSeparator() {
         if (screen.getText().endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
-            screen.setText(screen.getText().replace(String.valueOf(DECIMAL_SEPARATOR), EMPTY_STRING));
+            screen.setText(StringUtils.chop(screen.getText()));
         }
     }
 
     /**
      * Sets flags for boolean fields of controller.
      *
-     * @param isEditableScreen                 true if digit should be appended to screen number.
+     * @param isEditableScreen                true if digit should be appended to screen number.
      * @param isBinaryOperationPressed         true if binary operation was just pressed.
      * @param isUnaryOrPercentOperationPressed true if unary operation was just pressed.
      * @param isEqualsPressed                  true if equals was just pressed.
