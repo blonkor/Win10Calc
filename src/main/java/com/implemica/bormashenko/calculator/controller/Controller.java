@@ -1,22 +1,27 @@
 package com.implemica.bormashenko.calculator.controller;
 
-import com.implemica.bormashenko.calculator.controller.util.*;
 import com.implemica.bormashenko.calculator.model.*;
 import com.implemica.bormashenko.calculator.model.enums.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 import static com.implemica.bormashenko.calculator.controller.util.NumberFormatter.*;
 
@@ -53,6 +58,36 @@ public class Controller implements Initializable {
      */
     @FXML
     private ScrollPane navigationPanel, equationScroll;
+
+    /**
+     * Multiplicand for {@code Text} width used in moving the {@code Text} in equation {@code Label}.
+     */
+    private static final double MULTIPLICAND_FOR_TEXT_WIDTH = 1.5;
+
+    /**
+     * Scale for offset that should be applied to H value of equation scroll.
+     */
+    private static final int MOVE_LABEL_SCALE = 2;
+
+    /**
+     * Layout for memory {@code Label}.
+     */
+    private static final int MEMORY_LABELS_LAYOUT = 16;
+
+    /**
+     * Pref height for memory {@code Label}.
+     */
+    private static final int MEMORY_LABELS_HEIGHT = 63;
+
+    /**
+     * Font size for memory {@code Label}.
+     */
+    private static final int MEMORY_LABELS_FONT_SIZE = 24;
+
+    /**
+     * Insets for memory {@code Label}.
+     */
+    private static final Insets MEMORY_LABELS_INSETS = new Insets(0, 15, 0, 15);
 
     /**
      * Zero symbol is primary number in screen {@code Label}.
@@ -243,29 +278,25 @@ public class Controller implements Initializable {
 
     /**
      * Opens or closes navigation bar.
-     *
-     * @todo tests
      */
-    public void showNavigationPanel() {
-        ViewFormatter.showOrHideNavigationPanel(navigationPanel, aboutPanel, navigationBlock);
+    public void showOrHideNavigationPanel() {
+        navigationPanel.setVisible(!navigationPanel.isVisible());
+        aboutPanel.setVisible(!aboutPanel.isVisible());
+        navigationBlock.setVisible(!navigationBlock.isVisible());
     }
 
     /**
      * Moves text in equation {@code Label} to the left.
-     *
-     * @todo tests
      */
     public void moveEquationLeft() {
-        ViewFormatter.moveTextInLabel(leftArrow, rightArrow, equation, equationScroll, true);
+        moveTextInEquationLabel(leftArrow, rightArrow, true);
     }
 
     /**
      * Moves text in equation {@code Label} to the right.
-     *
-     * @todo tests
      */
     public void moveEquationRight() {
-        ViewFormatter.moveTextInLabel(rightArrow, leftArrow, equation, equationScroll, false);
+        moveTextInEquationLabel(rightArrow, leftArrow, false);
     }
 
     /**
@@ -274,7 +305,12 @@ public class Controller implements Initializable {
      * @todo tests
      */
     public void memoryShowOperation() {
-        ViewFormatter.showOrHideMemoryPanel(memoryAnchorPane, memoryPanel, memoryBlock, memory);
+        memoryAnchorPane.setVisible(!memoryAnchorPane.isVisible());
+        memoryBlock.setVisible(!memoryBlock.isVisible());
+
+        if (memoryAnchorPane.isVisible()) {
+            updateMemoryLabels();
+        }
     }
 
     /**
@@ -284,7 +320,7 @@ public class Controller implements Initializable {
      */
     public void memoryClearOperation() {
         memory.clearMemory();
-        ViewFormatter.setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+        setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -307,7 +343,7 @@ public class Controller implements Initializable {
     public void memoryAddOperation() {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.addToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+        setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -318,7 +354,7 @@ public class Controller implements Initializable {
     public void memorySubtractOperation() {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.subtractFromMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+        setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -329,7 +365,7 @@ public class Controller implements Initializable {
     public void memoryStoreOperation() {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.storeToMemory(number);
-        ViewFormatter.setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+        setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
     }
 
     /**
@@ -511,6 +547,114 @@ public class Controller implements Initializable {
      */
     public void equalsOperation() {
         calculateResult();
+    }
+
+    /**
+     * Moves {@code Text} in equation {@code Label} to the right or left.
+     *
+     * @param clickedButton  right or left arrow {@code Button} that should move {@code Text} to the specific side.
+     * @param oppositeButton left or right{@code Button} that should move {@code Text} to the opposite of clicked
+     *                       {@code Button} side.
+     * @param moveLeft       true if moving left or false if moving right.
+     */
+    private void moveTextInEquationLabel(Button clickedButton, Button oppositeButton, boolean moveLeft) {
+        oppositeButton.setVisible(true);
+
+        Text text = new Text(equation.getText());
+        text.setFont(equation.getFont());
+
+        double newHValue = equationScroll.getHvalue();
+
+        if (text.getBoundsInLocal().getWidth() > clickedButton.getScene().getWidth() * MULTIPLICAND_FOR_TEXT_WIDTH) {
+            double offset = NumberUtils.toScaledBigDecimal(clickedButton.getScene().getWidth() /
+                    text.getBoundsInLocal().getWidth(), MOVE_LABEL_SCALE, RoundingMode.HALF_UP).doubleValue();
+
+            if (moveLeft) {
+                newHValue += offset;
+            } else {
+                newHValue -= offset;
+            }
+
+        } else {
+
+            if (moveLeft) {
+                newHValue = equationScroll.getHmax();
+            } else {
+                newHValue = equationScroll.getHmin();
+            }
+
+        }
+
+        equationScroll.setHvalue(newHValue);
+
+        if ((moveLeft && equationScroll.getHvalue() == equationScroll.getHmax()) ||
+                (!moveLeft && equationScroll.getHvalue() == equationScroll.getHmin())) {
+            clickedButton.setVisible(false);
+        }
+    }
+
+    /**
+     * Creates memory {@code Label} for each {@link Memory} cell.
+     */
+    private void updateMemoryLabels() {
+        Stack<BigDecimal> store = memory.getStore();
+
+        if (!store.isEmpty()) {
+            memoryPanel.getChildren().removeAll(memoryPanel.getChildren());
+
+            double layoutY = MEMORY_LABELS_LAYOUT;
+
+            for (int i = 0; i < store.size(); i++) {
+                Label label = new Label();
+                label.setText(store.elementAt(store.size() - i - 1).toString());
+                configureMemoryLabel(label, layoutY);
+
+                memoryPanel.getChildren().add(label);
+                layoutY += MEMORY_LABELS_HEIGHT + MEMORY_LABELS_LAYOUT;
+            }
+        }
+    }
+
+    /**
+     * Sets configuration such as size, layout and style for memory {@code Label}.
+     *
+     * @param label   {@code Label} to edit.
+     * @param layoutY coordinate Y for the {@code Label}.
+     */
+    private void configureMemoryLabel(Label label, double layoutY) {
+        label.setPrefWidth(memoryPanel.getWidth());
+        label.setPrefHeight(MEMORY_LABELS_HEIGHT);
+        label.setMinHeight(label.getPrefHeight());
+        label.setMaxHeight(label.getPrefHeight());
+        label.setPadding(MEMORY_LABELS_INSETS);
+        label.setLayoutY(layoutY);
+        label.setStyle(setStyleForLabels());
+        label.setWrapText(true);
+        label.setOnMouseMoved(event -> label.setStyle(setStyleForLabelsOnHover()));
+        label.setOnMouseExited(event -> label.setStyle(setStyleForLabels()));
+        label.setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
+     * Sets style for memory {@code Label}.
+     *
+     * @return style (as css representation).
+     */
+    private static String setStyleForLabels() {
+        return "-fx-background-color: transparent;" +
+                "-fx-font-size: " + MEMORY_LABELS_FONT_SIZE + "px;" +
+                "-fx-font-family: \"Segoe UI Semibold\"";
+    }
+
+    /**
+     * Sets style for memory {@code Label} on hover.
+     *
+     * @return style (as css representation).
+     */
+    private static String setStyleForLabelsOnHover() {
+        return "-fx-background-color: #e7e7e7;" +
+                "-fx-font-size: " + MEMORY_LABELS_FONT_SIZE + "px;" +
+                "-fx-font-family: \"Segoe UI Semibold\"";
     }
 
     /**
@@ -1017,15 +1161,15 @@ public class Controller implements Initializable {
                 percent, sqrt, sqr, inverse, divide, multiply, subtract, add, negate, dot
         };
 
-        ViewFormatter.setButtonsDisability(true, buttonsToDisable);
+        setButtonsDisability(true, buttonsToDisable);
 
         setFlags(false, false, false,
-                false,false, true);
+                false, false, true);
     }
 
     /**
      * Returns to normal state after any exception was thrown.
-     *
+     * <p>
      * Sets text in screen and equation {@code Label} to default. Enables all disabled {@code Button} (but memory
      * {@code Button} such as {@code memoryClear}, {@code memoryRecall}, {@code memoryShow} enabled only if there is
      * anything stored in memory).
@@ -1044,8 +1188,8 @@ public class Controller implements Initializable {
                     memoryClear, memoryRecall, memoryShow
             };
 
-            ViewFormatter.setButtonsDisability(false, buttonsToEnable);
-            ViewFormatter.setButtonsDisability(memory.getStore().isEmpty(), memoryStandardDisabledButtons);
+            setButtonsDisability(false, buttonsToEnable);
+            setButtonsDisability(memory.getStore().isEmpty(), memoryStandardDisabledButtons);
         }
     }
 
@@ -1061,7 +1205,7 @@ public class Controller implements Initializable {
     /**
      * Sets flags for boolean fields of controller.
      *
-     * @param isEditableScreen                true if digit should be appended to screen number.
+     * @param isEditableScreen                 true if digit should be appended to screen number.
      * @param isBinaryOperationPressed         true if binary operation was just pressed.
      * @param isUnaryOrPercentOperationPressed true if unary operation was just pressed.
      * @param isEqualsPressed                  true if equals was just pressed.
@@ -1077,5 +1221,17 @@ public class Controller implements Initializable {
         this.isEqualsPressed = isEqualsPressed;
         this.isFirstSet = isFirstCalculated;
         this.isError = isError;
+    }
+
+    /**
+     * Disables or enables several {@code Button}, passed as args.
+     *
+     * @param flag    true for disabling and false for enabling.
+     * @param buttons several {@code Button} that should change their disability.
+     */
+    private static void setButtonsDisability(boolean flag, Button... buttons) {
+        for (Button button : buttons) {
+            button.setDisable(flag);
+        }
     }
 }
