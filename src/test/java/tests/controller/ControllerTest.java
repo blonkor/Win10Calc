@@ -2,6 +2,7 @@ package tests.controller;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import org.junit.Test;
 import util.RobotControl;
 
@@ -40,21 +41,29 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void allTests() {
-//        keyboardTests();
-//        appendDigitTests();
-//        appendDotTests();
-//        backspaceTests();
-//        clearTests();
+        keyboardTests();
+
+        showNavigationPanelTest();
+        moveEquationLabelTextTest();
+
+        appendDigitTests();
+        appendDotTests();
+        backspaceTests();
+        clearTests();
+
         addTests();
         subtractTests();
         multiplyTests();
         divideTests();
+
         negateTests();
         sqrTests();
         sqrtTests();
         inverseTests();
+
         percentageTests();
         equalsTests();
+
         exceptionTests();
     }
 
@@ -128,6 +137,80 @@ public class ControllerTest extends RobotControl {
                 "");
         checkKeyboardForOperations("1 2 3 4 5 shift+= enter enter enter", "49,380",
                 "");
+    }
+
+    /**
+     * Tests for showing navigation panel.
+     */
+    private void showNavigationPanelTest() {
+        assertFalse(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
+        assertFalse(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
+        assertFalse(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
+
+        clickOn(getButtonBySelector(NAVIGATION_ID));
+
+        assertTrue(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
+        assertTrue(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
+        assertTrue(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
+
+        clickOn(getButtonBySelector(NAVIGATION_ID));
+
+        assertFalse(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
+        assertFalse(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
+        assertFalse(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
+    }
+
+    /**
+     * Tests for moving text in equation {@code Label}.
+     */
+    private void moveEquationLabelTextTest() {
+        resetAll();
+
+        clickButtons("sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr");
+
+        ScrollPane equationScroll = (ScrollPane) getNodeBySelector(EQUATION_SCROLL_ID);
+        assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
+
+        Button leftArrow = getButtonBySelector(LEFT_ARROW_ID);
+        Button rightArrow = getButtonBySelector(RIGHT_ARROW_ID);
+
+        clickOn(leftArrow);
+
+        assertTrue(rightArrow.isVisible());
+        assertFalse(leftArrow.isVisible());
+        assertEquals(equationScroll.getHmax(), equationScroll.getHvalue());
+
+        clickOn(rightArrow);
+
+        assertTrue(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
+        assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
+
+        clickButtons("sqr sqr sqr sqr sqr sqr");
+
+        clickOn(leftArrow);
+
+        assertTrue(rightArrow.isVisible());
+        assertTrue(leftArrow.isVisible());
+        assertEquals(0.57, equationScroll.getHvalue());
+
+        clickOn(leftArrow);
+
+        assertTrue(rightArrow.isVisible());
+        assertFalse(leftArrow.isVisible());
+        assertEquals(equationScroll.getHmax(), equationScroll.getHvalue());
+
+        clickOn(rightArrow);
+
+        assertTrue(leftArrow.isVisible());
+        assertTrue(rightArrow.isVisible());
+        assertEquals(0.43000000000000005, equationScroll.getHvalue());
+
+        clickOn(rightArrow);
+
+        assertTrue(leftArrow.isVisible());
+        assertFalse(rightArrow.isVisible());
+        assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
     }
 
     /**

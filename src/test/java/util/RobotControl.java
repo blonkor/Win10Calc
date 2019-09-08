@@ -209,6 +209,11 @@ public class RobotControl extends GuiTest {
     protected static final String CLOSE_ID = "#close";
 
     /**
+     * ID of equation {@code ScrollPane}.
+     */
+    protected static final String EQUATION_SCROLL_ID = "#equationScroll";
+
+    /**
      * ID of navigation panel {@code ScrollPane}.
      */
     protected static final String NAVIGATION_PANEL_ID = "#navigationPanel";
