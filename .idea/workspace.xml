@@ -84,7 +84,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Launcher">
+  <component name="RunManager" selected="JUnit.NumberFormatterTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -205,8 +205,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.NumberFormatterTest" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ControllerTest.moveEquationLabelTextTest" />
         <item itemvalue="JUnit.ControllerTest.showNavigationPanelTest" />
         <item itemvalue="JUnit.CalculationModelTest" />

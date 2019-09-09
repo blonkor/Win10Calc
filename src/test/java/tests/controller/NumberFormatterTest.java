@@ -924,13 +924,16 @@ class NumberFormatterTest {
     }
 
     /**
-     * Check result of format number operation.
+     * Check result of format number operation (with and without group separator).
      *
      * @param bigDecimal     number to format.
      * @param expectedResult expected result after performing operation.
      */
     private void checkFormat(BigDecimal bigDecimal, String expectedResult) {
-        String result = NumberFormatter.formatNumber(bigDecimal);
-        assertEquals(expectedResult, result);
+        String resultWithGroupSeparator = NumberFormatter.formatNumber(bigDecimal);
+        assertEquals(expectedResult, resultWithGroupSeparator);
+
+        String resultWithoutGroupSeparator = NumberFormatter.formatWithoutGroupSeparator(bigDecimal);
+        assertEquals(expectedResult.replaceAll(",", ""), resultWithoutGroupSeparator);
     }
 }

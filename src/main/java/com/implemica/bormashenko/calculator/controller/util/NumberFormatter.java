@@ -264,7 +264,6 @@ public class NumberFormatter {
      *
      * @param number number to format.
      * @return formatted number without group separator.
-     * @todo tests
      */
     public static String formatWithoutGroupSeparator(BigDecimal number) {
         return replaceGroupingSeparator(formatNumber(number));
