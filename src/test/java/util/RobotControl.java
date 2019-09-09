@@ -789,7 +789,8 @@ public class RobotControl extends GuiTest {
      * Clicks on reset all {@code Button}.
      */
     protected void resetAll() {
-        clickOn(getNodeBySelector(CLEAR_ALL_ID));
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        clickOn(getButtonBySelector(MEMORY_CLEAR_ID));
     }
 
     /**

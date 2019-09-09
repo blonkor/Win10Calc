@@ -1,5 +1,6 @@
 package tests.controller;
 
+import com.implemica.bormashenko.calculator.model.Memory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -52,6 +53,9 @@ public class ControllerTest extends RobotControl {
 
         showNavigationPanelTest();
         moveEquationLabelTextTest();
+
+        memoryShowTest();
+        memoryClearTest();
 
         appendDigitTests();
         appendDotTests();
@@ -228,14 +232,16 @@ public class ControllerTest extends RobotControl {
      * Tests for memory show operation.
      */
     @Test
-    public void memoryShowTests() {
+    public void memoryShowTest() {
+        resetAll();
+
         int memoryLabelsLayout = 16;
         int memoryLabelsHeight = 63;
         int memoryLabelsFontSize = 24;
         Insets memoryLabelInsets = new Insets(0, 15, 0, 15);
 
         clickButtons("1 MS 2 MS 3 MS MShow");
-        int expectedNumberOfLabels = 3;
+        int numberOfLabels = 3;
 
         AnchorPane memoryPanel = (AnchorPane) getNodeBySelector(MEMORY_PANEL_ID);
         AnchorPane memoryBlock = (AnchorPane) getNodeBySelector(MEMORY_BLOCK_ID);
@@ -245,12 +251,12 @@ public class ControllerTest extends RobotControl {
 
         int layoutY = memoryLabelsLayout;
 
-        for (int i = 0; i < expectedNumberOfLabels; i++) {
+        for (int i = 0; i < numberOfLabels; i++) {
             ScrollPane scrollPane = (ScrollPane) memoryPanel.getChildren().get(0);
             AnchorPane anchorPane = (AnchorPane) scrollPane.getContent();
             Label label = (Label) anchorPane.getChildren().get(i);
 
-            assertEquals(String.valueOf(expectedNumberOfLabels - i), label.getText());
+            assertEquals(String.valueOf(numberOfLabels - i), label.getText());
             assertEquals(memoryPanel.getWidth() - 2, label.getPrefWidth());
             assertEquals(memoryLabelsHeight, label.getPrefHeight());
             assertEquals(memoryLabelsHeight, label.getMinHeight());
@@ -281,6 +287,20 @@ public class ControllerTest extends RobotControl {
 
         assertFalse(memoryPanel.isVisible());
         assertFalse(memoryBlock.isVisible());
+    }
+
+    /**
+     * Tests for memory clear operation.
+     */
+    @Test
+    public void memoryClearTest() {
+        resetAll();
+
+        clickButtons("1 MS 2 MS 3 MS MC");
+
+        assertTrue(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
+        assertTrue(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
+        assertTrue(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
     }
 
     /**
