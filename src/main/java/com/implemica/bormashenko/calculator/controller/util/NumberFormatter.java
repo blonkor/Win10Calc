@@ -175,7 +175,6 @@ public class NumberFormatter {
      *
      * @param number number to edit.
      * @return edited number if it was possible to edit.
-     * @todo tests
      */
     public static String changeSign(String number) {
         if (!number.equals(ZERO)) {

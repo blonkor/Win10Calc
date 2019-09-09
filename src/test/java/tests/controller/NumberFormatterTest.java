@@ -1,7 +1,7 @@
 package tests.controller;
 
 import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  * @author Mykhailo Bormashenko
  */
-public class NumberFormatterTest {
+class NumberFormatterTest {
 
     /**
      * Tests for append digit operation.
      */
     @Test
-    public void appendDigitTests() {
+    void appendDigitTests() {
         //can append
         {
             //empty string
@@ -275,7 +275,7 @@ public class NumberFormatterTest {
      * Tests for add dot operation.
      */
     @Test
-    public void appendDecimalSeparatorTests() {
+    void appendDecimalSeparatorTests() {
         //without dot
         //without commas
         checkAppendDecimalSeparator("0", "0.");
@@ -411,7 +411,7 @@ public class NumberFormatterTest {
      * Tests for delete last char operation.
      */
     @Test
-    public void deleteLastCharTests() {
+    void deleteLastCharTests() {
         //one-digit numbers
         checkDeleteLastChar("0", "0");
         checkDeleteLastChar("1", "0");
@@ -548,10 +548,27 @@ public class NumberFormatterTest {
     }
 
     /**
+     * Tests for change sign operation.
+     */
+    @Test
+    void changeSignTests() {
+        checkChangeSign("0", "0");
+        checkChangeSign("0.", "-0.");
+        checkChangeSign("0.00", "-0.00");
+
+        checkChangeSign("1", "-1");
+        checkChangeSign("5", "-5");
+        checkChangeSign("10", "-10");
+        checkChangeSign("100", "-100");
+        checkChangeSign("1,000", "-1,000");
+        checkChangeSign("10,000", "-10,000");
+    }
+
+    /**
      * Tests for screen to big decimal operation.
      */
     @Test
-    public void screenToBigDecimalTests() {
+    void screenToBigDecimalTests() {
         //integers
         //without commas
         checkScreenToBigDecimal("0", new BigDecimal("0"));
@@ -654,7 +671,7 @@ public class NumberFormatterTest {
      * Tests for format operation.
      */
     @Test
-    public void formatTests() {
+    void formatTests() {
         //integers
         {
             //less that 16 digits
@@ -819,7 +836,7 @@ public class NumberFormatterTest {
             checkFormat(new BigDecimal("1.5e-1"), "0.15");
             checkFormat(new BigDecimal("1.68e-2"), "0.0168");
             checkFormat(new BigDecimal("5.25e-5"), "0.0000525");
-            checkFormat(new BigDecimal("6.73e-15"), "0.0000000000000067");
+            checkFormat(new BigDecimal("6.73e-16"), "6.73e-16");
             checkFormat(new BigDecimal("9.74e-17"), "9.74e-17");
 
             checkFormat(new BigDecimal("1.3e-67"), "1.3e-67");
@@ -838,7 +855,7 @@ public class NumberFormatterTest {
             checkFormat(new BigDecimal("-1.5e-1"), "-0.15");
             checkFormat(new BigDecimal("-1.68e-2"), "-0.0168");
             checkFormat(new BigDecimal("-5.25e-5"), "-0.0000525");
-            checkFormat(new BigDecimal("-6.73e-15"), "-0.0000000000000067");
+            checkFormat(new BigDecimal("-6.73e-16"), "-6.73e-16");
             checkFormat(new BigDecimal("-9.74e-17"), "-9.74e-17");
 
             checkFormat(new BigDecimal("-1.3e-67"), "-1.3e-67");
@@ -881,6 +898,18 @@ public class NumberFormatterTest {
     private void checkDeleteLastChar(String number, String expectedResult) {
         String result = NumberFormatter.deleteLastChar(number);
         assertEquals(expectedResult, result);
+    }
+
+    /**
+     * Checks result of change sign operation (after first and second performing this operation in a row).
+     *
+     * @param number number to edit (and vise versa with expected result for second time).
+     * @param expectedResult expected result after performing operation (and vise versa with number for second time).
+     */
+    private void checkChangeSign(String number, String expectedResult) {
+        String result = NumberFormatter.changeSign(number);
+        assertEquals(expectedResult, result);
+        assertEquals(number, NumberFormatter.changeSign(expectedResult));
     }
 
     /**
