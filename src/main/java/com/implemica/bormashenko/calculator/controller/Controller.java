@@ -840,7 +840,7 @@ public class Controller implements Initializable {
             } else if (isUnaryOrPercentPressed) {
                 equationTextToSet = setEquationAfterSeveralUnaryOrPercentage(operation);
 
-                setFirstAndCalculateUnary(operation, calculation.getResult());
+                severalUnaryInARow(operation);
 
             } else {
                 equationTextToSet = setEquationAfterUnary(operation, number);
@@ -868,6 +868,25 @@ public class Controller implements Initializable {
         calculation.setFirst(first);
         calculation.calculateUnary(operation);
         calculation.setFirst(calculation.getResult());
+        screen.setText(formatNumber(calculation.getResult()));
+    }
+
+
+    /**
+     * Calculates result of {@code UnaryOperation} after several {@code UnaryOperation} in a row.
+     *
+     * Sets first number as second (for saving it), sets result of previous calculating as first number, calculates
+     * {@code UnaryOperation}, then sets saved first number (in second) as first, sets result as second and shows result
+     * in screen {@code Label}.
+     *
+     * @param operation {@code UnaryOperation} to perform.
+     */
+    private void severalUnaryInARow(UnaryOperation operation) {
+        calculation.setSecond(calculation.getFirst());
+        calculation.setFirst(calculation.getResult());
+        calculation.calculateUnary(operation);
+        calculation.setFirst(calculation.getSecond());
+        calculation.setSecond(calculation.getResult());
         screen.setText(formatNumber(calculation.getResult()));
     }
 
@@ -1209,17 +1228,17 @@ public class Controller implements Initializable {
      * @param isBinaryOperationPressed         true if binary operation was just pressed.
      * @param isUnaryOrPercentOperationPressed true if unary operation was just pressed.
      * @param isEqualsPressed                  true if equals was just pressed.
-     * @param isFirstCalculated                true if first operand for model is calculated.
+     * @param isFirstSet                       true if first operand for model is set.
      * @param isError                          true if is error was just happened.
      */
     private void setFlags(boolean isEditableScreen, boolean isBinaryOperationPressed,
-                          boolean isUnaryOrPercentOperationPressed, boolean isEqualsPressed, boolean isFirstCalculated,
+                          boolean isUnaryOrPercentOperationPressed, boolean isEqualsPressed, boolean isFirstSet,
                           boolean isError) {
         this.isEditableScreen = isEditableScreen;
         this.isBinaryOperationPressed = isBinaryOperationPressed;
         this.isUnaryOrPercentPressed = isUnaryOrPercentOperationPressed;
         this.isEqualsPressed = isEqualsPressed;
-        this.isFirstSet = isFirstCalculated;
+        this.isFirstSet = isFirstSet;
         this.isError = isError;
     }
 
