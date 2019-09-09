@@ -469,14 +469,14 @@ public class RobotControl extends GuiTest {
     protected static final String LEFT_ARROW_SYMBOL = "\uE96F";
 
     /**
-     * Value for scroll using {@code FxRobot}.
+     * Value for scrolling navigation bar using {@code Robot}.
      */
-    protected static final int SCROLL_AMOUNT = 10;
+    private static final int SCROLL_NAVIGATION_BAR_AMOUNT = 10;
 
     /**
      * Robot for automatically pressing buttons and looking for nodes in application.
      */
-    protected FxRobot robot = new FxRobot();
+    private FxRobot robot = new FxRobot();
 
     /**
      * Robot for moving cursor. Allows to move it faster than {@code FxRobot}.
@@ -819,9 +819,23 @@ public class RobotControl extends GuiTest {
         hoverOn(centerX, centerY);
     }
 
+    /**
+     * Moves cursor to the specific point using robot.
+     *
+     * @param x coordinate X.
+     * @param y coordinate Y.
+     */
     protected void hoverOn(int x, int y) {
         awtRobot.mouseMove(x, y);
 
+        FXTestUtils.awaitEvents();
+    }
+
+    /**
+     * Scrolls mouse on {@code SCROLL_NAVIGATION_BAR_AMOUNT} value.
+     */
+    protected void scrollNavigationBar() {
+        awtRobot.mouseWheel(RobotControl.SCROLL_NAVIGATION_BAR_AMOUNT);
         FXTestUtils.awaitEvents();
     }
 
