@@ -313,8 +313,6 @@ public class Controller implements Initializable {
 
     /**
      * Clears all memory.
-     *
-     * @todo tests
      */
     public void memoryClearOperation() {
         memory.clearMemory();
@@ -325,14 +323,16 @@ public class Controller implements Initializable {
 
     /**
      * Recalls number in memory.
-     *
-     * @todo tests
      */
     public void memoryRecallOperation() {
-        BigDecimal number = memory.recall();
-        screen.setText(formatNumber(number));
+        try {
+            BigDecimal number = memory.recall();
+            screen.setText(formatNumber(number));
 
-        isEditableScreen = false;
+            isEditableScreen = false;
+        } catch (Exception e) {
+            exceptionThrown(e.getMessage());
+        }
     }
 
     /**

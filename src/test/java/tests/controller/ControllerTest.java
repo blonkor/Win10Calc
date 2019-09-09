@@ -304,6 +304,17 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
+     * Tests for memory recall operation.
+     */
+    @Test
+    public void memoryRecallTest() {
+        checkTyped("1 MS 2 MS 3 MS MR", "3");
+        checkTyped("1 MS 2 MS 3 MR", "2");
+        checkTyped("MS 1 0 0 + MR", "0");
+        checkTyped("1 MS 1 0 0 + 9 9 MR", "1");
+    }
+
+    /**
      * Tests for appending digits.
      */
     @Test
