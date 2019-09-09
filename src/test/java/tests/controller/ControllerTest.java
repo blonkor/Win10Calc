@@ -81,7 +81,6 @@ public class ControllerTest extends RobotControl {
 
     /**
      * Tests for keyboard handling.
-     * @todo memory
      */
     @Test
     public void keyboardTests() {
@@ -236,6 +235,16 @@ public class ControllerTest extends RobotControl {
     public void memoryStoreTest() {
         resetAll();
 
+        clickButtons("MS");
+
+        assertFalse(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
+        assertFalse(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
+        assertFalse(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
+
+        resetAll();
+
+        pressKeyboard("ctrl+M");
+
         assertFalse(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertFalse(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
         assertFalse(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
@@ -314,6 +323,14 @@ public class ControllerTest extends RobotControl {
         assertTrue(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertTrue(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
         assertTrue(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
+
+        resetAll();
+
+        pressKeyboard("1 ctrl+M 2 ctrl+M 3 ctrl+M ctrl+L");
+
+        assertTrue(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
+        assertTrue(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
+        assertTrue(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
     }
 
     /**
@@ -325,6 +342,11 @@ public class ControllerTest extends RobotControl {
         checkTyped("1 MS 2 MS 3 MR", "2");
         checkTyped("MS 1 0 0 + MR", "0");
         checkTyped("1 MS 1 0 0 + 9 9 MR", "1");
+
+        checkKeyboardForOperations("1 ctrl+M 2 ctrl+M 3 ctrl+M ctrl+R", "3");
+        checkKeyboardForOperations("1 ctrl+M 2 ctrl+M 3 ctrl+R", "2");
+        checkKeyboardForOperations("ctrl+M 1 0 0 shift+= ctrl+R", "0");
+        checkKeyboardForOperations("1 ctrl+M 1 0 0 shift+= 9 9 ctrl+R", "1");
     }
 
     /**
@@ -336,9 +358,17 @@ public class ControllerTest extends RobotControl {
         checkTyped("1 MS 2 MS 3 M+ MR", "5");
         checkTyped("MS 1 0 0 + M+ MR", "100");
         checkTyped("1 MS 1 0 0 + 9 9 M+ MR", "100");
-        
+
         checkTyped("8 M+ MR", "8");
         checkTyped("1 neg 2 8 M+ MR", "-128");
+
+        checkKeyboardForOperations("1 ctrl+M 2 ctrl+M 3 ctrl+M ctrl+P ctrl+R", "6");
+        checkKeyboardForOperations("1 ctrl+M 2 ctrl+M 3 ctrl+P ctrl+R", "5");
+        checkKeyboardForOperations("ctrl+M 1 0 0 shift+= ctrl+P ctrl+R", "100");
+        checkKeyboardForOperations("1 ctrl+M 1 0 0 shift+= 9 9 ctrl+P ctrl+R", "100");
+
+        checkKeyboardForOperations("8 ctrl+P ctrl+R", "8");
+        checkKeyboardForOperations("1 F9 2 8 ctrl+P ctrl+R", "-128");
     }
 
     /**
@@ -353,6 +383,14 @@ public class ControllerTest extends RobotControl {
 
         checkTyped("8 M- MR", "-8");
         checkTyped("1 neg 2 8 M- MR", "128");
+
+        checkKeyboardForOperations("1 ctrl+M 2 ctrl+M 3 ctrl+M ctrl+Q ctrl+R", "0");
+        checkKeyboardForOperations("1 ctrl+M 2 ctrl+M 3 ctrl+Q ctrl+R", "-1");
+        checkKeyboardForOperations("ctrl+M 1 0 0 shift+= ctrl+Q ctrl+R", "-100");
+        checkKeyboardForOperations("1 ctrl+M 1 0 0 shift+= 9 9 ctrl+Q ctrl+R", "-98");
+
+        checkKeyboardForOperations("8 ctrl+Q ctrl+R", "-8");
+        checkKeyboardForOperations("1 F9 2 8 ctrl+Q ctrl+R", "128");
     }
 
     /**
@@ -1864,14 +1902,24 @@ public class ControllerTest extends RobotControl {
      *
      * @param keyboardButtons      keyboard buttons that should be pressed.
      * @param expectedScreenText   required text on screen {@code Label} after pressing.
-     * @param expectedEquationText required text on equation {@code Label} after pressing.
      */
-    private void checkKeyboardForOperations(String keyboardButtons, String expectedScreenText,
-                                            String expectedEquationText) {
+    private void checkKeyboardForOperations(String keyboardButtons, String expectedScreenText) {
         resetAll();
         pressKeyboard(keyboardButtons);
 
         assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
+    }
+
+    /**
+     * Checks that keyboard buttons and combinations work correctly.
+     *
+     * @param keyboardButtons      keyboard buttons that should be pressed.
+     * @param expectedScreenText   required text on screen {@code Label} after pressing.
+     * @param expectedEquationText required text on equation {@code Label} after pressing.
+     */
+    private void checkKeyboardForOperations(String keyboardButtons, String expectedScreenText,
+                                            String expectedEquationText) {
+        checkKeyboardForOperations(keyboardButtons, expectedScreenText);
 
         expectedEquationText = expectedEquationText.replaceAll(SPACE, NARROW_SPACE);
         assertEquals(expectedEquationText, getLabeledBySelector(EQUATION_LABEL_ID).getText());
