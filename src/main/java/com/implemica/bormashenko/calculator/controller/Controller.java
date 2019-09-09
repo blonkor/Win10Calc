@@ -301,8 +301,6 @@ public class Controller implements Initializable {
 
     /**
      * Shows memory.
-     *
-     * @todo tests
      */
     public void memoryShowOperation() {
         memoryAnchorPane.setVisible(!memoryAnchorPane.isVisible());
@@ -321,6 +319,8 @@ public class Controller implements Initializable {
     public void memoryClearOperation() {
         memory.clearMemory();
         setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+
+        isEditableScreen = false;
     }
 
     /**
@@ -344,6 +344,8 @@ public class Controller implements Initializable {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.addToMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+
+        isEditableScreen = false;
     }
 
     /**
@@ -355,6 +357,8 @@ public class Controller implements Initializable {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.subtractFromMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+
+        isEditableScreen = false;
     }
 
     /**
@@ -366,6 +370,8 @@ public class Controller implements Initializable {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.storeToMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+
+        isEditableScreen = false;
     }
 
     /**

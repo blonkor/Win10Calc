@@ -1,12 +1,19 @@
 package tests.controller;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import org.junit.Test;
 import util.RobotControl;
 
 import java.awt.*;
+import java.math.BigDecimal;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,6 +76,7 @@ public class ControllerTest extends RobotControl {
 
     /**
      * Tests for keyboard handling.
+     * @todo memory
      */
     @Test
     public void keyboardTests() {
@@ -214,6 +222,65 @@ public class ControllerTest extends RobotControl {
         assertTrue(leftArrow.isVisible());
         assertFalse(rightArrow.isVisible());
         assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
+    }
+
+    /**
+     * Tests for memory show operation.
+     */
+    @Test
+    public void memoryShowTests() {
+        int memoryLabelsLayout = 16;
+        int memoryLabelsHeight = 63;
+        int memoryLabelsFontSize = 24;
+        Insets memoryLabelInsets = new Insets(0, 15, 0, 15);
+
+        clickButtons("1 MS 2 MS 3 MS MShow");
+        int expectedNumberOfLabels = 3;
+
+        AnchorPane memoryPanel = (AnchorPane) getNodeBySelector(MEMORY_PANEL_ID);
+        AnchorPane memoryBlock = (AnchorPane) getNodeBySelector(MEMORY_BLOCK_ID);
+
+        assertTrue(memoryPanel.isVisible());
+        assertTrue(memoryBlock.isVisible());
+
+        int layoutY = memoryLabelsLayout;
+
+        for (int i = 0; i < expectedNumberOfLabels; i++) {
+            ScrollPane scrollPane = (ScrollPane) memoryPanel.getChildren().get(0);
+            AnchorPane anchorPane = (AnchorPane) scrollPane.getContent();
+            Label label = (Label) anchorPane.getChildren().get(i);
+
+            assertEquals(String.valueOf(expectedNumberOfLabels - i), label.getText());
+            assertEquals(memoryPanel.getWidth() - 2, label.getPrefWidth());
+            assertEquals(memoryLabelsHeight, label.getPrefHeight());
+            assertEquals(memoryLabelsHeight, label.getMinHeight());
+            assertEquals(memoryLabelsHeight, label.getMaxHeight());
+            assertEquals(memoryLabelInsets, label.getPadding());
+            assertEquals(layoutY, label.getLayoutY());
+            assertEquals(Paint.valueOf("transparent"), label.getBackground().getFills().get(0).getFill());
+            assertEquals(new Font("Segoe UI Semibold", memoryLabelsFontSize), label.getFont());
+            assertTrue(label.isWrapText());
+
+            hoverOn(label);
+
+            assertEquals(Paint.valueOf("0xe7e7e7ff"), label.getBackground().getFills().get(0).getFill());
+            assertEquals(new Font("Segoe UI Semibold", memoryLabelsFontSize), label.getFont());
+
+            hoverOn(getButtonBySelector(MEMORY_SHOW_ID));
+
+            assertEquals(Paint.valueOf("transparent"), label.getBackground().getFills().get(0).getFill());
+            assertEquals(new Font("Segoe UI Semibold", memoryLabelsFontSize), label.getFont());
+
+            assertEquals(Pos.TOP_LEFT, label.getAlignment());
+
+            layoutY += memoryLabelsHeight + memoryLabelsLayout;
+
+        }
+
+        clickButtons("MShow");
+
+        assertFalse(memoryPanel.isVisible());
+        assertFalse(memoryBlock.isVisible());
     }
 
     /**
@@ -1145,7 +1212,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("1 0 0 neg 1 0 0 0 neg 1 0 0 0 0 neg 1 0 0 0 0 0", "-1,001,000,100,001,000",
                 "");
         checkTyped("1 0 0 neg 1 0 0 0 neg 1 0 0 0 0 neg 1 0 0 0 0 0 neg",
-                "1,001,000,100,001,000","");
+                "1,001,000,100,001,000", "");
 
         //after dot
         checkTyped("6 2 . neg", "-62.", "");
