@@ -228,13 +228,6 @@
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
     </task>
-    <task id="LOCAL-00118" summary="Number formatter class totally refactored. Another way for formatting numbers was implemented.">
-      <created>1567370852327</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1567370852330</updated>
-    </task>
     <task id="LOCAL-00119" summary="Code refactoring for number formatter tests.">
       <created>1567370978535</created>
       <option name="number" value="00119" />
@@ -571,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568031397407</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="Tests for memory add and subtract operations in controller created.">
+      <created>1568031923635</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1568031923635</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -605,7 +605,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for resizing window optimized." />
     <MESSAGE value="Launcher refactored." />
     <MESSAGE value="Launcher for tests refactored." />
     <MESSAGE value="Enums in model refactored." />
@@ -630,7 +629,8 @@
     <MESSAGE value="Tests for memory show operation in controller created." />
     <MESSAGE value="Tests for memory clear operation in controller created." />
     <MESSAGE value="Tests for memory recall operation in controller created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for memory recall operation in controller created." />
+    <MESSAGE value="Tests for memory add and subtract operations in controller created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for memory add and subtract operations in controller created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

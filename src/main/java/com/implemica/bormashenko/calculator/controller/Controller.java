@@ -300,6 +300,17 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Saves number in memory.
+     */
+    public void memoryStoreOperation() {
+        BigDecimal number = screenToBigDecimal(screen.getText());
+        memory.storeToMemory(number);
+        setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+
+        isEditableScreen = false;
+    }
+
+    /**
      * Shows memory.
      */
     public void memoryShowOperation() {
@@ -348,25 +359,10 @@ public class Controller implements Initializable {
 
     /**
      * Subtracts number from memory.
-     *
-     * @todo tests
      */
     public void memorySubtractOperation() {
         BigDecimal number = screenToBigDecimal(screen.getText());
         memory.subtractFromMemory(number);
-        setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
-
-        isEditableScreen = false;
-    }
-
-    /**
-     * Saves number in memory.
-     *
-     * @todo tests
-     */
-    public void memoryStoreOperation() {
-        BigDecimal number = screenToBigDecimal(screen.getText());
-        memory.storeToMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
         isEditableScreen = false;

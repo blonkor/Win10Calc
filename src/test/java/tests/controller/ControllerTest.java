@@ -1,6 +1,5 @@
 package tests.controller;
 
-import com.implemica.bormashenko.calculator.model.Memory;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,8 +12,6 @@ import org.junit.Test;
 import util.RobotControl;
 
 import java.awt.*;
-import java.math.BigDecimal;
-import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,8 +51,12 @@ public class ControllerTest extends RobotControl {
         showNavigationPanelTest();
         moveEquationLabelTextTest();
 
+        memoryStoreTest();
         memoryShowTest();
         memoryClearTest();
+        memoryRecallTests();
+        memoryAddTests();
+        memorySubtractTests();
 
         appendDigitTests();
         appendDotTests();
@@ -226,6 +227,18 @@ public class ControllerTest extends RobotControl {
         assertTrue(leftArrow.isVisible());
         assertFalse(rightArrow.isVisible());
         assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
+    }
+
+    /**
+     * Tests for memory store operation.
+     */
+    @Test
+    public void memoryStoreTest() {
+        resetAll();
+
+        assertFalse(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
+        assertFalse(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
+        assertFalse(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
     }
 
     /**
