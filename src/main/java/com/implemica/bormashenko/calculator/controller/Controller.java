@@ -871,7 +871,6 @@ public class Controller implements Initializable {
         screen.setText(formatNumber(calculation.getResult()));
     }
 
-
     /**
      * Calculates result of {@code UnaryOperation} after several {@code UnaryOperation} in a row.
      *

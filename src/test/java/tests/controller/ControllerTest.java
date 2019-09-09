@@ -70,7 +70,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for keyboard handling.
      */
-    private void keyboardTests() {
+    @Test
+    public void keyboardTests() {
         //digits
         checkKeyboardForOperations("1 2 3 4 5 6 7 8 9 0 .",
                 "1,234,567,890.", "");
@@ -142,7 +143,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for showing navigation panel.
      */
-    private void showNavigationPanelTest() {
+    @Test
+    public void showNavigationPanelTest() {
         assertFalse(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
         assertFalse(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
         assertFalse(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
@@ -163,7 +165,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for moving text in equation {@code Label}.
      */
-    private void moveEquationLabelTextTest() {
+    @Test
+    public void moveEquationLabelTextTest() {
         resetAll();
 
         clickButtons("sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr");
@@ -216,7 +219,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for appending digits.
      */
-    private void appendDigitTests() {
+    @Test
+    public void appendDigitTests() {
         //can append
         {
             //without operations
@@ -392,7 +396,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for appending dot.
      */
-    private void appendDotTests() {
+    @Test
+    public void appendDotTests() {
         //can append
         {
             //without operations
@@ -557,7 +562,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for backspace.
      */
-    private void backspaceTests() {
+    @Test
+    public void backspaceTests() {
         //last digit
         checkTyped("backspace", "0");
         checkTyped("0 backspace", "0");
@@ -634,7 +640,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for clear operations ( clear text and clear all ).
      */
-    private void clearTests() {
+    @Test
+    public void clearTests() {
 
         //without operations
         checkClear("0");
@@ -722,7 +729,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for add operation.
      */
-    private void addTests() {
+    @Test
+    public void addTests() {
         //standard cases
         checkTyped("+", "0", "0 +");
         checkTyped("0 +", "0", "0 +");
@@ -815,7 +823,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for subtract operation.
      */
-    private void subtractTests() {
+    @Test
+    public void subtractTests() {
         //standard cases
         checkTyped("-", "0", "0 -");
         checkTyped("0 -", "0", "0 -");
@@ -906,7 +915,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for multiply operation.
      */
-    private void multiplyTests() {
+    @Test
+    public void multiplyTests() {
         //standard cases
         checkTyped("*", "0", "0 ×");
         checkTyped("0 *", "0", "0 ×");
@@ -1004,7 +1014,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for divide operation.
      */
-    private void divideTests() {
+    @Test
+    public void divideTests() {
         //standard cases
         checkTyped("/", "0", "0 ÷");
         checkTyped("0 /", "0", "0 ÷");
@@ -1105,7 +1116,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for negate operation.
      */
-    private void negateTests() {
+    @Test
+    public void negateTests() {
         //standard cases
         checkTyped("neg", "0", "");
         checkTyped("0 neg", "0", "");
@@ -1192,7 +1204,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for square operation.
      */
-    private void sqrTests() {
+    @Test
+    public void sqrTests() {
         //standard cases
         checkTyped("sqr", "0", "sqr( 0 )");
         checkTyped("0 sqr", "0", "sqr( 0 )");
@@ -1276,7 +1289,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for square root operation.
      */
-    private void sqrtTests() {
+    @Test
+    public void sqrtTests() {
         //standard cases
         checkTyped("sqrt", "0", "√( 0 )");
         checkTyped("0 sqrt", "0", "√( 0 )");
@@ -1365,7 +1379,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for inverse operation.
      */
-    private void inverseTests() {
+    @Test
+    public void inverseTests() {
         //standard cases
         checkTyped("0 inverse", "Cannot divide by zero", "1/( 0 )");
         checkTyped("1 inverse", "1", "1/( 1 )");
@@ -1461,7 +1476,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for percentage operation.
      */
-    private void percentageTests() {
+    @Test
+    public void percentageTests() {
         //standard cases
         checkTyped("%", "0", "0");
         checkTyped("0 %", "0", "0");
@@ -1535,7 +1551,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for equals operation.
      */
-    private void equalsTests() {
+    @Test
+    public void equalsTests() {
         //standard cases
         checkTyped("=", "0", "");
         checkTyped("0 =", "0", "");
@@ -1653,7 +1670,8 @@ public class ControllerTest extends RobotControl {
     /**
      * Tests for exceptions.
      */
-    private void exceptionTests() {
+    @Test
+    public void exceptionTests() {
         //overflow
         //add
         checkException("1 0 0 0 0 0 0 0 0 0 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr * 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 " +

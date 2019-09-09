@@ -69,7 +69,8 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for background color, color of text and font for {@code Button} and {@code Label}.
      */
-    private void colorAndFontTests() {
+    @Test
+    public void colorAndFontTests() {
         //colors
         String whiteColor = "0xffffffff";
         String mostlyWhileColor = "0xfafafaff";
@@ -279,7 +280,8 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for text that {@code Button} and {@code Label} contain.
      */
-    private void textTests() {
+    @Test
+    public void textTests() {
         //buttons
         {
             checkTextForButton(ONE_ID, "1");
@@ -357,7 +359,8 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for resizing application.
      */
-    private void resizeTests() {
+    @Test
+    public void resizeTests() {
         int zero = 0;
         int ten = 10;
         int fifty = 50;
@@ -2000,7 +2003,8 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for moving window.
      */
-    private void moveWindowTests() {
+    @Test
+    public void moveWindowTests() {
         int locationEdge = -20;
         int zero = 0;
         int ten = 10;
@@ -2126,7 +2130,8 @@ public class ViewTest extends RobotControl {
     /**
      * Tests for resizing font in screen {@code Label}.
      */
-    private void resizeFontTests() {
+    @Test
+    public void resizeFontTests() {
         checkResizeFont("1", DEFAULT_WIDTH, 47);
         checkResizeFont("1 2", DEFAULT_WIDTH, 47);
         checkResizeFont("1 2 3 4 5 6 7 8 9", DEFAULT_WIDTH, 47);
@@ -2148,7 +2153,8 @@ public class ViewTest extends RobotControl {
     /**
      * Test for visibility of arrow {@code Button}.
      */
-    private void visibleArrowsTests() {
+    @Test
+    public void visibleArrowsTests() {
         int numberOfSqrClicks = 12;
 
         setWindowsSizeAndLayout(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_X, DEFAULT_Y);
@@ -2185,7 +2191,8 @@ public class ViewTest extends RobotControl {
     /**
      * Test for expanding application.
      */
-    private void expandTest() {
+    @Test
+    public void expandTest() {
         String minimizedSymbol = "\uE922";
         String maximizedSymbol = "\uE923";
 
@@ -2202,7 +2209,8 @@ public class ViewTest extends RobotControl {
     /**
      * Test for hiding application.
      */
-    private void hideTest() {
+    @Test
+    public void hideTest() {
         clickOn(getButtonBySelector(HIDE_ID));
 
         assertTrue(stage.isIconified());
