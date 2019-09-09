@@ -11,7 +11,9 @@ import javafx.scene.text.Font;
 import org.junit.Test;
 import util.RobotControl;
 
+import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -1935,6 +1937,13 @@ public class ControllerTest extends RobotControl {
         resetAll();
         clickButtons(buttons);
 
+//        try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
         assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
     }
 

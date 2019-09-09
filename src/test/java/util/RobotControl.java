@@ -11,8 +11,10 @@ import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.api.FxRobot;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -781,7 +783,13 @@ public class RobotControl extends GuiTest {
 
             awtRobot.keyRelease(mainKey);
 
-            FXTestUtils.awaitEvents();
+//             try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
         }
     }
 
@@ -802,7 +810,13 @@ public class RobotControl extends GuiTest {
         hoverOn(node);
         click(MouseButton.PRIMARY);
 
-        FXTestUtils.awaitEvents();
+//         try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -828,7 +842,14 @@ public class RobotControl extends GuiTest {
     protected void hoverOn(int x, int y) {
         awtRobot.mouseMove(x, y);
 
-        FXTestUtils.awaitEvents();
+//        try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     /**
@@ -836,7 +857,13 @@ public class RobotControl extends GuiTest {
      */
     protected void scrollNavigationBar() {
         awtRobot.mouseWheel(RobotControl.SCROLL_NAVIGATION_BAR_AMOUNT);
-        FXTestUtils.awaitEvents();
+//        try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -853,7 +880,13 @@ public class RobotControl extends GuiTest {
         awtRobot.mouseMove(toX, toY);
         robot.release(MouseButton.PRIMARY);
 
-        FXTestUtils.awaitEvents();
+//         try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -872,7 +905,13 @@ public class RobotControl extends GuiTest {
         window.setX(x);
         window.setY(y);
 
-        FXTestUtils.awaitEvents();
+//         try {
+//            SwingUtilities.invokeAndWait(() -> {});
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
