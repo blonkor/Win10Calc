@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/view/ViewTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/view/ViewTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,9 +13,6 @@
   </component>
   <component name="CoverageOptionsProvider">
     <option name="myAddOrReplace" value="0" />
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="156" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -84,105 +79,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ViewTest.colorAndFontTests">
+  <component name="RunManager">
     <configuration name="ViewTest.allTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="METHOD_NAME" value="allTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.colorAndFontTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="METHOD_NAME" value="colorAndFontTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.moveWindowTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="METHOD_NAME" value="moveWindowTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.resizeTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="METHOD_NAME" value="resizeTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest.textTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="METHOD_NAME" value="textTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="tests.model in Win10Calc" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.implemica.bormashenko.calculator.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="PARAMETERS" value="" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="view in Win10Calc" type="JUnit" factoryName="JUnit">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -191,30 +89,17 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
+      <option name="METHOD_NAME" value="allTests" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="PARAMETERS" value="" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="JUnit.tests.model in Win10Calc" />
-      <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="JUnit.ViewTest.moveWindowTests" />
-      <item itemvalue="JUnit.ViewTest.resizeTests" />
-      <item itemvalue="JUnit.ViewTest.textTests" />
-      <item itemvalue="JUnit.ViewTest.colorAndFontTests" />
-      <item itemvalue="JUnit.ViewTest.allTests" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ViewTest.colorAndFontTests" />
         <item itemvalue="JUnit.ViewTest.allTests" />
-        <item itemvalue="JUnit.ViewTest.textTests" />
-        <item itemvalue="JUnit.ViewTest.resizeTests" />
-        <item itemvalue="JUnit.ViewTest.moveWindowTests" />
       </list>
     </recent_temporary>
   </component>
@@ -228,13 +113,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00121" summary="Optimizing tests.">
-      <created>1567508039279</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1567508039279</updated>
     </task>
     <task id="LOCAL-00122" summary="Tests for sqr operation created.">
       <created>1567511710838</created>
@@ -572,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568033289311</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="Reduced time for running view tests by optimizing them and removing unnecessary test cases.">
+      <created>1568040332012</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1568040332012</updated>
+    </task>
+    <option name="localTasksCounter" value="171" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -606,7 +491,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Enums in model refactored." />
     <MESSAGE value="Overflow exception refactored." />
     <MESSAGE value="Bug fix with RobotController." />
     <MESSAGE value="Refactoring NumberFormatterTest." />
@@ -631,7 +515,8 @@
     <MESSAGE value="Tests for memory add and subtract operations in controller created." />
     <MESSAGE value="Tests for memory store operation in controller created." />
     <MESSAGE value="Tests for memory using keypad created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for memory using keypad created." />
+    <MESSAGE value="Reduced time for running view tests by optimizing them and removing unnecessary test cases." />
+    <option name="LAST_COMMIT_MESSAGE" value="Reduced time for running view tests by optimizing them and removing unnecessary test cases." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
@@ -643,8 +528,8 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_allTests.ic" NAME="ViewTest.allTests Coverage Results" MODIFIED="1566999141724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>view.tests.*</FILTER>
+    <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_allTests.ic" NAME="ViewTest.allTests Coverage Results" MODIFIED="1568041279473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$MemoryModelTest.ic" NAME="MemoryModelTest Coverage Results" MODIFIED="1566384965449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">
       <FILTER>Model.*</FILTER>
@@ -666,6 +551,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$NumberFormatterTest.ic" NAME="NumberFormatterTest Coverage Results" MODIFIED="1567081388430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.controller.util.NumberFormatter</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$ViewTest.ic" NAME="ViewTest Coverage Results" MODIFIED="1568040399780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>tests.view.*</FILTER>
     </SUITE>
   </component>
 </project>
