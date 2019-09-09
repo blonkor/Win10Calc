@@ -229,7 +229,7 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
-     * Tests for memory show operation.
+     * Test for memory show operation.
      */
     @Test
     public void memoryShowTest() {
@@ -290,7 +290,7 @@ public class ControllerTest extends RobotControl {
     }
 
     /**
-     * Tests for memory clear operation.
+     * Test for memory clear operation.
      */
     @Test
     public void memoryClearTest() {
@@ -307,11 +307,39 @@ public class ControllerTest extends RobotControl {
      * Tests for memory recall operation.
      */
     @Test
-    public void memoryRecallTest() {
+    public void memoryRecallTests() {
         checkTyped("1 MS 2 MS 3 MS MR", "3");
         checkTyped("1 MS 2 MS 3 MR", "2");
         checkTyped("MS 1 0 0 + MR", "0");
         checkTyped("1 MS 1 0 0 + 9 9 MR", "1");
+    }
+
+    /**
+     * Tests for memory add operation.
+     */
+    @Test
+    public void memoryAddTests() {
+        checkTyped("1 MS 2 MS 3 MS M+ MR", "6");
+        checkTyped("1 MS 2 MS 3 M+ MR", "5");
+        checkTyped("MS 1 0 0 + M+ MR", "100");
+        checkTyped("1 MS 1 0 0 + 9 9 M+ MR", "100");
+        
+        checkTyped("8 M+ MR", "8");
+        checkTyped("1 neg 2 8 M+ MR", "-128");
+    }
+
+    /**
+     * Tests for memory subtract operation.
+     */
+    @Test
+    public void memorySubtractTests() {
+        checkTyped("1 MS 2 MS 3 MS M- MR", "0");
+        checkTyped("1 MS 2 MS 3 M- MR", "-1");
+        checkTyped("MS 1 0 0 + M- MR", "-100");
+        checkTyped("1 MS 1 0 0 + 9 9 M- MR", "-98");
+
+        checkTyped("8 M- MR", "-8");
+        checkTyped("1 neg 2 8 M- MR", "128");
     }
 
     /**

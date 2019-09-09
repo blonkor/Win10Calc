@@ -83,23 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.memoryRecallTest">
-    <configuration name="ControllerTest.appendDigitTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="appendDigitTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.ControllerTest.memorySubtractTests">
     <configuration name="ControllerTest.keyboardTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -111,6 +95,22 @@
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
       <option name="METHOD_NAME" value="keyboardTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.memoryAddTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="memoryAddTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -148,7 +148,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.memoryShowTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.memorySubtractTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -158,7 +158,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
       <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="memoryShowTests" />
+      <option name="METHOD_NAME" value="memorySubtractTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -201,19 +201,19 @@
     <list>
       <item itemvalue="JUnit.tests.model in Win10Calc" />
       <item itemvalue="JUnit.view in Win10Calc" />
-      <item itemvalue="JUnit.ControllerTest.memoryShowTests" />
-      <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
       <item itemvalue="JUnit.ControllerTest.keyboardTests" />
       <item itemvalue="JUnit.ControllerTest.memoryClearTest" />
       <item itemvalue="JUnit.ControllerTest.memoryRecallTest" />
+      <item itemvalue="JUnit.ControllerTest.memoryAddTests" />
+      <item itemvalue="JUnit.ControllerTest.memorySubtractTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControllerTest.memorySubtractTests" />
+        <item itemvalue="JUnit.ControllerTest.memoryAddTests" />
         <item itemvalue="JUnit.ControllerTest.memoryRecallTest" />
         <item itemvalue="JUnit.ControllerTest.memoryClearTest" />
         <item itemvalue="JUnit.ControllerTest.keyboardTests" />
-        <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
-        <item itemvalue="JUnit.ControllerTest.memoryShowTests" />
       </list>
     </recent_temporary>
   </component>
@@ -227,13 +227,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00117" summary="Tests for multiply operation created.">
-      <created>1567209458820</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1567209458820</updated>
     </task>
     <task id="LOCAL-00118" summary="Number formatter class totally refactored. Another way for formatting numbers was implemented.">
       <created>1567370852327</created>
@@ -571,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568030935406</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="Tests for memory recall operation in controller created.">
+      <created>1568031397407</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1568031397407</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -605,7 +605,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="View refactored." />
     <MESSAGE value="Tests for resizing window optimized." />
     <MESSAGE value="Launcher refactored." />
     <MESSAGE value="Launcher for tests refactored." />
@@ -630,7 +629,8 @@
     <MESSAGE value="Tests for format without group separator operation created." />
     <MESSAGE value="Tests for memory show operation in controller created." />
     <MESSAGE value="Tests for memory clear operation in controller created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for memory clear operation in controller created." />
+    <MESSAGE value="Tests for memory recall operation in controller created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for memory recall operation in controller created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

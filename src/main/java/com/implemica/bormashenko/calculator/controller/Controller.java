@@ -337,8 +337,6 @@ public class Controller implements Initializable {
 
     /**
      * Adds number to memory.
-     *
-     * @todo tests
      */
     public void memoryAddOperation() {
         BigDecimal number = screenToBigDecimal(screen.getText());
