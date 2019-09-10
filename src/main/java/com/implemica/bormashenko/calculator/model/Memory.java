@@ -51,7 +51,7 @@ public class Memory {
         } else {
             BigDecimal recalledValue = store.peek();
 
-            if (new Calculation().overflowValidationFailed(recalledValue)) {
+            if (new Calculation().overflowValidationFailed(recalledValue, false)) {
                 throw new OverflowException();
             }
 

@@ -36,7 +36,7 @@ public class Calculation {
      *
      * @see BinaryOperation
      */
-    private static final int DIVIDE_SCALE = 20000;
+    private static final int DIVIDE_SCALE = 10000;
 
     /**
      * MathContext for {@code UnaryOperation.SQRT}.
@@ -58,6 +58,13 @@ public class Calculation {
      * If this bound reached, {@link OverflowException} should be thrown.
      */
     private static final BigDecimal MIN_DECIMAL_VALUE = new BigDecimal("1.e-10000");
+
+    /**
+     * Max possible scale for number.
+     *
+     * If scale is bigger, {@link OverflowException} should be thrown.
+     */
+    private static final int MAX_SCALE = 9999;
 
     /**
      * {@code BigDecimal} value of 0.5.
@@ -145,7 +152,7 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(result)) {
+        if (overflowValidationFailed(result, binaryOperation == BinaryOperation.DIVIDE)) {
             throw new OverflowException();
         }
     }
@@ -169,7 +176,7 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(result)) {
+        if (overflowValidationFailed(result, false)) {
             throw new OverflowException();
         }
     }
@@ -192,7 +199,7 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(result)) {
+        if (overflowValidationFailed(result, false)) {
             throw new OverflowException();
         }
     }
@@ -203,7 +210,11 @@ public class Calculation {
      * @param value big decimal value to check.
      * @return true if validation failed or false otherwise.
      */
-    boolean overflowValidationFailed(BigDecimal value) {
+    boolean overflowValidationFailed(BigDecimal value, boolean divide) {
+        if (divide && !first.equals(BigDecimal.ZERO) && value.equals(BigDecimal.ZERO)) {
+            return true;
+        }
+
         return value.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
                 (value.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !value.equals(BigDecimal.ZERO));
     }
@@ -370,6 +381,10 @@ public class Calculation {
      * @throws OverflowException while validation for second value is failed.
      */
     private void percentageOfFirst() {
+        if (second.scale() + first.scale() > MAX_SCALE) {
+            throw new OverflowException();
+        }
+
         result = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
@@ -379,6 +394,10 @@ public class Calculation {
      * @throws OverflowException while validation for second number is failed.
      */
     private void percentageOf100() {
+        if (second.scale() - ONE_HUNDRED.stripTrailingZeros().scale() > MAX_SCALE) {
+            throw new OverflowException();
+        }
+
         result = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 }

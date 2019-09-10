@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/util/RobotControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Memory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Memory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,7 +99,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.divideOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -108,73 +109,73 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="divideOperationTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.addTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="addTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ViewTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ViewTest.allTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.binaryOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.view.*" />
+          <option name="PATTERN" value="tests.model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.view" />
-      <option name="MAIN_CLASS_NAME" value="tests.view.ViewTest" />
-      <option name="METHOD_NAME" value="allTests" />
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="binaryOverflowExceptionTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculationModelTest.percentageOfFirstOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="percentageOfFirstOverflowExceptionTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculationModelTest.percentageOfFirstTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="percentageOfFirstTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
+      <item itemvalue="JUnit.CalculationModelTest" />
+      <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
+      <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstOverflowExceptionTests" />
+      <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstTests" />
       <item itemvalue="Application.Launcher" />
-      <item itemvalue="JUnit.ViewTest" />
-      <item itemvalue="JUnit.ViewTest.allTests" />
-      <item itemvalue="JUnit.ControllerTest.addTests" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.ControllerTest.addTests" />
-        <item itemvalue="JUnit.ViewTest.allTests" />
-        <item itemvalue="JUnit.ViewTest" />
-        <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest" />
+        <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstTests" />
+        <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstOverflowExceptionTests" />
+        <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
       </list>
     </recent_temporary>
   </component>
@@ -188,13 +189,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00123" summary="Tests for sqrt operation created.">
-      <created>1567517398574</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1567517398574</updated>
     </task>
     <task id="LOCAL-00124" summary="Bug fix in controller with equation label text after error.">
       <created>1567517426416</created>
@@ -532,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568041381035</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="Added Boris's remarks.">
+      <created>1568043358337</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1568043358337</updated>
+    </task>
+    <option name="localTasksCounter" value="173" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -566,7 +567,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Bug fix with RobotController." />
     <MESSAGE value="Refactoring NumberFormatterTest." />
     <MESSAGE value="TODO item removed." />
     <MESSAGE value="Refactoring ViewFormatter." />
@@ -591,7 +591,8 @@
     <MESSAGE value="Tests for memory using keypad created." />
     <MESSAGE value="Reduced time for running view tests by optimizing them and removing unnecessary test cases." />
     <MESSAGE value="Workspace changed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Workspace changed." />
+    <MESSAGE value="Added Boris's remarks." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Boris's remarks." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

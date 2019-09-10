@@ -4288,13 +4288,13 @@ class CalculationModelTest {
 
             //first is -1.e-9999
             checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN_MINUS_ONE, "1.e-9985");
-            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN, "9.999999999999999e-9986");
-            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN_PLUS_ONE, "9.999999999999998e-9986");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN, "1.e-9985");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN_PLUS_ONE, "1.e-9985");
 
             checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, BigDecimal.ZERO, "0");
 
-            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-9.999999999999998e-9986");
-            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN, "-9.999999999999999e-9986");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN_MINUS_ONE, "-1.e-9985");
+            checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN, "-1.e-9985");
             checkPercentageOfFirstOperation(NEG_ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN_PLUS_ONE, "-1.e-9985");
 
             //first is -1.e-9998
@@ -4385,13 +4385,13 @@ class CalculationModelTest {
 
             //first is 1.e-9999
             checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN_MINUS_ONE, "-1.e-9985");
-            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN, "-9.999999999999999e-9986");
-            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN_PLUS_ONE, "-9.999999999999998e-9986");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN, "-1.e-9985");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MIN_VALUE_ON_SCREEN_PLUS_ONE, "-1.e-9985");
 
             checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, BigDecimal.ZERO, "0");
 
-            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN_MINUS_ONE, "9.999999999999998e-9986");
-            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN, "9.999999999999999e-9986");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN_MINUS_ONE, "1.e-9985");
+            checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN, "1.e-9985");
             checkPercentageOfFirstOperation(ONE_DOT_E_MINUS_9999, MAX_VALUE_ON_SCREEN_PLUS_ONE, "1.e-9985");
         }
 
@@ -5243,7 +5243,6 @@ class CalculationModelTest {
 
         try {
             calculation.calculateBinary();
-            System.out.println(calculation.getResult());
             fail();
         } catch (OverflowException e) {
             assertEquals(OVERFLOW_MESSAGE, e.getMessage());
