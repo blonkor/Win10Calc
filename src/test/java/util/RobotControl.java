@@ -641,6 +641,8 @@ public class RobotControl extends GuiTest {
             }
 
             clickOn(getButtonBySelector(selector));
+
+            FXTestUtils.awaitEvents();
         }
     }
 
@@ -790,6 +792,10 @@ public class RobotControl extends GuiTest {
 //        } catch (InvocationTargetException e) {
 //            e.printStackTrace();
 //        }
+            /**
+             * @todo show to Boris
+             */
+            FXTestUtils.awaitEvents();
         }
     }
 
@@ -810,13 +816,11 @@ public class RobotControl extends GuiTest {
         hoverOn(node);
         click(MouseButton.PRIMARY);
 
-//         try {
-//            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
+         try {
+            SwingUtilities.invokeAndWait(() -> {});
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -844,11 +848,11 @@ public class RobotControl extends GuiTest {
 
 //        try {
 //            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
+//        } catch (InterruptedException | InvocationTargetException e) {
 //            e.printStackTrace();
 //        }
+
+        FXTestUtils.awaitEvents();
 
     }
 
