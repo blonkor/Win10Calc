@@ -723,7 +723,7 @@ public class Controller implements Initializable {
             } else {
 
                 if (isEqualsPressed) {
-                    equationTextToSet = binaryAfterEquals(operation, number);
+                    equationTextToSet = binaryAfterEquals(operation, calculation.getResult());
                 } else {
                     equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
                 }
@@ -1096,14 +1096,16 @@ public class Controller implements Initializable {
         removeLastDecimalSeparator();
 
         try {
-            if (calculation.getBinaryOperation() != null) {
+            boolean isBinarySet = calculation.getBinaryOperation() != null;
+
+            if (isBinarySet) {
                 calculateResultForBinaryNotNull();
             }
 
             equation.setText(EMPTY_STRING);
 
             setFlags(false, false, false,
-                    true, true, false);
+                    true, isBinarySet, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
