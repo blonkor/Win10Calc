@@ -188,13 +188,6 @@
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
     </task>
-    <task id="LOCAL-00128" summary="Tests for percentage operation created.">
-      <created>1567543923369</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1567543923369</updated>
-    </task>
     <task id="LOCAL-00129" summary="Refactoring model tests.">
       <created>1567547343536</created>
       <option name="number" value="00129" />
@@ -531,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568225735290</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="Bug fix with using result of model in next operations.">
+      <created>1568227261997</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1568227261997</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -565,7 +565,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Renaming enums." />
     <MESSAGE value="Refactoring calculate result operation in controller." />
     <MESSAGE value="Refactoring binary operation in controller." />
     <MESSAGE value="Bug fix with percentage operation in model." />
@@ -590,7 +589,8 @@
     <MESSAGE value="Speed of calculation optimized." />
     <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Demo test case created." />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo test case created." />
+    <MESSAGE value="Bug fix with using result of model in next operations." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix with using result of model in next operations." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

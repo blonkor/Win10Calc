@@ -1068,7 +1068,18 @@ public class Controller implements Initializable {
         String textBefore;
 
         int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
+
+        if (lastIndexOfAdd != -1 && equationTextToSet.charAt(lastIndexOfAdd - 1) == 'e') {
+            lastIndexOfAdd = equationTextToSet.substring(0, lastIndexOfAdd - 1).lastIndexOf(BinaryOperation.ADD.symbol);
+        }
+
         int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+
+        if (lastIndexOfSubtract != -1 && equationTextToSet.charAt(lastIndexOfSubtract - 1) == 'e') {
+            lastIndexOfSubtract = equationTextToSet.substring(0, lastIndexOfSubtract - 1).lastIndexOf(
+                    BinaryOperation.SUBTRACT.symbol);
+        }
+
         int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
         int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
         int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
