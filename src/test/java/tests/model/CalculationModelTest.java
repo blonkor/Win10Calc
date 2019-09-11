@@ -191,18 +191,58 @@ class CalculationModelTest {
     private static final BigDecimal ONE_DOT_E_MINUS_17 = new BigDecimal("1.e-17");
 
     /**
-     * Object of {@code Calculation}.
+     * Object of {@link Calculation}.
      */
     private static Calculation calculation;
 
     /**
-     * Setting up an object of {@code Calculation}.
+     * Setting up an object of {@link Calculation}.
      *
      * @see Calculation
      */
     @BeforeAll
     static void setupObject() {
         calculation = new Calculation();
+    }
+
+    /**
+     * Demo test case to show how is {@link Calculation} works.
+     *
+     * The demo equation is: ((5 + 3) * 7 - 2) / 5.
+     */
+    @Test
+    void demoCase() {
+        BigDecimal two = new BigDecimal("2");
+        BigDecimal three = new BigDecimal("3");
+        BigDecimal five = new BigDecimal("5");
+        BigDecimal seven = new BigDecimal("7");
+
+        //calculate (5 + 3)
+        calculation.setFirst(five);
+        calculation.setSecond(three);
+        calculation.setBinaryOperation(ADD);
+        calculation.calculateBinary();
+
+        //then multiply previous result on 7
+        calculation.setFirst(calculation.getResult());
+        calculation.setSecond(seven);
+        calculation.setBinaryOperation(MULTIPLY);
+        calculation.calculateBinary();
+
+        //then subtract 2 from previous result
+        calculation.setFirst(calculation.getResult());
+        calculation.setSecond(two);
+        calculation.setBinaryOperation(SUBTRACT);
+        calculation.calculateBinary();
+
+        //then divide previous result by 5
+        calculation.setFirst(calculation.getResult());
+        calculation.setSecond(five);
+        calculation.setBinaryOperation(DIVIDE);
+        calculation.calculateBinary();
+
+        //assert result
+        assertEquals(new BigDecimal("10.8"), calculation.getResult());
     }
 
     /**
