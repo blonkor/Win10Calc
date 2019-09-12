@@ -535,6 +535,7 @@ public class Controller implements Initializable {
 
     /**
      * Performs percentage operation from {@link Calculation}.
+     * @todo bug
      */
     public void percentOperation() {
         calculatePercentage();
