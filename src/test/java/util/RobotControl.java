@@ -11,10 +11,8 @@ import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.testfx.api.FxRobot;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -562,91 +560,6 @@ public class RobotControl extends GuiTest {
     }
 
     /**
-     * Clicks on {@code Button} in application.
-     *
-     * @param text string where every symbol is {@code Button} representation.
-     * @throws IllegalArgumentException if required text is not a {@code Button} representation.
-     */
-    protected void clickButtons(String text) {
-        String[] buttons = text.split(" ");
-
-        for (String button : buttons) {
-
-            String selector;
-
-            //memory
-            if (button.equals("MC")) {
-                selector = MEMORY_CLEAR_ID;
-            } else if (button.equals("MR")) {
-                selector = MEMORY_RECALL_ID;
-            } else if (button.equals("M+")) {
-                selector = MEMORY_ADD_ID;
-            } else if (button.equals("M-")) {
-                selector = MEMORY_SUBTRACT_ID;
-            } else if (button.equals("MS")) {
-                selector = MEMORY_STORE_ID;
-            } else if (button.equals("MShow")) {
-                selector = MEMORY_SHOW_ID;
-
-                //text
-            } else if (button.equals("0")) {
-                selector = ZERO_ID;
-            } else if (button.equals("1")) {
-                selector = ONE_ID;
-            } else if (button.equals("2")) {
-                selector = TWO_ID;
-            } else if (button.equals("3")) {
-                selector = THREE_ID;
-            } else if (button.equals("4")) {
-                selector = FOUR_ID;
-            } else if (button.equals("5")) {
-                selector = FIVE_ID;
-            } else if (button.equals("6")) {
-                selector = SIX_ID;
-            } else if (button.equals("7")) {
-                selector = SEVEN_ID;
-            } else if (button.equals("8")) {
-                selector = EIGHT_ID;
-            } else if (button.equals("9")) {
-                selector = NINE_ID;
-            } else if (button.equals(".")) {
-                selector = DOT_ID;
-            } else if (button.equals("backspace")) {
-                selector = BACKSPACE_ID;
-
-                //operations
-            } else if (button.equals("+")) {
-                selector = ADD_ID;
-            } else if (button.equals("-")) {
-                selector = SUBTRACT_ID;
-            } else if (button.equals("*")) {
-                selector = MULTIPLY_ID;
-            } else if (button.equals("/")) {
-                selector = DIVIDE_ID;
-            } else if (button.equals("=")) {
-                selector = EQUALS_ID;
-            } else if (button.equals("%")) {
-                selector = PERCENT_ID;
-            } else if (button.equals("neg")) {
-                selector = NEGATE_ID;
-            } else if (button.equals("sqr")) {
-                selector = SQR_ID;
-            } else if (button.equals("sqrt")) {
-                selector = SQRT_ID;
-            } else if (button.equals("inverse")) {
-                selector = INVERSE_ID;
-            } else {
-                throw new IllegalArgumentException("Expected: string with correct buttons representation only. \n" +
-                        "Got: " + button);
-            }
-
-            clickOn(getButtonBySelector(selector));
-
-            FXTestUtils.awaitEvents();
-        }
-    }
-
-    /**
      * Presses on keyboard buttons.
      *
      * @param text string where every symbol is keypad button representation.
@@ -658,7 +571,7 @@ public class RobotControl extends GuiTest {
         for (String code : codes) {
 
             int additionalKey = 0;
-            int mainKey;
+            int mainKey = KeyEvent.VK_CONTROL;
 
             //ctrl combinations
             if (code.equals("ctrl+M")) {
@@ -768,6 +681,8 @@ public class RobotControl extends GuiTest {
                 mainKey = KeyEvent.VK_DELETE;
             } else if (code.equals("esc")) {
                 mainKey = KeyEvent.VK_ESCAPE;
+            } else  if (code.equals("sqr")) {
+                clickOn(getNodeBySelector(SQR_ID));
             } else {
                 throw new IllegalArgumentException("Expected: string with correct keypad representation only. \n" +
                         "Got: " + code);
@@ -803,8 +718,7 @@ public class RobotControl extends GuiTest {
      * Clicks on reset all {@code Button}.
      */
     protected void resetAll() {
-        clickOn(getButtonBySelector(CLEAR_ALL_ID));
-        clickOn(getButtonBySelector(MEMORY_CLEAR_ID));
+        pressKeyboard("esc ctrl+L");
     }
 
     /**
@@ -816,11 +730,7 @@ public class RobotControl extends GuiTest {
         hoverOn(node);
         click(MouseButton.PRIMARY);
 
-         try {
-            SwingUtilities.invokeAndWait(() -> {});
-        } catch (InterruptedException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        FXTestUtils.awaitEvents();
     }
 
     /**
@@ -846,14 +756,7 @@ public class RobotControl extends GuiTest {
     protected void hoverOn(int x, int y) {
         awtRobot.mouseMove(x, y);
 
-//        try {
-//            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException | InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-
         FXTestUtils.awaitEvents();
-
     }
 
     /**
@@ -861,13 +764,8 @@ public class RobotControl extends GuiTest {
      */
     protected void scrollNavigationBar() {
         awtRobot.mouseWheel(RobotControl.SCROLL_NAVIGATION_BAR_AMOUNT);
-//        try {
-//            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
+
+        FXTestUtils.awaitEvents();
     }
 
     /**
@@ -884,13 +782,7 @@ public class RobotControl extends GuiTest {
         awtRobot.mouseMove(toX, toY);
         robot.release(MouseButton.PRIMARY);
 
-//         try {
-//            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
+        FXTestUtils.awaitEvents();
     }
 
     /**
@@ -909,13 +801,7 @@ public class RobotControl extends GuiTest {
         window.setX(x);
         window.setY(y);
 
-//         try {
-//            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
+        FXTestUtils.awaitEvents();
     }
 
     /**
