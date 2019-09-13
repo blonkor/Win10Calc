@@ -1039,7 +1039,12 @@ public class Controller implements Initializable {
                 if (isUnaryOrPercentPressed) {
                     equationTextToSet = equationTextToSetAfterSeveralPercentage(equationTextToSet);
                 } else {
-                    equationTextToSet += NARROW_SPACE + formatWithoutGroupSeparator(calculation.getResult());
+
+                    if (!equationTextToSet.equals(EMPTY_STRING)) {
+                        equationTextToSet += NARROW_SPACE;
+                    }
+
+                    equationTextToSet += formatWithoutGroupSeparator(calculation.getResult());
                 }
 
                 setFlags(false, false, true,
