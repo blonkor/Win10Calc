@@ -563,7 +563,7 @@ public class Controller implements Initializable {
         int signum = convertBooleanToSignum(visible);
 
         transitionNavigation.setByX(navigationPanel.getWidth() * signum);
-        transitionAbout.setByX(navigationPanel.getWidth() * signum);
+        transitionAbout.setByX((navigationPanel.getWidth() + 1) * signum);
 
         transitionNavigation.play();
         transitionAbout.play();
