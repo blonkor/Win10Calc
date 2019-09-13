@@ -535,7 +535,6 @@ public class Controller implements Initializable {
 
     /**
      * Performs percentage operation from {@link Calculation}.
-     * @todo bug
      */
     public void percentOperation() {
         calculatePercentage();
@@ -874,7 +873,7 @@ public class Controller implements Initializable {
 
     /**
      * Calculates result of {@code UnaryOperation} after several {@code UnaryOperation} in a row.
-     *
+     * <p>
      * Sets first number as second (for saving it), sets result of previous calculating as first number, calculates
      * {@code UnaryOperation}, then sets saved first number (in second) as first, sets result as second and shows result
      * in screen {@code Label}.
@@ -908,7 +907,6 @@ public class Controller implements Initializable {
     private String setEquationAfterSeveralUnaryOrPercentage(UnaryOperation operation) {
         String equationTextToSet = equation.getText();
 
-        int lastIndexOfOperation;
 
         String textBefore = EMPTY_STRING;
         String textAfter = equationTextToSet;
@@ -918,12 +916,7 @@ public class Controller implements Initializable {
                 equationTextToSet.contains(BinaryOperation.MULTIPLY.symbol) ||
                 equationTextToSet.contains(BinaryOperation.DIVIDE.symbol)) {
 
-            int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
-            int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-            int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-            int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-            lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
-                    Math.max(lastIndexOfMultiply, lastIndexOfDivide)) + 1;
+            int lastIndexOfOperation = findLastIndexOfOperation(equationTextToSet);
 
             textBefore = equationTextToSet.substring(0, lastIndexOfOperation);
             textAfter = equationTextToSet.substring(lastIndexOfOperation + 1);
@@ -938,6 +931,34 @@ public class Controller implements Initializable {
         }
 
         return equationTextToSet;
+    }
+
+    /**
+     * Looks for the last {@code BinaryOperation} symbol in required text (which is not belongs to
+     * {@code EXPONENT_SEPARATOR}).
+     *
+     * @param text string where to look for.
+     * @return last index of {@code BinaryOperation}.
+     */
+    private int findLastIndexOfOperation(String text) {
+        int lastIndexOfAdd = text.lastIndexOf(BinaryOperation.ADD.symbol);
+
+        if (lastIndexOfAdd != -1 && text.charAt(lastIndexOfAdd - 1) == 'e') {
+            lastIndexOfAdd = text.substring(0, lastIndexOfAdd - 1).lastIndexOf(BinaryOperation.ADD.symbol);
+        }
+
+        int lastIndexOfSubtract = text.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+
+        if (lastIndexOfSubtract != -1 && text.charAt(lastIndexOfSubtract - 1) == 'e') {
+            lastIndexOfSubtract = text.substring(0, lastIndexOfSubtract - 1).lastIndexOf(
+                    BinaryOperation.SUBTRACT.symbol);
+        }
+
+        int lastIndexOfMultiply = text.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
+        int lastIndexOfDivide = text.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+
+        return Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
+                Math.max(lastIndexOfMultiply, lastIndexOfDivide)) + 1;
     }
 
     /**
@@ -1066,27 +1087,8 @@ public class Controller implements Initializable {
      * @return updated text.
      */
     private String equationTextToSetAfterSeveralPercentage(String equationTextToSet) {
-        String textBefore;
-
-        int lastIndexOfAdd = equationTextToSet.lastIndexOf(BinaryOperation.ADD.symbol);
-
-        if (lastIndexOfAdd != -1 && equationTextToSet.charAt(lastIndexOfAdd - 1) == 'e') {
-            lastIndexOfAdd = equationTextToSet.substring(0, lastIndexOfAdd - 1).lastIndexOf(BinaryOperation.ADD.symbol);
-        }
-
-        int lastIndexOfSubtract = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-
-        if (lastIndexOfSubtract != -1 && equationTextToSet.charAt(lastIndexOfSubtract - 1) == 'e') {
-            lastIndexOfSubtract = equationTextToSet.substring(0, lastIndexOfSubtract - 1).lastIndexOf(
-                    BinaryOperation.SUBTRACT.symbol);
-        }
-
-        int lastIndexOfMultiply = equationTextToSet.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-        int lastIndexOfDivide = equationTextToSet.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
-        int lastIndexOfOperation = Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
-                Math.max(lastIndexOfMultiply, lastIndexOfDivide));
-
-        textBefore = equationTextToSet.substring(0, lastIndexOfOperation + 1);
+        int lastIndexOfOperation = findLastIndexOfOperation(equationTextToSet);
+        String textBefore = equationTextToSet.substring(0, lastIndexOfOperation);
 
         return textBefore + NARROW_SPACE + formatWithoutGroupSeparator(calculation.getResult());
     }
