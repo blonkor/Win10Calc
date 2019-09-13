@@ -954,7 +954,7 @@ public class Controller implements Initializable {
         }
 
         int lastIndexOfMultiply = text.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-        int lastIndexOfDivide = text.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+        int lastIndexOfDivide = text.lastIndexOf(BinaryOperation.DIVIDE.symbol);
 
         return Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
                 Math.max(lastIndexOfMultiply, lastIndexOfDivide)) + 1;
