@@ -1158,8 +1158,8 @@ public class ControllerTest extends RobotControl {
 
         //after unary
         checkTyped("8 " + KEY_NEG + KEY_PERCENT, "0", "0");
-        checkTyped("4 9 - sqr " + KEY_PERCENT, "1,176.49", "49 - 1,176.49");
-        checkTyped("6 4 /" + KEY_SQRT + KEY_PERCENT, "0.08", "64 ÷ 0.08");
+        checkTyped("4 9 - sqr " + KEY_PERCENT, "1,176.49", "49 - 1176.49");
+        checkTyped("6 4 / " + KEY_SQRT + KEY_PERCENT, "0.08", "64 ÷ 0.08");
 
         //after binary
         checkTyped("5 6 4 - " + KEY_PERCENT, "3,180.96", "564 - 3180.96");
@@ -1170,9 +1170,9 @@ public class ControllerTest extends RobotControl {
 
         //after equals
         checkTyped("7 3 = " + KEY_PERCENT, "0", "0");
-        checkTyped("5 3 " + KEY_ADD + "12 = " + KEY_PERCENT, "42.25",
+        checkTyped("5 3 " + KEY_ADD + "1 2 = " + KEY_PERCENT, "42.25",
                 "42.25");
-        checkTyped("5 3 / 12 = " + KEY_PERCENT, "0.0441666666666667",
+        checkTyped("5 3 / 1 2 = " + KEY_PERCENT, "0.0441666666666667",
                 "0.0441666666666667");
 
         //percent after second inputted
