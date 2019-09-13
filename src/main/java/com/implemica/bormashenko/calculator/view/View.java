@@ -128,6 +128,7 @@ public class View implements Serializable {
         FontResizeListener fontResizeListener = new FontResizeListener(scene);
         screen.textProperty().addListener(fontResizeListener);
         scene.widthProperty().addListener(fontResizeListener);
+        scene.heightProperty().addListener(fontResizeListener);
 
         //equation label length listener
         ScrollPane scrollPaneEquation = (ScrollPane) scene.lookup(EQUATION_SCROLL_ID);

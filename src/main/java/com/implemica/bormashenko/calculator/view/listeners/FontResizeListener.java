@@ -3,6 +3,7 @@ package com.implemica.bormashenko.calculator.view.listeners;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -30,11 +31,6 @@ public class FontResizeListener implements InvalidationListener {
     private static final int WIDTH_DIFF_TO_INCREASE = 50;
 
     /**
-     * Value for changing font size.
-     */
-    private static final double FONT_SIZE_OFFSET = 0.5;
-
-    /**
      * ID of screen {@code Label}.
      */
     private static final String SCREEN_LABEL_ID = "#screen";
@@ -55,6 +51,8 @@ public class FontResizeListener implements InvalidationListener {
 
     @Override
     public void invalidated(Observable observable) {
+        setFontForButtons();
+
         Label label = (Label) scene.lookup(SCREEN_LABEL_ID);
 
         //get text width
@@ -83,9 +81,65 @@ public class FontResizeListener implements InvalidationListener {
             fontSize = MAX_FONT_SIZE;
         }
 
+        if (scene.getHeight() >= 800) {
+            fontSize = 72;
+        }
+
         //set font size
-        label.setStyle(getFontString(fontSize));
+        label.setStyle(getFontString(fontSize, "Segoe UI Semibold"));
     }
+
+
+    private void setFontForButtons() {
+        double operationFont = 14.5;
+        double backspaceAndDotFont = 16.5;
+        double degreeFont = 20;
+        double digitsFont = 22.5;
+
+        if (scene.getHeight() >= 750 && scene.getWidth() >= 400) {
+            operationFont = 19.5;
+            backspaceAndDotFont = 20.5;
+            degreeFont++;
+            digitsFont++;
+        }
+
+        Button[] operationButtonsAssets = new Button[]{
+                (Button) scene.lookup("#percent"),
+                (Button) scene.lookup("#sqrt"),
+                (Button) scene.lookup("#divide"),
+                (Button) scene.lookup("#multiply"),
+                (Button) scene.lookup("#subtract"),
+                (Button) scene.lookup("#add"),
+                (Button) scene.lookup("#equals"),
+                (Button) scene.lookup("#negate")
+        };
+
+        for (Button button : operationButtonsAssets) {
+            button.setStyle(getFontString(operationFont, "Segoe MDL2 Assets"));
+        }
+
+        Button[] operationButtonsSegoeUI = new Button[]{
+                (Button) scene.lookup("#clearText"),
+                (Button) scene.lookup("#clearAll")
+        };
+
+        for (Button button : operationButtonsSegoeUI) {
+            button.setStyle(getFontString(operationFont, "Segoe UI"));
+        }
+
+        scene.lookup("#backspace").setStyle(getFontString(backspaceAndDotFont,
+                "Segoe MDL2 Assets"));
+        scene.lookup("#dot").setStyle(getFontString(backspaceAndDotFont, "Segoe UI Black"));
+
+        Button[] degreeButtons = new Button[] {
+                (Button) scene.lookup("#sqr"),
+                (Button) scene.lookup("#inverse")
+        };
+
+
+
+    }
+
 
     /**
      * Stylesheet representation of font size.
@@ -93,8 +147,8 @@ public class FontResizeListener implements InvalidationListener {
      * @param size size of font to set in px.
      * @return string for setting size of font in stylesheets.
      */
-    private String getFontString(double size) {
+    private String getFontString(double size, String fontFamily) {
         return "-fx-font-size: " + size + "px;" +
-                "-fx-font-family: \"Segoe UI Semibold\"";
+                "-fx-font-family: \"" + fontFamily + "\"";
     }
 }
