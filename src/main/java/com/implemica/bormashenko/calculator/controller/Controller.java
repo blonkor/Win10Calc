@@ -165,7 +165,6 @@ public class Controller implements Initializable {
      * @param event keyboard code or combination that was/were pressed.
      */
     public void keyboardHandling(KeyEvent event) {
-
         KeyCombination ctrlM = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN);
         KeyCombination ctrlP = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
         KeyCombination ctrlQ = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);

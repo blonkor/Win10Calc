@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -188,13 +188,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00130" summary="Refactoring model tests and adding tests for percentage operation while binary operation is null.">
-      <created>1567548936937</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1567548936937</updated>
     </task>
     <task id="LOCAL-00131" summary="Tests for equals operation created.">
       <created>1567592359339</created>
@@ -532,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568300498156</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="Bug fix with equation text after several unary or percentage operations.">
+      <created>1568373860486</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1568373860486</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -566,7 +566,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Refactoring binary operation in controller." />
     <MESSAGE value="Bug fix with percentage operation in model." />
     <MESSAGE value="Refactoring unary operations in controller." />
     <MESSAGE value="Refactoring percentage operation in controller." />
@@ -591,7 +590,8 @@
     <MESSAGE value="Demo test case created." />
     <MESSAGE value="Bug fix with using result of model in next operations." />
     <MESSAGE value="Speed of tests for controller optimized." />
-    <option name="LAST_COMMIT_MESSAGE" value="Speed of tests for controller optimized." />
+    <MESSAGE value="Bug fix with equation text after several unary or percentage operations." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix with equation text after several unary or percentage operations." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

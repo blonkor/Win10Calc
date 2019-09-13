@@ -22,20 +22,71 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ControllerTest extends RobotControl {
 
-
+    /**
+     * Keypad button for firing clear all {@code Button}.
+     */
     private static final String KEY_C = "esc";
+
+    /**
+     * Keypad button for firing clear text {@code Button}.
+     */
     private static final String KEY_CE = "del";
+
+    /**
+     * Keypad combination for firing memory store {@code Button}.
+     */
     private static final String KEY_MS = "ctrl+M ";
+
+    /**
+     * Keypad combination for firing memory clear {@code Button}.
+     */
     private static final String KEY_MC = "ctrl+L ";
+
+    /**
+     * Keypad combination for firing memory recall {@code Button}.
+     */
     private static final String KEY_MR = "ctrl+R ";
+
+    /**
+     * Keypad combination for firing memory add {@code Button}.
+     */
     private static final String KEY_M_ADD = "ctrl+P ";
+
+    /**
+     * Keypad combination for firing memory subtract {@code Button}.
+     */
     private static final String KEY_M_SUBTRACT = "ctrl+Q ";
+
+    /**
+     * Keypad combination for firing add {@code Button}.
+     */
     private static final String KEY_ADD = "shift+= ";
+
+    /**
+     * Keypad combination for firing multiply {@code Button}.
+     */
     private static final String KEY_MULTIPLY = "shift+8 ";
+
+    /**
+     * Keypad button for firing negate {@code Button}.
+     */
     private static final String KEY_NEG = "F9 ";
+
+    /**
+     * Keypad button for firing inverse {@code Button}.
+     */
     private static final String KEY_INVERSE = "R ";
+
+    /**
+     * Keypad combination for firing sqrt {@code Button}.
+     */
     private static final String KEY_SQRT = "shift+2 ";
+
+    /**
+     * Keypad combination for firing percent {@code Button}.
+     */
     private static final String KEY_PERCENT = "shift+5 ";
+
     /**
      * Symbol that should be replaced in equation {@code Label}.
      */
