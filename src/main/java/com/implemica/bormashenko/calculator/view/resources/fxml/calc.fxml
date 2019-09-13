@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
@@ -415,7 +416,7 @@
    </ScrollPane>
     <AnchorPane fx:id="memoryBlock" maxHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#memoryShowOperation" prefHeight="163.0" prefWidth="322.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
     <AnchorPane fx:id="navigationBlock" onMouseClicked="#showOrHideNavigationPanel" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
-    <AnchorPane fx:id="aboutPanel" layoutY="427.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="256.0" styleClass="gray_background" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="-256.0">
+    <AnchorPane fx:id="aboutPanel" layoutY="427.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="69.0" prefWidth="256.0" styleClass="gray_background" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="-256.0">
         <Button fx:id="about" alignment="BASELINE_LEFT" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="256.0" text="About" AnchorPane.bottomAnchor="5.0">
             <styleClass>
                 <String fx:value="navigation_buttons" />
@@ -464,7 +465,7 @@
             </Label>
         </graphic>
     </Button>
-    <ScrollPane fx:id="navigationPanel" fitToWidth="true" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0" styleClass="scroll_pane_navigation" visible="false" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="-256.0" AnchorPane.topAnchor="73.0">
+    <ScrollPane fx:id="navigationPanel" fitToWidth="true" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="256.0" styleClass="scroll_pane_navigation" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="-256.0" AnchorPane.topAnchor="73.0">
         <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="760.0" prefWidth="280.0">
             <Label fx:id="mode" layoutY="5.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="256.0" styleClass="gray_background" text="Calculator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                 <font>
@@ -771,6 +772,7 @@
                     <Font name="Segoe UI" size="15.0" />
                 </font>
             </Button>
+         <Line endX="-10.0" endY="10.0" fill="#0073e5" layoutX="10.0" layoutY="71.0" startX="-10.0" startY="-10.0" stroke="#0073e5" strokeWidth="2.0" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="49.0" />
         </AnchorPane>
     </ScrollPane>
     <styleClass>

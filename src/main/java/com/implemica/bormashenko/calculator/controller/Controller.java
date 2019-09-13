@@ -281,17 +281,8 @@ public class Controller implements Initializable {
      * Opens or closes navigation bar.
      */
     public void showOrHideNavigationPanel() {
-        if (!navigationPanel.isVisible()) {
-            navigationPanel.setVisible(true);
-            aboutPanel.setVisible(true);
-            navigationBlock.setVisible(true);
-            translateNavigation(true);
-        } else {
-            translateNavigation(false);
-            navigationPanel.setVisible(false);
-            aboutPanel.setVisible(false);
-            navigationBlock.setVisible(false);
-        }
+        translateNavigation(!navigationBlock.isVisible());
+        navigationBlock.setVisible(!navigationBlock.isVisible());
     }
 
     /**
