@@ -14,6 +14,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -279,9 +281,17 @@ public class Controller implements Initializable {
      * Opens or closes navigation bar.
      */
     public void showOrHideNavigationPanel() {
-        navigationPanel.setVisible(!navigationPanel.isVisible());
-        aboutPanel.setVisible(!aboutPanel.isVisible());
-        navigationBlock.setVisible(!navigationBlock.isVisible());
+        if (!navigationPanel.isVisible()) {
+            navigationPanel.setVisible(true);
+            aboutPanel.setVisible(true);
+            navigationBlock.setVisible(true);
+            translateNavigation(true);
+        } else {
+            translateNavigation(false);
+            navigationPanel.setVisible(false);
+            aboutPanel.setVisible(false);
+            navigationBlock.setVisible(false);
+        }
     }
 
     /**
@@ -546,6 +556,35 @@ public class Controller implements Initializable {
      */
     public void equalsOperation() {
         calculateResult();
+    }
+
+    /**
+     * Slowly moves navigation bar to the right or left.
+     *
+     * @param visible if true, moves navigation bar right, otherwise moves right.
+     */
+    private void translateNavigation(boolean visible) {
+        int durationLength = 250;
+        Duration duration = Duration.millis(durationLength);
+        TranslateTransition transitionNavigation = new TranslateTransition(duration, navigationPanel);
+        TranslateTransition transitionAbout = new TranslateTransition(duration, aboutPanel);
+
+        int signum = convertBooleanToSignum(visible);
+
+        transitionNavigation.setByX(navigationPanel.getWidth() * signum);
+        transitionAbout.setByX(navigationPanel.getWidth() * signum);
+
+        transitionNavigation.play();
+        transitionAbout.play();
+    }
+
+    /**
+     * Converts boolean to int with sign.
+     * @param flag boolean value to convert.
+     * @return 1 if flag is true or -1 otherwise.
+     */
+    private int convertBooleanToSignum(boolean flag) {
+        return flag ? 1 : -1;
     }
 
     /**
