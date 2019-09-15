@@ -681,7 +681,7 @@ public class RobotControl extends GuiTest {
                 mainKey = KeyEvent.VK_DELETE;
             } else if (code.equals("esc")) {
                 mainKey = KeyEvent.VK_ESCAPE;
-            } else  if (code.equals("sqr")) {
+            } else if (code.equals("sqr")) {
                 clickOn(getNodeBySelector(SQR_ID));
             } else {
                 throw new IllegalArgumentException("Expected: string with correct keypad representation only. \n" +
@@ -822,7 +822,18 @@ public class RobotControl extends GuiTest {
      * @param flag     flag for setting visibility.
      */
     protected void setNodeVisible(String selector, boolean flag) {
-        Node control = getNodeBySelector(selector);
-        control.setVisible(flag);
+        Node node = getNodeBySelector(selector);
+        node.setVisible(flag);
+    }
+
+    /**
+     * Sets location X for node.
+     *
+     * @param selector     id of node.
+     * @param translationX translation x of node.
+     */
+    protected void translateNodeByX(String selector, double translationX) {
+        Node node = getNodeBySelector(selector);
+        node.setTranslateX(translationX);
     }
 }

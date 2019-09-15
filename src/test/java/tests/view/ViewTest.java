@@ -84,18 +84,17 @@ public class ViewTest extends RobotControl {
         //fonts
         Font system_12 = new Font("System", 12);
         Font systemBold_14 = new Font("System Bold", 14);
-        Font segoeUI_14_5 = new Font("Segoe UI", 14.5);
         Font segoeUI_15 = new Font("Segoe UI", 15);
         Font segoeUI_20 = new Font("Segoe UI", 20);
         Font segoeBlack_16 = new Font("Segoe UI Black", 16);
         Font segoeSemilight_15 = new Font("Segoe UI Semilight", 15);
         Font segoeSemibold_12 = new Font("Segoe UI Semibold", 12);
         Font segoeSemibold_20 = new Font("Segoe UI Semibold", 20);
-        Font segoeSemibold_22_5 = new Font("Segoe UI Semibold", 22.5);
+        Font segoeSemibold_23 = new Font("Segoe UI Semibold", 23);
         Font segoeSemibold_47 = new Font("Segoe UI Semibold", 47);
         Font segoeAssets_6 = new Font("Segoe MDL2 Assets", 6);
         Font segoeAssets_10 = new Font("Segoe MDL2 Assets", 10);
-        Font segoeAssets_14_5 = new Font("Segoe MDL2 Assets", 14.5);
+        Font segoeAssets_15 = new Font("Segoe MDL2 Assets", 15);
         Font segoeAssets_16 = new Font("Segoe MDL2 Assets", 16);
         Font calcAssets_15 = new Font("Calculator MDL2 Assets", 15);
 
@@ -104,7 +103,7 @@ public class ViewTest extends RobotControl {
             //digits
             checkColorAndFontForButtons(new String[]{ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID, SEVEN_ID,
                             EIGHT_ID, NINE_ID, ZERO_ID},
-                    mostlyWhileColor, veryDarkGrayColor, segoeSemibold_22_5,
+                    mostlyWhileColor, veryDarkGrayColor, segoeSemibold_23,
                     lightGrayColor, veryDarkGrayColor);
 
             //dot
@@ -114,11 +113,11 @@ public class ViewTest extends RobotControl {
 
             //math operations
             checkColorAndFontForButtons(new String[]{DIVIDE_ID, MULTIPLY_ID, SUBTRACT_ID, ADD_ID, EQUALS_ID},
-                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
+                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_15,
                     strongBlueColor, whiteColor);
 
             checkColorAndFontForButtons(new String[]{NEGATE_ID, PERCENT_ID, SQRT_ID},
-                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
+                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_15,
                     lightGrayColor, veryDarkGrayColor);
 
             checkColorAndFontForButtons(new String[]{SQR_ID, INVERSE_ID},
@@ -127,7 +126,7 @@ public class ViewTest extends RobotControl {
 
             //clear operations
             checkColorAndFontForButtons(new String[]{CLEAR_ALL_ID, CLEAR_TEXT_ID},
-                    veryLightGrayColor, veryDarkGrayColor, segoeUI_14_5,
+                    veryLightGrayColor, veryDarkGrayColor, segoeUI_15,
                     lightGrayColor, veryDarkGrayColor);
 
             checkColorAndFontForButtons(new String[]{BACKSPACE_ID},
@@ -190,9 +189,9 @@ public class ViewTest extends RobotControl {
                     vividRedColor, whiteColor);
 
             //navigation buttons in scroll pane
-            setNodeVisible(NAVIGATION_PANEL_ID, true);
-            setNodeVisible(ABOUT_PANEL_ID, true);
             setNodeVisible(NAVIGATION_BLOCK_ID, true);
+            translateNodeByX(NAVIGATION_PANEL_ID, 256);
+            translateNodeByX(ABOUT_PANEL_ID, 256);
 
             checkColorAndFontForButtons(new String[]{STANDARD_MODE_ID, SCIENTIFIC_MODE_ID, PROGRAMMER_MODE_ID,
                             DATE_CALCULATION_MODE_ID, CURRENCY_MODE_ID, VOLUME_MODE_ID, LENGTH_MODE_ID},
@@ -216,7 +215,7 @@ public class ViewTest extends RobotControl {
             //check that standard operations buttons is under the navigation block,
             // while buttons in top panel are not under the block
             checkColorAndFontForButtons(new String[]{DIVIDE_ID, MULTIPLY_ID, SUBTRACT_ID, ADD_ID, EQUALS_ID},
-                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_14_5,
+                    veryLightGrayColor, veryDarkGrayColor, segoeAssets_15,
                     veryLightGrayColor, veryDarkGrayColor);
 
             //minimize and expand
@@ -229,9 +228,9 @@ public class ViewTest extends RobotControl {
                     lightGrayColor, veryDarkGrayColor, segoeAssets_10,
                     vividRedColor, whiteColor);
 
-            setNodeVisible(NAVIGATION_PANEL_ID, false);
-            setNodeVisible(ABOUT_PANEL_ID, false);
             setNodeVisible(NAVIGATION_BLOCK_ID, false);
+            translateNodeByX(NAVIGATION_PANEL_ID, -256);
+            translateNodeByX(ABOUT_PANEL_ID, -256);
 
             //check that navigation button is under the memory block,
             // while buttons in top panel are not under the block
