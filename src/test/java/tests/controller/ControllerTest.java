@@ -147,20 +147,32 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void showNavigationPanelTest() {
-        assertFalse(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
-        assertFalse(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
+        assertEquals(0, getNodeBySelector(NAVIGATION_PANEL_ID).getTranslateX());
+        assertEquals(0, getNodeBySelector(ABOUT_PANEL_ID).getTranslateX());
         assertFalse(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
 
         clickOn(getButtonBySelector(NAVIGATION_ID));
 
-        assertTrue(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
-        assertTrue(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(256, getNodeBySelector(NAVIGATION_PANEL_ID).getTranslateX());
+        assertEquals(257, getNodeBySelector(ABOUT_PANEL_ID).getTranslateX());
         assertTrue(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
 
         clickOn(getButtonBySelector(NAVIGATION_ID));
 
-        assertFalse(getNodeBySelector(NAVIGATION_PANEL_ID).isVisible());
-        assertFalse(getNodeBySelector(ABOUT_PANEL_ID).isVisible());
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(0, getNodeBySelector(NAVIGATION_PANEL_ID).getTranslateX());
+        assertEquals(0, getNodeBySelector(ABOUT_PANEL_ID).getTranslateX());
         assertFalse(getNodeBySelector(NAVIGATION_BLOCK_ID).isVisible());
     }
 
