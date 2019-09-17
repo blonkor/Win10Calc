@@ -67,9 +67,9 @@ class CalculationModelTest {
 
         calculation.resetAll();
 
-        assertEquals(calculation.getFirst(), BigDecimal.ZERO);
-        assertEquals(calculation.getSecond(), BigDecimal.ZERO);
-        assertNull(calculation.getResult());
+        assertEquals(BigDecimal.ZERO, calculation.getFirst());
+        assertEquals(BigDecimal.ZERO, calculation.getSecond());
+        assertEquals(BigDecimal.ZERO, calculation.getResult());
         assertNull(calculation.getBinaryOperation());
     }
 
@@ -251,7 +251,7 @@ class CalculationModelTest {
 
         checkSubtractOperation("0.01", "0.00000000000000000000000000001",
                 "0.00999999999999999999999999999");
-        checkSubtractOperation("0.00000000000000000000000000001","0.01",
+        checkSubtractOperation("0.00000000000000000000000000001", "0.01",
                 "-0.00999999999999999999999999999");
 
         //boundary
@@ -324,660 +324,90 @@ class CalculationModelTest {
      */
     @Test
     void multiplyOperationTests() {
-        //integers only
-        {
-            //first is -10000000000000000
-            checkMultiplyOperation("-10000000000000000", "-10000000000000000", "1.e+32");
-            checkMultiplyOperation("-10000000000000000", "-9999999999999999", "9.999999999999999e+31");
-            checkMultiplyOperation("-10000000000000000", "-9999999999999998",
-                    "9.999999999999998e+31");
-            checkMultiplyOperation("-10000000000000000", "-10", "1.e+17");
-            checkMultiplyOperation("-10000000000000000", "-1", "1.e+16");
-
-            checkMultiplyOperation("-10000000000000000", "0", "0");
-
-            checkMultiplyOperation("-10000000000000000", "1", "-1.e+16");
-            checkMultiplyOperation("-10000000000000000", "10", "-1.e+17");
-            checkMultiplyOperation("-10000000000000000", "9999999999999998",
-                    "-9.999999999999998e+31");
-            checkMultiplyOperation("-10000000000000000", "9999999999999999",
-                    "-9.999999999999999e+31");
-            checkMultiplyOperation("-10000000000000000", "10000000000000000", "-1.e+32");
-
-            //first is -9999999999999999
-            checkMultiplyOperation("-9999999999999999", "-9999999999999999",
-                    "99999999999999980000000000000001");
-            checkMultiplyOperation("-9999999999999999", "-9999999999999998",
-                    "99999999999999970000000000000002");
-            checkMultiplyOperation("-9999999999999999", "-10", "9.999999999999999e+16");
-            checkMultiplyOperation("-9999999999999999", "-1", "9999999999999999");
-
-            checkMultiplyOperation("-9999999999999999", "0", "0");
-
-            checkMultiplyOperation("-9999999999999999", "1", "-9999999999999999");
-            checkMultiplyOperation("-9999999999999999", "10", "-9.999999999999999e+16");
-            checkMultiplyOperation("-9999999999999999", "9999999999999998",
-                    "-99999999999999970000000000000002");
-            checkMultiplyOperation("-9999999999999999", "9999999999999999",
-                    "-99999999999999980000000000000001");
-            checkMultiplyOperation("-9999999999999999", "10000000000000000", "-9.999999999999999e+31");
-
-            //first is -9999999999999998
-            checkMultiplyOperation("-9999999999999998", "-9999999999999998",
-                    "99999999999999960000000000000004");
-            checkMultiplyOperation("-9999999999999998", "-10", "9.999999999999998e+16");
-            checkMultiplyOperation("-9999999999999998", "-1", "9999999999999998");
-
-            checkMultiplyOperation("-9999999999999998", "0", "0");
-
-            checkMultiplyOperation("-9999999999999998", "1", "-9999999999999998");
-            checkMultiplyOperation("-9999999999999998", "10", "-9.999999999999998e+16");
-            checkMultiplyOperation("-9999999999999998", "9999999999999998",
-                    "-99999999999999960000000000000004");
-            checkMultiplyOperation("-9999999999999998", "9999999999999999",
-                    "-99999999999999970000000000000002");
-            checkMultiplyOperation("-9999999999999998", "10000000000000000",
-                    "-9.999999999999998e+31");
-
-            //first is -10
-            checkMultiplyOperation("-10", "-10", "1.e+2");
-            checkMultiplyOperation("-10", "-1", "1.e+1");
-
-            checkMultiplyOperation("-10", "0", "0");
-
-            checkMultiplyOperation("-10", "1", "-1.e+1");
-            checkMultiplyOperation("-10", "10", "-1.e+2");
-            checkMultiplyOperation("-10", "9999999999999998", "-9.999999999999998e+16");
-            checkMultiplyOperation("-10", "9999999999999999", "-9.999999999999999e+16");
-            checkMultiplyOperation("-10", "10000000000000000", "-1.e+17");
-
-            //first is -1
-            checkMultiplyOperation("-1", "-1", "1");
-
-            checkMultiplyOperation("-1", "0", "0");
-
-            checkMultiplyOperation("-1", "1", "-1");
-            checkMultiplyOperation("-1", "10", "-1.e+1");
-            checkMultiplyOperation("-1", "9999999999999998", "-9999999999999998");
-            checkMultiplyOperation("-1", "9999999999999999", "-9999999999999999");
-            checkMultiplyOperation("-1", "10000000000000000", "-1.e+16");
-
-            //first is 0
-            checkMultiplyOperation("0", "0", "0");
-
-            checkMultiplyOperation("0", "1", "0");
-            checkMultiplyOperation("0", "10", "0");
-            checkMultiplyOperation("0", "9999999999999998", "0");
-            checkMultiplyOperation("0", "9999999999999999", "0");
-            checkMultiplyOperation("0", "10000000000000000", "0");
-
-            //first is 1
-            checkMultiplyOperation("1", "1", "1");
-            checkMultiplyOperation("1", "10", "1.e+1");
-            checkMultiplyOperation("1", "9999999999999998", "9999999999999998");
-            checkMultiplyOperation("1", "9999999999999999", "9999999999999999");
-            checkMultiplyOperation("1", "10000000000000000", "1.e+16");
-
-            //first is 10
-            checkMultiplyOperation("10", "10", "1.e+2");
-            checkMultiplyOperation("10", "9999999999999998", "9.999999999999998e+16");
-            checkMultiplyOperation("10", "9999999999999999", "9.999999999999999e+16");
-            checkMultiplyOperation("10", "10000000000000000", "1.e+17");
-
-            //first is 9999999999999998
-            checkMultiplyOperation("9999999999999998", "9999999999999998",
-                    "99999999999999960000000000000004");
-            checkMultiplyOperation("9999999999999998", "9999999999999999",
-                    "99999999999999970000000000000002");
-            checkMultiplyOperation("9999999999999998", "10000000000000000",
-                    "9.999999999999998e+31");
-
-            //first is 9999999999999999
-            checkMultiplyOperation("9999999999999999", "9999999999999999",
-                    "99999999999999980000000000000001");
-            checkMultiplyOperation("9999999999999999", "10000000000000000", "9.999999999999999e+31");
-
-            //first is 10000000000000000
-            checkMultiplyOperation("10000000000000000", "10000000000000000", "1.e+32");
-        }
-
-        //integer and decimal
-        {
-            //first is -10000000000000000
-            checkMultiplyOperation("-10000000000000000", "-0.9999999999999999", "9999999999999999");
-            checkMultiplyOperation("-10000000000000000", "-0.9", "9.e+15");
-            checkMultiplyOperation("-10000000000000000", "-0.1", "1.e+15");
-
-            checkMultiplyOperation("-10000000000000000", "0.1", "-1.e+15");
-            checkMultiplyOperation("-10000000000000000", "0.9", "-9.e+15");
-            checkMultiplyOperation("-10000000000000000", "0.9999999999999999", "-9999999999999999");
-
-            //first is -9999999999999999
-            checkMultiplyOperation("-9999999999999999", "-0.9999999999999999",
-                    "9999999999999998.0000000000000001");
-            checkMultiplyOperation("-9999999999999999", "-0.9", "8999999999999999.1");
-            checkMultiplyOperation("-9999999999999999", "-0.1", "999999999999999.9");
-
-            checkMultiplyOperation("-9999999999999999", "0.1", "-999999999999999.9");
-            checkMultiplyOperation("-9999999999999999", "0.9", "-8999999999999999.1");
-            checkMultiplyOperation("-9999999999999999", "0.9999999999999999",
-                    "-9999999999999998.0000000000000001");
-
-            //first is -9999999999999998
-            checkMultiplyOperation("-9999999999999998", "-0.9999999999999999",
-                    "9999999999999997.0000000000000002");
-            checkMultiplyOperation("-9999999999999998", "-0.9", "8999999999999998.2");
-            checkMultiplyOperation("-9999999999999998", "-0.1", "999999999999999.8");
-
-            checkMultiplyOperation("-9999999999999998", "0.1", "-999999999999999.8");
-            checkMultiplyOperation("-9999999999999998", "0.9", "-8999999999999998.2");
-            checkMultiplyOperation("-9999999999999998", "0.9999999999999999",
-                    "-9999999999999997.0000000000000002");
-
-            //first is -10
-            checkMultiplyOperation("-10", "-0.9999999999999999", "9.999999999999999");
-            checkMultiplyOperation("-10", "-0.9", "9");
-            checkMultiplyOperation("-10", "-0.1", "1");
-
-            checkMultiplyOperation("-10", "0.1", "-1");
-            checkMultiplyOperation("-10", "0.9", "-9");
-            checkMultiplyOperation("-10", "0.9999999999999999", "-9.999999999999999");
-
-            //first is -1
-            checkMultiplyOperation("-1", "-0.9999999999999999", "0.9999999999999999");
-            checkMultiplyOperation("-1", "-0.9", "0.9");
-            checkMultiplyOperation("-1", "-0.1", "0.1");
-
-            checkMultiplyOperation("-1", "0.1", "-0.1");
-            checkMultiplyOperation("-1", "0.9", "-0.9");
-            checkMultiplyOperation("-1", "0.9999999999999999", "-0.9999999999999999");
-
-            //first is 0
-            checkMultiplyOperation("0", "-0.9999999999999999", "0");
-            checkMultiplyOperation("0", "-0.9", "0");
-            checkMultiplyOperation("0", "-0.1", "0");
-
-            checkMultiplyOperation("0", "0.1", "0");
-            checkMultiplyOperation("0", "0.9", "0");
-            checkMultiplyOperation("0", "0.9999999999999999", "0");
-
-            //first is 1
-            checkMultiplyOperation("1", "-0.9999999999999999", "-0.9999999999999999");
-            checkMultiplyOperation("1", "-0.9", "-0.9");
-            checkMultiplyOperation("1", "-0.1", "-0.1");
-
-            checkMultiplyOperation("1", "0.1", "0.1");
-            checkMultiplyOperation("1", "0.9", "0.9");
-            checkMultiplyOperation("1", "0.9999999999999999", "0.9999999999999999");
-
-            //first is 10
-            checkMultiplyOperation("10", "-0.9999999999999999", "-9.999999999999999");
-            checkMultiplyOperation("10", "-0.9", "-9");
-            checkMultiplyOperation("10", "-0.1", "-1");
-
-            checkMultiplyOperation("10", "0.1", "1");
-            checkMultiplyOperation("10", "0.9", "9");
-            checkMultiplyOperation("10", "0.9999999999999999", "9.999999999999999");
-
-            //first is 9999999999999998
-            checkMultiplyOperation("9999999999999998", "-0.9999999999999999",
-                    "-9999999999999997.0000000000000002");
-            checkMultiplyOperation("9999999999999998", "-0.9", "-8999999999999998.2");
-            checkMultiplyOperation("9999999999999998", "-0.1", "-999999999999999.8");
-
-            checkMultiplyOperation("9999999999999998", "0.1", "999999999999999.8");
-            checkMultiplyOperation("9999999999999998", "0.9", "8999999999999998.2");
-            checkMultiplyOperation("9999999999999998", "0.9999999999999999",
-                    "9999999999999997.0000000000000002");
-
-            //first is 9999999999999999
-            checkMultiplyOperation("9999999999999999", "-0.9999999999999999",
-                    "-9999999999999998.0000000000000001");
-            checkMultiplyOperation("9999999999999999", "-0.9", "-8999999999999999.1");
-            checkMultiplyOperation("9999999999999999", "-0.1", "-999999999999999.9");
-
-            checkMultiplyOperation("9999999999999999", "0.1", "999999999999999.9");
-            checkMultiplyOperation("9999999999999999", "0.9", "8999999999999999.1");
-            checkMultiplyOperation("9999999999999999", "0.9999999999999999", "9999999999999998.0000000000000001");
-
-            //first is 10000000000000000
-            checkMultiplyOperation("10000000000000000", "-0.9999999999999999", "-9999999999999999");
-            checkMultiplyOperation("10000000000000000", "-0.9", "-9.e+15");
-            checkMultiplyOperation("10000000000000000", "-0.1", "-1.e+15");
-
-            checkMultiplyOperation("10000000000000000", "0.1", "1.e+15");
-            checkMultiplyOperation("10000000000000000", "0.9", "9.e+15");
-            checkMultiplyOperation("10000000000000000", "0.9999999999999999", "9999999999999999");
-        }
-
-        //decimals only
-        {
-            //first is -0.9999999999999999
-            checkMultiplyOperation("-0.9999999999999999", "-0.9999999999999999",
-                    "0.99999999999999980000000000000001");
-            checkMultiplyOperation("-0.9999999999999999", "-0.9", "0.89999999999999991");
-            checkMultiplyOperation("-0.9999999999999999", "-0.1", "0.09999999999999999");
-
-            checkMultiplyOperation("-0.9999999999999999", "0.1", "-0.09999999999999999");
-            checkMultiplyOperation("-0.9999999999999999", "0.9", "-0.89999999999999991");
-            checkMultiplyOperation("-0.9999999999999999", "0.9999999999999999",
-                    "-0.99999999999999980000000000000001");
-
-            //first is -0.9
-            checkMultiplyOperation("-0.9", "-0.9", "0.81");
-            checkMultiplyOperation("-0.9", "-0.1", "0.09");
-
-            checkMultiplyOperation("-0.9", "0.1", "-0.09");
-            checkMultiplyOperation("-0.9", "0.9", "-0.81");
-            checkMultiplyOperation("-0.9", "0.9999999999999999", "-0.89999999999999991");
-
-            //first is -0.1
-            checkMultiplyOperation("-0.1", "-0.1", "0.01");
-
-            checkMultiplyOperation("-0.1", "0.1", "-0.01");
-            checkMultiplyOperation("-0.1", "0.9", "-0.09");
-            checkMultiplyOperation("-0.1", "0.9999999999999999", "-0.09999999999999999");
-
-            //first is 0.1
-            checkMultiplyOperation("0.1", "0.1", "0.01");
-            checkMultiplyOperation("0.1", "0.9", "0.09");
-            checkMultiplyOperation("0.1", "0.9999999999999999", "0.09999999999999999");
-
-            //first is 0.9
-            checkMultiplyOperation("0.9", "0.9", "0.81");
-            checkMultiplyOperation("0.9", "0.9999999999999999", "0.89999999999999991");
-
-            //first is 0.9999999999999999
-            checkMultiplyOperation("0.9999999999999999", "0.9999999999999999", "0.99999999999999980000000000000001");
-        }
-
-        //engineer numbers
-        //with engineer numbers
-        {
-            //first is -1.e+17
-            checkMultiplyOperation("-1.e+17", "-1.e+17", "1.e+34");
-            checkMultiplyOperation("-1.e+17", "-1.e+16", "1.e+33");
-
-            checkMultiplyOperation("-1.e+17", "1.e+16", "-1.e+33");
-            checkMultiplyOperation("-1.e+17", "1.e+17", "-1.e+34");
-
-            //first is -1.e+16
-            checkMultiplyOperation("-1.e+16", "-1.e+16", "1.e+32");
-
-            checkMultiplyOperation("-1.e+16", "1.e+16", "-1.e+32");
-            checkMultiplyOperation("-1.e+16", "1.e+17", "-1.e+33");
-
-            //first is 1.e+16
-            checkMultiplyOperation("1.e+16", "1.e+16", "1.e+32");
-            checkMultiplyOperation("1.e+16", "1.e+17", "1.e+33");
-
-            //first is 1.e+17
-            checkMultiplyOperation("1.e+17", "1.e+17", "1.e+34");
-
-
-            //first is -1.e-17
-            checkMultiplyOperation("-1.e-17", "-1.e-17", "1.e-34");
-            checkMultiplyOperation("-1.e-17", "-1.e-16", "1.e-33");
-
-            checkMultiplyOperation("-1.e-17", "1.e-16", "-1.e-33");
-            checkMultiplyOperation("-1.e-17", "1.e-17", "-1.e-34");
-
-            //first is -1.e-16
-            checkMultiplyOperation("-1.e-16", "-1.e-16", "1.e-32");
-
-            checkMultiplyOperation("-1.e-16", "1.e-16", "-1.e-32");
-            checkMultiplyOperation("-1.e-16", "1.e-17", "-1.e-33");
-
-            //first is 1.e-16
-            checkMultiplyOperation("1.e-16", "1.e-16", "1.e-32");
-            checkMultiplyOperation("1.e-16", "1.e-17", "1.e-33");
-
-            //first is 1.e-17
-            checkMultiplyOperation("1.e-17", "1.e-17", "1.e-34");
-        }
-
-        //with integers
-        {
-            //first is -1.e-9999
-            checkMultiplyOperation("-1.e-9999", "-10000000000000000", "1.e-9983");
-            checkMultiplyOperation("-1.e-9999", "-9999999999999999", "9.999999999999999e-9984");
-            checkMultiplyOperation("-1.e-9999", "-9999999999999998",
-                    "9.999999999999998e-9984");
-            checkMultiplyOperation("-1.e-9999", "-10", "1.e-9998");
-            checkMultiplyOperation("-1.e-9999", "-1", "1.e-9999");
-
-            checkMultiplyOperation("-1.e-9999", "0", "0");
-
-            checkMultiplyOperation("-1.e-9999", "1", "-1.e-9999");
-            checkMultiplyOperation("-1.e-9999", "10", "-1.e-9998");
-            checkMultiplyOperation("-1.e-9999", "9999999999999998",
-                    "-9.999999999999998e-9984");
-            checkMultiplyOperation("-1.e-9999", "9999999999999999", "-9.999999999999999e-9984");
-            checkMultiplyOperation("-1.e-9999", "10000000000000000", "-1.e-9983");
-
-            //first is -1.e-9998
-            checkMultiplyOperation("-1.e-9998", "-10000000000000000", "1.e-9982");
-            checkMultiplyOperation("-1.e-9998", "-9999999999999999", "9.999999999999999e-9983");
-            checkMultiplyOperation("-1.e-9998", "-9999999999999998",
-                    "9.999999999999998e-9983");
-            checkMultiplyOperation("-1.e-9998", "-10", "1.e-9997");
-            checkMultiplyOperation("-1.e-9998", "-1", "1.e-9998");
-
-            checkMultiplyOperation("-1.e-9998", "0", "0");
-
-            checkMultiplyOperation("-1.e-9998", "1", "-1.e-9998");
-            checkMultiplyOperation("-1.e-9998", "10", "-1.e-9997");
-            checkMultiplyOperation("-1.e-9998", "9999999999999998",
-                    "-9.999999999999998e-9983");
-            checkMultiplyOperation("-1.e-9998", "9999999999999999", "-9.999999999999999e-9983");
-            checkMultiplyOperation("-1.e-9998", "10000000000000000", "-1.e-9982");
-
-            //first is 1.e-9998
-            checkMultiplyOperation("1.e-9998", "-10000000000000000", "-1.e-9982");
-            checkMultiplyOperation("1.e-9998", "-9999999999999999", "-9.999999999999999e-9983");
-            checkMultiplyOperation("1.e-9998", "-9999999999999998",
-                    "-9.999999999999998e-9983");
-            checkMultiplyOperation("1.e-9998", "-10", "-1.e-9997");
-            checkMultiplyOperation("1.e-9998", "-1", "-1.e-9998");
-
-            checkMultiplyOperation("1.e-9998", "0", "0");
-
-            checkMultiplyOperation("1.e-9998", "1", "1.e-9998");
-            checkMultiplyOperation("1.e-9998", "10", "1.e-9997");
-            checkMultiplyOperation("1.e-9998", "9999999999999998",
-                    "9.999999999999998e-9983");
-            checkMultiplyOperation("1.e-9998", "9999999999999999", "9.999999999999999e-9983");
-            checkMultiplyOperation("1.e-9998", "10000000000000000", "1.e-9982");
-
-            //first is 1.e-9999
-            checkMultiplyOperation("1.e-9999", "-10000000000000000", "-1.e-9983");
-            checkMultiplyOperation("1.e-9999", "-9999999999999999", "-9.999999999999999e-9984");
-            checkMultiplyOperation("1.e-9999", "-9999999999999998",
-                    "-9.999999999999998e-9984");
-            checkMultiplyOperation("1.e-9999", "-10", "-1.e-9998");
-            checkMultiplyOperation("1.e-9999", "-1", "-1.e-9999");
-
-            checkMultiplyOperation("1.e-9999", "0", "0");
-
-            checkMultiplyOperation("1.e-9999", "1", "1.e-9999");
-            checkMultiplyOperation("1.e-9999", "10", "1.e-9998");
-            checkMultiplyOperation("1.e-9999", "9999999999999998",
-                    "9.999999999999998e-9984");
-            checkMultiplyOperation("1.e-9999", "9999999999999999", "9.999999999999999e-9984");
-            checkMultiplyOperation("1.e-9999", "10000000000000000", "1.e-9983");
-
-
-            //first is -1.e+17
-            checkMultiplyOperation("-1.e+17", "-10000000000000000", "1.e+33");
-            checkMultiplyOperation("-1.e+17", "-9999999999999999", "9.999999999999999e+32");
-            checkMultiplyOperation("-1.e+17", "-9999999999999998",
-                    "9.999999999999998e+32");
-            checkMultiplyOperation("-1.e+17", "-10", "1.e+18");
-            checkMultiplyOperation("-1.e+17", "-1", "1.e+17");
-
-            checkMultiplyOperation("-1.e+17", "0", "0");
-
-            checkMultiplyOperation("-1.e+17", "1", "-1.e+17");
-            checkMultiplyOperation("-1.e+17", "10", "-1.e+18");
-            checkMultiplyOperation("-1.e+17", "9999999999999998",
-                    "-9.999999999999998e+32");
-            checkMultiplyOperation("-1.e+17", "9999999999999999", "-9.999999999999999e+32");
-            checkMultiplyOperation("-1.e+17", "10000000000000000", "-1.e+33");
-
-            //first is -1.e+16
-            checkMultiplyOperation("-1.e+16", "-10000000000000000", "1.e+32");
-            checkMultiplyOperation("-1.e+16", "-9999999999999999", "9.999999999999999e+31");
-            checkMultiplyOperation("-1.e+16", "-9999999999999998",
-                    "9.999999999999998e+31");
-            checkMultiplyOperation("-1.e+16", "-10", "1.e+17");
-            checkMultiplyOperation("-1.e+16", "-1", "1.e+16");
-
-            checkMultiplyOperation("-1.e+16", "0", "0");
-
-            checkMultiplyOperation("-1.e+16", "1", "-1.e+16");
-            checkMultiplyOperation("-1.e+16", "10", "-1.e+17");
-            checkMultiplyOperation("-1.e+16", "9999999999999998",
-                    "-9.999999999999998e+31");
-            checkMultiplyOperation("-1.e+16", "9999999999999999", "-9.999999999999999e+31");
-            checkMultiplyOperation("-1.e+16", "10000000000000000", "-1.e+32");
-
-            //first is 1.e+16
-            checkMultiplyOperation("1.e+16", "-10000000000000000", "-1.e+32");
-            checkMultiplyOperation("1.e+16", "-9999999999999999", "-9.999999999999999e+31");
-            checkMultiplyOperation("1.e+16", "-9999999999999998", "-9.999999999999998e+31");
-            checkMultiplyOperation("1.e+16", "-10", "-1.e+17");
-            checkMultiplyOperation("1.e+16", "-1", "-1.e+16");
-
-            checkMultiplyOperation("1.e+16", "0", "0");
-
-            checkMultiplyOperation("1.e+16", "1", "1.e+16");
-            checkMultiplyOperation("1.e+16", "10", "1.e+17");
-            checkMultiplyOperation("1.e+16", "9999999999999998", "9.999999999999998e+31");
-            checkMultiplyOperation("1.e+16", "9999999999999999", "9.999999999999999e+31");
-            checkMultiplyOperation("1.e+16", "10000000000000000", "1.e+32");
-
-            //first is 1.e+17
-            checkMultiplyOperation("1.e+17", "-10000000000000000", "-1.e+33");
-            checkMultiplyOperation("1.e+17", "-9999999999999999", "-9.999999999999999e+32");
-            checkMultiplyOperation("1.e+17", "-9999999999999998", "-9.999999999999998e+32");
-            checkMultiplyOperation("1.e+17", "-10", "-1.e+18");
-            checkMultiplyOperation("1.e+17", "-1", "-1.e+17");
-
-            checkMultiplyOperation("1.e+17", "0", "0");
-
-            checkMultiplyOperation("1.e+17", "1", "1.e+17");
-            checkMultiplyOperation("1.e+17", "10", "1.e+18");
-            checkMultiplyOperation("1.e+17", "9999999999999998", "9.999999999999998e+32");
-            checkMultiplyOperation("1.e+17", "9999999999999999", "9.999999999999999e+32");
-            checkMultiplyOperation("1.e+17", "10000000000000000", "1.e+33");
-
-
-            //first is -1.e-17
-            checkMultiplyOperation("-1.e-17", "-10000000000000000", "0.1");
-            checkMultiplyOperation("-1.e-17", "-9999999999999999", "0.09999999999999999");
-            checkMultiplyOperation("-1.e-17", "-9999999999999998", "0.09999999999999998");
-            checkMultiplyOperation("-1.e-17", "-10", "1.e-16");
-            checkMultiplyOperation("-1.e-17", "-1", "1.e-17");
-
-            checkMultiplyOperation("-1.e-17", "0", "0");
-
-            checkMultiplyOperation("-1.e-17", "1", "-1.e-17");
-            checkMultiplyOperation("-1.e-17", "10", "-1.e-16");
-            checkMultiplyOperation("-1.e-17", "9999999999999998",
-                    "-0.09999999999999998");
-            checkMultiplyOperation("-1.e-17", "9999999999999999", "-0.09999999999999999");
-            checkMultiplyOperation("-1.e-17", "10000000000000000", "-0.1");
-
-            //first is -1.e-16
-            checkMultiplyOperation("-1.e-16", "-10000000000000000", "1");
-            checkMultiplyOperation("-1.e-16", "-9999999999999999", "0.9999999999999999");
-            checkMultiplyOperation("-1.e-16", "-9999999999999998", "0.9999999999999998");
-            checkMultiplyOperation("-1.e-16", "-10", "1.e-15");
-            checkMultiplyOperation("-1.e-16", "-1", "1.e-16");
-
-            checkMultiplyOperation("-1.e-16", "0", "0");
-
-            checkMultiplyOperation("-1.e-16", "1", "-1.e-16");
-            checkMultiplyOperation("-1.e-16", "10", "-1.e-15");
-            checkMultiplyOperation("-1.e-16", "9999999999999998",
-                    "-0.9999999999999998");
-            checkMultiplyOperation("-1.e-16", "9999999999999999", "-0.9999999999999999");
-            checkMultiplyOperation("-1.e-16", "10000000000000000", "-1");
-
-            //first is 1.e-16
-            checkMultiplyOperation("1.e-16", "-10000000000000000", "-1");
-            checkMultiplyOperation("1.e-16", "-9999999999999999", "-0.9999999999999999");
-            checkMultiplyOperation("1.e-16", "-9999999999999998", "-0.9999999999999998");
-            checkMultiplyOperation("1.e-16", "-10", "-1.e-15");
-            checkMultiplyOperation("1.e-16", "-1", "-1.e-16");
-
-            checkMultiplyOperation("1.e-16", "0", "0");
-
-            checkMultiplyOperation("1.e-16", "1", "1.e-16");
-            checkMultiplyOperation("1.e-16", "10", "1.e-15");
-            checkMultiplyOperation("1.e-16", "9999999999999998", "0.9999999999999998");
-            checkMultiplyOperation("1.e-16", "9999999999999999", "0.9999999999999999");
-            checkMultiplyOperation("1.e-16", "10000000000000000", "1");
-
-            //first is 1.e-17
-            checkMultiplyOperation("1.e-17", "-10000000000000000", "-0.1");
-            checkMultiplyOperation("1.e-17", "-9999999999999999", "-0.09999999999999999");
-            checkMultiplyOperation("1.e-17", "-9999999999999998", "-0.09999999999999998");
-            checkMultiplyOperation("1.e-17", "-10", "-1.e-16");
-            checkMultiplyOperation("1.e-17", "-1", "-1.e-17");
-
-            checkMultiplyOperation("1.e-17", "0", "0");
-
-            checkMultiplyOperation("1.e-17", "1", "1.e-17");
-            checkMultiplyOperation("1.e-17", "10", "1.e-16");
-            checkMultiplyOperation("1.e-17", "9999999999999998", "0.09999999999999998");
-            checkMultiplyOperation("1.e-17", "9999999999999999", "0.09999999999999999");
-            checkMultiplyOperation("1.e-17", "10000000000000000", "0.1");
-        }
+        //easy cases
+        checkMultiplyOperation("2", "2", "4");
+        checkMultiplyOperation("-3", "-3", "9");
+        checkMultiplyOperation("5.5", "3.2", "17.6");
+        checkMultiplyOperation("-10.2", "-7", "71.4");
+        checkMultiplyOperation("7.4", "-5.1", "-37.74");
+        checkMultiplyOperation("1.e+5", "1.e+8", "1.e+13");
+        checkMultiplyOperation("1.e-20", "5.e-20", "5.e-40");
+
+        //cases with zero
+        checkMultiplyOperation("0", "0", "0");
+        checkMultiplyOperation("2", "0", "0");
+        checkMultiplyOperation("-3", "0", "0");
+        checkMultiplyOperation("5.5", "0", "0");
+        checkMultiplyOperation("0", "-7", "0");
+        checkMultiplyOperation("0", "-5.1", "0");
+        checkMultiplyOperation("0", "1.e+8", "0");
+
+        //big numbers
+        checkMultiplyOperation("10000000000000000", "10000000000000000", "1.e+32");
+        checkMultiplyOperation("5000000000000000", "9999999999999999",
+                "4.9999999999999995e+31");
+        checkMultiplyOperation("1234567890987654321", "1", "1234567890987654321");
+        checkMultiplyOperation("100000000000000000000000000", "10", "1.e+27");
 
         //with decimals
-        {
-            //first is -1.e+9999
-            checkMultiplyOperation("-1.e+9999", "-0.9999999999999999", "9.999999999999999e+9998");
-            checkMultiplyOperation("-1.e+9999", "-0.9", "9.e+9998");
-            checkMultiplyOperation("-1.e+9999", "-0.1", "1.e+9998");
+        checkMultiplyOperation("10000000000000000", "0.1", "1.e+15");
+        checkMultiplyOperation("5000000000000000", "0.9999999999999999",
+                "4999999999999999.5");
+        checkMultiplyOperation("1234567890987654321", "123.123",
+                "152003702442072962964.483");
+        checkMultiplyOperation("100000000000000000000000000", "0.00000000000000000000000000001",
+                "0.001");
 
-            checkMultiplyOperation("-1.e+9999", "0.1", "-1.e+9998");
-            checkMultiplyOperation("-1.e+9999", "0.9", "-9.e+9998");
-            checkMultiplyOperation("-1.e+9999", "0.9999999999999999", "-9.999999999999999e+9998");
+        //decimal and decimal
+        checkMultiplyOperation("0.0000000000001", "0.1", "0.00000000000001");
+        checkMultiplyOperation("0.0000000000000001", "0.9999999999999999",
+                "0.00000000000000009999999999999999");
+        checkMultiplyOperation("1234567890.987654321", "123.123",
+                "152003702442.072962964483");
+        checkMultiplyOperation("0.01", "0.00000000000000000000000000001",
+                "0.0000000000000000000000000000001");
 
-            //first is -1.e+9998
-            checkMultiplyOperation("-1.e+9998", "-0.9999999999999999", "9.999999999999999e+9997");
-            checkMultiplyOperation("-1.e+9998", "-0.9", "9.e+9997");
-            checkMultiplyOperation("-1.e+9998", "-0.1", "1.e+9997");
+        //boundary
+        checkMultiplyOperation("4.5e+9999", "2", "9.e+9999");
+        checkMultiplyOperation("9.e+9998", "10", "9.e+9999");
+        checkMultiplyOperation("9.e-9998", "0.1", "9.e-9999");
+        checkMultiplyOperation("4.5e-9999", "2", "9.e-9999");
 
-            checkMultiplyOperation("-1.e+9998", "0.1", "-1.e+9997");
-            checkMultiplyOperation("-1.e+9998", "0.9", "-9.e+9997");
-            checkMultiplyOperation("-1.e+9998", "0.9999999999999999", "-9.999999999999999e+9997");
-
-            //first is 1.e+9998
-            checkMultiplyOperation("1.e+9998", "-0.9999999999999999", "-9.999999999999999e+9997");
-            checkMultiplyOperation("1.e+9998", "-0.9", "-9.e+9997");
-            checkMultiplyOperation("1.e+9998", "-0.1", "-1.e+9997");
-
-            checkMultiplyOperation("1.e+9998", "0.1", "1.e+9997");
-            checkMultiplyOperation("1.e+9998", "0.9", "9.e+9997");
-            checkMultiplyOperation("1.e+9998", "0.9999999999999999", "9.999999999999999e+9997");
-
-            //first is 1.e+9999
-            checkMultiplyOperation("1.e+9999", "-0.9999999999999999", "-9.999999999999999e+9998");
-            checkMultiplyOperation("1.e+9999", "-0.9", "-9.e+9998");
-            checkMultiplyOperation("1.e+9999", "-0.1", "-1.e+9998");
-
-            checkMultiplyOperation("1.e+9999", "0.1", "1.e+9998");
-            checkMultiplyOperation("1.e+9999", "0.9", "9.e+9998");
-            checkMultiplyOperation("1.e+9999", "0.9999999999999999", "9.999999999999999e+9998");
-
-            //first is -1.e+17
-            checkMultiplyOperation("-1.e+17", "-0.9999999999999999", "9.999999999999999e+16");
-            checkMultiplyOperation("-1.e+17", "-0.9", "9.e+16");
-            checkMultiplyOperation("-1.e+17", "-0.1", "1.e+16");
-
-            checkMultiplyOperation("-1.e+17", "0.1", "-1.e+16");
-            checkMultiplyOperation("-1.e+17", "0.9", "-9.e+16");
-            checkMultiplyOperation("-1.e+17", "0.9999999999999999", "-9.999999999999999e+16");
-
-            //first is -1.e+16
-            checkMultiplyOperation("-1.e+16", "-0.9999999999999999", "9999999999999999");
-            checkMultiplyOperation("-1.e+16", "-0.9", "9.e+15");
-            checkMultiplyOperation("-1.e+16", "-0.1", "1.e+15");
-
-            checkMultiplyOperation("-1.e+16", "0.1", "-1.e+15");
-            checkMultiplyOperation("-1.e+16", "0.9", "-9.e+15");
-            checkMultiplyOperation("-1.e+16", "0.9999999999999999", "-9999999999999999");
-
-            //first is 1.e+16
-            checkMultiplyOperation("1.e+16", "-0.9999999999999999", "-9999999999999999");
-            checkMultiplyOperation("1.e+16", "-0.9", "-9.e+15");
-            checkMultiplyOperation("1.e+16", "-0.1", "-1.e+15");
-
-            checkMultiplyOperation("1.e+16", "0.1", "1.e+15");
-            checkMultiplyOperation("1.e+16", "0.9", "9.e+15");
-            checkMultiplyOperation("1.e+16", "0.9999999999999999", "9999999999999999");
-
-            //first is 1.e+17
-            checkMultiplyOperation("1.e+17", "-0.9999999999999999", "-9.999999999999999e+16");
-            checkMultiplyOperation("1.e+17", "-0.9", "-9.e+16");
-            checkMultiplyOperation("1.e+17", "-0.1", "-1.e+16");
-
-            checkMultiplyOperation("1.e+17", "0.1", "1.e+16");
-            checkMultiplyOperation("1.e+17", "0.9", "9.e+16");
-            checkMultiplyOperation("1.e+17", "0.9999999999999999", "9.999999999999999e+16");
-
-            //first is -1.e-17
-            checkMultiplyOperation("-1.e-17", "-0.9999999999999999", "9.999999999999999e-18");
-            checkMultiplyOperation("-1.e-17", "-0.9", "9.e-18");
-            checkMultiplyOperation("-1.e-17", "-0.1", "1.e-18");
-
-            checkMultiplyOperation("-1.e-17", "0.1", "-1.e-18");
-            checkMultiplyOperation("-1.e-17", "0.9", "-9.e-18");
-            checkMultiplyOperation("-1.e-17", "0.9999999999999999", "-9.999999999999999e-18");
-
-            //first is -1.e-16
-            checkMultiplyOperation("-1.e-16", "-0.9999999999999999", "9.999999999999999e-17");
-            checkMultiplyOperation("-1.e-16", "-0.9", "9.e-17");
-            checkMultiplyOperation("-1.e-16", "-0.1", "1.e-17");
-
-            checkMultiplyOperation("-1.e-16", "0.1", "-1.e-17");
-            checkMultiplyOperation("-1.e-16", "0.9", "-9.e-17");
-            checkMultiplyOperation("-1.e-16", "0.9999999999999999", "-9.999999999999999e-17");
-
-            //first is 1.e-16
-            checkMultiplyOperation("1.e-16", "-0.9999999999999999", "-9.999999999999999e-17");
-            checkMultiplyOperation("1.e-16", "-0.9", "-9.e-17");
-            checkMultiplyOperation("1.e-16", "-0.1", "-1.e-17");
-
-            checkMultiplyOperation("1.e-16", "0.1", "1.e-17");
-            checkMultiplyOperation("1.e-16", "0.9", "9.e-17");
-            checkMultiplyOperation("1.e-16", "0.9999999999999999", "9.999999999999999e-17");
-
-            //first is 1.e-17
-            checkMultiplyOperation("1.e-17", "-0.9999999999999999", "-9.999999999999999e-18");
-            checkMultiplyOperation("1.e-17", "-0.9", "-9.e-18");
-            checkMultiplyOperation("1.e-17", "-0.1", "-1.e-18");
-
-            checkMultiplyOperation("1.e-17", "0.1", "1.e-18");
-            checkMultiplyOperation("1.e-17", "0.9", "9.e-18");
-            checkMultiplyOperation("1.e-17", "0.9999999999999999", "9.999999999999999e-18");
-        }
+        checkMultiplyOperation("-4.5e+9999", "2", "-9.e+9999");
+        checkMultiplyOperation("9.e+9998", "-10", "-9.e+9999");
+        checkMultiplyOperation("9.e-9998", "-0.1", "-9.e-9999");
+        checkMultiplyOperation("-4.5e-9999", "2", "-9.e-9999");
 
         //several random values
-        {
-            checkMultiplyOperation("41", "13", "533");
-            checkMultiplyOperation("64", "56", "3584");
+        checkMultiplyOperation("41", "13", "533");
+        checkMultiplyOperation("64", "56", "3584");
 
-            checkMultiplyOperation("123", "-13", "-1599");
-            checkMultiplyOperation("41", "-65", "-2665");
+        checkMultiplyOperation("123", "-13", "-1599");
+        checkMultiplyOperation("41", "-65", "-2665");
 
-            checkMultiplyOperation("-876", "-13", "11388");
-            checkMultiplyOperation("-54", "-53", "2862");
+        checkMultiplyOperation("-876", "-13", "11388");
+        checkMultiplyOperation("-54", "-53", "2862");
 
-            checkMultiplyOperation("12", "541.652", "6499.824");
-            checkMultiplyOperation("9", "13.764", "123.876");
+        checkMultiplyOperation("12", "541.652", "6499.824");
+        checkMultiplyOperation("9", "13.764", "123.876");
 
-            checkMultiplyOperation("132", "-23.13", "-3053.16");
-            checkMultiplyOperation("12", "-76.87", "-922.44");
+        checkMultiplyOperation("132", "-23.13", "-3053.16");
+        checkMultiplyOperation("12", "-76.87", "-922.44");
 
-            checkMultiplyOperation("-65", "65.13", "-4233.45");
-            checkMultiplyOperation("-76", "75.123", "-5709.348");
+        checkMultiplyOperation("-65", "65.13", "-4233.45");
+        checkMultiplyOperation("-76", "75.123", "-5709.348");
 
-            checkMultiplyOperation("-13", "-6.12", "79.56");
-            checkMultiplyOperation("-76", "-13.5", "1026");
+        checkMultiplyOperation("-13", "-6.12", "79.56");
+        checkMultiplyOperation("-76", "-13.5", "1026");
 
-            checkMultiplyOperation("33.12", "6.13", "203.0256");
-            checkMultiplyOperation("86.7", "5.132", "444.9444");
+        checkMultiplyOperation("33.12", "6.13", "203.0256");
+        checkMultiplyOperation("86.7", "5.132", "444.9444");
 
-            checkMultiplyOperation("1.75", "-0.1", "-0.175");
-            checkMultiplyOperation("23.5", "-6.87", "-161.445");
+        checkMultiplyOperation("1.75", "-0.1", "-0.175");
+        checkMultiplyOperation("23.5", "-6.87", "-161.445");
 
-            checkMultiplyOperation("-765.1", "-1.8", "1377.18");
-            checkMultiplyOperation("-65.7", "-7.8", "512.46");
-        }
+        checkMultiplyOperation("-765.1", "-1.8", "1377.18");
+        checkMultiplyOperation("-65.7", "-7.8", "512.46");
     }
 
     /**
@@ -985,1114 +415,112 @@ class CalculationModelTest {
      */
     @Test
     void divideOperationTests() {
-        //integers only
-        {
-            //first is -10000000000000000
-            checkDivideOperation("-10000000000000000", "-10000000000000000", "1");
-            checkDivideOperation("-10000000000000000", "-10", "1.e+15");
-            checkDivideOperation("-10000000000000000", "-1", "1.e+16");
-
-            checkDivideOperation("-10000000000000000", "1", "-1.e+16");
-            checkDivideOperation("-10000000000000000", "10", "-1.e+15");
-            checkDivideOperation("-10000000000000000", "10000000000000000", "-1");
-
-            //first is -9999999999999999
-            checkDivideOperation("-9999999999999999", "-10000000000000000", "0.9999999999999999");
-            checkDivideOperation("-9999999999999999", "-9999999999999999", "1");
-            checkDivideOperation("-9999999999999999", "-10", "999999999999999.9");
-            checkDivideOperation("-9999999999999999", "-1", "9999999999999999");
-
-            checkDivideOperation("-9999999999999999", "1", "-9999999999999999");
-            checkDivideOperation("-9999999999999999", "10", "-999999999999999.9");
-            checkDivideOperation("-9999999999999999", "9999999999999999", "-1");
-            checkDivideOperation("-9999999999999999", "10000000000000000", "-0.9999999999999999");
-
-            //first is -9999999999999998
-            checkDivideOperation("-9999999999999998", "-10000000000000000",
-                    "0.9999999999999998");
-            checkDivideOperation("-9999999999999998", "-9999999999999998", "1");
-            checkDivideOperation("-9999999999999998", "-10", "999999999999999.8");
-            checkDivideOperation("-9999999999999998", "-1", "9999999999999998");
-
-            checkDivideOperation("-9999999999999998", "1", "-9999999999999998");
-            checkDivideOperation("-9999999999999998", "10", "-999999999999999.8");
-            checkDivideOperation("-9999999999999998", "9999999999999998", "-1");
-            checkDivideOperation("-9999999999999998", "10000000000000000",
-                    "-0.9999999999999998");
-
-            //first is -10
-            checkDivideOperation("-10", "-10000000000000000", "1.e-15");
-            checkDivideOperation("-10", "-10", "1");
-            checkDivideOperation("-10", "-1", "1.e+1");
-
-            checkDivideOperation("-10", "1", "-1.e+1");
-            checkDivideOperation("-10", "10", "-1");
-            checkDivideOperation("-10", "10000000000000000", "-1.e-15");
-
-            //first is -1
-            checkDivideOperation("-1", "-10000000000000000", "1.e-16");
-            checkDivideOperation("-1", "-10", "0.1");
-            checkDivideOperation("-1", "-1", "1");
-
-            checkDivideOperation("-1", "1", "-1");
-            checkDivideOperation("-1", "10", "-0.1");
-            checkDivideOperation("-1", "10000000000000000", "-1.e-16");
-
-            //first is 0
-            checkDivideOperation("0", "-10000000000000000", "0");
-            checkDivideOperation("0", "-9999999999999999", "0");
-            checkDivideOperation("0", "-9999999999999998", "0");
-            checkDivideOperation("0", "-10", "0");
-            checkDivideOperation("0", "-1", "0");
-
-            checkDivideOperation("0", "1", "0");
-            checkDivideOperation("0", "10", "0");
-            checkDivideOperation("0", "9999999999999998", "0");
-            checkDivideOperation("0", "9999999999999999", "0");
-            checkDivideOperation("0", "10000000000000000", "0");
-
-            //first is 1
-            checkDivideOperation("1", "-10000000000000000", "-1.e-16");
-            checkDivideOperation("1", "-10", "-0.1");
-            checkDivideOperation("1", "-1", "-1");
-
-            checkDivideOperation("1", "1", "1");
-            checkDivideOperation("1", "10", "0.1");
-            checkDivideOperation("1", "10000000000000000", "1.e-16");
-
-            //first is 10
-            checkDivideOperation("10", "-10000000000000000", "-1.e-15");
-            checkDivideOperation("10", "-10", "-1");
-            checkDivideOperation("10", "-1", "-1.e+1");
-
-            checkDivideOperation("10", "1", "1.e+1");
-            checkDivideOperation("10", "10", "1");
-            checkDivideOperation("10", "10000000000000000", "1.e-15");
-
-            //first is 9999999999999998
-            checkDivideOperation("9999999999999998", "-10000000000000000",
-                    "-0.9999999999999998");
-            checkDivideOperation("9999999999999998", "-9999999999999998", "-1");
-            checkDivideOperation("9999999999999998", "-10", "-999999999999999.8");
-            checkDivideOperation("9999999999999998", "-1", "-9999999999999998");
-
-            checkDivideOperation("9999999999999998", "1", "9999999999999998");
-            checkDivideOperation("9999999999999998", "10", "999999999999999.8");
-            checkDivideOperation("9999999999999998", "9999999999999998", "1");
-            checkDivideOperation("9999999999999998", "10000000000000000",
-                    "0.9999999999999998");
-
-            //first is 9999999999999999
-            checkDivideOperation("9999999999999999", "-10000000000000000", "-0.9999999999999999");
-            checkDivideOperation("9999999999999999", "-9999999999999999", "-1");
-            checkDivideOperation("9999999999999999", "-10", "-999999999999999.9");
-            checkDivideOperation("9999999999999999", "-1", "-9999999999999999");
-
-            checkDivideOperation("9999999999999999", "1", "9999999999999999");
-            checkDivideOperation("9999999999999999", "10", "999999999999999.9");
-            checkDivideOperation("9999999999999999", "9999999999999999", "1");
-            checkDivideOperation("9999999999999999", "10000000000000000", "0.9999999999999999");
-
-            //first is 10000000000000000
-            checkDivideOperation("10000000000000000", "-10000000000000000", "-1");
-            checkDivideOperation("10000000000000000", "-10", "-1.e+15");
-            checkDivideOperation("10000000000000000", "-1", "-1.e+16");
-
-            checkDivideOperation("10000000000000000", "1", "1.e+16");
-            checkDivideOperation("10000000000000000", "10", "1.e+15");
-            checkDivideOperation("10000000000000000", "10000000000000000", "1");
-        }
-
-        //integer and decimal
-        {
-            //first is -10000000000000000 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-10000000000000000", "9.999999999999999e-17");
-
-            checkDivideOperation("-0.9", "-10000000000000000", "9.e-17");
-
-            checkDivideOperation("-10000000000000000", "-0.1", "1.e+17");
-            checkDivideOperation("-0.1", "-10000000000000000", "1.e-17");
-
-            checkDivideOperation("-10000000000000000", "0.1", "-1.e+17");
-            checkDivideOperation("0.1", "-10000000000000000", "-1.e-17");
-
-            checkDivideOperation("0.9", "-10000000000000000", "-9.e-17");
-
-            checkDivideOperation("0.9999999999999999", "-10000000000000000", "-9.999999999999999e-17");
-
-            //first is -9999999999999999 (and vice versa)
-            checkDivideOperation("-9999999999999999", "-0.9999999999999999", "1.e+16");
-            checkDivideOperation("-0.9999999999999999", "-9999999999999999", "1.e-16");
-
-
-            checkDivideOperation("-9999999999999999", "-0.9", "1.111111111111111e+16");
-
-            checkDivideOperation("-9999999999999999", "-0.1", "9.999999999999999e+16");
-
-            checkDivideOperation("-9999999999999999", "0.1", "-9.999999999999999e+16");
-
-            checkDivideOperation("-9999999999999999", "0.9", "-1.111111111111111e+16");
-
-            checkDivideOperation("-9999999999999999", "0.9999999999999999", "-1.e+16");
-            checkDivideOperation("0.9999999999999999", "-9999999999999999", "-1.e-16");
-
-            //first is -9999999999999998 (and vice versa)
-            checkDivideOperation("-9999999999999998", "-0.1", "9.999999999999998e+16");
-
-            checkDivideOperation("-9999999999999998", "0.1", "-9.999999999999998e+16");
-
-            //first is -10 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-10", "0.09999999999999999");
-
-            checkDivideOperation("-0.9", "-10", "0.09");
-
-            checkDivideOperation("-10", "-0.1", "1.e+2");
-            checkDivideOperation("-0.1", "-10", "0.01");
-
-            checkDivideOperation("-10", "0.1", "-1.e+2");
-            checkDivideOperation("0.1", "-10", "-0.01");
-
-            checkDivideOperation("0.9", "-10", "-0.09");
-
-            checkDivideOperation("0.9999999999999999", "-10", "-0.09999999999999999");
-
-            //first is -1 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1", "0.9999999999999999");
-
-            checkDivideOperation("-0.9", "-1", "0.9");
-
-            checkDivideOperation("-1", "-0.1", "1.e+1");
-            checkDivideOperation("-0.1", "-1", "0.1");
-
-            checkDivideOperation("-1", "0.1", "-1.e+1");
-            checkDivideOperation("0.1", "-1", "-0.1");
-
-            checkDivideOperation("0.9", "-1", "-0.9");
-
-            checkDivideOperation("0.9999999999999999", "-1", "-0.9999999999999999");
-
-            //first is 0 (and vice versa)
-            checkDivideOperation("0", "-0.9999999999999999", "0");
-
-            checkDivideOperation("0", "-0.9", "0");
-
-            checkDivideOperation("0", "-0.1", "0");
-
-            checkDivideOperation("0", "0.1", "0");
-
-            checkDivideOperation("0", "0.9", "0");
-
-            checkDivideOperation("0", "0.9999999999999999", "0");
-
-
-            //first is 1 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1", "-0.9999999999999999");
-
-            checkDivideOperation("-0.9", "1", "-0.9");
-
-            checkDivideOperation("1", "-0.1", "-1.e+1");
-            checkDivideOperation("-0.1", "1", "-0.1");
-
-            checkDivideOperation("1", "0.1", "1.e+1");
-            checkDivideOperation("0.1", "1", "0.1");
-
-            checkDivideOperation("0.9", "1", "0.9");
-
-            checkDivideOperation("0.9999999999999999", "1", "0.9999999999999999");
-
-            //first is 10 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "10", "-0.09999999999999999");
-
-
-            checkDivideOperation("-0.9", "10", "-0.09");
-
-            checkDivideOperation("10", "-0.1", "-1.e+2");
-            checkDivideOperation("-0.1", "10", "-0.01");
-
-            checkDivideOperation("10", "0.1", "1.e+2");
-            checkDivideOperation("0.1", "10", "0.01");
-
-            checkDivideOperation("0.9", "10", "0.09");
-
-
-            checkDivideOperation("0.9999999999999999", "10", "0.09999999999999999");
-
-            //first is 9999999999999998 (and vice versa)
-            checkDivideOperation("9999999999999998", "-0.1", "-9.999999999999998e+16");
-
-            checkDivideOperation("9999999999999998", "0.1", "9.999999999999998e+16");
-
-            //first is 9999999999999999 (and vice versa)
-            checkDivideOperation("9999999999999999", "-0.9999999999999999", "-1.e+16");
-            checkDivideOperation("-0.9999999999999999", "9999999999999999", "-1.e-16");
-
-            checkDivideOperation("9999999999999999", "-0.9", "-1.111111111111111e+16");
-
-            checkDivideOperation("9999999999999999", "-0.1", "-9.999999999999999e+16");
-
-            checkDivideOperation("9999999999999999", "0.1", "9.999999999999999e+16");
-
-            checkDivideOperation("9999999999999999", "0.9", "1.111111111111111e+16");
-
-            checkDivideOperation("9999999999999999", "0.9999999999999999", "1.e+16");
-            checkDivideOperation("0.9999999999999999", "9999999999999999", "1.e-16");
-
-            //first is 10000000000000000 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "10000000000000000", "-9.999999999999999e-17");
-
-            checkDivideOperation("-0.9", "10000000000000000", "-9.e-17");
-
-            checkDivideOperation("10000000000000000", "-0.1", "-1.e+17");
-            checkDivideOperation("-0.1", "10000000000000000", "-1.e-17");
-
-            checkDivideOperation("10000000000000000", "0.1", "1.e+17");
-            checkDivideOperation("0.1", "10000000000000000", "1.e-17");
-
-            checkDivideOperation("0.9", "10000000000000000", "9.e-17");
-
-            checkDivideOperation("0.9999999999999999", "10000000000000000", "9.999999999999999e-17");
-        }
-
-        //decimals only
-        {
-            //first is -0.9999999999999999
-            checkDivideOperation("-0.9999999999999999", "-0.9999999999999999", "1");
-            checkDivideOperation("-0.9999999999999999", "-0.9", "1.111111111111111");
-            checkDivideOperation("-0.9999999999999999", "-0.1", "9.999999999999999");
-
-            checkDivideOperation("-0.9999999999999999", "0.1", "-9.999999999999999");
-            checkDivideOperation("-0.9999999999999999", "0.9", "-1.111111111111111");
-            checkDivideOperation("-0.9999999999999999", "0.9999999999999999", "-1");
-
-            //first is -0.9
-            checkDivideOperation("-0.9", "-0.9", "1");
-            checkDivideOperation("-0.9", "-0.1", "9");
-
-            checkDivideOperation("-0.9", "0.1", "-9");
-            checkDivideOperation("-0.9", "0.9", "-1");
-
-            //first is -0.1
-            checkDivideOperation("-0.1", "-0.1", "1");
-
-            checkDivideOperation("-0.1", "0.1", "-1");
-
-            //first is 0.1
-            checkDivideOperation("0.1", "-0.1", "-1");
-
-            checkDivideOperation("0.1", "0.1", "1");
-
-            //first is 0.9
-            checkDivideOperation("0.9", "-0.9", "-1");
-            checkDivideOperation("0.9", "-0.1", "-9");
-
-            checkDivideOperation("0.9", "0.1", "9");
-            checkDivideOperation("0.9", "0.9", "1");
-
-            //first is 0.9999999999999999
-            checkDivideOperation("0.9999999999999999", "-0.9999999999999999", "-1");
-            checkDivideOperation("0.9999999999999999", "-0.9", "-1.111111111111111");
-            checkDivideOperation("0.9999999999999999", "-0.1", "-9.999999999999999");
-
-            checkDivideOperation("0.9999999999999999", "0.1", "9.999999999999999");
-            checkDivideOperation("0.9999999999999999", "0.9", "1.111111111111111");
-            checkDivideOperation("0.9999999999999999", "0.9999999999999999", "1");
-        }
-
-        //engineer numbers
-        //with engineer numbers
-        {
-            //first is -1.e+9999
-            checkDivideOperation("-1.e+9999", "-1.e+9999", "1");
-            checkDivideOperation("-1.e+9999", "-1.e+9998", "1.e+1");
-
-            checkDivideOperation("-1.e+9999", "1.e+9998", "-1.e+1");
-            checkDivideOperation("-1.e+9999", "1.e+9999", "-1");
-
-            //first is -1.e+9998
-            checkDivideOperation("-1.e+9998", "-1.e+9999", "0.1");
-            checkDivideOperation("-1.e+9998", "-1.e+9998", "1");
-
-            checkDivideOperation("-1.e+9998", "1.e+9998", "-1");
-            checkDivideOperation("-1.e+9998", "1.e+9999", "-0.1");
-
-            //first is 1.e+9998
-            checkDivideOperation("1.e+9998", "-1.e+9999", "-0.1");
-            checkDivideOperation("1.e+9998", "-1.e+9998", "-1");
-
-            checkDivideOperation("1.e+9998", "1.e+9998", "1");
-            checkDivideOperation("1.e+9998", "1.e+9999", "0.1");
-
-            //first is 1.e+9999
-            checkDivideOperation("1.e+9999", "-1.e+9999", "-1");
-            checkDivideOperation("1.e+9999", "-1.e+9998", "-1.e+1");
-
-            checkDivideOperation("1.e+9999", "1.e+9998", "1.e+1");
-            checkDivideOperation("1.e+9999", "1.e+9999", "1");
-
-
-            //first is -1.e+17
-            checkDivideOperation("-1.e+17", "-1.e+17", "1");
-            checkDivideOperation("-1.e+17", "-1.e+16", "1.e+1");
-
-            checkDivideOperation("-1.e+17", "1.e+16", "-1.e+1");
-            checkDivideOperation("-1.e+17", "1.e+17", "-1");
-
-            //first is -1.e+16
-            checkDivideOperation("-1.e+16", "-1.e+17", "0.1");
-            checkDivideOperation("-1.e+16", "-1.e+16", "1");
-
-            checkDivideOperation("-1.e+16", "1.e+16", "-1");
-            checkDivideOperation("-1.e+16", "1.e+17", "-0.1");
-
-            //first is 1.e+16
-            checkDivideOperation("1.e+16", "-1.e+17", "-0.1");
-            checkDivideOperation("1.e+16", "-1.e+16", "-1");
-
-            checkDivideOperation("1.e+16", "1.e+16", "1");
-            checkDivideOperation("1.e+16", "1.e+17", "0.1");
-
-            //first is 1.e+17
-            checkDivideOperation("1.e+17", "-1.e+17", "-1");
-            checkDivideOperation("1.e+17", "-1.e+16", "-1.e+1");
-
-            checkDivideOperation("1.e+17", "1.e+16", "1.e+1");
-            checkDivideOperation("1.e+17", "1.e+17", "1");
-
-
-            //first is -1.e-9999
-            checkDivideOperation("-1.e-9999", "-1.e-9999", "1");
-            checkDivideOperation("-1.e-9999", "-1.e-9998", "0.1");
-
-            checkDivideOperation("-1.e-9999", "1.e-9998", "-0.1");
-            checkDivideOperation("-1.e-9999", "1.e-9999", "-1");
-
-            //first is -1.e-9998
-            checkDivideOperation("-1.e-9998", "-1.e-9999", "1.e+1");
-            checkDivideOperation("-1.e-9998", "-1.e-9998", "1");
-
-            checkDivideOperation("-1.e-9998", "1.e-9998", "-1");
-            checkDivideOperation("-1.e-9998", "1.e-9999", "-1.e+1");
-
-            //first is 1.e-9998
-            checkDivideOperation("1.e-9998", "-1.e-9999", "-1.e+1");
-            checkDivideOperation("1.e-9998", "-1.e-9998", "-1");
-
-            checkDivideOperation("1.e-9998", "1.e-9998", "1");
-            checkDivideOperation("1.e-9998", "1.e-9999", "1.e+1");
-
-            //first is 1.e-9999
-            checkDivideOperation("1.e-9999", "-1.e-9999", "-1");
-            checkDivideOperation("1.e-9999", "-1.e-9998", "-0.1");
-
-            checkDivideOperation("1.e-9999", "1.e-9998", "0.1");
-            checkDivideOperation("1.e-9999", "1.e-9999", "1");
-
-
-            //first is -1.e-17
-            checkDivideOperation("-1.e-17", "-1.e-17", "1");
-            checkDivideOperation("-1.e-17", "-1.e-16", "0.1");
-
-            checkDivideOperation("-1.e-17", "1.e-16", "-0.1");
-            checkDivideOperation("-1.e-17", "1.e-17", "-1");
-
-            //first is -1.e-16
-            checkDivideOperation("-1.e-16", "-1.e-17", "1.e+1");
-            checkDivideOperation("-1.e-16", "-1.e-16", "1");
-
-            checkDivideOperation("-1.e-16", "1.e-16", "-1");
-            checkDivideOperation("-1.e-16", "1.e-17", "-1.e+1");
-
-            //first is 1.e-16
-            checkDivideOperation("1.e-16", "-1.e-17", "-1.e+1");
-            checkDivideOperation("1.e-16", "-1.e-16", "-1");
-
-            checkDivideOperation("1.e-16", "1.e-16", "1");
-            checkDivideOperation("1.e-16", "1.e-17", "1.e+1");
-
-            //first is 1.e-17
-            checkDivideOperation("1.e-17", "-1.e-17", "-1");
-            checkDivideOperation("1.e-17", "-1.e-16", "-0.1");
-
-            checkDivideOperation("1.e-17", "1.e-16", "0.1");
-            checkDivideOperation("1.e-17", "1.e-17", "1");
-        }
-
-        //with integers
-        {
-            //first is -1.e+9999 (and vice versa)
-            checkDivideOperation("-1.e+9999", "-10000000000000000", "1.e+9983");
-            checkDivideOperation("-10000000000000000", "-1.e+9999", "1.e-9983");
-
-            checkDivideOperation("-9999999999999999", "-1.e+9999", "9.999999999999999e-9984");
-
-            checkDivideOperation("-9999999999999998", "-1.e+9999",
-                    "9.999999999999998e-9984");
-
-            checkDivideOperation("-1.e+9999", "-10", "1.e+9998");
-            checkDivideOperation("-10", "-1.e+9999", "1.e-9998");
-
-            checkDivideOperation("-1.e+9999", "-1", "1.e+9999");
-            checkDivideOperation("-1", "-1.e+9999", "1.e-9999");
-
-
-            checkDivideOperation("0", "-1.e+9999", "0");
-
-
-            checkDivideOperation("-1.e+9999", "1", "-1.e+9999");
-            checkDivideOperation("1", "-1.e+9999", "-1.e-9999");
-
-            checkDivideOperation("-1.e+9999", "10", "-1.e+9998");
-            checkDivideOperation("10", "-1.e+9999", "-1.e-9998");
-
-            checkDivideOperation("9999999999999998", "-1.e+9999",
-                    "-9.999999999999998e-9984");
-
-            checkDivideOperation("9999999999999999", "-1.e+9999", "-9.999999999999999e-9984");
-
-            checkDivideOperation("-1.e+9999", "10000000000000000", "-1.e+9983");
-            checkDivideOperation("10000000000000000", "-1.e+9999", "-1.e-9983");
-
-            //first is -1.e+9998 (and vice versa)
-            checkDivideOperation("-1.e+9998", "-10000000000000000", "1.e+9982");
-            checkDivideOperation("-10000000000000000", "-1.e+9998", "1.e-9982");
-
-            checkDivideOperation("-9999999999999999", "-1.e+9998", "9.999999999999999e-9983");
-
-            checkDivideOperation("-9999999999999998", "-1.e+9998",
-                    "9.999999999999998e-9983");
-
-            checkDivideOperation("-1.e+9998", "-10", "1.e+9997");
-            checkDivideOperation("-10", "-1.e+9998", "1.e-9997");
-
-            checkDivideOperation("-1.e+9998", "-1", "1.e+9998");
-            checkDivideOperation("-1", "-1.e+9998", "1.e-9998");
-
-
-            checkDivideOperation("0", "-1.e+9998", "0");
-
-
-            checkDivideOperation("-1.e+9998", "1", "-1.e+9998");
-            checkDivideOperation("1", "-1.e+9998", "-1.e-9998");
-
-            checkDivideOperation("-1.e+9998", "10", "-1.e+9997");
-            checkDivideOperation("10", "-1.e+9998", "-1.e-9997");
-
-            checkDivideOperation("9999999999999998", "-1.e+9998",
-                    "-9.999999999999998e-9983");
-
-            checkDivideOperation("9999999999999999", "-1.e+9998", "-9.999999999999999e-9983");
-
-            checkDivideOperation("-1.e+9998", "10000000000000000", "-1.e+9982");
-            checkDivideOperation("10000000000000000", "-1.e+9998", "-1.e-9982");
-
-            //first is 1.e+9998 (and vice versa)
-            checkDivideOperation("1.e+9998", "-10000000000000000", "-1.e+9982");
-            checkDivideOperation("-10000000000000000", "1.e+9998", "-1.e-9982");
-
-            checkDivideOperation("-9999999999999999", "1.e+9998", "-9.999999999999999e-9983");
-
-            checkDivideOperation("-9999999999999998", "1.e+9998", "-9.999999999999998e-9983");
-
-            checkDivideOperation("1.e+9998", "-10", "-1.e+9997");
-            checkDivideOperation("-10", "1.e+9998", "-1.e-9997");
-
-            checkDivideOperation("1.e+9998", "-1", "-1.e+9998");
-            checkDivideOperation("-1", "1.e+9998", "-1.e-9998");
-
-
-            checkDivideOperation("0", "1.e+9998", "0");
-
-
-            checkDivideOperation("1.e+9998", "1", "1.e+9998");
-            checkDivideOperation("1", "1.e+9998", "1.e-9998");
-
-            checkDivideOperation("1.e+9998", "10", "1.e+9997");
-            checkDivideOperation("10", "1.e+9998", "1.e-9997");
-
-            checkDivideOperation("9999999999999998", "1.e+9998", "9.999999999999998e-9983");
-
-            checkDivideOperation("9999999999999999", "1.e+9998", "9.999999999999999e-9983");
-
-            checkDivideOperation("1.e+9998", "10000000000000000", "1.e+9982");
-            checkDivideOperation("10000000000000000", "1.e+9998", "1.e-9982");
-
-            //first is 1.e+9999 (and vice versa)
-            checkDivideOperation("1.e+9999", "-10000000000000000", "-1.e+9983");
-            checkDivideOperation("-10000000000000000", "1.e+9999", "-1.e-9983");
-
-            checkDivideOperation("-9999999999999999", "1.e+9999", "-9.999999999999999e-9984");
-
-            checkDivideOperation("-9999999999999998", "1.e+9999", "-9.999999999999998e-9984");
-
-            checkDivideOperation("1.e+9999", "-10", "-1.e+9998");
-            checkDivideOperation("-10", "1.e+9999", "-1.e-9998");
-
-            checkDivideOperation("1.e+9999", "-1", "-1.e+9999");
-            checkDivideOperation("-1", "1.e+9999", "-1.e-9999");
-
-
-            checkDivideOperation("0", "1.e+9999", "0");
-
-
-            checkDivideOperation("1.e+9999", "1", "1.e+9999");
-            checkDivideOperation("1", "1.e+9999", "1.e-9999");
-
-            checkDivideOperation("1.e+9999", "10", "1.e+9998");
-            checkDivideOperation("10", "1.e+9999", "1.e-9998");
-
-            checkDivideOperation("9999999999999998", "1.e+9999", "9.999999999999998e-9984");
-
-            checkDivideOperation("9999999999999999", "1.e+9999", "9.999999999999999e-9984");
-
-            checkDivideOperation("1.e+9999", "10000000000000000", "1.e+9983");
-            checkDivideOperation("10000000000000000", "1.e+9999", "1.e-9983");
-
-
-            //first is -1.e+17 (and vice versa)
-            checkDivideOperation("-1.e+17", "-10000000000000000", "1.e+1");
-            checkDivideOperation("-10000000000000000", "-1.e+17", "0.1");
-
-            checkDivideOperation("-9999999999999999", "-1.e+17", "0.09999999999999999");
-
-            checkDivideOperation("-9999999999999998", "-1.e+17", "0.09999999999999998");
-
-            checkDivideOperation("-1.e+17", "-10", "1.e+16");
-            checkDivideOperation("-10", "-1.e+17", "1.e-16");
-
-            checkDivideOperation("-1.e+17", "-1", "1.e+17");
-            checkDivideOperation("-1", "-1.e+17", "1.e-17");
-
-
-            checkDivideOperation("0", "-1.e+17", "0");
-
-
-            checkDivideOperation("-1.e+17", "1", "-1.e+17");
-            checkDivideOperation("1", "-1.e+17", "-1.e-17");
-
-            checkDivideOperation("-1.e+17", "10", "-1.e+16");
-            checkDivideOperation("10", "-1.e+17", "-1.e-16");
-
-            checkDivideOperation("9999999999999998", "-1.e+17", "-0.09999999999999998");
-
-            checkDivideOperation("9999999999999999", "-1.e+17", "-0.09999999999999999");
-
-            checkDivideOperation("-1.e+17", "10000000000000000", "-1.e+1");
-            checkDivideOperation("10000000000000000", "-1.e+17", "-0.1");
-
-            //first is -1.e+16 (and vice versa)
-            checkDivideOperation("-1.e+16", "-10000000000000000", "1");
-            checkDivideOperation("-10000000000000000", "-1.e+16", "1");
-
-            checkDivideOperation("-9999999999999999", "-1.e+16", "0.9999999999999999");
-
-            checkDivideOperation("-9999999999999998", "-1.e+16", "0.9999999999999998");
-
-            checkDivideOperation("-1.e+16", "-10", "1.e+15");
-            checkDivideOperation("-10", "-1.e+16", "1.e-15");
-
-            checkDivideOperation("-1.e+16", "-1", "1.e+16");
-            checkDivideOperation("-1", "-1.e+16", "1.e-16");
-
-
-            checkDivideOperation("0", "-1.e+16", "0");
-
-
-            checkDivideOperation("-1.e+16", "1", "-1.e+16");
-            checkDivideOperation("1", "-1.e+16", "-1.e-16");
-
-            checkDivideOperation("-1.e+16", "10", "-1.e+15");
-            checkDivideOperation("10", "-1.e+16", "-1.e-15");
-
-            checkDivideOperation("9999999999999998", "-1.e+16", "-0.9999999999999998");
-
-            checkDivideOperation("9999999999999999", "-1.e+16", "-0.9999999999999999");
-
-            checkDivideOperation("-1.e+16", "10000000000000000", "-1");
-            checkDivideOperation("10000000000000000", "-1.e+16", "-1");
-
-            //first is 1.e+16 (and vice versa)
-            checkDivideOperation("1.e+16", "-10000000000000000", "-1");
-            checkDivideOperation("-10000000000000000", "1.e+16", "-1");
-
-            checkDivideOperation("-9999999999999999", "1.e+16", "-0.9999999999999999");
-
-            checkDivideOperation("-9999999999999998", "1.e+16", "-0.9999999999999998");
-
-            checkDivideOperation("1.e+16", "-10", "-1.e+15");
-            checkDivideOperation("-10", "1.e+16", "-1.e-15");
-
-            checkDivideOperation("1.e+16", "-1", "-1.e+16");
-            checkDivideOperation("-1", "1.e+16", "-1.e-16");
-
-
-            checkDivideOperation("0", "1.e+16", "0");
-
-
-            checkDivideOperation("1.e+16", "1", "1.e+16");
-            checkDivideOperation("1", "1.e+16", "1.e-16");
-
-            checkDivideOperation("1.e+16", "10", "1.e+15");
-            checkDivideOperation("10", "1.e+16", "1.e-15");
-
-            checkDivideOperation("9999999999999998", "1.e+16", "0.9999999999999998");
-
-            checkDivideOperation("9999999999999999", "1.e+16", "0.9999999999999999");
-
-            checkDivideOperation("1.e+16", "10000000000000000", "1");
-            checkDivideOperation("10000000000000000", "1.e+16", "1");
-
-            //first is 1.e+17 (and vice versa)
-            checkDivideOperation("1.e+17", "-10000000000000000", "-1.e+1");
-            checkDivideOperation("-10000000000000000", "1.e+17", "-0.1");
-
-            checkDivideOperation("-9999999999999999", "1.e+17", "-0.09999999999999999");
-
-            checkDivideOperation("-9999999999999998", "1.e+17", "-0.09999999999999998");
-
-            checkDivideOperation("1.e+17", "-10", "-1.e+16");
-            checkDivideOperation("-10", "1.e+17", "-1.e-16");
-
-            checkDivideOperation("1.e+17", "-1", "-1.e+17");
-            checkDivideOperation("-1", "1.e+17", "-1.e-17");
-
-
-            checkDivideOperation("0", "1.e+17", "0");
-
-
-            checkDivideOperation("1.e+17", "1", "1.e+17");
-            checkDivideOperation("1", "1.e+17", "1.e-17");
-
-            checkDivideOperation("1.e+17", "10", "1.e+16");
-            checkDivideOperation("10", "1.e+17", "1.e-16");
-
-            checkDivideOperation("9999999999999998", "1.e+17", "0.09999999999999998");
-
-            checkDivideOperation("9999999999999999", "1.e+17", "0.09999999999999999");
-
-            checkDivideOperation("1.e+17", "10000000000000000", "1.e+1");
-            checkDivideOperation("10000000000000000", "1.e+17", "0.1");
-
-
-            //first is -1.e-9999 (and vice versa)
-            checkDivideOperation("-1.e-9999", "-1", "1.e-9999");
-            checkDivideOperation("-1", "-1.e-9999", "1.e+9999");
-
-            checkDivideOperation("0", "-1.e-9999", "0");
-
-            checkDivideOperation("-1.e-9999", "1", "-1.e-9999");
-            checkDivideOperation("1", "-1.e-9999", "-1.e+9999");
-
-            //first is -1.e-9998 (and vice versa)
-            checkDivideOperation("-1.e-9998", "-10", "1.e-9999");
-            checkDivideOperation("-10", "-1.e-9998", "1.e+9999");
-
-            checkDivideOperation("-1.e-9998", "-1", "1.e-9998");
-            checkDivideOperation("-1", "-1.e-9998", "1.e+9998");
-
-
-            checkDivideOperation("0", "-1.e-9998", "0");
-
-
-            checkDivideOperation("-1.e-9998", "1", "-1.e-9998");
-            checkDivideOperation("1", "-1.e-9998", "-1.e+9998");
-
-            checkDivideOperation("-1.e-9998", "10", "-1.e-9999");
-            checkDivideOperation("10", "-1.e-9998", "-1.e+9999");
-
-            //first is 1.e-9998 (and vice versa)
-            checkDivideOperation("1.e-9998", "-10", "-1.e-9999");
-            checkDivideOperation("-10", "1.e-9998", "-1.e+9999");
-
-            checkDivideOperation("1.e-9998", "-1", "-1.e-9998");
-            checkDivideOperation("-1", "1.e-9998", "-1.e+9998");
-
-
-            checkDivideOperation("0", "1.e-9998", "0");
-
-
-            checkDivideOperation("1.e-9998", "1", "1.e-9998");
-            checkDivideOperation("1", "1.e-9998", "1.e+9998");
-
-            checkDivideOperation("1.e-9998", "10", "1.e-9999");
-            checkDivideOperation("10", "1.e-9998", "1.e+9999");
-
-            //first is 1.e-9999 (and vice versa)
-            checkDivideOperation("1.e-9999", "-1", "-1.e-9999");
-            checkDivideOperation("-1", "1.e-9999", "-1.e+9999");
-
-            checkDivideOperation("0", "1.e-9999", "0");
-
-            checkDivideOperation("1.e-9999", "1", "1.e-9999");
-            checkDivideOperation("1", "1.e-9999", "1.e+9999");
-
-
-            //first is -1.e-17 (and vice versa)
-            checkDivideOperation("-1.e-17", "-10000000000000000", "1.e-33");
-            checkDivideOperation("-10000000000000000", "-1.e-17", "1.e+33");
-
-            checkDivideOperation("-9999999999999999", "-1.e-17", "9.999999999999999e+32");
-
-            checkDivideOperation("-9999999999999998", "-1.e-17", "9.999999999999998e+32");
-
-            checkDivideOperation("-1.e-17", "-10", "1.e-18");
-            checkDivideOperation("-10", "-1.e-17", "1.e+18");
-
-            checkDivideOperation("-1.e-17", "-1", "1.e-17");
-            checkDivideOperation("-1", "-1.e-17", "1.e+17");
-
-
-            checkDivideOperation("0", "-1.e-17", "0");
-
-
-            checkDivideOperation("-1.e-17", "1", "-1.e-17");
-            checkDivideOperation("1", "-1.e-17", "-1.e+17");
-
-            checkDivideOperation("-1.e-17", "10", "-1.e-18");
-            checkDivideOperation("10", "-1.e-17", "-1.e+18");
-
-            checkDivideOperation("9999999999999998", "-1.e-17",
-                    "-9.999999999999998e+32");
-
-            checkDivideOperation("9999999999999999", "-1.e-17", "-9.999999999999999e+32");
-
-            checkDivideOperation("-1.e-17", "10000000000000000", "-1.e-33");
-            checkDivideOperation("10000000000000000", "-1.e-17", "-1.e+33");
-
-            //first is -1.e-16 (and vice versa)
-            checkDivideOperation("-1.e-16", "-10000000000000000", "1.e-32");
-            checkDivideOperation("-10000000000000000", "-1.e-16", "1.e+32");
-
-            checkDivideOperation("-9999999999999999", "-1.e-16", "9.999999999999999e+31");
-
-            checkDivideOperation("-9999999999999998", "-1.e-16", "9.999999999999998e+31");
-
-            checkDivideOperation("-1.e-16", "-10", "1.e-17");
-            checkDivideOperation("-10", "-1.e-16", "1.e+17");
-
-            checkDivideOperation("-1.e-16", "-1", "1.e-16");
-            checkDivideOperation("-1", "-1.e-16", "1.e+16");
-
-
-            checkDivideOperation("0", "-1.e-16", "0");
-
-
-            checkDivideOperation("-1.e-16", "1", "-1.e-16");
-            checkDivideOperation("1", "-1.e-16", "-1.e+16");
-
-            checkDivideOperation("-1.e-16", "10", "-1.e-17");
-            checkDivideOperation("10", "-1.e-16", "-1.e+17");
-
-            checkDivideOperation("9999999999999998", "-1.e-16",
-                    "-9.999999999999998e+31");
-
-            checkDivideOperation("9999999999999999", "-1.e-16", "-9.999999999999999e+31");
-
-            checkDivideOperation("-1.e-16", "10000000000000000", "-1.e-32");
-            checkDivideOperation("10000000000000000", "-1.e-16", "-1.e+32");
-
-            //first is 1.e-16 (and vice versa)
-            checkDivideOperation("1.e-16", "-10000000000000000", "-1.e-32");
-            checkDivideOperation("-10000000000000000", "1.e-16", "-1.e+32");
-
-            checkDivideOperation("-9999999999999999", "1.e-16", "-9.999999999999999e+31");
-
-            checkDivideOperation("-9999999999999998", "1.e-16", "-9.999999999999998e+31");
-
-            checkDivideOperation("1.e-16", "-10", "-1.e-17");
-            checkDivideOperation("-10", "1.e-16", "-1.e+17");
-
-            checkDivideOperation("1.e-16", "-1", "-1.e-16");
-            checkDivideOperation("-1", "1.e-16", "-1.e+16");
-
-
-            checkDivideOperation("0", "1.e-16", "0");
-
-
-            checkDivideOperation("1.e-16", "1", "1.e-16");
-            checkDivideOperation("1", "1.e-16", "1.e+16");
-
-            checkDivideOperation("1.e-16", "10", "1.e-17");
-            checkDivideOperation("10", "1.e-16", "1.e+17");
-
-            checkDivideOperation("9999999999999998", "1.e-16", "9.999999999999998e+31");
-
-            checkDivideOperation("9999999999999999", "1.e-16", "9.999999999999999e+31");
-
-            checkDivideOperation("1.e-16", "10000000000000000", "1.e-32");
-            checkDivideOperation("10000000000000000", "1.e-16", "1.e+32");
-
-            //first is 1.e-17 (and vice versa)
-            checkDivideOperation("1.e-17", "-10000000000000000", "-1.e-33");
-            checkDivideOperation("-10000000000000000", "1.e-17", "-1.e+33");
-
-            checkDivideOperation("-9999999999999999", "1.e-17", "-9.999999999999999e+32");
-
-            checkDivideOperation("-9999999999999998", "1.e-17", "-9.999999999999998e+32");
-
-            checkDivideOperation("1.e-17", "-10", "-1.e-18");
-            checkDivideOperation("-10", "1.e-17", "-1.e+18");
-
-            checkDivideOperation("1.e-17", "-1", "-1.e-17");
-            checkDivideOperation("-1", "1.e-17", "-1.e+17");
-
-
-            checkDivideOperation("0", "1.e-17", "0");
-
-
-            checkDivideOperation("1.e-17", "1", "1.e-17");
-            checkDivideOperation("1", "1.e-17", "1.e+17");
-
-            checkDivideOperation("1.e-17", "10", "1.e-18");
-            checkDivideOperation("10", "1.e-17", "1.e+18");
-
-            checkDivideOperation("9999999999999998", "1.e-17", "9.999999999999998e+32");
-
-            checkDivideOperation("9999999999999999", "1.e-17", "9.999999999999999e+32");
-
-            checkDivideOperation("1.e-17", "10000000000000000", "1.e-33");
-            checkDivideOperation("10000000000000000", "1.e-17", "1.e+33");
-        }
+        //easy cases
+        checkDivideOperation("2", "2", "1");
+        checkDivideOperation("-3", "-3", "1");
+
+        checkDivideOperation("4", "2", "2");
+        checkDivideOperation("2", "4", "0.5");
+
+        checkDivideOperation("-10.2", "-102", "0.1");
+        checkDivideOperation("-102", "-10.2", "1.e+1");
+
+        checkDivideOperation("7.4", "-0.5", "-14.8");
+
+        checkDivideOperation("-5.55", "1.11", "-5");
+
+        checkDivideOperation("1.e+5", "1.e+8", "0.001");
+        checkDivideOperation("1.e+8", "1.e+5", "1.e+3");
+
+        checkDivideOperation("1.e-20", "5.e-20", "0.2");
+        checkDivideOperation("5.e-20", "1.e-20", "5");
+
+        //cases with zero
+        checkDivideOperation("0", "2", "0");
+        checkDivideOperation("0", "-3", "0");
+        checkDivideOperation("0", "5.5", "0");
+        checkDivideOperation("0", "-7", "0");
+        checkDivideOperation("0", "-5.1", "0");
+        checkDivideOperation("0", "1.e+8", "0");
+
+        //big numbers
+        checkDivideOperation("10000000000000000", "-10000000000000000", "-1");
+        checkDivideOperation("8888888888888888", "-4444444444444444", "-2");
+        checkDivideOperation("1234567890987654321", "1", "1234567890987654321");
+        checkDivideOperation("100000000000000000000000000", "10", "1.e+25");
+        checkDivideOperation("-10", "100000000000000000000000000", "-1.e-25");
 
         //with decimals
-        {
-            //first is -1.e+9998 (and vice versa)
-            checkDivideOperation("-0.9", "-1.e+9998", "9.e-9999");
+        checkDivideOperation("10000000000000000", "0.1", "1.e+17");
+        checkDivideOperation("0.1", "10000000000000000", "1.e-17");
 
-            checkDivideOperation("-1.e+9998", "-0.1", "1.e+9999");
-            checkDivideOperation("-0.1", "-1.e+9998", "1.e-9999");
+        checkDivideOperation("9999999999999999", "0.9999999999999999", "1.e+16");
+        checkDivideOperation("0.9999999999999999", "9999999999999999", "1.e-16");
 
+        checkDivideOperation("1234567890987654321", "0.2", "6172839454938271605");
+        checkDivideOperation("6172839454938271605", "0.02", "3.0864197274691358025e+20");
 
-            checkDivideOperation("-1.e+9998", "0.1", "-1.e+9999");
-            checkDivideOperation("0.1", "-1.e+9998", "-1.e-9999");
+        checkDivideOperation("100000000000000000000000000", "0.00000000000000000000000000001",
+                "1.e+55");
+        checkDivideOperation("0.00000000000000000000000000001", "100000000000000000000000000",
+                "1.e-55");
 
-            checkDivideOperation("0.9", "-1.e+9998", "-9.e-9999");
+        //decimal and decimal
+        checkDivideOperation("0.0000000000001", "0.1", "0.000000000001");
+        checkDivideOperation("0.1", "0.0000000000001", "1.e+12");
 
-            //first is 1.e+9998 (and vice versa)
-            checkDivideOperation("-0.9", "1.e+9998", "-9.e-9999");
+        checkDivideOperation("-0.0000000000000001", "-0.00000000000000008", "1.25");
+        checkDivideOperation("-0.00000000000000008", "-0.0000000000000001", "0.8");
 
-            checkDivideOperation("1.e+9998", "-0.1", "-1.e+9999");
-            checkDivideOperation("-0.1", "1.e+9998", "-1.e-9999");
+        checkDivideOperation("246.246", "-123.123", "-2");
+        checkDivideOperation("-123.123", "246.246", "-0.5");
 
+        checkDivideOperation("-0.01", "0.00000000000000000000000000001", "-1.e+27");
+        checkDivideOperation("0.00000000000000000000000000001", "-0.01", "-1.e-27");
 
-            checkDivideOperation("1.e+9998", "0.1", "1.e+9999");
-            checkDivideOperation("0.1", "1.e+9998", "1.e-9999");
+        //boundary
+        checkDivideOperation("1.e+9998", "0.1", "1.e+9999");
+        checkDivideOperation("-0.1", "1.e+9998", "-1.e-9999");
 
-            checkDivideOperation("0.9", "1.e+9998", "9.e-9999");
+        checkDivideOperation("9.e+9998", "0.2", "4.5e+9999");
+        checkDivideOperation("0.2", "-1.e+9998", "-2.e-9999");
 
+        checkDivideOperation("1.e-9998", "10", "1.e-9999");
+        checkDivideOperation("-10", "1.e-9998", "-1.e+9999");
 
-            //first is -1.e-9999 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1.e-9999", "9.999999999999999e+9998");
-
-            checkDivideOperation("-0.9", "-1.e-9999", "9.e+9998");
-
-            checkDivideOperation("-1.e-9999", "-0.1", "1.e-9998");
-            checkDivideOperation("-0.1", "-1.e-9999", "1.e+9998");
-
-            checkDivideOperation("-1.e-9999", "0.1", "-1.e-9998");
-            checkDivideOperation("0.1", "-1.e-9999", "-1.e+9998");
-
-            checkDivideOperation("0.9", "-1.e-9999", "-9.e+9998");
-
-            checkDivideOperation("0.9999999999999999", "-1.e-9999", "-9.999999999999999e+9998");
-
-            //first is -1.e-9998 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1.e-9998", "9.999999999999999e+9997");
-
-            checkDivideOperation("-0.9", "-1.e-9998", "9.e+9997");
-
-            checkDivideOperation("-1.e-9998", "-0.1", "1.e-9997");
-            checkDivideOperation("-0.1", "-1.e-9998", "1.e+9997");
-
-            checkDivideOperation("-1.e-9998", "0.1", "-1.e-9997");
-            checkDivideOperation("0.1", "-1.e-9998", "-1.e+9997");
-
-            checkDivideOperation("0.9", "-1.e-9998", "-9.e+9997");
-
-            checkDivideOperation("0.9999999999999999", "-1.e-9998", "-9.999999999999999e+9997");
-
-            //first is 1.e-9998 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1.e-9998", "-9.999999999999999e+9997");
-
-            checkDivideOperation("-0.9", "1.e-9998", "-9.e+9997");
-
-            checkDivideOperation("1.e-9998", "-0.1", "-1.e-9997");
-            checkDivideOperation("-0.1", "1.e-9998", "-1.e+9997");
-
-            checkDivideOperation("1.e-9998", "0.1", "1.e-9997");
-            checkDivideOperation("0.1", "1.e-9998", "1.e+9997");
-
-            checkDivideOperation("0.9", "1.e-9998", "9.e+9997");
-
-            checkDivideOperation("0.9999999999999999", "1.e-9998", "9.999999999999999e+9997");
-
-            //first is 1.e-9999 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1.e-9999", "-9.999999999999999e+9998");
-
-            checkDivideOperation("-0.9", "1.e-9999", "-9.e+9998");
-
-            checkDivideOperation("1.e-9999", "-0.1", "-1.e-9998");
-            checkDivideOperation("-0.1", "1.e-9999", "-1.e+9998");
-
-            checkDivideOperation("1.e-9999", "0.1", "1.e-9998");
-            checkDivideOperation("0.1", "1.e-9999", "1.e+9998");
-
-            checkDivideOperation("0.9", "1.e-9999", "9.e+9998");
-
-            checkDivideOperation("0.9999999999999999", "1.e-9999", "9.999999999999999e+9998");
-
-            //first is -1.e+17 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1.e+17", "9.999999999999999e-18");
-
-            checkDivideOperation("-0.9", "-1.e+17", "9.e-18");
-
-            checkDivideOperation("-1.e+17", "-0.1", "1.e+18");
-            checkDivideOperation("-0.1", "-1.e+17", "1.e-18");
-
-            checkDivideOperation("-1.e+17", "0.1", "-1.e+18");
-            checkDivideOperation("0.1", "-1.e+17", "-1.e-18");
-
-            checkDivideOperation("0.9", "-1.e+17", "-9.e-18");
-
-            checkDivideOperation("0.9999999999999999", "-1.e+17", "-9.999999999999999e-18");
-
-            //first is -1.e+16 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1.e+16", "9.999999999999999e-17");
-
-            checkDivideOperation("-0.9", "-1.e+16", "9.e-17");
-
-            checkDivideOperation("-1.e+16", "-0.1", "1.e+17");
-            checkDivideOperation("-0.1", "-1.e+16", "1.e-17");
-
-            checkDivideOperation("-1.e+16", "0.1", "-1.e+17");
-            checkDivideOperation("0.1", "-1.e+16", "-1.e-17");
-
-            checkDivideOperation("0.9", "-1.e+16", "-9.e-17");
-
-            checkDivideOperation("0.9999999999999999", "-1.e+16", "-9.999999999999999e-17");
-
-            //first is 1.e+16 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1.e+16", "-9.999999999999999e-17");
-
-            checkDivideOperation("-0.9", "1.e+16", "-9.e-17");
-
-            checkDivideOperation("1.e+16", "-0.1", "-1.e+17");
-            checkDivideOperation("-0.1", "1.e+16", "-1.e-17");
-
-            checkDivideOperation("1.e+16", "0.1", "1.e+17");
-            checkDivideOperation("0.1", "1.e+16", "1.e-17");
-
-            checkDivideOperation("0.9", "1.e+16", "9.e-17");
-
-            checkDivideOperation("0.9999999999999999", "1.e+16", "9.999999999999999e-17");
-
-            //first is 1.e+17 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1.e+17", "-9.999999999999999e-18");
-
-            checkDivideOperation("-0.9", "1.e+17", "-9.e-18");
-
-            checkDivideOperation("1.e+17", "-0.1", "-1.e+18");
-            checkDivideOperation("-0.1", "1.e+17", "-1.e-18");
-
-            checkDivideOperation("1.e+17", "0.1", "1.e+18");
-            checkDivideOperation("0.1", "1.e+17", "1.e-18");
-
-            checkDivideOperation("0.9", "1.e+17", "9.e-18");
-
-            checkDivideOperation("0.9999999999999999", "1.e+17", "9.999999999999999e-18");
-
-            //first is -1.e-17 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1.e-17", "9.999999999999999e+16");
-
-            checkDivideOperation("-0.9", "-1.e-17", "9.e+16");
-
-            checkDivideOperation("-1.e-17", "-0.1", "1.e-16");
-            checkDivideOperation("-0.1", "-1.e-17", "1.e+16");
-
-            checkDivideOperation("-1.e-17", "0.1", "-1.e-16");
-            checkDivideOperation("0.1", "-1.e-17", "-1.e+16");
-
-            checkDivideOperation("0.9", "-1.e-17", "-9.e+16");
-
-            checkDivideOperation("0.9999999999999999", "-1.e-17", "-9.999999999999999e+16");
-
-            //first is -1.e-16 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "-1.e-16", "9.999999999999999e+15");
-
-            checkDivideOperation("-0.9", "-1.e-16", "9.e+15");
-
-            checkDivideOperation("-1.e-16", "-0.1", "1.e-15");
-            checkDivideOperation("-0.1", "-1.e-16", "1.e+15");
-
-            checkDivideOperation("-1.e-16", "0.1", "-1.e-15");
-            checkDivideOperation("0.1", "-1.e-16", "-1.e+15");
-
-            checkDivideOperation("0.9", "-1.e-16", "-9.e+15");
-
-            checkDivideOperation("0.9999999999999999", "-1.e-16", "-9.999999999999999e+15");
-
-            //first is 1.e-16 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1.e-16", "-9.999999999999999e+15");
-
-            checkDivideOperation("-0.9", "1.e-16", "-9.e+15");
-
-            checkDivideOperation("1.e-16", "-0.1", "-1.e-15");
-            checkDivideOperation("-0.1", "1.e-16", "-1.e+15");
-
-            checkDivideOperation("1.e-16", "0.1", "1.e-15");
-            checkDivideOperation("0.1", "1.e-16", "1.e+15");
-
-            checkDivideOperation("0.9", "1.e-16", "9.e+15");
-
-            checkDivideOperation("0.9999999999999999", "1.e-16", "9.999999999999999e+15");
-
-            //first is 1.e-17 (and vice versa)
-            checkDivideOperation("-0.9999999999999999", "1.e-17", "-9.999999999999999e+16");
-
-            checkDivideOperation("-0.9", "1.e-17", "-9.e+16");
-
-            checkDivideOperation("1.e-17", "-0.1", "-1.e-16");
-            checkDivideOperation("-0.1", "1.e-17", "-1.e+16");
-
-            checkDivideOperation("1.e-17", "0.1", "1.e-16");
-            checkDivideOperation("0.1", "1.e-17", "1.e+16");
-
-            checkDivideOperation("0.9", "1.e-17", "9.e+16");
-
-            checkDivideOperation("0.9999999999999999", "1.e-17", "9.999999999999999e+16");
-        }
+        checkDivideOperation("9.e-9998", "20", "4.5e-9999");
+        checkDivideOperation("20", "-1.e-9998", "-2.e+9999");
 
         //several random values
-        {
-            checkDivideOperation("24", "12", "2");
-            checkDivideOperation("415", "5", "83");
+        checkDivideOperation("24", "12", "2");
+        checkDivideOperation("415", "5", "83");
 
-            checkDivideOperation("123", "-3", "-41");
-            checkDivideOperation("140", "-7", "-2.e+1");
+        checkDivideOperation("123", "-3", "-41");
+        checkDivideOperation("140", "-7", "-2.e+1");
 
-            checkDivideOperation("-41", "-41", "1");
-            checkDivideOperation("-651", "-6", "108.5");
+        checkDivideOperation("-41", "-41", "1");
+        checkDivideOperation("-651", "-6", "108.5");
 
-            checkDivideOperation("504", "2.52", "2.e+2");
-            checkDivideOperation("1001", "10.01", "1.e+2");
+        checkDivideOperation("504", "2.52", "2.e+2");
+        checkDivideOperation("1001", "10.01", "1.e+2");
 
-            checkDivideOperation("101", "-1.01", "-1.e+2");
-            checkDivideOperation("88", "-2.2", "-4.e+1");
+        checkDivideOperation("101", "-1.01", "-1.e+2");
+        checkDivideOperation("88", "-2.2", "-4.e+1");
 
-            checkDivideOperation("-5342", "53.42", "-1.e+2");
-            checkDivideOperation("-100", "0.05", "-2.e+3");
+        checkDivideOperation("-5342", "53.42", "-1.e+2");
+        checkDivideOperation("-100", "0.05", "-2.e+3");
 
-            checkDivideOperation("-65", "-6.5", "1.e+1");
-            checkDivideOperation("-123", "-1.23", "1.e+2");
+        checkDivideOperation("-65", "-6.5", "1.e+1");
+        checkDivideOperation("-123", "-1.23", "1.e+2");
 
-            checkDivideOperation("555.555", "555.555", "1");
-            checkDivideOperation("132.5", "66.25", "2");
+        checkDivideOperation("555.555", "555.555", "1");
+        checkDivideOperation("132.5", "66.25", "2");
 
-            checkDivideOperation("65.65", "-32.825", "-2");
-            checkDivideOperation("15.12", "-0.3", "-50.4");
+        checkDivideOperation("65.65", "-32.825", "-2");
+        checkDivideOperation("15.12", "-0.3", "-50.4");
 
-            checkDivideOperation("-0.76", "-0.001", "7.6e+2");
-            checkDivideOperation("-1061.5", "-1.1", "965");
-        }
+        checkDivideOperation("-0.76", "-0.001", "7.6e+2");
+        checkDivideOperation("-1061.5", "-1.1", "965");
     }
 
     /**
@@ -2100,59 +528,31 @@ class CalculationModelTest {
      */
     @Test
     void negateOperationTests() {
-        //integers
-        checkNegateOperation("-10000000000000000", "1.e+16");
-        checkNegateOperation("-9999999999999999", "9999999999999999");
-        checkNegateOperation("-9999999999999998", "9999999999999998");
-        checkNegateOperation("-10", "1.e+1");
-        checkNegateOperation("-1", "1");
+        //easy cases
+        checkNegateOperation("2", "-2");
+        checkNegateOperation("-3", "3");
+        checkNegateOperation("5.5", "-5.5");
+        checkNegateOperation("-10.2", "10.2");
+        checkNegateOperation("7.4", "-7.4");
+        checkNegateOperation("-1.e+5", "1.e+5");
+        checkNegateOperation("1.e-20", "-1.e-20");
 
+        //cases with zero
         checkNegateOperation("0", "0");
 
-        checkNegateOperation("1", "-1");
-        checkNegateOperation("10", "-1.e+1");
-        checkNegateOperation("9999999999999998", "-9999999999999998");
-        checkNegateOperation("9999999999999999", "-9999999999999999");
+        //big numbers
         checkNegateOperation("10000000000000000", "-1.e+16");
-
+        checkNegateOperation("-5000000000000000", "5.e+15");
+        checkNegateOperation("1234567890987654321", "-1234567890987654321");
+        checkNegateOperation("-100000000000000000000000000", "1.e+26");
 
         //decimals
-
-        checkNegateOperation("-0.9999999999999999", "0.9999999999999999");
-        checkNegateOperation("-0.9", "0.9");
-        checkNegateOperation("-0.1", "0.1");
-
-        checkNegateOperation("0.1", "-0.1");
-        checkNegateOperation("0.9", "-0.9");
-        checkNegateOperation("0.9999999999999999", "-0.9999999999999999");
-
-
-        //engineer numbers
-
-        checkNegateOperation("-1.e+9999", "1.e+9999");
-        checkNegateOperation("-1.e+9998", "1.e+9998");
-        checkNegateOperation("-1.e+17", "1.e+17");
-        checkNegateOperation("-1.e+16", "1.e+16");
-
-        checkNegateOperation("1.e+16", "-1.e+16");
-        checkNegateOperation("1.e+17", "-1.e+17");
-        checkNegateOperation("1.e+9998", "-1.e+9998");
-        checkNegateOperation("1.e+9999", "-1.e+9999");
-
-
-        checkNegateOperation("-1.e-9999", "1.e-9999");
-        checkNegateOperation("-1.e-9998", "1.e-9998");
-        checkNegateOperation("-1.e-17", "1.e-17");
-        checkNegateOperation("-1.e-16", "1.e-16");
-
-        checkNegateOperation("1.e-16", "-1.e-16");
-        checkNegateOperation("1.e-17", "-1.e-17");
-        checkNegateOperation("1.e-9998", "-1.e-9998");
-        checkNegateOperation("1.e-9999", "-1.e-9999");
-
+        checkNegateOperation("0.0000000000001", "-0.0000000000001");
+        checkNegateOperation("-0.0000000000000001", "0.0000000000000001");
+        checkNegateOperation("1234567890.987654321", "-1234567890.987654321");
+        checkNegateOperation("-0.00000000000000000000000000009", "0.00000000000000000000000000009");
 
         //several random values
-
         checkNegateOperation("6324", "-6324");
         checkNegateOperation("987", "-987");
 
@@ -2164,7 +564,6 @@ class CalculationModelTest {
 
         checkNegateOperation("-234.123", "234.123");
         checkNegateOperation("-6434.213", "6434.213");
-
     }
 
     /**
@@ -2172,52 +571,37 @@ class CalculationModelTest {
      */
     @Test
     void sqrOperationTests() {
-        //integers 
+        //easy cases
+        checkSqrOperation("2", "4");
+        checkSqrOperation("-3", "9");
+        checkSqrOperation("5.5", "30.25");
+        checkSqrOperation("-10.2", "104.04");
+        checkSqrOperation("7.4", "54.76");
+        checkSqrOperation("-1.e+5", "1.e+10");
+        checkSqrOperation("1.e-20", "1.e-40");
 
-        checkSqrOperation("-10000000000000000", "1.e+32");
-        checkSqrOperation("-9999999999999999", "99999999999999980000000000000001");
-        checkSqrOperation("-9999999999999998", "99999999999999960000000000000004");
-        checkSqrOperation("-10", "1.e+2");
-        checkSqrOperation("-1", "1");
-
+        //cases with zero
         checkSqrOperation("0", "0");
 
-        checkSqrOperation("1", "1");
-        checkSqrOperation("10", "1.e+2");
-        checkSqrOperation("9999999999999998", "99999999999999960000000000000004");
-        checkSqrOperation("9999999999999999", "99999999999999980000000000000001");
+        //big numbers
         checkSqrOperation("10000000000000000", "1.e+32");
-
+        checkSqrOperation("-5000000000000000", "2.5e+31");
+        checkSqrOperation("1234567890987654321", "1524157877457704723228166437789971041");
+        checkSqrOperation("-100000000000000000000000000", "1.e+52");
 
         //decimals
+        checkSqrOperation("0.0000000000001", "1.e-26");
+        checkSqrOperation("-0.0000000000000001", "1.e-32");
+        checkSqrOperation("1234567890.987654321", "1524157877457704723.228166437789971041");
+        checkSqrOperation("-0.00000000000000000000000000009", "8.1e-57");
 
-        checkSqrOperation("-0.9999999999999999", "0.99999999999999980000000000000001");
-        checkSqrOperation("-0.9", "0.81");
-        checkSqrOperation("-0.1", "0.01");
-
-        checkSqrOperation("0.1", "0.01");
-        checkSqrOperation("0.9", "0.81");
-        checkSqrOperation("0.9999999999999999", "0.99999999999999980000000000000001");
-
-
-        //engineer numbers
-
-        checkSqrOperation("-1.e+17", "1.e+34");
-        checkSqrOperation("-1.e+16", "1.e+32");
-
-        checkSqrOperation("1.e+16", "1.e+32");
-        checkSqrOperation("1.e+17", "1.e+34");
-
-
-        checkSqrOperation("-1.e-17", "1.e-34");
-        checkSqrOperation("-1.e-16", "1.e-32");
-
-        checkSqrOperation("1.e-16", "1.e-32");
-        checkSqrOperation("1.e-17", "1.e-34");
-
+        //boundary
+        checkSqrOperation("1.e+4999", "1.e+9998");
+        checkSqrOperation("-9.e+4999", "8.1e+9999");
+        checkSqrOperation("1.e-4999", "1.e-9998");
+        checkSqrOperation("-9.e-4999", "8.1e-9997");
 
         //several random values
-
         checkSqrOperation("743", "552049");
         checkSqrOperation("324", "104976");
 
@@ -2229,7 +613,6 @@ class CalculationModelTest {
 
         checkSqrOperation("-31.62", "999.8244");
         checkSqrOperation("-65.123", "4241.005129");
-
     }
 
     /**
@@ -2237,43 +620,42 @@ class CalculationModelTest {
      */
     @Test
     void sqrtOperationTests() {
-        //integers 
+        //easy cases
+        checkSqrtOperation("4", "2");
+        checkSqrtOperation("9", "3");
+        checkSqrtOperation("100", "1.e+1");
+        checkSqrtOperation("1.21", "1.1");
+        checkSqrtOperation("0.81", "0.9");
+        checkSqrtOperation("1.e+5", "316.2277660168379");
+        checkSqrtOperation("1.e-20", "1.e-10");
 
+        //cases with zero
         checkSqrtOperation("0", "0");
 
-        checkSqrtOperation("1", "1");
-        checkSqrtOperation("9", "3");
-        checkSqrtOperation("25000000000000", "5.e+6");
-        checkSqrtOperation("11111108888889", "3333333");
+        //big numbers
         checkSqrtOperation("10000000000000000", "1.e+8");
-
+        checkSqrtOperation("5000000000000000", "70710678.11865475");
+        checkSqrtOperation("1234567890987654", "35136418.30049918");
+        checkSqrtOperation("100000000000000000000000000", "1.e+13");
 
         //decimals
-
-        checkSqrtOperation("0.015625", "0.125");
-        checkSqrtOperation("0.04", "0.2");
-        checkSqrtOperation("0.36", "0.6");
-
-
-        //engineer numbers
-
-        checkSqrtOperation("1.e+16", "1.e+8");
-        checkSqrtOperation("1.e+17", "316227766.0168379");
-        checkSqrtOperation("1.e+9998", "1.e+4999");
-        checkSqrtOperation("1.e+9999", "3.162277660168379e+4999");
-
-        checkSqrtOperation("1.e-16", "1.e-8");
-        checkSqrtOperation("1.e-17", "3.162277660168379e-9");
-
+        checkSqrtOperation("0.0000000000001", "3.162277660168379e-7");
+        checkSqrtOperation("0.0000000000000001", "0.00000001");
+        checkSqrtOperation("1234567890.987654", "35136.41830049918");
+        checkSqrtOperation("0.0000000000000000000000000009", "3.e-14");
 
         //several random values
-
         checkSqrtOperation("9132131", "3021.941594405822");
         checkSqrtOperation("1235123", "1111.360877483097");
 
         checkSqrtOperation("123.5523", "11.11540822462225");
         checkSqrtOperation("123.1243", "11.09613896812761");
 
+        checkSqrtOperation("7373", "85.86617494683224");
+        checkSqrtOperation("123198743", "11099.49291634532");
+
+        checkSqrtOperation("312.5632", "17.67945700523633");
+        checkSqrtOperation("123.87624525", "11.1299705862145");
     }
 
     /**
@@ -2281,49 +663,37 @@ class CalculationModelTest {
      */
     @Test
     void inverseOperationTests() {
-        //integers
-        checkInverseOperation("-10000000000000000", "-1.e-16");
-        checkInverseOperation("-10", "-1.e-1");
-        checkInverseOperation("-1", "-1");
+        //easy cases
+        checkInverseOperation("2", "0.5");
+        checkInverseOperation("0.5", "2");
 
-        checkInverseOperation("1", "1");
-        checkInverseOperation("10", "1.e-1");
+        checkInverseOperation("-100", "-0.01");
+        checkInverseOperation("-0.01", "-1.e+2");
+
+        checkInverseOperation("1.e+5", "1.e-5");
+        checkInverseOperation("1.e+5", "0.00001");
+
+        //big numbers
         checkInverseOperation("10000000000000000", "1.e-16");
+        checkInverseOperation("0.0000000000000001", "1.e+16");
 
+        checkInverseOperation("-5000000000000000", "-2.e-16");
+        checkInverseOperation("-0.00000000000000002", "-5.e+16");
 
-        //decimals
+        checkInverseOperation("-100000000000000000000000000", "-1.e-26");
+        checkInverseOperation("-0.00000000000000000000000001", "-1.e+26");
 
-        checkInverseOperation("-0.1", "-1.e+1");
+        checkInverseOperation("0.00000000000000000000000000008", "1.25E+28");
+        checkInverseOperation("12500000000000000000000000000", "0.00000000000000000000000000008");
 
-        checkInverseOperation("0.1", "1.e+1");
-
-
-        //engineer numbers
-
-        checkInverseOperation("-1.e+9999", "-1.e-9999");
-        checkInverseOperation("-1.e+9998", "-1.e-9998");
-        checkInverseOperation("-1.e+17", "-1.e-17");
-        checkInverseOperation("-1.e+16", "-1.e-16");
-
-        checkInverseOperation("1.e+16", "1.e-16");
-        checkInverseOperation("1.e+17", "1.e-17");
-        checkInverseOperation("1.e+9998", "1.e-9998");
+        //boundary
         checkInverseOperation("1.e+9999", "1.e-9999");
+        checkInverseOperation("-2.e+9998", "-5.e-9999");
 
-
-        checkInverseOperation("-1.e-9999", "-1.e+9999");
-        checkInverseOperation("-1.e-9998", "-1.e+9998");
-        checkInverseOperation("-1.e-17", "-1.e+17");
-        checkInverseOperation("-1.e-16", "-1.e+16");
-
-        checkInverseOperation("1.e-16", "1.e+16");
-        checkInverseOperation("1.e-17", "1.e+17");
-        checkInverseOperation("1.e-9998", "1.e+9998");
         checkInverseOperation("1.e-9999", "1.e+9999");
-
+        checkInverseOperation("-2.e-9999", "-5.e+9998");
 
         //several random values
-
         checkInverseOperation("50", "0.02");
         checkInverseOperation("2", "0.5");
 
@@ -2335,7 +705,6 @@ class CalculationModelTest {
 
         checkInverseOperation("-0.025", "-4.e+1");
         checkInverseOperation("-6.25", "-0.16");
-
     }
 
     /**
@@ -2343,753 +712,83 @@ class CalculationModelTest {
      */
     @Test
     void percentageOfFirstTests() {
-        //integers only
-        {
-            //first is -100000000000000000
-            checkPercentageOfFirstOperation("-10000000000000000", "-10000000000000000", "1.e+30");
-            checkPercentageOfFirstOperation("-10000000000000000", "-9999999999999999",
-                    "9.999999999999999e+29");
-            checkPercentageOfFirstOperation("-10000000000000000", "-9999999999999998",
-                    "9.999999999999998e+29");
-            checkPercentageOfFirstOperation("-10000000000000000", "-10", "1.e+15");
-            checkPercentageOfFirstOperation("-10000000000000000", "-1", "1.e+14");
-
-            checkPercentageOfFirstOperation("-10000000000000000", "0", "0");
-
-            checkPercentageOfFirstOperation("-10000000000000000", "1", "-1.e+14");
-            checkPercentageOfFirstOperation("-10000000000000000", "10", "-1.e+15");
-            checkPercentageOfFirstOperation("-10000000000000000", "9999999999999998",
-                    "-9.999999999999998e+29");
-            checkPercentageOfFirstOperation("-10000000000000000", "9999999999999999",
-                    "-9.999999999999999e+29");
-            checkPercentageOfFirstOperation("-10000000000000000", "10000000000000000", "-1.e+30");
-
-            //first is -9999999999999999
-            checkPercentageOfFirstOperation("-9999999999999999", "-9999999999999999",
-                    "999999999999999800000000000000.01");
-            checkPercentageOfFirstOperation("-9999999999999999", "-9999999999999998",
-                    "999999999999999700000000000000.02");
-            checkPercentageOfFirstOperation("-9999999999999999", "-10", "999999999999999.9");
-            checkPercentageOfFirstOperation("-9999999999999999", "-1", "99999999999999.99");
-
-            checkPercentageOfFirstOperation("-9999999999999999", "0", "0");
-
-            checkPercentageOfFirstOperation("-9999999999999999", "1", "-99999999999999.99");
-            checkPercentageOfFirstOperation("-9999999999999999", "10", "-999999999999999.9");
-            checkPercentageOfFirstOperation("-9999999999999999", "9999999999999998",
-                    "-999999999999999700000000000000.02");
-            checkPercentageOfFirstOperation("-9999999999999999", "9999999999999999",
-                    "-999999999999999800000000000000.01");
-            checkPercentageOfFirstOperation("-9999999999999999", "10000000000000000",
-                    "-9.999999999999999e+29");
-
-            //first is -9999999999999998
-            checkPercentageOfFirstOperation("-9999999999999998", "-9999999999999998",
-                    "999999999999999600000000000000.04");
-            checkPercentageOfFirstOperation("-9999999999999998", "-10", "999999999999999.8");
-            checkPercentageOfFirstOperation("-9999999999999998", "-1", "99999999999999.98");
-
-            checkPercentageOfFirstOperation("-9999999999999998", "0", "0");
-
-            checkPercentageOfFirstOperation("-9999999999999998", "1", "-99999999999999.98");
-            checkPercentageOfFirstOperation("-9999999999999998", "10", "-999999999999999.8");
-            checkPercentageOfFirstOperation("-9999999999999998", "9999999999999998",
-                    "-999999999999999600000000000000.04");
-            checkPercentageOfFirstOperation("-9999999999999998", "9999999999999999",
-                    "-999999999999999700000000000000.02");
-            checkPercentageOfFirstOperation("-9999999999999998", "10000000000000000",
-                    "-9.999999999999998e+29");
-
-            //first is -10
-            checkPercentageOfFirstOperation("-10", "-10", "1");
-            checkPercentageOfFirstOperation("-10", "-1", "0.1");
-
-            checkPercentageOfFirstOperation("-10", "0", "0");
-
-            checkPercentageOfFirstOperation("-10", "1", "-0.1");
-            checkPercentageOfFirstOperation("-10", "10", "-1");
-            checkPercentageOfFirstOperation("-10", "9999999999999998", "-999999999999999.8");
-            checkPercentageOfFirstOperation("-10", "9999999999999999", "-999999999999999.9");
-            checkPercentageOfFirstOperation("-10", "10000000000000000", "-1.e+15");
-
-            //first is -1
-            checkPercentageOfFirstOperation("-1", "-1", "0.01");
-
-            checkPercentageOfFirstOperation("-1", "0", "0");
-
-            checkPercentageOfFirstOperation("-1", "1", "-0.01");
-            checkPercentageOfFirstOperation("-1", "10", "-0.1");
-            checkPercentageOfFirstOperation("-1", "9999999999999998", "-99999999999999.98");
-            checkPercentageOfFirstOperation("-1", "9999999999999999", "-99999999999999.99");
-            checkPercentageOfFirstOperation("-1", "10000000000000000", "-1.e+14");
-
-            //first is 0
-            checkPercentageOfFirstOperation("0", "0", "0");
-
-            checkPercentageOfFirstOperation("0", "1", "0");
-            checkPercentageOfFirstOperation("0", "10", "0");
-            checkPercentageOfFirstOperation("0", "9999999999999998", "0");
-            checkPercentageOfFirstOperation("0", "9999999999999999", "0");
-            checkPercentageOfFirstOperation("0", "10000000000000000", "0");
-
-            //first is 1
-            checkPercentageOfFirstOperation("1", "1", "0.01");
-            checkPercentageOfFirstOperation("1", "10", "0.1");
-            checkPercentageOfFirstOperation("1", "9999999999999998", "99999999999999.98");
-            checkPercentageOfFirstOperation("1", "9999999999999999", "99999999999999.99");
-            checkPercentageOfFirstOperation("1", "10000000000000000", "1.e+14");
-
-            //first is 10
-            checkPercentageOfFirstOperation("10", "10", "1");
-            checkPercentageOfFirstOperation("10", "9999999999999998", "999999999999999.8");
-            checkPercentageOfFirstOperation("10", "9999999999999999", "999999999999999.9");
-            checkPercentageOfFirstOperation("10", "10000000000000000", "1.e+15");
-
-            //first is 9999999999999998
-            checkPercentageOfFirstOperation("9999999999999998", "9999999999999998",
-                    "999999999999999600000000000000.04");
-            checkPercentageOfFirstOperation("9999999999999998", "9999999999999999",
-                    "999999999999999700000000000000.02");
-            checkPercentageOfFirstOperation("9999999999999998", "10000000000000000",
-                    "9.999999999999998e+29");
-
-            //first is 9999999999999999
-            checkPercentageOfFirstOperation("9999999999999999", "9999999999999999",
-                    "999999999999999800000000000000.01");
-            checkPercentageOfFirstOperation("9999999999999999", "10000000000000000", "9.999999999999999e+29");
-
-            //first is 10000000000000000
-            checkPercentageOfFirstOperation("10000000000000000", "10000000000000000", "1.e+30");
-        }
-
-        //integer and decimal
-        {
-            //first is -10000000000000000
-            checkPercentageOfFirstOperation("-10000000000000000", "-0.9999999999999999", "99999999999999.99");
-            checkPercentageOfFirstOperation("-10000000000000000", "-0.9", "9.e+13");
-            checkPercentageOfFirstOperation("-10000000000000000", "-0.1", "1.e+13");
-
-            checkPercentageOfFirstOperation("-10000000000000000", "0.1", "-1.e+13");
-            checkPercentageOfFirstOperation("-10000000000000000", "0.9", "-9.e+13");
-            checkPercentageOfFirstOperation("-10000000000000000", "0.9999999999999999", "-99999999999999.99");
-
-            //first is -9999999999999999
-            checkPercentageOfFirstOperation("-9999999999999999", "-0.9999999999999999",
-                    "99999999999999.980000000000000001");
-            checkPercentageOfFirstOperation("-9999999999999999", "-0.9", "89999999999999.991");
-            checkPercentageOfFirstOperation("-9999999999999999", "-0.1", "9999999999999.999");
-
-            checkPercentageOfFirstOperation("-9999999999999999", "0.1", "-9999999999999.999");
-            checkPercentageOfFirstOperation("-9999999999999999", "0.9", "-89999999999999.991");
-            checkPercentageOfFirstOperation("-9999999999999999", "0.9999999999999999",
-                    "-99999999999999.980000000000000001");
-
-            //first is -9999999999999998
-            checkPercentageOfFirstOperation("-9999999999999998", "-0.9999999999999999",
-                    "99999999999999.970000000000000002");
-            checkPercentageOfFirstOperation("-9999999999999998", "-0.9", "89999999999999.982");
-            checkPercentageOfFirstOperation("-9999999999999998", "-0.1", "9999999999999.998");
-
-            checkPercentageOfFirstOperation("-9999999999999998", "0.1", "-9999999999999.998");
-            checkPercentageOfFirstOperation("-9999999999999998", "0.9", "-89999999999999.982");
-            checkPercentageOfFirstOperation("-9999999999999998", "0.9999999999999999",
-                    "-99999999999999.970000000000000002");
-
-            //first is -10
-            checkPercentageOfFirstOperation("-10", "-0.9999999999999999", "0.09999999999999999");
-            checkPercentageOfFirstOperation("-10", "-0.9", "0.09");
-            checkPercentageOfFirstOperation("-10", "-0.1", "0.01");
-
-            checkPercentageOfFirstOperation("-10", "0.1", "-0.01");
-            checkPercentageOfFirstOperation("-10", "0.9", "-0.09");
-            checkPercentageOfFirstOperation("-10", "0.9999999999999999", "-0.09999999999999999");
-
-            //first is -1
-            checkPercentageOfFirstOperation("-1", "-0.9999999999999999", "0.009999999999999999");
-            checkPercentageOfFirstOperation("-1", "-0.9", "0.009");
-            checkPercentageOfFirstOperation("-1", "-0.1", "0.001");
-
-            checkPercentageOfFirstOperation("-1", "0.1", "-0.001");
-            checkPercentageOfFirstOperation("-1", "0.9", "-0.009");
-            checkPercentageOfFirstOperation("-1", "0.9999999999999999", "-0.009999999999999999");
-
-            //first is 0
-            checkPercentageOfFirstOperation("0", "-0.9999999999999999", "0");
-            checkPercentageOfFirstOperation("0", "-0.9", "0");
-            checkPercentageOfFirstOperation("0", "-0.1", "0");
-
-            checkPercentageOfFirstOperation("0", "0.1", "0");
-            checkPercentageOfFirstOperation("0", "0.9", "0");
-            checkPercentageOfFirstOperation("0", "0.9999999999999999", "0");
-
-            //first is 1
-            checkPercentageOfFirstOperation("1", "-0.9999999999999999", "-0.009999999999999999");
-            checkPercentageOfFirstOperation("1", "-0.9", "-0.009");
-            checkPercentageOfFirstOperation("1", "-0.1", "-0.001");
-
-            checkPercentageOfFirstOperation("1", "0.1", "0.001");
-            checkPercentageOfFirstOperation("1", "0.9", "0.009");
-            checkPercentageOfFirstOperation("1", "0.9999999999999999", "0.009999999999999999");
-
-            //first is 10
-            checkPercentageOfFirstOperation("10", "-0.9999999999999999", "-0.09999999999999999");
-            checkPercentageOfFirstOperation("10", "-0.9", "-0.09");
-            checkPercentageOfFirstOperation("10", "-0.1", "-0.01");
-
-            checkPercentageOfFirstOperation("10", "0.1", "0.01");
-            checkPercentageOfFirstOperation("10", "0.9", "0.09");
-            checkPercentageOfFirstOperation("10", "0.9999999999999999", "0.09999999999999999");
-
-            //first is 9999999999999998
-            checkPercentageOfFirstOperation("9999999999999998", "-0.9999999999999999",
-                    "-99999999999999.970000000000000002");
-            checkPercentageOfFirstOperation("9999999999999998", "-0.9", "-89999999999999.982");
-            checkPercentageOfFirstOperation("9999999999999998", "-0.1", "-9999999999999.998");
-
-            checkPercentageOfFirstOperation("9999999999999998", "0.1", "9999999999999.998");
-            checkPercentageOfFirstOperation("9999999999999998", "0.9", "89999999999999.982");
-            checkPercentageOfFirstOperation("9999999999999998", "0.9999999999999999",
-                    "99999999999999.970000000000000002");
-
-            //first is 9999999999999999
-            checkPercentageOfFirstOperation("9999999999999999", "-0.9999999999999999",
-                    "-99999999999999.980000000000000001");
-            checkPercentageOfFirstOperation("9999999999999999", "-0.9", "-89999999999999.991");
-            checkPercentageOfFirstOperation("9999999999999999", "-0.1", "-9999999999999.999");
-
-            checkPercentageOfFirstOperation("9999999999999999", "0.1", "9999999999999.999");
-            checkPercentageOfFirstOperation("9999999999999999", "0.9", "89999999999999.991");
-            checkPercentageOfFirstOperation("9999999999999999", "0.9999999999999999",
-                    "99999999999999.980000000000000001");
-
-            //first is 10000000000000000
-            checkPercentageOfFirstOperation("10000000000000000", "-0.9999999999999999", "-99999999999999.99");
-            checkPercentageOfFirstOperation("10000000000000000", "-0.9", "-9.e+13");
-            checkPercentageOfFirstOperation("10000000000000000", "-0.1", "-1.e+13");
-
-            checkPercentageOfFirstOperation("10000000000000000", "0.1", "1.e+13");
-            checkPercentageOfFirstOperation("10000000000000000", "0.9", "9.e+13");
-            checkPercentageOfFirstOperation("10000000000000000", "0.9999999999999999", "99999999999999.99");
-        }
-
-        //decimals only
-        {
-            //first is -0.9999999999999999
-            checkPercentageOfFirstOperation("-0.9999999999999999", "-0.9999999999999999",
-                    "0.0099999999999999980000000000000001");
-            checkPercentageOfFirstOperation("-0.9999999999999999", "-0.9", "0.0089999999999999991");
-            checkPercentageOfFirstOperation("-0.9999999999999999", "-0.1", "0.0009999999999999999");
-
-            checkPercentageOfFirstOperation("-0.9999999999999999", "0.1", "-0.0009999999999999999");
-            checkPercentageOfFirstOperation("-0.9999999999999999", "0.9", "-0.0089999999999999991");
-            checkPercentageOfFirstOperation("-0.9999999999999999", "0.9999999999999999",
-                    "-0.0099999999999999980000000000000001");
-
-            //first is -0.9
-            checkPercentageOfFirstOperation("-0.9", "-0.9", "0.0081");
-            checkPercentageOfFirstOperation("-0.9", "-0.1", "0.0009");
-
-            checkPercentageOfFirstOperation("-0.9", "0.1", "-0.0009");
-            checkPercentageOfFirstOperation("-0.9", "0.9", "-0.0081");
-            checkPercentageOfFirstOperation("-0.9", "0.9999999999999999", "-0.0089999999999999991");
-
-            //first is -0.1
-            checkPercentageOfFirstOperation("-0.1", "-0.1", "0.0001");
-
-            checkPercentageOfFirstOperation("-0.1", "0.1", "-0.0001");
-            checkPercentageOfFirstOperation("-0.1", "0.9", "-0.0009");
-            checkPercentageOfFirstOperation("-0.1", "0.9999999999999999", "-0.0009999999999999999");
-
-            //first is 0.1
-            checkPercentageOfFirstOperation("0.1", "0.1", "0.0001");
-            checkPercentageOfFirstOperation("0.1", "0.9", "0.0009");
-            checkPercentageOfFirstOperation("0.1", "0.9999999999999999", "0.0009999999999999999");
-
-            //first is 0.9
-            checkPercentageOfFirstOperation("0.9", "0.9", "0.0081");
-            checkPercentageOfFirstOperation("0.9", "0.9999999999999999", "0.0089999999999999991");
-
-            //first is 0.9999999999999999
-            checkPercentageOfFirstOperation("0.9999999999999999", "0.9999999999999999",
-                    "0.0099999999999999980000000000000001");
-        }
-
-        //engineer numbers
-        //with engineer numbers
-        {
-            //first is -1.e+9999
-            checkPercentageOfFirstOperation("-1.e+9999", "-1.e-9999", "0.01");
-            checkPercentageOfFirstOperation("-1.e+9999", "-1.e-9998", "0.1");
-            checkPercentageOfFirstOperation("-1.e+9999", "-1.e-17", "1.e+9980");
-            checkPercentageOfFirstOperation("-1.e+9999", "-1.e-16", "1.e+9981");
-
-            checkPercentageOfFirstOperation("-1.e+9999", "1.e-16", "-1.e+9981");
-            checkPercentageOfFirstOperation("-1.e+9999", "1.e-17", "-1.e+9980");
-            checkPercentageOfFirstOperation("-1.e+9999", "1.e-9998", "-0.1");
-            checkPercentageOfFirstOperation("-1.e+9999", "1.e-9999", "-0.01");
-
-            //first is -1.e+9998
-            checkPercentageOfFirstOperation("-1.e+9998", "-1.e-9998", "0.01");
-            checkPercentageOfFirstOperation("-1.e+9998", "-1.e-17", "1.e+9979");
-            checkPercentageOfFirstOperation("-1.e+9998", "-1.e-16", "1.e+9980");
-
-            checkPercentageOfFirstOperation("-1.e+9998", "1.e-16", "-1.e+9980");
-            checkPercentageOfFirstOperation("-1.e+9998", "1.e-17", "-1.e+9979");
-            checkPercentageOfFirstOperation("-1.e+9998", "1.e-9998", "-0.01");
-
-            //first is 1.e+9998
-            checkPercentageOfFirstOperation("1.e+9998", "-1.e-9998", "-0.01");
-            checkPercentageOfFirstOperation("1.e+9998", "-1.e-17", "-1.e+9979");
-            checkPercentageOfFirstOperation("1.e+9998", "-1.e-16", "-1.e+9980");
-
-            checkPercentageOfFirstOperation("1.e+9998", "1.e-16", "1.e+9980");
-            checkPercentageOfFirstOperation("1.e+9998", "1.e-17", "1.e+9979");
-            checkPercentageOfFirstOperation("1.e+9998", "1.e-9998", "0.01");
-
-            //first is 1.e+9999
-            checkPercentageOfFirstOperation("1.e+9999", "-1.e-9999", "-0.01");
-            checkPercentageOfFirstOperation("1.e+9999", "-1.e-9998", "-0.1");
-            checkPercentageOfFirstOperation("1.e+9999", "-1.e-17", "-1.e+9980");
-            checkPercentageOfFirstOperation("1.e+9999", "-1.e-16", "-1.e+9981");
-
-            checkPercentageOfFirstOperation("1.e+9999", "1.e-16", "1.e+9981");
-            checkPercentageOfFirstOperation("1.e+9999", "1.e-17", "1.e+9980");
-            checkPercentageOfFirstOperation("1.e+9999", "1.e-9998", "0.1");
-            checkPercentageOfFirstOperation("1.e+9999", "1.e-9999", "0.01");
-
-
-            //first is -1.e+17
-            checkPercentageOfFirstOperation("-1.e+17", "-1.e+17", "1.e+32");
-            checkPercentageOfFirstOperation("-1.e+17", "-1.e+16", "1.e+31");
-
-            checkPercentageOfFirstOperation("-1.e+17", "1.e+16", "-1.e+31");
-            checkPercentageOfFirstOperation("-1.e+17", "1.e+17", "-1.e+32");
-
-
-            checkPercentageOfFirstOperation("-1.e+17", "-1.e-9999", "1.e-9984");
-            checkPercentageOfFirstOperation("-1.e+17", "-1.e-9998", "1.e-9983");
-            checkPercentageOfFirstOperation("-1.e+17", "-1.e-17", "0.01");
-            checkPercentageOfFirstOperation("-1.e+17", "-1.e-16", "0.1");
-
-            checkPercentageOfFirstOperation("-1.e+17", "1.e-16", "-0.1");
-            checkPercentageOfFirstOperation("-1.e+17", "1.e-17", "-0.01");
-            checkPercentageOfFirstOperation("-1.e+17", "1.e-9998", "-1.e-9983");
-            checkPercentageOfFirstOperation("-1.e+17", "1.e-9999", "-1.e-9984");
-
-            //first is -1.e+16
-            checkPercentageOfFirstOperation("-1.e+16", "-1.e+16", "1.e+30");
-
-            checkPercentageOfFirstOperation("-1.e+16", "1.e+16", "-1.e+30");
-
-
-            checkPercentageOfFirstOperation("-1.e+16", "-1.e-9999", "1.e-9985");
-            checkPercentageOfFirstOperation("-1.e+16", "-1.e-9998", "1.e-9984");
-            checkPercentageOfFirstOperation("-1.e+16", "-1.e-17", "0.001");
-            checkPercentageOfFirstOperation("-1.e+16", "-1.e-16", "0.01");
-
-            checkPercentageOfFirstOperation("-1.e+16", "1.e-16", "-0.01");
-            checkPercentageOfFirstOperation("-1.e+16", "1.e-17", "-0.001");
-            checkPercentageOfFirstOperation("-1.e+16", "1.e-9998", "-1.e-9984");
-            checkPercentageOfFirstOperation("-1.e+16", "1.e-9999", "-1.e-9985");
-
-            //first is 1.e+16
-            checkPercentageOfFirstOperation("1.e+16", "-1.e+16", "-1.e+30");
-
-            checkPercentageOfFirstOperation("1.e+16", "1.e+16", "1.e+30");
-
-
-            checkPercentageOfFirstOperation("1.e+16", "-1.e-9999", "-1.e-9985");
-            checkPercentageOfFirstOperation("1.e+16", "-1.e-9998", "-1.e-9984");
-            checkPercentageOfFirstOperation("1.e+16", "-1.e-17", "-0.001");
-            checkPercentageOfFirstOperation("1.e+16", "-1.e-16", "-0.01");
-
-            checkPercentageOfFirstOperation("1.e+16", "1.e-16", "0.01");
-            checkPercentageOfFirstOperation("1.e+16", "1.e-17", "0.001");
-            checkPercentageOfFirstOperation("1.e+16", "1.e-9998", "1.e-9984");
-            checkPercentageOfFirstOperation("1.e+16", "1.e-9999", "1.e-9985");
-
-            //first is 1.e+17
-            checkPercentageOfFirstOperation("1.e+17", "-1.e+17", "-1.e+32");
-            checkPercentageOfFirstOperation("1.e+17", "-1.e+16", "-1.e+31");
-
-            checkPercentageOfFirstOperation("1.e+17", "1.e+16", "1.e+31");
-            checkPercentageOfFirstOperation("1.e+17", "1.e+17", "1.e+32");
-
-
-            checkPercentageOfFirstOperation("1.e+17", "-1.e-9999", "-1.e-9984");
-            checkPercentageOfFirstOperation("1.e+17", "-1.e-9998", "-1.e-9983");
-            checkPercentageOfFirstOperation("1.e+17", "-1.e-17", "-0.01");
-            checkPercentageOfFirstOperation("1.e+17", "-1.e-16", "-0.1");
-
-            checkPercentageOfFirstOperation("1.e+17", "1.e-16", "0.1");
-            checkPercentageOfFirstOperation("1.e+17", "1.e-17", "0.01");
-            checkPercentageOfFirstOperation("1.e+17", "1.e-9998", "1.e-9983");
-            checkPercentageOfFirstOperation("1.e+17", "1.e-9999", "1.e-9984");
-        }
-
-        //with integers
-        {
-            //first is -1.e+9999
-            checkPercentageOfFirstOperation("-1.e+9999", "-10", "1.e+9998");
-            checkPercentageOfFirstOperation("-1.e+9999", "-1", "1.e+9997");
-
-            checkPercentageOfFirstOperation("-1.e+9999", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e+9999", "1", "-1.e+9997");
-            checkPercentageOfFirstOperation("-1.e+9999", "10", "-1.e+9998");
-
-            //first is -1.e+9998
-            checkPercentageOfFirstOperation("-1.e+9998", "-10", "1.e+9997");
-            checkPercentageOfFirstOperation("-1.e+9998", "-1", "1.e+9996");
-
-            checkPercentageOfFirstOperation("-1.e+9998", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e+9998", "1", "-1.e+9996");
-            checkPercentageOfFirstOperation("-1.e+9998", "10", "-1.e+9997");
-
-            //first is -1.e+17
-            checkPercentageOfFirstOperation("-1.e+17", "-10000000000000000", "1.e+31");
-            checkPercentageOfFirstOperation("-1.e+17", "-9999999999999999", "9.999999999999999e+30");
-            checkPercentageOfFirstOperation("-1.e+17", "-9999999999999998",
-                    "9.999999999999998e+30");
-            checkPercentageOfFirstOperation("-1.e+17", "-10", "1.e+16");
-            checkPercentageOfFirstOperation("-1.e+17", "-1", "1.e+15");
-
-            checkPercentageOfFirstOperation("-1.e+17", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e+17", "1", "-1.e+15");
-            checkPercentageOfFirstOperation("-1.e+17", "10", "-1.e+16");
-            checkPercentageOfFirstOperation("-1.e+17", "9999999999999998",
-                    "-9.999999999999998e+30");
-            checkPercentageOfFirstOperation("-1.e+17", "9999999999999999", "-9.999999999999999e+30");
-            checkPercentageOfFirstOperation("-1.e+17", "10000000000000000", "-1.e+31");
-
-            //first is -1.e+16
-            checkPercentageOfFirstOperation("-1.e+16", "-10000000000000000", "1.e+30");
-            checkPercentageOfFirstOperation("-1.e+16", "-9999999999999999", "9.999999999999999e+29");
-            checkPercentageOfFirstOperation("-1.e+16", "-9999999999999998",
-                    "9.999999999999998e+29");
-            checkPercentageOfFirstOperation("-1.e+16", "-10", "1.e+15");
-            checkPercentageOfFirstOperation("-1.e+16", "-1", "1.e+14");
-
-            checkPercentageOfFirstOperation("-1.e+16", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e+16", "1", "-1.e+14");
-            checkPercentageOfFirstOperation("-1.e+16", "10", "-1.e+15");
-            checkPercentageOfFirstOperation("-1.e+16", "9999999999999998",
-                    "-9.999999999999998e+29");
-            checkPercentageOfFirstOperation("-1.e+16", "9999999999999999", "-9.999999999999999e+29");
-            checkPercentageOfFirstOperation("-1.e+16", "10000000000000000", "-1.e+30");
-
-            //first is 1.e+16
-            checkPercentageOfFirstOperation("1.e+16", "-10000000000000000", "-1.e+30");
-            checkPercentageOfFirstOperation("1.e+16", "-9999999999999999", "-9.999999999999999e+29");
-            checkPercentageOfFirstOperation("1.e+16", "-9999999999999998", "-9.999999999999998e+29");
-            checkPercentageOfFirstOperation("1.e+16", "-10", "-1.e+15");
-            checkPercentageOfFirstOperation("1.e+16", "-1", "-1.e+14");
-
-            checkPercentageOfFirstOperation("1.e+16", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e+16", "1", "1.e+14");
-            checkPercentageOfFirstOperation("1.e+16", "10", "1.e+15");
-            checkPercentageOfFirstOperation("1.e+16", "9999999999999998", "9.999999999999998e+29");
-            checkPercentageOfFirstOperation("1.e+16", "9999999999999999", "9.999999999999999e+29");
-            checkPercentageOfFirstOperation("1.e+16", "10000000000000000", "1.e+30");
-
-            //first is 1.e+17
-            checkPercentageOfFirstOperation("1.e+17", "-10000000000000000", "-1.e+31");
-            checkPercentageOfFirstOperation("1.e+17", "-9999999999999999", "-9.999999999999999e+30");
-            checkPercentageOfFirstOperation("1.e+17", "-9999999999999998", "-9.999999999999998e+30");
-            checkPercentageOfFirstOperation("1.e+17", "-10", "-1.e+16");
-            checkPercentageOfFirstOperation("1.e+17", "-1", "-1.e+15");
-
-            checkPercentageOfFirstOperation("1.e+17", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e+17", "1", "1.e+15");
-            checkPercentageOfFirstOperation("1.e+17", "10", "1.e+16");
-            checkPercentageOfFirstOperation("1.e+17", "9999999999999998", "9.999999999999998e+30");
-            checkPercentageOfFirstOperation("1.e+17", "9999999999999999", "9.999999999999999e+30");
-            checkPercentageOfFirstOperation("1.e+17", "10000000000000000", "1.e+31");
-
-            //first is 1.e+9998
-            checkPercentageOfFirstOperation("1.e+9998", "-10", "-1.e+9997");
-            checkPercentageOfFirstOperation("1.e+9998", "-1", "-1.e+9996");
-
-            checkPercentageOfFirstOperation("1.e+9998", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e+9998", "1", "1.e+9996");
-            checkPercentageOfFirstOperation("1.e+9998", "10", "1.e+9997");
-
-            //first is 1.e+9999
-            checkPercentageOfFirstOperation("1.e+9999", "-10", "-1.e+9998");
-            checkPercentageOfFirstOperation("1.e+9999", "-1", "-1.e+9997");
-
-            checkPercentageOfFirstOperation("1.e+9999", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e+9999", "1", "1.e+9997");
-            checkPercentageOfFirstOperation("1.e+9999", "10", "1.e+9998");
-
-
-            //first is -1.e-9999
-            checkPercentageOfFirstOperation("-1.e-9999", "-10000000000000000", "1.e-9985");
-            checkPercentageOfFirstOperation("-1.e-9999", "-9999999999999999", "1.e-9985");
-            checkPercentageOfFirstOperation("-1.e-9999", "-9999999999999998", "1.e-9985");
-
-            checkPercentageOfFirstOperation("-1.e-9999", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e-9999", "9999999999999998", "-1.e-9985");
-            checkPercentageOfFirstOperation("-1.e-9999", "9999999999999999", "-1.e-9985");
-            checkPercentageOfFirstOperation("-1.e-9999", "10000000000000000", "-1.e-9985");
-
-            //first is -1.e-9998
-            checkPercentageOfFirstOperation("-1.e-9998", "-10000000000000000", "1.e-9984");
-            checkPercentageOfFirstOperation("-1.e-9998", "-9999999999999999", "9.999999999999999e-9985");
-            checkPercentageOfFirstOperation("-1.e-9998", "-9999999999999998",
-                    "9.999999999999998e-9985");
-            checkPercentageOfFirstOperation("-1.e-9998", "-10", "1.e-9999");
-
-            checkPercentageOfFirstOperation("-1.e-9998", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e-9998", "10", "-1.e-9999");
-            checkPercentageOfFirstOperation("-1.e-9998", "9999999999999998",
-                    "-9.999999999999998e-9985");
-            checkPercentageOfFirstOperation("-1.e-9998", "9999999999999999", "-9.999999999999999e-9985");
-            checkPercentageOfFirstOperation("-1.e-9998", "10000000000000000", "-1.e-9984");
-
-            //first is -1.e-17
-            checkPercentageOfFirstOperation("-1.e-17", "-10000000000000000", "0.001");
-            checkPercentageOfFirstOperation("-1.e-17", "-9999999999999999", "0.0009999999999999999");
-            checkPercentageOfFirstOperation("-1.e-17", "-9999999999999998",
-                    "0.0009999999999999998");
-            checkPercentageOfFirstOperation("-1.e-17", "-10", "1.e-18");
-            checkPercentageOfFirstOperation("-1.e-17", "-1", "1.e-19");
-
-            checkPercentageOfFirstOperation("-1.e-17", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e-17", "1", "-1.e-19");
-            checkPercentageOfFirstOperation("-1.e-17", "10", "-1.e-18");
-            checkPercentageOfFirstOperation("-1.e-17", "9999999999999998",
-                    "-0.0009999999999999998");
-            checkPercentageOfFirstOperation("-1.e-17", "9999999999999999", "-0.0009999999999999999");
-            checkPercentageOfFirstOperation("-1.e-17", "10000000000000000", "-0.001");
-
-            //first is -1.e-16
-            checkPercentageOfFirstOperation("-1.e-16", "-10000000000000000", "0.01");
-            checkPercentageOfFirstOperation("-1.e-16", "-9999999999999999", "0.009999999999999999");
-            checkPercentageOfFirstOperation("-1.e-16", "-9999999999999998",
-                    "0.009999999999999998");
-            checkPercentageOfFirstOperation("-1.e-16", "-10", "1.e-17");
-            checkPercentageOfFirstOperation("-1.e-16", "-1", "1.e-18");
-
-            checkPercentageOfFirstOperation("-1.e-16", "0", "0");
-
-            checkPercentageOfFirstOperation("-1.e-16", "1", "-1.e-18");
-            checkPercentageOfFirstOperation("-1.e-16", "10", "-1.e-17");
-            checkPercentageOfFirstOperation("-1.e-16", "9999999999999998",
-                    "-0.009999999999999998");
-            checkPercentageOfFirstOperation("-1.e-16", "9999999999999999", "-0.009999999999999999");
-            checkPercentageOfFirstOperation("-1.e-16", "10000000000000000", "-0.01");
-
-            //first is 1.e-16
-            checkPercentageOfFirstOperation("1.e-16", "-10000000000000000", "-0.01");
-            checkPercentageOfFirstOperation("1.e-16", "-9999999999999999", "-0.009999999999999999");
-            checkPercentageOfFirstOperation("1.e-16", "-9999999999999998", "-0.009999999999999998");
-            checkPercentageOfFirstOperation("1.e-16", "-10", "-1.e-17");
-            checkPercentageOfFirstOperation("1.e-16", "-1", "-1.e-18");
-
-            checkPercentageOfFirstOperation("1.e-16", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e-16", "1", "1.e-18");
-            checkPercentageOfFirstOperation("1.e-16", "10", "1.e-17");
-            checkPercentageOfFirstOperation("1.e-16", "9999999999999998", "0.009999999999999998");
-            checkPercentageOfFirstOperation("1.e-16", "9999999999999999", "0.009999999999999999");
-            checkPercentageOfFirstOperation("1.e-16", "10000000000000000", "0.01");
-
-            //first is 1.e-17
-            checkPercentageOfFirstOperation("1.e-17", "-10000000000000000", "-0.001");
-            checkPercentageOfFirstOperation("1.e-17", "-9999999999999999", "-0.0009999999999999999");
-            checkPercentageOfFirstOperation("1.e-17", "-9999999999999998", "-0.0009999999999999998");
-            checkPercentageOfFirstOperation("1.e-17", "-10", "-1.e-18");
-            checkPercentageOfFirstOperation("1.e-17", "-1", "-1.e-19");
-
-            checkPercentageOfFirstOperation("1.e-17", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e-17", "1", "1.e-19");
-            checkPercentageOfFirstOperation("1.e-17", "10", "1.e-18");
-            checkPercentageOfFirstOperation("1.e-17", "9999999999999998", "0.0009999999999999998");
-            checkPercentageOfFirstOperation("1.e-17", "9999999999999999", "0.0009999999999999999");
-            checkPercentageOfFirstOperation("1.e-17", "10000000000000000", "0.001");
-
-            //first is 1.e-9998
-            checkPercentageOfFirstOperation("1.e-9998", "-10000000000000000", "-1.e-9984");
-            checkPercentageOfFirstOperation("1.e-9998", "-9999999999999999", "-9.999999999999999e-9985");
-            checkPercentageOfFirstOperation("1.e-9998", "-9999999999999998",
-                    "-9.999999999999998e-9985");
-            checkPercentageOfFirstOperation("1.e-9998", "-10", "-1.e-9999");
-
-            checkPercentageOfFirstOperation("1.e-9998", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e-9998", "10", "1.e-9999");
-            checkPercentageOfFirstOperation("1.e-9998", "9999999999999998",
-                    "9.999999999999998e-9985");
-            checkPercentageOfFirstOperation("1.e-9998", "9999999999999999", "9.999999999999999e-9985");
-            checkPercentageOfFirstOperation("1.e-9998", "10000000000000000", "1.e-9984");
-
-            //first is 1.e-9999
-            checkPercentageOfFirstOperation("1.e-9999", "-10000000000000000", "-1.e-9985");
-            checkPercentageOfFirstOperation("1.e-9999", "-9999999999999999", "-1.e-9985");
-            checkPercentageOfFirstOperation("1.e-9999", "-9999999999999998", "-1.e-9985");
-
-            checkPercentageOfFirstOperation("1.e-9999", "0", "0");
-
-            checkPercentageOfFirstOperation("1.e-9999", "9999999999999998", "1.e-9985");
-            checkPercentageOfFirstOperation("1.e-9999", "9999999999999999", "1.e-9985");
-            checkPercentageOfFirstOperation("1.e-9999", "10000000000000000", "1.e-9985");
-        }
+        //easy cases
+        checkPercentageOfFirstOperation("100", "100", "1.e+2");
+        checkPercentageOfFirstOperation("50", "-100", "-5.e+1");
+        checkPercentageOfFirstOperation("100", "15", "15");
+        checkPercentageOfFirstOperation("10.1", "-5", "-0.505");
+        checkPercentageOfFirstOperation("75.276", "67.2", "50.585472");
+        checkPercentageOfFirstOperation("1.e+5", "1.e+8", "1.e+11");
+        checkPercentageOfFirstOperation("1.e-20", "5.e-20", "5.e-42");
+
+        //cases with zero
+        checkPercentageOfFirstOperation("0", "0", "0");
+        checkPercentageOfFirstOperation("2", "0", "0");
+        checkPercentageOfFirstOperation("-3", "0", "0");
+        checkPercentageOfFirstOperation("5.5", "0", "0");
+        checkPercentageOfFirstOperation("0", "-7", "0");
+        checkPercentageOfFirstOperation("0", "-5.1", "0");
+        checkPercentageOfFirstOperation("0", "1.e+8", "0");
+
+        //big numbers
+        checkPercentageOfFirstOperation("10000000000000000", "10000000000000000", "1.e+30");
+        checkPercentageOfFirstOperation("5000000000000000", "9999999999999999", "4.9999999999999995e+29");
+        checkPercentageOfFirstOperation("1234567890987654321", "1", "12345678909876543.21");
+        checkPercentageOfFirstOperation("100000000000000000000000000", "10", "1.e+25");
 
         //with decimals
-        {
-            //first is -1.e+9999
-            checkPercentageOfFirstOperation("-1.e+9999", "-0.9999999999999999", "9.999999999999999e+9996");
-            checkPercentageOfFirstOperation("-1.e+9999", "-0.9", "9.e+9996");
-            checkPercentageOfFirstOperation("-1.e+9999", "-0.1", "1.e+9996");
+        checkPercentageOfFirstOperation("10000000000000000", "0.1", "1.e+13");
+        checkPercentageOfFirstOperation("5000000000000000", "0.9999999999999999", "49999999999999.995");
+        checkPercentageOfFirstOperation("1234567890987654321", "123.123", "1520037024420729629.64483");
+        checkPercentageOfFirstOperation("100000000000000000000000000", "0.00000000000000000000000000001", "0.00001");
 
-            checkPercentageOfFirstOperation("-1.e+9999", "0.1", "-1.e+9996");
-            checkPercentageOfFirstOperation("-1.e+9999", "0.9", "-9.e+9996");
-            checkPercentageOfFirstOperation("-1.e+9999", "0.9999999999999999", "-9.999999999999999e+9996");
+        //decimal and decimal
+        checkPercentageOfFirstOperation("0.0000000000001", "0.1", "1.e-16");
+        checkPercentageOfFirstOperation("0.0000000000000001", "0.9999999999999999", "9.999999999999999e-19");
+        checkPercentageOfFirstOperation("1234567890.987654321", "123.123", "1520037024.42072962964483");
+        checkPercentageOfFirstOperation("0.01", "0.00000000000000000000000000001", "1.e-33");
 
-            //first is -1.e+9998
-            checkPercentageOfFirstOperation("-1.e+9998", "-0.9999999999999999", "9.999999999999999e+9995");
-            checkPercentageOfFirstOperation("-1.e+9998", "-0.9", "9.e+9995");
-            checkPercentageOfFirstOperation("-1.e+9998", "-0.1", "1.e+9995");
+        //boundary
+        checkPercentageOfFirstOperation("9.e+9997", "10000", "9.e+9999");
+        checkPercentageOfFirstOperation("-9.e+9999", "-100", "9.e+9999");
+        checkPercentageOfFirstOperation("9.e-9997", "1", "9.e-9999");
+        checkPercentageOfFirstOperation("-9.e-9999", "-100", "9.e-9999");
 
-            checkPercentageOfFirstOperation("-1.e+9998", "0.1", "-1.e+9995");
-            checkPercentageOfFirstOperation("-1.e+9998", "0.9", "-9.e+9995");
-            checkPercentageOfFirstOperation("-1.e+9998", "0.9999999999999999", "-9.999999999999999e+9995");
-
-            //first is -1.e+17
-            checkPercentageOfFirstOperation("-1.e+17", "-0.9999999999999999", "999999999999999.9");
-            checkPercentageOfFirstOperation("-1.e+17", "-0.9", "9.e+14");
-            checkPercentageOfFirstOperation("-1.e+17", "-0.1", "1.e+14");
-
-            checkPercentageOfFirstOperation("-1.e+17", "0.1", "-1.e+14");
-            checkPercentageOfFirstOperation("-1.e+17", "0.9", "-9.e+14");
-            checkPercentageOfFirstOperation("-1.e+17", "0.9999999999999999", "-999999999999999.9");
-
-            //first is -1.e+16
-            checkPercentageOfFirstOperation("-1.e+16", "-0.9999999999999999", "99999999999999.99");
-            checkPercentageOfFirstOperation("-1.e+16", "-0.9", "9.e+13");
-            checkPercentageOfFirstOperation("-1.e+16", "-0.1", "1.e+13");
-
-            checkPercentageOfFirstOperation("-1.e+16", "0.1", "-1.e+13");
-            checkPercentageOfFirstOperation("-1.e+16", "0.9", "-9.e+13");
-            checkPercentageOfFirstOperation("-1.e+16", "0.9999999999999999", "-99999999999999.99");
-
-            //first is 1.e+16
-            checkPercentageOfFirstOperation("1.e+16", "-0.9999999999999999", "-99999999999999.99");
-            checkPercentageOfFirstOperation("1.e+16", "-0.9", "-9.e+13");
-            checkPercentageOfFirstOperation("1.e+16", "-0.1", "-1.e+13");
-
-            checkPercentageOfFirstOperation("1.e+16", "0.1", "1.e+13");
-            checkPercentageOfFirstOperation("1.e+16", "0.9", "9.e+13");
-            checkPercentageOfFirstOperation("1.e+16", "0.9999999999999999", "99999999999999.99");
-
-            //first is 1.e+17
-            checkPercentageOfFirstOperation("1.e+17", "-0.9999999999999999", "-999999999999999.9");
-            checkPercentageOfFirstOperation("1.e+17", "-0.9", "-9.e+14");
-            checkPercentageOfFirstOperation("1.e+17", "-0.1", "-1.e+14");
-
-            checkPercentageOfFirstOperation("1.e+17", "0.1", "1.e+14");
-            checkPercentageOfFirstOperation("1.e+17", "0.9", "9.e+14");
-            checkPercentageOfFirstOperation("1.e+17", "0.9999999999999999", "999999999999999.9");
-
-            //first is 1.e+9998
-            checkPercentageOfFirstOperation("1.e+9998", "-0.9999999999999999", "-9.999999999999999e+9995");
-            checkPercentageOfFirstOperation("1.e+9998", "-0.9", "-9.e+9995");
-            checkPercentageOfFirstOperation("1.e+9998", "-0.1", "-1.e+9995");
-
-            checkPercentageOfFirstOperation("1.e+9998", "0.1", "1.e+9995");
-            checkPercentageOfFirstOperation("1.e+9998", "0.9", "9.e+9995");
-            checkPercentageOfFirstOperation("1.e+9998", "0.9999999999999999", "9.999999999999999e+9995");
-
-            //first is 1.e+9999
-            checkPercentageOfFirstOperation("1.e+9999", "-0.9999999999999999", "-9.999999999999999e+9996");
-            checkPercentageOfFirstOperation("1.e+9999", "-0.9", "-9.e+9996");
-            checkPercentageOfFirstOperation("1.e+9999", "-0.1", "-1.e+9996");
-
-            checkPercentageOfFirstOperation("1.e+9999", "0.1", "1.e+9996");
-            checkPercentageOfFirstOperation("1.e+9999", "0.9", "9.e+9996");
-            checkPercentageOfFirstOperation("1.e+9999", "0.9999999999999999", "9.999999999999999e+9996");
-
-            //first is -1.e-17
-            checkPercentageOfFirstOperation("-1.e-17", "-0.9999999999999999", "9.999999999999999e-20");
-            checkPercentageOfFirstOperation("-1.e-17", "-0.9", "9.e-20");
-            checkPercentageOfFirstOperation("-1.e-17", "-0.1", "1.e-20");
-
-            checkPercentageOfFirstOperation("-1.e-17", "0.1", "-1.e-20");
-            checkPercentageOfFirstOperation("-1.e-17", "0.9", "-9.e-20");
-            checkPercentageOfFirstOperation("-1.e-17", "0.9999999999999999", "-9.999999999999999e-20");
-
-            //first is -1.e-16
-            checkPercentageOfFirstOperation("-1.e-16", "-0.9999999999999999", "9.999999999999999e-19");
-            checkPercentageOfFirstOperation("-1.e-16", "-0.9", "9.e-19");
-            checkPercentageOfFirstOperation("-1.e-16", "-0.1", "1.e-19");
-
-            checkPercentageOfFirstOperation("-1.e-16", "0.1", "-1.e-19");
-            checkPercentageOfFirstOperation("-1.e-16", "0.9", "-9.e-19");
-            checkPercentageOfFirstOperation("-1.e-16", "0.9999999999999999", "-9.999999999999999e-19");
-
-            //first is 1.e-16
-            checkPercentageOfFirstOperation("1.e-16", "-0.9999999999999999", "-9.999999999999999e-19");
-            checkPercentageOfFirstOperation("1.e-16", "-0.9", "-9.e-19");
-            checkPercentageOfFirstOperation("1.e-16", "-0.1", "-1.e-19");
-
-            checkPercentageOfFirstOperation("1.e-16", "0.1", "1.e-19");
-            checkPercentageOfFirstOperation("1.e-16", "0.9", "9.e-19");
-            checkPercentageOfFirstOperation("1.e-16", "0.9999999999999999", "9.999999999999999e-19");
-
-            //first is 1.e-17
-            checkPercentageOfFirstOperation("1.e-17", "-0.9999999999999999", "-9.999999999999999e-20");
-            checkPercentageOfFirstOperation("1.e-17", "-0.9", "-9.e-20");
-            checkPercentageOfFirstOperation("1.e-17", "-0.1", "-1.e-20");
-
-            checkPercentageOfFirstOperation("1.e-17", "0.1", "1.e-20");
-            checkPercentageOfFirstOperation("1.e-17", "0.9", "9.e-20");
-            checkPercentageOfFirstOperation("1.e-17", "0.9999999999999999", "9.999999999999999e-20");
-        }
+        checkPercentageOfFirstOperation("-9.e+9997", "10000", "-9.e+9999");
+        checkPercentageOfFirstOperation("9.e+9999", "-100", "-9.e+9999");
+        checkPercentageOfFirstOperation("-9.e-9997", "1", "-9.e-9999");
+        checkPercentageOfFirstOperation("9.e-9999", "-100", "-9.e-9999");
 
         //several random values
-        {
-            checkPercentageOfFirstOperation("14", "51", "7.14");
-            checkPercentageOfFirstOperation("6523", "123", "8023.29");
+        checkPercentageOfFirstOperation("14", "51", "7.14");
+        checkPercentageOfFirstOperation("6523", "123", "8023.29");
 
-            checkPercentageOfFirstOperation("123", "-31", "-38.13");
-            checkPercentageOfFirstOperation("874", "-41", "-358.34");
+        checkPercentageOfFirstOperation("123", "-31", "-38.13");
+        checkPercentageOfFirstOperation("874", "-41", "-358.34");
 
-            checkPercentageOfFirstOperation("-31", "-1321", "409.51");
-            checkPercentageOfFirstOperation("-132", "-52", "68.64");
+        checkPercentageOfFirstOperation("-31", "-1321", "409.51");
+        checkPercentageOfFirstOperation("-132", "-52", "68.64");
 
-            checkPercentageOfFirstOperation("51354", "132.12", "67848.9048");
-            checkPercentageOfFirstOperation("54", "21.4", "11.556");
+        checkPercentageOfFirstOperation("51354", "132.12", "67848.9048");
+        checkPercentageOfFirstOperation("54", "21.4", "11.556");
 
-            checkPercentageOfFirstOperation("221", "-123.512", "-272.96152");
-            checkPercentageOfFirstOperation("54", "-2135.13", "-1152.9702");
+        checkPercentageOfFirstOperation("221", "-123.512", "-272.96152");
+        checkPercentageOfFirstOperation("54", "-2135.13", "-1152.9702");
 
-            checkPercentageOfFirstOperation("-12", "1.2", "-0.144");
-            checkPercentageOfFirstOperation("-87", "23.61", "-20.5407");
+        checkPercentageOfFirstOperation("-12", "1.2", "-0.144");
+        checkPercentageOfFirstOperation("-87", "23.61", "-20.5407");
 
-            checkPercentageOfFirstOperation("-65", "-10.11", "6.5715");
-            checkPercentageOfFirstOperation("-324", "-12.31", "39.8844");
+        checkPercentageOfFirstOperation("-65", "-10.11", "6.5715");
+        checkPercentageOfFirstOperation("-324", "-12.31", "39.8844");
 
-            checkPercentageOfFirstOperation("21.12", "7.6", "1.60512");
-            checkPercentageOfFirstOperation("5132.123", "24.24", "1244.0266152");
+        checkPercentageOfFirstOperation("21.12", "7.6", "1.60512");
+        checkPercentageOfFirstOperation("5132.123", "24.24", "1244.0266152");
 
-            checkPercentageOfFirstOperation("42.64", "-67.8", "-28.90992");
-            checkPercentageOfFirstOperation("31.31", "-34.5", "-10.80195");
+        checkPercentageOfFirstOperation("42.64", "-67.8", "-28.90992");
+        checkPercentageOfFirstOperation("31.31", "-34.5", "-10.80195");
 
-            checkPercentageOfFirstOperation("-74.1", "-2.23", "1.65243");
-            checkPercentageOfFirstOperation("-7.2", "-23.53", "1.69416");
-        }
+        checkPercentageOfFirstOperation("-74.1", "-2.23", "1.65243");
+        checkPercentageOfFirstOperation("-7.2", "-23.53", "1.69416");
     }
 
     /**
@@ -3097,47 +796,37 @@ class CalculationModelTest {
      */
     @Test
     void percentageOf100Tests() {
-        //integers
-        checkPercentageOf100Operation("-10000000000000000", "-1.e+14");
-        checkPercentageOf100Operation("-9999999999999999", "-99999999999999.99");
-        checkPercentageOf100Operation("-9999999999999998", "-99999999999999.98");
+        //easy cases
+        checkPercentageOf100Operation("100", "1");
         checkPercentageOf100Operation("-10", "-0.1");
-        checkPercentageOf100Operation("-1", "-0.01");
+        checkPercentageOf100Operation("50", "0.5");
+        checkPercentageOf100Operation("-789", "-7.89");
+        checkPercentageOf100Operation("5.5", "0.055");
+        checkPercentageOf100Operation("-10.2", "-0.102");
+        checkPercentageOf100Operation("7.4", "0.074");
+        checkPercentageOf100Operation("-1.e+5", "-1.e+3");
+        checkPercentageOf100Operation("1.e-20", "1.e-22");
 
+        //cases with zero
         checkPercentageOf100Operation("0", "0");
 
-        checkPercentageOf100Operation("1", "0.01");
-        checkPercentageOf100Operation("10", "0.1");
-        checkPercentageOf100Operation("9999999999999998", "99999999999999.98");
-        checkPercentageOf100Operation("9999999999999999", "99999999999999.99");
+        //big numbers
         checkPercentageOf100Operation("10000000000000000", "1.e+14");
+        checkPercentageOf100Operation("-5000000000000000", "-5.e+13");
+        checkPercentageOf100Operation("1234567890987654321", "12345678909876543.21");
+        checkPercentageOf100Operation("-100000000000000000000000000", "-1.e+24");
 
         //decimals
-        checkPercentageOf100Operation("-0.9999999999999999", "-0.009999999999999999");
-        checkPercentageOf100Operation("-0.9", "-0.009");
-        checkPercentageOf100Operation("-0.1", "-0.001");
+        checkPercentageOf100Operation("0.0000000000001", "0.000000000000001");
+        checkPercentageOf100Operation("-0.0000000000000001", "-0.000000000000000001");
+        checkPercentageOf100Operation("1234567890.987654321", "12345678.90987654321");
+        checkPercentageOf100Operation("-0.00000000000000000000000000009",
+                "-0.0000000000000000000000000000009");
 
-        checkPercentageOf100Operation("0.1", "0.001");
-        checkPercentageOf100Operation("0.9", "0.009");
-        checkPercentageOf100Operation("0.9999999999999999", "0.009999999999999999");
-
-        //engineer numbers
-        checkPercentageOf100Operation("-1.e+9999", "-1.e+9997");
-        checkPercentageOf100Operation("-1.e+9998", "-1.e+9996");
-        checkPercentageOf100Operation("-1.e+17", "-1.e+15");
-        checkPercentageOf100Operation("-1.e+16", "-1.e+14");
-
-        checkPercentageOf100Operation("1.e+16", "1.e+14");
-        checkPercentageOf100Operation("1.e+17", "1.e+15");
-        checkPercentageOf100Operation("1.e+9998", "1.e+9996");
-        checkPercentageOf100Operation("1.e+9999", "1.e+9997");
-
-
-        checkPercentageOf100Operation("-1.e-17", "-1.e-19");
-        checkPercentageOf100Operation("-1.e-16", "-1.e-18");
-
-        checkPercentageOf100Operation("1.e-16", "1.e-18");
-        checkPercentageOf100Operation("1.e-17", "1.e-19");
+        //boundary
+        checkPercentageOf100Operation("9.e+9999", "9.e+9997");
+        checkPercentageOf100Operation("1.e-9997", "1.e-9999");
+        checkPercentageOf100Operation("-9.e-9997", "-9.e-9999");
 
         //several random values
         checkPercentageOf100Operation("73", "0.73");
@@ -3166,6 +855,7 @@ class CalculationModelTest {
 
         assertEquals(BigDecimal.ZERO, calculation.getFirst());
         assertEquals(BigDecimal.ZERO, calculation.getSecond());
+        assertEquals(BigDecimal.ZERO, calculation.getResult());
     }
 
     /**
@@ -3174,243 +864,108 @@ class CalculationModelTest {
     @Test
     void binaryOverflowExceptionTests() {
         //add operation
-        {
-            checkAddOverflowException("-9.e+9999", "-9.e+9999");
-            checkAddOverflowException("-9.e+9999", "-8.e+9999");
-            checkAddOverflowException("-9.e+9999", "-2.e+9999");
-            checkAddOverflowException("-9.e+9999", "-1.e+9999");
+        checkAddOverflowException("9.e+9999", "9.e+9999");
+        checkAddOverflowException("9.e+9999", "1.e+9999");
+        checkAddOverflowException("8.e+9999", "2.e+9999");
 
-            checkAddOverflowException("-8.e+9999", "-8.e+9999");
-            checkAddOverflowException("-8.e+9999", "-8.e+9999");
-            checkAddOverflowException("-8.e+9999", "-2.e+9999");
-
-            checkAddOverflowException("8.e+9999", "8.e+9999");
-            checkAddOverflowException("8.e+9999", "8.e+9999");
-            checkAddOverflowException("8.e+9999", "2.e+9999");
-
-            checkAddOverflowException("9.e+9999", "9.e+9999");
-            checkAddOverflowException("9.e+9999", "8.e+9999");
-            checkAddOverflowException("9.e+9999", "2.e+9999");
-            checkAddOverflowException("9.e+9999", "1.e+9999");
-        }
+        checkAddOverflowException("-9.e+9999", "-9.e+9999");
+        checkAddOverflowException("-9.e+9999", "-1.e+9999");
+        checkAddOverflowException("-8.e+9999", "-2.e+9999");
 
         //subtract operation
-        {
-            checkSubtractOverflowException("-9.e+9999", "9.e+9999");
-            checkSubtractOverflowException("9.e+9999", "-9.e+9999");
+        checkSubtractOverflowException("9.e+9999", "-9.e+9999");
+        checkSubtractOverflowException("-9.e+9999", "9.e+9999");
 
-            checkSubtractOverflowException("-9.e+9999", "8.e+9999");
-            checkSubtractOverflowException("8.e+9999", "-9.e+9999");
+        checkSubtractOverflowException("9.e+9999", "-1.e+9999");
+        checkSubtractOverflowException("-1.e+9999", "9.e+9999");
 
-            checkSubtractOverflowException("-9.e+9999", "2.e+9999");
-            checkSubtractOverflowException("2.e+9999", "-9.e+9999");
+        checkSubtractOverflowException("8.e+9999", "-2.e+9999");
+        checkSubtractOverflowException("-2.e+9999", "8.e+9999");
 
-            checkSubtractOverflowException("-9.e+9999", "1.e+9999");
-            checkSubtractOverflowException("1.e+9999", "-9.e+9999");
+        checkSubtractOverflowException("-9.e+9999", "9.e+9999");
+        checkSubtractOverflowException("9.e+9999", "-9.e+9999");
 
+        checkSubtractOverflowException("-9.e+9999", "1.e+9999");
+        checkSubtractOverflowException("1.e+9999", "-9.e+9999");
 
-            checkSubtractOverflowException("-8.e+9999", "8.e+9999");
-            checkSubtractOverflowException("8.e+9999", "-8.e+9999");
-
-            checkSubtractOverflowException("-8.e+9999", "8.e+9999");
-            checkSubtractOverflowException("8.e+9999", "-8.e+9999");
-
-            checkSubtractOverflowException("-8.e+9999", "2.e+9999");
-            checkSubtractOverflowException("2.e+9999", "-8.e+9999");
-
-
-            checkSubtractOverflowException("8.e+9999", "-8.e+9999");
-            checkSubtractOverflowException("-8.e+9999", "8.e+9999");
-
-            checkSubtractOverflowException("8.e+9999", "-8.e+9999");
-            checkSubtractOverflowException("-8.e+9999", "8.e+9999");
-
-            checkSubtractOverflowException("8.e+9999", "-2.e+9999");
-            checkSubtractOverflowException("-2.e+9999", "8.e+9999");
-
-
-            checkSubtractOverflowException("9.e+9999", "-9.e+9999");
-            checkSubtractOverflowException("-9.e+9999", "9.e+9999");
-
-            checkSubtractOverflowException("9.e+9999", "-8.e+9999");
-            checkSubtractOverflowException("-8.e+9999", "9.e+9999");
-
-            checkSubtractOverflowException("9.e+9999", "-2.e+9999");
-            checkSubtractOverflowException("-2.e+9999", "9.e+9999");
-
-            checkSubtractOverflowException("9.e+9999", "-1.e+9999");
-            checkSubtractOverflowException("-1.e+9999", "9.e+9999");
-        }
+        checkSubtractOverflowException("-8.e+9999", "2.e+9999");
+        checkSubtractOverflowException("2.e+9999", "-8.e+9999");
 
         //multiply operation
-        {
-            checkMultiplyOverflowException("-1.e+9999", "-10");
-            checkMultiplyOverflowException("-1.e+9999", "10");
+        checkMultiplyOverflowException("1.e+9999", "-1.e+9999");
+        checkMultiplyOverflowException("1.e+9999", "1.e+9999");
 
-            checkMultiplyOverflowException("-1.e+9999", "-1.e+9998");
-            checkMultiplyOverflowException("-1.e+9999", "1.e+9998");
+        checkMultiplyOverflowException("1.e+9999", "-10");
+        checkMultiplyOverflowException("1.e+9999", "10");
 
-            checkMultiplyOverflowException("-1.e+9999", "-1.e+9999");
-            checkMultiplyOverflowException("-1.e+9999", "1.e+9999");
+        checkMultiplyOverflowException("1.e+5000", "-1.e+5000");
+        checkMultiplyOverflowException("1.e+5000", "1.e+5000");
 
+        checkMultiplyOverflowException("-1.e+9999", "-10");
+        checkMultiplyOverflowException("-1.e+9999", "10");
 
-            checkMultiplyOverflowException("-1.e+9998", "-1.e+9998");
-            checkMultiplyOverflowException("-1.e+9998", "1.e+9998");
+        checkMultiplyOverflowException("-1.e+9999", "-1.e+9999");
+        checkMultiplyOverflowException("-1.e+9999", "1.e+9999");
 
-            checkMultiplyOverflowException("-1.e+9998", "-1.e+9999");
-            checkMultiplyOverflowException("-1.e+9998", "1.e+9999");
-
-
-            checkMultiplyOverflowException("-1.e+5000", "-1.e+5000");
-            checkMultiplyOverflowException("-1.e+5000", "1.e+5000");
+        checkMultiplyOverflowException("-1.e+5000", "-1.e+5000");
+        checkMultiplyOverflowException("-1.e+5000", "1.e+5000");
 
 
-            checkMultiplyOverflowException("1.e+5000", "-1.e+5000");
-            checkMultiplyOverflowException("1.e+5000", "1.e+5000");
+        checkMultiplyOverflowException("1.e-9999", "-1.e-9999");
+        checkMultiplyOverflowException("1.e-9999", "1.e-9999");
 
-            checkMultiplyOverflowException("1.e+9998", "-1.e+9998");
-            checkMultiplyOverflowException("1.e+9998", "1.e+9998");
+        checkMultiplyOverflowException("1.e-9999", "-0.1");
+        checkMultiplyOverflowException("1.e-9999", "0.1");
 
-            checkMultiplyOverflowException("1.e+9998", "-1.e+9999");
-            checkMultiplyOverflowException("1.e+9998", "1.e+9999");
+        checkMultiplyOverflowException("1.e-5000", "-1.e-5000");
+        checkMultiplyOverflowException("1.e-5000", "1.e-5000");
 
+        checkMultiplyOverflowException("-1.e-9999", "-0.1");
+        checkMultiplyOverflowException("-1.e-9999", "0.1");
 
-            checkMultiplyOverflowException("1.e+9999", "-10");
-            checkMultiplyOverflowException("1.e+9999", "10");
+        checkMultiplyOverflowException("-1.e-9999", "-1.e-9999");
+        checkMultiplyOverflowException("-1.e-9999", "1.e-9999");
 
-            checkMultiplyOverflowException("1.e+9999", "-1.e+9998");
-            checkMultiplyOverflowException("1.e+9999", "1.e+9998");
-
-            checkMultiplyOverflowException("1.e+9999", "-1.e+9999");
-            checkMultiplyOverflowException("1.e+9999", "1.e+9999");
-
-
-            checkMultiplyOverflowException("-1.e-9999", "-0.1");
-            checkMultiplyOverflowException("-1.e-9999", "0.1");
-
-            checkMultiplyOverflowException("-1.e-9999", "-1.e-9998");
-            checkMultiplyOverflowException("-1.e-9999", "1.e-9998");
-
-            checkMultiplyOverflowException("-1.e-9999", "-1.e-9999");
-            checkMultiplyOverflowException("-1.e-9999", "1.e-9999");
-
-
-            checkMultiplyOverflowException("-1.e-9998", "-1.e-9998");
-            checkMultiplyOverflowException("-1.e-9998", "1.e-9998");
-
-            checkMultiplyOverflowException("-1.e-9998", "-1.e-9999");
-            checkMultiplyOverflowException("-1.e-9998", "1.e-9999");
-
-
-            checkMultiplyOverflowException("-1.e-5000", "-1.e-5000");
-            checkMultiplyOverflowException("-1.e-5000", "1.e-5000");
-
-
-            checkMultiplyOverflowException("1.e-5000", "-1.e-5000");
-            checkMultiplyOverflowException("1.e-5000", "1.e-5000");
-
-
-            checkMultiplyOverflowException("1.e-9998", "-1.e-9998");
-            checkMultiplyOverflowException("1.e-9998", "1.e-9998");
-
-            checkMultiplyOverflowException("1.e-9998", "-1.e-9999");
-            checkMultiplyOverflowException("1.e-9998", "1.e-9999");
-
-
-            checkMultiplyOverflowException("1.e-9999", "-0.1");
-            checkMultiplyOverflowException("1.e-9999", "0.1");
-
-            checkMultiplyOverflowException("1.e-9999", "-1.e-9998");
-            checkMultiplyOverflowException("1.e-9999", "1.e-9998");
-
-            checkMultiplyOverflowException("1.e-9999", "-1.e-9999");
-            checkMultiplyOverflowException("1.e-9999", "1.e-9999");
-        }
+        checkMultiplyOverflowException("-1.e-5000", "-1.e-5000");
+        checkMultiplyOverflowException("-1.e-5000", "1.e-5000");
 
         //divide operation
-        {
-            checkDivideOverflowException("-1.e+9999", "-1.e-9999");
-            checkDivideOverflowException("-1.e+9999", "1.e-9999");
+        checkDivideOverflowException("1.e+9999", "-1.e-9999");
+        checkDivideOverflowException("1.e+9999", "1.e-9999");
 
-            checkDivideOverflowException("-1.e+9999", "-1.e-9998");
-            checkDivideOverflowException("-1.e+9999", "1.e-9998");
+        checkDivideOverflowException("1.e+9999", "-0.1");
+        checkDivideOverflowException("1.e+9999", "0.1");
 
-            checkDivideOverflowException("-1.e+9999", "-0.1");
-            checkDivideOverflowException("-1.e+9999", "0.1");
+        checkDivideOverflowException("1.e+5000", "-1.e-5000");
+        checkDivideOverflowException("1.e+5000", "1.e-5000");
 
+        checkDivideOverflowException("-1.e+9999", "-1.e-9999");
+        checkDivideOverflowException("-1.e+9999", "1.e-9999");
 
-            checkDivideOverflowException("-1.e+9998", "-1.e-9999");
-            checkDivideOverflowException("-1.e+9998", "1.e-9999");
+        checkDivideOverflowException("-1.e+9999", "-0.1");
+        checkDivideOverflowException("-1.e+9999", "0.1");
 
-            checkDivideOverflowException("-1.e+9998", "-1.e-9998");
-            checkDivideOverflowException("-1.e+9998", "1.e-9998");
-
-            checkDivideOverflowException("-1.e+5000", "-1.e-5000");
-            checkDivideOverflowException("-1.e+5000", "1.e-5000");
+        checkDivideOverflowException("-1.e+5000", "-1.e-5000");
+        checkDivideOverflowException("-1.e+5000", "1.e-5000");
 
 
-            checkDivideOverflowException("-1.e+5000", "-1.e-5000");
-            checkDivideOverflowException("-1.e+5000", "1.e-5000");
+        checkDivideOverflowException("1.e-9999", "-1.e+9999");
+        checkDivideOverflowException("1.e-9999", "1.e+9999");
 
+        checkDivideOverflowException("1.e-9999", "-10");
+        checkDivideOverflowException("1.e-9999", "10");
 
-            checkDivideOverflowException("1.e+9998", "-1.e-9999");
-            checkDivideOverflowException("1.e+9998", "1.e-9999");
+        checkDivideOverflowException("1.e-5000", "-1.e+5000");
+        checkDivideOverflowException("1.e-5000", "1.e+5000");
 
-            checkDivideOverflowException("1.e+9998", "-1.e-9998");
-            checkDivideOverflowException("1.e+9998", "1.e-9998");
+        checkDivideOverflowException("-1.e-9999", "-1.e+9999");
+        checkDivideOverflowException("-1.e-9999", "1.e+9999");
 
+        checkDivideOverflowException("-1.e-9999", "-10");
+        checkDivideOverflowException("-1.e-9999", "10");
 
-            checkDivideOverflowException("1.e+9999", "-1.e-9999");
-            checkDivideOverflowException("1.e+9999", "1.e-9999");
-
-            checkDivideOverflowException("1.e+9999", "-1.e-9998");
-            checkDivideOverflowException("1.e+9999", "1.e-9998");
-
-            checkDivideOverflowException("1.e+9999", "-0.1");
-            checkDivideOverflowException("1.e+9999", "0.1");
-
-
-            checkDivideOverflowException("-1.e-9999", "-1.e+9999");
-            checkDivideOverflowException("-1.e-9999", "1.e+9999");
-
-            checkDivideOverflowException("-1.e-9999", "-1.e+9998");
-            checkDivideOverflowException("-1.e-9999", "1.e+9998");
-
-            checkDivideOverflowException("-1.e-9999", "-10");
-            checkDivideOverflowException("-1.e-9999", "10");
-
-
-            checkDivideOverflowException("-1.e-9998", "-1.e+9999");
-            checkDivideOverflowException("-1.e-9998", "1.e+9999");
-
-            checkDivideOverflowException("-1.e-9998", "-1.e+9998");
-            checkDivideOverflowException("-1.e-9998", "1.e+9998");
-
-
-            checkDivideOverflowException("-1.e+5000", "-1.e-5000");
-            checkDivideOverflowException("-1.e+5000", "1.e-5000");
-
-
-            checkDivideOverflowException("-1.e+5000", "-1.e-5000");
-            checkDivideOverflowException("-1.e+5000", "1.e-5000");
-
-
-            checkDivideOverflowException("1.e-9998", "-1.e+9999");
-            checkDivideOverflowException("1.e-9998", "1.e+9999");
-
-            checkDivideOverflowException("1.e-9998", "-1.e+9998");
-            checkDivideOverflowException("1.e-9998", "1.e+9998");
-
-
-            checkDivideOverflowException("1.e-9999", "-1.e+9999");
-            checkDivideOverflowException("1.e-9999", "1.e+9999");
-
-            checkDivideOverflowException("1.e-9999", "-1.e+9998");
-            checkDivideOverflowException("1.e-9999", "1.e+9998");
-
-            checkDivideOverflowException("1.e-9999", "-10");
-            checkDivideOverflowException("1.e-9999", "10");
-        }
+        checkDivideOverflowException("-1.e-5000", "-1.e+5000");
+        checkDivideOverflowException("-1.e-5000", "1.e+5000");
     }
 
     /**
@@ -3418,26 +973,17 @@ class CalculationModelTest {
      */
     @Test
     void sqrOverflowExceptionTests() {
+        checkSqrOverflowException("1.e+9999");
+        checkSqrOverflowException("1.e+5000");
+
         checkSqrOverflowException("-1.e+9999");
-        checkSqrOverflowException("-1.e+9998");
-        checkSqrOverflowException("-1.e+7500");
         checkSqrOverflowException("-1.e+5000");
 
-        checkSqrOverflowException("1.e+5000");
-        checkSqrOverflowException("1.e+7500");
-        checkSqrOverflowException("1.e+9998");
-        checkSqrOverflowException("1.e+9999");
-
+        checkSqrOverflowException("1.e-9999");
+        checkSqrOverflowException("1.e-5000");
 
         checkSqrOverflowException("-1.e-9999");
-        checkSqrOverflowException("-1.e-9998");
-        checkSqrOverflowException("-1.e-7500");
         checkSqrOverflowException("-1.e-5000");
-
-        checkSqrOverflowException("1.e-5000");
-        checkSqrOverflowException("1.e-7500");
-        checkSqrOverflowException("1.e-9998");
-        checkSqrOverflowException("1.e-9999");
     }
 
     /**
@@ -3445,112 +991,42 @@ class CalculationModelTest {
      */
     @Test
     void percentageOfFirstOverflowExceptionTests() {
-        checkPercentageOfFirstOverflowException("-1.e+9999", "-1000");
-        checkPercentageOfFirstOverflowException("-1.e+9999", "1000");
+        checkPercentageOfFirstOverflowException("1.e+9999", "-1.e+9999");
+        checkPercentageOfFirstOverflowException("1.e+9999", "1.e+9999");
 
-        checkPercentageOfFirstOverflowException("-1.e+9999", "-1001");
-        checkPercentageOfFirstOverflowException("-1.e+9999", "1001");
+        checkPercentageOfFirstOverflowException("1.e+9999", "-1000");
+        checkPercentageOfFirstOverflowException("1.e+9999", "1000");
 
-        checkPercentageOfFirstOverflowException("-1.e+9999", "-1.e+9998");
-        checkPercentageOfFirstOverflowException("-1.e+9999", "1.e+9998");
+        checkPercentageOfFirstOverflowException("1.e+5001", "-1.e+5001");
+        checkPercentageOfFirstOverflowException("1.e+5001", "1.e+5001");
 
         checkPercentageOfFirstOverflowException("-1.e+9999", "-1.e+9999");
         checkPercentageOfFirstOverflowException("-1.e+9999", "1.e+9999");
 
-
-        checkPercentageOfFirstOverflowException("-1.e+9998", "-10000");
-        checkPercentageOfFirstOverflowException("-1.e+9998", "10000");
-
-        checkPercentageOfFirstOverflowException("-1.e+9998", "-1.e+9998");
-        checkPercentageOfFirstOverflowException("-1.e+9998", "1.e+9998");
-
-        checkPercentageOfFirstOverflowException("-1.e+9998", "-1.e+9999");
-        checkPercentageOfFirstOverflowException("-1.e+9998", "1.e+9999");
-
+        checkPercentageOfFirstOverflowException("-1.e+9999", "-1000");
+        checkPercentageOfFirstOverflowException("-1.e+9999", "1000");
 
         checkPercentageOfFirstOverflowException("-1.e+5001", "-1.e+5001");
         checkPercentageOfFirstOverflowException("-1.e+5001", "1.e+5001");
 
 
-        checkPercentageOfFirstOverflowException("1.e+5001", "-1.e+5001");
-        checkPercentageOfFirstOverflowException("1.e+5001", "1.e+5001");
-
-
-        checkPercentageOfFirstOverflowException("1.e+9998", "-10000");
-        checkPercentageOfFirstOverflowException("1.e+9998", "10000");
-
-        checkPercentageOfFirstOverflowException("1.e+9998", "-1.e+9998");
-        checkPercentageOfFirstOverflowException("1.e+9998", "1.e+9998");
-
-        checkPercentageOfFirstOverflowException("1.e+9998", "-1.e+9999");
-        checkPercentageOfFirstOverflowException("1.e+9998", "1.e+9999");
-
-
-        checkPercentageOfFirstOverflowException("1.e+9999", "-1000");
-        checkPercentageOfFirstOverflowException("1.e+9999", "1000");
-
-        checkPercentageOfFirstOverflowException("1.e+9999", "-1001");
-        checkPercentageOfFirstOverflowException("1.e+9999", "1001");
-
-        checkPercentageOfFirstOverflowException("1.e+9999", "-1.e+9998");
-        checkPercentageOfFirstOverflowException("1.e+9999", "1.e+9998");
-
-        checkPercentageOfFirstOverflowException("1.e+9999", "-1.e+9999");
-        checkPercentageOfFirstOverflowException("1.e+9999", "1.e+9999");
-
-
-        checkPercentageOfFirstOverflowException("-1.e-9999", "-0.001");
-        checkPercentageOfFirstOverflowException("-1.e-9999", "0.001");
-
-        checkPercentageOfFirstOverflowException("-1.e-9999", "-0.0001");
-        checkPercentageOfFirstOverflowException("-1.e-9999", "0.0001");
-
-        checkPercentageOfFirstOverflowException("-1.e-9999", "-1.e-9998");
-        checkPercentageOfFirstOverflowException("-1.e-9999", "1.e-9998");
-
-        checkPercentageOfFirstOverflowException("-1.e-9999", "-1.e-9999");
-        checkPercentageOfFirstOverflowException("-1.e-9999", "1.e-9999");
-
-
-        checkPercentageOfFirstOverflowException("-1.e-9998", "-0.0001");
-        checkPercentageOfFirstOverflowException("-1.e-9998", "0.0001");
-
-        checkPercentageOfFirstOverflowException("-1.e-9998", "-1.e-9998");
-        checkPercentageOfFirstOverflowException("-1.e-9998", "1.e-9998");
-
-        checkPercentageOfFirstOverflowException("-1.e-9998", "-1.e-9999");
-        checkPercentageOfFirstOverflowException("-1.e-9998", "1.e-9999");
-
-
-        checkPercentageOfFirstOverflowException("-1.e-5001", "-1.e-5001");
-        checkPercentageOfFirstOverflowException("-1.e-5001", "1.e-5001");
-
-
-        checkPercentageOfFirstOverflowException("1.e-5001", "-1.e-5001");
-        checkPercentageOfFirstOverflowException("1.e-5001", "1.e-5001");
-
-
-        checkPercentageOfFirstOverflowException("1.e-9998", "-0.0001");
-        checkPercentageOfFirstOverflowException("1.e-9998", "0.0001");
-
-        checkPercentageOfFirstOverflowException("1.e-9998", "-1.e-9998");
-        checkPercentageOfFirstOverflowException("1.e-9998", "1.e-9998");
-
-        checkPercentageOfFirstOverflowException("1.e-9998", "-1.e-9999");
-        checkPercentageOfFirstOverflowException("1.e-9998", "1.e-9999");
-
-
-        checkPercentageOfFirstOverflowException("1.e-9999", "-0.001");
-        checkPercentageOfFirstOverflowException("1.e-9999", "0.001");
+        checkPercentageOfFirstOverflowException("1.e-9999", "-1.e-9999");
+        checkPercentageOfFirstOverflowException("1.e-9999", "1.e-9999");
 
         checkPercentageOfFirstOverflowException("1.e-9999", "-0.0001");
         checkPercentageOfFirstOverflowException("1.e-9999", "0.0001");
 
-        checkPercentageOfFirstOverflowException("1.e-9999", "-1.e-9998");
-        checkPercentageOfFirstOverflowException("1.e-9999", "1.e-9998");
+        checkPercentageOfFirstOverflowException("1.e-5001", "-1.e-5001");
+        checkPercentageOfFirstOverflowException("1.e-5001", "1.e-5001");
 
-        checkPercentageOfFirstOverflowException("1.e-9999", "-1.e-9999");
-        checkPercentageOfFirstOverflowException("1.e-9999", "1.e-9999");
+        checkPercentageOfFirstOverflowException("-1.e-9999", "-1.e-9999");
+        checkPercentageOfFirstOverflowException("-1.e-9999", "1.e-9999");
+
+        checkPercentageOfFirstOverflowException("-1.e-9999", "-0.0001");
+        checkPercentageOfFirstOverflowException("-1.e-9999", "0.0001");
+
+        checkPercentageOfFirstOverflowException("-1.e-5001", "-1.e-5001");
+        checkPercentageOfFirstOverflowException("-1.e-5001", "1.e-5001");
     }
 
     /**
@@ -3570,51 +1046,29 @@ class CalculationModelTest {
      */
     @Test
     void divideByZeroExceptionTests() {
-        checkDivideByZeroException("-10000000000000000");
-        checkDivideByZeroException("-9999999999999999");
-        checkDivideByZeroException("-9999999999999998");
-        checkDivideByZeroException("-10");
-        checkDivideByZeroException("-1");
-
         checkDivideByZeroException("1");
-        checkDivideByZeroException("10");
-        checkDivideByZeroException("9999999999999998");
-        checkDivideByZeroException("9999999999999999");
+        checkDivideByZeroException("2");
         checkDivideByZeroException("10000000000000000");
-
-
-        checkDivideByZeroException("-0.9999999999999999");
-        checkDivideByZeroException("-0.9");
-        checkDivideByZeroException("-0.1");
+        checkDivideByZeroException("-1");
+        checkDivideByZeroException("-2");
+        checkDivideByZeroException("-10000000000000000");
 
         checkDivideByZeroException("0.1");
         checkDivideByZeroException("0.9");
         checkDivideByZeroException("0.9999999999999999");
+        checkDivideByZeroException("-0.1");
+        checkDivideByZeroException("-0.9");
+        checkDivideByZeroException("-0.9999999999999999");
 
-
+        checkDivideByZeroException("1.e+9999");
+        checkDivideByZeroException("1.e+9998");
         checkDivideByZeroException("-1.e+9999");
         checkDivideByZeroException("-1.e+9998");
 
-        checkDivideByZeroException("1.e+9998");
-        checkDivideByZeroException("1.e+9999");
-
-        checkDivideByZeroException("-1.e+17");
-        checkDivideByZeroException("-1.e+16");
-
-        checkDivideByZeroException("1.e+16");
-        checkDivideByZeroException("1.e+17");
-
+        checkDivideByZeroException("1.e-9999");
+        checkDivideByZeroException("1.e-9998");
         checkDivideByZeroException("-1.e-9999");
         checkDivideByZeroException("-1.e-9998");
-
-        checkDivideByZeroException("1.e-9998");
-        checkDivideByZeroException("1.e-9999");
-
-        checkDivideByZeroException("-1.e-17");
-        checkDivideByZeroException("-1.e-16");
-
-        checkDivideByZeroException("1.e-16");
-        checkDivideByZeroException("1.e-17");
     }
 
     /**
@@ -3622,37 +1076,19 @@ class CalculationModelTest {
      */
     @Test
     void negativeSqrtExceptionTests() {
-        //integers 
-        {
-            checkNegativeSqrtException("-1");
-            checkNegativeSqrtException("-10");
-            checkNegativeSqrtException("-9");
-            checkNegativeSqrtException("-25000000000000");
-            checkNegativeSqrtException("-11111108888889");
-            checkNegativeSqrtException("-9999999999999998");
-            checkNegativeSqrtException("-9999999999999999");
-            checkNegativeSqrtException("-10000000000000000");
-        }
+        checkNegativeSqrtException("-1");
+        checkNegativeSqrtException("-9");
+        checkNegativeSqrtException("-10000000000000000");
 
-        //decimals
-        {
-            checkNegativeSqrtException("-0.1");
-            checkNegativeSqrtException("-0.9");
-            checkNegativeSqrtException("-0.9999999999999999");
-        }
+        checkNegativeSqrtException("-0.1");
+        checkNegativeSqrtException("-0.9");
+        checkNegativeSqrtException("-0.9999999999999999");
 
-        //engineer numbers
-        {
-            checkNegativeSqrtException("-1.e+16");
-            checkNegativeSqrtException("-1.e+17");
-            checkNegativeSqrtException("-1.e+9998");
-            checkNegativeSqrtException("-1.e+9999");
+        checkNegativeSqrtException("-1.e+9998");
+        checkNegativeSqrtException("-1.e+9999");
 
-            checkNegativeSqrtException("-1.e-9999");
-            checkNegativeSqrtException("-1.e-9998");
-            checkNegativeSqrtException("-1.e-16");
-            checkNegativeSqrtException("-1.e-17");
-        }
+        checkNegativeSqrtException("-1.e-9999");
+        checkNegativeSqrtException("-1.e-9998");
     }
 
     /**
@@ -3851,6 +1287,7 @@ class CalculationModelTest {
 
         calculation.setFirst(second);
         calculation.setSecond(first);
+        calculation.setBinaryOperation(SUBTRACT);
         calculation.calculatePercentage();
 
         assertEquals(expectedResult, calculation.getResult());
@@ -3878,6 +1315,10 @@ class CalculationModelTest {
         calculation.calculatePercentage();
 
         assertEquals(expectedResult, calculation.getResult());
+
+        calculation.setSecond(second);
+        calculation.setBinaryOperation(DIVIDE);
+        calculation.calculatePercentage();
     }
 
     /**

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Controller tests updated.">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Refactoring model tests.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" afterDir="false" />
     </list>
@@ -83,7 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest.addOperationTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest">
     <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -99,7 +99,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.addOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.divideByZeroExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -109,13 +109,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="addOperationTests" />
+      <option name="METHOD_NAME" value="divideByZeroExceptionTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.subtractOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.negativeSqrtExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -125,13 +125,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="subtractOperationTests" />
+      <option name="METHOD_NAME" value="negativeSqrtExceptionTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DemoTest.demoCase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.percentageOfFirstOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -140,14 +140,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.DemoTest" />
-      <option name="METHOD_NAME" value="demoCase" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="percentageOfFirstOverflowExceptionTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DemoTest.demoExceptionCase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.resetAllTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -156,27 +156,27 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.DemoTest" />
-      <option name="METHOD_NAME" value="demoExceptionCase" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="resetAllTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstOverflowExceptionTests" />
+      <item itemvalue="JUnit.CalculationModelTest.divideByZeroExceptionTests" />
+      <item itemvalue="JUnit.CalculationModelTest.negativeSqrtExceptionTests" />
+      <item itemvalue="JUnit.CalculationModelTest.resetAllTests" />
       <item itemvalue="JUnit.CalculationModelTest" />
-      <item itemvalue="JUnit.DemoTest.demoCase" />
-      <item itemvalue="JUnit.DemoTest.demoExceptionCase" />
-      <item itemvalue="JUnit.CalculationModelTest.addOperationTests" />
-      <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculationModelTest.addOperationTests" />
-        <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
-        <item itemvalue="JUnit.DemoTest.demoCase" />
-        <item itemvalue="JUnit.DemoTest.demoExceptionCase" />
         <item itemvalue="JUnit.CalculationModelTest" />
+        <item itemvalue="JUnit.CalculationModelTest.resetAllTests" />
+        <item itemvalue="JUnit.CalculationModelTest.negativeSqrtExceptionTests" />
+        <item itemvalue="JUnit.CalculationModelTest.divideByZeroExceptionTests" />
+        <item itemvalue="JUnit.CalculationModelTest.percentageOfFirstOverflowExceptionTests" />
       </list>
     </recent_temporary>
   </component>
@@ -190,13 +190,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00143" summary="Tests for resizing window optimized.">
-      <created>1567763114858</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1567763114858</updated>
     </task>
     <task id="LOCAL-00144" summary="Launcher refactored.">
       <created>1567763167920</created>
@@ -534,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568644025509</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <task id="LOCAL-00192" summary="Refactoring model tests so it is now easier to understand. Test cases for add and subtract operation changed.">
+      <created>1568646289249</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1568646289250</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -568,7 +568,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for memory clear operation in controller created." />
     <MESSAGE value="Tests for memory recall operation in controller created." />
     <MESSAGE value="Tests for memory add and subtract operations in controller created." />
     <MESSAGE value="Tests for memory store operation in controller created." />
@@ -577,7 +576,6 @@
     <MESSAGE value="Workspace changed." />
     <MESSAGE value="Added Boris's remarks." />
     <MESSAGE value="Speed of calculation optimized." />
-    <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Demo test case created." />
     <MESSAGE value="Bug fix with using result of model in next operations." />
     <MESSAGE value="Speed of tests for controller optimized." />
@@ -593,7 +591,9 @@
     <MESSAGE value="View tests updated." />
     <MESSAGE value="Controller tests updated." />
     <MESSAGE value="Demo test case moved to another class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo test case moved to another class." />
+    <MESSAGE value="Refactoring model tests so it is now easier to understand. Test cases for add and subtract operation changed." />
+    <MESSAGE value="Refactoring model tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring model tests." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
