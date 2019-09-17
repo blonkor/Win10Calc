@@ -74,6 +74,14 @@ class CalculationModelTest {
     }
 
     /**
+     * Tests for several binary operations made in a row.
+     */
+    @Test
+    void severalBinaryOperationTests() {
+
+    }
+
+    /**
      * Tests for add operation.
      */
     @Test
@@ -1121,6 +1129,36 @@ class CalculationModelTest {
         } catch (ArithmeticException e) {
             assertEquals(DIVIDE_BY_ZERO_MESSAGE, e.getMessage());
         }
+    }
+
+    /**
+     * Method for testing several {@code BinaryOperation} in a row in {@link Calculation}.
+     * <p>
+     * After each calculating result of calculation is set as first number.
+     *
+     * @param first          first number of equation.
+     * @param numbers        array of numbers that should be set as second number of equation after every calculation
+     *                       made.
+     * @param operations     array of {@code BinaryOperation} that should be set. Note that this array should has the
+     *                       same lengths as array of numbers.
+     * @param expectedResult result that should be obtained.
+     */
+    private void checkSeveralBinaryOperations(String first, String[] numbers, BinaryOperation[] operations,
+                                              String expectedResult) {
+        calculation.setFirst(new BigDecimal(first));
+
+        if (numbers.length != operations.length) {
+            throw new RuntimeException("Lengths of numbers and operation arrays should be the same.");
+        }
+
+        for (int i = 0; i < numbers.length; i++) {
+            calculation.setSecond(new BigDecimal(numbers[i]));
+            calculation.setBinaryOperation(operations[i]);
+            calculation.calculateBinary();
+            calculation.setFirst(calculation.getResult());
+        }
+
+        assertEquals(new BigDecimal(expectedResult), calculation.getResult());
     }
 
     /**
