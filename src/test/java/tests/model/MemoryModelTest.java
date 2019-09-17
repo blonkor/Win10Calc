@@ -91,74 +91,65 @@ class MemoryModelTest {
     @Test
     void addToMemoryTests() {
         //one
-        checkAddToMemory(new BigDecimal[]{newBD("642")},
-                newBD("5"), newBD("647"));
-        checkAddToMemory(new BigDecimal[]{newBD("-987")},
-                newBD("13"), newBD("-974"));
-        checkAddToMemory(new BigDecimal[]{newBD("123.74213")},
-                newBD("76"), newBD("199.74213"));
+        checkAddToMemory(new BigDecimal[]{newBD("642")}, newBD("5"), newBD("647"));
+        checkAddToMemory(new BigDecimal[]{newBD("-987")}, newBD("13"), newBD("-974"));
+        checkAddToMemory(new BigDecimal[]{newBD("123.74213")}, newBD("76"), newBD("199.74213"));
         checkAddToMemory(new BigDecimal[]{newBD("-724.8743")},
                 newBD("1325"), newBD("600.1257"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("762")},
-                newBD("-6"), newBD("756"));
-        checkAddToMemory(new BigDecimal[]{newBD("-246.246")},
-                newBD("-12"), newBD("-258.246"));
-        checkAddToMemory(new BigDecimal[]{newBD("2466")},
-                newBD("-75"), newBD("2391"));
-        checkAddToMemory(new BigDecimal[]{newBD("-23.25")},
-                newBD("-134"), newBD("-157.25"));
+        checkAddToMemory(new BigDecimal[]{newBD("762")}, newBD("-6"), newBD("756"));
+        checkAddToMemory(new BigDecimal[]{newBD("-246.246")}, newBD("-12"), newBD("-258.246"));
+        checkAddToMemory(new BigDecimal[]{newBD("2466")}, newBD("-75"), newBD("2391"));
+        checkAddToMemory(new BigDecimal[]{newBD("-23.25")}, newBD("-134"), newBD("-157.25"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("765147")},
-                newBD("764.234"), newBD("765911.234"));
-        checkAddToMemory(new BigDecimal[]{newBD("-2575")},
-                newBD("243.87"), newBD("-2331.13"));
-        checkAddToMemory(new BigDecimal[]{newBD("246.234")},
-                newBD("987.2475"), newBD("1233.4815"));
-        checkAddToMemory(new BigDecimal[]{newBD("-865.24")},
-                newBD("275.23"), newBD("-590.01"));
+        checkAddToMemory(new BigDecimal[]{newBD("765147")}, newBD("764.234"),
+                newBD("765911.234"));
+        checkAddToMemory(new BigDecimal[]{newBD("-2575")}, newBD("243.87"), newBD("-2331.13"));
+        checkAddToMemory(new BigDecimal[]{newBD("246.234")}, newBD("987.2475"),
+                newBD("1233.4815"));
+        checkAddToMemory(new BigDecimal[]{newBD("-865.24")}, newBD("275.23"), newBD("-590.01"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("7536")},
-                newBD("-24380.904"), newBD("-16844.904"));
-        checkAddToMemory(new BigDecimal[]{newBD("-21346")},
-                newBD("-246.83"), newBD("-21592.83"));
-        checkAddToMemory(new BigDecimal[]{newBD("752.2345")},
-                newBD("-765432.234"), newBD("-764679.9995"));
-        checkAddToMemory(new BigDecimal[]{newBD("-76.2576")},
-                newBD("-243.75324"), newBD("-320.01084"));
+        checkAddToMemory(new BigDecimal[]{newBD("7536")}, newBD("-24380.904"),
+                newBD("-16844.904"));
+        checkAddToMemory(new BigDecimal[]{newBD("-21346")}, newBD("-246.83"),
+                newBD("-21592.83"));
+        checkAddToMemory(new BigDecimal[]{newBD("752.2345")}, newBD("-765432.234"),
+                newBD("-764679.9995"));
+        checkAddToMemory(new BigDecimal[]{newBD("-76.2576")}, newBD("-243.75324"),
+                newBD("-320.01084"));
 
         //two
-        checkAddToMemory(new BigDecimal[]{newBD("243"), newBD("7654")},
-                newBD("65"), newBD("7719"));
-        checkAddToMemory(new BigDecimal[]{newBD("-765"), newBD("97")},
-                newBD("-234"), newBD("-137"));
-        checkAddToMemory(new BigDecimal[]{newBD("234.7652"), newBD("324")},
-                newBD("652.243"), newBD("976.243"));
-        checkAddToMemory(new BigDecimal[]{newBD("-765.234"), newBD("765")},
-                newBD("-234.75"), newBD("530.25"));
+        checkAddToMemory(new BigDecimal[]{newBD("243"), newBD("7654")}, newBD("65"),
+                newBD("7719"));
+        checkAddToMemory(new BigDecimal[]{newBD("-765"), newBD("97")}, newBD("-234"),
+                newBD("-137"));
+        checkAddToMemory(new BigDecimal[]{newBD("234.7652"), newBD("324")}, newBD("652.243"),
+                newBD("976.243"));
+        checkAddToMemory(new BigDecimal[]{newBD("-765.234"), newBD("765")}, newBD("-234.75"),
+                newBD("530.25"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("234"), newBD("-234")},
-                newBD("8652"), newBD("8418"));
-        checkAddToMemory(new BigDecimal[]{newBD("-765"), newBD("-876")},
-                newBD("-234"), newBD("-1.11e+3"));
-        checkAddToMemory(new BigDecimal[]{newBD("246.2437"), newBD("-24")},
-                newBD("9876.234"), newBD("9852.234"));
-        checkAddToMemory(new BigDecimal[]{newBD("-234.876"), newBD("-765")},
-                newBD("-234.86"), newBD("-999.86"));
+        checkAddToMemory(new BigDecimal[]{newBD("234"), newBD("-234")}, newBD("8652"),
+                newBD("8418"));
+        checkAddToMemory(new BigDecimal[]{newBD("-765"), newBD("-876")}, newBD("-234"),
+                newBD("-1.11e+3"));
+        checkAddToMemory(new BigDecimal[]{newBD("246.2437"), newBD("-24")}, newBD("9876.234"),
+                newBD("9852.234"));
+        checkAddToMemory(new BigDecimal[]{newBD("-234.876"), newBD("-765")}, newBD("-234.86"),
+                newBD("-999.86"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("2375"), newBD("76.234")},
-                newBD("243"), newBD("319.234"));
-        checkAddToMemory(new BigDecimal[]{newBD("-2347"), newBD("243.87")},
-                newBD("-876"), newBD("-632.13"));
+        checkAddToMemory(new BigDecimal[]{newBD("2375"), newBD("76.234")}, newBD("243"),
+                newBD("319.234"));
+        checkAddToMemory(new BigDecimal[]{newBD("-2347"), newBD("243.87")}, newBD("-876"),
+                newBD("-632.13"));
         checkAddToMemory(new BigDecimal[]{newBD("876.234"), newBD("234.908")},
                 newBD("723.823"), newBD("958.731"));
         checkAddToMemory(new BigDecimal[]{newBD("-237.8765"), newBD("2432.65")},
                 newBD("-324.765"), newBD("2107.885"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("423"), newBD("-47654.25")},
-                newBD("0"), newBD("-47654.25"));
-        checkAddToMemory(new BigDecimal[]{newBD("-876"), newBD("-75.4")},
-                newBD("-85"), newBD("-160.4"));
+        checkAddToMemory(new BigDecimal[]{newBD("423"), newBD("-47654.25")}, newBD("0"),
+                newBD("-47654.25"));
+        checkAddToMemory(new BigDecimal[]{newBD("-876"), newBD("-75.4")}, newBD("-85"),
+                newBD("-160.4"));
         checkAddToMemory(new BigDecimal[]{newBD("234.2347"), newBD("-234.2")},
                 newBD("234.987"), newBD("0.787"));
         checkAddToMemory(new BigDecimal[]{newBD("-987.1237"), newBD("-0.123465")},
@@ -170,11 +161,11 @@ class MemoryModelTest {
         checkAddToMemory(new BigDecimal[]{newBD("243567"), newBD("1236"), newBD("8724")},
                 newBD("6324"), newBD("15048"));
 
-        checkAddToMemory(new BigDecimal[]{newBD("123641327"), newBD("1472"),
-                        newBD("654315"), newBD("1265423")},
+        checkAddToMemory(new BigDecimal[]{newBD("123641327"), newBD("1472"), newBD("654315"),
+                        newBD("1265423")},
                 newBD("2346754"), newBD("3612177"));
-        checkAddToMemory(new BigDecimal[]{newBD("127443"), newBD("1245765"),
-                        newBD("3468465"), newBD("345312")},
+        checkAddToMemory(new BigDecimal[]{newBD("127443"), newBD("1245765"), newBD("3468465"),
+                        newBD("345312")},
                 newBD("6324"), newBD("351636"));
 
         checkAddToMemory(new BigDecimal[]{newBD("97.34578"), newBD("874245"),
