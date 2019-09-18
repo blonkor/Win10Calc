@@ -1195,7 +1195,7 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing binary operations.
+     * Method for testing {@link BinaryOperation} in {@link Calculation}.
      *
      * @param equation       equation that should be calculated. Should contain only numbers or operation symbols and
      *                       starts with number. Numbers should be separated from digits by spacing.
@@ -1220,7 +1220,7 @@ class CalculationModelTest {
      * Performs calculation for tests.
      *
      * @param args numbers that should be set as second in {@link Calculation} (except the first number, that should be
-     *             set as first) and {@code BinaryOperation}s that should be set as operation.
+     *             set as first) and {@link BinaryOperation}s that should be set as operation.
      *             <p>
      *             F.e., args = {"2", "+", "2"}. Method will firstly calculate 2 + 2, and then the result will be
      *             multiplied on 2.
@@ -1301,7 +1301,7 @@ class CalculationModelTest {
      * Method for testing {@link UnaryOperation} in {@link Calculation}.
      *
      * @param first          first number of equation.
-     * @param operation      {@code UnaryOperation} to use.
+     * @param operation      {@link UnaryOperation} to use.
      * @param expectedResult result that should be obtained.
      */
     private void checkUnaryOperation(BigDecimal first, UnaryOperation operation, BigDecimal expectedResult) {
@@ -1318,7 +1318,7 @@ class CalculationModelTest {
      *
      * @param first          first number of equation.
      * @param second         second number of equation.
-     * @param expectedResult result that should be obtained and set as result in {@code Calculation}.
+     * @param expectedResult result that should be obtained and set as result in {@link Calculation}.
      */
     private void checkPercentageOfFirstOperation(String first, String second, String expectedResult) {
         checkPercentageOfFirstOperation(new BigDecimal(first), new BigDecimal(second),
@@ -1332,7 +1332,7 @@ class CalculationModelTest {
      *
      * @param first          first number of equation.
      * @param second         second number of equation.
-     * @param expectedResult result that should be obtained and set as result in {@code Calculation}.
+     * @param expectedResult result that should be obtained and set as result in {@link Calculation}.
      */
     private void checkPercentageOfFirstOperation(BigDecimal first, BigDecimal second, BigDecimal expectedResult) {
         calculation.setFirst(first);
@@ -1354,7 +1354,7 @@ class CalculationModelTest {
      * Method for testing percentage of 100 operation in {@link Calculation}.
      *
      * @param second         second number of equation.
-     * @param expectedResult result that should be obtained and set as result in {@code Calculation}.
+     * @param expectedResult result that should be obtained and set as result in {@link Calculation}.
      */
     private void checkPercentageOf100Operation(String second, String expectedResult) {
         checkPercentageOf100Operation(new BigDecimal(second), new BigDecimal(expectedResult));
@@ -1364,7 +1364,7 @@ class CalculationModelTest {
      * Method for testing percentage of 100 operation in {@link Calculation}.
      *
      * @param second         second number of equation.
-     * @param expectedResult result that should be obtained and set as result in {@code Calculation}.
+     * @param expectedResult result that should be obtained and set as result in {@link Calculation}.
      */
     private void checkPercentageOf100Operation(BigDecimal second, BigDecimal expectedResult) {
         calculation.setSecond(second);
@@ -1403,7 +1403,7 @@ class CalculationModelTest {
     /**
      * Method for testing {@link OverflowException} while using {@code UnaryOperation.SQRT} in {@link Calculation}.
      * <p>
-     * For inputted value, {@code OverflowException} should be thrown.
+     * For inputted value, an {@link OverflowException} should be thrown.
      *
      * @param first first number of equation.
      * @see UnaryOperation
@@ -1422,7 +1422,7 @@ class CalculationModelTest {
     /**
      * Method for testing {@link OverflowException} while using percentage of first operation in {@link Calculation}.
      * <p>
-     * For inputted values, {@code OverflowException} should be thrown.
+     * For inputted values, an {@link OverflowException} should be thrown.
      * <p>
      * For this operation it is possible to swap numbers of equation between each other to obtain the same result.
      *
