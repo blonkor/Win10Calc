@@ -83,8 +83,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest">
-    <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.binaryOverflowExceptionTests">
+    <configuration name="CalculationModelTest.binaryOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -94,28 +94,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculationModelTest.divideByZeroExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="divideByZeroExceptionTests" />
+      <option name="METHOD_NAME" value="binaryOverflowExceptionTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.negativeSqrtExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.divideOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -125,13 +110,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="negativeSqrtExceptionTests" />
+      <option name="METHOD_NAME" value="divideOperationTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.resetAllTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.multiplyOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -141,13 +126,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="resetAllTests" />
+      <option name="METHOD_NAME" value="multiplyOperationTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemoryModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.severalBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -156,26 +141,43 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.MemoryModelTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="severalBinaryOperations" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculationModelTest.subtractOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="subtractOperationTests" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.CalculationModelTest.divideByZeroExceptionTests" />
-      <item itemvalue="JUnit.CalculationModelTest.negativeSqrtExceptionTests" />
-      <item itemvalue="JUnit.CalculationModelTest.resetAllTests" />
-      <item itemvalue="JUnit.CalculationModelTest" />
-      <item itemvalue="JUnit.MemoryModelTest" />
+      <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
+      <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
+      <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
+      <item itemvalue="JUnit.CalculationModelTest.severalBinaryOperations" />
+      <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculationModelTest" />
-        <item itemvalue="JUnit.MemoryModelTest" />
-        <item itemvalue="JUnit.CalculationModelTest.resetAllTests" />
-        <item itemvalue="JUnit.CalculationModelTest.negativeSqrtExceptionTests" />
-        <item itemvalue="JUnit.CalculationModelTest.divideByZeroExceptionTests" />
+        <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
+        <item itemvalue="JUnit.CalculationModelTest.severalBinaryOperations" />
+        <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
       </list>
     </recent_temporary>
   </component>
@@ -189,13 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00146" summary="Enums in model refactored.">
-      <created>1567763469108</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1567763469108</updated>
     </task>
     <task id="LOCAL-00147" summary="Overflow exception refactored.">
       <created>1567763597256</created>
@@ -533,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568722916485</updated>
     </task>
-    <option name="localTasksCounter" value="195" />
+    <task id="LOCAL-00195" summary="Mock for several binary operations in a row made.">
+      <created>1568730292323</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1568730292323</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -567,7 +569,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for memory add and subtract operations in controller created." />
     <MESSAGE value="Tests for memory store operation in controller created." />
     <MESSAGE value="Tests for memory using keypad created." />
     <MESSAGE value="Reduced time for running view tests by optimizing them and removing unnecessary test cases." />
@@ -592,7 +593,8 @@
     <MESSAGE value="Refactoring model tests so it is now easier to understand. Test cases for add and subtract operation changed." />
     <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Refactoring memory model tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring memory model tests." />
+    <MESSAGE value="Mock for several binary operations in a row made." />
+    <option name="LAST_COMMIT_MESSAGE" value="Mock for several binary operations in a row made." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

@@ -21,6 +21,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalculationModelTest {
 
     /**
+     * Regex for all integer numbers not in engineer representation.
+     */
+    private static final String INTEGER_NUMBER_REGEX = "-?\\d+";
+
+    /**
+     * Regex for all decimal numbers not in engineer representation.
+     */
+    private static final String DECIMAL_NUMBER_REGEX = "-?\\d+\\.\\d+";
+
+    /**
+     * Regex for all numbers not engineer representation.
+     */
+    private static final String ENGINEER_NUMBER_REGEX = "-?\\d\\.\\d*e[+-]\\d+";
+
+    /**
      * Exception message for {@link OverflowException}.
      */
     private static final String OVERFLOW_MESSAGE = "Overflow";
@@ -74,461 +89,406 @@ class CalculationModelTest {
     }
 
     /**
-     * Tests for several binary operations made in a row.
-     */
-    @Test
-    void severalBinaryOperationTests() {
-
-    }
-
-    /**
-     * Tests for add operation.
+     * Tests for the only add operation.
      */
     @Test
     void addOperationTests() {
         //easy cases
-        checkAddOperation("2", "2", "4");
-        checkAddOperation("-3", "-3", "-6");
-        checkAddOperation("5.5", "3.2", "8.7");
-        checkAddOperation("-10.2", "-7", "-17.2");
-        checkAddOperation("7.4", "-5.1", "2.3");
-        checkAddOperation("1.e+5", "1.e+8", "1.001e+8");
-        checkAddOperation("1.e-20", "5.e-20", "6.e-20");
+        checkBinaryOperations("2 + 2", "4");
+        checkBinaryOperations("-3 + -3", "-6");
+        checkBinaryOperations("5.5 + 3.2", "8.7");
+        checkBinaryOperations("-10.2 + -7", "-17.2");
+        checkBinaryOperations("7.4 + -5.1", "2.3");
+        checkBinaryOperations("1.e+5 + 1.e+8", "1.001e+8");
+        checkBinaryOperations("1.e-20 + 5.e-20", "6.e-20");
 
         //cases with zero
-        checkAddOperation("0", "0", "0");
-        checkAddOperation("2", "0", "2");
-        checkAddOperation("-3", "0", "-3");
-        checkAddOperation("5.5", "0", "5.5");
-        checkAddOperation("0", "-7", "-7");
-        checkAddOperation("0", "-5.1", "-5.1");
-        checkAddOperation("0", "1.e+8", "1.e+8");
+        checkBinaryOperations("0 + 0", "0");
+        checkBinaryOperations("2 + 0", "2");
+        checkBinaryOperations("-3 + 0", "-3");
+        checkBinaryOperations("5.5 + 0", "5.5");
+        checkBinaryOperations("0 + -7", "-7");
+        checkBinaryOperations("0 + -5.1", "-5.1");
+        checkBinaryOperations("0 + 1.e+8", "1.e+8");
 
         //big numbers
-        checkAddOperation("10000000000000000", "10000000000000000", "2.e+16");
-        checkAddOperation("5000000000000000", "9999999999999999", "14999999999999999");
-        checkAddOperation("1234567890987654321", "1", "1234567890987654322");
-        checkAddOperation("100000000000000000000000000", "10",
+        checkBinaryOperations("10000000000000000 + 10000000000000000", "2.e+16");
+        checkBinaryOperations("5000000000000000 + 9999999999999999", "14999999999999999");
+        checkBinaryOperations("1234567890987654321 + 1", "1234567890987654322");
+        checkBinaryOperations("100000000000000000000000000 + 10",
                 "1.0000000000000000000000001e+26");
 
         //with decimals
-        checkAddOperation("10000000000000000", "0.1", "10000000000000000.1");
-        checkAddOperation("5000000000000000", "0.9999999999999999",
+        checkBinaryOperations("10000000000000000 + 0.1", "10000000000000000.1");
+        checkBinaryOperations("5000000000000000 + 0.9999999999999999",
                 "5000000000000000.9999999999999999");
-        checkAddOperation("1234567890987654321", "123.123", "1234567890987654444.123");
-        checkAddOperation("100000000000000000000000000", "0.00000000000000000000000000001",
+        checkBinaryOperations("1234567890987654321 + 123.123", "1234567890987654444.123");
+        checkBinaryOperations("100000000000000000000000000 + 0.00000000000000000000000000001",
                 "100000000000000000000000000.00000000000000000000000000001");
 
         //decimal and decimal
-        checkAddOperation("0.0000000000001", "0.1", "0.1000000000001");
-        checkAddOperation("0.0000000000000001", "0.9999999999999999", "1");
-        checkAddOperation("1234567890.987654321", "123.123", "1234568014.110654321");
-        checkAddOperation("0.01", "0.00000000000000000000000000001",
+        checkBinaryOperations("0.0000000000001 + 0.1", "0.1000000000001");
+        checkBinaryOperations("0.0000000000000001 + 0.9999999999999999", "1");
+        checkBinaryOperations("1234567890.987654321 + 123.123", "1234568014.110654321");
+        checkBinaryOperations("0.01 + 0.00000000000000000000000000001",
                 "0.01000000000000000000000000001");
 
         //boundary
-        checkAddOperation("8.e+9999", "1.e+9999", "9.e+9999");
-        checkAddOperation("9.e+9999", "9.e+9998", "9.9e+9999");
-        checkAddOperation("8.e-9999", "1.e-9999", "9.e-9999");
-        checkAddOperation("9.e-9999", "9.e-9998", "9.9e-9998");
+        checkBinaryOperations("8.e+9999 + 1.e+9999", "9.e+9999");
+        checkBinaryOperations("9.e+9999 + 9.e+9998", "9.9e+9999");
+        checkBinaryOperations("8.e-9999 + 1.e-9999", "9.e-9999");
+        checkBinaryOperations("9.e-9999 + 9.e-9998", "9.9e-9998");
 
-        checkAddOperation("-8.e+9999", "-1.e+9999", "-9.e+9999");
-        checkAddOperation("-9.e+9999", "-9.e+9998", "-9.9e+9999");
-        checkAddOperation("-8.e-9999", "-1.e-9999", "-9.e-9999");
-        checkAddOperation("-9.e-9999", "-9.e-9998", "-9.9e-9998");
+        checkBinaryOperations("-8.e+9999 + -1.e+9999", "-9.e+9999");
+        checkBinaryOperations("-9.e+9999 + -9.e+9998", "-9.9e+9999");
+        checkBinaryOperations("-8.e-9999 + -1.e-9999", "-9.e-9999");
+        checkBinaryOperations("-9.e-9999 + -9.e-9998", "-9.9e-9998");
 
         //several random values
-        checkAddOperation("197", "8763", "8.96e+3");
-        checkAddOperation("36346", "62", "36408");
+        checkBinaryOperations("197 + 8763", "8.96e+3");
+        checkBinaryOperations("36346 + 62", "36408");
 
-        checkAddOperation("62", "-542", "-4.8e+2");
-        checkAddOperation("7654", "-62", "7592");
+        checkBinaryOperations("62 + -542", "-4.8e+2");
+        checkBinaryOperations("7654 + -62", "7592");
 
-        checkAddOperation("-53252", "-52", "-53304");
-        checkAddOperation("-1243", "-65", "-1308");
+        checkBinaryOperations("-53252 + -52", "-53304");
+        checkBinaryOperations("-1243 + -65", "-1308");
 
-        checkAddOperation("623", "124.123", "747.123");
-        checkAddOperation("324", "653.523", "977.523");
+        checkBinaryOperations("623 + 124.123", "747.123");
+        checkBinaryOperations("324 + 653.523", "977.523");
 
-        checkAddOperation("7652", "-23.598", "7628.402");
-        checkAddOperation("2431", "-123.124", "2307.876");
+        checkBinaryOperations("7652 + -23.598", "7628.402");
+        checkBinaryOperations("2431 + -123.124", "2307.876");
 
-        checkAddOperation("-62", "76.43", "14.43");
-        checkAddOperation("-87", "876.1", "789.1");
+        checkBinaryOperations("-62 + 76.43", "14.43");
+        checkBinaryOperations("-87 + 876.1", "789.1");
 
-        checkAddOperation("-63", "-0.234", "-63.234");
-        checkAddOperation("-1967", "-22.76", "-1989.76");
+        checkBinaryOperations("-63 + -0.234", "-63.234");
+        checkBinaryOperations("-1967 + -22.76", "-1989.76");
 
-        checkAddOperation("53.14", "51.65", "104.79");
-        checkAddOperation("75.234", "75.234", "150.468");
+        checkBinaryOperations("53.14 + 51.65", "104.79");
+        checkBinaryOperations("75.234 + 75.234", "150.468");
 
-        checkAddOperation("64.26", "-25.7", "38.56");
-        checkAddOperation("623.3", "-75.2", "548.1");
+        checkBinaryOperations("64.26 + -25.7", "38.56");
+        checkBinaryOperations("623.3 + -75.2", "548.1");
 
-        checkAddOperation("-532.1", "-2.2", "-534.3");
-        checkAddOperation("-622.2", "-25.6", "-647.8");
+        checkBinaryOperations("-532.1 + -2.2", "-534.3");
+        checkBinaryOperations("-622.2 + -25.6", "-647.8");
     }
 
     /**
-     * Tests for subtract operation.
+     * Tests for the only subtract operation.
      */
     @Test
     void subtractOperationTests() {
         //easy cases
-        checkSubtractOperation("2", "2", "0");
-        checkSubtractOperation("-3", "-3", "0");
-
-        checkSubtractOperation("5.5", "3.2", "2.3");
-        checkSubtractOperation("3.2", "5.5", "-2.3");
-
-        checkSubtractOperation("-10.2", "-7", "-3.2");
-        checkSubtractOperation("-7", "-10.2", "3.2");
-
-        checkSubtractOperation("7.4", "-5.1", "12.5");
-        checkSubtractOperation("-5.1", "7.4", "-12.5");
-
-        checkSubtractOperation("1.e+5", "1.e+8", "-9.99e+7");
-        checkSubtractOperation("1.e+8", "1.e+5", "9.99e+7");
-
-        checkSubtractOperation("1.e-20", "5.e-20", "-4.e-20");
-        checkSubtractOperation("5.e-20", "1.e-20", "4.e-20");
+        checkBinaryOperations("2 - 2", "0");
+        checkBinaryOperations("-3 - -3", "0");
+        checkBinaryOperations("5.5 - 3.2", "2.3");
+        checkBinaryOperations("-10.2 - -7", "-3.2");
+        checkBinaryOperations("-5.1 - 7.4", "-12.5");
+        checkBinaryOperations("1.e+8 - 1.e+5", "9.99e+7");
+        checkBinaryOperations("5.e-20 - 1.e-20", "4.e-20");
 
         //cases with zero
-        checkSubtractOperation("0", "0", "0");
-
-        checkSubtractOperation("2", "0", "2");
-        checkSubtractOperation("0", "2", "-2");
-
-        checkSubtractOperation("-3", "0", "-3");
-        checkSubtractOperation("0", "-3", "3");
-
-        checkSubtractOperation("5.5", "0", "5.5");
-        checkSubtractOperation("0", "5.5", "-5.5");
-
-        checkSubtractOperation("-7", "0", "-7");
-        checkSubtractOperation("0", "-7", "7");
-
-        checkSubtractOperation("-5.1", "0", "-5.1");
-        checkSubtractOperation("0", "-5.1", "5.1");
-
-        checkSubtractOperation("1.e+8", "0", "1.e+8");
-        checkSubtractOperation("0", "1.e+8", "-1.e+8");
+        checkBinaryOperations("0 - 0", "0");
+        checkBinaryOperations("2 - 0", "2");
+        checkBinaryOperations("-3 - 0", "-3");
+        checkBinaryOperations("5.5 - 0", "5.5");
+        checkBinaryOperations("0 - -7", "7");
+        checkBinaryOperations("0 - -5.1", "5.1");
+        checkBinaryOperations("0 - 1.e+8", "-1.e+8");
 
         //big numbers
-        checkSubtractOperation("10000000000000000", "10000000000000000", "0");
-
-        checkSubtractOperation("5000000000000000", "9999999999999999", "-4999999999999999");
-        checkSubtractOperation("9999999999999999", "5000000000000000", "4999999999999999");
-
-        checkSubtractOperation("1234567890987654321", "1", "1.23456789098765432e+18");
-        checkSubtractOperation("1", "1234567890987654321", "-1.23456789098765432e+18");
-
-        checkSubtractOperation("100000000000000000000000000", "10",
-                "9.999999999999999999999999e+25");
-        checkSubtractOperation("10", "100000000000000000000000000",
+        checkBinaryOperations("10000000000000000 - 10000000000000000", "0");
+        checkBinaryOperations("5000000000000000 - 9999999999999999", "-4999999999999999");
+        checkBinaryOperations("1234567890987654321 - 1", "1.23456789098765432e+18");
+        checkBinaryOperations("10 - 100000000000000000000000000",
                 "-9.999999999999999999999999e+25");
 
         //with decimals
-        checkSubtractOperation("10000000000000000", "0.1", "9999999999999999.9");
-        checkSubtractOperation("0.1", "10000000000000000", "-9999999999999999.9");
-
-        checkSubtractOperation("5000000000000000", "0.9999999999999999",
-                "4999999999999999.0000000000000001");
-        checkSubtractOperation("0.9999999999999999", "5000000000000000",
+        checkBinaryOperations("10000000000000000 - 0.1", "9999999999999999.9");
+        checkBinaryOperations("0.9999999999999999 - 5000000000000000",
                 "-4999999999999999.0000000000000001");
-
-        checkSubtractOperation("1234567890987654321", "123.123", "1234567890987654197.877");
-        checkSubtractOperation("123.123", "1234567890987654321", "-1234567890987654197.877");
-
-        checkSubtractOperation("100000000000000000000000000", "0.00000000000000000000000000001",
+        checkBinaryOperations("1234567890987654321 - 123.123", "1234567890987654197.877");
+        checkBinaryOperations("100000000000000000000000000 - 0.00000000000000000000000000001",
                 "99999999999999999999999999.99999999999999999999999999999");
-        checkSubtractOperation("0.00000000000000000000000000001", "100000000000000000000000000",
-                "-99999999999999999999999999.99999999999999999999999999999");
 
         //decimal and decimal
-        checkSubtractOperation("0.0000000000001", "0.1", "-0.0999999999999");
-        checkSubtractOperation("0.1", "0.0000000000001", "0.0999999999999");
-
-        checkSubtractOperation("0.0000000000000001", "0.9999999999999999",
-                "-0.9999999999999998");
-        checkSubtractOperation("0.9999999999999999", "0.0000000000000001",
-                "0.9999999999999998");
-
-        checkSubtractOperation("1234567890.987654321", "123.123", "1234567767.864654321");
-        checkSubtractOperation("123.123", "1234567890.987654321", "-1234567767.864654321");
-
-        checkSubtractOperation("0.01", "0.00000000000000000000000000001",
+        checkBinaryOperations("0.0000000000001 - 0.1", "-0.0999999999999");
+        checkBinaryOperations("0.0000000000000001 - 0.9999999999999999", "-0.9999999999999998");
+        checkBinaryOperations("1234567890.987654321 - 123.123", "1234567767.864654321");
+        checkBinaryOperations("0.01 - 0.00000000000000000000000000001",
                 "0.00999999999999999999999999999");
-        checkSubtractOperation("0.00000000000000000000000000001", "0.01",
-                "-0.00999999999999999999999999999");
 
         //boundary
-        checkSubtractOperation("8.e+9999", "-1.e+9999", "9.e+9999");
-        checkSubtractOperation("-1.e+9999", "8.e+9999", "-9.e+9999");
+        checkBinaryOperations("8.e+9999 - -1.e+9999", "9.e+9999");
+        checkBinaryOperations("-1.e+9999 - 8.e+9999", "-9.e+9999");
 
-        checkSubtractOperation("9.e+9999", "-9.e+9998", "9.9e+9999");
-        checkSubtractOperation("-9.e+9998", "9.e+9999", "-9.9e+9999");
+        checkBinaryOperations("9.e+9999 - -9.e+9998", "9.9e+9999");
+        checkBinaryOperations("-9.e+9998 - 9.e+9999", "-9.9e+9999");
 
-        checkSubtractOperation("8.e-9999", "-1.e-9999", "9.e-9999");
-        checkSubtractOperation("-1.e-9999", "8.e-9999", "-9.e-9999");
+        checkBinaryOperations("8.e-9999 - -1.e-9999", "9.e-9999");
+        checkBinaryOperations("-1.e-9999 - 8.e-9999", "-9.e-9999");
 
-        checkSubtractOperation("9.e-9999", "-9.e-9998", "9.9e-9998");
-        checkSubtractOperation("-9.e-9998", "9.e-9999", "-9.9e-9998");
+        checkBinaryOperations("9.e-9999 - -9.e-9998", "9.9e-9998");
+        checkBinaryOperations("-9.e-9998 - 9.e-9999", "-9.9e-9998");
 
         //several random values (and vice versa)
-        checkSubtractOperation("523", "876", "-353");
-        checkSubtractOperation("876", "523", "353");
-        checkSubtractOperation("34", "65", "-31");
-        checkSubtractOperation("65", "34", "31");
+        checkBinaryOperations("523 - 876", "-353");
+        checkBinaryOperations("65 - 34", "31");
 
-        checkSubtractOperation("724", "-652", "1376");
-        checkSubtractOperation("-652", "724", "-1376");
-        checkSubtractOperation("763", "-865", "1628");
-        checkSubtractOperation("-865", "763", "-1628");
+        checkBinaryOperations("724 - -652", "1376");
+        checkBinaryOperations("-865 - 763", "-1628");
 
-        checkSubtractOperation("-6521", "-41", "-6.48e+3");
-        checkSubtractOperation("-41", "-6521", "6.48e+3");
-        checkSubtractOperation("-7624", "-7245", "-379");
-        checkSubtractOperation("-7245", "-7624", "379");
+        checkBinaryOperations("-6521 - -41", "-6.48e+3");
+        checkBinaryOperations("-7245 - -7624", "379");
 
-        checkSubtractOperation("763", "245.876", "517.124");
-        checkSubtractOperation("245.876", "763", "-517.124");
-        checkSubtractOperation("9876", "123.87", "9752.13");
-        checkSubtractOperation("123.87", "9876", "-9752.13");
+        checkBinaryOperations("763 - 245.876", "517.124");
+        checkBinaryOperations("123.87 - 9876", "-9752.13");
 
-        checkSubtractOperation("6425", "-123.65", "6548.65");
-        checkSubtractOperation("-123.65", "6425", "-6548.65");
-        checkSubtractOperation("987", "-12.65", "999.65");
-        checkSubtractOperation("-12.65", "987", "-999.65");
+        checkBinaryOperations("6425 - -123.65", "6548.65");
+        checkBinaryOperations("-12.65 - 987", "-999.65");
 
-        checkSubtractOperation("-6", "76.123", "-82.123");
-        checkSubtractOperation("76.123", "-6", "82.123");
-        checkSubtractOperation("-6543", "12.43", "-6555.43");
-        checkSubtractOperation("12.43", "-6543", "6555.43");
+        checkBinaryOperations("-6 - 76.123", "-82.123");
+        checkBinaryOperations("12.43 - -6543", "6555.43");
 
-        checkSubtractOperation("-876", "-21.41", "-854.59");
-        checkSubtractOperation("-21.41", "-876", "854.59");
-        checkSubtractOperation("-987", "-12.21", "-974.79");
-        checkSubtractOperation("-12.21", "-987", "974.79");
+        checkBinaryOperations("-876 - -21.41", "-854.59");
+        checkBinaryOperations("-12.21 - -987", "974.79");
 
-        checkSubtractOperation("12.11", "87.0765", "-74.9665");
-        checkSubtractOperation("87.0765", "12.11", "74.9665");
-        checkSubtractOperation("123.66", "1111.09", "-987.43");
-        checkSubtractOperation("1111.09", "123.66", "987.43");
+        checkBinaryOperations("12.11 - 87.0765", "-74.9665");
+        checkBinaryOperations("1111.09 - 123.66", "987.43");
 
-        checkSubtractOperation("123.65", "-1.2", "124.85");
-        checkSubtractOperation("-1.2", "123.65", "-124.85");
-        checkSubtractOperation("5.1", "-12.7", "17.8");
-        checkSubtractOperation("-12.7", "5.1", "-17.8");
+        checkBinaryOperations("123.65 - -1.2", "124.85");
+        checkBinaryOperations("-12.7 - 5.1", "-17.8");
 
-        checkSubtractOperation("-0.112", "-3.2", "3.088");
-        checkSubtractOperation("-3.2", "-0.112", "-3.088");
-        checkSubtractOperation("-9.1", "-1.224", "-7.876");
-        checkSubtractOperation("-1.224", "-9.1", "7.876");
+        checkBinaryOperations("-0.112 - -3.2", "3.088");
+        checkBinaryOperations("-1.224 - -9.1", "7.876");
     }
 
     /**
-     * Tests for multiply operation.
+     * Tests for the only multiply operation.
      */
     @Test
     void multiplyOperationTests() {
         //easy cases
-        checkMultiplyOperation("2", "2", "4");
-        checkMultiplyOperation("-3", "-3", "9");
-        checkMultiplyOperation("5.5", "3.2", "17.6");
-        checkMultiplyOperation("-10.2", "-7", "71.4");
-        checkMultiplyOperation("7.4", "-5.1", "-37.74");
-        checkMultiplyOperation("1.e+5", "1.e+8", "1.e+13");
-        checkMultiplyOperation("1.e-20", "5.e-20", "5.e-40");
+        checkBinaryOperations("2 * 2", "4");
+        checkBinaryOperations("-3 * -3", "9");
+        checkBinaryOperations("5.5 * 3.2", "17.6");
+        checkBinaryOperations("-10.2 * -7", "71.4");
+        checkBinaryOperations("7.4 * -5.1", "-37.74");
+        checkBinaryOperations("1.e+5 * 1.e+8", "1.e+13");
+        checkBinaryOperations("1.e-20 * 5.e-20", "5.e-40");
 
         //cases with zero
-        checkMultiplyOperation("0", "0", "0");
-        checkMultiplyOperation("2", "0", "0");
-        checkMultiplyOperation("-3", "0", "0");
-        checkMultiplyOperation("5.5", "0", "0");
-        checkMultiplyOperation("0", "-7", "0");
-        checkMultiplyOperation("0", "-5.1", "0");
-        checkMultiplyOperation("0", "1.e+8", "0");
+        checkBinaryOperations("0 * 0", "0");
+        checkBinaryOperations("2 * 0", "0");
+        checkBinaryOperations("-3 * 0", "0");
+        checkBinaryOperations("5.5 * 0", "0");
+        checkBinaryOperations("0 * -7", "0");
+        checkBinaryOperations("0 * -5.1", "0");
+        checkBinaryOperations("0 * 1.e+8", "0");
 
         //big numbers
-        checkMultiplyOperation("10000000000000000", "10000000000000000", "1.e+32");
-        checkMultiplyOperation("5000000000000000", "9999999999999999",
-                "4.9999999999999995e+31");
-        checkMultiplyOperation("1234567890987654321", "1", "1234567890987654321");
-        checkMultiplyOperation("100000000000000000000000000", "10", "1.e+27");
+        checkBinaryOperations("10000000000000000 * 10000000000000000", "1.e+32");
+        checkBinaryOperations("5000000000000000 * 9999999999999999", "4.9999999999999995e+31");
+        checkBinaryOperations("1234567890987654321 * 1", "1234567890987654321");
+        checkBinaryOperations("100000000000000000000000000 * 10", "1.e+27");
 
         //with decimals
-        checkMultiplyOperation("10000000000000000", "0.1", "1.e+15");
-        checkMultiplyOperation("5000000000000000", "0.9999999999999999",
-                "4999999999999999.5");
-        checkMultiplyOperation("1234567890987654321", "123.123",
-                "152003702442072962964.483");
-        checkMultiplyOperation("100000000000000000000000000", "0.00000000000000000000000000001",
+        checkBinaryOperations("10000000000000000 * 0.1", "1.e+15");
+        checkBinaryOperations("5000000000000000 * 0.9999999999999999", "4999999999999999.5");
+        checkBinaryOperations("1234567890987654321 * 123.123", "152003702442072962964.483");
+        checkBinaryOperations("100000000000000000000000000 * 0.00000000000000000000000000001",
                 "0.001");
 
         //decimal and decimal
-        checkMultiplyOperation("0.0000000000001", "0.1", "0.00000000000001");
-        checkMultiplyOperation("0.0000000000000001", "0.9999999999999999",
+        checkBinaryOperations("0.0000000000001 * 0.1", "0.00000000000001");
+        checkBinaryOperations("0.0000000000000001 * 0.9999999999999999",
                 "0.00000000000000009999999999999999");
-        checkMultiplyOperation("1234567890.987654321", "123.123",
-                "152003702442.072962964483");
-        checkMultiplyOperation("0.01", "0.00000000000000000000000000001",
+        checkBinaryOperations("1234567890.987654321 * 123.123", "152003702442.072962964483");
+        checkBinaryOperations("0.01 * 0.00000000000000000000000000001",
                 "0.0000000000000000000000000000001");
 
         //boundary
-        checkMultiplyOperation("4.5e+9999", "2", "9.e+9999");
-        checkMultiplyOperation("9.e+9998", "10", "9.e+9999");
-        checkMultiplyOperation("9.e-9998", "0.1", "9.e-9999");
-        checkMultiplyOperation("4.5e-9999", "2", "9.e-9999");
+        checkBinaryOperations("4.5e+9999 * 2", "9.e+9999");
+        checkBinaryOperations("9.e+9998 * 10", "9.e+9999");
+        checkBinaryOperations("9.e-9998 * 0.1", "9.e-9999");
+        checkBinaryOperations("4.5e-9999 * 2", "9.e-9999");
 
-        checkMultiplyOperation("-4.5e+9999", "2", "-9.e+9999");
-        checkMultiplyOperation("9.e+9998", "-10", "-9.e+9999");
-        checkMultiplyOperation("9.e-9998", "-0.1", "-9.e-9999");
-        checkMultiplyOperation("-4.5e-9999", "2", "-9.e-9999");
+        checkBinaryOperations("-4.5e+9999 * 2", "-9.e+9999");
+        checkBinaryOperations("9.e+9998 * -10", "-9.e+9999");
+        checkBinaryOperations("9.e-9998 * -0.1", "-9.e-9999");
+        checkBinaryOperations("-4.5e-9999 * 2", "-9.e-9999");
 
         //several random values
-        checkMultiplyOperation("41", "13", "533");
-        checkMultiplyOperation("64", "56", "3584");
+        checkBinaryOperations("41 * 13", "533");
+        checkBinaryOperations("64 * 56", "3584");
 
-        checkMultiplyOperation("123", "-13", "-1599");
-        checkMultiplyOperation("41", "-65", "-2665");
+        checkBinaryOperations("123 * -13", "-1599");
+        checkBinaryOperations("41 * -65", "-2665");
 
-        checkMultiplyOperation("-876", "-13", "11388");
-        checkMultiplyOperation("-54", "-53", "2862");
+        checkBinaryOperations("-876 * -13", "11388");
+        checkBinaryOperations("-54 * -53", "2862");
 
-        checkMultiplyOperation("12", "541.652", "6499.824");
-        checkMultiplyOperation("9", "13.764", "123.876");
+        checkBinaryOperations("12 * 541.652", "6499.824");
+        checkBinaryOperations("9 * 13.764", "123.876");
 
-        checkMultiplyOperation("132", "-23.13", "-3053.16");
-        checkMultiplyOperation("12", "-76.87", "-922.44");
+        checkBinaryOperations("132 * -23.13", "-3053.16");
+        checkBinaryOperations("12 * -76.87", "-922.44");
 
-        checkMultiplyOperation("-65", "65.13", "-4233.45");
-        checkMultiplyOperation("-76", "75.123", "-5709.348");
+        checkBinaryOperations("-65 * 65.13", "-4233.45");
+        checkBinaryOperations("-76 * 75.123", "-5709.348");
 
-        checkMultiplyOperation("-13", "-6.12", "79.56");
-        checkMultiplyOperation("-76", "-13.5", "1026");
+        checkBinaryOperations("-13 * -6.12", "79.56");
+        checkBinaryOperations("-76 * -13.5", "1026");
 
-        checkMultiplyOperation("33.12", "6.13", "203.0256");
-        checkMultiplyOperation("86.7", "5.132", "444.9444");
+        checkBinaryOperations("33.12 * 6.13", "203.0256");
+        checkBinaryOperations("86.7 * 5.132", "444.9444");
 
-        checkMultiplyOperation("1.75", "-0.1", "-0.175");
-        checkMultiplyOperation("23.5", "-6.87", "-161.445");
+        checkBinaryOperations("1.75 * -0.1", "-0.175");
+        checkBinaryOperations("23.5 * -6.87", "-161.445");
 
-        checkMultiplyOperation("-765.1", "-1.8", "1377.18");
-        checkMultiplyOperation("-65.7", "-7.8", "512.46");
+        checkBinaryOperations("-765.1 * -1.8", "1377.18");
+        checkBinaryOperations("-65.7 * -7.8", "512.46");
     }
 
     /**
-     * Tests for divide operation.
+     * Tests for the only divide operation.
      */
     @Test
     void divideOperationTests() {
         //easy cases
-        checkDivideOperation("2", "2", "1");
-        checkDivideOperation("-3", "-3", "1");
-
-        checkDivideOperation("4", "2", "2");
-        checkDivideOperation("2", "4", "0.5");
-
-        checkDivideOperation("-10.2", "-102", "0.1");
-        checkDivideOperation("-102", "-10.2", "1.e+1");
-
-        checkDivideOperation("7.4", "-0.5", "-14.8");
-
-        checkDivideOperation("-5.55", "1.11", "-5");
-
-        checkDivideOperation("1.e+5", "1.e+8", "0.001");
-        checkDivideOperation("1.e+8", "1.e+5", "1.e+3");
-
-        checkDivideOperation("1.e-20", "5.e-20", "0.2");
-        checkDivideOperation("5.e-20", "1.e-20", "5");
+        checkBinaryOperations("2 / 2", "1");
+        checkBinaryOperations("-3 / -3", "1");
+        checkBinaryOperations("4 / 2", "2");
+        checkBinaryOperations("-10.2 / -102", "0.1");
+        checkBinaryOperations("7.4 / -0.5", "-14.8");
+        checkBinaryOperations("-5.55 / 1.11", "-5");
+        checkBinaryOperations("1.e+5 / 1.e+8", "0.001");
+        checkBinaryOperations("1.e-20 / 5.e-20", "0.2");
 
         //cases with zero
-        checkDivideOperation("0", "2", "0");
-        checkDivideOperation("0", "-3", "0");
-        checkDivideOperation("0", "5.5", "0");
-        checkDivideOperation("0", "-7", "0");
-        checkDivideOperation("0", "-5.1", "0");
-        checkDivideOperation("0", "1.e+8", "0");
+        checkBinaryOperations("0 / 2", "0");
+        checkBinaryOperations("0 / -3", "0");
+        checkBinaryOperations("0 / 5.5", "0");
+        checkBinaryOperations("0 / -7", "0");
+        checkBinaryOperations("0 / -5.1", "0");
+        checkBinaryOperations("0 / 1.e+8", "0");
 
         //big numbers
-        checkDivideOperation("10000000000000000", "-10000000000000000", "-1");
-        checkDivideOperation("8888888888888888", "-4444444444444444", "-2");
-        checkDivideOperation("1234567890987654321", "1", "1234567890987654321");
-        checkDivideOperation("100000000000000000000000000", "10", "1.e+25");
-        checkDivideOperation("-10", "100000000000000000000000000", "-1.e-25");
+        checkBinaryOperations("10000000000000000 / -10000000000000000", "-1");
+        checkBinaryOperations("8888888888888888 / -4444444444444444", "-2");
+        checkBinaryOperations("1234567890987654321 / 1", "1234567890987654321");
+        checkBinaryOperations("100000000000000000000000000 / 10", "1.e+25");
 
         //with decimals
-        checkDivideOperation("10000000000000000", "0.1", "1.e+17");
-        checkDivideOperation("0.1", "10000000000000000", "1.e-17");
-
-        checkDivideOperation("9999999999999999", "0.9999999999999999", "1.e+16");
-        checkDivideOperation("0.9999999999999999", "9999999999999999", "1.e-16");
-
-        checkDivideOperation("1234567890987654321", "0.2", "6172839454938271605");
-        checkDivideOperation("6172839454938271605", "0.02", "3.0864197274691358025e+20");
-
-        checkDivideOperation("100000000000000000000000000", "0.00000000000000000000000000001",
+        checkBinaryOperations("10000000000000000 / 0.1", "1.e+17");
+        checkBinaryOperations("9999999999999999 / 0.9999999999999999", "1.e+16");
+        checkBinaryOperations("1234567890987654321 / 0.2", "6172839454938271605");
+        checkBinaryOperations("100000000000000000000000000 / 0.00000000000000000000000000001",
                 "1.e+55");
-        checkDivideOperation("0.00000000000000000000000000001", "100000000000000000000000000",
-                "1.e-55");
 
         //decimal and decimal
-        checkDivideOperation("0.0000000000001", "0.1", "0.000000000001");
-        checkDivideOperation("0.1", "0.0000000000001", "1.e+12");
-
-        checkDivideOperation("-0.0000000000000001", "-0.00000000000000008", "1.25");
-        checkDivideOperation("-0.00000000000000008", "-0.0000000000000001", "0.8");
-
-        checkDivideOperation("246.246", "-123.123", "-2");
-        checkDivideOperation("-123.123", "246.246", "-0.5");
-
-        checkDivideOperation("-0.01", "0.00000000000000000000000000001", "-1.e+27");
-        checkDivideOperation("0.00000000000000000000000000001", "-0.01", "-1.e-27");
+        checkBinaryOperations("0.0000000000001 / 0.1", "0.000000000001");
+        checkBinaryOperations("-0.00000000000000008 / -0.0000000000000001", "0.8");
+        checkBinaryOperations("246.246 / -123.123", "-2");
+        checkBinaryOperations("-0.01 / 0.00000000000000000000000000001", "-1.e+27");
 
         //boundary
-        checkDivideOperation("1.e+9998", "0.1", "1.e+9999");
-        checkDivideOperation("-0.1", "1.e+9998", "-1.e-9999");
+        checkBinaryOperations("1.e+9998 / 0.1", "1.e+9999");
+        checkBinaryOperations("-0.1 / 1.e+9998", "-1.e-9999");
 
-        checkDivideOperation("9.e+9998", "0.2", "4.5e+9999");
-        checkDivideOperation("0.2", "-1.e+9998", "-2.e-9999");
+        checkBinaryOperations("9.e+9998 / 0.2", "4.5e+9999");
+        checkBinaryOperations("0.2 / -1.e+9998", "-2.e-9999");
 
-        checkDivideOperation("1.e-9998", "10", "1.e-9999");
-        checkDivideOperation("-10", "1.e-9998", "-1.e+9999");
+        checkBinaryOperations("1.e-9998 / 10", "1.e-9999");
+        checkBinaryOperations("-10 / 1.e-9998", "-1.e+9999");
 
-        checkDivideOperation("9.e-9998", "20", "4.5e-9999");
-        checkDivideOperation("20", "-1.e-9998", "-2.e+9999");
+        checkBinaryOperations("9.e-9998 / 20", "4.5e-9999");
+        checkBinaryOperations("20 / -1.e-9998", "-2.e+9999");
 
         //several random values
-        checkDivideOperation("24", "12", "2");
-        checkDivideOperation("415", "5", "83");
+        checkBinaryOperations("24 / 12", "2");
+        checkBinaryOperations("415 / 5", "83");
 
-        checkDivideOperation("123", "-3", "-41");
-        checkDivideOperation("140", "-7", "-2.e+1");
+        checkBinaryOperations("123 / -3", "-41");
+        checkBinaryOperations("140 / -7", "-2.e+1");
 
-        checkDivideOperation("-41", "-41", "1");
-        checkDivideOperation("-651", "-6", "108.5");
+        checkBinaryOperations("-41 / -41", "1");
+        checkBinaryOperations("-651 / -6", "108.5");
 
-        checkDivideOperation("504", "2.52", "2.e+2");
-        checkDivideOperation("1001", "10.01", "1.e+2");
+        checkBinaryOperations("504 / 2.52", "2.e+2");
+        checkBinaryOperations("1001 / 10.01", "1.e+2");
 
-        checkDivideOperation("101", "-1.01", "-1.e+2");
-        checkDivideOperation("88", "-2.2", "-4.e+1");
+        checkBinaryOperations("101 / -1.01", "-1.e+2");
+        checkBinaryOperations("88 / -2.2", "-4.e+1");
 
-        checkDivideOperation("-5342", "53.42", "-1.e+2");
-        checkDivideOperation("-100", "0.05", "-2.e+3");
+        checkBinaryOperations("-5342 / 53.42", "-1.e+2");
+        checkBinaryOperations("-100 / 0.05", "-2.e+3");
 
-        checkDivideOperation("-65", "-6.5", "1.e+1");
-        checkDivideOperation("-123", "-1.23", "1.e+2");
+        checkBinaryOperations("-65 / -6.5", "1.e+1");
+        checkBinaryOperations("-123 / -1.23", "1.e+2");
 
-        checkDivideOperation("555.555", "555.555", "1");
-        checkDivideOperation("132.5", "66.25", "2");
+        checkBinaryOperations("555.555 / 555.555", "1");
+        checkBinaryOperations("132.5 / 66.25", "2");
 
-        checkDivideOperation("65.65", "-32.825", "-2");
-        checkDivideOperation("15.12", "-0.3", "-50.4");
+        checkBinaryOperations("65.65 / -32.825", "-2");
+        checkBinaryOperations("15.12 / -0.3", "-50.4");
 
-        checkDivideOperation("-0.76", "-0.001", "7.6e+2");
-        checkDivideOperation("-1061.5", "-1.1", "965");
+        checkBinaryOperations("-0.76 / -0.001", "7.6e+2");
+        checkBinaryOperations("-1061.5 / -1.1", "965");
+    }
+
+    /**
+     * Tests for equations that contains only binary operations.
+     */
+    @Test
+    void severalBinaryOperations() {
+        //integer numbers
+        checkBinaryOperations("1 + 1 + 1", "3");
+        checkBinaryOperations("10 - 2 - 2", "6");
+        checkBinaryOperations("2 * 2 * 2", "8");
+        checkBinaryOperations("125 / 5 / 5", "5");
+
+        checkBinaryOperations("1000 + 1245 - 1455 + 123", "913");
+        checkBinaryOperations("1014 + 14 - 28 / 100", "1.e+1");
+        checkBinaryOperations("2 * 90 / 45 + 25 - 5", "24");
+        checkBinaryOperations("125 / 5 * 55 + 12 - 9", "1378");
+
+        //integer and decimal
+        checkBinaryOperations("1.6 + 1 + 1", "3.6");
+        checkBinaryOperations("10 - 2.7 - 2", "5.3");
+        checkBinaryOperations("2 * 2 * 2.102", "8.408");
+        checkBinaryOperations("125.5 / 5 / 0.251", "1.e+2");
+
+        checkBinaryOperations("124.126 + 0.143 - 0.043 * 2 + 5", "253.452");
+        checkBinaryOperations("132 / 2 * 0.4 + 1.2", "27.6");
+        checkBinaryOperations("564.01 - 0.1 + 2.1 * 500 - 100", "282905");
+        checkBinaryOperations("111 * 222 / 2.22 * 11.5", "1.2765e+5");
+
+        //decimal numbers
+        checkBinaryOperations("1.6 + 6.8 + 0.2", "8.6");
+        checkBinaryOperations("50.5 - 0.1 - 0.4", "5.e+1");
+        checkBinaryOperations("0.1 * 4.1 * 0.2", "0.082");
+        checkBinaryOperations("0.1 / 0.01 / 0.001", "1.e+4");
+
+        checkBinaryOperations("19481.312 + 312.124 - 123.14", "19670.296");
+        checkBinaryOperations("777.777 / 7.77 * 1.111 - 5.4", "105.8111");
+        checkBinaryOperations("123.123 - 1.1 + 1.2 * 5.2", "640.7596");
+        checkBinaryOperations("100.001 / 0.0001 * 5.5 - 1231313.131313", "4268741.868687");
+
+        //engineers
+        checkBinaryOperations("1.e+120 + 5.e+120 + 7.e+120", "1.3e+121");
+        checkBinaryOperations("5.e-6 - 1.e-6 - 1.e-2", "-0.009996");
+        checkBinaryOperations("7.e+12 * 2.e+5 * 2.e-5", "2.8e+13");
+        checkBinaryOperations("1.e-500 / 1.e+1000 / 1.e+500", "1.e-2000");
+
+        checkBinaryOperations("1.6532e+13 * 1.41e+134 - 1.e+147", "1.331012e+147");
+        checkBinaryOperations("1.11e-67 / 2.22e+67 * 1.e+131", "0.0005");
+        checkBinaryOperations("1.67e+120 - 1.57e+120 + 1.e+120 / 5.e+100 * 2.e-5", "4.4e+14");
+        checkBinaryOperations("1.e-50 + 1.e-100 * 1.e+50",
+                "1.00000000000000000000000000000000000000000000000001");
     }
 
     /**
@@ -871,109 +831,212 @@ class CalculationModelTest {
      */
     @Test
     void binaryOverflowExceptionTests() {
-        //add operation
-        checkAddOverflowException("9.e+9999", "9.e+9999");
-        checkAddOverflowException("9.e+9999", "1.e+9999");
-        checkAddOverflowException("8.e+9999", "2.e+9999");
+        //the very boundary test case
+        checkBinaryOverflowException("9999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+                "999999999999999999999 + 1");
 
-        checkAddOverflowException("-9.e+9999", "-9.e+9999");
-        checkAddOverflowException("-9.e+9999", "-1.e+9999");
-        checkAddOverflowException("-8.e+9999", "-2.e+9999");
+        //add operation
+        checkBinaryOverflowException("9.e+9999 + 9.e+9999");
+        checkBinaryOverflowException("9.e+9999 + 1.e+9999");
+        checkBinaryOverflowException("8.e+9999 + 2.e+9999");
+
+        checkBinaryOverflowException("-9.e+9999 + -9.e+9999");
+        checkBinaryOverflowException("-9.e+9999 + -1.e+9999");
+        checkBinaryOverflowException("-8.e+9999 + -2.e+9999");
 
         //subtract operation
-        checkSubtractOverflowException("9.e+9999", "-9.e+9999");
-        checkSubtractOverflowException("-9.e+9999", "9.e+9999");
+        checkBinaryOverflowException("9.e+9999 - -9.e+9999");
+        checkBinaryOverflowException("-9.e+9999 - 9.e+9999");
 
-        checkSubtractOverflowException("9.e+9999", "-1.e+9999");
-        checkSubtractOverflowException("-1.e+9999", "9.e+9999");
+        checkBinaryOverflowException("9.e+9999 - -1.e+9999");
+        checkBinaryOverflowException("-1.e+9999 - 9.e+9999");
 
-        checkSubtractOverflowException("8.e+9999", "-2.e+9999");
-        checkSubtractOverflowException("-2.e+9999", "8.e+9999");
+        checkBinaryOverflowException("8.e+9999 - -2.e+9999");
+        checkBinaryOverflowException("-2.e+9999 - 8.e+9999");
 
-        checkSubtractOverflowException("-9.e+9999", "9.e+9999");
-        checkSubtractOverflowException("9.e+9999", "-9.e+9999");
+        checkBinaryOverflowException("-9.e+9999 - 9.e+9999");
+        checkBinaryOverflowException("9.e+9999 - -9.e+9999");
 
-        checkSubtractOverflowException("-9.e+9999", "1.e+9999");
-        checkSubtractOverflowException("1.e+9999", "-9.e+9999");
+        checkBinaryOverflowException("-9.e+9999 - 1.e+9999");
+        checkBinaryOverflowException("1.e+9999 - -9.e+9999");
 
-        checkSubtractOverflowException("-8.e+9999", "2.e+9999");
-        checkSubtractOverflowException("2.e+9999", "-8.e+9999");
+        checkBinaryOverflowException("-8.e+9999 - 2.e+9999");
+        checkBinaryOverflowException("2.e+9999 - -8.e+9999");
 
         //multiply operation
-        checkMultiplyOverflowException("1.e+9999", "-1.e+9999");
-        checkMultiplyOverflowException("1.e+9999", "1.e+9999");
+        checkBinaryOverflowException("1.e+9999 * -1.e+9999");
+        checkBinaryOverflowException("1.e+9999 * 1.e+9999");
 
-        checkMultiplyOverflowException("1.e+9999", "-10");
-        checkMultiplyOverflowException("1.e+9999", "10");
+        checkBinaryOverflowException("1.e+9999 * -10");
+        checkBinaryOverflowException("1.e+9999 * 10");
 
-        checkMultiplyOverflowException("1.e+5000", "-1.e+5000");
-        checkMultiplyOverflowException("1.e+5000", "1.e+5000");
+        checkBinaryOverflowException("1.e+5000 * -1.e+5000");
+        checkBinaryOverflowException("1.e+5000 * 1.e+5000");
 
-        checkMultiplyOverflowException("-1.e+9999", "-10");
-        checkMultiplyOverflowException("-1.e+9999", "10");
+        checkBinaryOverflowException("-1.e+9999 * -10");
+        checkBinaryOverflowException("-1.e+9999 * 10");
 
-        checkMultiplyOverflowException("-1.e+9999", "-1.e+9999");
-        checkMultiplyOverflowException("-1.e+9999", "1.e+9999");
+        checkBinaryOverflowException("-1.e+9999 * -1.e+9999");
+        checkBinaryOverflowException("-1.e+9999 * 1.e+9999");
 
-        checkMultiplyOverflowException("-1.e+5000", "-1.e+5000");
-        checkMultiplyOverflowException("-1.e+5000", "1.e+5000");
+        checkBinaryOverflowException("-1.e+5000 * -1.e+5000");
+        checkBinaryOverflowException("-1.e+5000 * 1.e+5000");
 
 
-        checkMultiplyOverflowException("1.e-9999", "-1.e-9999");
-        checkMultiplyOverflowException("1.e-9999", "1.e-9999");
+        checkBinaryOverflowException("1.e-9999 * -1.e-9999");
+        checkBinaryOverflowException("1.e-9999 * 1.e-9999");
 
-        checkMultiplyOverflowException("1.e-9999", "-0.1");
-        checkMultiplyOverflowException("1.e-9999", "0.1");
+        checkBinaryOverflowException("1.e-9999 * -0.1");
+        checkBinaryOverflowException("1.e-9999 * 0.1");
 
-        checkMultiplyOverflowException("1.e-5000", "-1.e-5000");
-        checkMultiplyOverflowException("1.e-5000", "1.e-5000");
+        checkBinaryOverflowException("1.e-5000 * -1.e-5000");
+        checkBinaryOverflowException("1.e-5000 * 1.e-5000");
 
-        checkMultiplyOverflowException("-1.e-9999", "-0.1");
-        checkMultiplyOverflowException("-1.e-9999", "0.1");
+        checkBinaryOverflowException("-1.e-9999 * -0.1");
+        checkBinaryOverflowException("-1.e-9999 * 0.1");
 
-        checkMultiplyOverflowException("-1.e-9999", "-1.e-9999");
-        checkMultiplyOverflowException("-1.e-9999", "1.e-9999");
+        checkBinaryOverflowException("-1.e-9999 * -1.e-9999");
+        checkBinaryOverflowException("-1.e-9999 * 1.e-9999");
 
-        checkMultiplyOverflowException("-1.e-5000", "-1.e-5000");
-        checkMultiplyOverflowException("-1.e-5000", "1.e-5000");
+        checkBinaryOverflowException("-1.e-5000 * -1.e-5000");
+        checkBinaryOverflowException("-1.e-5000 * 1.e-5000");
 
         //divide operation
-        checkDivideOverflowException("1.e+9999", "-1.e-9999");
-        checkDivideOverflowException("1.e+9999", "1.e-9999");
+        checkBinaryOverflowException("1.e+9999 / -1.e-9999");
+        checkBinaryOverflowException("1.e+9999 / 1.e-9999");
 
-        checkDivideOverflowException("1.e+9999", "-0.1");
-        checkDivideOverflowException("1.e+9999", "0.1");
+        checkBinaryOverflowException("1.e+9999 / -0.1");
+        checkBinaryOverflowException("1.e+9999 / 0.1");
 
-        checkDivideOverflowException("1.e+5000", "-1.e-5000");
-        checkDivideOverflowException("1.e+5000", "1.e-5000");
+        checkBinaryOverflowException("1.e+5000 / -1.e-5000");
+        checkBinaryOverflowException("1.e+5000 / 1.e-5000");
 
-        checkDivideOverflowException("-1.e+9999", "-1.e-9999");
-        checkDivideOverflowException("-1.e+9999", "1.e-9999");
+        checkBinaryOverflowException("-1.e+9999 / -1.e-9999");
+        checkBinaryOverflowException("-1.e+9999 / 1.e-9999");
 
-        checkDivideOverflowException("-1.e+9999", "-0.1");
-        checkDivideOverflowException("-1.e+9999", "0.1");
+        checkBinaryOverflowException("-1.e+9999 / -0.1");
+        checkBinaryOverflowException("-1.e+9999 / 0.1");
 
-        checkDivideOverflowException("-1.e+5000", "-1.e-5000");
-        checkDivideOverflowException("-1.e+5000", "1.e-5000");
+        checkBinaryOverflowException("-1.e+5000 / -1.e-5000");
+        checkBinaryOverflowException("-1.e+5000 / 1.e-5000");
 
 
-        checkDivideOverflowException("1.e-9999", "-1.e+9999");
-        checkDivideOverflowException("1.e-9999", "1.e+9999");
+        checkBinaryOverflowException("1.e-9999 / -1.e+9999");
+        checkBinaryOverflowException("1.e-9999 / 1.e+9999");
 
-        checkDivideOverflowException("1.e-9999", "-10");
-        checkDivideOverflowException("1.e-9999", "10");
+        checkBinaryOverflowException("1.e-9999 / -10");
+        checkBinaryOverflowException("1.e-9999 / 10");
 
-        checkDivideOverflowException("1.e-5000", "-1.e+5000");
-        checkDivideOverflowException("1.e-5000", "1.e+5000");
+        checkBinaryOverflowException("1.e-5000 / -1.e+5000");
+        checkBinaryOverflowException("1.e-5000 / 1.e+5000");
 
-        checkDivideOverflowException("-1.e-9999", "-1.e+9999");
-        checkDivideOverflowException("-1.e-9999", "1.e+9999");
+        checkBinaryOverflowException("-1.e-9999 / -1.e+9999");
+        checkBinaryOverflowException("-1.e-9999 / 1.e+9999");
 
-        checkDivideOverflowException("-1.e-9999", "-10");
-        checkDivideOverflowException("-1.e-9999", "10");
+        checkBinaryOverflowException("-1.e-9999 / -10");
+        checkBinaryOverflowException("-1.e-9999 / 10");
 
-        checkDivideOverflowException("-1.e-5000", "-1.e+5000");
-        checkDivideOverflowException("-1.e-5000", "1.e+5000");
+        checkBinaryOverflowException("-1.e-5000 / -1.e+5000");
+        checkBinaryOverflowException("-1.e-5000 / 1.e+5000");
     }
 
     /**
@@ -1132,109 +1195,65 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing several {@code BinaryOperation} in a row in {@link Calculation}.
-     * <p>
-     * After each calculating result of calculation is set as first number.
+     * Method for testing binary operations.
      *
-     * @param first          first number of equation.
-     * @param numbers        array of numbers that should be set as second number of equation after every calculation
-     *                       made.
-     * @param operations     array of {@code BinaryOperation} that should be set. Note that this array should has the
-     *                       same lengths as array of numbers.
+     * @param equation       equation that should be calculated. Should contain only numbers or operation symbols and
+     *                       starts with number. Numbers should be separated from digits by spacing.
+     *                       <p>
+     *                       F.e., 2 + 2 * 2 will firstly calculate 2 + 2, and then the result will be multiplied on 2.
+     *                       <p>
+     *                       - 5 + 10 will cause an exception, but -5 + 10 will correctly calculate result (5).
+     *                       <p>
+     *                       3 +* 6 will cause an exception, but 3 + * 6 will calculate 3 * 6.
+     *                       <p>
+     *                       4 * 2 4 will calculate 4 * 2 and then will multiply the result on 4 (final result is 32)
      * @param expectedResult result that should be obtained.
      */
-    private void checkSeveralBinaryOperations(String first, String[] numbers, BinaryOperation[] operations,
-                                              String expectedResult) {
-        calculation.setFirst(new BigDecimal(first));
-
-        if (numbers.length != operations.length) {
-            throw new RuntimeException("Lengths of numbers and operation arrays should be the same.");
-        }
-
-        for (int i = 0; i < numbers.length; i++) {
-            calculation.setSecond(new BigDecimal(numbers[i]));
-            calculation.setBinaryOperation(operations[i]);
-            calculation.calculateBinary();
-            calculation.setFirst(calculation.getResult());
-        }
+    private void checkBinaryOperations(String equation, String expectedResult) {
+        String[] args = equation.split(" ");
+        performTestCalculation(args);
 
         assertEquals(new BigDecimal(expectedResult), calculation.getResult());
     }
 
     /**
-     * Method for testing {@code BinaryOperation.ADD} in {@link Calculation}.
-     * <p>
+     * Performs calculation for tests.
      *
-     * @param first          first number of equation.
-     * @param second         second number of equation.
-     * @param expectedResult result that should be obtained.
+     * @param args numbers that should be set as second in {@link Calculation} (except the first number, that should be
+     *             set as first) and {@code BinaryOperation}s that should be set as operation.
+     *             <p>
+     *             F.e., args = {"2", "+", "2"}. Method will firstly calculate 2 + 2, and then the result will be
+     *             multiplied on 2.
+     *             <p>
+     *             args = {"-", "5", "+", "10"} will cause an exception, but args = {"-5", "+", "10"} will correctly
+     *             calculate result (5).
+     *             <p>
+     *             args = {"3", "+*", "6"} will cause an exception, but args = {"3", "+", "*", "6"} will calculate 3 * 6.
+     *             <p>
+     *             args = {"4", "*", "2", "4"} will calculate 4 * 2 and then will multiply the result on 4 (final result
+     *             is 32)
      */
-    private void checkAddOperation(String first, String second, String expectedResult) {
-        checkBinaryOperation(new BigDecimal(first), new BigDecimal(second), ADD, new BigDecimal(expectedResult));
-    }
+    private void performTestCalculation(String[] args) {
+        calculation.setFirst(new BigDecimal(args[0]));
 
-    /**
-     * Method for testing {@code BinaryOperation.SUBTRACT} in {@link Calculation}.
-     * <p>
-     *
-     * @param first          first number of equation.
-     * @param second         second number of equation.
-     * @param expectedResult result that should be obtained.
-     */
-    private void checkSubtractOperation(String first, String second, String expectedResult) {
-        checkBinaryOperation(new BigDecimal(first), new BigDecimal(second), SUBTRACT, new BigDecimal(expectedResult));
-    }
+        for (int i = 1; i < args.length; i++) {
 
-    /**
-     * Method for testing {@code BinaryOperation.MULTIPLY} in {@link Calculation}.
-     * <p>
-     *
-     * @param first          first number of equation.
-     * @param second         second number of equation.
-     * @param expectedResult result that should be obtained.
-     */
-    private void checkMultiplyOperation(String first, String second, String expectedResult) {
-        checkBinaryOperation(new BigDecimal(first), new BigDecimal(second), MULTIPLY, new BigDecimal(expectedResult));
-    }
-
-    /**
-     * Method for testing {@code BinaryOperation.DIVIDE}  in {@link Calculation}.
-     * <p>
-     *
-     * @param first          first number of equation.
-     * @param second         second number of equation.
-     * @param expectedResult result that should be obtained.
-     */
-    private void checkDivideOperation(String first, String second, String expectedResult) {
-        checkBinaryOperation(new BigDecimal(first), new BigDecimal(second), DIVIDE, new BigDecimal(expectedResult));
-    }
-
-    /**
-     * Method for testing {@link BinaryOperation} in {@link Calculation}.
-     * <p>
-     * For operations {@code BinaryOperation.ADD} and {@code BinaryOperation.MULTIPLY} it is possible to swap numbers
-     * of equation between each other to obtain the same result.
-     *
-     * @param first          first number of equation.
-     * @param second         second number of equation.
-     * @param operation      {@code BinaryOperation} to use.
-     * @param expectedResult result that should be obtained.
-     */
-    private void checkBinaryOperation(BigDecimal first, BigDecimal second, BinaryOperation operation,
-                                      BigDecimal expectedResult) {
-        calculation.setFirst(first);
-        calculation.setSecond(second);
-        calculation.setBinaryOperation(operation);
-        calculation.calculateBinary();
-
-        assertEquals(expectedResult, calculation.getResult());
-
-        if (operation == ADD || operation == MULTIPLY) {
-            calculation.setFirst(second);
-            calculation.setSecond(first);
-            calculation.calculateBinary();
-
-            assertEquals(expectedResult, calculation.getResult());
+            if (args[i].equals("+")) {
+                calculation.setBinaryOperation(ADD);
+            } else if (args[i].equals("-")) {
+                calculation.setBinaryOperation(SUBTRACT);
+            } else if (args[i].equals("*")) {
+                calculation.setBinaryOperation(MULTIPLY);
+            } else if (args[i].equals("/")) {
+                calculation.setBinaryOperation(DIVIDE);
+            } else if (args[i].matches(INTEGER_NUMBER_REGEX) || args[i].matches(DECIMAL_NUMBER_REGEX) ||
+                    args[i].matches(ENGINEER_NUMBER_REGEX)) {
+                calculation.setSecond(new BigDecimal(args[i]));
+                calculation.calculateBinary();
+                calculation.setFirst(calculation.getResult());
+            } else {
+                throw new IllegalArgumentException("Expected: binary operation or number. Got: " + args[i]);
+            }
         }
     }
 
@@ -1360,87 +1379,24 @@ class CalculationModelTest {
     }
 
     /**
-     * Method for testing {@link OverflowException} while using {@code BinaryOperation.ADD} in {@link Calculation}
-     * <p>
-     * For inputted values, {@code OverflowException} should be thrown.
+     * Method for testing throwing {@link OverflowException} while using binary operations.
      *
-     * @param first  first number of equation.
-     * @param second second number of equation.
+     * @param equation equation that should be calculated. Should contain only numbers or operation symbols and starts
+     *                 with number. Numbers should be separated from digits by spacing. For this equation, an
+     *                 {@link OverflowException} should be thrown.
+     *                 F.e., 2 + 2 * 2 will firstly calculate 2 + 2, and then the result will be multiplied on 2.
+     *                 - 5 + 10 will cause an exception, but -5 + 10 will correctly calculate result (5).
+     *                 3 +* 6 will cause an exception, but 3 + * 6 will calculate 3 * 6.
+     *                 4 * 2 4 will calculate 4 * 2 and then will multiply the result on 4 (final result is 32)
      */
-    private void checkAddOverflowException(String first, String second) {
-        checkBinaryOverflowException(new BigDecimal(first), new BigDecimal(second), ADD);
-    }
-
-    /**
-     * Method for testing {@link OverflowException} while using {@code BinaryOperation.SUBTRACT} in {@link Calculation}
-     * <p>
-     * For inputted values, {@code OverflowException} should be thrown.
-     *
-     * @param first  first number of equation.
-     * @param second second number of equation.
-     */
-    private void checkSubtractOverflowException(String first, String second) {
-        checkBinaryOverflowException(new BigDecimal(first), new BigDecimal(second), SUBTRACT);
-    }
-
-    /**
-     * Method for testing {@link OverflowException} while using {@code BinaryOperation.MULTIPLY} in {@link Calculation}
-     * <p>
-     * For inputted values, {@code OverflowException} should be thrown.
-     *
-     * @param first  first number of equation.
-     * @param second second number of equation.
-     */
-    private void checkMultiplyOverflowException(String first, String second) {
-        checkBinaryOverflowException(new BigDecimal(first), new BigDecimal(second), MULTIPLY);
-    }
-
-    /**
-     * Method for testing {@link OverflowException} while using {@code BinaryOperation.DIVIDE} in {@link Calculation}
-     * <p>
-     * For inputted values, {@code OverflowException} should be thrown.
-     *
-     * @param first  first number of equation.
-     * @param second second number of equation.
-     */
-    private void checkDivideOverflowException(String first, String second) {
-        checkBinaryOverflowException(new BigDecimal(first), new BigDecimal(second), DIVIDE);
-    }
-
-    /**
-     * Method for testing {@link OverflowException} while using {@link BinaryOperation} in {@link Calculation}
-     * <p>
-     * For inputted values, {@code OverflowException} should be thrown.
-     * <p>
-     * For operations {@code BinaryOperation.ADD} and {@code BinaryOperation.MULTIPLY} it is possible to swap numbers
-     * of equation between each other to obtain the same result.
-     *
-     * @param first     first number of equation.
-     * @param second    second number of equation.
-     * @param operation {@code BinaryOperation} to use.
-     */
-    private void checkBinaryOverflowException(BigDecimal first, BigDecimal second, BinaryOperation operation) {
-        calculation.setFirst(first);
-        calculation.setSecond(second);
-        calculation.setBinaryOperation(operation);
+    private void checkBinaryOverflowException(String equation) {
+        String[] args = equation.split(" ");
 
         try {
-            calculation.calculateBinary();
+            performTestCalculation(args);
             fail();
         } catch (OverflowException e) {
             assertEquals(OVERFLOW_MESSAGE, e.getMessage());
-        }
-
-        if (operation == ADD || operation == MULTIPLY) {
-            calculation.setFirst(second);
-            calculation.setSecond(first);
-
-            try {
-                calculation.calculateBinary();
-                fail();
-            } catch (OverflowException e) {
-                assertEquals(OVERFLOW_MESSAGE, e.getMessage());
-            }
         }
     }
 
