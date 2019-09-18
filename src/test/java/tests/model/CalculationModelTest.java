@@ -1199,8 +1199,7 @@ class CalculationModelTest {
      *
      * @param equation       equation that should be calculated. Should contain only numbers or operation symbols and
      *                       starts with number. Splitting numbers and operations is not necessary, but possible with
-     *                       any number of spacings. Negative or engineer symbol of number (if exist) should not be
-     *                       separated from digits.
+     *                       any number of spacings.
      *                       <p>
      *                       F.e., 2+2*2 will firstly calculate 2 + 2, and then the result will be multiplied on 2.
      *                       <p>
@@ -1418,8 +1417,7 @@ class CalculationModelTest {
      *
      * @param equation equation that should be calculated. Should contain only numbers or operation symbols and
      *                 starts with number. Splitting numbers and operations is not necessary, but possible with
-     *                 any number of spacings. Negative or engineer symbol of number (if exist) should not be
-     *                 separated from digits. For the equation, an {@link OverflowException} should be thrown.
+     *                 any number of spacings. For the equation, an {@link OverflowException} should be thrown.
      *                 <p>
      *                 F.e., 2+2*2 will firstly calculate 2 + 2, and then the result will be multiplied on 2.
      *                 <p>
