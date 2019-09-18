@@ -83,7 +83,60 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CalculationModelTest.binaryOverflowExceptionTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest">
+    <configuration name="CalculationModelTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="divideOperationTests" />
+      <option name="TEST_OBJECT" value="uniqueId" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:tests.model.CalculationModelTest]" />
+      </uniqueIds>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculationModelTest (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="METHOD_NAME" value="binaryOverflowExceptionTests" />
+      <option name="TEST_OBJECT" value="uniqueId" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:tests.model.CalculationModelTest]" />
+      </uniqueIds>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.model" />
+      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CalculationModelTest.binaryOverflowExceptionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -96,54 +149,9 @@
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
       <option name="METHOD_NAME" value="binaryOverflowExceptionTests" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculationModelTest.divideOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="divideOperationTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculationModelTest.multiplyOperationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="multiplyOperationTests" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculationModelTest.severalBinaryOperations" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="severalBinaryOperations" />
-      <option name="TEST_OBJECT" value="method" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:tests.model.CalculationModelTest]" />
+      </uniqueIds>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -160,24 +168,27 @@
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
       <option name="METHOD_NAME" value="subtractOperationTests" />
       <option name="TEST_OBJECT" value="method" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:tests.model.CalculationModelTest]" />
+      </uniqueIds>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
-      <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
-      <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
-      <item itemvalue="JUnit.CalculationModelTest.severalBinaryOperations" />
+      <item itemvalue="JUnit.CalculationModelTest (1)" />
       <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
+      <item itemvalue="JUnit.CalculationModelTest (2)" />
+      <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
+      <item itemvalue="JUnit.CalculationModelTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
-        <item itemvalue="JUnit.CalculationModelTest.severalBinaryOperations" />
+        <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="JUnit.CalculationModelTest.subtractOperationTests" />
-        <item itemvalue="JUnit.CalculationModelTest.multiplyOperationTests" />
-        <item itemvalue="JUnit.CalculationModelTest.divideOperationTests" />
+        <item itemvalue="JUnit.CalculationModelTest (2)" />
+        <item itemvalue="JUnit.CalculationModelTest.binaryOverflowExceptionTests" />
+        <item itemvalue="JUnit.CalculationModelTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -191,20 +202,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00147" summary="Overflow exception refactored.">
-      <created>1567763597256</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1567763597256</updated>
-    </task>
-    <task id="LOCAL-00148" summary="Bug fix with RobotController.">
-      <created>1567783079201</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1567783079201</updated>
     </task>
     <task id="LOCAL-00149" summary="Refactoring NumberFormatterTest.">
       <created>1567791609927</created>
@@ -535,7 +532,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568730292323</updated>
     </task>
-    <option name="localTasksCounter" value="196" />
+    <task id="LOCAL-00196" summary="Simplifying and refactoring tests for model for binary operation.">
+      <created>1568808039326</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1568808039326</updated>
+    </task>
+    <task id="LOCAL-00197" summary="Javadocs for tests for model updated.">
+      <created>1568808235093</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1568808235093</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -569,8 +580,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Tests for memory store operation in controller created." />
-    <MESSAGE value="Tests for memory using keypad created." />
     <MESSAGE value="Reduced time for running view tests by optimizing them and removing unnecessary test cases." />
     <MESSAGE value="Workspace changed." />
     <MESSAGE value="Added Boris's remarks." />
@@ -594,7 +603,9 @@
     <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Refactoring memory model tests." />
     <MESSAGE value="Mock for several binary operations in a row made." />
-    <option name="LAST_COMMIT_MESSAGE" value="Mock for several binary operations in a row made." />
+    <MESSAGE value="Simplifying and refactoring tests for model for binary operation." />
+    <MESSAGE value="Javadocs for tests for model updated." />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadocs for tests for model updated." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
@@ -624,11 +635,11 @@
     <SUITE FILE_PATH="coverage/Win10Calc$ViewTest_checkColorTests.ic" NAME="ViewTest.checkColorTests Coverage Results" MODIFIED="1566595570493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.view.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Win10Calc$CalculationModelTest.ic" NAME="CalculationModelTest Coverage Results" MODIFIED="1568376256095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>tests.model.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$Model_in_Win10Calc.ic" NAME="Model in Win10Calc Coverage Results" MODIFIED="1566389321992" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Win10Calc$CalculationModelTest.ic" NAME="CalculationModelTest Coverage Results" MODIFIED="1568811092331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.implemica.bormashenko.calculator.model.Calculation</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Win10Calc$ControllerTest_allTests.ic" NAME="ControllerTest.allTests Coverage Results" MODIFIED="1568375565226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.implemica.bormashenko.calculator.controller.*</FILTER>
