@@ -83,7 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
+  <component name="RunManager" selected="JUnit.CalculationModelTest.boundaryTests">
     <configuration name="CalculationModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
@@ -99,7 +99,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CalculationModelTest.divideZeroByZeroExceptionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CalculationModelTest.boundaryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -109,7 +109,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests.model" />
       <option name="MAIN_CLASS_NAME" value="tests.model.CalculationModelTest" />
-      <option name="METHOD_NAME" value="divideZeroByZeroExceptionTest" />
+      <option name="METHOD_NAME" value="boundaryTests" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,19 +163,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.CalculationModelTest.divideZeroByZeroExceptionTest" />
       <item itemvalue="JUnit.CalculationModelTest.inverseZeroExceptionTest" />
       <item itemvalue="JUnit.CalculationModelTest" />
       <item itemvalue="JUnit.ControllerTest" />
       <item itemvalue="JUnit.ControllerTest.allTests" />
+      <item itemvalue="JUnit.CalculationModelTest.boundaryTests" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculationModelTest.boundaryTests" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="JUnit.CalculationModelTest.inverseZeroExceptionTest" />
-        <item itemvalue="JUnit.CalculationModelTest.divideZeroByZeroExceptionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -189,13 +189,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00152" summary="Renaming enums.">
-      <created>1567801827255</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
-      <option name="project" value="LOCAL" />
-      <updated>1567801827255</updated>
     </task>
     <task id="LOCAL-00153" summary="Refactoring calculate result operation in controller.">
       <created>1567801856957</created>
@@ -533,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568901338305</updated>
     </task>
-    <option name="localTasksCounter" value="201" />
+    <task id="LOCAL-00201" summary="Tests for model refactored.">
+      <created>1568901741960</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1568901741960</updated>
+    </task>
+    <option name="localTasksCounter" value="202" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -589,10 +589,10 @@
     <MESSAGE value="Mock for several binary operations in a row made." />
     <MESSAGE value="Simplifying and refactoring tests for model for binary operation." />
     <MESSAGE value="Javadocs for tests for model updated." />
-    <MESSAGE value="Tests for model refactored." />
     <MESSAGE value="Javadocs for model tests updated." />
     <MESSAGE value="Signature of percent operation in model changed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Signature of percent operation in model changed." />
+    <MESSAGE value="Tests for model refactored." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for model refactored." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
