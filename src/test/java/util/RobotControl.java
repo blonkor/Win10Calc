@@ -566,10 +566,9 @@ public class RobotControl extends GuiTest {
      * @throws IllegalArgumentException if required text is not a keypad button representation.
      */
     protected void pressKeyboard(String text) {
-        String[] codes = text.split(" ");
+        String[] codes = splitCodes(text);
 
         for (String code : codes) {
-
             int additionalKey = 0;
             int mainKey = KeyEvent.VK_CONTROL;
 
@@ -700,16 +699,6 @@ public class RobotControl extends GuiTest {
 
             awtRobot.keyRelease(mainKey);
 
-//             try {
-//            SwingUtilities.invokeAndWait(() -> {});
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-            /**
-             * @todo show to Boris
-             */
             FXTestUtils.awaitEvents();
         }
     }
@@ -835,5 +824,65 @@ public class RobotControl extends GuiTest {
     protected void translateNodeByX(String selector, double translationX) {
         Node node = getNodeBySelector(selector);
         node.setTranslateX(translationX);
+    }
+
+    /**
+     * Splits text to keyboard codes.
+     *
+     * @param text text to split.
+     * @return array obtained after split operation.
+     */
+    private String[] splitCodes(String text) {
+        text = text.replaceAll("0", " 0 ");
+        text = text.replaceAll("1", " 1 ");
+        text = text.replaceAll("2", " 2 ");
+        text = text.replaceAll("3", " 3 ");
+        text = text.replaceAll("4", " 4 ");
+        text = text.replaceAll("5", " 5 ");
+        text = text.replaceAll("6", " 6 ");
+        text = text.replaceAll("7", " 7 ");
+        text = text.replaceAll("8", " 8 ");
+        text = text.replaceAll("9", " 9 ");
+        text = text.replaceAll("\\.", " . ");
+
+        text = text.replaceAll("-", " - ");
+        text = text.replaceAll("/", " / ");
+        text = text.replaceAll("=", " = ");
+
+        text = text.replaceAll("R", " R ");
+        text = text.replaceAll("F 9", " F9 ");
+        text = text.replaceAll("backspace", " backspace ");
+        text = text.replaceAll("enter", " enter ");
+        text = text.replaceAll("del", " del ");
+        text = text.replaceAll("esc", " esc ");
+        text = text.replaceAll("sqr", " sqr ");
+
+        text = text.replaceAll("ctrl\\+M", " ctrl+M ");
+        text = text.replaceAll("ctrl\\+P", " ctrl+P ");
+        text = text.replaceAll("ctrl\\+Q", " ctrl+Q ");
+        text = text.replaceAll("ctrl\\+ R", " ctrl+R ");
+        text = text.replaceAll("ctrl\\+L", " ctrl+L ");
+        text = text.replaceAll("shift\\+ 2", " shift+2 ");
+        text = text.replaceAll("shift\\+ 5", " shift+5 ");
+        text = text.replaceAll("shift\\+ 8", " shift+8 ");
+        text = text.replaceAll("shift\\+ =", " shift+= ");
+
+        text = text.replaceAll("num 0", " num0 ");
+        text = text.replaceAll("num 1", " num1 ");
+        text = text.replaceAll("num 2", " num2 ");
+        text = text.replaceAll("num 3", " num3 ");
+        text = text.replaceAll("num 4", " num4 ");
+        text = text.replaceAll("num 5", " num5 ");
+        text = text.replaceAll("num 6", " num6 ");
+        text = text.replaceAll("num 7", " num7 ");
+        text = text.replaceAll("num 8", " num8 ");
+        text = text.replaceAll("num 9", " num9 ");
+        text = text.replaceAll("num\\+", " num+ ");
+        text = text.replaceAll("num -", " num- ");
+        text = text.replaceAll("num\\*", " num* ");
+        text = text.replaceAll("num /", " num/ ");
+
+        text = text.replaceFirst("\\s", "");
+        return text.split("\\s+");
     }
 }
