@@ -192,9 +192,9 @@ public class Calculation {
         if (binaryOperation == null) {
             resetAll();
         } else if (binaryOperation == BinaryOperation.ADD || binaryOperation == BinaryOperation.SUBTRACT) {
-            percentageOfFirst();
+            result = percentageOfFirst();
         } else if (binaryOperation == BinaryOperation.MULTIPLY || binaryOperation == BinaryOperation.DIVIDE) {
-            percentageOf100();
+            result = percentageOf100();
         }
 
         result = result.stripTrailingZeros();
@@ -380,12 +380,12 @@ public class Calculation {
      *
      * @throws OverflowException while validation for second value is failed.
      */
-    private void percentageOfFirst() {
+    private BigDecimal percentageOfFirst() {
         if (second.scale() + first.scale() > MAX_SCALE) {
             throw new OverflowException();
         }
 
-        result = first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
     /**
@@ -393,11 +393,11 @@ public class Calculation {
      *
      * @throws OverflowException while validation for second number is failed.
      */
-    private void percentageOf100() {
+    private BigDecimal percentageOf100() {
         if (second.scale() - ONE_HUNDRED.stripTrailingZeros().scale() > MAX_SCALE) {
             throw new OverflowException();
         }
 
-        result = second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 }
