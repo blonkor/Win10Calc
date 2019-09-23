@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Added validation in">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
@@ -187,13 +187,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00159" summary="Refactoring ViewFormatter (this class is deleted) and controller (assigned to ViewFormatter methods).">
-      <created>1567980464760</created>
-      <option name="number" value="00159" />
-      <option name="presentableId" value="LOCAL-00159" />
-      <option name="project" value="LOCAL" />
-      <updated>1567980464767</updated>
     </task>
     <task id="LOCAL-00160" summary="Bug fix with several unary operations in a row.">
       <created>1568024653117</created>
@@ -531,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569250751736</updated>
     </task>
-    <option name="localTasksCounter" value="208" />
+    <task id="LOCAL-00208" summary="Bug fixes in controller with stored and returned from memory value.">
+      <created>1569250794193</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1569250794193</updated>
+    </task>
+    <option name="localTasksCounter" value="209" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -565,7 +565,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Bug fix in controller with divide symbol in equation text." />
     <MESSAGE value="Bug fix with equation text after percent operation after equals while binary operation is set." />
     <MESSAGE value="Created animation for moving navigation bar." />
     <MESSAGE value="Refactoring controller and view for navigation panel." />
@@ -590,7 +589,8 @@
     <MESSAGE value="Overflow validation is util class now." />
     <MESSAGE value="Refactoring tests for model." />
     <MESSAGE value="Boundary tests for controller created. Minor refactoring for controller tests." />
-    <option name="LAST_COMMIT_MESSAGE" value="Boundary tests for controller created. Minor refactoring for controller tests." />
+    <MESSAGE value="Bug fixes in controller with stored and returned from memory value." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes in controller with stored and returned from memory value." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

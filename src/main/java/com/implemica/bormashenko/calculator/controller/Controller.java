@@ -3,6 +3,8 @@ package com.implemica.bormashenko.calculator.controller;
 import com.implemica.bormashenko.calculator.model.*;
 import com.implemica.bormashenko.calculator.model.enums.*;
 
+import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
+import com.implemica.bormashenko.calculator.model.util.OverflowValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -351,7 +353,7 @@ public class Controller implements Initializable {
     public void memoryRecallOperation() {
         try {
             BigDecimal number = memory.recall();
-            screen.setText(formatNumber(number));
+            showNumberOnScreen(formatNumber(number), false);
 
             isEditableScreen = false;
         } catch (Exception e) {
@@ -835,10 +837,11 @@ public class Controller implements Initializable {
      * @param second    {@code BigDecimal} number to set as second.
      */
     private void calculateBinaryAndSetNewBinary(BinaryOperation operation, BigDecimal second) {
+        boolean divideWasPerformed = calculation.getBinaryOperation() == BinaryOperation.DIVIDE;
         calculation.setSecond(second);
         calculation.calculateBinary();
         setBinaryAndFirst(operation, calculation.getResult());
-        screen.setText(formatNumber(calculation.getResult()));
+        showNumberOnScreen(formatNumber(calculation.getResult()), divideWasPerformed);
     }
 
     /**
@@ -948,7 +951,7 @@ public class Controller implements Initializable {
         calculation.setFirst(first);
         calculation.calculateUnary(operation);
         calculation.setFirst(calculation.getResult());
-        screen.setText(formatNumber(calculation.getResult()));
+        showNumberOnScreen(formatNumber(calculation.getResult()), false);
     }
 
     /**
@@ -966,7 +969,7 @@ public class Controller implements Initializable {
         calculation.calculateUnary(operation);
         calculation.setFirst(calculation.getSecond());
         calculation.setSecond(calculation.getResult());
-        screen.setText(formatNumber(calculation.getResult()));
+        showNumberOnScreen(formatNumber(calculation.getResult()), false);
     }
 
     /**
@@ -1087,7 +1090,7 @@ public class Controller implements Initializable {
             calculation.setSecond(calculation.getResult());
         }
 
-        screen.setText(formatNumber(calculation.getResult()));
+        showNumberOnScreen(formatNumber(calculation.getResult()), false);
     }
 
     /**
@@ -1164,7 +1167,7 @@ public class Controller implements Initializable {
         calculation.setSecond(number);
         calculation.calculatePercentage();
         calculation.setSecond(calculation.getResult());
-        screen.setText(formatNumber(calculation.getResult()));
+        showNumberOnScreen(formatNumber(calculation.getResult()), false);
     }
 
     /**
@@ -1239,7 +1242,8 @@ public class Controller implements Initializable {
             calculateResultAfterEqualsOrUnaryOrPercentage();
         }
 
-        screen.setText(formatNumber(calculation.getResult()));
+        showNumberOnScreen(formatNumber(calculation.getResult()),
+                calculation.getBinaryOperation() == BinaryOperation.DIVIDE);
     }
 
     /**
@@ -1330,6 +1334,21 @@ public class Controller implements Initializable {
     private void removeLastDecimalSeparator() {
         if (screen.getText().endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
             screen.setText(StringUtils.chop(screen.getText()));
+        }
+    }
+
+    /**
+     * Shows formatted number in screen {@code Label} if it should not cause {@link OverflowException}.
+     *
+     * @param number            number to show.
+     * @param isDividePerformed true if divide operation was just performed or false otherwise.
+     */
+    private void showNumberOnScreen(String number, boolean isDividePerformed) {
+        if (OverflowValidation.overflowValidationFailed(screenToBigDecimal(number), isDividePerformed,
+                calculation.getFirst())) {
+            throw new OverflowException();
+        } else {
+            screen.setText(number);
         }
     }
 
