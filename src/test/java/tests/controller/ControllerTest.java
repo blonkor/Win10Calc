@@ -1303,37 +1303,39 @@ public class ControllerTest extends RobotControl {
                 "10000000000" + "00000====================================================" + KEY_MULTIPLY + "10===";
 
         //string for calculating number 1.e-9999
-        String theSmallestNumber = oneDotEPlusFourNines + KEY_INVERSE;
+        String theSmallestNumber = "0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.00000000" +
+                "00000001================================================" + KEY_MULTIPLY + "0.000000000000001=";
 
         //string for calculating number 999999999999999949999.....9.9999...9.8
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
-        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1================" +
-                KEY_MS + "/5=" + KEY_MULTIPLY + "10=================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
-                KEY_MULTIPLY + "10=";
+        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1===============" +
+                KEY_MS + "/5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
+                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1=" + KEY_MS + "esc" + oneDotEPlusFourNines + KEY_MULTIPLY + "9" +
+                KEY_ADD + KEY_MR + "=";
 
         //max numbers
         //right
-        checkTyped(boundaryNumber + KEY_MS + "esc" + theSmallestNumber + KEY_ADD,
+        checkTyped(boundaryNumber + KEY_MS + "esc" + theSmallestNumber + KEY_ADD + KEY_MR + "=",
                 "9.999999999999999e+9999");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "=" + KEY_ADD + KEY_MR + "=");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "==" + KEY_ADD + KEY_MR + "=");
 
         //left
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + theSmallestNumber + KEY_NEG + KEY_ADD + 
-                        KEY_MR + "=","-9.999999999999999e+9999");
-        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_NEG + KEY_ADD + "=" + KEY_ADD + 
-                        KEY_MR + "=");
-        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_NEG + KEY_ADD + "==" + KEY_ADD + 
-                        KEY_MR + "=");
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "esc" + theSmallestNumber + KEY_MULTIPLY +
+                "-1" + KEY_ADD + KEY_MR,"-9.999999999999999e+9999");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_MULTIPLY + "-1" + KEY_ADD + "=" +
+                KEY_ADD + KEY_MR + "=");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_MULTIPLY + "-1" + KEY_ADD + "==" +
+                KEY_ADD + KEY_MR + "=");
 
         //min numbers
         //left bound
-        checkTyped(theSmallestNumber + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=", 
+        checkTyped(theSmallestNumber + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
                 "1.e-9999");
 
         //positive and positive
-        checkTypedWithoutResetMemory(KEY_MR + "/10=" + KEY_MULTIPLY + "0.1=", "1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10=", "1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=", "1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10/10=", "1.e-9999");
 
         checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10=");
@@ -1341,7 +1343,7 @@ public class ControllerTest extends RobotControl {
         checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100=");
 
         //negative and positive
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=", 
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
                 "1.e-9999");
         checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "1.e-9999");
 
@@ -1355,7 +1357,7 @@ public class ControllerTest extends RobotControl {
                 "-1.e-9999");
 
         //positive and negative
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=", 
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
                 "-1.e-9999");
         checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
 
