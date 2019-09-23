@@ -1227,7 +1227,7 @@ class CalculationModelTest {
         checkEquation(theVeryLeftNumberBeforeTheVeryLeftNumber + "-" + theVeryLeftNumber + "=",
                 theVeryLeftNumber);
 
-        //positive
+        //positive and positive
         checkEquation("1.e-9998*0.1 =", "1.e-9999");
         checkEquation("1.e-9998/10 =", "1.e-9999");
 
@@ -1236,7 +1236,7 @@ class CalculationModelTest {
         checkEquationException("1.e-9999*0.01 =", OVERFLOW_MESSAGE);
         checkEquationException("1.e-9999/100 =", OVERFLOW_MESSAGE);
 
-        //negative
+        //negative and negative
         checkEquation("-1.e-9998*-0.1 =", "1.e-9999");
         checkEquation("-1.e-9998/-10 =", "1.e-9999");
 
