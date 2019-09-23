@@ -1298,29 +1298,22 @@ public class ControllerTest extends RobotControl {
                 "1000000000000000====================================================" + KEY_MULTIPLY + "10===" +
                 KEY_INVERSE + KEY_MS + "1-" + KEY_MR + "==" + KEY_MS;
 
-        //stringBuilder for calculating number 99999999999999994999...999 (16 nines, then digit 4, then 9983 nines)
-        StringBuilder builderForCalculateIntegerBoundNumber = new StringBuilder("9999999999999999" + KEY_MULTIPLY +
-                "10" + KEY_ADD + "4");
+        //string for calculating number 1.e+9999
+        String oneDotEPlusFourNines = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY +
+                "10000000000" + "00000====================================================" + KEY_MULTIPLY + "10===";
 
-        for (int i = 0; i < 9975; i += 15) {
-            builderForCalculateIntegerBoundNumber.append(KEY_MULTIPLY + "1000000000000000" + KEY_ADD +
-                    "999999999999999");
-        }
-
-        builderForCalculateIntegerBoundNumber.append(KEY_MULTIPLY + "100000000" + KEY_ADD + "99999999=");
+        //string for calculating number 1.e-9999
+        String theSmallestNumber = oneDotEPlusFourNines + KEY_INVERSE;
 
         //string for calculating number 999999999999999949999.....9.9999...9.8
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
-        String boundaryNumber = oneMinusTwoMinimalNumbersToMemory + builderForCalculateIntegerBoundNumber + KEY_ADD +
-                KEY_MR + "=";
-
-        //string for calculating number 1.e-9999
-        String theSmallestNumber = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "10000000000" +
-                "00000====================================================" + KEY_MULTIPLY + "10===" + KEY_INVERSE;
+        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1================" +
+                KEY_MS + "/5=" + KEY_MULTIPLY + "10=================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
+                KEY_MULTIPLY + "10=";
 
         //max numbers
         //right
-        checkTyped(boundaryNumber + KEY_MS + theSmallestNumber + KEY_ADD + KEY_MR + "=",
+        checkTyped(boundaryNumber + KEY_MS + "esc" + theSmallestNumber + KEY_ADD,
                 "9.999999999999999e+9999");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "=" + KEY_ADD + KEY_MR + "=");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "==" + KEY_ADD + KEY_MR + "=");

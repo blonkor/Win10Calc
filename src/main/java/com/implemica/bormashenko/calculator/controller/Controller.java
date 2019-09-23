@@ -839,7 +839,12 @@ public class Controller implements Initializable {
     private void calculateBinaryAndSetNewBinary(BinaryOperation operation, BigDecimal second) {
         boolean divideWasPerformed = calculation.getBinaryOperation() == BinaryOperation.DIVIDE;
         calculation.setSecond(second);
-        calculation.calculateBinary();
+        System.out.println(calculation.getResult());
+
+        calculation.calculateBinary(); //@todo
+
+        System.out.println(calculation.getResult() + "aaa");
+
         setBinaryAndFirst(operation, calculation.getResult());
         showNumberOnScreen(formatNumber(calculation.getResult()), divideWasPerformed);
     }
