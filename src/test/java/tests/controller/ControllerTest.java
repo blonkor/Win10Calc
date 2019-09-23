@@ -1,5 +1,6 @@
 package tests.controller;
 
+import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -98,6 +99,26 @@ public class ControllerTest extends RobotControl {
     private static final String NARROW_SPACE = "\u2009";
 
     /**
+     * Exception message for {@link OverflowException}.
+     */
+    private static final String OVERFLOW_MESSAGE = "Overflow";
+
+    /**
+     * Exception message for divide by zero {@link ArithmeticException}.
+     */
+    private static final String DIVIDE_BY_ZERO_MESSAGE = "Cannot divide by zero";
+
+    /**
+     * Exception message for divide zero by zero {@link ArithmeticException}.
+     */
+    private static final String DIVIDE_ZERO_BY_ZERO_MESSAGE = "Result is undefined";
+
+    /**
+     * Exception message for invalid input {@link ArithmeticException}.
+     */
+    private static final String INVALID_INPUT_MESSAGE = "Invalid input";
+
+    /**
      * Constructor needed to extend {@link RobotControl}
      *
      * @throws AWTException signals that an Abstract Window Toolkit exception has occurred.
@@ -140,6 +161,7 @@ public class ControllerTest extends RobotControl {
         equalsTests();
 
         exceptionTests();
+        boundaryTests();
     }
 
     //@todo tests for mouse
@@ -1008,7 +1030,7 @@ public class ControllerTest extends RobotControl {
                 "1.235371090882345", "√( √( √( √( √( 866 ) ) ) ) )");
 
         //after another unary
-        checkTyped("8" + KEY_NEG + KEY_SQRT, "Invalid input", "√( -8 )");
+        checkTyped("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE, "√( -8 )");
         checkTyped("3600000000 sqr" + KEY_SQRT, "3,600,000,000",
                 "√( sqr( 3600000000 ) )");
         checkTyped("0.000001" + KEY_INVERSE + KEY_SQRT, "1,000",
@@ -1076,7 +1098,7 @@ public class ControllerTest extends RobotControl {
                 "55 ÷ 1/( 55 )");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + KEY_INVERSE, "Cannot divide by zero",
+        checkTyped("78" + KEY_PERCENT + KEY_INVERSE, DIVIDE_BY_ZERO_MESSAGE,
                 "1/( 0 )");
         checkTyped("562-" + KEY_PERCENT + KEY_INVERSE, "3.166119983282886e-4",
                 "562 - 1/( 3158.44 )");
@@ -1229,40 +1251,135 @@ public class ControllerTest extends RobotControl {
         //add
         checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000=======" +
                         "=============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + "=========",
-                "Overflow");
+                OVERFLOW_MESSAGE);
 
         //subtract
         checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
-                "==============================================" + KEY_MULTIPLY + "10===-===========", "Overflow");
+                "==============================================" + KEY_MULTIPLY + "10===-===========", OVERFLOW_MESSAGE);
 
         //multiply
         checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
-                "==============================================" + KEY_MULTIPLY + "10====", "Overflow");
+                "==============================================" + KEY_MULTIPLY + "10====", OVERFLOW_MESSAGE);
 
         //divide
         checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.000000000000001====" +
-                "================================================/10====", "Overflow");
+                "================================================/10====", OVERFLOW_MESSAGE);
 
         //sqr
-        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
-        checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", "Overflow");
+        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", OVERFLOW_MESSAGE);
+        checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", OVERFLOW_MESSAGE);
 
         //percentage
         checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
-                "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + KEY_PERCENT, 
-                "Overflow");
+                        "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + KEY_PERCENT,
+                OVERFLOW_MESSAGE);
         checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.000000000000001=====" +
-                "===============================================/10===" + KEY_MULTIPLY + KEY_PERCENT, "Overflow");
+                "===============================================/10===" + KEY_MULTIPLY + KEY_PERCENT, OVERFLOW_MESSAGE);
 
         //invalid input
-        checkException("8" + KEY_NEG + KEY_SQRT, "Invalid input");
+        checkException("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
 
         //divide by zero
-        checkException("14/0=", "Cannot divide by zero");
-        checkException("0" + KEY_INVERSE, "Cannot divide by zero");
+        checkException("14/0=", DIVIDE_BY_ZERO_MESSAGE);
+        checkException("0" + KEY_INVERSE, DIVIDE_BY_ZERO_MESSAGE);
 
         //divide zero by zero
-        checkException("0/0=", "Result is undefined");
+        checkException("0/0=", DIVIDE_ZERO_BY_ZERO_MESSAGE);
+    }
+
+    /**
+     * Tests for bounds.
+     */
+    @Test
+    public void boundaryTests() {
+        //string for storing to memory number with 0 integer part
+        //and 9998 nines in decimal part (and the last one digit is 8)
+        String oneMinusTwoMinimalNumbersToMemory = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY +
+                "1000000000000000====================================================" + KEY_MULTIPLY + "10===" +
+                KEY_INVERSE + KEY_MS + "1-" + KEY_MR + "==" + KEY_MS;
+
+        //stringBuilder for calculating number 99999999999999994999...999 (16 nines, then digit 4, then 9983 nines)
+        StringBuilder builderForCalculateIntegerBoundNumber = new StringBuilder("9999999999999999" + KEY_MULTIPLY +
+                "10" + KEY_ADD + "4");
+
+        for (int i = 0; i < 9975; i += 15) {
+            builderForCalculateIntegerBoundNumber.append(KEY_MULTIPLY + "1000000000000000" + KEY_ADD +
+                    "999999999999999");
+        }
+
+        builderForCalculateIntegerBoundNumber.append(KEY_MULTIPLY + "100000000" + KEY_ADD + "99999999=");
+
+        //string for calculating number 999999999999999949999.....9.9999...9.8
+        //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
+        String boundaryNumber = oneMinusTwoMinimalNumbersToMemory + builderForCalculateIntegerBoundNumber + KEY_ADD +
+                KEY_MR + "=";
+
+        //string for calculating number 1.e-9999
+        String theSmallestNumber = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "10000000000" +
+                "00000====================================================" + KEY_MULTIPLY + "10===" + KEY_INVERSE;
+
+        //max numbers
+        //right
+        checkTyped(boundaryNumber + KEY_MS + theSmallestNumber + KEY_ADD + KEY_MR + "=",
+                "9.999999999999999e+9999");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "=" + KEY_ADD + KEY_MR + "=");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "==" + KEY_ADD + KEY_MR + "=");
+
+        //left
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + theSmallestNumber + KEY_NEG + KEY_ADD + 
+                        KEY_MR + "=","-9.999999999999999e+9999");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_NEG + KEY_ADD + "=" + KEY_ADD + 
+                        KEY_MR + "=");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_NEG + KEY_ADD + "==" + KEY_ADD + 
+                        KEY_MR + "=");
+
+        //min numbers
+        //left bound
+        checkTyped(theSmallestNumber + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=", 
+                "1.e-9999");
+
+        //positive and positive
+        checkTypedWithoutResetMemory(KEY_MR + "/10=" + KEY_MULTIPLY + "0.1=", "1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + "/10=/10=", "1.e-9999");
+
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100=");
+
+        //negative and positive
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=", 
+                "1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "1.e-9999");
+
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
+
+        //right bound
+        checkTyped(theSmallestNumber + KEY_NEG + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
+                "-1.e-9999");
+
+        //positive and negative
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=", 
+                "-1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
+
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
+
+        //negative and negative
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
+                "-1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
+
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
+        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
     }
 
     /**
@@ -1273,9 +1390,7 @@ public class ControllerTest extends RobotControl {
      */
     private void checkTyped(String buttons, String expectedScreenText) {
         resetAll();
-        pressKeyboard(buttons);
-
-        assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
+        checkTypedWithoutResetMemory(buttons, expectedScreenText);
     }
 
     /**
@@ -1290,6 +1405,20 @@ public class ControllerTest extends RobotControl {
 
         expectedEquationText = expectedEquationText.replaceAll(SPACE, NARROW_SPACE);
         assertEquals(expectedEquationText, getLabeledBySelector(EQUATION_LABEL_ID).getText());
+    }
+
+    /**
+     * Checks that screen {@code Label} has required text after clicking on several {@code Button}.
+     * This method does not resets memory to its primary stage.
+     *
+     * @param buttons            several {@code Button} that should be clicked.
+     * @param expectedScreenText required text on screen {@code Label} after clicking.
+     */
+    private void checkTypedWithoutResetMemory(String buttons, String expectedScreenText) {
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        pressKeyboard(buttons);
+
+        assertEquals(expectedScreenText, getLabeledBySelector(SCREEN_LABEL_ID).getText());
     }
 
     /**
@@ -1328,10 +1457,30 @@ public class ControllerTest extends RobotControl {
      */
     private void checkException(String buttons, String expectedScreenText) {
         checkTyped(buttons, expectedScreenText);
+        checkButtonsAfterException(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
+    }
 
+    /**
+     * Checks that exception was thrown after clicking several {@code Button}.
+     * This method does not reset application to its primary stage.
+     *
+     * @param buttons            several {@code Button} that should be clicked.
+     */
+    private void checkOverflowExceptionWithoutResetMemory(String buttons) {
+        clickOn(getButtonBySelector(CLEAR_ALL_ID));
+        checkTypedWithoutResetMemory(buttons, OVERFLOW_MESSAGE);
+        checkButtonsAfterException(getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
+    }
+
+    /**
+     * Checks that required buttons are disabled or enabled after exception thrown.
+     *
+     * @param isMemoryDisabled false if memory contains something and memory buttons are enabled or true otherwise.
+     */
+    private void checkButtonsAfterException(boolean isMemoryDisabled) {
         Button[] enabledButtons = getSeveralButtonsBySelector(CLEAR_ALL_ID, CLEAR_TEXT_ID, BACKSPACE_ID,
                 ZERO_ID, ONE_ID, TWO_ID, THREE_ID, FOUR_ID, FIVE_ID, SIX_ID, SEVEN_ID, EIGHT_ID, NINE_ID, EQUALS_ID);
-        Button[] disabledButtons = getSeveralButtonsBySelector(MEMORY_SHOW_ID, MEMORY_CLEAR_ID, MEMORY_RECALL_ID,
+        Button[] disabledButtons = getSeveralButtonsBySelector(MEMORY_CLEAR_ID, MEMORY_RECALL_ID,
                 MEMORY_ADD_ID, MEMORY_SUBTRACT_ID, MEMORY_STORE_ID, PERCENT_ID, SQRT_ID, SQR_ID, INVERSE_ID, DIVIDE_ID,
                 MULTIPLY_ID, SUBTRACT_ID, ADD_ID, NEGATE_ID, DOT_ID);
 
@@ -1342,5 +1491,7 @@ public class ControllerTest extends RobotControl {
         for (Button button : disabledButtons) {
             assertTrue(button.isDisabled());
         }
+
+        assertEquals(isMemoryDisabled, getButtonBySelector(MEMORY_SHOW_ID).isDisabled());
     }
 }
