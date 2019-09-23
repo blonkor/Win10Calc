@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Added validation in">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Calculation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/util/OverflowValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/util/OverflowValidation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/model/CalculationModelTest.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -193,34 +187,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00155" summary="Bug fix with percentage operation in model.">
-      <created>1567882537066</created>
-      <option name="number" value="00155" />
-      <option name="presentableId" value="LOCAL-00155" />
-      <option name="project" value="LOCAL" />
-      <updated>1567882537066</updated>
-    </task>
-    <task id="LOCAL-00156" summary="Refactoring unary operations in controller.">
-      <created>1567889097391</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
-      <option name="project" value="LOCAL" />
-      <updated>1567889097391</updated>
-    </task>
-    <task id="LOCAL-00157" summary="Refactoring percentage operation in controller.">
-      <created>1567890284451</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1567890284451</updated>
-    </task>
-    <task id="LOCAL-00158" summary="Refactoring controller.">
-      <created>1567890869819</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1567890869819</updated>
     </task>
     <task id="LOCAL-00159" summary="Refactoring ViewFormatter (this class is deleted) and controller (assigned to ViewFormatter methods).">
       <created>1567980464760</created>
@@ -537,7 +503,35 @@
       <option name="project" value="LOCAL" />
       <updated>1569250184315</updated>
     </task>
-    <option name="localTasksCounter" value="204" />
+    <task id="LOCAL-00204" summary="Overflow validation refactored.">
+      <created>1569250503454</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1569250503454</updated>
+    </task>
+    <task id="LOCAL-00205" summary="Overflow validation is util class now.">
+      <created>1569250638109</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1569250638109</updated>
+    </task>
+    <task id="LOCAL-00206" summary="Refactoring tests for model.">
+      <created>1569250677794</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1569250677794</updated>
+    </task>
+    <task id="LOCAL-00207" summary="Boundary tests for controller created. Minor refactoring for controller tests.">
+      <created>1569250751736</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1569250751736</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -571,10 +565,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Bug fix with using result of model in next operations." />
-    <MESSAGE value="Speed of tests for controller optimized." />
-    <MESSAGE value="Bug fix with equation text after several unary or percentage operations." />
-    <MESSAGE value="Refactoring controller tests." />
     <MESSAGE value="Bug fix in controller with divide symbol in equation text." />
     <MESSAGE value="Bug fix with equation text after percent operation after equals while binary operation is set." />
     <MESSAGE value="Created animation for moving navigation bar." />
@@ -596,7 +586,11 @@
     <MESSAGE value="Tests for model refactored." />
     <MESSAGE value="Several boundary test cases created." />
     <MESSAGE value="Overflow validation is utility class now." />
-    <option name="LAST_COMMIT_MESSAGE" value="Overflow validation is utility class now." />
+    <MESSAGE value="Overflow validation refactored." />
+    <MESSAGE value="Overflow validation is util class now." />
+    <MESSAGE value="Refactoring tests for model." />
+    <MESSAGE value="Boundary tests for controller created. Minor refactoring for controller tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Boundary tests for controller created. Minor refactoring for controller tests." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

@@ -156,6 +156,11 @@ public class Controller implements Initializable {
      */
     private boolean isError = false;
 
+    /**
+     * True if recall from memory button was just pressed.
+     */
+    private boolean isRecalledFromMemory = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //no initializing is needed
@@ -303,7 +308,15 @@ public class Controller implements Initializable {
      * Saves number in memory.
      */
     public void memoryStoreOperation() {
-        BigDecimal number = screenToBigDecimal(screen.getText());
+        BigDecimal number;
+        if (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed) {
+            number = calculation.getResult();
+        } else if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
+
         memory.storeToMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
@@ -344,13 +357,31 @@ public class Controller implements Initializable {
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
+
+        if (isUnaryOrPercentPressed) {
+            equation.setText(EMPTY_STRING);
+        }
+
+        if (isEqualsPressed || isUnaryOrPercentPressed) {
+            isFirstSet = false;
+        }
+
+        setFlags(false, false, false,
+                false, isFirstSet, false, true);
     }
 
     /**
      * Adds number to memory.
      */
     public void memoryAddOperation() {
-        BigDecimal number = screenToBigDecimal(screen.getText());
+        BigDecimal number;
+
+        if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
+
         memory.addToMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
@@ -361,7 +392,14 @@ public class Controller implements Initializable {
      * Subtracts number from memory.
      */
     public void memorySubtractOperation() {
-        BigDecimal number = screenToBigDecimal(screen.getText());
+        BigDecimal number;
+
+        if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
+
         memory.subtractFromMemory(number);
         setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
@@ -399,7 +437,7 @@ public class Controller implements Initializable {
         }
 
         setFlags(true, false, false,
-                false, isFirstSet, false);
+                false, isFirstSet, false, false);
     }
 
     /**
@@ -426,7 +464,7 @@ public class Controller implements Initializable {
         }
 
         setFlags(true, false, false,
-                false, isFirstSet, false);
+                false, isFirstSet, false, false);
     }
 
     /**
@@ -454,7 +492,7 @@ public class Controller implements Initializable {
         screen.setText(ZERO);
 
         setFlags(true, false, false,
-                false, isFirstSet, false);
+                false, isFirstSet, false, false);
     }
 
     /**
@@ -470,7 +508,7 @@ public class Controller implements Initializable {
         equation.setText(EMPTY_STRING);
 
         setFlags(true, false, false,
-                false, false, false);
+                false, false, false, false);
     }
 
     /**
@@ -571,6 +609,7 @@ public class Controller implements Initializable {
 
     /**
      * Converts boolean to int with sign.
+     *
      * @param flag boolean value to convert.
      * @return 1 if flag is true or -1 otherwise.
      */
@@ -635,7 +674,7 @@ public class Controller implements Initializable {
 
             for (int i = 0; i < store.size(); i++) {
                 Label label = new Label();
-                label.setText(store.elementAt(store.size() - i - 1).toString());
+                label.setText(formatNumber(store.elementAt(store.size() - i - 1)));
                 configureMemoryLabel(label, layoutY);
 
                 memoryPanel.getChildren().add(label);
@@ -736,7 +775,13 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number = screenToBigDecimal(screen.getText());
+            BigDecimal number;
+
+            if (isRecalledFromMemory) {
+                number = memory.recall();
+            } else {
+                number = screenToBigDecimal(screen.getText());
+            }
 
             if (!isFirstSet) {
                 equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE + operation.symbol;
@@ -763,7 +808,7 @@ public class Controller implements Initializable {
             }
 
             setFlags(false, true, false,
-                    false, true, false);
+                    false, true, false, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         } finally {
@@ -831,7 +876,7 @@ public class Controller implements Initializable {
         equation.setText(StringUtils.chop(equation.getText()) + operation.symbol);
 
         setFlags(false, true, false,
-                false, true, false);
+                false, true, false, false);
     }
 
     /**
@@ -858,7 +903,13 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number = screenToBigDecimal(screen.getText());
+            BigDecimal number;
+
+            if (isRecalledFromMemory) {
+                number = memory.recall();
+            } else {
+                number = screenToBigDecimal(screen.getText());
+            }
 
             if (!isFirstSet) {
                 equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
@@ -878,7 +929,7 @@ public class Controller implements Initializable {
             }
 
             setFlags(false, false, true,
-                    false, true, false);
+                    false, true, false, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         } finally {
@@ -935,7 +986,6 @@ public class Controller implements Initializable {
      */
     private String setEquationAfterSeveralUnaryOrPercentage(UnaryOperation operation) {
         String equationTextToSet = equation.getText();
-
 
         String textBefore = EMPTY_STRING;
         String textAfter = equationTextToSet;
@@ -1078,7 +1128,7 @@ public class Controller implements Initializable {
                 }
 
                 setFlags(false, false, true,
-                        false, true, false);
+                        false, true, false, false);
             } catch (Exception e) {
                 exceptionThrown(e.getMessage());
             } finally {
@@ -1095,7 +1145,7 @@ public class Controller implements Initializable {
         equation.setText(ZERO);
 
         setFlags(false, false, true,
-                false, true, false);
+                false, true, false, false);
     }
 
     /**
@@ -1103,7 +1153,14 @@ public class Controller implements Initializable {
      * {@link Calculation}. Then sets received result as second nu,ber and shows it in screen {@code Label}.
      */
     private void percentageWithBinary() {
-        BigDecimal number = screenToBigDecimal(screen.getText());
+        BigDecimal number;
+
+        if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
+
         calculation.setSecond(number);
         calculation.calculatePercentage();
         calculation.setSecond(calculation.getResult());
@@ -1153,7 +1210,7 @@ public class Controller implements Initializable {
             equation.setText(EMPTY_STRING);
 
             setFlags(false, false, false,
-                    true, isBinarySet, false);
+                    true, isBinarySet, false, false);
         } catch (Exception e) {
             exceptionThrown(e.getMessage());
         }
@@ -1168,7 +1225,13 @@ public class Controller implements Initializable {
      * Sets result to screen {@code Label}.
      */
     private void calculateResultForBinaryNotNull() {
-        BigDecimal number = screenToBigDecimal(screen.getText());
+        BigDecimal number;
+
+        if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
 
         if (!isEqualsPressed && !isUnaryOrPercentPressed) {
             calculateResultNotAfterEqualsOrUnaryOrPercentage(number);
@@ -1232,7 +1295,7 @@ public class Controller implements Initializable {
         setButtonsDisability(true, buttonsToDisable);
 
         setFlags(false, false, false,
-                false, false, true);
+                false, false, true, false);
     }
 
     /**
@@ -1279,16 +1342,18 @@ public class Controller implements Initializable {
      * @param isEqualsPressed                  true if equals was just pressed.
      * @param isFirstSet                       true if first operand for model is set.
      * @param isError                          true if is error was just happened.
+     * @param isRecalledFromMemory             true if recall from memory button was just pressed.
      */
     private void setFlags(boolean isEditableScreen, boolean isBinaryOperationPressed,
                           boolean isUnaryOrPercentOperationPressed, boolean isEqualsPressed, boolean isFirstSet,
-                          boolean isError) {
+                          boolean isError, boolean isRecalledFromMemory) {
         this.isEditableScreen = isEditableScreen;
         this.isBinaryOperationPressed = isBinaryOperationPressed;
         this.isUnaryOrPercentPressed = isUnaryOrPercentOperationPressed;
         this.isEqualsPressed = isEqualsPressed;
         this.isFirstSet = isFirstSet;
         this.isError = isError;
+        this.isRecalledFromMemory = isRecalledFromMemory;
     }
 
     /**
