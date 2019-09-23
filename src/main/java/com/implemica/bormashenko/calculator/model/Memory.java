@@ -1,6 +1,7 @@
 package com.implemica.bormashenko.calculator.model;
 
 import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
+import com.implemica.bormashenko.calculator.model.util.OverflowValidation;
 
 import java.math.BigDecimal;
 import java.util.Stack;
@@ -51,7 +52,7 @@ public class Memory {
         } else {
             BigDecimal recalledValue = store.peek();
 
-            if (new Calculation().overflowValidationFailed(recalledValue, false)) {
+            if (OverflowValidation.overflowValidationFailed(recalledValue, false, BigDecimal.ZERO)) {
                 throw new OverflowException();
             }
 
