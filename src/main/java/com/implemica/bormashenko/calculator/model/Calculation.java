@@ -3,6 +3,7 @@ package com.implemica.bormashenko.calculator.model;
 import com.implemica.bormashenko.calculator.model.enums.BinaryOperation;
 import com.implemica.bormashenko.calculator.model.enums.UnaryOperation;
 import com.implemica.bormashenko.calculator.model.exceptions.OverflowException;
+import com.implemica.bormashenko.calculator.model.util.OverflowValidation;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -46,22 +47,8 @@ public class Calculation {
     private static final MathContext SQRT_CONTEXT = MathContext.DECIMAL64;
 
     /**
-     * Bound for maximal value.
-     * <p>
-     * If this bound reached, {@link OverflowException} should be thrown.
-     */
-    private static final BigDecimal MAX_INTEGER_VALUE = new BigDecimal("1.e+10000");
-
-    /**
-     * Bound for minimal value.
-     * <p>
-     * If this bound reached, {@link OverflowException} should be thrown.
-     */
-    private static final BigDecimal MIN_DECIMAL_VALUE = new BigDecimal("1.e-10000");
-
-    /**
      * Max possible scale for number.
-     *
+     * <p>
      * If scale is bigger, {@link OverflowException} should be thrown.
      */
     private static final int MAX_SCALE = 9999;
@@ -152,7 +139,8 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(result, binaryOperation == BinaryOperation.DIVIDE)) {
+        if (OverflowValidation.overflowValidationFailed(result, binaryOperation == BinaryOperation.DIVIDE,
+                first)) {
             throw new OverflowException();
         }
     }
@@ -176,7 +164,7 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(result, false)) {
+        if (OverflowValidation.overflowValidationFailed(result, false, first)) {
             throw new OverflowException();
         }
     }
@@ -199,24 +187,9 @@ public class Calculation {
 
         result = result.stripTrailingZeros();
 
-        if (overflowValidationFailed(result, false)) {
+        if (OverflowValidation.overflowValidationFailed(result, false, first)) {
             throw new OverflowException();
         }
-    }
-
-    /**
-     * Checks that number in range ({@code MAX_INTEGER_VALUE}, {@code MAX_INTEGER_VALUE}).
-     *
-     * @param value big decimal value to check.
-     * @return true if validation failed or false otherwise.
-     */
-    boolean overflowValidationFailed(BigDecimal value, boolean divide) {
-        if (divide && !first.equals(BigDecimal.ZERO) && value.equals(BigDecimal.ZERO)) {
-            return true;
-        }
-
-        return value.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (value.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && !value.equals(BigDecimal.ZERO));
     }
 
     /**
