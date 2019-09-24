@@ -24,21 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerTest extends RobotControl {
 
     /**
-     * Keypad button for firing clear all {@code Button}.
-     */
-    private static final String KEY_C = "esc";
-
-    /**
-     * Keypad button for firing clear text {@code Button}.
-     */
-    private static final String KEY_CE = "del";
-
-    /**
-     * Keypad combination for firing memory store {@code Button}.
-     */
-    private static final String KEY_MS = "ctrl+M";
-
-    /**
      * Keypad combination for firing memory clear {@code Button}.
      */
     private static final String KEY_MC = "ctrl+L";
@@ -265,7 +250,7 @@ public class ControllerTest extends RobotControl {
     public void memoryStoreTest() {
         resetAll();
 
-        pressKeyboard(KEY_MS);
+        pressKeyboard("MS");
 
         assertFalse(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertFalse(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
@@ -284,7 +269,7 @@ public class ControllerTest extends RobotControl {
         int memoryLabelsFontSize = 24;
         Insets memoryLabelInsets = new Insets(0, 15, 0, 15);
 
-        pressKeyboard("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS);
+        pressKeyboard("1 MS 2 MS 3 MS");
         clickOn(getButtonBySelector(MEMORY_SHOW_ID));
         int numberOfLabels = 3;
 
@@ -340,7 +325,7 @@ public class ControllerTest extends RobotControl {
     public void memoryClearTest() {
         resetAll();
 
-        pressKeyboard("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_MC);
+        pressKeyboard("1 MS 2 MS 3 MS" + KEY_MC);
 
         assertTrue(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertTrue(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
@@ -352,9 +337,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memoryRecallTests() {
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_MR, "3");
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MR, "2");
-        checkTyped(KEY_MS + "100" + KEY_MR, "0");
+        checkTyped("1 MS 2 MS 3 MS" + KEY_MR, "3");
+        checkTyped("1 MS 2 MS 3" + KEY_MR, "2");
+        checkTyped("MS 100" + KEY_MR, "0");
     }
 
     /**
@@ -362,9 +347,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memoryAddTests() {
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_M_ADD + KEY_MR, "6");
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_M_ADD + KEY_MR, "5");
-        checkTyped(KEY_MS + "1 0 0 " + KEY_ADD + KEY_M_ADD + KEY_MR, "100");
+        checkTyped("1 MS 2 MS 3 MS" + KEY_M_ADD + KEY_MR, "6");
+        checkTyped("1 MS 2 MS 3" + KEY_M_ADD + KEY_MR, "5");
+        checkTyped(" MS 1 0 0 " + KEY_ADD + KEY_M_ADD + KEY_MR, "100");
 
         checkTyped("8" + KEY_M_ADD + KEY_MR, "8");
         checkTyped("1" + KEY_NEG + "28" + KEY_M_ADD + KEY_MR, "-128");
@@ -375,9 +360,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memorySubtractTests() {
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_M_SUBTRACT + KEY_MR, "0");
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_M_SUBTRACT + KEY_MR, "-1");
-        checkTyped(KEY_MS + "1 0 0 " + KEY_ADD + KEY_M_SUBTRACT + KEY_MR, "-100");
+        checkTyped("1 MS 2 MS 3 MS" + KEY_M_SUBTRACT + KEY_MR, "0");
+        checkTyped("1 MS 2 MS 3" + KEY_M_SUBTRACT + KEY_MR, "-1");
+        checkTyped("MS 1 0 0 " + KEY_ADD + KEY_M_SUBTRACT + KEY_MR, "-100");
 
         checkTyped("8" + KEY_M_SUBTRACT + KEY_MR, "-8");
         checkTyped("1" + KEY_NEG + "28" + KEY_M_SUBTRACT + KEY_MR, "128");
@@ -638,13 +623,13 @@ public class ControllerTest extends RobotControl {
         //after error
         resetAll();
         pressKeyboard("/0=");
-        pressKeyboard(KEY_CE);
+        pressKeyboard("del");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
 
         resetAll();
         pressKeyboard("/0=");
-        pressKeyboard(KEY_C);
+        pressKeyboard("esc");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
@@ -1301,20 +1286,19 @@ public class ControllerTest extends RobotControl {
 
         //string for calculating number 999999999999999949999.....9.9999...9.8
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
-        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1===============" +
-                KEY_MS + "/5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
-                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1=" + KEY_MS + "esc" + oneDotEPlusFourNines + KEY_MULTIPLY +
+        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1=============== MS /5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
+                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1= MS esc" + oneDotEPlusFourNines + KEY_MULTIPLY +
                 "9" + KEY_ADD + KEY_MR + "=";
 
         //max numbers
         //right
-        checkTyped(boundaryNumber + KEY_MS + "esc" + theSmallestNumber + KEY_ADD + KEY_MR + "=",
+        checkTyped(boundaryNumber + " MS esc" + theSmallestNumber + KEY_ADD + KEY_MR + "=",
                 "9.999999999999999e+9999");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "=" + KEY_ADD + KEY_MR + "=");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "==" + KEY_ADD + KEY_MR + "=");
 
         //left
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "esc" + theSmallestNumber + KEY_MULTIPLY +
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + " MS esc" + theSmallestNumber + KEY_MULTIPLY +
                 "-1" + KEY_ADD + KEY_MR,"-9.999999999999999e+9999");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_MULTIPLY + "-1" + KEY_ADD + "=" +
                 KEY_ADD + KEY_MR + "=");
@@ -1322,7 +1306,7 @@ public class ControllerTest extends RobotControl {
                 KEY_ADD + KEY_MR + "=");
 
         //min numbers
-        checkTyped(theSmallestNumber + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
+        checkTyped(theSmallestNumber + "MS" + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
                 "1.e-9999");
 
         checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=",
@@ -1389,14 +1373,14 @@ public class ControllerTest extends RobotControl {
 
         pressKeyboard(keys);
         String expectedEquationText = equationLabel.getText();
-        pressKeyboard(KEY_CE);
+        pressKeyboard("del");
 
         assertEquals("0", screenLabel.getText());
         assertEquals(expectedEquationText, equationLabel.getText());
 
         resetAll();
         pressKeyboard(keys);
-        pressKeyboard(KEY_C);
+        pressKeyboard("esc");
 
         assertEquals("0", screenLabel.getText());
         assertEquals("", equationLabel.getText());
