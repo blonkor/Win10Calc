@@ -681,7 +681,7 @@ public class RobotControl extends GuiTest {
                 mainKey = KeyEvent.VK_DELETE;
             } else if (code.equals("esc")) {
                 mainKey = KeyEvent.VK_ESCAPE;
-            } else if (code.equals("^")) {
+            } else if (code.equals("²")) {
                 clickOn(getNodeBySelector(SQR_ID));
             } else {
                 throw new IllegalArgumentException("Expected: string with correct keypad representation only. \n" +
@@ -708,7 +708,7 @@ public class RobotControl extends GuiTest {
      * Clicks on reset all {@code Button}.
      */
     protected void resetAll() {
-        pressKeyboard("esc ctrl+L");
+        pressKeyboard("esc MC");
     }
 
     /**
@@ -834,7 +834,20 @@ public class RobotControl extends GuiTest {
      * @return edited string.
      */
     private String replaceSymbolsToKeyCodes(String text) {
-        text = text.replaceAll("MS", "ctrl+M");
+        text = text.replaceAll("MS", "ctrlPlusM");
+        text = text.replaceAll("MC", "ctrlPlusL");
+        text = text.replaceAll("MR", "ctrlPlusR");
+        text = text.replaceAll("M_Add", "ctrlPlusP");
+        text = text.replaceAll("M_Subtract", "ctrlPlusQ");
+        text = text.replaceAll("\\+", "shift+=");
+        text = text.replaceAll("\\*", "shift+8");
+        text = text.replaceAll("neg", "F9");
+        text = text.replaceAll("1/x", "R");
+        text = text.replaceAll("√", "shift+2");
+        text = text.replaceAll("%", "shift+5");
+
+        text = text.replaceAll("ctrlPlus", "ctrl+");
+
         return text;
     }
 
@@ -867,7 +880,7 @@ public class RobotControl extends GuiTest {
         text = text.replaceAll("enter", " enter ");
         text = text.replaceAll("del", " del ");
         text = text.replaceAll("esc", " esc ");
-        text = text.replaceAll("^", " ^ ");
+        text = text.replaceAll("²", " ² ");
 
         text = text.replaceAll("ctrl\\+M", " ctrl+M ");
         text = text.replaceAll("ctrl\\+P", " ctrl+P ");
