@@ -363,7 +363,7 @@ public class Controller implements Initializable {
             showNumberOnScreen(formatNumber(number), false);
 
             isEditableScreen = false;
-        } catch (Exception e) {
+        } catch (OverflowException e) {
             exceptionThrown(e.getMessage());
         }
 
@@ -826,7 +826,7 @@ public class Controller implements Initializable {
 
             setFlags(false, true, false,
                     false, true, false, false);
-        } catch (Exception e) {
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException e) {
             exceptionThrown(e.getMessage());
         } finally {
             equation.setText(equationTextToSet);
@@ -952,7 +952,7 @@ public class Controller implements Initializable {
 
             setFlags(false, false, true,
                     false, true, false, false);
-        } catch (Exception e) {
+        } catch (OverflowException | NegativeRootException | DivideByZeroException e) {
             exceptionThrown(e.getMessage());
         } finally {
             equation.setText(equationTextToSet);
@@ -1163,7 +1163,7 @@ public class Controller implements Initializable {
 
                 setFlags(false, false, true,
                         false, true, false, false);
-            } catch (Exception e) {
+            } catch (OverflowException e) {
                 exceptionThrown(e.getMessage());
             } finally {
                 equation.setText(equationTextToSet);
@@ -1247,7 +1247,7 @@ public class Controller implements Initializable {
 
             setFlags(false, false, false,
                     true, isBinarySet, false, false);
-        } catch (Exception e) {
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException e) {
             exceptionThrown(e.getMessage());
         }
     }

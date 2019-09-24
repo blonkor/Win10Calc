@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/model/DemoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/model/DemoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -186,13 +186,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00166" summary="Tests for memory recall operation in controller created.">
-      <created>1568031397407</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1568031397407</updated>
     </task>
     <task id="LOCAL-00167" summary="Tests for memory add and subtract operations in controller created.">
       <created>1568031923635</created>
@@ -530,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569364709563</updated>
     </task>
-    <option name="localTasksCounter" value="215" />
+    <task id="LOCAL-00215" summary="Demo test case for model for exception created.">
+      <created>1569365327975</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1569365327975</updated>
+    </task>
+    <option name="localTasksCounter" value="216" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -564,7 +564,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Stylesheets updated." />
     <MESSAGE value="View tests updated." />
     <MESSAGE value="Controller tests updated." />
     <MESSAGE value="Demo test case moved to another class." />
@@ -589,7 +588,8 @@
     <MESSAGE value="Invalid input test case added." />
     <MESSAGE value="Refactoring tests for controller." />
     <MESSAGE value="Changing model's exceptions' logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing model's exceptions' logic." />
+    <MESSAGE value="Demo test case for model for exception created." />
+    <option name="LAST_COMMIT_MESSAGE" value="Demo test case for model for exception created." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
