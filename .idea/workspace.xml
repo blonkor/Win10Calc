@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/util/OverflowValidation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/util/OverflowValidation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/ControllerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="" />
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -193,27 +187,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00162" summary="Tests for change sign operation created.">
-      <created>1568026817014</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1568026817014</updated>
-    </task>
-    <task id="LOCAL-00163" summary="Tests for format without group separator operation created.">
-      <created>1568027009899</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1568027009899</updated>
-    </task>
-    <task id="LOCAL-00164" summary="Tests for memory show operation in controller created.">
-      <created>1568030135027</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1568030135027</updated>
     </task>
     <task id="LOCAL-00165" summary="Tests for memory clear operation in controller created.">
       <created>1568030935406</created>
@@ -537,7 +510,28 @@
       <option name="project" value="LOCAL" />
       <updated>1569251591753</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="Refactoring overflow validation.">
+      <created>1569282481270</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1569282481271</updated>
+    </task>
+    <task id="LOCAL-00212" summary="Todo item removed.">
+      <created>1569282525084</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1569282525085</updated>
+    </task>
+    <task id="LOCAL-00213" summary="Updating boundary tests for controller.">
+      <created>1569282571995</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1569282571995</updated>
+    </task>
+    <option name="localTasksCounter" value="214" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -571,9 +565,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Created animation for moving navigation bar." />
-    <MESSAGE value="Refactoring controller and view for navigation panel." />
-    <MESSAGE value="Bug fix with showing about panel." />
     <MESSAGE value="Font resize listener updated for buttons and refactored." />
     <MESSAGE value="Stylesheets updated." />
     <MESSAGE value="View tests updated." />
@@ -596,7 +587,10 @@
     <MESSAGE value="Bug fixes in controller with stored and returned from memory value." />
     <MESSAGE value="Bug fix with rounded number in controller that does not cause overflow exception." />
     <MESSAGE value="Overflow validation is utility class now." />
-    <option name="LAST_COMMIT_MESSAGE" value="Overflow validation is utility class now." />
+    <MESSAGE value="Refactoring overflow validation." />
+    <MESSAGE value="Todo item removed." />
+    <MESSAGE value="Updating boundary tests for controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating boundary tests for controller." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
