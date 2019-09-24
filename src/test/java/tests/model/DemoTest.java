@@ -22,6 +22,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 class DemoTest {
 
     /**
+     * Message for divide by zero exception.
+     */
+    private static final String DIVIDE_BY_ZERO_MESSAGE = "Cannot divide by zero";
+
+    /**
      * Object of {@link Calculation}.
      */
     private static Calculation calculation;
@@ -91,5 +96,60 @@ class DemoTest {
         assertEquals(new BigDecimal("10.8"), calculation.getResult());
 
         System.out.println(calculation.getResult());
+    }
+
+    /**
+     * Demo test case to show how is {@link Calculation} works.
+     * <p>
+     * The demo equation is: ((5 + 3) * 7 - 2) / 0.
+     */
+    @Test
+    void demoCaseForExceptions() {
+        //calculate (5 + 3)
+        calculation.setFirst(new BigDecimal("5"));
+        calculation.setSecond(new BigDecimal("3"));
+        calculation.setBinaryOperation(ADD);
+
+        try {
+            calculation.calculateBinary();
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException e) {
+            fail();
+        }
+
+        //then multiply previous result on 7
+        calculation.setFirst(calculation.getResult());
+        calculation.setSecond(new BigDecimal("7"));
+        calculation.setBinaryOperation(MULTIPLY);
+
+        try {
+            calculation.calculateBinary();
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException e) {
+            fail();
+        }
+
+        //then subtract 2 from previous result
+        calculation.setFirst(calculation.getResult());
+        calculation.setSecond(new BigDecimal("2"));
+        calculation.setBinaryOperation(SUBTRACT);
+
+        try {
+            calculation.calculateBinary();
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException e) {
+            fail();
+        }
+
+        //then divide previous result by 5
+        calculation.setFirst(calculation.getResult());
+        calculation.setSecond(new BigDecimal("0"));
+        calculation.setBinaryOperation(DIVIDE);
+
+        try {
+            calculation.calculateBinary();
+        } catch (OverflowException | DivideZeroByZeroException e) {
+            fail();
+        } catch (DivideByZeroException e) {
+            assertEquals(DIVIDE_BY_ZERO_MESSAGE, e.getMessage());
+            System.out.println(e.getMessage());
+        }
     }
 }
