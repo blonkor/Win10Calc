@@ -1275,6 +1275,7 @@ public class ControllerTest extends RobotControl {
                 "===============================================/10===" + KEY_MULTIPLY + KEY_PERCENT, OVERFLOW_MESSAGE);
 
         //invalid input
+        checkException("1" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
         checkException("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
 
         //divide by zero
