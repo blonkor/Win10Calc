@@ -296,12 +296,21 @@ class MemoryModelTest {
     @Test
     void recallFromEmptyMemory() {
         memory = new Memory();
-        assertNull(memory.recall());
+
+        try {
+            assertNull(memory.recall());
+        } catch (OverflowException e) {
+            fail();
+        }
 
         memory.addToMemory(newBD("545"));
         memory.clearMemory();
 
-        assertNull(memory.recall());
+        try {
+            assertNull(memory.recall());
+        } catch (OverflowException e) {
+            fail();
+        }
     }
 
     /**
@@ -424,7 +433,11 @@ class MemoryModelTest {
      *                              object should be returned while recall operation is performed.
      */
     private void checkRecall(BigDecimal expectedRecalledValue) {
-        assertEquals(expectedRecalledValue, memory.recall());
+        try {
+            assertEquals(expectedRecalledValue, memory.recall());
+        } catch (OverflowException e) {
+            fail();
+        }
     }
 
     /**
