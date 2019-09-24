@@ -59,7 +59,7 @@ class DemoTest {
 
         //then divide previous result by 5
         calculation.setFirst(calculation.getResult());
-        calculation.setSecond(new BigDecimal("5"));
+        calculation.setSecond(new BigDecimal("0"));
         calculation.setBinaryOperation(DIVIDE);
         calculation.calculateBinary();
 

@@ -680,7 +680,7 @@ public class RobotControl extends GuiTest {
                 mainKey = KeyEvent.VK_DELETE;
             } else if (code.equals("esc")) {
                 mainKey = KeyEvent.VK_ESCAPE;
-            } else if (code.equals("sqr")) {
+            } else if (code.equals("^")) {
                 clickOn(getNodeBySelector(SQR_ID));
             } else {
                 throw new IllegalArgumentException("Expected: string with correct keypad representation only. \n" +
@@ -855,7 +855,7 @@ public class RobotControl extends GuiTest {
         text = text.replaceAll("enter", " enter ");
         text = text.replaceAll("del", " del ");
         text = text.replaceAll("esc", " esc ");
-        text = text.replaceAll("sqr", " sqr ");
+        text = text.replaceAll("^", " ^ ");
 
         text = text.replaceAll("ctrl\\+M", " ctrl+M ");
         text = text.replaceAll("ctrl\\+P", " ctrl+P ");
