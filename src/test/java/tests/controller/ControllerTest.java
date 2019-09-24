@@ -164,8 +164,6 @@ public class ControllerTest extends RobotControl {
         boundaryTests();
     }
 
-    //@todo tests for mouse
-
     /**
      * Tests for showing navigation panel.
      */
@@ -1271,8 +1269,8 @@ public class ControllerTest extends RobotControl {
 
         //percentage
         checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
-                        "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + KEY_PERCENT,
-                OVERFLOW_MESSAGE);
+                        "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD +
+                        KEY_PERCENT, OVERFLOW_MESSAGE);
         checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.000000000000001=====" +
                 "===============================================/10===" + KEY_MULTIPLY + KEY_PERCENT, OVERFLOW_MESSAGE);
 
@@ -1292,12 +1290,6 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void boundaryTests() {
-        //string for storing to memory number with 0 integer part
-        //and 9998 nines in decimal part (and the last one digit is 8)
-        String oneMinusTwoMinimalNumbersToMemory = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY +
-                "1000000000000000====================================================" + KEY_MULTIPLY + "10===" +
-                KEY_INVERSE + KEY_MS + "1-" + KEY_MR + "==" + KEY_MS;
-
         //string for calculating number 1.e+9999
         String oneDotEPlusFourNines = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY +
                 "10000000000" + "00000====================================================" + KEY_MULTIPLY + "10===";
@@ -1310,8 +1302,8 @@ public class ControllerTest extends RobotControl {
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
         String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1===============" +
                 KEY_MS + "/5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
-                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1=" + KEY_MS + "esc" + oneDotEPlusFourNines + KEY_MULTIPLY + "9" +
-                KEY_ADD + KEY_MR + "=";
+                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1=" + KEY_MS + "esc" + oneDotEPlusFourNines + KEY_MULTIPLY +
+                "9" + KEY_ADD + KEY_MR + "=";
 
         //max numbers
         //right
@@ -1329,52 +1321,17 @@ public class ControllerTest extends RobotControl {
                 KEY_ADD + KEY_MR + "=");
 
         //min numbers
-        //left bound
         checkTyped(theSmallestNumber + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
                 "1.e-9999");
 
-        //positive and positive
-        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=", "1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=",
+                "1.e-9999");
         checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10/10=", "1.e-9999");
 
         checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100=");
-
-        //negative and positive
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
-                "1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "1.e-9999");
-
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
-
-        //right bound
-        checkTyped(theSmallestNumber + KEY_NEG + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
-                "-1.e-9999");
-
-        //positive and negative
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
-                "-1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
-
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
-
-        //negative and negative
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
-                "-1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
-
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
     }
 
     /**
