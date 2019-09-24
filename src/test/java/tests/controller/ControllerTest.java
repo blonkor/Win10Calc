@@ -24,21 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerTest extends RobotControl {
 
     /**
-     * Keypad button for firing clear all {@code Button}.
-     */
-    private static final String KEY_C = "esc";
-
-    /**
-     * Keypad button for firing clear text {@code Button}.
-     */
-    private static final String KEY_CE = "del";
-
-    /**
-     * Keypad combination for firing memory store {@code Button}.
-     */
-    private static final String KEY_MS = "ctrl+M";
-
-    /**
      * Keypad combination for firing memory clear {@code Button}.
      */
     private static final String KEY_MC = "ctrl+L";
@@ -164,8 +149,6 @@ public class ControllerTest extends RobotControl {
         boundaryTests();
     }
 
-    //@todo tests for mouse
-
     /**
      * Tests for showing navigation panel.
      */
@@ -236,7 +219,7 @@ public class ControllerTest extends RobotControl {
         assertTrue(rightArrow.isVisible());
         assertTrue(leftArrow.isVisible());
 
-        double expectedHValueLeft = 0.56;
+        double expectedHValueLeft = 0.5;
         assertEquals(expectedHValueLeft, equationScroll.getHvalue());
 
         clickOn(leftArrow);
@@ -267,7 +250,7 @@ public class ControllerTest extends RobotControl {
     public void memoryStoreTest() {
         resetAll();
 
-        pressKeyboard(KEY_MS);
+        pressKeyboard("MS");
 
         assertFalse(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertFalse(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
@@ -286,7 +269,7 @@ public class ControllerTest extends RobotControl {
         int memoryLabelsFontSize = 24;
         Insets memoryLabelInsets = new Insets(0, 15, 0, 15);
 
-        pressKeyboard("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS);
+        pressKeyboard("1 MS 2 MS 3 MS");
         clickOn(getButtonBySelector(MEMORY_SHOW_ID));
         int numberOfLabels = 3;
 
@@ -342,7 +325,7 @@ public class ControllerTest extends RobotControl {
     public void memoryClearTest() {
         resetAll();
 
-        pressKeyboard("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_MC);
+        pressKeyboard("1 MS 2 MS 3 MS" + KEY_MC);
 
         assertTrue(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertTrue(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
@@ -354,9 +337,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memoryRecallTests() {
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_MR, "3");
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MR, "2");
-        checkTyped(KEY_MS + "100" + KEY_MR, "0");
+        checkTyped("1 MS 2 MS 3 MS" + KEY_MR, "3");
+        checkTyped("1 MS 2 MS 3" + KEY_MR, "2");
+        checkTyped("MS 100" + KEY_MR, "0");
     }
 
     /**
@@ -364,9 +347,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memoryAddTests() {
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_M_ADD + KEY_MR, "6");
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_M_ADD + KEY_MR, "5");
-        checkTyped(KEY_MS + "1 0 0 " + KEY_ADD + KEY_M_ADD + KEY_MR, "100");
+        checkTyped("1 MS 2 MS 3 MS" + KEY_M_ADD + KEY_MR, "6");
+        checkTyped("1 MS 2 MS 3" + KEY_M_ADD + KEY_MR, "5");
+        checkTyped(" MS 1 0 0 " + KEY_ADD + KEY_M_ADD + KEY_MR, "100");
 
         checkTyped("8" + KEY_M_ADD + KEY_MR, "8");
         checkTyped("1" + KEY_NEG + "28" + KEY_M_ADD + KEY_MR, "-128");
@@ -377,9 +360,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memorySubtractTests() {
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_MS + KEY_M_SUBTRACT + KEY_MR, "0");
-        checkTyped("1" + KEY_MS + "2" + KEY_MS + "3" + KEY_M_SUBTRACT + KEY_MR, "-1");
-        checkTyped(KEY_MS + "1 0 0 " + KEY_ADD + KEY_M_SUBTRACT + KEY_MR, "-100");
+        checkTyped("1 MS 2 MS 3 MS" + KEY_M_SUBTRACT + KEY_MR, "0");
+        checkTyped("1 MS 2 MS 3" + KEY_M_SUBTRACT + KEY_MR, "-1");
+        checkTyped("MS 1 0 0 " + KEY_ADD + KEY_M_SUBTRACT + KEY_MR, "-100");
 
         checkTyped("8" + KEY_M_SUBTRACT + KEY_MR, "-8");
         checkTyped("1" + KEY_NEG + "28" + KEY_M_SUBTRACT + KEY_MR, "128");
@@ -640,13 +623,13 @@ public class ControllerTest extends RobotControl {
         //after error
         resetAll();
         pressKeyboard("/0=");
-        pressKeyboard(KEY_CE);
+        pressKeyboard("del");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
 
         resetAll();
         pressKeyboard("/0=");
-        pressKeyboard(KEY_C);
+        pressKeyboard("esc");
         assertEquals("0", getLabeledBySelector(SCREEN_LABEL_ID).getText());
         assertEquals("", getLabeledBySelector(EQUATION_LABEL_ID).getText());
     }
@@ -678,7 +661,7 @@ public class ControllerTest extends RobotControl {
                 "-98791480 +");
 
         //after another unary
-        checkTyped("8 sqr" + KEY_ADD, "64", "sqr( 8 ) +");
+        checkTyped("8^" + KEY_ADD, "64", "sqr( 8 ) +");
         checkTyped("3600000000" + KEY_SQRT + KEY_ADD, "60,000",
                 "√( 3600000000 ) +");
         checkTyped("1" + KEY_INVERSE + KEY_ADD, "1", "1/( 1 ) +");
@@ -739,7 +722,7 @@ public class ControllerTest extends RobotControl {
                 "-98791480 -");
 
         //after another unary
-        checkTyped("8 sqr -", "64", "sqr( 8 ) -");
+        checkTyped("8^-", "64", "sqr( 8 ) -");
         checkTyped("3600000000" + KEY_SQRT + "-", "60,000",
                 "√( 3600000000 ) -");
         checkTyped("1" + KEY_INVERSE + "-", "1", "1/( 1 ) -");
@@ -801,7 +784,7 @@ public class ControllerTest extends RobotControl {
                 "-98791480 ×");
 
         //after another unary
-        checkTyped("8 sqr" + KEY_MULTIPLY, "64", "sqr( 8 ) ×");
+        checkTyped("8^" + KEY_MULTIPLY, "64", "sqr( 8 ) ×");
         checkTyped("3600000000" + KEY_SQRT + KEY_MULTIPLY, "60,000",
                 "√( 3600000000 ) ×");
         checkTyped("1" + KEY_INVERSE + KEY_MULTIPLY, "1", "1/( 1 ) ×");
@@ -862,7 +845,7 @@ public class ControllerTest extends RobotControl {
                 "-98791480 ÷");
 
         //after another unary
-        checkTyped("8 sqr /", "64", "sqr( 8 ) ÷");
+        checkTyped("8^/", "64", "sqr( 8 ) ÷");
         checkTyped("3600000000" + KEY_SQRT + "/", "60,000",
                 "√( 3600000000 ) ÷");
         checkTyped("1" + KEY_INVERSE + "/", "1", "1/( 1 ) ÷");
@@ -930,7 +913,7 @@ public class ControllerTest extends RobotControl {
                 "");
 
         //after another unary
-        checkTyped("8 sqr" + KEY_NEG, "-64", "negate( sqr( 8 ) )");
+        checkTyped("8^" + KEY_NEG, "-64", "negate( sqr( 8 ) )");
         checkTyped("49" + KEY_SQRT + KEY_NEG, "-7", "negate( √( 49 ) )");
         checkTyped("1" + KEY_INVERSE + KEY_NEG, "-1", "negate( 1/( 1 ) )");
 
@@ -955,7 +938,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("856-30" + KEY_NEG, "-30", "856 -");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6 sqr" + KEY_NEG, "-36",
+        checkTyped("8" + KEY_MULTIPLY + "6^" + KEY_NEG, "-36",
                 "8 × negate( sqr( 6 ) )");
     }
 
@@ -965,45 +948,45 @@ public class ControllerTest extends RobotControl {
     @Test
     public void sqrTests() {
         //standard cases
-        checkTyped("0 sqr", "0", "sqr( 0 )");
-        checkTyped("1 sqr", "1", "sqr( 1 )");
-        checkTyped("256 sqr", "65,536", "sqr( 256 )");
-        checkTyped("1151 sqr", "1,324,801", "sqr( 1151 )");
+        checkTyped("0^", "0", "sqr( 0 )");
+        checkTyped("1^", "1", "sqr( 1 )");
+        checkTyped("256^", "65,536", "sqr( 256 )");
+        checkTyped("1151^", "1,324,801", "sqr( 1151 )");
 
         //several operations
-        checkTyped("1 sqr 2 sqr 3 sqr", "9", "sqr( 3 )");
+        checkTyped("1^2^3^", "9", "sqr( 3 )");
 
         //after dot
-        checkTyped("62. sqr", "3,844", "sqr( 62 )");
+        checkTyped("62.^", "3,844", "sqr( 62 )");
 
         //in a row
-        checkTyped("866 sqr sqr sqr sqr sqr", "1.00131920194e+94",
+        checkTyped("866^^^^^", "1.00131920194e+94",
                 "sqr( sqr( sqr( sqr( sqr( 866 ) ) ) ) )");
 
         //after another unary
-        checkTyped("8" + KEY_NEG + "sqr", "64", "sqr( -8 )");
-        checkTyped("49 " + KEY_SQRT + "sqr", "49", "sqr( √( 49 ) )");
-        checkTyped("0.000001" + KEY_INVERSE + "sqr", "1,000,000,000,000",
+        checkTyped("8" + KEY_NEG + "^", "64", "sqr( -8 )");
+        checkTyped("49 " + KEY_SQRT + "^", "49", "sqr( √( 49 ) )");
+        checkTyped("0.000001" + KEY_INVERSE + "^", "1,000,000,000,000",
                 "sqr( 1/( 0.000001 ) )");
 
         //after binary
-        checkTyped("564- sqr", "318,096", "564 - sqr( 564 )");
-        checkTyped("55/ sqr", "3,025", "55 ÷ sqr( 55 )");
+        checkTyped("564-^", "318,096", "564 - sqr( 564 )");
+        checkTyped("55/^", "3,025", "55 ÷ sqr( 55 )");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + "sqr", "0", "sqr( 0 )");
-        checkTyped("565-" + KEY_PERCENT + "sqr", "10,190,460.0625",
+        checkTyped("78" + KEY_PERCENT + "^", "0", "sqr( 0 )");
+        checkTyped("565-" + KEY_PERCENT + "^", "10,190,460.0625",
                 "565 - sqr( 3192.25 )");
 
         //after equals
-        checkTyped("73= sqr", "5,329", "sqr( 73 )");
-        checkTyped("53-14= sqr", "1,521", "sqr( 39 )");
+        checkTyped("73=^", "5,329", "sqr( 73 )");
+        checkTyped("53-14=^", "1,521", "sqr( 39 )");
 
         //after second inputted
-        checkTyped("8" + KEY_MULTIPLY + "6 sqr", "36", "8 × sqr( 6 )");
+        checkTyped("8" + KEY_MULTIPLY + "6^", "36", "8 × sqr( 6 )");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6 sqr sqr", "1,296",
+        checkTyped("8" + KEY_MULTIPLY + "6^^", "1,296",
                 "8 × sqr( sqr( 6 ) )");
     }
 
@@ -1031,7 +1014,7 @@ public class ControllerTest extends RobotControl {
 
         //after another unary
         checkTyped("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE, "√( -8 )");
-        checkTyped("3600000000 sqr" + KEY_SQRT, "3,600,000,000",
+        checkTyped("3600000000^" + KEY_SQRT, "3,600,000,000",
                 "√( sqr( 3600000000 ) )");
         checkTyped("0.000001" + KEY_INVERSE + KEY_SQRT, "1,000",
                 "√( 1/( 0.000001 ) )");
@@ -1087,7 +1070,7 @@ public class ControllerTest extends RobotControl {
         //after another unary
         checkTyped("123" + KEY_NEG + KEY_INVERSE, "-0.008130081300813",
                 "1/( -123 )");
-        checkTyped("49 sqr" + KEY_INVERSE, "4.164931278633903e-4",
+        checkTyped("49^" + KEY_INVERSE, "4.164931278633903e-4",
                 "1/( sqr( 49 ) )");
         checkTyped("1" + KEY_SQRT + KEY_INVERSE, "1", "1/( √( 1 ) )");
 
@@ -1113,7 +1096,7 @@ public class ControllerTest extends RobotControl {
                 "856 - 1/( 30 )");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6 sqr " + KEY_INVERSE, "0.0277777777777778",
+        checkTyped("8" + KEY_MULTIPLY + "6^ " + KEY_INVERSE, "0.0277777777777778",
                 "8 × 1/( sqr( 6 ) )");
     }
 
@@ -1145,7 +1128,7 @@ public class ControllerTest extends RobotControl {
 
         //after unary
         checkTyped("8" + KEY_NEG + KEY_PERCENT, "0", "0");
-        checkTyped("49- sqr" + KEY_PERCENT, "1,176.49", "49 - 1176.49");
+        checkTyped("49-^" + KEY_PERCENT, "1,176.49", "49 - 1176.49");
         checkTyped("64/" + KEY_SQRT + KEY_PERCENT, "0.08", "64 ÷ 0.08");
 
         //after binary
@@ -1168,7 +1151,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("856-30" + KEY_PERCENT, "256.8", "856 - 256.8");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6 sqr" + KEY_PERCENT, "0.36",
+        checkTyped("8" + KEY_MULTIPLY + "6^" + KEY_PERCENT, "0.36",
                 "8 × 0.36");
         checkTyped("1" + KEY_ADD + "2" + KEY_ADD + "3" + KEY_ADD + "4" + KEY_INVERSE + KEY_PERCENT,
                 "0.015", "1 + 2 + 3 + 0.015");
@@ -1199,7 +1182,7 @@ public class ControllerTest extends RobotControl {
 
         //after unary without binary set
         checkTyped("8" + KEY_NEG + "=", "-8", "");
-        checkTyped("49 sqr =", "2,401", "");
+        checkTyped("49^ =", "2,401", "");
         checkTyped("1234" + KEY_SQRT + "=", "35.12833614050059", "");
         checkTyped("0.000001" + KEY_INVERSE + "=", "1,000,000", "");
 
@@ -1207,8 +1190,8 @@ public class ControllerTest extends RobotControl {
         checkTyped("5" + KEY_ADD + "8" + KEY_NEG + "=", "-3", "");
         checkTyped("5" + KEY_ADD + "8" + KEY_NEG + "==", "-11", "");
 
-        checkTyped("7543" + KEY_MULTIPLY + "49 sqr =", "18,110,743", "");
-        checkTyped("7543" + KEY_MULTIPLY + "49 sqr ==", "43,483,893,943",
+        checkTyped("7543" + KEY_MULTIPLY + "49^ =", "18,110,743", "");
+        checkTyped("7543" + KEY_MULTIPLY + "49^ ==", "43,483,893,943",
                 "");
 
         checkTyped("0/3600000000" + KEY_SQRT + "=", "0", "");
@@ -1236,7 +1219,7 @@ public class ControllerTest extends RobotControl {
         checkTyped("8" + KEY_MULTIPLY + "6=", "48", "");
 
         //equals after second calculated
-        checkTyped("856-30 sqr =", "-44", "");
+        checkTyped("856-30^ =", "-44", "");
 
         //after error
         checkTyped("/0==", "0", "");
@@ -1249,34 +1232,35 @@ public class ControllerTest extends RobotControl {
     public void exceptionTests() {
         //overflow
         //add
-        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000=======" +
+        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000=======" +
                         "=============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + "=========",
                 OVERFLOW_MESSAGE);
 
         //subtract
-        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
+        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000======" +
                 "==============================================" + KEY_MULTIPLY + "10===-===========", OVERFLOW_MESSAGE);
 
         //multiply
-        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
+        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000======" +
                 "==============================================" + KEY_MULTIPLY + "10====", OVERFLOW_MESSAGE);
 
         //divide
-        checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.000000000000001====" +
+        checkException("0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "0.000000000000001====" +
                 "================================================/10====", OVERFLOW_MESSAGE);
 
-        //sqr
-        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", OVERFLOW_MESSAGE);
-        checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr", OVERFLOW_MESSAGE);
+        //^
+        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^", OVERFLOW_MESSAGE);
+        checkException("0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^", OVERFLOW_MESSAGE);
 
         //percentage
-        checkException("1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "1000000000000000======" +
-                        "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + KEY_PERCENT,
-                OVERFLOW_MESSAGE);
-        checkException("0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.000000000000001=====" +
+        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000======" +
+                        "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD +
+                        KEY_PERCENT, OVERFLOW_MESSAGE);
+        checkException("0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "0.000000000000001=====" +
                 "===============================================/10===" + KEY_MULTIPLY + KEY_PERCENT, OVERFLOW_MESSAGE);
 
         //invalid input
+        checkException("1" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
         checkException("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
 
         //divide by zero
@@ -1292,36 +1276,29 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void boundaryTests() {
-        //string for storing to memory number with 0 integer part
-        //and 9998 nines in decimal part (and the last one digit is 8)
-        String oneMinusTwoMinimalNumbersToMemory = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY +
-                "1000000000000000====================================================" + KEY_MULTIPLY + "10===" +
-                KEY_INVERSE + KEY_MS + "1-" + KEY_MR + "==" + KEY_MS;
-
         //string for calculating number 1.e+9999
-        String oneDotEPlusFourNines = "1000000000 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY +
+        String oneDotEPlusFourNines = "1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY +
                 "10000000000" + "00000====================================================" + KEY_MULTIPLY + "10===";
 
         //string for calculating number 1.e-9999
-        String theSmallestNumber = "0.000000001 sqr sqr sqr sqr sqr sqr sqr sqr sqr sqr" + KEY_MULTIPLY + "0.00000000" +
+        String theSmallestNumber = "0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "0.00000000" +
                 "00000001================================================" + KEY_MULTIPLY + "0.000000000000001=";
 
         //string for calculating number 999999999999999949999.....9.9999...9.8
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
-        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1===============" +
-                KEY_MS + "/5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
-                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1=" + KEY_MS + "esc" + oneDotEPlusFourNines + KEY_MULTIPLY + "9" +
-                KEY_ADD + KEY_MR + "=";
+        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1=============== MS /5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
+                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1= MS esc" + oneDotEPlusFourNines + KEY_MULTIPLY +
+                "9" + KEY_ADD + KEY_MR + "=";
 
         //max numbers
         //right
-        checkTyped(boundaryNumber + KEY_MS + "esc" + theSmallestNumber + KEY_ADD + KEY_MR + "=",
+        checkTyped(boundaryNumber + " MS esc" + theSmallestNumber + KEY_ADD + KEY_MR + "=",
                 "9.999999999999999e+9999");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "=" + KEY_ADD + KEY_MR + "=");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "==" + KEY_ADD + KEY_MR + "=");
 
         //left
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "esc" + theSmallestNumber + KEY_MULTIPLY +
+        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + " MS esc" + theSmallestNumber + KEY_MULTIPLY +
                 "-1" + KEY_ADD + KEY_MR,"-9.999999999999999e+9999");
         checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_MULTIPLY + "-1" + KEY_ADD + "=" +
                 KEY_ADD + KEY_MR + "=");
@@ -1329,52 +1306,17 @@ public class ControllerTest extends RobotControl {
                 KEY_ADD + KEY_MR + "=");
 
         //min numbers
-        //left bound
-        checkTyped(theSmallestNumber + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
+        checkTyped(theSmallestNumber + "MS" + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
                 "1.e-9999");
 
-        //positive and positive
-        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=", "1.e-9999");
+        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=",
+                "1.e-9999");
         checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10/10=", "1.e-9999");
 
         checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01=");
         checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100=");
-
-        //negative and positive
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
-                "1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "1.e-9999");
-
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
-
-        //right bound
-        checkTyped(theSmallestNumber + KEY_NEG + KEY_MS + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
-                "-1.e-9999");
-
-        //positive and negative
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
-                "-1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
-
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
-
-        //negative and negative
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + KEY_MS + "/10=" + KEY_MULTIPLY + "0.1" + KEY_NEG + "=",
-                "-1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + "/10=/10" + KEY_NEG + "=", "-1.e-9999");
-
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01" + KEY_NEG + "=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100" + KEY_NEG + "=");
     }
 
     /**
@@ -1431,14 +1373,14 @@ public class ControllerTest extends RobotControl {
 
         pressKeyboard(keys);
         String expectedEquationText = equationLabel.getText();
-        pressKeyboard(KEY_CE);
+        pressKeyboard("del");
 
         assertEquals("0", screenLabel.getText());
         assertEquals(expectedEquationText, equationLabel.getText());
 
         resetAll();
         pressKeyboard(keys);
-        pressKeyboard(KEY_C);
+        pressKeyboard("esc");
 
         assertEquals("0", screenLabel.getText());
         assertEquals("", equationLabel.getText());

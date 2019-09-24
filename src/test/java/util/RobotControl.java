@@ -566,6 +566,7 @@ public class RobotControl extends GuiTest {
      * @throws IllegalArgumentException if required text is not a keypad button representation.
      */
     protected void pressKeyboard(String text) {
+        text = replaceSymbolsToKeyCodes(text);
         String[] codes = splitCodes(text);
 
         for (String code : codes) {
@@ -680,7 +681,7 @@ public class RobotControl extends GuiTest {
                 mainKey = KeyEvent.VK_DELETE;
             } else if (code.equals("esc")) {
                 mainKey = KeyEvent.VK_ESCAPE;
-            } else if (code.equals("sqr")) {
+            } else if (code.equals("^")) {
                 clickOn(getNodeBySelector(SQR_ID));
             } else {
                 throw new IllegalArgumentException("Expected: string with correct keypad representation only. \n" +
@@ -827,6 +828,17 @@ public class RobotControl extends GuiTest {
     }
 
     /**
+     * Replaces several symbols such as *, + etc. to appropriate key codes (such as shift+5, shift+= etc).
+     *
+     * @param text string to edit.
+     * @return edited string.
+     */
+    private String replaceSymbolsToKeyCodes(String text) {
+        text = text.replaceAll("MS", "ctrl+M");
+        return text;
+    }
+
+    /**
      * Splits text to keyboard codes.
      *
      * @param text text to split.
@@ -855,7 +867,7 @@ public class RobotControl extends GuiTest {
         text = text.replaceAll("enter", " enter ");
         text = text.replaceAll("del", " del ");
         text = text.replaceAll("esc", " esc ");
-        text = text.replaceAll("sqr", " sqr ");
+        text = text.replaceAll("^", " ^ ");
 
         text = text.replaceAll("ctrl\\+M", " ctrl+M ");
         text = text.replaceAll("ctrl\\+P", " ctrl+P ");
