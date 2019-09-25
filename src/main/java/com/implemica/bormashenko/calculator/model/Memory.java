@@ -44,9 +44,9 @@ public class Memory {
      * Recalls last saved in memory object.
      *
      * @return last saved in memory object or null if store is empty.
-     * @throws OverflowException while validation in {@link Calculation} for recalled value is failed.
+     * @throws OverflowException while validation for recalled value is failed.
      */
-    public BigDecimal recall() {
+    public BigDecimal recall() throws OverflowException {
         if (store.isEmpty()) {
             return null;
         } else {

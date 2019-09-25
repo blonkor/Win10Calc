@@ -78,7 +78,12 @@ class CalculationModelTest {
         calculation.setFirst(BigDecimal.ONE);
         calculation.setSecond(BigDecimal.TEN);
         calculation.setBinaryOperation(ADD);
-        calculation.calculateBinary();
+
+        try {
+            calculation.calculateBinary();
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException e) {
+            fail();
+        }
 
         calculation.resetAll();
 
@@ -853,7 +858,11 @@ class CalculationModelTest {
         calculation.setFirst(BigDecimal.ONE);
         calculation.setSecond(BigDecimal.TEN);
 
-        calculation.calculatePercentage();
+        try {
+            calculation.calculatePercentage();
+        } catch (OverflowException e) {
+            fail();
+        }
 
         assertEquals(BigDecimal.ZERO, calculation.getFirst());
         assertEquals(BigDecimal.ZERO, calculation.getSecond());
@@ -1157,7 +1166,9 @@ class CalculationModelTest {
         try {
             calculation.calculateBinary();
             fail();
-        } catch (ArithmeticException e) {
+        } catch (OverflowException | DivideByZeroException e) {
+            fail();
+        } catch (DivideZeroByZeroException e) {
             assertEquals(DIVIDE_ZERO_BY_ZERO_MESSAGE, e.getMessage());
         }
     }
@@ -1172,7 +1183,9 @@ class CalculationModelTest {
         try {
             calculation.calculateUnary(INVERSE);
             fail();
-        } catch (ArithmeticException e) {
+        } catch (OverflowException | NegativeRootException e) {
+            fail();
+        } catch (DivideByZeroException e) {
             assertEquals(DIVIDE_BY_ZERO_MESSAGE, e.getMessage());
         }
     }
@@ -1291,7 +1304,12 @@ class CalculationModelTest {
      */
     private void checkEquation(String equation, String expectedResult) {
         String[] args = splitEquation(equation);
-        performTestCalculation(args);
+
+        try {
+            performTestCalculation(args);
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException | NegativeRootException e) {
+            fail();
+        }
 
         assertEquals(new BigDecimal(expectedResult), calculation.getResult());
     }
@@ -1353,8 +1371,13 @@ class CalculationModelTest {
      *             args = {"5", "sqr"} will calculate 5^2, as well as args = {"5", "sqr", "="}.
      *             <p>
      *             args = {"5", "+", "9", "sqr", "="} will calculate 5 + 9^2 (that is 81) and the final result is 86.
+     * @throws OverflowException         while validation for result is failed.
+     * @throws DivideByZeroException     if trying to divide by zero.
+     * @throws DivideZeroByZeroException if trying to divide zero by zero.
+     * @throws NegativeRootException     if trying to divide inverse zero.
      */
-    private void performTestCalculation(String[] args) {
+    private void performTestCalculation(String[] args) throws OverflowException, DivideByZeroException,
+            DivideZeroByZeroException, NegativeRootException {
         calculation.resetAll();
         calculation.setFirst(new BigDecimal(args[0]));
         boolean secondSet = false;
@@ -1408,8 +1431,12 @@ class CalculationModelTest {
      * Performs binary calculation from {@link Calculation} for tests. The same method should be used in controller.
      *
      * @param secondSet only if true calculation should be made.
+     * @throws OverflowException         while validation for result is failed.
+     * @throws DivideByZeroException     if trying to divide by zero.
+     * @throws DivideZeroByZeroException if trying to divide zero by zero.
      */
-    private void doBinary(boolean secondSet) {
+    private void doBinary(boolean secondSet) throws OverflowException, DivideByZeroException,
+            DivideZeroByZeroException {
         if (secondSet) {
             calculation.calculateBinary();
             calculation.setFirst(calculation.getResult());
@@ -1421,8 +1448,12 @@ class CalculationModelTest {
      * If second number is set, first should be saved before calculation for not to loose it.
      *
      * @param secondSet if true calculation should be made on second number, otherwise on first.
+     * @throws OverflowException     while validation for result is failed.
+     * @throws NegativeRootException if trying to divide inverse zero.
+     * @throws DivideByZeroException if trying to divide inverse zero.
      */
-    private void doUnary(boolean secondSet, UnaryOperation operation) {
+    private void doUnary(boolean secondSet, UnaryOperation operation) throws OverflowException, NegativeRootException,
+            DivideByZeroException {
         if (secondSet) {
             BigDecimal tempFirst = calculation.getFirst();
             calculation.setFirst(calculation.getSecond());
@@ -1445,8 +1476,9 @@ class CalculationModelTest {
      * If second number is not set, first should be set as second.
      *
      * @param secondSet if false first number should be set as second.
+     * @throws OverflowException while validation for result is failed.
      */
-    private void doPercent(boolean secondSet) {
+    private void doPercent(boolean secondSet) throws OverflowException {
         if (!secondSet) {
             calculation.setSecond(calculation.getFirst());
         }
@@ -1483,7 +1515,7 @@ class CalculationModelTest {
         try {
             performTestCalculation(args);
             fail();
-        } catch (OverflowException | ArithmeticException e) {
+        } catch (OverflowException | DivideByZeroException | DivideZeroByZeroException | NegativeRootException e) {
             assertEquals(expectedMessage, e.getMessage());
         }
     }

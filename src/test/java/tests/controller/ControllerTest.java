@@ -24,56 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerTest extends RobotControl {
 
     /**
-     * Keypad combination for firing memory clear {@code Button}.
-     */
-    private static final String KEY_MC = "ctrl+L";
-
-    /**
-     * Keypad combination for firing memory recall {@code Button}.
-     */
-    private static final String KEY_MR = "ctrl+R";
-
-    /**
-     * Keypad combination for firing memory add {@code Button}.
-     */
-    private static final String KEY_M_ADD = "ctrl+P";
-
-    /**
-     * Keypad combination for firing memory subtract {@code Button}.
-     */
-    private static final String KEY_M_SUBTRACT = "ctrl+Q";
-
-    /**
-     * Keypad combination for firing add {@code Button}.
-     */
-    private static final String KEY_ADD = "shift+=";
-
-    /**
-     * Keypad combination for firing multiply {@code Button}.
-     */
-    private static final String KEY_MULTIPLY = "shift+8";
-
-    /**
-     * Keypad button for firing negate {@code Button}.
-     */
-    private static final String KEY_NEG = "F9";
-
-    /**
-     * Keypad button for firing inverse {@code Button}.
-     */
-    private static final String KEY_INVERSE = "R";
-
-    /**
-     * Keypad combination for firing sqrt {@code Button}.
-     */
-    private static final String KEY_SQRT = "shift+2";
-
-    /**
-     * Keypad combination for firing percent {@code Button}.
-     */
-    private static final String KEY_PERCENT = "shift+5";
-
-    /**
      * Symbol that should be replaced in equation {@code Label}.
      */
     private static final String SPACE = " ";
@@ -190,8 +140,7 @@ public class ControllerTest extends RobotControl {
     public void moveEquationLabelTextTest() {
         resetAll();
 
-        pressKeyboard(KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT +
-                KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT);
+        pressKeyboard("√√√√√√√√√√√√√");
 
         ScrollPane equationScroll = (ScrollPane) getNodeBySelector(EQUATION_SCROLL_ID);
         assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
@@ -211,15 +160,14 @@ public class ControllerTest extends RobotControl {
         assertFalse(rightArrow.isVisible());
         assertEquals(equationScroll.getHmin(), equationScroll.getHvalue());
 
-        pressKeyboard(KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT +
-                KEY_SQRT + KEY_SQRT);
+        pressKeyboard("√√√√√√√√√√");
 
         clickOn(leftArrow);
 
         assertTrue(rightArrow.isVisible());
         assertTrue(leftArrow.isVisible());
 
-        double expectedHValueLeft = 0.5;
+        double expectedHValueLeft = 0.56;
         assertEquals(expectedHValueLeft, equationScroll.getHvalue());
 
         clickOn(leftArrow);
@@ -325,7 +273,7 @@ public class ControllerTest extends RobotControl {
     public void memoryClearTest() {
         resetAll();
 
-        pressKeyboard("1 MS 2 MS 3 MS" + KEY_MC);
+        pressKeyboard("1 MS 2 MS 3 MS MC");
 
         assertTrue(getButtonBySelector(MEMORY_CLEAR_ID).isDisabled());
         assertTrue(getButtonBySelector(MEMORY_RECALL_ID).isDisabled());
@@ -337,9 +285,9 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memoryRecallTests() {
-        checkTyped("1 MS 2 MS 3 MS" + KEY_MR, "3");
-        checkTyped("1 MS 2 MS 3" + KEY_MR, "2");
-        checkTyped("MS 100" + KEY_MR, "0");
+        checkTyped("1 MS 2 MS 3 MS MR", "3");
+        checkTyped("1 MS 2 MS 3 MR", "2");
+        checkTyped("MS 100 MR", "0");
     }
 
     /**
@@ -347,12 +295,12 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memoryAddTests() {
-        checkTyped("1 MS 2 MS 3 MS" + KEY_M_ADD + KEY_MR, "6");
-        checkTyped("1 MS 2 MS 3" + KEY_M_ADD + KEY_MR, "5");
-        checkTyped(" MS 1 0 0 " + KEY_ADD + KEY_M_ADD + KEY_MR, "100");
+        checkTyped("1 MS 2 MS 3 MS M_Add MR", "6");
+        checkTyped("1 MS 2 MS 3 M_Add MR", "5");
+        checkTyped("MS 100+ M_Add MR", "100");
 
-        checkTyped("8" + KEY_M_ADD + KEY_MR, "8");
-        checkTyped("1" + KEY_NEG + "28" + KEY_M_ADD + KEY_MR, "-128");
+        checkTyped("8 M_Add MR", "8");
+        checkTyped("1 neg 28 M_Add MR", "-128");
     }
 
     /**
@@ -360,12 +308,12 @@ public class ControllerTest extends RobotControl {
      */
     @Test
     public void memorySubtractTests() {
-        checkTyped("1 MS 2 MS 3 MS" + KEY_M_SUBTRACT + KEY_MR, "0");
-        checkTyped("1 MS 2 MS 3" + KEY_M_SUBTRACT + KEY_MR, "-1");
-        checkTyped("MS 1 0 0 " + KEY_ADD + KEY_M_SUBTRACT + KEY_MR, "-100");
+        checkTyped("1 MS 2 MS 3 MS M_Subtract MR", "0");
+        checkTyped("1 MS 2 MS 3 M_Subtract MR", "-1");
+        checkTyped("MS 100+ M_Subtract MR", "-100");
 
-        checkTyped("8" + KEY_M_SUBTRACT + KEY_MR, "-8");
-        checkTyped("1" + KEY_NEG + "28" + KEY_M_SUBTRACT + KEY_MR, "128");
+        checkTyped("8 M_Subtract MR", "-8");
+        checkTyped("1 neg 28 M_Subtract MR", "128");
     }
 
     /**
@@ -382,8 +330,8 @@ public class ControllerTest extends RobotControl {
         checkTyped("3259000234000023", "3,259,000,234,000,023");
 
         //after negate
-        checkTyped("8" + KEY_NEG + "96", "-896");
-        checkTyped("7" + KEY_NEG + "890635789000000", "-7,890,635,789,000,000");
+        checkTyped("8neg96", "-896");
+        checkTyped("7neg890635789000000", "-7,890,635,789,000,000");
 
         //after dot
         checkTyped("7255.34", "7,255.34");
@@ -394,27 +342,27 @@ public class ControllerTest extends RobotControl {
         checkTyped("0.1223458901245678", "0.1223458901245678");
 
         //after dot and negate
-        checkTyped("7" + KEY_NEG + "25.72", "-725.72");
+        checkTyped("7neg25.72", "-725.72");
 
         //after dot with 16 digits summary and negate
-        checkTyped("123657.29582" + KEY_NEG + "00256", "-123,657.2958200256");
+        checkTyped("123657.29582neg00256", "-123,657.2958200256");
 
         //after dot with 17 digits summary ( starts with 0. ) and negate
-        checkTyped("0.85298" + KEY_NEG + "23546736765", "-0.8529823546736765");
+        checkTyped("0.85298neg23546736765", "-0.8529823546736765");
 
         //after backspace
         checkTyped("8 backspace 32", "32");
 
         //after unary operation pressed
-        checkTyped("9" + KEY_SQRT + "825", "825");
-        checkTyped("22" + KEY_INVERSE + "7", "7");
+        checkTyped("9 √ 825", "825");
+        checkTyped("22 1/x 7", "7");
 
         //after binary operation pressed
         checkTyped("9-2", "2");
         checkTyped("12/1", "1");
         //after percent pressed
-        checkTyped("6" + KEY_PERCENT + "2", "2");
-        checkTyped("1-" + KEY_PERCENT + "90", "90");
+        checkTyped("6%2", "2");
+        checkTyped("1-%90", "90");
 
         //after equals pressed
         checkTyped("13=131", "131");
@@ -434,10 +382,10 @@ public class ControllerTest extends RobotControl {
         checkTyped("2198370919080518325", "2,198,370,919,080,518");
 
         //17 and negate
-        checkTyped("123456789" + KEY_NEG + "01234567", "-1,234,567,890,123,456");
+        checkTyped("123456789neg01234567", "-1,234,567,890,123,456");
 
         //more than 17 and negate
-        checkTyped("120984710245" + KEY_NEG + "8012850", "-1,209,847,102,458,012");
+        checkTyped("120984710245neg8012850", "-1,209,847,102,458,012");
 
         //17 and dot
         checkTyped("123456789.01234567", "123,456,789.0123456");
@@ -446,10 +394,10 @@ public class ControllerTest extends RobotControl {
         checkTyped("120984710245.8012730", "120,984,710,245.8012");
 
         //17 and dot and negate
-        checkTyped("123456" + KEY_NEG + "789.01234567", "-123,456,789.0123456");
+        checkTyped("123456neg789.01234567", "-123,456,789.0123456");
 
         //more than 17 and dot and negate
-        checkTyped("219.837" + KEY_NEG + "091908051832", "-219.8370919080518");
+        checkTyped("219.837neg091908051832", "-219.8370919080518");
 
         //18 and dot and starts with 0.
         checkTyped("0.74363738736363636", "0.7436373873636363");
@@ -458,10 +406,10 @@ public class ControllerTest extends RobotControl {
         checkTyped("0.3242384729375982868", "0.3242384729375982");
 
         //18 and dot and starts with 0. and negate
-        checkTyped("0.8752345" + KEY_NEG + "6890076345", "-0.8752345689007634");
+        checkTyped("0.8752345neg6890076345", "-0.8752345689007634");
 
         //more than 18 and dot and starts with 0. and negate
-        checkTyped("0.3" + KEY_NEG + "242384729375982760", "-0.3242384729375982");
+        checkTyped("0.3neg242384729375982760", "-0.3242384729375982");
     }
 
     /**
@@ -484,29 +432,29 @@ public class ControllerTest extends RobotControl {
         checkTyped("1209847102458012409.", "1,209,847,102,458,012.");
 
         //17 and negate
-        checkTyped("87984" + KEY_NEG + "719571987591.", "-8,798,471,957,198,759.");
+        checkTyped("87984neg719571987591.", "-8,798,471,957,198,759.");
 
         //more than 17 and negate
-        checkTyped("219" + KEY_NEG + "8370919080518051.", "-2,198,370,919,080,518.");
+        checkTyped("219neg8370919080518051.", "-2,198,370,919,080,518.");
 
         //with negated number
-        checkTyped("1" + KEY_NEG + ".", "-1.");
-        checkTyped("61237" + KEY_NEG + ".", "-61,237.");
+        checkTyped("1neg.", "-1.");
+        checkTyped("61237neg.", "-61,237.");
 
         //16 digits
-        checkTyped("6" + KEY_NEG + "235483463468345.", "-6,235,483,463,468,345.");
+        checkTyped("6neg235483463468345.", "-6,235,483,463,468,345.");
 
         //after unary operation pressed
-        checkTyped("953" + KEY_SQRT + ".", "0.");
-        checkTyped("71" + KEY_INVERSE + ".", "0.");
+        checkTyped("953 √ .", "0.");
+        checkTyped("71 1/x .", "0.");
 
         //after binary operations
         checkTyped("3254-.", "0.");
         checkTyped("24/.", "0.");
 
         //after percent
-        checkTyped("14" + KEY_PERCENT + ".", "0.");
-        checkTyped("5-" + KEY_PERCENT + ".", "0.");
+        checkTyped("14%.", "0.");
+        checkTyped("5-%.", "0.");
 
         //after equals
         checkTyped("15=.", "0.");
@@ -524,10 +472,10 @@ public class ControllerTest extends RobotControl {
         checkTyped("120984710245.8012092.", "120,984,710,245.8012");
 
         //17 and dot and negate
-        checkTyped("123456" + KEY_NEG + "789.01234567.", "-123,456,789.0123456");
+        checkTyped("123456neg789.01234567.", "-123,456,789.0123456");
 
         //more than 17 and dot and negate
-        checkTyped("120" + KEY_NEG + "984710245.8012092.", "-120,984,710,245.8012");
+        checkTyped("120neg984710245.8012092.", "-120,984,710,245.8012");
 
         //18 and dot and starts with 0.
         checkTyped("0.74363738736363636.", "0.7436373873636363");
@@ -536,10 +484,10 @@ public class ControllerTest extends RobotControl {
         checkTyped("0.324238472937598286.", "0.3242384729375982");
 
         //18 and dot and starts with 0. and negate
-        checkTyped("0.74" + KEY_NEG + "363738736363636.", "-0.7436373873636363");
+        checkTyped("0.74neg363738736363636.", "-0.7436373873636363");
 
         //more than 18 and dot and starts with 0. and negate
-        checkTyped("0.3" + KEY_NEG + "24238472937598286.", "-0.3242384729375982");
+        checkTyped("0.3neg24238472937598286.", "-0.3242384729375982");
 
         //already with dot
         checkTyped("1414.1.2..", "1,414.12");
@@ -562,19 +510,19 @@ public class ControllerTest extends RobotControl {
         checkTyped("14214. backspace", "14,214");
 
         //after negate
-        checkTyped("6563252" + KEY_NEG + "backspace", "-656,325");
+        checkTyped("6563252neg backspace", "-656,325");
 
         //after unary operation
-        checkTyped("900" + KEY_SQRT + "backspace", "30");
-        checkTyped("8" + KEY_INVERSE + "backspace", "0.125");
+        checkTyped("900 √ backspace", "30");
+        checkTyped("8 1/x backspace", "0.125");
 
         //after binary operation
         checkTyped("14- backspace", "14");
         checkTyped("523/ backspace", "523");
 
         //after percent
-        checkTyped("14" + KEY_PERCENT + "backspace", "0");
-        checkTyped("14-" + KEY_PERCENT + "backspace", "1.96");
+        checkTyped("14%backspace", "0");
+        checkTyped("14-%backspace", "1.96");
 
         //after equals
         checkTyped("51= backspace", "51");
@@ -601,17 +549,17 @@ public class ControllerTest extends RobotControl {
         checkClear("1.23");
 
         //unary
-        checkClear("123" + KEY_NEG);
-        checkClear("1231" + KEY_SQRT);
-        checkClear("38" + KEY_INVERSE);
+        checkClear("123neg");
+        checkClear("1231 √");
+        checkClear("38 1/x");
 
         //binary
         checkClear("51-");
         checkClear("1816/");
 
         //percent
-        checkClear("12" + KEY_PERCENT);
-        checkClear("122-" + KEY_PERCENT);
+        checkClear("12%");
+        checkClear("122-%");
 
         //equals
         checkClear("12=");
@@ -640,59 +588,54 @@ public class ControllerTest extends RobotControl {
     @Test
     public void addTests() {
         //standard cases
-        checkTyped("0" + KEY_ADD, "0", "0 +");
-        checkTyped("1" + KEY_ADD, "1", "1 +");
-        checkTyped("256" + KEY_ADD, "256", "256 +");
-        checkTyped("1155" + KEY_ADD, "1,155", "1155 +");
+        checkTyped("0+", "0", "0 +");
+        checkTyped("1+", "1", "1 +");
+        checkTyped("256+", "256", "256 +");
+        checkTyped("1155+", "1,155", "1155 +");
 
         //several operations
-        checkTyped("1" + KEY_ADD + "2" + KEY_ADD + "3" + KEY_ADD, "6",
-                "1 + 2 + 3 +");
-        checkTyped("100" + KEY_ADD + "1000" + KEY_ADD + "10000" + KEY_ADD + "100000" + KEY_ADD,
-                "111,100", "100 + 1000 + 10000 + 100000 +");
+        checkTyped("1+2+3+", "6", "1 + 2 + 3 +");
+        checkTyped("100+1000+10000+100000+", "111,100",
+                "100 + 1000 + 10000 + 100000 +");
 
         //after dot
-        checkTyped("62." + KEY_ADD, "62", "62 +");
-        checkTyped("623626." + KEY_ADD, "623,626", "623626 +");
+        checkTyped("62.+", "62", "62 +");
+        checkTyped("623626.+", "623,626", "623626 +");
 
         //after negate
-        checkTyped("866" + KEY_NEG + KEY_ADD, "-866", "-866 +");
-        checkTyped("98791480" + KEY_NEG + KEY_ADD, "-98,791,480",
-                "-98791480 +");
+        checkTyped("866neg+", "-866", "-866 +");
+        checkTyped("98791480neg+", "-98,791,480", "-98791480 +");
 
         //after another unary
-        checkTyped("8^" + KEY_ADD, "64", "sqr( 8 ) +");
-        checkTyped("3600000000" + KEY_SQRT + KEY_ADD, "60,000",
-                "√( 3600000000 ) +");
-        checkTyped("1" + KEY_INVERSE + KEY_ADD, "1", "1/( 1 ) +");
+        checkTyped("8²+", "64", "sqr( 8 ) +");
+        checkTyped("3600000000 √ +", "60,000", "√( 3600000000 ) +");
+        checkTyped("1 1/x+", "1", "1/( 1 ) +");
 
         //in a row
-        checkTyped("55" + KEY_ADD + KEY_ADD, "55", "55 +");
-        checkTyped("1567" + KEY_ADD + KEY_ADD + KEY_ADD, "1,567", "1567 +");
+        checkTyped("55++", "55", "55 +");
+        checkTyped("1567+++", "1,567", "1567 +");
 
         //after another binary
-        checkTyped("16-" + KEY_ADD, "16", "16 +");
-        checkTyped("564" + KEY_MULTIPLY + KEY_ADD, "564", "564 +");
-        checkTyped("344363/" + KEY_ADD, "344,363", "344363 +");
+        checkTyped("16-+", "16", "16 +");
+        checkTyped("564*+", "564", "564 +");
+        checkTyped("344363/+", "344,363", "344363 +");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + KEY_ADD, "0", "0 +");
-        checkTyped("562-" + KEY_PERCENT + KEY_ADD, "-2,596.44",
-                "562 - 3158.44 +");
+        checkTyped("78%+", "0", "0 +");
+        checkTyped("562-%+", "-2,596.44", "562 - 3158.44 +");
 
         //after equals
-        checkTyped("73=" + KEY_ADD, "73", "73 +");
-        checkTyped("53-12=" + KEY_ADD, "41", "41 +");
+        checkTyped("73=+", "73", "73 +");
+        checkTyped("53-12=+", "41", "41 +");
 
         //engineers
-        checkTyped("9000000000000000" + KEY_ADD + "1000000000000000" + KEY_ADD, "1.e+16",
+        checkTyped("9000000000000000+1000000000000000+", "1.e+16",
                 "9000000000000000 + 1000000000000000 +");
-        checkTyped("9000000000000000" + KEY_ADD + "1000000000000000" + KEY_ADD + "1" + KEY_ADD,
-                "1.e+16", "9000000000000000 + 1000000000000000 + 1 +");
-        checkTyped("9000000000000000" + KEY_ADD + "1000000000000000" + KEY_ADD + "6" + KEY_ADD,
-                "1.000000000000001e+16",
-                "9000000000000000 + 1000000000000000 + " + "6 +");
-        checkTyped("9999999999999999" + KEY_ADD + "9999999999999999" + KEY_ADD, "2.e+16",
+        checkTyped("9000000000000000+1000000000000000+1+", "1.e+16",
+                "9000000000000000 + 1000000000000000 + 1 +");
+        checkTyped("9000000000000000+1000000000000000+6+", "1.000000000000001e+16",
+                "9000000000000000 + 1000000000000000 + 6 +");
+        checkTyped("9999999999999999+9999999999999999+", "2.e+16",
                 "9999999999999999 + 9999999999999999 +");
     }
 
@@ -717,29 +660,27 @@ public class ControllerTest extends RobotControl {
         checkTyped("623626.-", "623,626", "623626 -");
 
         //after negate
-        checkTyped("866" + KEY_NEG + "-", "-866", "-866 -");
-        checkTyped("98791480" + KEY_NEG + "-", "-98,791,480",
+        checkTyped("866neg-", "-866", "-866 -");
+        checkTyped("98791480neg-", "-98,791,480",
                 "-98791480 -");
 
         //after another unary
-        checkTyped("8^-", "64", "sqr( 8 ) -");
-        checkTyped("3600000000" + KEY_SQRT + "-", "60,000",
-                "√( 3600000000 ) -");
-        checkTyped("1" + KEY_INVERSE + "-", "1", "1/( 1 ) -");
+        checkTyped("8²-", "64", "sqr( 8 ) -");
+        checkTyped("3600000000 √ -", "60,000", "√( 3600000000 ) -");
+        checkTyped("1 1/x -", "1", "1/( 1 ) -");
 
         //in a row
         checkTyped("55--", "55", "55 -");
         checkTyped("1567---", "1,567", "1567 -");
 
         //after another binary
-        checkTyped("16" + KEY_ADD + "-", "16", "16 -");
-        checkTyped("564" + KEY_MULTIPLY + "-", "564", "564 -");
+        checkTyped("16+-", "16", "16 -");
+        checkTyped("564*-", "564", "564 -");
         checkTyped("344363/-", "344,363", "344363 -");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + "-", "0", "0 -");
-        checkTyped("562-" + KEY_PERCENT + "-", "-2,596.44",
-                "562 - 3158.44 -");
+        checkTyped("78%-", "0", "0 -");
+        checkTyped("562-%-", "-2,596.44", "562 - 3158.44 -");
 
         //after equals
         checkTyped("73=-", "73", "73 -");
@@ -762,61 +703,55 @@ public class ControllerTest extends RobotControl {
     @Test
     public void multiplyTests() {
         //standard cases
-        checkTyped("0" + KEY_MULTIPLY, "0", "0 ×");
-        checkTyped("1" + KEY_MULTIPLY, "1", "1 ×");
-        checkTyped("256" + KEY_MULTIPLY, "256", "256 ×");
-        checkTyped("1155" + KEY_MULTIPLY, "1,155", "1155 ×");
+        checkTyped("0*", "0", "0 ×");
+        checkTyped("1*", "1", "1 ×");
+        checkTyped("256*", "256", "256 ×");
+        checkTyped("1155*", "1,155", "1155 ×");
 
         //several operations
-        checkTyped("1" + KEY_MULTIPLY + "2" + KEY_MULTIPLY + "3" + KEY_MULTIPLY, "6",
-                "1 × 2 × 3 ×");
-        checkTyped("100" + KEY_MULTIPLY + "1000" + KEY_MULTIPLY + "10000" + KEY_MULTIPLY + "100" + "000" +
-                        KEY_MULTIPLY, "100,000,000,000,000",
+        checkTyped("1*2*3*", "6", "1 × 2 × 3 ×");
+        checkTyped("100*1000*10000*100000*", "100,000,000,000,000",
                 "100 × 1000 × 10000 × 100000 ×");
 
         //after dot
-        checkTyped("62." + KEY_MULTIPLY, "62", "62 ×");
-        checkTyped("623626." + KEY_MULTIPLY, "623,626", "623626 ×");
+        checkTyped("62.*", "62", "62 ×");
+        checkTyped("623626.*", "623,626", "623626 ×");
 
         //after negate
-        checkTyped("866" + KEY_NEG + KEY_MULTIPLY, "-866", "-866 ×");
-        checkTyped("98791480" + KEY_NEG + KEY_MULTIPLY, "-98,791,480",
-                "-98791480 ×");
+        checkTyped("866neg*", "-866", "-866 ×");
+        checkTyped("98791480neg*", "-98,791,480", "-98791480 ×");
 
         //after another unary
-        checkTyped("8^" + KEY_MULTIPLY, "64", "sqr( 8 ) ×");
-        checkTyped("3600000000" + KEY_SQRT + KEY_MULTIPLY, "60,000",
-                "√( 3600000000 ) ×");
-        checkTyped("1" + KEY_INVERSE + KEY_MULTIPLY, "1", "1/( 1 ) ×");
+        checkTyped("8²*", "64", "sqr( 8 ) ×");
+        checkTyped("3600000000 √ *", "60,000", "√( 3600000000 ) ×");
+        checkTyped("1 1/x*", "1", "1/( 1 ) ×");
 
         //in a row
-        checkTyped("55" + KEY_MULTIPLY + KEY_MULTIPLY, "55", "55 ×");
-        checkTyped("1567" + KEY_MULTIPLY + KEY_MULTIPLY + KEY_MULTIPLY, "1,567",
-                "1567 ×");
+        checkTyped("55**", "55", "55 ×");
+        checkTyped("1567***", "1,567", "1567 ×");
 
         //after another binary
-        checkTyped("16-" + KEY_MULTIPLY, "16", "16 ×");
-        checkTyped("564" + KEY_ADD + KEY_MULTIPLY, "564", "564 ×");
-        checkTyped("344363/" + KEY_MULTIPLY, "344,363", "344363 ×");
+        checkTyped("16-*", "16", "16 ×");
+        checkTyped("564+*", "564", "564 ×");
+        checkTyped("344363/*", "344,363", "344363 ×");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + KEY_MULTIPLY, "0", "0 ×");
-        checkTyped("562-" + KEY_PERCENT + KEY_MULTIPLY, "-2,596.44",
-                "562 - 3158.44 ×");
+        checkTyped("78%*", "0", "0 ×");
+        checkTyped("562-%*", "-2,596.44", "562 - 3158.44 ×");
 
         //after equals
-        checkTyped("73=" + KEY_MULTIPLY, "73", "73 ×");
-        checkTyped("53-12=" + KEY_MULTIPLY, "41", "41 ×");
+        checkTyped("73=*", "73", "73 ×");
+        checkTyped("53-12=*", "41", "41 ×");
 
         //engineers
-        checkTyped("9000000000000000" + KEY_MULTIPLY + "1000000000000000" + KEY_MULTIPLY,
-                "9.e+30", "9000000000000000 × 1000000000000000 ×");
-        checkTyped("9000000000000000" + KEY_MULTIPLY + "1000000000000000" + KEY_MULTIPLY + "4" + KEY_MULTIPLY,
-                "3.6e+31", "9000000000000000 × 1000000000000000 × 4 ×");
-        checkTyped("0.9999999999999999" + KEY_MULTIPLY + "0.1" + KEY_MULTIPLY, "0.1",
+        checkTyped("9000000000000000*1000000000000000*", "9.e+30",
+                "9000000000000000 × 1000000000000000 ×");
+        checkTyped("9000000000000000*1000000000000000*4*", "3.6e+31",
+                "9000000000000000 × 1000000000000000 × 4 ×");
+        checkTyped("0.9999999999999999*0.1*", "0.1",
                 "0.9999999999999999 × 0.1 ×");
-        checkTyped("0.9999999999999999" + KEY_MULTIPLY + "0.6" + KEY_MULTIPLY,
-                "0.5999999999999999", "0.9999999999999999 × 0.6 ×");
+        checkTyped("0.9999999999999999*0.6*", "0.5999999999999999",
+                "0.9999999999999999 × 0.6 ×");
     }
 
     /**
@@ -840,29 +775,26 @@ public class ControllerTest extends RobotControl {
         checkTyped("623626./", "623,626", "623626 ÷");
 
         //after negate
-        checkTyped("866" + KEY_NEG + "/", "-866", "-866 ÷");
-        checkTyped("98791480" + KEY_NEG + "/", "-98,791,480",
-                "-98791480 ÷");
+        checkTyped("866neg/", "-866", "-866 ÷");
+        checkTyped("98791480neg/", "-98,791,480", "-98791480 ÷");
 
         //after another unary
-        checkTyped("8^/", "64", "sqr( 8 ) ÷");
-        checkTyped("3600000000" + KEY_SQRT + "/", "60,000",
-                "√( 3600000000 ) ÷");
-        checkTyped("1" + KEY_INVERSE + "/", "1", "1/( 1 ) ÷");
+        checkTyped("8²/", "64", "sqr( 8 ) ÷");
+        checkTyped("3600000000 √ /", "60,000", "√( 3600000000 ) ÷");
+        checkTyped("1 1/x /", "1", "1/( 1 ) ÷");
 
         //in a row
         checkTyped("55//", "55", "55 ÷");
         checkTyped("1567///", "1,567", "1567 ÷");
 
         //after another binary
-        checkTyped("16" + KEY_ADD + "/", "16", "16 ÷");
-        checkTyped("564" + KEY_MULTIPLY + "/", "564", "564 ÷");
+        checkTyped("16+/", "16", "16 ÷");
+        checkTyped("564*/", "564", "564 ÷");
         checkTyped("344363-/", "344,363", "344363 ÷");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + "/", "0", "0 ÷");
-        checkTyped("562-" + KEY_PERCENT + "/", "-2,596.44",
-                "562 - 3158.44 ÷");
+        checkTyped("78%/", "0", "0 ÷");
+        checkTyped("562-%/", "-2,596.44", "562 - 3158.44 ÷");
 
         //after equals
         checkTyped("73=/", "73", "73 ÷");
@@ -893,53 +825,48 @@ public class ControllerTest extends RobotControl {
     @Test
     public void negateTests() {
         //standard cases
-        checkTyped("0" + KEY_NEG, "0", "");
-        checkTyped("0.00" + KEY_NEG, "-0.00", "");
-        checkTyped("1" + KEY_NEG, "-1", "");
-        checkTyped("2" + KEY_NEG, "-2", "");
-        checkTyped("256" + KEY_NEG, "-256", "");
-        checkTyped("1151" + KEY_NEG, "-1,151", "");
+        checkTyped("0neg", "0", "");
+        checkTyped("0.00neg", "-0.00", "");
+        checkTyped("1neg", "-1", "");
+        checkTyped("2neg", "-2", "");
+        checkTyped("256neg", "-256", "");
+        checkTyped("1151neg", "-1,151", "");
 
         //several operations
-        checkTyped("1" + KEY_NEG + "2" + KEY_NEG + "3", "123", "");
-        checkTyped("1" + KEY_NEG + "2" + KEY_NEG + "3" + KEY_NEG, "-123",
-                "");
+        checkTyped("1neg2neg3", "123", "");
+        checkTyped("1neg2neg3neg", "-123", "");
 
         //after dot
-        checkTyped("62." + KEY_NEG, "-62.", "");
+        checkTyped("62.neg", "-62.", "");
 
         //in a row
-        checkTyped("866" + KEY_NEG + KEY_NEG + KEY_NEG + KEY_NEG + KEY_NEG, "-866",
-                "");
+        checkTyped("866neg neg neg neg neg", "-866", "");
 
         //after another unary
-        checkTyped("8^" + KEY_NEG, "-64", "negate( sqr( 8 ) )");
-        checkTyped("49" + KEY_SQRT + KEY_NEG, "-7", "negate( √( 49 ) )");
-        checkTyped("1" + KEY_INVERSE + KEY_NEG, "-1", "negate( 1/( 1 ) )");
+        checkTyped("8²neg", "-64", "negate( sqr( 8 ) )");
+        checkTyped("49 √ neg", "-7", "negate( √( 49 ) )");
+        checkTyped("1 1/x neg", "-1", "negate( 1/( 1 ) )");
 
         //after binary
-        checkTyped("564-" + KEY_NEG, "-564", "564 - negate( 564 )");
-        checkTyped("55/" + KEY_NEG, "-55", "55 ÷ negate( 55 )");
+        checkTyped("564-neg", "-564", "564 - negate( 564 )");
+        checkTyped("55/neg", "-55", "55 ÷ negate( 55 )");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + KEY_NEG, "0", "negate( 0 )");
-        checkTyped("565-" + KEY_PERCENT + KEY_NEG, "-3,192.25",
-                "565 - negate( 3192.25 )");
+        checkTyped("78%neg", "0", "negate( 0 )");
+        checkTyped("565-%neg", "-3,192.25", "565 - negate( 3192.25 )");
 
         //after equals
-        checkTyped("73=" + KEY_NEG, "-73", "negate( 73 )");
-        checkTyped("53-11=" + KEY_NEG, "-42", "negate( 42 )");
+        checkTyped("73=neg", "-73", "negate( 73 )");
+        checkTyped("53-11=neg", "-42", "negate( 42 )");
 
         //negating negated
-        checkTyped("92/5=" + KEY_NEG + KEY_NEG, "18.4",
-                "negate( negate( 18.4 ) )");
+        checkTyped("92/5=neg neg", "18.4", "negate( negate( 18.4 ) )");
 
         //negating after second inputted
-        checkTyped("856-30" + KEY_NEG, "-30", "856 -");
+        checkTyped("856-30neg", "-30", "856 -");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6^" + KEY_NEG, "-36",
-                "8 × negate( sqr( 6 ) )");
+        checkTyped("8*6²neg", "-36", "8 × negate( sqr( 6 ) )");
     }
 
     /**
@@ -948,46 +875,44 @@ public class ControllerTest extends RobotControl {
     @Test
     public void sqrTests() {
         //standard cases
-        checkTyped("0^", "0", "sqr( 0 )");
-        checkTyped("1^", "1", "sqr( 1 )");
-        checkTyped("256^", "65,536", "sqr( 256 )");
-        checkTyped("1151^", "1,324,801", "sqr( 1151 )");
+        checkTyped("0²", "0", "sqr( 0 )");
+        checkTyped("1²", "1", "sqr( 1 )");
+        checkTyped("256²", "65,536", "sqr( 256 )");
+        checkTyped("1151²", "1,324,801", "sqr( 1151 )");
 
         //several operations
-        checkTyped("1^2^3^", "9", "sqr( 3 )");
+        checkTyped("1²2²3²", "9", "sqr( 3 )");
 
         //after dot
-        checkTyped("62.^", "3,844", "sqr( 62 )");
+        checkTyped("62.²", "3,844", "sqr( 62 )");
 
         //in a row
-        checkTyped("866^^^^^", "1.00131920194e+94",
+        checkTyped("866²²²²²", "1.00131920194e+94",
                 "sqr( sqr( sqr( sqr( sqr( 866 ) ) ) ) )");
 
         //after another unary
-        checkTyped("8" + KEY_NEG + "^", "64", "sqr( -8 )");
-        checkTyped("49 " + KEY_SQRT + "^", "49", "sqr( √( 49 ) )");
-        checkTyped("0.000001" + KEY_INVERSE + "^", "1,000,000,000,000",
+        checkTyped("8neg²", "64", "sqr( -8 )");
+        checkTyped("49 √ ²", "49", "sqr( √( 49 ) )");
+        checkTyped("0.000001 1/x ²", "1,000,000,000,000",
                 "sqr( 1/( 0.000001 ) )");
 
         //after binary
-        checkTyped("564-^", "318,096", "564 - sqr( 564 )");
-        checkTyped("55/^", "3,025", "55 ÷ sqr( 55 )");
+        checkTyped("564-²", "318,096", "564 - sqr( 564 )");
+        checkTyped("55/²", "3,025", "55 ÷ sqr( 55 )");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + "^", "0", "sqr( 0 )");
-        checkTyped("565-" + KEY_PERCENT + "^", "10,190,460.0625",
-                "565 - sqr( 3192.25 )");
+        checkTyped("78%²", "0", "sqr( 0 )");
+        checkTyped("565-%²", "10,190,460.0625", "565 - sqr( 3192.25 )");
 
         //after equals
-        checkTyped("73=^", "5,329", "sqr( 73 )");
-        checkTyped("53-14=^", "1,521", "sqr( 39 )");
+        checkTyped("73=²", "5,329", "sqr( 73 )");
+        checkTyped("53-14=²", "1,521", "sqr( 39 )");
 
         //after second inputted
-        checkTyped("8" + KEY_MULTIPLY + "6^", "36", "8 × sqr( 6 )");
+        checkTyped("8*6²", "36", "8 × sqr( 6 )");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6^^", "1,296",
-                "8 × sqr( sqr( 6 ) )");
+        checkTyped("8*6²²", "1,296", "8 × sqr( sqr( 6 ) )");
     }
 
     /**
@@ -996,50 +921,44 @@ public class ControllerTest extends RobotControl {
     @Test
     public void sqrtTests() {
         //standard cases
-        checkTyped("0" + KEY_SQRT, "0", "√( 0 )");
-        checkTyped("1" + KEY_SQRT, "1", "√( 1 )");
-        checkTyped("256" + KEY_SQRT, "16", "√( 256 )");
-        checkTyped("1151 " + KEY_SQRT, "33.92639090737475", "√( 1151 )");
+        checkTyped("0 √", "0", "√( 0 )");
+        checkTyped("1 √", "1", "√( 1 )");
+        checkTyped("256 √", "16", "√( 256 )");
+        checkTyped("1151 √", "33.92639090737475", "√( 1151 )");
 
         //several operations
-        checkTyped("1" + KEY_SQRT + "2 " + KEY_SQRT + "3 " + KEY_SQRT, "1.732050807568877",
-                "√( 3 )");
+        checkTyped("1 √ 2  √ 3  √", "1.732050807568877", "√( 3 )");
 
         //after dot
-        checkTyped("62." + KEY_SQRT, "7.874007874011811", "√( 62 )");
+        checkTyped("62. √", "7.874007874011811", "√( 62 )");
 
         //in a row
-        checkTyped("866" + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT + KEY_SQRT,
-                "1.235371090882345", "√( √( √( √( √( 866 ) ) ) ) )");
+        checkTyped("866 √√√√√", "1.235371090882345",
+                "√( √( √( √( √( 866 ) ) ) ) )");
 
         //after another unary
-        checkTyped("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE, "√( -8 )");
-        checkTyped("3600000000^" + KEY_SQRT, "3,600,000,000",
+        checkTyped("8neg √", INVALID_INPUT_MESSAGE, "√( -8 )");
+        checkTyped("3600000000² √", "3,600,000,000",
                 "√( sqr( 3600000000 ) )");
-        checkTyped("0.000001" + KEY_INVERSE + KEY_SQRT, "1,000",
-                "√( 1/( 0.000001 ) )");
+        checkTyped("0.000001 1/x √", "1,000", "√( 1/( 0.000001 ) )");
 
         //after binary
-        checkTyped("564-" + KEY_SQRT, "23.74868417407583", "564 - √( 564 )");
-        checkTyped("1567/" + KEY_SQRT, "39.58535082577897",
-                "1567 ÷ √( 1567 )");
+        checkTyped("564- √", "23.74868417407583", "564 - √( 564 )");
+        checkTyped("1567/ √", "39.58535082577897", "1567 ÷ √( 1567 )");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + KEY_SQRT, "0", "√( 0 )");
-        checkTyped("562-" + KEY_PERCENT + KEY_SQRT, "56.2",
-                "562 - √( 3158.44 )");
+        checkTyped("78%√", "0", "√( 0 )");
+        checkTyped("562-%√", "56.2", "562 - √( 3158.44 )");
 
         //after equals
-        checkTyped("73=" + KEY_SQRT, "8.544003745317531", "√( 73 )");
-        checkTyped("53-23=" + KEY_SQRT, "5.477225575051661", "√( 30 )");
+        checkTyped("73= √", "8.544003745317531", "√( 73 )");
+        checkTyped("53-23= √", "5.477225575051661", "√( 30 )");
 
         //after second inputted
-        checkTyped("856-30" + KEY_SQRT, "5.477225575051661",
-                "856 - √( 30 )");
+        checkTyped("856-30 √", "5.477225575051661", "856 - √( 30 )");
 
         //after second calculating
-        checkTyped("1" + KEY_ADD + "2" + KEY_ADD + "3" + KEY_ADD + "4" + KEY_INVERSE + KEY_SQRT,
-                "0.5", "1 + 2 + 3 + √( 1/( 4 ) )");
+        checkTyped("1+2+3+4 1/x √", "0.5", "1 + 2 + 3 + √( 1/( 4 ) )");
     }
 
     /**
@@ -1048,56 +967,47 @@ public class ControllerTest extends RobotControl {
     @Test
     public void inverseTests() {
         //standard cases
-        checkTyped("1" + KEY_INVERSE, "1", "1/( 1 )");
-        checkTyped("2" + KEY_INVERSE, "0.5", "1/( 2 )");
-        checkTyped("256" + KEY_INVERSE, "0.00390625", "1/( 256 )");
-        checkTyped("1151" + KEY_INVERSE, "8.688097306689835e-4",
-                "1/( 1151 )");
+        checkTyped("1 1/x", "1", "1/( 1 )");
+        checkTyped("2 1/x", "0.5", "1/( 2 )");
+        checkTyped("256 1/x", "0.00390625", "1/( 256 )");
+        checkTyped("1151 1/x", "8.688097306689835e-4", "1/( 1151 )");
 
         //several operations
-        checkTyped("1" + KEY_INVERSE + "2" + KEY_INVERSE + "3" + KEY_INVERSE,
-                "0.3333333333333333", "1/( 3 )");
+        checkTyped("1 1/x 2 1/x 3 1/x", "0.3333333333333333", "1/( 3 )");
 
         //after dot
-        checkTyped("62." + KEY_INVERSE, "0.0161290322580645", "1/( 62 )");
+        checkTyped("62. 1/x", "0.0161290322580645", "1/( 62 )");
 
         //in a row
-        checkTyped("866" + KEY_INVERSE + KEY_INVERSE + KEY_INVERSE + KEY_INVERSE, "866",
+        checkTyped("866 1/x 1/x 1/x 1/x", "866",
                 "1/( 1/( 1/( 1/( 866 ) ) ) )");
-        checkTyped("866" + KEY_INVERSE + KEY_INVERSE + KEY_INVERSE + KEY_INVERSE + KEY_INVERSE,
-                "0.0011547344110855", "1/( 1/( 1/( 1/( 1/( 866 ) ) ) ) )");
+        checkTyped("866 1/x 1/x 1/x 1/x 1/x", "0.0011547344110855",
+                "1/( 1/( 1/( 1/( 1/( 866 ) ) ) ) )");
 
         //after another unary
-        checkTyped("123" + KEY_NEG + KEY_INVERSE, "-0.008130081300813",
-                "1/( -123 )");
-        checkTyped("49^" + KEY_INVERSE, "4.164931278633903e-4",
-                "1/( sqr( 49 ) )");
-        checkTyped("1" + KEY_SQRT + KEY_INVERSE, "1", "1/( √( 1 ) )");
+        checkTyped("123neg 1/x", "-0.008130081300813", "1/( -123 )");
+        checkTyped("49² 1/x", "4.164931278633903e-4", "1/( sqr( 49 ) )");
+        checkTyped("1 √ 1/x", "1", "1/( √( 1 ) )");
 
         //after binary
-        checkTyped("6522456-" + KEY_INVERSE, "1.533164807857654e-7",
+        checkTyped("6522456- 1/x", "1.533164807857654e-7",
                 "6522456 - 1/( 6522456 )");
-        checkTyped("55/" + KEY_INVERSE, "0.0181818181818182",
-                "55 ÷ 1/( 55 )");
+        checkTyped("55/ 1/x", "0.0181818181818182", "55 ÷ 1/( 55 )");
 
         //after percent
-        checkTyped("78" + KEY_PERCENT + KEY_INVERSE, DIVIDE_BY_ZERO_MESSAGE,
-                "1/( 0 )");
-        checkTyped("562-" + KEY_PERCENT + KEY_INVERSE, "3.166119983282886e-4",
+        checkTyped("78% 1/x", DIVIDE_BY_ZERO_MESSAGE, "1/( 0 )");
+        checkTyped("562-% 1/x", "3.166119983282886e-4",
                 "562 - 1/( 3158.44 )");
 
         //after equals
-        checkTyped("73=" + KEY_INVERSE, "0.0136986301369863", "1/( 73 )");
-        checkTyped("53-26=" + KEY_INVERSE, "0.037037037037037",
-                "1/( 27 )");
+        checkTyped("73= 1/x", "0.0136986301369863", "1/( 73 )");
+        checkTyped("53-26= 1/x", "0.037037037037037", "1/( 27 )");
 
         //after second inputted
-        checkTyped("856-30" + KEY_INVERSE, "0.0333333333333333",
-                "856 - 1/( 30 )");
+        checkTyped("856-30 1/x", "0.0333333333333333", "856 - 1/( 30 )");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6^ " + KEY_INVERSE, "0.0277777777777778",
-                "8 × 1/( sqr( 6 ) )");
+        checkTyped("8*6²  1/x", "0.0277777777777778", "8 × 1/( sqr( 6 ) )");
     }
 
     /**
@@ -1106,55 +1016,47 @@ public class ControllerTest extends RobotControl {
     @Test
     public void percentageTests() {
         //standard cases
-        checkTyped("0" + KEY_PERCENT, "0", "0");
-        checkTyped("1" + KEY_PERCENT, "0", "0");
-        checkTyped("256" + KEY_PERCENT, "0", "0");
-        checkTyped("1151" + KEY_PERCENT, "0", "0");
+        checkTyped("0%", "0", "0");
+        checkTyped("1%", "0", "0");
+        checkTyped("256%", "0", "0");
+        checkTyped("1151%", "0", "0");
 
         //several operations
-        checkTyped("1" + KEY_PERCENT + "2" + KEY_PERCENT + "3" + KEY_PERCENT, "0",
-                "0");
+        checkTyped("1%2%3%", "0", "0");
 
         //after dot
-        checkTyped("62." + KEY_PERCENT, "0", "0");
+        checkTyped("62.%", "0", "0");
 
         //in a row
-        checkTyped("866" + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT,
-                "0", "0");
-        checkTyped("866" + KEY_ADD + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT,
-                "42,180,075.43559148", "866 + 42180075.43559148");
-        checkTyped("866/" + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT + KEY_PERCENT,
-                "0.0000000866", "866 ÷ 0.0000000866");
+        checkTyped("866%%%%%", "0", "0");
+        checkTyped("866+%%%%%", "42,180,075.43559148",
+                "866 + 42180075.43559148");
+        checkTyped("866/%%%%%", "0.0000000866", "866 ÷ 0.0000000866");
 
         //after unary
-        checkTyped("8" + KEY_NEG + KEY_PERCENT, "0", "0");
-        checkTyped("49-^" + KEY_PERCENT, "1,176.49", "49 - 1176.49");
-        checkTyped("64/" + KEY_SQRT + KEY_PERCENT, "0.08", "64 ÷ 0.08");
+        checkTyped("8neg%", "0", "0");
+        checkTyped("49-²%", "1,176.49", "49 - 1176.49");
+        checkTyped("64/ √%", "0.08", "64 ÷ 0.08");
 
         //after binary
-        checkTyped("564-" + KEY_PERCENT, "3,180.96", "564 - 3180.96");
-        checkTyped("6522456-" + KEY_PERCENT, "425,424,322,719.36",
+        checkTyped("564-%", "3,180.96", "564 - 3180.96");
+        checkTyped("6522456-%", "425,424,322,719.36",
                 "6522456 - 425424322719.36");
-        checkTyped("55/" + KEY_PERCENT, "0.55", "55 ÷ 0.55");
-        checkTyped("1567/" + KEY_PERCENT, "15.67", "1567 ÷ 15.67");
+        checkTyped("55/%", "0.55", "55 ÷ 0.55");
+        checkTyped("1567/%", "15.67", "1567 ÷ 15.67");
 
         //after equals
-        checkTyped("73=" + KEY_PERCENT, "0", "0");
-        checkTyped("53" + KEY_ADD + "1 2 = " + KEY_PERCENT, "42.25",
-                "42.25");
-        checkTyped("53/12=" + KEY_PERCENT, "0.0441666666666667",
-                "0.0441666666666667");
+        checkTyped("73=%", "0", "0");
+        checkTyped("53+1 2 = %", "42.25", "42.25");
+        checkTyped("53/12=%", "0.0441666666666667", "0.0441666666666667");
 
         //percent after second inputted
-        checkTyped("8" + KEY_MULTIPLY + "6" + KEY_PERCENT, "0.06",
-                "8 × 0.06");
-        checkTyped("856-30" + KEY_PERCENT, "256.8", "856 - 256.8");
+        checkTyped("8*6%", "0.06", "8 × 0.06");
+        checkTyped("856-30%", "256.8", "856 - 256.8");
 
         //after second calculating
-        checkTyped("8" + KEY_MULTIPLY + "6^" + KEY_PERCENT, "0.36",
-                "8 × 0.36");
-        checkTyped("1" + KEY_ADD + "2" + KEY_ADD + "3" + KEY_ADD + "4" + KEY_INVERSE + KEY_PERCENT,
-                "0.015", "1 + 2 + 3 + 0.015");
+        checkTyped("8*6²%", "0.36", "8 × 0.36");
+        checkTyped("1+2+3+4 1/x%", "0.015", "1 + 2 + 3 + 0.015");
     }
 
     /**
@@ -1178,48 +1080,44 @@ public class ControllerTest extends RobotControl {
         checkTyped("866=====", "866", "");
 
         //in a row with binary set
-        checkTyped("866" + KEY_ADD + "123=====", "1,481", "");
+        checkTyped("866+123=====", "1,481", "");
 
         //after unary without binary set
-        checkTyped("8" + KEY_NEG + "=", "-8", "");
-        checkTyped("49^ =", "2,401", "");
-        checkTyped("1234" + KEY_SQRT + "=", "35.12833614050059", "");
-        checkTyped("0.000001" + KEY_INVERSE + "=", "1,000,000", "");
+        checkTyped("8neg=", "-8", "");
+        checkTyped("49² =", "2,401", "");
+        checkTyped("1234 √ =", "35.12833614050059", "");
+        checkTyped("0.000001 1/x =", "1,000,000", "");
 
         //after unary with binary set
-        checkTyped("5" + KEY_ADD + "8" + KEY_NEG + "=", "-3", "");
-        checkTyped("5" + KEY_ADD + "8" + KEY_NEG + "==", "-11", "");
+        checkTyped("5+8neg=", "-3", "");
+        checkTyped("5+8neg==", "-11", "");
 
-        checkTyped("7543" + KEY_MULTIPLY + "49^ =", "18,110,743", "");
-        checkTyped("7543" + KEY_MULTIPLY + "49^ ==", "43,483,893,943",
-                "");
+        checkTyped("7543*49² =", "18,110,743", "");
+        checkTyped("7543*49² ==", "43,483,893,943", "");
 
-        checkTyped("0/3600000000" + KEY_SQRT + "=", "0", "");
-        checkTyped("0/3600000000" + KEY_SQRT + "==", "0", "");
+        checkTyped("0/3600000000 √ =", "0", "");
+        checkTyped("0/3600000000 √ ==", "0", "");
 
-        checkTyped("213" + KEY_MULTIPLY + "1" + KEY_INVERSE + "=", "213",
-                "");
-        checkTyped("213" + KEY_MULTIPLY + "1" + KEY_INVERSE + "==", "213",
-                "");
+        checkTyped("213*1 1/x =", "213", "");
+        checkTyped("213*1 1/x ==", "213", "");
 
         //after binary
-        checkTyped("16" + KEY_ADD + "=", "32", "");
-        checkTyped("16" + KEY_ADD + "==", "48", "");
+        checkTyped("16+=", "32", "");
+        checkTyped("16+==", "48", "");
 
-        checkTyped("344363" + KEY_MULTIPLY + "=", "118,585,875,769", "");
-        checkTyped("344363" + KEY_MULTIPLY + "===", "1.40626099319007e+22",
-                "");
+        checkTyped("344363*=", "118,585,875,769", "");
+        checkTyped("344363*===", "1.40626099319007e+22", "");
 
         //after percent
-        checkTyped("6" + KEY_PERCENT + "=", "0", "");
-        checkTyped("6" + KEY_ADD + KEY_PERCENT + "=", "6.36", "");
-        checkTyped("6" + KEY_MULTIPLY + KEY_PERCENT + "==", "0.0216", "");
+        checkTyped("6%=", "0", "");
+        checkTyped("6+%=", "6.36", "");
+        checkTyped("6*%==", "0.0216", "");
 
         //equals after second inputted
-        checkTyped("8" + KEY_MULTIPLY + "6=", "48", "");
+        checkTyped("8*6=", "48", "");
 
         //equals after second calculated
-        checkTyped("856-30^ =", "-44", "");
+        checkTyped("856-30² =", "-44", "");
 
         //after error
         checkTyped("/0==", "0", "");
@@ -1232,40 +1130,38 @@ public class ControllerTest extends RobotControl {
     public void exceptionTests() {
         //overflow
         //add
-        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000=======" +
-                        "=============================================" + KEY_MULTIPLY + "10===" + KEY_ADD + "=========",
-                OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
+                "==+=========", OVERFLOW_MESSAGE);
 
         //subtract
-        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000======" +
-                "==============================================" + KEY_MULTIPLY + "10===-===========", OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
+                "==-===========", OVERFLOW_MESSAGE);
 
         //multiply
-        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000======" +
-                "==============================================" + KEY_MULTIPLY + "10====", OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
+                "===", OVERFLOW_MESSAGE);
 
         //divide
-        checkException("0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "0.000000000000001====" +
-                "================================================/10====", OVERFLOW_MESSAGE);
+        checkException("0.000000001²²²²²²²²²²*0.000000000000001====================================================/10" +
+                "====", OVERFLOW_MESSAGE);
 
-        //^
-        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^", OVERFLOW_MESSAGE);
-        checkException("0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^", OVERFLOW_MESSAGE);
+        //²
+        checkException("1000000000²²²²²²²²²²²", OVERFLOW_MESSAGE);
+        checkException("0.000000001²²²²²²²²²²²", OVERFLOW_MESSAGE);
 
         //percentage
-        checkException("1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "1000000000000000======" +
-                        "==============================================" + KEY_MULTIPLY + "10===" + KEY_ADD +
-                        KEY_PERCENT, OVERFLOW_MESSAGE);
-        checkException("0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "0.000000000000001=====" +
-                "===============================================/10===" + KEY_MULTIPLY + KEY_PERCENT, OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
+                "==+%", OVERFLOW_MESSAGE);
+        checkException("0.000000001²²²²²²²²²²*0.000000000000001====================================================/10" +
+                "===*%", OVERFLOW_MESSAGE);
 
         //invalid input
-        checkException("1" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
-        checkException("8" + KEY_NEG + KEY_SQRT, INVALID_INPUT_MESSAGE);
+        checkException("1neg √", INVALID_INPUT_MESSAGE);
+        checkException("8neg √", INVALID_INPUT_MESSAGE);
 
         //divide by zero
         checkException("14/0=", DIVIDE_BY_ZERO_MESSAGE);
-        checkException("0" + KEY_INVERSE, DIVIDE_BY_ZERO_MESSAGE);
+        checkException("0 1/x", DIVIDE_BY_ZERO_MESSAGE);
 
         //divide zero by zero
         checkException("0/0=", DIVIDE_ZERO_BY_ZERO_MESSAGE);
@@ -1277,46 +1173,41 @@ public class ControllerTest extends RobotControl {
     @Test
     public void boundaryTests() {
         //string for calculating number 1.e+9999
-        String oneDotEPlusFourNines = "1000000000 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY +
-                "10000000000" + "00000====================================================" + KEY_MULTIPLY + "10===";
+        String oneDotEPlusFourNines = "1000000000²²²²²²²²²²*1000000000000000=========================================" +
+                "===========*10===";
 
         //string for calculating number 1.e-9999
-        String theSmallestNumber = "0.000000001 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^" + KEY_MULTIPLY + "0.00000000" +
-                "00000001================================================" + KEY_MULTIPLY + "0.000000000000001=";
+        String theSmallestNumber = "0.000000001²²²²²²²²²²*0.0000000000000001=========================================" +
+                "=======*0.000000000000001=";
 
         //string for calculating number 999999999999999949999.....9.9999...9.8
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
-        String boundaryNumber = oneDotEPlusFourNines + KEY_MULTIPLY + "0.5=" + KEY_MULTIPLY + "0.1=============== MS /5=" + KEY_MULTIPLY + "10================-" + KEY_INVERSE + "==-" + KEY_MR + "=" +
-                KEY_MULTIPLY + "10=" + KEY_MULTIPLY + "0.1= MS esc" + oneDotEPlusFourNines + KEY_MULTIPLY +
-                "9" + KEY_ADD + KEY_MR + "=";
+        String boundaryNumber = oneDotEPlusFourNines + "*0.5=*0.1=============== MS /5=*10================- 1/x ==- " +
+                "MR = *10=*0.1= MS esc" + oneDotEPlusFourNines + "*9+ MR =";
 
         //max numbers
         //right
-        checkTyped(boundaryNumber + " MS esc" + theSmallestNumber + KEY_ADD + KEY_MR + "=",
+        checkTyped(boundaryNumber + "MS esc" + theSmallestNumber + "+ MR =",
                 "9.999999999999999e+9999");
-        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "=" + KEY_ADD + KEY_MR + "=");
-        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_ADD + "==" + KEY_ADD + KEY_MR + "=");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + "+=+ MR =");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + "+==+ MR =");
 
         //left
-        checkTypedWithoutResetMemory(KEY_MR + KEY_NEG + " MS esc" + theSmallestNumber + KEY_MULTIPLY +
-                "-1" + KEY_ADD + KEY_MR,"-9.999999999999999e+9999");
-        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_MULTIPLY + "-1" + KEY_ADD + "=" +
-                KEY_ADD + KEY_MR + "=");
-        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + KEY_MULTIPLY + "-1" + KEY_ADD + "==" +
-                KEY_ADD + KEY_MR + "=");
+        checkTypedWithoutResetMemory("MR neg MS esc" + theSmallestNumber + "*-1+MR",
+                "-9.999999999999999e+9999");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + "*-1+=+ MR =");
+        checkOverflowExceptionWithoutResetMemory(theSmallestNumber + "*-1+==+ MR =");
 
         //min numbers
-        checkTyped(theSmallestNumber + "MS" + KEY_MULTIPLY + "2=-" + KEY_MR + "=",
-                "1.e-9999");
+        checkTyped(theSmallestNumber + "MS *2=- MR =", "1.e-9999");
 
-        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10" + KEY_MULTIPLY + "0.1=",
-                "1.e-9999");
-        checkTypedWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "10/10=", "1.e-9999");
+        checkTypedWithoutResetMemory("MR *10*0.1=", "1.e-9999");
+        checkTypedWithoutResetMemory("MR *10/10=", "1.e-9999");
 
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.1=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/10=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + KEY_MULTIPLY + "0.01=");
-        checkOverflowExceptionWithoutResetMemory(KEY_MR + "/100=");
+        checkOverflowExceptionWithoutResetMemory("MR *0.1=");
+        checkOverflowExceptionWithoutResetMemory("MR /10=");
+        checkOverflowExceptionWithoutResetMemory("MR *0.01=");
+        checkOverflowExceptionWithoutResetMemory("MR /100=");
     }
 
     /**
