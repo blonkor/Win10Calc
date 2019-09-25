@@ -206,6 +206,16 @@ public class Controller implements Initializable {
      */
     private boolean isRecalledFromMemory = false;
 
+    /**
+     * True if memory is shown.
+     */
+    private boolean isMemoryShown = false;
+
+    /**
+     * True if navigation is shown.
+     */
+    private boolean isNavigationShown = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //no initializing is needed
@@ -322,7 +332,7 @@ public class Controller implements Initializable {
 
         }
 
-        if (buttonToFire != null && !memoryBlock.isVisible() && !navigationBlock.isVisible()) {
+        if (buttonToFire != null && !isMemoryShown && !isNavigationShown) {
             buttonToFire.fire();
         }
     }
@@ -331,8 +341,9 @@ public class Controller implements Initializable {
      * Opens or closes navigation bar.
      */
     public void showOrHideNavigationPanel() {
-        translateNavigation(!navigationBlock.isVisible());
-        navigationBlock.setVisible(!navigationBlock.isVisible());
+        translateNavigation(!isNavigationShown);
+        navigationBlock.setVisible(!isNavigationShown);
+        isNavigationShown = !isNavigationShown;
     }
 
     /**
@@ -376,10 +387,12 @@ public class Controller implements Initializable {
      * Shows memory.
      */
     public void memoryShowOperation() {
-        memoryAnchorPane.setVisible(!memoryAnchorPane.isVisible());
-        memoryBlock.setVisible(!memoryBlock.isVisible());
+        memoryAnchorPane.setVisible(!isMemoryShown);
+        memoryBlock.setVisible(!isMemoryShown);
 
-        if (memoryAnchorPane.isVisible()) {
+        isMemoryShown = !isMemoryShown;
+
+        if (isMemoryShown) {
             updateMemoryLabels();
         }
     }

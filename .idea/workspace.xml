@@ -4,8 +4,6 @@
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/enums/BinaryOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/enums/BinaryOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/enums/UnaryOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/enums/UnaryOperation.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,7 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest">
+  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -129,50 +127,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DemoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.allTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.model.*" />
+          <option name="PATTERN" value="tests.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.DemoTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="allTests" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemoryModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.memoryShowTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.model.*" />
+          <option name="PATTERN" value="tests.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.model" />
-      <option name="MAIN_CLASS_NAME" value="tests.model.MemoryModelTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="memoryShowTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.DemoTest" />
-      <item itemvalue="JUnit.MemoryModelTest" />
       <item itemvalue="JUnit.CalculationModelTest" />
       <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.ControllerTest.allTests" />
+      <item itemvalue="JUnit.ControllerTest.memoryShowTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControllerTest.allTests" />
+        <item itemvalue="JUnit.ControllerTest.memoryShowTest" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.CalculationModelTest" />
         <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.MemoryModelTest" />
-        <item itemvalue="JUnit.DemoTest" />
       </list>
     </recent_temporary>
   </component>
@@ -186,13 +186,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00169" summary="Tests for memory using keypad created.">
-      <created>1568033289311</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1568033289311</updated>
     </task>
     <task id="LOCAL-00170" summary="Reduced time for running view tests by optimizing them and removing unnecessary test cases.">
       <created>1568040332012</created>
@@ -530,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569407043322</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL-00218" summary="Symbols for equation label removed from model to controller.">
+      <created>1569409339464</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1569409339464</updated>
+    </task>
+    <option name="localTasksCounter" value="219" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -564,7 +564,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Demo test case moved to another class." />
     <MESSAGE value="Refactoring model tests so it is now easier to understand. Test cases for add and subtract operation changed." />
     <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Refactoring memory model tests." />
@@ -589,7 +588,8 @@
     <MESSAGE value="Demo test case for model for exception created." />
     <MESSAGE value="Returning clone of collection instead of origin in memory." />
     <MESSAGE value="Equals method for big decimals replaced by compare to method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Equals method for big decimals replaced by compare to method." />
+    <MESSAGE value="Symbols for equation label removed from model to controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Symbols for equation label removed from model to controller." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
