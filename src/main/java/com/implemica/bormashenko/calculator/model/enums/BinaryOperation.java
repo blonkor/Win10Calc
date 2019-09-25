@@ -10,34 +10,20 @@ public enum BinaryOperation {
     /**
      * Sums two numbers.
      */
-    ADD("+"),
+    ADD,
 
     /**
      * Subtracts one number from another.
      */
-    SUBTRACT("-"),
+    SUBTRACT,
 
     /**
      * Multiplies two numbers.
      */
-    MULTIPLY("×"),
+    MULTIPLY,
 
     /**
      * Divides one number to another.
      */
-    DIVIDE("÷");
-
-    /**
-     * Symbol representation of operation.
-     */
-    public String symbol;
-
-    /**
-     * Constructor for the enum.
-     *
-     * @param symbol symbol representation of operation.
-     */
-    BinaryOperation(String symbol) {
-        this.symbol = symbol;
-    }
+    DIVIDE
 }

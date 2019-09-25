@@ -122,6 +122,46 @@ public class Controller implements Initializable {
     private static final String CLOSING_BRACKET = ")";
 
     /**
+     * Symbol of {@code BinaryOperation.ADD} operation used in equation {@code Label}.
+     */
+    private static final String ADD_SYMBOL = "+";
+
+    /**
+     * Symbol of {@code BinaryOperation.SUBTRACT} operation used in equation {@code Label}.
+     */
+    private static final String SUBTRACT_SYMBOL = "-";
+
+    /**
+     * Symbol of {@code BinaryOperation.MULTIPLY} operation used in equation {@code Label}.
+     */
+    private static final String MULTIPLY_SYMBOL = "×";
+
+    /**
+     * Symbol of {@code BinaryOperation.DIVIDE} operation used in equation {@code Label}.
+     */
+    private static final String DIVIDE_SYMBOL = "÷";
+
+    /**
+     * Symbol of {@code UnaryOperation.NEGATE} operation used in equation {@code Label}.
+     */
+    private static final String NEGATE_SYMBOL = "negate";
+
+    /**
+     * Symbol of {@code UnaryOperation.SQR} operation used in equation {@code Label}.
+     */
+    private static final String SQR_SYMBOL = "sqr";
+
+    /**
+     * Symbol of {@code UnaryOperation.SQRT} operation used in equation {@code Label}.
+     */
+    private static final String SQRT_SYMBOL = "√";
+
+    /**
+     * Symbol of {@code UnaryOperation.INVERSE} operation used in equation {@code Label}.
+     */
+    private static final String INVERSE_SYMBOL = "1/";
+
+    /**
      * {@link Calculation} model of application.
      */
     private Calculation calculation = new Calculation();
@@ -801,13 +841,14 @@ public class Controller implements Initializable {
             }
 
             if (!isFirstSet) {
-                equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE + operation.symbol;
+                equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE +
+                        binaryOperationSymbol(operation);
 
                 setBinaryAndFirst(operation, number);
 
             } else if (!isEqualsPressed && !isUnaryOrPercentPressed) {
                 equationTextToSet = equation.getText() + NARROW_SPACE + formatWithoutGroupSeparator(number) +
-                        NARROW_SPACE + operation.symbol;
+                        NARROW_SPACE + binaryOperationSymbol(operation);
 
                 calculateBinaryAndSetNewBinary(operation, number);
 
@@ -816,7 +857,7 @@ public class Controller implements Initializable {
                 if (isEqualsPressed) {
                     equationTextToSet = binaryAfterEquals(operation, calculation.getResult());
                 } else {
-                    equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
+                    equationTextToSet = equation.getText() + NARROW_SPACE + binaryOperationSymbol(operation);
                 }
 
                 if (isUnaryOrPercentPressed) {
@@ -877,10 +918,10 @@ public class Controller implements Initializable {
 
         if (calculation.getBinaryOperation() == null) {
             equationTextToSet = formatWithoutGroupSeparator(number) +
-                    NARROW_SPACE + operation.symbol;
+                    NARROW_SPACE + binaryOperationSymbol(operation);
         } else {
             equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
-                    NARROW_SPACE + operation.symbol;
+                    NARROW_SPACE + binaryOperationSymbol(operation);
         }
 
         setBinaryAndFirst(operation, number);
@@ -895,7 +936,7 @@ public class Controller implements Initializable {
      */
     private void binaryAfterBinary(BinaryOperation operation) {
         calculation.setBinaryOperation(operation);
-        equation.setText(StringUtils.chop(equation.getText()) + operation.symbol);
+        equation.setText(StringUtils.chop(equation.getText()) + binaryOperationSymbol(operation));
 
         setFlags(false, true, false,
                 false, true, false, false);
@@ -934,7 +975,7 @@ public class Controller implements Initializable {
             }
 
             if (!isFirstSet) {
-                equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
                         formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
 
                 setFirstAndCalculateUnary(operation, number);
@@ -1020,10 +1061,10 @@ public class Controller implements Initializable {
         String textBefore = EMPTY_STRING;
         String textAfter = equationTextToSet;
 
-        if (equationTextToSet.contains(BinaryOperation.ADD.symbol) ||
-                equationTextToSet.contains(BinaryOperation.SUBTRACT.symbol) ||
-                equationTextToSet.contains(BinaryOperation.MULTIPLY.symbol) ||
-                equationTextToSet.contains(BinaryOperation.DIVIDE.symbol)) {
+        if (equationTextToSet.contains(ADD_SYMBOL) ||
+                equationTextToSet.contains(SUBTRACT_SYMBOL) ||
+                equationTextToSet.contains(MULTIPLY_SYMBOL) ||
+                equationTextToSet.contains(DIVIDE_SYMBOL)) {
 
             int lastIndexOfOperation = findLastIndexOfOperation(equationTextToSet);
 
@@ -1032,11 +1073,11 @@ public class Controller implements Initializable {
         }
 
         if (textBefore.equals(EMPTY_STRING)) {
-            equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
-                    CLOSING_BRACKET;
+            equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE + textAfter +
+                    NARROW_SPACE + CLOSING_BRACKET;
         } else {
-            equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
-                    textAfter + NARROW_SPACE + CLOSING_BRACKET;
+            equationTextToSet = textBefore + NARROW_SPACE + unaryOperationSymbol(operation) + OPENING_BRACKET +
+                    NARROW_SPACE + textAfter + NARROW_SPACE + CLOSING_BRACKET;
         }
 
         return equationTextToSet;
@@ -1050,21 +1091,20 @@ public class Controller implements Initializable {
      * @return last index of {@code BinaryOperation}.
      */
     private int findLastIndexOfOperation(String text) {
-        int lastIndexOfAdd = text.lastIndexOf(BinaryOperation.ADD.symbol);
+        int lastIndexOfAdd = text.lastIndexOf(ADD_SYMBOL);
 
         if (lastIndexOfAdd != -1 && text.charAt(lastIndexOfAdd - 1) == 'e') {
-            lastIndexOfAdd = text.substring(0, lastIndexOfAdd - 1).lastIndexOf(BinaryOperation.ADD.symbol);
+            lastIndexOfAdd = text.substring(0, lastIndexOfAdd - 1).lastIndexOf(ADD_SYMBOL);
         }
 
-        int lastIndexOfSubtract = text.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+        int lastIndexOfSubtract = text.lastIndexOf(SUBTRACT_SYMBOL);
 
         if (lastIndexOfSubtract != -1 && text.charAt(lastIndexOfSubtract - 1) == 'e') {
-            lastIndexOfSubtract = text.substring(0, lastIndexOfSubtract - 1).lastIndexOf(
-                    BinaryOperation.SUBTRACT.symbol);
+            lastIndexOfSubtract = text.substring(0, lastIndexOfSubtract - 1).lastIndexOf(SUBTRACT_SYMBOL);
         }
 
-        int lastIndexOfMultiply = text.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-        int lastIndexOfDivide = text.lastIndexOf(BinaryOperation.DIVIDE.symbol);
+        int lastIndexOfMultiply = text.lastIndexOf(MULTIPLY_SYMBOL);
+        int lastIndexOfDivide = text.lastIndexOf(DIVIDE_SYMBOL);
 
         return Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
                 Math.max(lastIndexOfMultiply, lastIndexOfDivide)) + 1;
@@ -1083,10 +1123,10 @@ public class Controller implements Initializable {
         String equationTextToSet;
 
         if (equation.getText().equals(EMPTY_STRING)) {
-            equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+            equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
                     formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
         } else {
-            equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET +
+            equationTextToSet = equation.getText() + NARROW_SPACE + unaryOperationSymbol(operation) + OPENING_BRACKET +
                     NARROW_SPACE + formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
         }
 
@@ -1421,6 +1461,48 @@ public class Controller implements Initializable {
         this.isFirstSet = isFirstSet;
         this.isError = isError;
         this.isRecalledFromMemory = isRecalledFromMemory;
+    }
+
+    /**
+     * Creates symbol to show in equation {@code Label} for {@link BinaryOperation}.
+     * @param operation {@link BinaryOperation} to use.
+     * @return symbol of the operation.
+     */
+    private String binaryOperationSymbol(BinaryOperation operation) {
+        String symbol = "";
+
+        if (operation == BinaryOperation.ADD) {
+            symbol = ADD_SYMBOL;
+        } else if (operation == BinaryOperation.SUBTRACT) {
+            symbol = SUBTRACT_SYMBOL;
+        } else if (operation == BinaryOperation.MULTIPLY) {
+            symbol = MULTIPLY_SYMBOL;
+        } else if (operation == BinaryOperation.DIVIDE) {
+            symbol = DIVIDE_SYMBOL;
+        }
+
+        return symbol;
+    }
+
+    /**
+     * Creates symbol to show in equation {@code Label} for {@link UnaryOperation}.
+     * @param operation {@link UnaryOperation} to use.
+     * @return symbol of the operation.
+     */
+    private String unaryOperationSymbol(UnaryOperation operation) {
+        String symbol = "";
+
+        if (operation == UnaryOperation.NEGATE) {
+            symbol = NEGATE_SYMBOL;
+        } else if (operation == UnaryOperation.SQR) {
+            symbol = SQR_SYMBOL;
+        } else if (operation == UnaryOperation.SQRT) {
+            symbol = SQRT_SYMBOL;
+        } else if (operation == UnaryOperation.INVERSE) {
+            symbol = INVERSE_SYMBOL;
+        }
+
+        return symbol;
     }
 
     /**
