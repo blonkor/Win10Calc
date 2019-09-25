@@ -187,13 +187,6 @@
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
     </task>
-    <task id="LOCAL-00170" summary="Reduced time for running view tests by optimizing them and removing unnecessary test cases.">
-      <created>1568040332012</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1568040332012</updated>
-    </task>
     <task id="LOCAL-00171" summary="Workspace changed.">
       <created>1568041381035</created>
       <option name="number" value="00171" />
@@ -530,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569409339464</updated>
     </task>
-    <option name="localTasksCounter" value="219" />
+    <task id="LOCAL-00219" summary="Controller's logic does not depend on view anymore.">
+      <created>1569410220296</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1569410220296</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -564,7 +564,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Refactoring model tests so it is now easier to understand. Test cases for add and subtract operation changed." />
     <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Refactoring memory model tests." />
     <MESSAGE value="Mock for several binary operations in a row made." />
@@ -589,7 +588,8 @@
     <MESSAGE value="Returning clone of collection instead of origin in memory." />
     <MESSAGE value="Equals method for big decimals replaced by compare to method." />
     <MESSAGE value="Symbols for equation label removed from model to controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="Symbols for equation label removed from model to controller." />
+    <MESSAGE value="Controller's logic does not depend on view anymore." />
+    <option name="LAST_COMMIT_MESSAGE" value="Controller's logic does not depend on view anymore." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

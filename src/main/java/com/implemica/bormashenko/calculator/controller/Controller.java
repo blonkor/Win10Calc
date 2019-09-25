@@ -27,8 +27,10 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 import static com.implemica.bormashenko.calculator.controller.util.NumberFormatter.*;
 
@@ -1525,8 +1527,6 @@ public class Controller implements Initializable {
      * @param buttons several {@code Button} that should change their disability.
      */
     private static void setButtonsDisability(boolean flag, Button... buttons) {
-        for (Button button : buttons) {
-            button.setDisable(flag);
-        }
+        Stream.of(buttons).forEach(button -> button.setDisable(flag));
     }
 }
