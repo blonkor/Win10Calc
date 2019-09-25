@@ -29,6 +29,7 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 import static com.implemica.bormashenko.calculator.controller.util.NumberFormatter.*;
 
@@ -122,6 +123,46 @@ public class Controller implements Initializable {
     private static final String CLOSING_BRACKET = ")";
 
     /**
+     * Symbol of {@code BinaryOperation.ADD} operation used in equation {@code Label}.
+     */
+    private static final String ADD_SYMBOL = "+";
+
+    /**
+     * Symbol of {@code BinaryOperation.SUBTRACT} operation used in equation {@code Label}.
+     */
+    private static final String SUBTRACT_SYMBOL = "-";
+
+    /**
+     * Symbol of {@code BinaryOperation.MULTIPLY} operation used in equation {@code Label}.
+     */
+    private static final String MULTIPLY_SYMBOL = "×";
+
+    /**
+     * Symbol of {@code BinaryOperation.DIVIDE} operation used in equation {@code Label}.
+     */
+    private static final String DIVIDE_SYMBOL = "÷";
+
+    /**
+     * Symbol of {@code UnaryOperation.NEGATE} operation used in equation {@code Label}.
+     */
+    private static final String NEGATE_SYMBOL = "negate";
+
+    /**
+     * Symbol of {@code UnaryOperation.SQR} operation used in equation {@code Label}.
+     */
+    private static final String SQR_SYMBOL = "sqr";
+
+    /**
+     * Symbol of {@code UnaryOperation.SQRT} operation used in equation {@code Label}.
+     */
+    private static final String SQRT_SYMBOL = "√";
+
+    /**
+     * Symbol of {@code UnaryOperation.INVERSE} operation used in equation {@code Label}.
+     */
+    private static final String INVERSE_SYMBOL = "1/";
+
+    /**
      * {@link Calculation} model of application.
      */
     private Calculation calculation = new Calculation();
@@ -166,6 +207,16 @@ public class Controller implements Initializable {
      */
     private boolean isRecalledFromMemory = false;
 
+    /**
+     * True if memory is shown.
+     */
+    private boolean isMemoryShown = false;
+
+    /**
+     * True if navigation is shown.
+     */
+    private boolean isNavigationShown = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //no initializing is needed
@@ -177,49 +228,39 @@ public class Controller implements Initializable {
      * @param event keyboard code or combination that was/were pressed.
      */
     public void keyboardHandling(KeyEvent event) {
-        KeyCombination ctrlM = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlP = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlQ = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlR = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlL = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
-        KeyCombination shiftTwo = new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.SHIFT_DOWN);
-        KeyCombination shiftFive = new KeyCodeCombination(KeyCode.DIGIT5, KeyCombination.SHIFT_DOWN);
-        KeyCombination shiftEight = new KeyCodeCombination(KeyCode.DIGIT8, KeyCombination.SHIFT_DOWN);
-        KeyCombination shiftEquals = new KeyCodeCombination(KeyCode.EQUALS, KeyCombination.SHIFT_DOWN);
-
         KeyCode keyCode = event.getCode();
         Button buttonToFire = null;
 
         //combinations with ctrl
         if (event.isControlDown()) {
 
-            if (ctrlM.match(event)) {
+            if (keyCode == KeyCode.M) {
                 buttonToFire = memoryStore;
-            } else if (ctrlP.match(event)) {
+            } else if (keyCode == KeyCode.P) {
                 buttonToFire = memoryAdd;
-            } else if (ctrlQ.match(event)) {
+            } else if (keyCode == KeyCode.Q) {
                 buttonToFire = memorySubtract;
-            } else if (ctrlR.match(event)) {
+            } else if (keyCode == KeyCode.R) {
                 buttonToFire = memoryRecall;
-            } else if (ctrlL.match(event)) {
+            } else if (keyCode == KeyCode.L) {
                 buttonToFire = memoryClear;
             }
 
             //combinations with shift
         } else if (event.isShiftDown()) {
 
-            if (shiftTwo.match(event)) {
+            if (keyCode == KeyCode.DIGIT2) {
                 buttonToFire = sqrt;
-            } else if (shiftFive.match(event)) {
+            } else if (keyCode == KeyCode.DIGIT5) {
                 buttonToFire = percent;
-            } else if (shiftEight.match(event)) {
+            } else if (keyCode == KeyCode.DIGIT8) {
                 buttonToFire = multiply;
-            } else if (shiftEquals.match(event)) {
+            } else if (keyCode == KeyCode.EQUALS) {
                 buttonToFire = add;
             }
 
-            //digit buttons
-        } else if (keyCode.isDigitKey()) {
+            //not a combination
+        } else {
 
             if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
                 buttonToFire = zero;
@@ -241,26 +282,11 @@ public class Controller implements Initializable {
                 buttonToFire = eight;
             } else if (keyCode == KeyCode.DIGIT9 || keyCode == KeyCode.NUMPAD9) {
                 buttonToFire = nine;
-            }
-
-            //letter buttons
-        } else if (keyCode.isLetterKey()) {
-
-            if (keyCode == KeyCode.R) {
+            } else if (keyCode == KeyCode.R) {
                 buttonToFire = inverse;
-            }
-
-            //f buttons
-        } else if (keyCode.isFunctionKey()) {
-
-            if (keyCode == KeyCode.F9) {
+            } else if (keyCode == KeyCode.F9) {
                 buttonToFire = negate;
-            }
-
-            //any else buttons
-        } else {
-
-            if (keyCode == KeyCode.PERIOD) {
+            } else if (keyCode == KeyCode.PERIOD) {
                 buttonToFire = dot;
             } else if (keyCode == KeyCode.BACK_SPACE) {
                 buttonToFire = backspace;
@@ -282,7 +308,7 @@ public class Controller implements Initializable {
 
         }
 
-        if (buttonToFire != null && !memoryBlock.isVisible() && !navigationBlock.isVisible()) {
+        if (buttonToFire != null && !isMemoryShown && !isNavigationShown) {
             buttonToFire.fire();
         }
     }
@@ -291,8 +317,9 @@ public class Controller implements Initializable {
      * Opens or closes navigation bar.
      */
     public void showOrHideNavigationPanel() {
-        translateNavigation(!navigationBlock.isVisible());
-        navigationBlock.setVisible(!navigationBlock.isVisible());
+        translateNavigation(!isNavigationShown);
+        navigationBlock.setVisible(!isNavigationShown);
+        isNavigationShown = !isNavigationShown;
     }
 
     /**
@@ -314,14 +341,7 @@ public class Controller implements Initializable {
      */
     public void memoryStoreOperation() {
         try {
-            BigDecimal number;
-            if (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed) {
-                number = calculation.getResult();
-            } else if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber(true);
 
             memory.storeToMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -336,10 +356,12 @@ public class Controller implements Initializable {
      * Shows memory.
      */
     public void memoryShowOperation() {
-        memoryAnchorPane.setVisible(!memoryAnchorPane.isVisible());
-        memoryBlock.setVisible(!memoryBlock.isVisible());
+        memoryAnchorPane.setVisible(!isMemoryShown);
+        memoryBlock.setVisible(!isMemoryShown);
 
-        if (memoryAnchorPane.isVisible()) {
+        isMemoryShown = !isMemoryShown;
+
+        if (isMemoryShown) {
             updateMemoryLabels();
         }
     }
@@ -384,13 +406,7 @@ public class Controller implements Initializable {
      */
     public void memoryAddOperation() {
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber(false);
 
             memory.addToMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -406,13 +422,7 @@ public class Controller implements Initializable {
      */
     public void memorySubtractOperation() {
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber(false);
 
             memory.subtractFromMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -743,6 +753,33 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Returns correct number for next operations.
+     * <p>
+     * If calculation was just made, returns result.
+     * <p>
+     * If number from memory was just recalled, returns recalled value.
+     * <p>
+     * Otherwise, returns number from screen {@code Label}.
+     *
+     * @param checkResult true if result can be returned or false otherwise.
+     * @return correct number for next calculations.
+     * @throws OverflowException if recalled from memory value failed validation.
+     */
+    private BigDecimal getCorrectNumber(boolean checkResult) throws OverflowException {
+        BigDecimal number;
+
+        if (checkResult && (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed)) {
+            number = calculation.getResult();
+        } else if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
+
+        return number;
+    }
+
+    /**
      * Called when any {@code BinaryOperation} {@code Button} is pressed.
      * <p>
      * If number in screen {@code Label} ends with {@code DECIMAL_SEPARATOR}, removes it.
@@ -792,22 +829,17 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber(false);
 
             if (!isFirstSet) {
-                equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE + operation.symbol;
+                equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE +
+                        binaryOperationSymbol(operation);
 
                 setBinaryAndFirst(operation, number);
 
             } else if (!isEqualsPressed && !isUnaryOrPercentPressed) {
                 equationTextToSet = equation.getText() + NARROW_SPACE + formatWithoutGroupSeparator(number) +
-                        NARROW_SPACE + operation.symbol;
+                        NARROW_SPACE + binaryOperationSymbol(operation);
 
                 calculateBinaryAndSetNewBinary(operation, number);
 
@@ -816,7 +848,7 @@ public class Controller implements Initializable {
                 if (isEqualsPressed) {
                     equationTextToSet = binaryAfterEquals(operation, calculation.getResult());
                 } else {
-                    equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol;
+                    equationTextToSet = equation.getText() + NARROW_SPACE + binaryOperationSymbol(operation);
                 }
 
                 if (isUnaryOrPercentPressed) {
@@ -877,10 +909,10 @@ public class Controller implements Initializable {
 
         if (calculation.getBinaryOperation() == null) {
             equationTextToSet = formatWithoutGroupSeparator(number) +
-                    NARROW_SPACE + operation.symbol;
+                    NARROW_SPACE + binaryOperationSymbol(operation);
         } else {
             equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
-                    NARROW_SPACE + operation.symbol;
+                    NARROW_SPACE + binaryOperationSymbol(operation);
         }
 
         setBinaryAndFirst(operation, number);
@@ -895,7 +927,7 @@ public class Controller implements Initializable {
      */
     private void binaryAfterBinary(BinaryOperation operation) {
         calculation.setBinaryOperation(operation);
-        equation.setText(StringUtils.chop(equation.getText()) + operation.symbol);
+        equation.setText(StringUtils.chop(equation.getText()) + binaryOperationSymbol(operation));
 
         setFlags(false, true, false,
                 false, true, false, false);
@@ -925,16 +957,10 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber(false);
 
             if (!isFirstSet) {
-                equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+                equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
                         formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
 
                 setFirstAndCalculateUnary(operation, number);
@@ -1020,10 +1046,10 @@ public class Controller implements Initializable {
         String textBefore = EMPTY_STRING;
         String textAfter = equationTextToSet;
 
-        if (equationTextToSet.contains(BinaryOperation.ADD.symbol) ||
-                equationTextToSet.contains(BinaryOperation.SUBTRACT.symbol) ||
-                equationTextToSet.contains(BinaryOperation.MULTIPLY.symbol) ||
-                equationTextToSet.contains(BinaryOperation.DIVIDE.symbol)) {
+        if (equationTextToSet.contains(ADD_SYMBOL) ||
+                equationTextToSet.contains(SUBTRACT_SYMBOL) ||
+                equationTextToSet.contains(MULTIPLY_SYMBOL) ||
+                equationTextToSet.contains(DIVIDE_SYMBOL)) {
 
             int lastIndexOfOperation = findLastIndexOfOperation(equationTextToSet);
 
@@ -1032,11 +1058,11 @@ public class Controller implements Initializable {
         }
 
         if (textBefore.equals(EMPTY_STRING)) {
-            equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE + textAfter + NARROW_SPACE +
-                    CLOSING_BRACKET;
+            equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE + textAfter +
+                    NARROW_SPACE + CLOSING_BRACKET;
         } else {
-            equationTextToSet = textBefore + NARROW_SPACE + operation.symbol + OPENING_BRACKET + NARROW_SPACE +
-                    textAfter + NARROW_SPACE + CLOSING_BRACKET;
+            equationTextToSet = textBefore + NARROW_SPACE + unaryOperationSymbol(operation) + OPENING_BRACKET +
+                    NARROW_SPACE + textAfter + NARROW_SPACE + CLOSING_BRACKET;
         }
 
         return equationTextToSet;
@@ -1050,21 +1076,20 @@ public class Controller implements Initializable {
      * @return last index of {@code BinaryOperation}.
      */
     private int findLastIndexOfOperation(String text) {
-        int lastIndexOfAdd = text.lastIndexOf(BinaryOperation.ADD.symbol);
+        int lastIndexOfAdd = text.lastIndexOf(ADD_SYMBOL);
 
         if (lastIndexOfAdd != -1 && text.charAt(lastIndexOfAdd - 1) == 'e') {
-            lastIndexOfAdd = text.substring(0, lastIndexOfAdd - 1).lastIndexOf(BinaryOperation.ADD.symbol);
+            lastIndexOfAdd = text.substring(0, lastIndexOfAdd - 1).lastIndexOf(ADD_SYMBOL);
         }
 
-        int lastIndexOfSubtract = text.lastIndexOf(BinaryOperation.SUBTRACT.symbol);
+        int lastIndexOfSubtract = text.lastIndexOf(SUBTRACT_SYMBOL);
 
         if (lastIndexOfSubtract != -1 && text.charAt(lastIndexOfSubtract - 1) == 'e') {
-            lastIndexOfSubtract = text.substring(0, lastIndexOfSubtract - 1).lastIndexOf(
-                    BinaryOperation.SUBTRACT.symbol);
+            lastIndexOfSubtract = text.substring(0, lastIndexOfSubtract - 1).lastIndexOf(SUBTRACT_SYMBOL);
         }
 
-        int lastIndexOfMultiply = text.lastIndexOf(BinaryOperation.MULTIPLY.symbol);
-        int lastIndexOfDivide = text.lastIndexOf(BinaryOperation.DIVIDE.symbol);
+        int lastIndexOfMultiply = text.lastIndexOf(MULTIPLY_SYMBOL);
+        int lastIndexOfDivide = text.lastIndexOf(DIVIDE_SYMBOL);
 
         return Math.max(Math.max(lastIndexOfAdd, lastIndexOfSubtract),
                 Math.max(lastIndexOfMultiply, lastIndexOfDivide)) + 1;
@@ -1083,10 +1108,10 @@ public class Controller implements Initializable {
         String equationTextToSet;
 
         if (equation.getText().equals(EMPTY_STRING)) {
-            equationTextToSet = operation.symbol + OPENING_BRACKET + NARROW_SPACE +
+            equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
                     formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
         } else {
-            equationTextToSet = equation.getText() + NARROW_SPACE + operation.symbol + OPENING_BRACKET +
+            equationTextToSet = equation.getText() + NARROW_SPACE + unaryOperationSymbol(operation) + OPENING_BRACKET +
                     NARROW_SPACE + formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
         }
 
@@ -1189,13 +1214,7 @@ public class Controller implements Initializable {
      * @throws OverflowException while validation for result is failed.
      */
     private void percentageWithBinary() throws OverflowException {
-        BigDecimal number;
-
-        if (isRecalledFromMemory) {
-            number = memory.recall();
-        } else {
-            number = screenToBigDecimal(screen.getText());
-        }
+        BigDecimal number = getCorrectNumber(false);
 
         calculation.setSecond(number);
         calculation.calculatePercentage();
@@ -1266,13 +1285,7 @@ public class Controller implements Initializable {
      */
     private void calculateResultForBinaryNotNull() throws OverflowException, DivideByZeroException,
             DivideZeroByZeroException {
-        BigDecimal number;
-
-        if (isRecalledFromMemory) {
-            number = memory.recall();
-        } else {
-            number = screenToBigDecimal(screen.getText());
-        }
+        BigDecimal number = getCorrectNumber(false);
 
         if (!isEqualsPressed && !isUnaryOrPercentPressed) {
             calculateResultNotAfterEqualsOrUnaryOrPercentage(number);
@@ -1424,14 +1437,56 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Creates symbol to show in equation {@code Label} for {@link BinaryOperation}.
+     *
+     * @param operation {@link BinaryOperation} to use.
+     * @return symbol of the operation.
+     */
+    private String binaryOperationSymbol(BinaryOperation operation) {
+        String symbol = "";
+
+        if (operation == BinaryOperation.ADD) {
+            symbol = ADD_SYMBOL;
+        } else if (operation == BinaryOperation.SUBTRACT) {
+            symbol = SUBTRACT_SYMBOL;
+        } else if (operation == BinaryOperation.MULTIPLY) {
+            symbol = MULTIPLY_SYMBOL;
+        } else if (operation == BinaryOperation.DIVIDE) {
+            symbol = DIVIDE_SYMBOL;
+        }
+
+        return symbol;
+    }
+
+    /**
+     * Creates symbol to show in equation {@code Label} for {@link UnaryOperation}.
+     *
+     * @param operation {@link UnaryOperation} to use.
+     * @return symbol of the operation.
+     */
+    private String unaryOperationSymbol(UnaryOperation operation) {
+        String symbol = "";
+
+        if (operation == UnaryOperation.NEGATE) {
+            symbol = NEGATE_SYMBOL;
+        } else if (operation == UnaryOperation.SQR) {
+            symbol = SQR_SYMBOL;
+        } else if (operation == UnaryOperation.SQRT) {
+            symbol = SQRT_SYMBOL;
+        } else if (operation == UnaryOperation.INVERSE) {
+            symbol = INVERSE_SYMBOL;
+        }
+
+        return symbol;
+    }
+
+    /**
      * Disables or enables several {@code Button}, passed as args.
      *
      * @param flag    true for disabling and false for enabling.
      * @param buttons several {@code Button} that should change their disability.
      */
     private static void setButtonsDisability(boolean flag, Button... buttons) {
-        for (Button button : buttons) {
-            button.setDisable(flag);
-        }
+        Stream.of(buttons).forEach(button -> button.setDisable(flag));
     }
 }

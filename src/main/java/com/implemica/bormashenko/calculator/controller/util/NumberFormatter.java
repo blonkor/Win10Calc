@@ -84,6 +84,18 @@ public class NumberFormatter {
     private static final String EMPTY_STRING = "";
 
     /**
+     * Object for setting symbols for decimal formatter.
+     */
+    private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+
+    static {
+        symbols.setGroupingSeparator(GROUPING_SEPARATOR);
+        symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
+        format.setDecimalFormatSymbols(symbols);
+        format.setParseBigDecimal(true);
+    }
+
+    /**
      * Appends digit to number.
      * <p>
      * If number is {@code ZERO}, replaces it with inputted digit. Otherwise, checks if the digit can be appended.
@@ -121,7 +133,7 @@ public class NumberFormatter {
             }
         }
 
-        return NumberFormatter.separateNumberGroups(number);
+        return separateNumberGroups(number);
     }
 
     /**
@@ -218,7 +230,7 @@ public class NumberFormatter {
      * @return formatted number as string.
      */
     public static String formatNumber(BigDecimal number) {
-        setFormatSymbols(number.abs().compareTo(BigDecimal.ONE) >= 0);
+        setExponentSeparatorSymbol(number.abs().compareTo(BigDecimal.ONE) >= 0);
 
         int scale = number.scale();
         int precision = number.precision();
@@ -270,17 +282,12 @@ public class NumberFormatter {
     }
 
     /**
-     * Sets up symbols for {@code format}.
+     * Sets symbol for exponent separator in decimal formatter.
      *
-     * Symbol for {@code ExponentSeparator} depends on if the number is integer or decimal.
-     *
-     * @param isIntegerSeparator true if number is engineering and integer or false if decimal.
+     * @param isIntegerSeparator true if integer exponent separator should be used or false if decimal.
      */
-    private static void setFormatSymbols(boolean isIntegerSeparator) {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+    private static void setExponentSeparatorSymbol(boolean isIntegerSeparator) {
         symbols.setExponentSeparator(isIntegerSeparator ? INTEGER_EXPONENT_SEPARATOR : DECIMAL_EXPONENT_SEPARATOR);
-        symbols.setGroupingSeparator(GROUPING_SEPARATOR);
-        symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
         format.setDecimalFormatSymbols(symbols);
         format.setParseBigDecimal(true);
     }
@@ -371,6 +378,7 @@ public class NumberFormatter {
 
     /**
      * Replaces all {@code GROUPING_SEPARATOR} in number if they are exist.
+     *
      * @param number number to edit.
      * @return edited number if it was necessary to edit.
      */
@@ -385,7 +393,8 @@ public class NumberFormatter {
      * @return true if number contains {@code DECIMAL_SEPARATOR} or false otherwise.
      */
     private static boolean isDecimalNumber(String number) {
-        return number.contains(String.valueOf(DECIMAL_SEPARATOR));
+        number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+        return number.matches("-?\\d+\\.\\d*") || isEngineerNumber(number);
     }
 
     /**
@@ -395,7 +404,8 @@ public class NumberFormatter {
      * @return true if number starts with {@code MINUS} or false otherwise.
      */
     private static boolean isNegativeNumber(String number) {
-        return number.startsWith(MINUS);
+        number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+        return number.matches("-\\d+\\.?\\d*");
     }
 
     /**
@@ -405,7 +415,7 @@ public class NumberFormatter {
      * @return true if number contains {@code EXPONENT_SEPARATOR} or false otherwise.
      */
     private static boolean isEngineerNumber(String number) {
-        return number.contains(DECIMAL_EXPONENT_SEPARATOR);
+        return number.matches("-?\\d\\.\\d*" + DECIMAL_EXPONENT_SEPARATOR + "\\+?-?\\d+");
     }
 
     /**
@@ -415,7 +425,7 @@ public class NumberFormatter {
      * @return true if number contains only one digit or false otherwise.
      */
     private static boolean isOneDigitNumber(String number) {
-        return number.length() == 1 || (number.startsWith(MINUS) && number.length() == 2);
+        return number.matches("-?\\d");
     }
 
     /**
@@ -425,7 +435,6 @@ public class NumberFormatter {
      * @return true if second char of unsigned number is {@code EXPONENT_SEPARATOR} or false otherwise.
      */
     private static boolean isSecondCharEngineer(String number) {
-        number = number.replaceAll(MINUS, EMPTY_STRING);
-        return number.length() > 1 && String.valueOf(number.charAt(1)).equals(DECIMAL_EXPONENT_SEPARATOR);
+        return number.matches("-?\\d" + DECIMAL_EXPONENT_SEPARATOR + "\\+?-?\\d+");
     }
 }
