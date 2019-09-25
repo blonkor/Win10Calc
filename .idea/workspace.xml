@@ -169,10 +169,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerTest.allTests" />
+        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ControllerTest.memoryShowTest" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.CalculationModelTest" />
-        <item itemvalue="Application.Launcher" />
       </list>
     </recent_temporary>
   </component>
@@ -186,13 +186,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00171" summary="Workspace changed.">
-      <created>1568041381035</created>
-      <option name="number" value="00171" />
-      <option name="presentableId" value="LOCAL-00171" />
-      <option name="project" value="LOCAL" />
-      <updated>1568041381035</updated>
     </task>
     <task id="LOCAL-00172" summary="Added Boris's remarks.">
       <created>1568043358337</created>
@@ -530,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569410220296</updated>
     </task>
-    <option name="localTasksCounter" value="220" />
+    <task id="LOCAL-00220" summary="For each loop replaced by for each method from stream api">
+      <created>1569410932752</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1569410932752</updated>
+    </task>
+    <option name="localTasksCounter" value="221" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -564,7 +564,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Refactoring model tests." />
     <MESSAGE value="Refactoring memory model tests." />
     <MESSAGE value="Mock for several binary operations in a row made." />
     <MESSAGE value="Simplifying and refactoring tests for model for binary operation." />
@@ -589,7 +588,8 @@
     <MESSAGE value="Equals method for big decimals replaced by compare to method." />
     <MESSAGE value="Symbols for equation label removed from model to controller." />
     <MESSAGE value="Controller's logic does not depend on view anymore." />
-    <option name="LAST_COMMIT_MESSAGE" value="Controller's logic does not depend on view anymore." />
+    <MESSAGE value="For each loop replaced by for each method from stream api" />
+    <option name="LAST_COMMIT_MESSAGE" value="For each loop replaced by for each method from stream api" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

@@ -27,7 +27,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import java.util.stream.Stream;
@@ -229,49 +228,39 @@ public class Controller implements Initializable {
      * @param event keyboard code or combination that was/were pressed.
      */
     public void keyboardHandling(KeyEvent event) {
-        KeyCombination ctrlM = new KeyCodeCombination(KeyCode.M, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlP = new KeyCodeCombination(KeyCode.P, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlQ = new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlR = new KeyCodeCombination(KeyCode.R, KeyCombination.CONTROL_DOWN);
-        KeyCombination ctrlL = new KeyCodeCombination(KeyCode.L, KeyCombination.CONTROL_DOWN);
-        KeyCombination shiftTwo = new KeyCodeCombination(KeyCode.DIGIT2, KeyCombination.SHIFT_DOWN);
-        KeyCombination shiftFive = new KeyCodeCombination(KeyCode.DIGIT5, KeyCombination.SHIFT_DOWN);
-        KeyCombination shiftEight = new KeyCodeCombination(KeyCode.DIGIT8, KeyCombination.SHIFT_DOWN);
-        KeyCombination shiftEquals = new KeyCodeCombination(KeyCode.EQUALS, KeyCombination.SHIFT_DOWN);
-
         KeyCode keyCode = event.getCode();
         Button buttonToFire = null;
 
         //combinations with ctrl
         if (event.isControlDown()) {
 
-            if (ctrlM.match(event)) {
+            if (keyCode == KeyCode.M) {
                 buttonToFire = memoryStore;
-            } else if (ctrlP.match(event)) {
+            } else if (keyCode == KeyCode.P) {
                 buttonToFire = memoryAdd;
-            } else if (ctrlQ.match(event)) {
+            } else if (keyCode == KeyCode.Q) {
                 buttonToFire = memorySubtract;
-            } else if (ctrlR.match(event)) {
+            } else if (keyCode == KeyCode.R) {
                 buttonToFire = memoryRecall;
-            } else if (ctrlL.match(event)) {
+            } else if (keyCode == KeyCode.L) {
                 buttonToFire = memoryClear;
             }
 
             //combinations with shift
         } else if (event.isShiftDown()) {
 
-            if (shiftTwo.match(event)) {
+            if (keyCode == KeyCode.DIGIT2) {
                 buttonToFire = sqrt;
-            } else if (shiftFive.match(event)) {
+            } else if (keyCode == KeyCode.DIGIT5) {
                 buttonToFire = percent;
-            } else if (shiftEight.match(event)) {
+            } else if (keyCode == KeyCode.DIGIT8) {
                 buttonToFire = multiply;
-            } else if (shiftEquals.match(event)) {
+            } else if (keyCode == KeyCode.EQUALS) {
                 buttonToFire = add;
             }
 
-            //digit buttons
-        } else if (keyCode.isDigitKey()) {
+            //not a combination
+        } else {
 
             if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
                 buttonToFire = zero;
@@ -293,26 +282,11 @@ public class Controller implements Initializable {
                 buttonToFire = eight;
             } else if (keyCode == KeyCode.DIGIT9 || keyCode == KeyCode.NUMPAD9) {
                 buttonToFire = nine;
-            }
-
-            //letter buttons
-        } else if (keyCode.isLetterKey()) {
-
-            if (keyCode == KeyCode.R) {
+            } else if (keyCode == KeyCode.R) {
                 buttonToFire = inverse;
-            }
-
-            //f buttons
-        } else if (keyCode.isFunctionKey()) {
-
-            if (keyCode == KeyCode.F9) {
+            } else if (keyCode == KeyCode.F9) {
                 buttonToFire = negate;
-            }
-
-            //any else buttons
-        } else {
-
-            if (keyCode == KeyCode.PERIOD) {
+            } else if (keyCode == KeyCode.PERIOD) {
                 buttonToFire = dot;
             } else if (keyCode == KeyCode.BACK_SPACE) {
                 buttonToFire = backspace;
@@ -1480,6 +1454,7 @@ public class Controller implements Initializable {
 
     /**
      * Creates symbol to show in equation {@code Label} for {@link BinaryOperation}.
+     *
      * @param operation {@link BinaryOperation} to use.
      * @return symbol of the operation.
      */
@@ -1501,6 +1476,7 @@ public class Controller implements Initializable {
 
     /**
      * Creates symbol to show in equation {@code Label} for {@link UnaryOperation}.
+     *
      * @param operation {@link UnaryOperation} to use.
      * @return symbol of the operation.
      */
