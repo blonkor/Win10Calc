@@ -84,6 +84,18 @@ public class NumberFormatter {
     private static final String EMPTY_STRING = "";
 
     /**
+     * Object for setting symbols for decimal formatter.
+     */
+    private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+
+    static {
+        symbols.setGroupingSeparator(GROUPING_SEPARATOR);
+        symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
+        format.setDecimalFormatSymbols(symbols);
+        format.setParseBigDecimal(true);
+    }
+
+    /**
      * Appends digit to number.
      * <p>
      * If number is {@code ZERO}, replaces it with inputted digit. Otherwise, checks if the digit can be appended.
@@ -218,7 +230,7 @@ public class NumberFormatter {
      * @return formatted number as string.
      */
     public static String formatNumber(BigDecimal number) {
-        setFormatSymbols(number.abs().compareTo(BigDecimal.ONE) >= 0);
+        setExponentSeparatorSymbol(number.abs().compareTo(BigDecimal.ONE) >= 0);
 
         int scale = number.scale();
         int precision = number.precision();
@@ -270,17 +282,12 @@ public class NumberFormatter {
     }
 
     /**
-     * Sets up symbols for {@code format}.
+     * Sets symbol for exponent separator in decimal formatter.
      *
-     * Symbol for {@code ExponentSeparator} depends on if the number is integer or decimal.
-     *
-     * @param isIntegerSeparator true if number is engineering and integer or false if decimal.
+     * @param isIntegerSeparator true if integer exponent separator should be used or false if decimal.
      */
-    private static void setFormatSymbols(boolean isIntegerSeparator) {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+    private static void setExponentSeparatorSymbol(boolean isIntegerSeparator) {
         symbols.setExponentSeparator(isIntegerSeparator ? INTEGER_EXPONENT_SEPARATOR : DECIMAL_EXPONENT_SEPARATOR);
-        symbols.setGroupingSeparator(GROUPING_SEPARATOR);
-        symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
         format.setDecimalFormatSymbols(symbols);
         format.setParseBigDecimal(true);
     }
@@ -371,6 +378,7 @@ public class NumberFormatter {
 
     /**
      * Replaces all {@code GROUPING_SEPARATOR} in number if they are exist.
+     *
      * @param number number to edit.
      * @return edited number if it was necessary to edit.
      */
