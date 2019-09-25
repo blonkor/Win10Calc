@@ -220,13 +220,13 @@ public class Calculation {
      * @throws DivideZeroByZeroException if first and second numbers are 0.
      */
     private BigDecimal divide() throws DivideByZeroException, DivideZeroByZeroException {
-        if (first.equals(BigDecimal.ZERO) && !second.equals(BigDecimal.ZERO)) {
+        if (first.compareTo(BigDecimal.ZERO) == 0 && second.compareTo(BigDecimal.ZERO) != 0) {
             return BigDecimal.ZERO;
         }
 
-        if (second.equals(BigDecimal.ZERO)) {
+        if (second.compareTo(BigDecimal.ZERO) == 0) {
 
-            if (first.equals(BigDecimal.ZERO)) {
+            if (first.compareTo(BigDecimal.ZERO) == 0) {
                 throw new DivideZeroByZeroException();
             }
 
@@ -280,7 +280,7 @@ public class Calculation {
         BigDecimal stripped = first.stripTrailingZeros();
         int strippedScale = stripped.scale();
 
-        if (stripped.unscaledValue().equals(BigInteger.ONE) &&
+        if (stripped.unscaledValue().compareTo(BigInteger.ONE) == 0 &&
                 strippedScale % 2 == 0) {
             BigDecimal result = BigDecimal.valueOf(1L, strippedScale / 2);
 
@@ -335,7 +335,7 @@ public class Calculation {
      * @throws DivideByZeroException while first number is 0.
      */
     private BigDecimal inverse() throws DivideByZeroException{
-        if (first.equals(BigDecimal.ZERO)) {
+        if (first.compareTo(BigDecimal.ZERO) == 0) {
             throw new DivideByZeroException();
         }
 
