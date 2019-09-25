@@ -20,8 +20,16 @@ public class Memory {
      */
     private Stack<BigDecimal> store = new Stack<>();
 
+    /**
+     * Returns copy of the store.
+     *
+     * @return copy of the store.
+     */
     public Stack<BigDecimal> getStore() {
-        return store;
+        Stack<BigDecimal> clone = new Stack<>();
+        clone.addAll(store);
+
+        return clone;
     }
 
     /**
@@ -62,7 +70,7 @@ public class Memory {
 
     /**
      * Adds value to the last saved in memory object.
-     *
+     * <p>
      * Result of adding will be set instead of current last passed to memory object.
      * If store is empty, this operation will save the value in the memory.
      *
@@ -79,7 +87,7 @@ public class Memory {
 
     /**
      * Subtracts value from the last saved in memory object.
-     *
+     * <p>
      * Result of subtracting will be set instead of current last passed to memory object.
      * If store is empty, this operation will save the negated value in the memory.
      *
