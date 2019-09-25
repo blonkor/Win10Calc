@@ -38,9 +38,11 @@ public class OverflowValidation {
     public static boolean overflowValidationFailed(BigDecimal value, boolean divide, BigDecimal dividend) {
         BigDecimal abs = value.abs();
 
-        return (overflowValidationFailedForDivide(value, divide, dividend)) ||
-                (abs.compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                        (abs.compareTo(MIN_DECIMAL_VALUE) <= 0 && abs.compareTo(BigDecimal.ZERO) != 0));
+        boolean integerOverflow = abs.compareTo(MAX_INTEGER_VALUE) >= 0;
+        boolean decimalOverflow = abs.compareTo(MIN_DECIMAL_VALUE) <= 0 && abs.compareTo(BigDecimal.ZERO) != 0;
+        boolean overflowAfterDivide = divide && overflowValidationFailedForDivide(value, dividend);
+
+        return (integerOverflow || decimalOverflow || overflowAfterDivide);
     }
 
     /**
@@ -50,11 +52,10 @@ public class OverflowValidation {
      * dividend is not zero, validation failed.
      *
      * @param value    {@code BigDecimal} value to check.
-     * @param divide   true if divide operation was just performed.
      * @param dividend {@code BigDecimal} value that was used as dividend.
      * @return true if validation failed or false otherwise.
      */
-    private static boolean overflowValidationFailedForDivide(BigDecimal value, boolean divide, BigDecimal dividend) {
-        return divide && dividend.compareTo(BigDecimal.ZERO) != 0 && value.compareTo(BigDecimal.ZERO) == 0;
+    private static boolean overflowValidationFailedForDivide(BigDecimal value, BigDecimal dividend) {
+        return dividend.compareTo(BigDecimal.ZERO) != 0 && value.compareTo(BigDecimal.ZERO) == 0;
     }
 }
