@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -227,209 +228,261 @@ public class Controller implements Initializable {
      *
      * @param event keyboard code or combination that was/were pressed.
      */
+    @FXML
     public void keyboardHandling(KeyEvent event) {
-        KeyCode keyCode = event.getCode();
-        Button buttonToFire = null;
+        try {
+            KeyCode keyCode = event.getCode();
+            Button buttonToFire = null;
 
-        //combinations with ctrl
-        if (event.isControlDown()) {
+            //combinations with ctrl
+            if (event.isControlDown()) {
 
-            if (keyCode == KeyCode.M) {
-                buttonToFire = memoryStore;
-            } else if (keyCode == KeyCode.P) {
-                buttonToFire = memoryAdd;
-            } else if (keyCode == KeyCode.Q) {
-                buttonToFire = memorySubtract;
-            } else if (keyCode == KeyCode.R) {
-                buttonToFire = memoryRecall;
-            } else if (keyCode == KeyCode.L) {
-                buttonToFire = memoryClear;
+                if (keyCode == KeyCode.M) {
+                    buttonToFire = memoryStore;
+                } else if (keyCode == KeyCode.P) {
+                    buttonToFire = memoryAdd;
+                } else if (keyCode == KeyCode.Q) {
+                    buttonToFire = memorySubtract;
+                } else if (keyCode == KeyCode.R) {
+                    buttonToFire = memoryRecall;
+                } else if (keyCode == KeyCode.L) {
+                    buttonToFire = memoryClear;
+                }
+
+                //combinations with shift
+            } else if (event.isShiftDown()) {
+
+                if (keyCode == KeyCode.DIGIT2) {
+                    buttonToFire = sqrt;
+                } else if (keyCode == KeyCode.DIGIT5) {
+                    buttonToFire = percent;
+                } else if (keyCode == KeyCode.DIGIT8) {
+                    buttonToFire = multiply;
+                } else if (keyCode == KeyCode.EQUALS) {
+                    buttonToFire = add;
+                }
+
+                //not a combination
+            } else {
+
+                if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
+                    buttonToFire = zero;
+                } else if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.NUMPAD1) {
+                    buttonToFire = one;
+                } else if (keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.NUMPAD2) {
+                    buttonToFire = two;
+                } else if (keyCode == KeyCode.DIGIT3 || keyCode == KeyCode.NUMPAD3) {
+                    buttonToFire = three;
+                } else if (keyCode == KeyCode.DIGIT4 || keyCode == KeyCode.NUMPAD4) {
+                    buttonToFire = four;
+                } else if (keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.NUMPAD5) {
+                    buttonToFire = five;
+                } else if (keyCode == KeyCode.DIGIT6 || keyCode == KeyCode.NUMPAD6) {
+                    buttonToFire = six;
+                } else if (keyCode == KeyCode.DIGIT7 || keyCode == KeyCode.NUMPAD7) {
+                    buttonToFire = seven;
+                } else if (keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.NUMPAD8) {
+                    buttonToFire = eight;
+                } else if (keyCode == KeyCode.DIGIT9 || keyCode == KeyCode.NUMPAD9) {
+                    buttonToFire = nine;
+                } else if (keyCode == KeyCode.R) {
+                    buttonToFire = inverse;
+                } else if (keyCode == KeyCode.F9) {
+                    buttonToFire = negate;
+                } else if (keyCode == KeyCode.PERIOD) {
+                    buttonToFire = dot;
+                } else if (keyCode == KeyCode.BACK_SPACE) {
+                    buttonToFire = backspace;
+                } else if (keyCode == KeyCode.ADD) {
+                    buttonToFire = add;
+                } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
+                    buttonToFire = subtract;
+                } else if (keyCode == KeyCode.MULTIPLY) {
+                    buttonToFire = multiply;
+                } else if (keyCode == KeyCode.DIVIDE || keyCode == KeyCode.SLASH) {
+                    buttonToFire = divide;
+                } else if (keyCode == KeyCode.EQUALS || keyCode == KeyCode.ENTER) {
+                    buttonToFire = equals;
+                } else if (keyCode == KeyCode.DELETE) {
+                    buttonToFire = clearText;
+                } else if (keyCode == KeyCode.ESCAPE) {
+                    buttonToFire = clearAll;
+                }
+
             }
 
-            //combinations with shift
-        } else if (event.isShiftDown()) {
-
-            if (keyCode == KeyCode.DIGIT2) {
-                buttonToFire = sqrt;
-            } else if (keyCode == KeyCode.DIGIT5) {
-                buttonToFire = percent;
-            } else if (keyCode == KeyCode.DIGIT8) {
-                buttonToFire = multiply;
-            } else if (keyCode == KeyCode.EQUALS) {
-                buttonToFire = add;
+            if (buttonToFire != null && !isMemoryShown && !isNavigationShown) {
+                buttonToFire.fire();
             }
 
-            //not a combination
-        } else {
-
-            if (keyCode == KeyCode.DIGIT0 || keyCode == KeyCode.NUMPAD0) {
-                buttonToFire = zero;
-            } else if (keyCode == KeyCode.DIGIT1 || keyCode == KeyCode.NUMPAD1) {
-                buttonToFire = one;
-            } else if (keyCode == KeyCode.DIGIT2 || keyCode == KeyCode.NUMPAD2) {
-                buttonToFire = two;
-            } else if (keyCode == KeyCode.DIGIT3 || keyCode == KeyCode.NUMPAD3) {
-                buttonToFire = three;
-            } else if (keyCode == KeyCode.DIGIT4 || keyCode == KeyCode.NUMPAD4) {
-                buttonToFire = four;
-            } else if (keyCode == KeyCode.DIGIT5 || keyCode == KeyCode.NUMPAD5) {
-                buttonToFire = five;
-            } else if (keyCode == KeyCode.DIGIT6 || keyCode == KeyCode.NUMPAD6) {
-                buttonToFire = six;
-            } else if (keyCode == KeyCode.DIGIT7 || keyCode == KeyCode.NUMPAD7) {
-                buttonToFire = seven;
-            } else if (keyCode == KeyCode.DIGIT8 || keyCode == KeyCode.NUMPAD8) {
-                buttonToFire = eight;
-            } else if (keyCode == KeyCode.DIGIT9 || keyCode == KeyCode.NUMPAD9) {
-                buttonToFire = nine;
-            } else if (keyCode == KeyCode.R) {
-                buttonToFire = inverse;
-            } else if (keyCode == KeyCode.F9) {
-                buttonToFire = negate;
-            } else if (keyCode == KeyCode.PERIOD) {
-                buttonToFire = dot;
-            } else if (keyCode == KeyCode.BACK_SPACE) {
-                buttonToFire = backspace;
-            } else if (keyCode == KeyCode.ADD) {
-                buttonToFire = add;
-            } else if (keyCode == KeyCode.MINUS || keyCode == KeyCode.SUBTRACT) {
-                buttonToFire = subtract;
-            } else if (keyCode == KeyCode.MULTIPLY) {
-                buttonToFire = multiply;
-            } else if (keyCode == KeyCode.DIVIDE || keyCode == KeyCode.SLASH) {
-                buttonToFire = divide;
-            } else if (keyCode == KeyCode.EQUALS || keyCode == KeyCode.ENTER) {
-                buttonToFire = equals;
-            } else if (keyCode == KeyCode.DELETE) {
-                buttonToFire = clearText;
-            } else if (keyCode == KeyCode.ESCAPE) {
-                buttonToFire = clearAll;
-            }
-
-        }
-
-        if (buttonToFire != null && !isMemoryShown && !isNavigationShown) {
-            buttonToFire.fire();
+//            throw new ArrayIndexOutOfBoundsException("There should be a message");
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
     /**
      * Opens or closes navigation bar.
      */
+    @FXML
     public void showOrHideNavigationPanel() {
-        translateNavigation(!isNavigationShown);
-        navigationBlock.setVisible(!isNavigationShown);
-        isNavigationShown = !isNavigationShown;
+        try {
+            translateNavigation(!isNavigationShown);
+            navigationBlock.setVisible(!isNavigationShown);
+            isNavigationShown = !isNavigationShown;
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Moves text in equation {@code Label} to the left.
      */
+    @FXML
     public void moveEquationLeft() {
-        moveTextInEquationLabel(leftArrow, rightArrow, true);
+        try {
+            moveTextInEquationLabel(leftArrow, rightArrow, true);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Moves text in equation {@code Label} to the right.
      */
+    @FXML
     public void moveEquationRight() {
-        moveTextInEquationLabel(rightArrow, leftArrow, false);
+        try {
+            moveTextInEquationLabel(rightArrow, leftArrow, false);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Saves number in memory.
      */
+    @FXML
     public void memoryStoreOperation() {
         try {
-            BigDecimal number = getCorrectNumber(true);
+            try {
+                BigDecimal number = getCorrectNumber(true);
 
-            memory.storeToMemory(number);
-            setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+                memory.storeToMemory(number);
+                setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
-            isEditableScreen = false;
-        } catch (OverflowException e) {
-            exceptionThrown(e.getMessage());
+                isEditableScreen = false;
+            } catch (OverflowException e) {
+                exceptionThrown(e.getMessage());
+            }
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
     /**
      * Shows memory.
      */
+    @FXML
     public void memoryShowOperation() {
-        memoryAnchorPane.setVisible(!isMemoryShown);
-        memoryBlock.setVisible(!isMemoryShown);
+        try {
+            memoryAnchorPane.setVisible(!isMemoryShown);
+            memoryBlock.setVisible(!isMemoryShown);
 
-        isMemoryShown = !isMemoryShown;
+            isMemoryShown = !isMemoryShown;
 
-        if (isMemoryShown) {
-            updateMemoryLabels();
+            if (isMemoryShown) {
+                updateMemoryLabels();
+            }
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
     /**
      * Clears all memory.
      */
+    @FXML
     public void memoryClearOperation() {
-        memory.clearMemory();
-        setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
+        try {
+            memory.clearMemory();
+            setButtonsDisability(true, memoryClear, memoryRecall, memoryShow);
 
-        isEditableScreen = false;
+            isEditableScreen = false;
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Recalls number in memory.
      */
+    @FXML
     public void memoryRecallOperation() {
         try {
-            BigDecimal number = memory.recall();
-            showNumberOnScreen(formatNumber(number), false);
+            try {
+                BigDecimal number = memory.recall();
+                showNumberOnScreen(formatNumber(number), false);
 
-            isEditableScreen = false;
-        } catch (OverflowException e) {
-            exceptionThrown(e.getMessage());
+                isEditableScreen = false;
+            } catch (OverflowException e) {
+                exceptionThrown(e.getMessage());
+            }
+
+            if (isUnaryOrPercentPressed) {
+                equation.setText(EMPTY_STRING);
+            }
+
+            if (isEqualsPressed || isUnaryOrPercentPressed) {
+                isFirstSet = false;
+            }
+
+            setFlags(false, false, false,
+                    false, isFirstSet, false, true);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
-
-        if (isUnaryOrPercentPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        if (isEqualsPressed || isUnaryOrPercentPressed) {
-            isFirstSet = false;
-        }
-
-        setFlags(false, false, false,
-                false, isFirstSet, false, true);
     }
 
     /**
      * Adds number to memory.
      */
+    @FXML
     public void memoryAddOperation() {
         try {
-            BigDecimal number = getCorrectNumber(false);
+            try {
+                BigDecimal number = getCorrectNumber(false);
 
-            memory.addToMemory(number);
-            setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+                memory.addToMemory(number);
+                setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
-            isEditableScreen = false;
-        } catch (OverflowException e) {
-            exceptionThrown(e.getMessage());
+                isEditableScreen = false;
+            } catch (OverflowException e) {
+                exceptionThrown(e.getMessage());
+            }
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
     /**
      * Subtracts number from memory.
      */
+    @FXML
     public void memorySubtractOperation() {
         try {
-            BigDecimal number = getCorrectNumber(false);
+            try {
+                BigDecimal number = getCorrectNumber(false);
 
-            memory.subtractFromMemory(number);
-            setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
+                memory.subtractFromMemory(number);
+                setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
 
-            isEditableScreen = false;
-        } catch (OverflowException e) {
-            exceptionThrown(e.getMessage());
+                isEditableScreen = false;
+            } catch (OverflowException e) {
+                exceptionThrown(e.getMessage());
+            }
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
@@ -439,179 +492,267 @@ public class Controller implements Initializable {
      *
      * @param event {@code ActionEvent} that called the method.
      */
+    @FXML
     public void appendDigit(ActionEvent event) {
-        if (isError) {
-            returnAfterError();
+        try {
+            if (isError) {
+                returnAfterError();
+            }
+
+            String digit = ((Button) event.getSource()).getText();
+            String number;
+
+            if (isEditableScreen) {
+                number = screen.getText();
+            } else {
+                number = EMPTY_STRING;
+            }
+
+            screen.setText(appendDigitToNumber(number, digit));
+
+            if (isUnaryOrPercentPressed) {
+                equation.setText(EMPTY_STRING);
+            }
+
+            if (isEqualsPressed || isUnaryOrPercentPressed) {
+                isFirstSet = false;
+            }
+
+            setFlags(true, false, false,
+                    false, isFirstSet, false, false);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
-
-        String digit = ((Button) event.getSource()).getText();
-        String number;
-
-        if (isEditableScreen) {
-            number = screen.getText();
-        } else {
-            number = EMPTY_STRING;
-        }
-
-        screen.setText(appendDigitToNumber(number, digit));
-
-        if (isUnaryOrPercentPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        if (isEqualsPressed || isUnaryOrPercentPressed) {
-            isFirstSet = false;
-        }
-
-        setFlags(true, false, false,
-                false, isFirstSet, false, false);
     }
 
     /**
      * Makes number in screen {@code Label} decimal (if not decimal yet) if it is allowed.
      * Otherwise, sets "0." to screen {@code Label}.
      */
+    @FXML
     public void appendDecimalSeparator() {
-        String number;
+        try {
+            String number;
 
-        if (isEditableScreen) {
-            number = screen.getText();
-        } else {
-            number = ZERO;
+            if (isEditableScreen) {
+                number = screen.getText();
+            } else {
+                number = ZERO;
+            }
+
+            screen.setText(appendDecimalSeparatorIfMissed(number));
+
+            if (isUnaryOrPercentPressed) {
+                equation.setText(EMPTY_STRING);
+            }
+
+            if (isEqualsPressed || isUnaryOrPercentPressed) {
+                isFirstSet = false;
+            }
+
+            setFlags(true, false, false,
+                    false, isFirstSet, false, false);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
-
-        screen.setText(appendDecimalSeparatorIfMissed(number));
-
-        if (isUnaryOrPercentPressed) {
-            equation.setText(EMPTY_STRING);
-        }
-
-        if (isEqualsPressed || isUnaryOrPercentPressed) {
-            isFirstSet = false;
-        }
-
-        setFlags(true, false, false,
-                false, isFirstSet, false, false);
     }
 
     /**
      * Deletes last symbol in screen {@code Label} if it is allowed.
      */
+    @FXML
     public void backspace() {
-        if (isError) {
-            returnAfterError();
-        }
+        try {
+            if (isError) {
+                returnAfterError();
+            }
 
-        if (isEditableScreen) {
-            String number = screen.getText();
-            screen.setText(deleteLastChar(number));
+            if (isEditableScreen) {
+                String number = screen.getText();
+                screen.setText(deleteLastChar(number));
+            }
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
     /**
      * Sets text in screen {@code Label} to 0.
      */
+    @FXML
     public void clearText() {
-        if (isError) {
-            returnAfterError();
+        try {
+            if (isError) {
+                returnAfterError();
+            }
+
+            screen.setText(ZERO);
+
+            setFlags(true, false, false,
+                    false, isFirstSet, false, false);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
-
-        screen.setText(ZERO);
-
-        setFlags(true, false, false,
-                false, isFirstSet, false, false);
     }
 
     /**
      * Resets application to it's primary.
      */
+    @FXML
     public void resetAll() {
-        if (isError) {
-            returnAfterError();
+        try {
+            if (isError) {
+                returnAfterError();
+            }
+
+            clearText();
+            calculation.resetAll();
+            equation.setText(EMPTY_STRING);
+
+            setFlags(true, false, false,
+                    false, false, false, false);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
-
-        clearText();
-        calculation.resetAll();
-        equation.setText(EMPTY_STRING);
-
-        setFlags(true, false, false,
-                false, false, false, false);
     }
 
     /**
      * Performs add operation from {@link Calculation}.
      */
+    @FXML
     public void addOperation() {
-        binaryOperationPressed(BinaryOperation.ADD);
+        try {
+            binaryOperationPressed(BinaryOperation.ADD);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs subtract operation from {@link Calculation}.
      */
+    @FXML
     public void subtractOperation() {
-        binaryOperationPressed(BinaryOperation.SUBTRACT);
+        try {
+            binaryOperationPressed(BinaryOperation.SUBTRACT);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs multiply operation from {@link Calculation}.
      */
+    @FXML
     public void multiplyOperation() {
-        binaryOperationPressed(BinaryOperation.MULTIPLY);
+        try {
+            binaryOperationPressed(BinaryOperation.MULTIPLY);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs divide operation from {@link Calculation}.
      */
+    @FXML
     public void divideOperation() {
-        binaryOperationPressed(BinaryOperation.DIVIDE);
+        try {
+            binaryOperationPressed(BinaryOperation.DIVIDE);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs negate operation from {@link Calculation}.
      */
+    @FXML
     public void negateOperation() {
-        if (isEditableScreen) {
-            screen.setText(changeSign(screen.getText()));
-        } else {
-            unaryOperationPressed(UnaryOperation.NEGATE);
+        try {
+            if (isEditableScreen) {
+                screen.setText(changeSign(screen.getText()));
+            } else {
+                unaryOperationPressed(UnaryOperation.NEGATE);
+            }
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
         }
     }
 
     /**
      * Performs sqr operation from {@link Calculation}.
      */
+    @FXML
     public void squareOperation() {
-        unaryOperationPressed(UnaryOperation.SQR);
+        try {
+            unaryOperationPressed(UnaryOperation.SQR);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs sqrt operation from {@link Calculation}.
      */
+    @FXML
     public void squareRootOperation() {
-        unaryOperationPressed(UnaryOperation.SQRT);
+        try {
+            unaryOperationPressed(UnaryOperation.SQRT);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs inverse operation from {@link Calculation}.
      */
+    @FXML
     public void inverseOperation() {
-        unaryOperationPressed(UnaryOperation.INVERSE);
+        try {
+            unaryOperationPressed(UnaryOperation.INVERSE);
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs percentage operation from {@link Calculation}.
      */
+    @FXML
     public void percentOperation() {
-        calculatePercentage();
+        try {
+            calculatePercentage();
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
     }
 
     /**
      * Performs calculate result operation.
-     *
-     * @see Calculation
      */
+    @FXML
     public void equalsOperation() {
-        calculateResult();
+        try {
+            calculateResult();
+        } catch (Throwable e) {
+            tellUserAboutError(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows to user that something goes wrong.
+     *
+     * @param message message got by exception or error.
+     */
+    private void tellUserAboutError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Unsupported error was thrown with message:\n" + message +
+                "\nPlease contact developers.");
+
+        alert.showAndWait();
     }
 
     /**
