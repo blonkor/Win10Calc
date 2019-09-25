@@ -36,9 +36,11 @@ public class OverflowValidation {
      * @return true if validation failed or false otherwise.
      */
     public static boolean overflowValidationFailed(BigDecimal value, boolean divide, BigDecimal dividend) {
+        BigDecimal abs = value.abs();
+
         return (overflowValidationFailedForDivide(value, divide, dividend)) ||
-                (value.abs().compareTo(MAX_INTEGER_VALUE) >= 0 ||
-                (value.abs().compareTo(MIN_DECIMAL_VALUE) <= 0 && value.compareTo(BigDecimal.ZERO) != 0));
+                (abs.compareTo(MAX_INTEGER_VALUE) >= 0 ||
+                        (abs.compareTo(MIN_DECIMAL_VALUE) <= 0 && abs.compareTo(BigDecimal.ZERO) != 0));
     }
 
     /**

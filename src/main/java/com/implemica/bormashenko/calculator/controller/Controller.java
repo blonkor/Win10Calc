@@ -341,14 +341,7 @@ public class Controller implements Initializable {
      */
     public void memoryStoreOperation() {
         try {
-            BigDecimal number;
-            if (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed) {
-                number = calculation.getResult();
-            } else if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber();
 
             memory.storeToMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -413,13 +406,7 @@ public class Controller implements Initializable {
      */
     public void memoryAddOperation() {
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber();
 
             memory.addToMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -435,13 +422,7 @@ public class Controller implements Initializable {
      */
     public void memorySubtractOperation() {
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber();
 
             memory.subtractFromMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -754,7 +735,7 @@ public class Controller implements Initializable {
      *
      * @return style (as css representation).
      */
-    private static String setStyleForLabels() {
+    private String setStyleForLabels() {
         return "-fx-background-color: transparent;" +
                 "-fx-font-size: " + MEMORY_LABELS_FONT_SIZE + "px;" +
                 "-fx-font-family: \"Segoe UI Semibold\"";
@@ -765,10 +746,36 @@ public class Controller implements Initializable {
      *
      * @return style (as css representation).
      */
-    private static String setStyleForLabelsOnHover() {
+    private String setStyleForLabelsOnHover() {
         return "-fx-background-color: #e7e7e7;" +
                 "-fx-font-size: " + MEMORY_LABELS_FONT_SIZE + "px;" +
                 "-fx-font-family: \"Segoe UI Semibold\"";
+    }
+
+    /**
+     * Returns correct number for next operations.
+     * <p>
+     * If calculation was just made, returns result.
+     * <p>
+     * If number from memory was just recalled, returns recalled value.
+     * <p>
+     * Otherwise, returns number from screen {@code Label}.
+     *
+     * @return correct number for next calculations.
+     * @throws OverflowException if recalled from memory value failed validation.
+     */
+    private BigDecimal getCorrectNumber() throws OverflowException {
+        BigDecimal number;
+
+        if (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed) {
+            number = calculation.getResult();
+        } else if (isRecalledFromMemory) {
+            number = memory.recall();
+        } else {
+            number = screenToBigDecimal(screen.getText());
+        }
+
+        return number;
     }
 
     /**
@@ -821,13 +828,7 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber();
 
             if (!isFirstSet) {
                 equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE +
@@ -955,13 +956,7 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number;
-
-            if (isRecalledFromMemory) {
-                number = memory.recall();
-            } else {
-                number = screenToBigDecimal(screen.getText());
-            }
+            BigDecimal number = getCorrectNumber();
 
             if (!isFirstSet) {
                 equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
@@ -1218,13 +1213,7 @@ public class Controller implements Initializable {
      * @throws OverflowException while validation for result is failed.
      */
     private void percentageWithBinary() throws OverflowException {
-        BigDecimal number;
-
-        if (isRecalledFromMemory) {
-            number = memory.recall();
-        } else {
-            number = screenToBigDecimal(screen.getText());
-        }
+        BigDecimal number = getCorrectNumber();
 
         calculation.setSecond(number);
         calculation.calculatePercentage();
@@ -1295,13 +1284,7 @@ public class Controller implements Initializable {
      */
     private void calculateResultForBinaryNotNull() throws OverflowException, DivideByZeroException,
             DivideZeroByZeroException {
-        BigDecimal number;
-
-        if (isRecalledFromMemory) {
-            number = memory.recall();
-        } else {
-            number = screenToBigDecimal(screen.getText());
-        }
+        BigDecimal number = getCorrectNumber();
 
         if (!isEqualsPressed && !isUnaryOrPercentPressed) {
             calculateResultNotAfterEqualsOrUnaryOrPercentage(number);
@@ -1502,7 +1485,7 @@ public class Controller implements Initializable {
      * @param flag    true for disabling and false for enabling.
      * @param buttons several {@code Button} that should change their disability.
      */
-    private static void setButtonsDisability(boolean flag, Button... buttons) {
+    private void setButtonsDisability(boolean flag, Button... buttons) {
         Stream.of(buttons).forEach(button -> button.setDisable(flag));
     }
 }
