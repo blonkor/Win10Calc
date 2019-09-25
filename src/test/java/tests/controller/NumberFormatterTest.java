@@ -4,8 +4,10 @@ import com.implemica.bormashenko.calculator.controller.util.NumberFormatter;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test class for testing {@link NumberFormatter}.
@@ -874,7 +876,14 @@ class NumberFormatterTest {
      * @param expectedResult expected result after performing operation.
      */
     private void checkAppendDigit(String number, String digit, String expectedResult) {
-        String result = NumberFormatter.appendDigitToNumber(number, digit);
+        String result = null;
+
+        try {
+            result = NumberFormatter.appendDigitToNumber(number, digit);
+        } catch (ParseException e) {
+            fail();
+        }
+
         assertEquals(expectedResult, result);
     }
 
@@ -896,7 +905,13 @@ class NumberFormatterTest {
      * @param expectedResult expected result after performing operation.
      */
     private void checkDeleteLastChar(String number, String expectedResult) {
-        String result = NumberFormatter.deleteLastChar(number);
+        String result = null;
+
+        try {
+            result = NumberFormatter.deleteLastChar(number);
+        } catch (ParseException e) {
+            fail();
+        }
         assertEquals(expectedResult, result);
     }
 
@@ -918,7 +933,14 @@ class NumberFormatterTest {
      * @param bigDecimal expected result after performing operation.
      */
     private void checkScreenToBigDecimal(String string, BigDecimal bigDecimal) {
-        BigDecimal bigDecimalResult = NumberFormatter.screenToBigDecimal(string);
+        BigDecimal bigDecimalResult = null;
+
+        try {
+            bigDecimalResult = NumberFormatter.parseToBigDecimal(string);
+        } catch (ParseException e) {
+            fail();
+        }
+
         assertEquals(bigDecimal, bigDecimalResult);
     }
 
@@ -929,10 +951,13 @@ class NumberFormatterTest {
      * @param expectedResult expected result after performing operation.
      */
     private void checkFormat(BigDecimal bigDecimal, String expectedResult) {
-        String resultWithGroupSeparator = NumberFormatter.formatNumber(bigDecimal);
+        String resultWithGroupSeparator = NumberFormatter.formatNumber(bigDecimal, true);
         assertEquals(expectedResult, resultWithGroupSeparator);
 
-        String resultWithoutGroupSeparator = NumberFormatter.formatWithoutGroupSeparator(bigDecimal);
+        String resultWithoutGroupSeparator = NumberFormatter.formatNumber(bigDecimal, false);
+
+        System.out.println(resultWithGroupSeparator);
+        System.out.println(resultWithoutGroupSeparator);
         assertEquals(expectedResult.replaceAll(",", ""), resultWithoutGroupSeparator);
     }
 }

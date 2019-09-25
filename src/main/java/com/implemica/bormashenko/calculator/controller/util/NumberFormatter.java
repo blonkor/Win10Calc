@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 
 /**
  * Class for editing numbers' representation.
@@ -108,32 +109,50 @@ public class NumberFormatter {
      * @param digit  digit to append.
      * @return edited number if it was possible to edit.
      */
-    public static String appendDigitToNumber(String number, String digit) {
-        number = replaceGroupingSeparator(number);
+    public static String appendDigitToNumber(String number, String digit) throws ParseException {
+        String result = number;
 
-        if (number.equals(ZERO)) {
-            number = digit;
-        } else {
-            int additionalLength = 0;
-
-            if (number.replace(MINUS, EMPTY_STRING).startsWith(ZERO)) {
-                additionalLength++;
-            }
-
-            if (isDecimalNumber(number)) {
-                additionalLength++;
-            }
-
-            if (isNegativeNumber(number)) {
-                additionalLength++;
-            }
-
-            if (number.length() < MAX_SYMBOLS + additionalLength) {
-                number += digit;
-            }
+        if (number.equals(EMPTY_STRING) || number.equals(ZERO)) {
+            return digit;
         }
 
-        return separateNumberGroups(number);
+        boolean canAppend = true;
+        int additionalLength = 0;
+
+        if (number.replace(MINUS, EMPTY_STRING).startsWith(ZERO)) {
+            additionalLength++;
+        }
+
+        if (isDecimalNumber(number)) {
+            additionalLength++;
+        }
+
+        if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
+            additionalLength--;
+        }
+
+        if (isNegativeNumber(number)) {
+            additionalLength++;
+        }
+
+        if (formatNumber(parseToBigDecimal(number), false).length() >= MAX_SYMBOLS + additionalLength) {
+            canAppend = false;
+        }
+
+        if (canAppend) {
+
+            if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR)) ||
+                    (isDecimalNumber(number) && ((number.endsWith(ZERO)) || digit.equals(ZERO)))){
+                return number + digit;
+            }
+
+            result = number + digit;
+
+        } else {
+            return result;
+        }
+
+        return formatNumber(parseToBigDecimal(result), true);
     }
 
     /**
@@ -162,20 +181,39 @@ public class NumberFormatter {
      * @param number number to edit.
      * @return edited number if it was possible to edit.
      */
-    public static String deleteLastChar(String number) {
-        number = replaceGroupingSeparator(number);
-
-        if (!isEngineerNumber(number)) {
-
-            if (isOneDigitNumber(number)) {
-                number = ZERO;
-            } else {
-                number = StringUtils.chop(number);
-            }
-
+    public static String deleteLastChar(String number) throws ParseException {
+        if (isEngineerNumber(number)) {
+            return number;
         }
 
-        return separateNumberGroups(number);
+        if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
+            return StringUtils.chop(number);
+        }
+
+        if (number.endsWith(ZERO) && !isOneDigitNumber(number)) {
+            number = StringUtils.chop(number);
+
+            if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
+                return number;
+            }
+
+            return formatNumber(parseToBigDecimal(number), true);
+        }
+
+        number = formatNumber(parseToBigDecimal(number), false);
+
+        if (isOneDigitNumber(number)) {
+            number = ZERO;
+        } else {
+            number = StringUtils.chop(number);
+        }
+
+
+        if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
+            return formatNumber(parseToBigDecimal(number), true) + DECIMAL_SEPARATOR;
+        }
+
+        return formatNumber(parseToBigDecimal(number), true);
     }
 
     /**
@@ -201,16 +239,6 @@ public class NumberFormatter {
     }
 
     /**
-     * Converts number that contains {@code GROUPING_SEPARATOR} to {@code BigDecimal}.
-     *
-     * @param number number to convert.
-     * @return {@code BigDecimal} value of the number.
-     */
-    public static BigDecimal screenToBigDecimal(String number) {
-        return new BigDecimal(replaceGroupingSeparator(number));
-    }
-
-    /**
      * Formats number using {@link DecimalFormat}.
      * <p>
      * If number is less than {@code MIN_PLAIN_VALUE} and it's scale is more than {@code MAX_SYMBOLS}, shows number with
@@ -229,7 +257,7 @@ public class NumberFormatter {
      * @param number number to format.
      * @return formatted number as string.
      */
-    public static String formatNumber(BigDecimal number) {
+    public static String formatNumber(BigDecimal number, boolean useGrouping) {
         setExponentSeparatorSymbol(number.abs().compareTo(BigDecimal.ONE) >= 0);
 
         int scale = number.scale();
@@ -266,19 +294,22 @@ public class NumberFormatter {
         }
 
         format.applyPattern(pattern.toString());
-        return finalFormat(format.format(number));
+
+        return finalFormat(format.format(number), useGrouping);
     }
 
     /**
-     * Formats number using {@link DecimalFormat} without using {@code GROUPING_SEPARATOR}.
-     * <p>
-     * This method is the same to {@code NumberFormatter.formatNumber}, but do not applies {@code GROUPING_SEPARATOR}.
+     * Replaces all {@code GROUPING_SEPARATOR} in number if they are exist.
      *
-     * @param number number to format.
-     * @return formatted number without group separator.
+     * @param number number to edit.
+     * @return edited number if it was necessary to edit.
      */
-    public static String formatWithoutGroupSeparator(BigDecimal number) {
-        return replaceGroupingSeparator(formatNumber(number));
+    public static BigDecimal parseToBigDecimal(String number) throws ParseException {
+        if (isEngineerNumber(number)) {
+            return new BigDecimal(number);
+        }
+
+        return (BigDecimal) format.parse(number);
     }
 
     /**
@@ -292,6 +323,12 @@ public class NumberFormatter {
         format.setParseBigDecimal(true);
     }
 
+    private static String preparationBeforeParse(String number) {
+        number = number.replace(DECIMAL_SEPARATOR + DECIMAL_EXPONENT_SEPARATOR, DECIMAL_EXPONENT_SEPARATOR);
+
+        return number;
+    }
+
     /**
      * Corrects formatted number.
      * <p>
@@ -303,7 +340,7 @@ public class NumberFormatter {
      * @param number number that was formatted.
      * @return corrected number if it was necessary to correct.
      */
-    private static String finalFormat(String number) {
+    private static String finalFormat(String number, boolean useGrouping) {
         if (isSecondCharEngineer(number)) {
             number = number.replace(DECIMAL_EXPONENT_SEPARATOR,
                     DECIMAL_SEPARATOR + DECIMAL_EXPONENT_SEPARATOR);
@@ -313,77 +350,11 @@ public class NumberFormatter {
             number = number.replace(String.valueOf(DECIMAL_SEPARATOR), EMPTY_STRING);
         }
 
+        if (!useGrouping) {
+            number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+        }
+
         return number;
-    }
-
-    /**
-     * Separates every three digit in number.
-     * <p>
-     * Separation is made only for non-engineer numbers.
-     * <p>
-     * Decimal part should not be separated.
-     *
-     * @param number number to edit.
-     * @return edited number if it was possible to edit.
-     */
-    private static String separateNumberGroups(String number) {
-        if (isEngineerNumber(number)) {
-            return number;
-        }
-
-        boolean negative = isNegativeNumber(number);
-        number = number.replaceAll(MINUS, EMPTY_STRING);
-        String digitsAfterDecimal = EMPTY_STRING;
-
-        if (isDecimalNumber(number)) {
-            int decimalIndex = number.indexOf(DECIMAL_SEPARATOR);
-            digitsAfterDecimal = number.substring(decimalIndex);
-            number = number.substring(0, decimalIndex);
-        }
-
-        return separate(number, digitsAfterDecimal, negative);
-    }
-
-    /**
-     * Separates every three digits in number with {@code GROUPING_SEPARATOR} and appends required digits after
-     * {@code DECIMAL_SEPARATOR} to the result and prepends {@code MINUS} if needed.
-     *
-     * @param number             number to edit.
-     * @param digitsAfterDecimal digits that should be appended to the result after {@code DECIMAL_SEPARATOR}.
-     * @param negative           true if {@code MINUS} should be prepended to the result.
-     * @return edited number if it was possible to edit.
-     */
-    private static String separate(String number, String digitsAfterDecimal, boolean negative) {
-        StringBuilder str = new StringBuilder();
-        char[] chars = number.toCharArray();
-        int counter = 0;
-
-        for (int i = chars.length - 1; i >= 0; i--) {
-
-            if (counter == 3) {
-                str.append(GROUPING_SEPARATOR);
-                counter = 0;
-            }
-
-            str.append(chars[i]);
-            counter++;
-        }
-
-        if (negative) {
-            str.append(MINUS);
-        }
-
-        return str.reverse().append(digitsAfterDecimal).toString();
-    }
-
-    /**
-     * Replaces all {@code GROUPING_SEPARATOR} in number if they are exist.
-     *
-     * @param number number to edit.
-     * @return edited number if it was necessary to edit.
-     */
-    private static String replaceGroupingSeparator(String number) {
-        return number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
     }
 
     /**

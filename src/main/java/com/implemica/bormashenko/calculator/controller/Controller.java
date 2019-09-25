@@ -28,6 +28,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.Stack;
 import java.util.stream.Stream;
@@ -422,7 +423,7 @@ public class Controller implements Initializable {
         try {
             try {
                 BigDecimal number = memory.recall();
-                showNumberOnScreen(formatNumber(number), false);
+                showNumberOnScreen(formatNumber(number, true), false);
 
                 isEditableScreen = false;
             } catch (OverflowException e) {
@@ -842,7 +843,7 @@ public class Controller implements Initializable {
 
             for (int i = 0; i < store.size(); i++) {
                 Label label = new Label();
-                label.setText(formatNumber(store.elementAt(store.size() - i - 1)));
+                label.setText(formatNumber(store.elementAt(store.size() - i - 1), true));
                 configureMemoryLabel(label, layoutY);
 
                 memoryPanel.getChildren().add(label);
@@ -906,7 +907,7 @@ public class Controller implements Initializable {
      * @return correct number for next calculations.
      * @throws OverflowException if recalled from memory value failed validation.
      */
-    private BigDecimal getCorrectNumber(boolean checkResult) throws OverflowException {
+    private BigDecimal getCorrectNumber(boolean checkResult) throws OverflowException, ParseException {
         BigDecimal number;
 
         if (checkResult && (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed)) {
@@ -914,7 +915,7 @@ public class Controller implements Initializable {
         } else if (isRecalledFromMemory) {
             number = memory.recall();
         } else {
-            number = screenToBigDecimal(screen.getText());
+            number = parseToBigDecimal(screen.getText());
         }
 
         return number;
@@ -930,7 +931,7 @@ public class Controller implements Initializable {
      *
      * @param operation {@link BinaryOperation} that should be set.
      */
-    private void binaryOperationPressed(BinaryOperation operation) {
+    private void binaryOperationPressed(BinaryOperation operation) throws ParseException {
         removeLastDecimalSeparator();
 
         if (!isBinaryOperationPressed) {
@@ -966,20 +967,20 @@ public class Controller implements Initializable {
      *
      * @param operation new operation to sen in {@code Calculation}.
      */
-    private void binaryNotAfterBinary(BinaryOperation operation) {
+    private void binaryNotAfterBinary(BinaryOperation operation) throws ParseException {
         String equationTextToSet = EMPTY_STRING;
 
         try {
             BigDecimal number = getCorrectNumber(false);
 
             if (!isFirstSet) {
-                equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE +
+                equationTextToSet = formatNumber(number, false) + NARROW_SPACE +
                         binaryOperationSymbol(operation);
 
                 setBinaryAndFirst(operation, number);
 
             } else if (!isEqualsPressed && !isUnaryOrPercentPressed) {
-                equationTextToSet = equation.getText() + NARROW_SPACE + formatWithoutGroupSeparator(number) +
+                equationTextToSet = equation.getText() + NARROW_SPACE + formatNumber(number, false) +
                         NARROW_SPACE + binaryOperationSymbol(operation);
 
                 calculateBinaryAndSetNewBinary(operation, number);
@@ -1028,12 +1029,12 @@ public class Controller implements Initializable {
      * @throws DivideZeroByZeroException if trying to divide zero by zero.
      */
     private void calculateBinaryAndSetNewBinary(BinaryOperation operation, BigDecimal second) throws OverflowException,
-            DivideByZeroException, DivideZeroByZeroException {
+            DivideByZeroException, DivideZeroByZeroException, ParseException {
         boolean divideWasPerformed = calculation.getBinaryOperation() == BinaryOperation.DIVIDE;
         calculation.setSecond(second);
         calculation.calculateBinary();
         setBinaryAndFirst(operation, calculation.getResult());
-        showNumberOnScreen(formatNumber(calculation.getResult()), divideWasPerformed);
+        showNumberOnScreen(formatNumber(calculation.getResult(), true), divideWasPerformed);
     }
 
     /**
@@ -1049,10 +1050,10 @@ public class Controller implements Initializable {
         String equationTextToSet;
 
         if (calculation.getBinaryOperation() == null) {
-            equationTextToSet = formatWithoutGroupSeparator(number) +
+            equationTextToSet = formatNumber(number, false) +
                     NARROW_SPACE + binaryOperationSymbol(operation);
         } else {
-            equationTextToSet = formatWithoutGroupSeparator(calculation.getResult()) +
+            equationTextToSet = formatNumber(calculation.getResult(), false) +
                     NARROW_SPACE + binaryOperationSymbol(operation);
         }
 
@@ -1093,7 +1094,7 @@ public class Controller implements Initializable {
      *
      * @param operation {@link UnaryOperation} that should be performed.
      */
-    private void unaryOperationPressed(UnaryOperation operation) {
+    private void unaryOperationPressed(UnaryOperation operation) throws ParseException {
         removeLastDecimalSeparator();
         String equationTextToSet = EMPTY_STRING;
 
@@ -1102,7 +1103,7 @@ public class Controller implements Initializable {
 
             if (!isFirstSet) {
                 equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
-                        formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
+                        formatNumber(number, false) + NARROW_SPACE + CLOSING_BRACKET;
 
                 setFirstAndCalculateUnary(operation, number);
 
@@ -1137,11 +1138,11 @@ public class Controller implements Initializable {
      * @throws DivideByZeroException if trying to divide inverse zero.
      */
     private void setFirstAndCalculateUnary(UnaryOperation operation, BigDecimal first) throws OverflowException,
-            NegativeRootException, DivideByZeroException {
+            NegativeRootException, DivideByZeroException, ParseException {
         calculation.setFirst(first);
         calculation.calculateUnary(operation);
         calculation.setFirst(calculation.getResult());
-        showNumberOnScreen(formatNumber(calculation.getResult()), false);
+        showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }
 
     /**
@@ -1157,13 +1158,13 @@ public class Controller implements Initializable {
      * @throws DivideByZeroException if trying to divide inverse zero.
      */
     private void severalUnaryInARow(UnaryOperation operation) throws OverflowException, NegativeRootException,
-            DivideByZeroException {
+            DivideByZeroException, ParseException {
         calculation.setSecond(calculation.getFirst());
         calculation.setFirst(calculation.getResult());
         calculation.calculateUnary(operation);
         calculation.setFirst(calculation.getSecond());
         calculation.setSecond(calculation.getResult());
-        showNumberOnScreen(formatNumber(calculation.getResult()), false);
+        showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }
 
     /**
@@ -1250,10 +1251,10 @@ public class Controller implements Initializable {
 
         if (equation.getText().equals(EMPTY_STRING)) {
             equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
-                    formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
+                    formatNumber(number, false) + NARROW_SPACE + CLOSING_BRACKET;
         } else {
             equationTextToSet = equation.getText() + NARROW_SPACE + unaryOperationSymbol(operation) + OPENING_BRACKET +
-                    NARROW_SPACE + formatWithoutGroupSeparator(number) + NARROW_SPACE + CLOSING_BRACKET;
+                    NARROW_SPACE + formatNumber(number, false) + NARROW_SPACE + CLOSING_BRACKET;
         }
 
         return equationTextToSet;
@@ -1275,7 +1276,7 @@ public class Controller implements Initializable {
      * @throws DivideByZeroException if trying to divide inverse zero.
      */
     private void calculateUnaryFirstIsSet(UnaryOperation operation, BigDecimal number) throws OverflowException,
-            NegativeRootException, DivideByZeroException {
+            NegativeRootException, DivideByZeroException, ParseException {
         calculation.setSecond(calculation.getFirst());
         calculation.setFirst(number);
         calculation.calculateUnary(operation);
@@ -1287,7 +1288,7 @@ public class Controller implements Initializable {
             calculation.setSecond(calculation.getResult());
         }
 
-        showNumberOnScreen(formatNumber(calculation.getResult()), false);
+        showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }
 
     /**
@@ -1305,7 +1306,7 @@ public class Controller implements Initializable {
      * <p>
      * If any exception was thrown during calculating, it's message will be shown in screen {@code Label}.
      */
-    private void calculatePercentage() {
+    private void calculatePercentage() throws ParseException {
         removeLastDecimalSeparator();
 
         if (calculation.getBinaryOperation() == null) {
@@ -1324,7 +1325,7 @@ public class Controller implements Initializable {
                         equationTextToSet += NARROW_SPACE;
                     }
 
-                    equationTextToSet += formatWithoutGroupSeparator(calculation.getResult());
+                    equationTextToSet += formatNumber(calculation.getResult(), false);
                 }
 
                 setFlags(false, false, true,
@@ -1354,13 +1355,13 @@ public class Controller implements Initializable {
      *
      * @throws OverflowException while validation for result is failed.
      */
-    private void percentageWithBinary() throws OverflowException {
+    private void percentageWithBinary() throws OverflowException, ParseException {
         BigDecimal number = getCorrectNumber(false);
 
         calculation.setSecond(number);
         calculation.calculatePercentage();
         calculation.setSecond(calculation.getResult());
-        showNumberOnScreen(formatNumber(calculation.getResult()), false);
+        showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }
 
     /**
@@ -1377,7 +1378,7 @@ public class Controller implements Initializable {
         int lastIndexOfOperation = findLastIndexOfOperation(equationTextToSet);
         String textBefore = equationTextToSet.substring(0, lastIndexOfOperation);
 
-        return textBefore + NARROW_SPACE + formatWithoutGroupSeparator(calculation.getResult());
+        return textBefore + NARROW_SPACE + formatNumber(calculation.getResult(), false);
     }
 
     /**
@@ -1392,7 +1393,7 @@ public class Controller implements Initializable {
      * <p>
      * If {@code Exception} was thrown while calculating, performs {@code exceptionThrown} operation.
      */
-    private void calculateResult() {
+    private void calculateResult() throws ParseException{
         returnAfterError();
         removeLastDecimalSeparator();
 
@@ -1425,7 +1426,7 @@ public class Controller implements Initializable {
      * @throws DivideZeroByZeroException if trying to divide zero by zero.
      */
     private void calculateResultForBinaryNotNull() throws OverflowException, DivideByZeroException,
-            DivideZeroByZeroException {
+            DivideZeroByZeroException, ParseException {
         BigDecimal number = getCorrectNumber(false);
 
         if (!isEqualsPressed && !isUnaryOrPercentPressed) {
@@ -1434,7 +1435,7 @@ public class Controller implements Initializable {
             calculateResultAfterEqualsOrUnaryOrPercentage();
         }
 
-        showNumberOnScreen(formatNumber(calculation.getResult()),
+        showNumberOnScreen(formatNumber(calculation.getResult(), true),
                 calculation.getBinaryOperation() == BinaryOperation.DIVIDE);
     }
 
@@ -1545,8 +1546,8 @@ public class Controller implements Initializable {
      * @param isDividePerformed true if divide operation was just performed or false otherwise.
      * @throws OverflowException while validation for result is failed.
      */
-    private void showNumberOnScreen(String number, boolean isDividePerformed) throws OverflowException {
-        if (OverflowValidation.overflowValidationFailed(screenToBigDecimal(number), isDividePerformed,
+    private void showNumberOnScreen(String number, boolean isDividePerformed) throws OverflowException, ParseException {
+        if (OverflowValidation.overflowValidationFailed(parseToBigDecimal(number), isDividePerformed,
                 calculation.getFirst())) {
             throw new OverflowException();
         } else {
