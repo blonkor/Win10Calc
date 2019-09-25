@@ -133,7 +133,7 @@ public class NumberFormatter {
             }
         }
 
-        return NumberFormatter.separateNumberGroups(number);
+        return separateNumberGroups(number);
     }
 
     /**
@@ -393,7 +393,8 @@ public class NumberFormatter {
      * @return true if number contains {@code DECIMAL_SEPARATOR} or false otherwise.
      */
     private static boolean isDecimalNumber(String number) {
-        return number.contains(String.valueOf(DECIMAL_SEPARATOR));
+        number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+        return number.matches("-?\\d+\\.\\d*") || isEngineerNumber(number);
     }
 
     /**
@@ -403,7 +404,8 @@ public class NumberFormatter {
      * @return true if number starts with {@code MINUS} or false otherwise.
      */
     private static boolean isNegativeNumber(String number) {
-        return number.startsWith(MINUS);
+        number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+        return number.matches("-\\d+\\.?\\d*");
     }
 
     /**
@@ -413,7 +415,7 @@ public class NumberFormatter {
      * @return true if number contains {@code EXPONENT_SEPARATOR} or false otherwise.
      */
     private static boolean isEngineerNumber(String number) {
-        return number.contains(DECIMAL_EXPONENT_SEPARATOR);
+        return number.matches("-?\\d\\.\\d*" + DECIMAL_EXPONENT_SEPARATOR + "\\+?-?\\d+");
     }
 
     /**
@@ -423,7 +425,7 @@ public class NumberFormatter {
      * @return true if number contains only one digit or false otherwise.
      */
     private static boolean isOneDigitNumber(String number) {
-        return number.length() == 1 || (number.startsWith(MINUS) && number.length() == 2);
+        return number.matches("-?\\d");
     }
 
     /**
@@ -433,7 +435,6 @@ public class NumberFormatter {
      * @return true if second char of unsigned number is {@code EXPONENT_SEPARATOR} or false otherwise.
      */
     private static boolean isSecondCharEngineer(String number) {
-        number = number.replaceAll(MINUS, EMPTY_STRING);
-        return number.length() > 1 && String.valueOf(number.charAt(1)).equals(DECIMAL_EXPONENT_SEPARATOR);
+        return number.matches("-?\\d" + DECIMAL_EXPONENT_SEPARATOR + "\\+?-?\\d+");
     }
 }

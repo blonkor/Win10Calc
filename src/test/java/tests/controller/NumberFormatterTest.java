@@ -907,8 +907,7 @@ class NumberFormatterTest {
      * @param expectedResult expected result after performing operation (and vise versa with number for second time).
      */
     private void checkChangeSign(String number, String expectedResult) {
-        String result = NumberFormatter.changeSign(number);
-        assertEquals(expectedResult, result);
+        assertEquals(expectedResult, NumberFormatter.changeSign(number));
         assertEquals(number, NumberFormatter.changeSign(expectedResult));
     }
 
