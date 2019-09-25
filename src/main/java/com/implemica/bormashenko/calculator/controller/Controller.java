@@ -341,7 +341,7 @@ public class Controller implements Initializable {
      */
     public void memoryStoreOperation() {
         try {
-            BigDecimal number = getCorrectNumber();
+            BigDecimal number = getCorrectNumber(true);
 
             memory.storeToMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -406,7 +406,7 @@ public class Controller implements Initializable {
      */
     public void memoryAddOperation() {
         try {
-            BigDecimal number = getCorrectNumber();
+            BigDecimal number = getCorrectNumber(false);
 
             memory.addToMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -422,7 +422,7 @@ public class Controller implements Initializable {
      */
     public void memorySubtractOperation() {
         try {
-            BigDecimal number = getCorrectNumber();
+            BigDecimal number = getCorrectNumber(false);
 
             memory.subtractFromMemory(number);
             setButtonsDisability(false, memoryClear, memoryRecall, memoryShow);
@@ -735,7 +735,7 @@ public class Controller implements Initializable {
      *
      * @return style (as css representation).
      */
-    private String setStyleForLabels() {
+    private static String setStyleForLabels() {
         return "-fx-background-color: transparent;" +
                 "-fx-font-size: " + MEMORY_LABELS_FONT_SIZE + "px;" +
                 "-fx-font-family: \"Segoe UI Semibold\"";
@@ -746,7 +746,7 @@ public class Controller implements Initializable {
      *
      * @return style (as css representation).
      */
-    private String setStyleForLabelsOnHover() {
+    private static String setStyleForLabelsOnHover() {
         return "-fx-background-color: #e7e7e7;" +
                 "-fx-font-size: " + MEMORY_LABELS_FONT_SIZE + "px;" +
                 "-fx-font-family: \"Segoe UI Semibold\"";
@@ -761,13 +761,14 @@ public class Controller implements Initializable {
      * <p>
      * Otherwise, returns number from screen {@code Label}.
      *
+     * @param checkResult true if result can be returned or false otherwise.
      * @return correct number for next calculations.
      * @throws OverflowException if recalled from memory value failed validation.
      */
-    private BigDecimal getCorrectNumber() throws OverflowException {
+    private BigDecimal getCorrectNumber(boolean checkResult) throws OverflowException {
         BigDecimal number;
 
-        if (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed) {
+        if (checkResult && (isEqualsPressed || isBinaryOperationPressed || isUnaryOrPercentPressed)) {
             number = calculation.getResult();
         } else if (isRecalledFromMemory) {
             number = memory.recall();
@@ -828,7 +829,7 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number = getCorrectNumber();
+            BigDecimal number = getCorrectNumber(false);
 
             if (!isFirstSet) {
                 equationTextToSet = formatWithoutGroupSeparator(number) + NARROW_SPACE +
@@ -956,7 +957,7 @@ public class Controller implements Initializable {
         String equationTextToSet = EMPTY_STRING;
 
         try {
-            BigDecimal number = getCorrectNumber();
+            BigDecimal number = getCorrectNumber(false);
 
             if (!isFirstSet) {
                 equationTextToSet = unaryOperationSymbol(operation) + OPENING_BRACKET + NARROW_SPACE +
@@ -1213,7 +1214,7 @@ public class Controller implements Initializable {
      * @throws OverflowException while validation for result is failed.
      */
     private void percentageWithBinary() throws OverflowException {
-        BigDecimal number = getCorrectNumber();
+        BigDecimal number = getCorrectNumber(false);
 
         calculation.setSecond(number);
         calculation.calculatePercentage();
@@ -1284,7 +1285,7 @@ public class Controller implements Initializable {
      */
     private void calculateResultForBinaryNotNull() throws OverflowException, DivideByZeroException,
             DivideZeroByZeroException {
-        BigDecimal number = getCorrectNumber();
+        BigDecimal number = getCorrectNumber(false);
 
         if (!isEqualsPressed && !isUnaryOrPercentPressed) {
             calculateResultNotAfterEqualsOrUnaryOrPercentage(number);
@@ -1485,7 +1486,7 @@ public class Controller implements Initializable {
      * @param flag    true for disabling and false for enabling.
      * @param buttons several {@code Button} that should change their disability.
      */
-    private void setButtonsDisability(boolean flag, Button... buttons) {
+    private static void setButtonsDisability(boolean flag, Button... buttons) {
         Stream.of(buttons).forEach(button -> button.setDisable(flag));
     }
 }
