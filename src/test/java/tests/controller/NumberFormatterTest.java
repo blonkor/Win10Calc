@@ -277,7 +277,7 @@ class NumberFormatterTest {
      * Tests for add dot operation.
      */
     @Test
-    void appendDecimalSeparatorTests() {
+    void appendDecimalSeparatorTests() throws ParseException {
         //without dot
         //without commas
         checkAppendDecimalSeparator("0", "0.");
@@ -553,7 +553,7 @@ class NumberFormatterTest {
      * Tests for change sign operation.
      */
     @Test
-    void changeSignTests() {
+    void changeSignTests() throws ParseException {
         checkChangeSign("0", "0");
         checkChangeSign("0.", "-0.");
         checkChangeSign("0.00", "-0.00");
@@ -570,7 +570,7 @@ class NumberFormatterTest {
      * Tests for screen to big decimal operation.
      */
     @Test
-    void screenToBigDecimalTests() {
+    void screenToBigDecimalTests() throws ParseException {
         //integers
         //without commas
         checkScreenToBigDecimal("0", new BigDecimal("0"));
@@ -893,7 +893,7 @@ class NumberFormatterTest {
      * @param number         number to edit.
      * @param expectedResult expected result after performing operation.
      */
-    private void checkAppendDecimalSeparator(String number, String expectedResult) {
+    private void checkAppendDecimalSeparator(String number, String expectedResult) throws ParseException {
         String result = NumberFormatter.appendDecimalSeparatorIfMissed(number);
         assertEquals(expectedResult, result);
     }
@@ -918,10 +918,10 @@ class NumberFormatterTest {
     /**
      * Checks result of change sign operation (after first and second performing this operation in a row).
      *
-     * @param number number to edit (and vise versa with expected result for second time).
+     * @param number         number to edit (and vise versa with expected result for second time).
      * @param expectedResult expected result after performing operation (and vise versa with number for second time).
      */
-    private void checkChangeSign(String number, String expectedResult) {
+    private void checkChangeSign(String number, String expectedResult) throws ParseException {
         assertEquals(expectedResult, NumberFormatter.changeSign(number));
         assertEquals(number, NumberFormatter.changeSign(expectedResult));
     }
@@ -932,15 +932,8 @@ class NumberFormatterTest {
      * @param string     number to convert.
      * @param bigDecimal expected result after performing operation.
      */
-    private void checkScreenToBigDecimal(String string, BigDecimal bigDecimal) {
-        BigDecimal bigDecimalResult = null;
-
-        try {
-            bigDecimalResult = NumberFormatter.parseToBigDecimal(string);
-        } catch (ParseException e) {
-            fail();
-        }
-
+    private void checkScreenToBigDecimal(String string, BigDecimal bigDecimal) throws ParseException {
+        BigDecimal bigDecimalResult = NumberFormatter.parseToBigDecimal(string);
         assertEquals(bigDecimal, bigDecimalResult);
     }
 
@@ -956,8 +949,6 @@ class NumberFormatterTest {
 
         String resultWithoutGroupSeparator = NumberFormatter.formatNumber(bigDecimal, false);
 
-        System.out.println(resultWithGroupSeparator);
-        System.out.println(resultWithoutGroupSeparator);
         assertEquals(expectedResult.replaceAll(",", ""), resultWithoutGroupSeparator);
     }
 }
