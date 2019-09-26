@@ -38,11 +38,18 @@ public class OverflowValidation {
     public static boolean overflowValidationFailed(BigDecimal value, boolean divide, BigDecimal dividend) {
         BigDecimal abs = value.abs();
 
-        boolean integerOverflow = abs.compareTo(MAX_INTEGER_VALUE) >= 0;
-        boolean decimalOverflow = abs.compareTo(MIN_DECIMAL_VALUE) <= 0 && abs.compareTo(BigDecimal.ZERO) != 0;
-        boolean overflowAfterDivide = divide && overflowValidationFailedForDivide(value, dividend);
+        //integer overflow
+        if (abs.compareTo(MAX_INTEGER_VALUE) >= 0) {
+            return true;
+        }
 
-        return (integerOverflow || decimalOverflow || overflowAfterDivide);
+        //decimal overflow
+        if (abs.compareTo(MIN_DECIMAL_VALUE) <= 0 && abs.compareTo(BigDecimal.ZERO) != 0) {
+            return true;
+        }
+
+        //overflow after divide
+        return divide && overflowValidationFailedForDivide(value, dividend);
     }
 
     /**

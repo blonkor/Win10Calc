@@ -88,7 +88,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.NumberFormatterTest">
+  <component name="RunManager" selected="JUnit.NumberFormatterTest (1)">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -118,7 +118,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.appendDigitTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NumberFormatterTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -127,9 +127,11 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
-      <option name="METHOD_NAME" value="appendDigitTests" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
+      <option name="TEST_OBJECT" value="uniqueId" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:tests.controller.NumberFormatterTest]" />
+      </uniqueIds>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -168,17 +170,17 @@
     <list>
       <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.NumberFormatterTest" />
-      <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
       <item itemvalue="JUnit.ControllerTest.allTests" />
       <item itemvalue="JUnit.NumberFormatterTest.deleteLastCharTests" />
+      <item itemvalue="JUnit.NumberFormatterTest (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.NumberFormatterTest (1)" />
         <item itemvalue="JUnit.NumberFormatterTest" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.NumberFormatterTest.deleteLastCharTests" />
-        <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
       </list>
     </recent_temporary>
   </component>
