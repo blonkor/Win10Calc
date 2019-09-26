@@ -149,55 +149,31 @@ public class NumberFormatter {
     }
 
     /**
-     * Deletes last char in number.
+     * Deletes last digit in number.
      * <p>
-     * Last char for engineer numbers can not be deleted.
+     * Otherwise, if number is one-digit number, returns 0.
      * <p>
-     * If number ends with {@code DECIMAL_SEPARATOR}, deletes last symbol in number and returns it.
+     * Otherwise, if number does not have decimal part, divides in by 10 and sets scale of result to 0.
      * <p>
-     * If number ends with 0 and the whole number is not 0 or -0, deletes last symbol in number. Then returns it if
-     * it ends with {@code DECIMAL_SEPARATOR}, or returns formatted number otherwise.
-     * <p>
-     * Otherwise, formats number without {@code GROUPING_SEPARATOR} and then returns formatted result without last
-     * symbol or 0 if there was only one digit. Also, saves last {@code DECIMAL_SEPARATOR} if number ends with it after
-     * deleting last symbol.
+     * Otherwise, reduces number's scale by 1.
      *
      * @param number number to edit.
-     * @return edited number if it was possible to edit.
-     * @throws ParseException if impossible to parse number.
+     * @return edited number.
      */
-    public static String deleteLastChar(String number) throws ParseException {//todo
-        if (isEngineerNumber(number)) {
-            return number;
-        }
+    public static BigDecimal deleteLastDigit(BigDecimal number) {
+        BigDecimal result = number;
 
-        if (isLastDecimalSeparator(number)) {
-            return StringUtils.chop(number);
-        }
-
-        if (number.endsWith(ZERO) && !isOneDigitNumber(number)) {
-            number = StringUtils.chop(number);
-
-            if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
-                return number;
-            }
-
-            return formatNumber(parseToBigDecimal(number), true);
-        }
-
-        number = formatNumber(parseToBigDecimal(number), false);
-
-        if (isOneDigitNumber(number)) {
-            number = ZERO;
+        if (number.precision() == 1) {
+            result = BigDecimal.ZERO;
+        } else if (number.scale() == 0) {
+            result = number.divide(BigDecimal.TEN, BigDecimal.ROUND_DOWN);
+            result = result.setScale(0, BigDecimal.ROUND_DOWN);
         } else {
-            number = StringUtils.chop(number);
+            result = result.setScale(result.scale() - 1, BigDecimal.ROUND_DOWN);
         }
 
-        if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
-            return formatNumber(parseToBigDecimal(number), true) + DECIMAL_SEPARATOR;
-        }
 
-        return formatNumber(parseToBigDecimal(number), true);
+        return result;
     }
 
     /**

@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Test class for testing {@link NumberFormatter}.
@@ -302,49 +301,19 @@ class NumberFormatterTest {
         checkDeleteLastChar("-123", "-12");
 
         //with commas
-        checkDeleteLastChar("1,234", "123");
-        checkDeleteLastChar("6,225", "622");
-        checkDeleteLastChar("84,623", "8,462");
-        checkDeleteLastChar("64,362,234", "6,436,223");
-        checkDeleteLastChar("752,384,257", "75,238,425");
-        checkDeleteLastChar("32,572,357,832", "3,257,235,783");
+        checkDeleteLastChar("1234", "123");
+        checkDeleteLastChar("6225", "622");
+        checkDeleteLastChar("84623", "8462");
+        checkDeleteLastChar("64362234", "6436223");
+        checkDeleteLastChar("752384257", "75238425");
+        checkDeleteLastChar("32572357832", "3257235783");
 
-        checkDeleteLastChar("-235,623", "-23,562");
-        checkDeleteLastChar("-762,723", "-76,272");
-        checkDeleteLastChar("-142,790", "-14,279");
-        checkDeleteLastChar("-35,246,980", "-3,524,698");
-        checkDeleteLastChar("-234,268,436", "-23,426,843");
-        checkDeleteLastChar("-2,435,724,525", "-243,572,452");
-
-        //with dot at the end and no commas
-        checkDeleteLastChar("86.", "86");
-        checkDeleteLastChar("12.", "12");
-        checkDeleteLastChar("75.", "75");
-        checkDeleteLastChar("632.", "632");
-        checkDeleteLastChar("754.", "754");
-        checkDeleteLastChar("851.", "851");
-
-        checkDeleteLastChar("-12.", "-12");
-        checkDeleteLastChar("-85.", "-85");
-        checkDeleteLastChar("-75.", "-75");
-        checkDeleteLastChar("-234.", "-234");
-        checkDeleteLastChar("-752.", "-752");
-        checkDeleteLastChar("-146.", "-146");
-
-        //with dot at the end and commas
-        checkDeleteLastChar("65,327.", "65,327");
-        checkDeleteLastChar("1,461,234.", "1,461,234");
-        checkDeleteLastChar("65,237,234.", "65,237,234");
-        checkDeleteLastChar("2,598,753.", "2,598,753");
-        checkDeleteLastChar("234,578,349.", "234,578,349");
-        checkDeleteLastChar("23,478,235.", "23,478,235");
-
-        checkDeleteLastChar("-862,458.", "-862,458");
-        checkDeleteLastChar("-23,468,634.", "-23,468,634");
-        checkDeleteLastChar("-25,869,876.", "-25,869,876");
-        checkDeleteLastChar("-43,578,235.", "-43,578,235");
-        checkDeleteLastChar("-86,346,835.", "-86,346,835");
-        checkDeleteLastChar("-754,546,735.", "-754,546,735");
+        checkDeleteLastChar("-235623", "-23562");
+        checkDeleteLastChar("-762723", "-76272");
+        checkDeleteLastChar("-142790", "-14279");
+        checkDeleteLastChar("-35246980", "-3524698");
+        checkDeleteLastChar("-234268436", "-23426843");
+        checkDeleteLastChar("-2435724525", "-243572452");
 
         //with dot in the middle and no commas
         checkDeleteLastChar("1.76", "1.7");
@@ -362,48 +331,19 @@ class NumberFormatterTest {
         checkDeleteLastChar("-80.213", "-80.21");
 
         //with dot in the middle and commas
-        checkDeleteLastChar("1,477.234", "1,477.23");
-        checkDeleteLastChar("23,572.23462", "23,572.2346");
-        checkDeleteLastChar("762,852.0", "762,852.");
-        checkDeleteLastChar("2,575,723,572.9", "2,575,723,572.");
-        checkDeleteLastChar("876,532.2", "876,532.");
-        checkDeleteLastChar("9,014.23", "9,014.2");
+        checkDeleteLastChar("1477.234", "1477.23");
+        checkDeleteLastChar("23572.23462", "23572.2346");
+        checkDeleteLastChar("762852.0", "762852.");
+        checkDeleteLastChar("2575723572.9", "2575723572.");
+        checkDeleteLastChar("876532.2", "876532.");
+        checkDeleteLastChar("9014.23", "9014.2");
 
-        checkDeleteLastChar("-234,823,547.234", "-234,823,547.23");
-        checkDeleteLastChar("-23,472.23468", "-23,472.2346");
-        checkDeleteLastChar("-87,358,245.24", "-87,358,245.2");
-        checkDeleteLastChar("-2,472,357.23478", "-2,472,357.2347");
-        checkDeleteLastChar("-32,723,467.23482", "-32,723,467.2348");
-        checkDeleteLastChar("-23,475,345.7625", "-23,475,345.762");
-
-        //engineer numbers
-        checkDeleteLastChar("6.e+136", "6.e+136");
-        checkDeleteLastChar("8.e+17", "8.e+17");
-        checkDeleteLastChar("1.e+147", "1.e+147");
-        checkDeleteLastChar("8.e-1487", "8.e-1487");
-        checkDeleteLastChar("3.e-3254", "3.e-3254");
-        checkDeleteLastChar("7.e-134", "7.e-134");
-
-        checkDeleteLastChar("-1.e+1237", "-1.e+1237");
-        checkDeleteLastChar("-1.e+185", "-1.e+185");
-        checkDeleteLastChar("-3.e+1237", "-3.e+1237");
-        checkDeleteLastChar("-8.e-123", "-8.e-123");
-        checkDeleteLastChar("-3.e-85", "-3.e-85");
-        checkDeleteLastChar("-5.e-29", "-5.e-29");
-
-        checkDeleteLastChar("6.21e+24", "6.21e+24");
-        checkDeleteLastChar("3.762e+789", "3.762e+789");
-        checkDeleteLastChar("1.627e+25", "1.627e+25");
-        checkDeleteLastChar("7.831e-19", "7.831e-19");
-        checkDeleteLastChar("9.1346e-3216", "9.1346e-3216");
-        checkDeleteLastChar("1.143e-1446", "1.143e-1446");
-
-        checkDeleteLastChar("-8.09e+74", "-8.09e+74");
-        checkDeleteLastChar("-6.863e+835", "-6.863e+835");
-        checkDeleteLastChar("-4.325e+7267", "-4.325e+7267");
-        checkDeleteLastChar("-2.13e-874", "-2.13e-874");
-        checkDeleteLastChar("-2.126e-1353", "-2.126e-1353");
-        checkDeleteLastChar("-1.73e-735", "-1.73e-735");
+        checkDeleteLastChar("-234823547.234", "-234823547.23");
+        checkDeleteLastChar("-23472.23468", "-23472.2346");
+        checkDeleteLastChar("-87358245.24", "-87358245.2");
+        checkDeleteLastChar("-2472357.23478", "-2472357.2347");
+        checkDeleteLastChar("-32723467.23482", "-32723467.2348");
+        checkDeleteLastChar("-23475345.7625", "-23475345.762");
     }
 
     /**
@@ -748,14 +688,10 @@ class NumberFormatterTest {
      * @param expectedResult expected result after performing operation.
      */
     private void checkDeleteLastChar(String number, String expectedResult) {
-        String result = null;
+        BigDecimal bigDecimalNumber = new BigDecimal(number);
+        BigDecimal bigDecimalExpectedResult = new BigDecimal(expectedResult);
 
-        try {
-            result = NumberFormatter.deleteLastChar(number);
-        } catch (ParseException e) {
-            fail();
-        }
-        assertEquals(expectedResult, result);
+        assertEquals(bigDecimalExpectedResult, NumberFormatter.deleteLastDigit(bigDecimalNumber));
     }
 
     /**
