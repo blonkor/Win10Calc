@@ -101,7 +101,29 @@ public class NumberFormatter {
         format.setParseBigDecimal(true);
     }
 
-    public static BigDecimal appendDigitToNumber(BigDecimal number, BigDecimal digit, boolean appendDotBeforeDigit) {
+    /**
+     * Appends digit to number if it's precision less than {@code MAX_SYMBOLS}.
+     * <p>
+     * For appending digit, math operations are used.
+     * <p>
+     * If number < 0, digit should be negated.
+     * <p>
+     * If dot should be prepended before digit, multiplies digit on 0.1 and adds it to number.
+     * <p>
+     * Otherwise, if number is 0 (with scale = 0), returns digit only.
+     * <p>
+     * Otherwise, if number does not have decimal part, multiplies number on 10 and adds digit to number.
+     * <p>
+     * Otherwise, multiplies digit on 0.1^(number's scale + 1) and adds it to number.
+     *
+     * @param number                number to edit.
+     * @param digit                 digit to append to number.
+     * @param prependDotBeforeDigit true if {@code DECIMAL_SEPARATOR} should be prepended before digit or false
+     *                              otherwise. It helps not to loose trailing {@code DECIMAL_SEPARATOR} in string
+     *                              representation of number while parsing it to {@code BigDecimal}.
+     * @return edited number if it was possible to edit.
+     */
+    public static BigDecimal appendDigitToNumber(BigDecimal number, BigDecimal digit, boolean prependDotBeforeDigit) {
         BigDecimal result = number;
 
         if (number.precision() < MAX_SYMBOLS) {
@@ -110,7 +132,7 @@ public class NumberFormatter {
                 digit = digit.negate();
             }
 
-            if (appendDotBeforeDigit) {
+            if (prependDotBeforeDigit) {
                 digit = digit.multiply(ONE_TENTH);
                 result = number.add(digit);
             } else if (number.equals(BigDecimal.ZERO)) {
@@ -135,8 +157,8 @@ public class NumberFormatter {
      * @return edited number if it was possible to edit.
      * @throws ParseException if impossible to parse number.
      */
-    public static String appendDecimalSeparatorIfMissed(String number) throws ParseException {
-        if (!isDecimalNumber(number)) {
+    public static String appendDecimalSeparatorIfMissed(String number) {
+        if (!number.contains(String.valueOf(DECIMAL_SEPARATOR))) {
             number += DECIMAL_SEPARATOR;
         }
 
@@ -239,6 +261,16 @@ public class NumberFormatter {
      * @return formatted number as string.
      */
     public static String formatNumber(BigDecimal number, boolean useGrouping) {
+        BigDecimal numberToWorkWith;
+
+        if (number.scale() == 0) {
+            numberToWorkWith = number;
+        } else {
+            numberToWorkWith = number.stripTrailingZeros();
+        }
+
+        int trailingZeros = number.scale() - numberToWorkWith.scale();
+
         setExponentSeparatorSymbol(number.abs().compareTo(BigDecimal.ONE) >= 0);
         //format.setGroupingUsed();
 
@@ -277,7 +309,7 @@ public class NumberFormatter {
 
         format.applyPattern(pattern.toString());
 
-        return finalFormat(format.format(number), useGrouping);
+        return finalFormat(format.format(number), useGrouping, trailingZeros);
     }
 
     /**
@@ -323,7 +355,7 @@ public class NumberFormatter {
      * @param useGrouping true if {@code GROUPING_SEPARATOR} should be used or false otherwise.
      * @return corrected number if it was necessary to correct.
      */
-    private static String finalFormat(String number, boolean useGrouping) {
+    private static String finalFormat(String number, boolean useGrouping, int trailingZeros) {
         if (isSecondCharEngineer(number)) {
             number = number.replace(DECIMAL_EXPONENT_SEPARATOR,
                     DECIMAL_SEPARATOR + DECIMAL_EXPONENT_SEPARATOR);
@@ -335,6 +367,17 @@ public class NumberFormatter {
 
         if (!useGrouping) {
             number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
+        }
+
+        if (trailingZeros != 0) {
+            StringBuilder zeros = new StringBuilder();
+
+            for (int i = 0; i < trailingZeros; i++) {
+                zeros.append(ZERO);
+            }
+
+            number = appendDecimalSeparatorIfMissed(number);
+            number += zeros;
         }
 
         return number;
