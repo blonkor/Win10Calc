@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/controller/NumberFormatterTest.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -171,8 +172,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerTest.allTests" />
-        <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
         <item itemvalue="JUnit.NumberFormatterTest" />
+        <item itemvalue="JUnit.ControllerTest.appendDigitTests" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.NumberFormatterTest.formatTests" />
       </list>
@@ -188,13 +189,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00179" summary="Bug fix with equation text after several unary or percentage operations.">
-      <created>1568373860486</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1568373860486</updated>
     </task>
     <task id="LOCAL-00180" summary="Refactoring controller tests.">
       <created>1568374119659</created>
@@ -532,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569493089851</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="Append digit method in number formatter was edited.">
+      <created>1569526590858</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1569526590860</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -566,7 +567,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Several boundary test cases created." />
     <MESSAGE value="Overflow validation refactored." />
     <MESSAGE value="Overflow validation is util class now." />
     <MESSAGE value="Refactoring tests for model." />
@@ -591,7 +591,8 @@
     <MESSAGE value="Unsupported by model exceptions and errors are now tell user about themselves if appearing." />
     <MESSAGE value="Refactoring overflow validation." />
     <MESSAGE value="Refactoring number formatter." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring number formatter." />
+    <MESSAGE value="Append digit method in number formatter was edited." />
+    <option name="LAST_COMMIT_MESSAGE" value="Append digit method in number formatter was edited." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

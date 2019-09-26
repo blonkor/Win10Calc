@@ -149,23 +149,6 @@ public class NumberFormatter {
     }
 
     /**
-     * Appends decimal separator to number.
-     * <p>
-     * If number already has decimal separator, it can not be appended.
-     *
-     * @param number number to edit.
-     * @return edited number if it was possible to edit.
-     * @throws ParseException if impossible to parse number.
-     */
-    public static String appendDecimalSeparatorIfMissed(String number) {
-        if (!number.contains(String.valueOf(DECIMAL_SEPARATOR))) {
-            number += DECIMAL_SEPARATOR;
-        }
-
-        return number;
-    }
-
-    /**
      * Deletes last char in number.
      * <p>
      * Last char for engineer numbers can not be deleted.
@@ -376,7 +359,10 @@ public class NumberFormatter {
                 zeros.append(ZERO);
             }
 
-            number = appendDecimalSeparatorIfMissed(number);
+            if (!number.contains(String.valueOf(DECIMAL_SEPARATOR))) {
+                number += DECIMAL_SEPARATOR;
+            }
+
             number += zeros;
         }
 

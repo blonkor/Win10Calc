@@ -542,7 +542,11 @@ public class Controller implements Initializable {
                 number = ZERO;
             }
 
-            screen.setText(appendDecimalSeparatorIfMissed(number));
+            if (!number.contains(String.valueOf(DECIMAL_SEPARATOR))) {
+                number += DECIMAL_SEPARATOR;
+            }
+
+            screen.setText(number);
 
             if (isUnaryOrPercentPressed) {
                 equation.setText(EMPTY_STRING);
