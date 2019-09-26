@@ -15,6 +15,11 @@ import java.text.ParseException;
 public class NumberFormatter {
 
     /**
+     * Symbol for separating integer and decimal parts of number.
+     */
+    public static final char DECIMAL_SEPARATOR = '.';
+
+    /**
      * Maximal amount of digit symbols that can be shown on screen {@code Label}.
      */
     private final static int MAX_SYMBOLS = 16;
@@ -28,11 +33,6 @@ public class NumberFormatter {
      * Decimal formatter for formatting output.
      */
     private static final DecimalFormat format = new DecimalFormat();
-
-    /**
-     * Symbol for separating integer and decimal parts of number.
-     */
-    public static final char DECIMAL_SEPARATOR = '.';
 
     /**
      * Symbol for separating every three digits in integer number.
@@ -174,29 +174,6 @@ public class NumberFormatter {
 
 
         return result;
-    }
-
-    /**
-     * Changes sign of number.
-     * <p>
-     * Prepends {@code MINUS} if number is positive or removes it otherwise.
-     * <p>
-     * If number is {@code ZERO}, returns {@code ZERO}.
-     *
-     * @param number number to edit.
-     * @return edited number if it was possible to edit.
-     * @throws ParseException if impossible to parse number.
-     */
-    public static String changeSign(String number) throws ParseException {
-        if (!number.equals(ZERO)) {
-            if (!isNegativeNumber(number)) {
-                number = StringUtils.prependIfMissing(number, MINUS);
-            } else {
-                number = number.replace(MINUS, EMPTY_STRING);
-            }
-        }
-
-        return number;
     }
 
     /**

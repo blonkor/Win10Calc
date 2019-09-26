@@ -190,13 +190,6 @@
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
     </task>
-    <task id="LOCAL-00181" summary="Bug fix in controller with divide symbol in equation text.">
-      <created>1568374461508</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1568374461508</updated>
-    </task>
     <task id="LOCAL-00182" summary="Controller tests updated.">
       <created>1568376073166</created>
       <option name="number" value="00182" />
@@ -533,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569527782455</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="Delete last digit method in number formatter was edited.">
+      <created>1569531608687</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1569531608687</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -567,7 +567,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Overflow validation is util class now." />
     <MESSAGE value="Refactoring tests for model." />
     <MESSAGE value="Boundary tests for controller created. Minor refactoring for controller tests." />
     <MESSAGE value="Bug fixes in controller with stored and returned from memory value." />
@@ -592,7 +591,8 @@
     <MESSAGE value="Refactoring number formatter." />
     <MESSAGE value="Append digit method in number formatter was edited." />
     <MESSAGE value="Append dot method in number formatter was edited." />
-    <option name="LAST_COMMIT_MESSAGE" value="Append dot method in number formatter was edited." />
+    <MESSAGE value="Delete last digit method in number formatter was edited." />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete last digit method in number formatter was edited." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

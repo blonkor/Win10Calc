@@ -165,6 +165,11 @@ public class Controller implements Initializable {
     private static final String INVERSE_SYMBOL = "1/";
 
     /**
+     * Negative number symbol.
+     */
+    private static final String MINUS = "-";
+
+    /**
      * {@link Calculation} model of application.
      */
     private Calculation calculation = new Calculation();
@@ -695,7 +700,20 @@ public class Controller implements Initializable {
     public void negateOperation() {
         try {
             if (isEditableScreen) {
-                screen.setText(changeSign(screen.getText()));
+
+                String result = screen.getText();
+
+                if (!result.equals(ZERO)) {
+
+                    if (result.startsWith(MINUS)) {
+                        result = result.replace(MINUS, EMPTY_STRING);
+                    } else {
+                        result = MINUS + result;
+                    }
+
+                }
+
+                screen.setText(result);
             } else {
                 unaryOperationPressed(UnaryOperation.NEGATE);
             }
