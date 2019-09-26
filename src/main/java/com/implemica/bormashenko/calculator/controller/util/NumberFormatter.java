@@ -75,11 +75,6 @@ public class NumberFormatter {
     private static final String ZERO = "0";
 
     /**
-     * Negative number symbol.
-     */
-    private static final String MINUS = "-";
-
-    /**
      * Empty string for replacements.
      */
     private static final String EMPTY_STRING = "";
@@ -207,15 +202,15 @@ public class NumberFormatter {
 
         int trailingZeros = number.scale() - numberToWorkWith.scale();
 
-        setExponentSeparatorSymbol(number.abs().compareTo(BigDecimal.ONE) >= 0);
-        //format.setGroupingUsed();
+        setExponentSeparatorSymbol(numberToWorkWith.abs().compareTo(BigDecimal.ONE) >= 0);
+        //format.setGroupingUsed(); //todo
 
-        int scale = number.scale();
-        int precision = number.precision();
+        int scale = numberToWorkWith.scale();
+        int precision = numberToWorkWith.precision();
 
         StringBuilder pattern;
 
-        if (number.abs().compareTo(MIN_PLAIN_VALUE) < 0 && scale > MAX_SYMBOLS) {
+        if (numberToWorkWith.abs().compareTo(MIN_PLAIN_VALUE) < 0 && scale > MAX_SYMBOLS) {
             pattern = new StringBuilder(ZERO + DECIMAL_SEPARATOR + PATTERN_15_DIGITS + PATTERN_EXPONENT + ZERO);
         } else {
             int integerPartLength = precision - scale;
@@ -239,13 +234,13 @@ public class NumberFormatter {
                     pattern.append(PATTERN_DIGIT);
                 }
 
-                number = number.setScale(MAX_SYMBOLS, BigDecimal.ROUND_HALF_UP);//todo
+                numberToWorkWith = numberToWorkWith.setScale(MAX_SYMBOLS, BigDecimal.ROUND_HALF_UP);
             }
         }
 
         format.applyPattern(pattern.toString());
 
-        return finalFormat(format.format(number), useGrouping, trailingZeros);
+        return finalFormat(format.format(numberToWorkWith), useGrouping, trailingZeros);
     }
 
     /**
@@ -260,9 +255,7 @@ public class NumberFormatter {
      * @throws ParseException if impossible to parse number.
      */
     public static BigDecimal parseToBigDecimal(String number) throws ParseException {
-        if (isEngineerNumber(number)) {
-            return new BigDecimal(number);
-        }
+        setExponentSeparatorSymbol(number.contains(INTEGER_EXPONENT_SEPARATOR));
 
         return (BigDecimal) format.parse(number);
     }
@@ -286,9 +279,12 @@ public class NumberFormatter {
      * If the last symbol of number is {@code DECIMAL_SEPARATOR}, removes it.
      * <p>
      * If {@code GROUPING_SEPARATOR} should not be used, replaces them with empty string.
+     * <p>
+     * Appends trailing zeros if necessary.
      *
-     * @param number      number that was formatted.
-     * @param useGrouping true if {@code GROUPING_SEPARATOR} should be used or false otherwise.
+     * @param number        number that was formatted.
+     * @param useGrouping   true if {@code GROUPING_SEPARATOR} should be used or false otherwise.
+     * @param trailingZeros number of trailing zeros that should be appended.
      * @return corrected number if it was necessary to correct.
      */
     private static String finalFormat(String number, boolean useGrouping, int trailingZeros) {
@@ -325,76 +321,20 @@ public class NumberFormatter {
     /**
      * Checks if second char of unsigned number is {@code EXPONENT_SEPARATOR}.
      *
-     * @param number number to check.
+     * @param formattedNumber formatted number to check.
      * @return true if second char of unsigned number is {@code EXPONENT_SEPARATOR} or false otherwise.
      */
-    private static boolean isSecondCharEngineer(String number) {
-        return number.matches("-?\\d" + DECIMAL_EXPONENT_SEPARATOR + "\\+?-?\\d+");
+    private static boolean isSecondCharEngineer(String formattedNumber) {
+        return formattedNumber.matches("-?\\d" + DECIMAL_EXPONENT_SEPARATOR + "\\+?-?\\d+");
     }
 
     /**
      * Checks if last symbol of string is {@code DECIMAL_SEPARATOR}.
      *
-     * @param string string to check.
+     * @param formattedNumber formatted number to check.
      * @return true if last symbol of string is {@code DECIMAL_SEPARATOR} or false otherwise.
      */
-    private static boolean isLastDecimalSeparator(String string) {
-        return string.endsWith(String.valueOf(DECIMAL_SEPARATOR));
-    }
-
-    /**
-     * Checks if number contains {@code EXPONENT_SEPARATOR}.
-     *
-     * @param number number to check.
-     * @return true if number contains {@code EXPONENT_SEPARATOR} or false otherwise.
-     */
-    private static boolean isEngineerNumber(String number) {
-        return number.contains(DECIMAL_EXPONENT_SEPARATOR);
-    }
-
-    /**
-     * Checks if number contains {@code DECIMAL_SEPARATOR}.
-     *
-     * @param number number to check.
-     * @return true if number contains {@code DECIMAL_SEPARATOR} or false otherwise.
-     * @throws ParseException if impossible to parse number.
-     */
-    private static boolean isDecimalNumber(String number) throws ParseException {
-        return isLastDecimalSeparator(number) || parseToBigDecimal(number).scale() != 0;
-    }
-
-    /**
-     * Checks if number is negative.
-     *
-     * @param number number to check.
-     * @return true if number is negative or false otherwise.
-     * @throws ParseException if impossible to parse number.
-     */
-    private static boolean isNegativeNumber(String number) throws ParseException {
-        boolean negativeZero = isIntegerPartZero(number) && number.startsWith(MINUS);
-        return negativeZero || parseToBigDecimal(number).signum() < 0;
-    }
-
-    /**
-     * Checks if integer part of number is 0.
-     *
-     * @param number number to check.
-     * @return true if integer part of number is 0 or false otherwise.
-     * @throws ParseException if impossible to parse number.
-     */
-    private static boolean isIntegerPartZero(String number) throws ParseException {
-        return parseToBigDecimal(number).abs().compareTo(BigDecimal.ONE) < 0;
-    }
-
-    /**
-     * Checks if number contains only one digit.
-     *
-     * @param number number to check.
-     * @return true if number contains only one digit or false otherwise.
-     * @throws ParseException if impossible to parse number.
-     */
-    private static boolean isOneDigitNumber(String number) throws ParseException {
-        BigDecimal bigDecimal = parseToBigDecimal(number);
-        return bigDecimal.abs().compareTo(BigDecimal.TEN) < 0 && bigDecimal.scale() == 0;
+    private static boolean isLastDecimalSeparator(String formattedNumber) {
+        return formattedNumber.endsWith(String.valueOf(DECIMAL_SEPARATOR));
     }
 }
