@@ -316,7 +316,7 @@ public class Controller implements Initializable {
                 buttonToFire.fire();
             }
 
-//            throw new ArrayIndexOutOfBoundsException("There should be a message");
+           //throw new ArrayIndexOutOfBoundsException("Array index of bound");
         } catch (Throwable e) {
             tellUserAboutError(e.getMessage());
         }
@@ -506,10 +506,11 @@ public class Controller implements Initializable {
             if (isEditableScreen) {
                 number = screen.getText();
             } else {
-                number = EMPTY_STRING;
+                number = ZERO;
             }
 
-            screen.setText(appendDigitToNumber(number, digit));
+            BigDecimal result = appendDigitToNumber(parseToBigDecimal(number), new BigDecimal(digit), isLastDot(number));
+            screen.setText(formatNumber(result, true));
 
             if (isUnaryOrPercentPressed) {
                 equation.setText(EMPTY_STRING);
@@ -743,17 +744,21 @@ public class Controller implements Initializable {
 
     /**
      * Shows to user that something goes wrong.
+     * Also resets application to its primary.
      *
      * @param message message got by exception or error.
      */
     private void tellUserAboutError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Unsupported error was thrown with message:\n" + message +
-                "\nPlease contact developers.");
-
-        alert.showAndWait();
+//        resetAll();
+//        memoryClearOperation();
+//
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        alert.setTitle("Error");
+//        alert.setHeaderText(null);
+//        alert.setContentText("Unsupported error was thrown with message:\n" + message +
+//                "\nApplication was reset to its primary.");
+//
+//        alert.showAndWait();
     }
 
     /**
@@ -1622,13 +1627,17 @@ public class Controller implements Initializable {
         return symbol;
     }
 
+    private boolean isLastDot(String string) {
+        return string.endsWith(String.valueOf(DECIMAL_SEPARATOR));
+    }
+
     /**
      * Disables or enables several {@code Button}, passed as args.
      *
      * @param flag    true for disabling and false for enabling.
      * @param buttons several {@code Button} that should change their disability.
      */
-    private static void setButtonsDisability(boolean flag, Button... buttons) {
+    private void setButtonsDisability(boolean flag, Button... buttons) {
         Stream.of(buttons).forEach(button -> button.setDisable(flag));
     }
 }

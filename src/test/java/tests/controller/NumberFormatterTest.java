@@ -23,13 +23,6 @@ class NumberFormatterTest {
     void appendDigitTests() {
         //can append
         {
-            //empty string
-            checkAppendDigit("", "0", "0");
-            checkAppendDigit("", "1", "1");
-            checkAppendDigit("", "5", "5");
-            checkAppendDigit("", "8", "8");
-            checkAppendDigit("", "9", "9");
-
             //append to zero
             checkAppendDigit("0", "0", "0");
             checkAppendDigit("0", "1", "1");
@@ -115,28 +108,28 @@ class NumberFormatterTest {
             checkAppendDigit("-9", "9", "-99");
 
             //append to three-digits positive integer number
-            checkAppendDigit("934", "0", "9,340");
-            checkAppendDigit("825", "1", "8,251");
-            checkAppendDigit("230", "2", "2,302");
-            checkAppendDigit("827", "3", "8,273");
-            checkAppendDigit("828", "4", "8,284");
-            checkAppendDigit("821", "5", "8,215");
-            checkAppendDigit("997", "6", "9,976");
-            checkAppendDigit("282", "7", "2,827");
-            checkAppendDigit("962", "8", "9,628");
-            checkAppendDigit("973", "9", "9,739");
+            checkAppendDigit("934", "0", "9340");
+            checkAppendDigit("825", "1", "8251");
+            checkAppendDigit("230", "2", "2302");
+            checkAppendDigit("827", "3", "8273");
+            checkAppendDigit("828", "4", "8284");
+            checkAppendDigit("821", "5", "8215");
+            checkAppendDigit("997", "6", "9976");
+            checkAppendDigit("282", "7", "2827");
+            checkAppendDigit("962", "8", "9628");
+            checkAppendDigit("973", "9", "9739");
 
             //append to three-digits negative integer number
-            checkAppendDigit("-641", "0", "-6,410");
-            checkAppendDigit("-345", "1", "-3,451");
-            checkAppendDigit("-970", "2", "-9,702");
-            checkAppendDigit("-175", "3", "-1,753");
-            checkAppendDigit("-962", "4", "-9,624");
-            checkAppendDigit("-537", "5", "-5,375");
-            checkAppendDigit("-970", "6", "-9,706");
-            checkAppendDigit("-234", "7", "-2,347");
-            checkAppendDigit("-468", "8", "-4,688");
-            checkAppendDigit("-738", "9", "-7,389");
+            checkAppendDigit("-641", "0", "-6410");
+            checkAppendDigit("-345", "1", "-3451");
+            checkAppendDigit("-970", "2", "-9702");
+            checkAppendDigit("-175", "3", "-1753");
+            checkAppendDigit("-962", "4", "-9624");
+            checkAppendDigit("-537", "5", "-5375");
+            checkAppendDigit("-970", "6", "-9706");
+            checkAppendDigit("-234", "7", "-2347");
+            checkAppendDigit("-468", "8", "-4688");
+            checkAppendDigit("-738", "9", "-7389");
 
             //append to three-digits (before dot) positive decimal number
             checkAppendDigit("623.", "0", "623.0");
@@ -145,7 +138,7 @@ class NumberFormatterTest {
             checkAppendDigit("126.", "8", "126.8");
             checkAppendDigit("967.", "9", "967.9");
 
-            checkAppendDigit("821.25", "0", "821.250");
+            //checkAppendDigit("821.25", "0", "821.250");
             checkAppendDigit("997.813489", "1", "997.8134891");
             checkAppendDigit("282.342342", "5", "282.3423425");
             checkAppendDigit("962.9253", "8", "962.92538");
@@ -165,56 +158,56 @@ class NumberFormatterTest {
             checkAppendDigit("-341.72368", "9", "-341.723689");
 
             //append to integer number with commas
-            checkAppendDigit("723,567", "0", "7,235,670");
-            checkAppendDigit("82,458", "1", "824,581");
-            checkAppendDigit("23,634", "5", "236,345");
-            checkAppendDigit("2,578", "8", "25,788");
-            checkAppendDigit("2,155,478,547", "9", "21,554,785,479");
+            checkAppendDigit("723567", "0", "7235670");
+            checkAppendDigit("82458", "1", "824581");
+            checkAppendDigit("23634", "5", "236345");
+            checkAppendDigit("2578", "8", "25788");
+            checkAppendDigit("2155478547", "9", "21554785479");
 
-            checkAppendDigit("-457,345", "0", "-4,573,450");
-            checkAppendDigit("-73,456", "1", "-734,561");
-            checkAppendDigit("-3,457", "5", "-34,575");
-            checkAppendDigit("-25679", "8", "-256,798");
-            checkAppendDigit("-63,467,435", "9", "-634,674,359");
+            checkAppendDigit("-457345", "0", "-4573450");
+            checkAppendDigit("-73456", "1", "-734561");
+            checkAppendDigit("-3457", "5", "-34575");
+            checkAppendDigit("-25679", "8", "-256798");
+            checkAppendDigit("-63467435", "9", "-634674359");
 
             //append to decimal number with commas
-            checkAppendDigit("21,344.", "0", "21,344.0");
-            checkAppendDigit("7,346,346.8", "1", "7,346,346.81");
-            checkAppendDigit("83,463.375", "5", "83,463.3755");
-            checkAppendDigit("32,467,778.34678", "8", "32,467,778.346788");
-            checkAppendDigit("23,447.84365346", "9", "23,447.843653469");
+            checkAppendDigit("21344.", "0", "21344.0");
+            checkAppendDigit("7346346.8", "1", "7346346.81");
+            checkAppendDigit("83463.375", "5", "83463.3755");
+            checkAppendDigit("32467778.34678", "8", "32467778.346788");
+            checkAppendDigit("23447.84365346", "9", "23447.843653469");
 
-            checkAppendDigit("-32,567.", "0", "-32,567.0");
-            checkAppendDigit("-23,654.7", "1", "-23,654.71");
-            checkAppendDigit("-8,762,435.425", "5", "-8,762,435.4255");
-            checkAppendDigit("-34,637,457.7346", "8", "-34,637,457.73468");
-            checkAppendDigit("-3,453,635.8346346", "9", "-3,453,635.83463469");
+            checkAppendDigit("-32567.", "0", "-32567.0");
+            checkAppendDigit("-23654.7", "1", "-23654.71");
+            checkAppendDigit("-8762435.425", "5", "-8762435.4255");
+            checkAppendDigit("-34637457.7346", "8", "-34637457.73468");
+            checkAppendDigit("-3453635.8346346", "9", "-3453635.83463469");
 
             //append to 15-digits integer number
-            checkAppendDigit("678,096,234,678,975", "0", "6,780,962,346,789,750");
-            checkAppendDigit("780,875,456,897,543", "1", "7,808,754,568,975,431");
-            checkAppendDigit("987,456,875,345,789", "5", "9,874,568,753,457,895");
-            checkAppendDigit("987,564,567,986,246", "8", "9,875,645,679,862,468");
-            checkAppendDigit("189,090,098,567,245", "9", "1,890,900,985,672,459");
+            checkAppendDigit("678096234678975", "0", "6780962346789750");
+            checkAppendDigit("780875456897543", "1", "7808754568975431");
+            checkAppendDigit("987456875345789", "5", "9874568753457895");
+            checkAppendDigit("987564567986246", "8", "9875645679862468");
+            checkAppendDigit("189090098567245", "9", "1890900985672459");
 
-            checkAppendDigit("-987,456,752,346,783", "0", "-9,874,567,523,467,830");
-            checkAppendDigit("-987,567,356,782,345", "1", "-9,875,673,567,823,451");
-            checkAppendDigit("-987,457,621,103,536", "5", "-9,874,576,211,035,365");
-            checkAppendDigit("-123,567,256,721,457", "8", "-1,235,672,567,214,578");
-            checkAppendDigit("-423,767,464,768,144", "9", "-4,237,674,647,681,449");
+            checkAppendDigit("-987456752346783", "0", "-9874567523467830");
+            checkAppendDigit("-987567356782345", "1", "-9875673567823451");
+            checkAppendDigit("-987457621103536", "5", "-9874576211035365");
+            checkAppendDigit("-123567256721457", "8", "-1235672567214578");
+            checkAppendDigit("-423767464768144", "9", "-4237674647681449");
 
             //append to 15-digits (summary) decimal number
-            checkAppendDigit("678,987,175,238.357", "0", "678,987,175,238.3570");
-            checkAppendDigit("89,798.6297342734", "1", "89,798.62973427341");
-            checkAppendDigit("98,273,492,302.5727", "5", "98,273,492,302.57275");
+            checkAppendDigit("678987175238.357", "0", "678987175238.3570");
+            checkAppendDigit("89798.6297342734", "1", "89798.62973427341");
+            checkAppendDigit("98273492302.5727", "5", "98273492302.57275");
             checkAppendDigit("863.240000000023", "8", "863.2400000000238");
-            checkAppendDigit("624,592,234,242.500", "9", "624,592,234,242.5009");
+            checkAppendDigit("624592234242.500", "9", "624592234242.5009");
 
-            checkAppendDigit("-7,862,359,237.50226", "0", "-7,862,359,237.502260");
+            checkAppendDigit("-7862359237.50226", "0", "-7862359237.502260");
             checkAppendDigit("-842.789273942046", "1", "-842.7892739420461");
-            checkAppendDigit("-898,402,348,028.492", "5", "-898,402,348,028.4925");
-            checkAppendDigit("-725,836.826346363", "8", "-725,836.8263463638");
-            checkAppendDigit("-90,000,000.0000000", "9", "-90,000,000.00000009");
+            checkAppendDigit("-898402348028.492", "5", "-898402348028.4925");
+            checkAppendDigit("-725836.826346363", "8", "-725836.8263463638");
+            checkAppendDigit("-90000000.0000000", "9", "-90000000.00000009");
 
             //append to decimal number with 16 digits summary (while integer part is 0)
             checkAppendDigit("0.678986456781345", "0", "0.6789864567813450");
@@ -233,30 +226,30 @@ class NumberFormatterTest {
         //can not append
         {
             //append to 16-digits integer number
-            checkAppendDigit("9,847,862,357,839,869", "0", "9,847,862,357,839,869");
-            checkAppendDigit("7,374,149,817,289,492", "1", "7,374,149,817,289,492");
-            checkAppendDigit("7,349,564,303,904,532", "5", "7,349,564,303,904,532");
-            checkAppendDigit("9,872,358,289,579,258", "8", "9,872,358,289,579,258");
-            checkAppendDigit("6,729,423,840,284,622", "9", "6,729,423,840,284,622");
+            checkAppendDigit("9847862357839869", "0", "9847862357839869");
+            checkAppendDigit("7374149817289492", "1", "7374149817289492");
+            checkAppendDigit("7349564303904532", "5", "7349564303904532");
+            checkAppendDigit("9872358289579258", "8", "9872358289579258");
+            checkAppendDigit("6729423840284622", "9", "6729423840284622");
 
-            checkAppendDigit("-9,239,582,957,295,726", "0", "-9,239,582,957,295,726");
-            checkAppendDigit("-7,290,000,008,234,928", "1", "-7,290,000,008,234,928");
-            checkAppendDigit("-6,666,666,666,666,666", "5", "-6,666,666,666,666,666");
-            checkAppendDigit("-2,592,838,592,590,224", "8", "-2,592,838,592,590,224");
-            checkAppendDigit("-7,535,253,536,367,367", "9", "-7,535,253,536,367,367");
+            checkAppendDigit("-9239582957295726", "0", "-9239582957295726");
+            checkAppendDigit("-7290000008234928", "1", "-7290000008234928");
+            checkAppendDigit("-6666666666666666", "5", "-6666666666666666");
+            checkAppendDigit("-2592838592590224", "8", "-2592838592590224");
+            checkAppendDigit("-7535253536367367", "9", "-7535253536367367");
 
             //append to 16-digits (summary) decimal number
-            checkAppendDigit("6,269,657,463,635,353.", "0", "6,269,657,463,635,353.");
+            checkAppendDigit("6269657463635353.", "0", "6269657463635353.");
             checkAppendDigit("7.334536437634563", "1", "7.334536437634563");
-            checkAppendDigit("74,564.64654646464", "5", "74,564.64654646464");
-            checkAppendDigit("966,434,529,745,647.4", "8", "966,434,529,745,647.4");
+            checkAppendDigit("74564.64654646464", "5", "74564.64654646464");
+            checkAppendDigit("966434529745647.4", "8", "966434529745647.4");
             checkAppendDigit("84.74745745745749", "9", "84.74745745745749");
 
-            checkAppendDigit("-6,346,346,394,365,337.", "0", "-6,346,346,394,365,337.");
-            checkAppendDigit("-845,787,846,363,733.7", "1", "-845,787,846,363,733.7");
+            checkAppendDigit("-6346346394365337.", "0", "-6346346394365337.");
+            checkAppendDigit("-845787846363733.7", "1", "-845787846363733.7");
             checkAppendDigit("-734.6367934653793", "5", "-734.6367934653793");
-            checkAppendDigit("-95,675.67568758474", "8", "-95,675.67568758474");
-            checkAppendDigit("-734,639,356,475.4563", "9", "-734,639,356,475.4563");
+            checkAppendDigit("-95675.67568758474", "8", "-95675.67568758474");
+            checkAppendDigit("-734639356475.4563", "9", "-734639356475.4563");
 
             //append to decimal number with 17 digits summary (while integer part is 0)
             checkAppendDigit("0.7564734634634638", "0", "0.7564734634634638");
@@ -876,15 +869,12 @@ class NumberFormatterTest {
      * @param expectedResult expected result after performing operation.
      */
     private void checkAppendDigit(String number, String digit, String expectedResult) {
-        String result = null;
+        BigDecimal bigDecimalNumber = new BigDecimal(number);
+        BigDecimal bigDecimalDigit = new BigDecimal(digit);
+        BigDecimal bigDecimalExpectedResult = new BigDecimal(expectedResult);
 
-        try {
-            result = NumberFormatter.appendDigitToNumber(number, digit);
-        } catch (ParseException e) {
-            fail();
-        }
-
-        assertEquals(expectedResult, result);
+        assertEquals(bigDecimalExpectedResult, NumberFormatter.appendDigitToNumber(bigDecimalNumber, bigDecimalDigit,
+                number.endsWith(String.valueOf(NumberFormatter.DECIMAL_SEPARATOR))));
     }
 
     /**

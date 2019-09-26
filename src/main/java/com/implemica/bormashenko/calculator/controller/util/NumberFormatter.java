@@ -85,6 +85,11 @@ public class NumberFormatter {
     private static final String EMPTY_STRING = "";
 
     /**
+     * {@code BigDecimal} value for appending new digit to decimal number.
+     */
+    private static final BigDecimal ONE_TENTH = new BigDecimal("0.1");
+
+    /**
      * Object for setting symbols for decimal formatter.
      */
     private static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -96,42 +101,29 @@ public class NumberFormatter {
         format.setParseBigDecimal(true);
     }
 
-    /**
-     * Appends digit to number.
-     * <p>
-     * If number is {@code ZERO} or an empty string, replaces it with inputted digit. Otherwise, checks if the digit
-     * can be appended.
-     * <p>
-     * If number ends with {@code DECIMAL_SEPARATOR} or has (or will has after appending digit) trailing zero in decimal
-     * part, returns number with appended digit without formatting it (unnecessary).
-     * <p>
-     * Otherwise, return number with appended digit with formatting it.
-     *
-     * @param number number to edit.
-     * @param digit  digit to append.
-     * @return edited number if it was possible to edit.
-     * @throws ParseException if impossible to parse number.
-     */
-    public static String appendDigitToNumber(String number, String digit) throws ParseException {
-        if (number.equals(EMPTY_STRING) || number.equals(ZERO)) {
-            return digit;
-        }
+    public static BigDecimal appendDigitToNumber(BigDecimal number, BigDecimal digit, boolean appendDotBeforeDigit) {
+        BigDecimal result = number;
 
-        if (isCanAppend(number)) {
+        if (number.precision() < MAX_SYMBOLS) {
 
-            boolean decimalWithTrailingZero = isDecimalNumber(number) && (number.endsWith(ZERO) || digit.equals(ZERO));
-
-            if (isLastDecimalSeparator(number) || decimalWithTrailingZero) {
-                return number + digit;
+            if (number.signum() < 0) {
+                digit = digit.negate();
             }
 
-            number += digit;
-
-        } else {
-            return number;
+            if (appendDotBeforeDigit) {
+                digit = digit.multiply(ONE_TENTH);
+                result = number.add(digit);
+            } else if (number.equals(BigDecimal.ZERO)) {
+                result = digit;
+            } else if (number.scale() == 0) {
+                result = number.multiply(BigDecimal.TEN).add(digit);
+            } else {
+                digit = digit.multiply(ONE_TENTH.pow(number.scale() + 1));
+                result = result.add(digit);
+            }
         }
 
-        return formatNumber(parseToBigDecimal(number), true);
+        return result;
     }
 
     /**
@@ -169,7 +161,7 @@ public class NumberFormatter {
      * @return edited number if it was possible to edit.
      * @throws ParseException if impossible to parse number.
      */
-    public static String deleteLastChar(String number) throws ParseException {
+    public static String deleteLastChar(String number) throws ParseException {//todo
         if (isEngineerNumber(number)) {
             return number;
         }
@@ -248,6 +240,7 @@ public class NumberFormatter {
      */
     public static String formatNumber(BigDecimal number, boolean useGrouping) {
         setExponentSeparatorSymbol(number.abs().compareTo(BigDecimal.ONE) >= 0);
+        //format.setGroupingUsed();
 
         int scale = number.scale();
         int precision = number.precision();
@@ -278,7 +271,7 @@ public class NumberFormatter {
                     pattern.append(PATTERN_DIGIT);
                 }
 
-                number = number.setScale(MAX_SYMBOLS, BigDecimal.ROUND_HALF_UP);
+                number = number.setScale(MAX_SYMBOLS, BigDecimal.ROUND_HALF_UP);//todo
             }
         }
 
@@ -304,37 +297,6 @@ public class NumberFormatter {
         }
 
         return (BigDecimal) format.parse(number);
-    }
-
-    /**
-     * Checks if number's length can be increased.
-     *
-     * @param number number to check.
-     * @return true if number's length can be increased or false otherwise.
-     * @throws ParseException if impossible to parse number.
-     */
-    private static boolean isCanAppend(String number) throws ParseException {
-        int additionalLength = 0;
-
-        if (isIntegerPartZero(number)) {
-            additionalLength++;
-        }
-
-        if (isDecimalNumber(number)) {
-            additionalLength++;
-        }
-
-        if (isNegativeNumber(number)) {
-            additionalLength++;
-        }
-
-        if (number.endsWith(String.valueOf(DECIMAL_SEPARATOR))) {
-            additionalLength--;
-        }
-
-        int currentLength = formatNumber(parseToBigDecimal(number), false).length();
-
-        return currentLength < MAX_SYMBOLS + additionalLength;
     }
 
     /**
