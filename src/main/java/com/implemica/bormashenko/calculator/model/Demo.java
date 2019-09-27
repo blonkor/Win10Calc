@@ -38,18 +38,14 @@ public class Demo {
         BigDecimal d = new BigDecimal("4");
         BigDecimal e = new BigDecimal("5");
 
-        //calculate (a²)
-        calculation.setFirst(a);
-        calculation.calculateUnary(SQR);
+        //calculate (a²) and set it as first.
+        calculation.calculateUnary(a, SQR);
+        calculation.setFirst(calculation.getResult());
 
         System.out.println("Result of previous operation: " + calculation.getResult());
 
         //calculate (-b) and set it as second.
-        //For not no loose previous result, set it as second before calculation.
-        calculation.setSecond(calculation.getResult());
-        calculation.setFirst(b);
-        calculation.calculateUnary(NEGATE);
-        calculation.setFirst(calculation.getSecond());
+        calculation.calculateUnary(b, NEGATE);
         calculation.setSecond(calculation.getResult());
 
         System.out.println("Result of previous operation: " + calculation.getResult());
@@ -68,12 +64,9 @@ public class Demo {
 
         System.out.println("Result of previous operation: " + calculation.getResult());
 
-        //calculate (√d) and set it as second.
-        //For not no loose previous result, set it as second before calculation.
-        calculation.setSecond(calculation.getResult());
-        calculation.setFirst(d);
-        calculation.calculateUnary(SQRT);
-        calculation.setFirst(calculation.getSecond());
+        //set previous result as first, calculate (√d) and set it as second.
+        calculation.setFirst(calculation.getResult());
+        calculation.calculateUnary(d, SQRT);
         calculation.setSecond(calculation.getResult());
 
         System.out.println("Result of previous operation: " + calculation.getResult());
@@ -84,14 +77,10 @@ public class Demo {
 
         System.out.println("Result of previous operation: " + calculation.getResult());
 
-        //calculate ((1/e)²) and set it as second.
-        // For not no loose previous result, set it as second before calculation.
-        calculation.setSecond(calculation.getResult());
-        calculation.setFirst(e);
-        calculation.calculateUnary(INVERSE);
+        //set previous result as first, calculate ((1/e)²) and set it as second.
         calculation.setFirst(calculation.getResult());
-        calculation.calculateUnary(SQR);
-        calculation.setFirst(calculation.getSecond());
+        calculation.calculateUnary(e, INVERSE);
+        calculation.calculateUnary(calculation.getResult(), SQR);
         calculation.setSecond(calculation.getResult());
 
         System.out.println("Result of previous operation: " + calculation.getResult());

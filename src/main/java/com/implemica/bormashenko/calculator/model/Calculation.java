@@ -143,16 +143,17 @@ public class Calculation {
      * @throws NegativeRootException if trying to divide inverse zero.
      * @throws DivideByZeroException if trying to divide inverse zero.
      */
-    public void calculateUnary(UnaryOperation unaryOperation) throws OverflowException, NegativeRootException,
+    public void calculateUnary(BigDecimal number, UnaryOperation unaryOperation) throws OverflowException,
+            NegativeRootException,
             DivideByZeroException {
         if (unaryOperation == UnaryOperation.NEGATE) {
-            result = negate();
+            result = negate(number);
         } else if (unaryOperation == UnaryOperation.SQR) {
-            result = sqr();
+            result = sqr(number);
         } else if (unaryOperation == UnaryOperation.SQRT) {
-            result = sqrt();
+            result = sqrt(number);
         } else if (unaryOperation == UnaryOperation.INVERSE) {
-            result = inverse();
+            result = inverse(number);
         }
 
         result = result.stripTrailingZeros();
@@ -166,16 +167,16 @@ public class Calculation {
      * Calculates second number as a percentage of first number if current {@code BinaryOperation} is
      * {@code BinaryOperation.ADD} or {@code BinaryOperation.SUBTRACT}, or as a percentage of 100 if current
      * {@code BinaryOperation} is {@code BinaryOperation.MULTIPLY} or {@code BinaryOperation.DIVIDE}
-     *
+     * @param number number to perform operation.
      * @throws OverflowException while validation for result is failed.
      */
-    public void calculatePercentage() throws OverflowException {
+    public void calculatePercentage(BigDecimal number) throws OverflowException {
         if (binaryOperation == null) {
             resetAll();
         } else if (binaryOperation == BinaryOperation.ADD || binaryOperation == BinaryOperation.SUBTRACT) {
-            result = percentageOfFirst();
+            result = percentageOfFirst(number);
         } else if (binaryOperation == BinaryOperation.MULTIPLY || binaryOperation == BinaryOperation.DIVIDE) {
-            result = percentageOf100();
+            result = percentageOf100(number);
         }
 
         result = result.stripTrailingZeros();
@@ -238,20 +239,20 @@ public class Calculation {
 
     /**
      * Calculates negated first number.
-     *
+     * @param number number to perform operation.
      * @return negated first number.
      */
-    private BigDecimal negate() {
-        return first.negate();
+    private BigDecimal negate(BigDecimal number) {
+        return number.negate();
     }
 
     /**
      * Calculates square of first number.
-     *
+     * @param number number to perform operation.
      * @return square of first number.
      */
-    private BigDecimal sqr() {
-        return first.multiply(first);
+    private BigDecimal sqr(BigDecimal number) {
+        return number.multiply(number);
     }
 
     /**
@@ -260,12 +261,12 @@ public class Calculation {
      * This method is almost copied from JDK.9 src.
      * All additional information You can find at
      * {@link = "https://docs.oracle.com/javase/9/docs/api/java/math/BigDecimal.html#sqrt-java.math.MathContext-"}
-     *
+     * @param number number to perform operation.
      * @return square root of first number.
      * @throws NegativeRootException while first value is negative.
      */
-    private BigDecimal sqrt() throws NegativeRootException {
-        int signum = first.signum();
+    private BigDecimal sqrt(BigDecimal number) throws NegativeRootException {
+        int signum = number.signum();
 
         if (signum < 0) {
             throw new NegativeRootException();
@@ -275,9 +276,9 @@ public class Calculation {
             return BigDecimal.ZERO;
         }
 
-        int preferredScale = first.scale() / 2;
+        int preferredScale = number.scale() / 2;
         BigDecimal zeroWithFinalPreferredScale = BigDecimal.valueOf(0L, preferredScale);
-        BigDecimal stripped = first.stripTrailingZeros();
+        BigDecimal stripped = number.stripTrailingZeros();
         int strippedScale = stripped.scale();
 
         if (stripped.unscaledValue().compareTo(BigInteger.ONE) == 0 &&
@@ -330,41 +331,42 @@ public class Calculation {
 
     /**
      * Calculates inverted first number.
-     *
+     * @param number number to perform operation.
      * @return inverted first number.
      * @throws DivideByZeroException while first number is 0.
      */
-    private BigDecimal inverse() throws DivideByZeroException{
-        if (first.compareTo(BigDecimal.ZERO) == 0) {
+    private BigDecimal inverse(BigDecimal number) throws DivideByZeroException{
+        if (number.compareTo(BigDecimal.ZERO) == 0) {
             throw new DivideByZeroException();
         }
 
-        return BigDecimal.ONE.divide(first, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
+        return BigDecimal.ONE.divide(number, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
     /**
      * Calculates second number as a percentage of the first.
-     *
+     * @param number number to perform operation.
      * @throws OverflowException while validation for second value is failed.
      */
-    private BigDecimal percentageOfFirst() throws OverflowException {
-        if (second.scale() + first.scale() > MAX_SCALE) {
+    private BigDecimal percentageOfFirst(BigDecimal number) throws OverflowException {
+        if (number.scale() + first.scale() > MAX_SCALE) {
             throw new OverflowException();
         }
 
-        return first.multiply(second).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return first.multiply(number).divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 
     /**
      * Calculates second number as a percentage of 100.
      *
+     * @param number number to perform operation.
      * @throws OverflowException while validation for second number is failed.
      */
-    private BigDecimal percentageOf100() throws OverflowException{
-        if (second.scale() - ONE_HUNDRED.stripTrailingZeros().scale() > MAX_SCALE) {
+    private BigDecimal percentageOf100(BigDecimal number) throws OverflowException{
+        if (number.scale() - ONE_HUNDRED.stripTrailingZeros().scale() > MAX_SCALE) {
             throw new OverflowException();
         }
 
-        return second.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
+        return number.divide(ONE_HUNDRED, DIVIDE_SCALE, BigDecimal.ROUND_HALF_UP).stripTrailingZeros();
     }
 }

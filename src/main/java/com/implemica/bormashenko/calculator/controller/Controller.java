@@ -1186,8 +1186,7 @@ public class Controller implements Initializable {
      */
     private void setFirstAndCalculateUnary(UnaryOperation operation, BigDecimal first) throws OverflowException,
             NegativeRootException, DivideByZeroException, ParseException {
-        calculation.setFirst(first);
-        calculation.calculateUnary(operation);
+        calculation.calculateUnary(first, operation);
         calculation.setFirst(calculation.getResult());
         showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }
@@ -1206,10 +1205,7 @@ public class Controller implements Initializable {
      */
     private void severalUnaryInARow(UnaryOperation operation) throws OverflowException, NegativeRootException,
             DivideByZeroException, ParseException {
-        calculation.setSecond(calculation.getFirst());
-        calculation.setFirst(calculation.getResult());
-        calculation.calculateUnary(operation);
-        calculation.setFirst(calculation.getSecond());
+        calculation.calculateUnary(calculation.getResult(), operation);
         calculation.setSecond(calculation.getResult());
         showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }
@@ -1324,14 +1320,11 @@ public class Controller implements Initializable {
      */
     private void calculateUnaryFirstIsSet(UnaryOperation operation, BigDecimal number) throws OverflowException,
             NegativeRootException, DivideByZeroException, ParseException {
-        calculation.setSecond(calculation.getFirst());
-        calculation.setFirst(number);
-        calculation.calculateUnary(operation);
+        calculation.calculateUnary(number, operation);
 
         if (isEqualsPressed) {
             calculation.setFirst(calculation.getResult());
         } else {
-            calculation.setFirst(calculation.getSecond());
             calculation.setSecond(calculation.getResult());
         }
 
@@ -1405,8 +1398,7 @@ public class Controller implements Initializable {
     private void percentageWithBinary() throws OverflowException, ParseException {
         BigDecimal number = getCorrectNumber(false);
 
-        calculation.setSecond(number);
-        calculation.calculatePercentage();
+        calculation.calculatePercentage(number);
         calculation.setSecond(calculation.getResult());
         showNumberOnScreen(formatNumber(calculation.getResult(), true), false);
     }

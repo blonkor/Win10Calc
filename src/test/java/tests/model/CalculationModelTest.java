@@ -856,10 +856,9 @@ class CalculationModelTest {
     void percentageForBinaryNull() {
         calculation.setBinaryOperation(null);
         calculation.setFirst(BigDecimal.ONE);
-        calculation.setSecond(BigDecimal.TEN);
 
         try {
-            calculation.calculatePercentage();
+            calculation.calculatePercentage(BigDecimal.TEN);
         } catch (OverflowException e) {
             fail();
         }
@@ -1178,10 +1177,8 @@ class CalculationModelTest {
      */
     @Test
     void inverseZeroExceptionTest() {
-        calculation.setFirst(BigDecimal.ZERO);
-
         try {
-            calculation.calculateUnary(INVERSE);
+            calculation.calculateUnary(BigDecimal.ZERO, INVERSE);
             fail();
         } catch (OverflowException | NegativeRootException e) {
             fail();
@@ -1455,13 +1452,10 @@ class CalculationModelTest {
     private void doUnary(boolean secondSet, UnaryOperation operation) throws OverflowException, NegativeRootException,
             DivideByZeroException {
         if (secondSet) {
-            BigDecimal tempFirst = calculation.getFirst();
-            calculation.setFirst(calculation.getSecond());
-            calculation.calculateUnary(operation);
+            calculation.calculateUnary(calculation.getSecond(), operation);
             calculation.setSecond(calculation.getResult());
-            calculation.setFirst(tempFirst);
         } else {
-            calculation.calculateUnary(operation);
+            calculation.calculateUnary(calculation.getFirst(), operation);
 
             if (calculation.getBinaryOperation() == null) {
                 calculation.setFirst(calculation.getResult());
@@ -1483,7 +1477,7 @@ class CalculationModelTest {
             calculation.setSecond(calculation.getFirst());
         }
 
-        calculation.calculatePercentage();
+        calculation.calculatePercentage(calculation.getSecond());
         calculation.setSecond(calculation.getResult());
     }
 
