@@ -32,7 +32,7 @@ public class NumberFormatter {
     /**
      * Decimal formatter for formatting output.
      */
-    private static final DecimalFormat format = new DecimalFormat();
+    private static final DecimalFormat formatter = new DecimalFormat();
 
     /**
      * Symbol for separating every three digits in integer number.
@@ -75,11 +75,6 @@ public class NumberFormatter {
     private static final String ZERO = "0";
 
     /**
-     * Empty string for replacements.
-     */
-    private static final String EMPTY_STRING = "";
-
-    /**
      * {@code BigDecimal} value for appending new digit to decimal number.
      */
     private static final BigDecimal ONE_TENTH = new BigDecimal("0.1");
@@ -92,8 +87,8 @@ public class NumberFormatter {
     static {
         symbols.setGroupingSeparator(GROUPING_SEPARATOR);
         symbols.setDecimalSeparator(DECIMAL_SEPARATOR);
-        format.setDecimalFormatSymbols(symbols);
-        format.setParseBigDecimal(true);
+        formatter.setDecimalFormatSymbols(symbols);
+        formatter.setParseBigDecimal(true);
     }
 
     /**
@@ -237,9 +232,9 @@ public class NumberFormatter {
             }
         }
 
-        format.applyPattern(pattern.toString());
-        format.setGroupingUsed(useGrouping);
-        return finalFormat(format.format(numberToWorkWith), trailingZeros);
+        formatter.applyPattern(pattern.toString());
+        formatter.setGroupingUsed(useGrouping);
+        return finalFormat(formatter.format(numberToWorkWith), trailingZeros);
     }
 
     /**
@@ -256,7 +251,7 @@ public class NumberFormatter {
     public static BigDecimal parseToBigDecimal(String number) throws ParseException {
         setExponentSeparatorSymbol(number.contains(INTEGER_EXPONENT_SEPARATOR));
 
-        return (BigDecimal) format.parse(number);
+        return (BigDecimal) formatter.parse(number);
     }
 
     /**
@@ -266,7 +261,7 @@ public class NumberFormatter {
      */
     private static void setExponentSeparatorSymbol(boolean isIntegerSeparator) {
         symbols.setExponentSeparator(isIntegerSeparator ? INTEGER_EXPONENT_SEPARATOR : DECIMAL_EXPONENT_SEPARATOR);
-        format.setDecimalFormatSymbols(symbols);
+        formatter.setDecimalFormatSymbols(symbols);
     }
 
     /**

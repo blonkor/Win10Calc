@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+    <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="Refactoring number fo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
@@ -89,7 +88,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
+  <component name="RunManager" selected="JUnit.NumberFormatterTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -174,11 +173,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.NumberFormatterTest" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
         <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="JUnit.ControllerTest.sqrtTests" />
         <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.NumberFormatterTest" />
       </list>
     </recent_temporary>
   </component>
@@ -192,13 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00185" summary="Refactoring controller and view for navigation panel.">
-      <created>1568383873964</created>
-      <option name="number" value="00185" />
-      <option name="presentableId" value="LOCAL-00185" />
-      <option name="project" value="LOCAL" />
-      <updated>1568383873964</updated>
     </task>
     <task id="LOCAL-00186" summary="Bug fix with showing about panel.">
       <created>1568385047391</created>
@@ -536,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569580050082</updated>
     </task>
-    <option name="localTasksCounter" value="234" />
+    <task id="LOCAL-00234" summary="Bug fix in controller with formatting number.">
+      <created>1569589820140</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1569589820140</updated>
+    </task>
+    <option name="localTasksCounter" value="235" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -570,7 +569,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Bug fixes in controller with stored and returned from memory value." />
     <MESSAGE value="Bug fix with rounded number in controller that does not cause overflow exception." />
     <MESSAGE value="Overflow validation is utility class now." />
     <MESSAGE value="Updating controller tests." />
@@ -595,7 +593,8 @@
     <MESSAGE value="Change sign method in number formatter was edited." />
     <MESSAGE value="Demo was moved to model package and updated to became dynamically changeable." />
     <MESSAGE value="Refactoring number formatter." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring number formatter." />
+    <MESSAGE value="Bug fix in controller with formatting number." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fix in controller with formatting number." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
