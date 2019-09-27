@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.text.ParseException;
@@ -960,6 +961,7 @@ public class Controller implements Initializable {
         } else if (isRecalledFromMemory) {
             number = memory.recall();
         } else {
+            formatNumber(BigDecimal.ZERO, true);
             number = parseToBigDecimal(screen.getText());
         }
 

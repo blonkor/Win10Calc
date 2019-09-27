@@ -238,8 +238,8 @@ public class NumberFormatter {
         }
 
         format.applyPattern(pattern.toString());
-
-        return finalFormat(format.format(numberToWorkWith), useGrouping, trailingZeros);
+        format.setGroupingUsed(useGrouping);
+        return finalFormat(format.format(numberToWorkWith), trailingZeros);
     }
 
     /**
@@ -282,11 +282,10 @@ public class NumberFormatter {
      * Appends trailing zeros if necessary.
      *
      * @param number        number that was formatted.
-     * @param useGrouping   true if {@code GROUPING_SEPARATOR} should be used or false otherwise.
      * @param trailingZeros number of trailing zeros that should be appended.
      * @return corrected number if it was necessary to correct.
      */
-    private static String finalFormat(String number, boolean useGrouping, int trailingZeros) {
+    private static String finalFormat(String number, int trailingZeros) {
         if (isSecondCharEngineer(number)) {
             number = number.replace(DECIMAL_EXPONENT_SEPARATOR,
                     DECIMAL_SEPARATOR + DECIMAL_EXPONENT_SEPARATOR);
@@ -294,10 +293,6 @@ public class NumberFormatter {
 
         if (isLastDecimalSeparator(number)) {
             number = StringUtils.chop(number);
-        }
-
-        if (!useGrouping) {
-            number = number.replaceAll(String.valueOf(GROUPING_SEPARATOR), EMPTY_STRING);
         }
 
         if (trailingZeros != 0) {

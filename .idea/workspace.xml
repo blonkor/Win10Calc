@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
@@ -89,19 +90,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.ControllerTest.allTests">
-    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.model.Demo" />
-      <module name="Win10Calc" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.implemica.bormashenko.calculator.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.Launcher" />
       <module name="Win10Calc" />
@@ -111,6 +99,21 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Win10Calc" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests.controller" />
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,7 +134,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NumberFormatterTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.sqrtTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Win10Calc" />
       <extension name="coverage">
         <pattern>
@@ -140,11 +143,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests.controller" />
-      <option name="MAIN_CLASS_NAME" value="tests.controller.NumberFormatterTest" />
-      <option name="TEST_OBJECT" value="uniqueId" />
-      <uniqueIds>
-        <uniqueId value="[engine:junit-jupiter]/[class:tests.controller.NumberFormatterTest]" />
-      </uniqueIds>
+      <option name="MAIN_CLASS_NAME" value="tests.controller.ControllerTest" />
+      <option name="METHOD_NAME" value="sqrtTests" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -168,16 +169,16 @@
       <item itemvalue="Application.Launcher" />
       <item itemvalue="JUnit.NumberFormatterTest" />
       <item itemvalue="JUnit.ControllerTest.allTests" />
-      <item itemvalue="JUnit.NumberFormatterTest (1)" />
-      <item itemvalue="Application.Demo" />
+      <item itemvalue="JUnit.ControllerTest.sqrtTests" />
+      <item itemvalue="JUnit.ControllerTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerTest.allTests" />
+        <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.ControllerTest.sqrtTests" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.NumberFormatterTest" />
-        <item itemvalue="Application.Demo" />
-        <item itemvalue="JUnit.NumberFormatterTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -191,13 +192,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00184" summary="Created animation for moving navigation bar.">
-      <created>1568381030219</created>
-      <option name="number" value="00184" />
-      <option name="presentableId" value="LOCAL-00184" />
-      <option name="project" value="LOCAL" />
-      <updated>1568381030219</updated>
     </task>
     <task id="LOCAL-00185" summary="Refactoring controller and view for navigation panel.">
       <created>1568383873964</created>
@@ -535,7 +529,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569576601033</updated>
     </task>
-    <option name="localTasksCounter" value="233" />
+    <task id="LOCAL-00233" summary="Refactoring number formatter.">
+      <created>1569580050082</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1569580050082</updated>
+    </task>
+    <option name="localTasksCounter" value="234" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -588,13 +589,13 @@
     <MESSAGE value="Demo test case for unary operations created." />
     <MESSAGE value="Unsupported by model exceptions and errors are now tell user about themselves if appearing." />
     <MESSAGE value="Refactoring overflow validation." />
-    <MESSAGE value="Refactoring number formatter." />
     <MESSAGE value="Append digit method in number formatter was edited." />
     <MESSAGE value="Append dot method in number formatter was edited." />
     <MESSAGE value="Delete last digit method in number formatter was edited." />
     <MESSAGE value="Change sign method in number formatter was edited." />
     <MESSAGE value="Demo was moved to model package and updated to became dynamically changeable." />
-    <option name="LAST_COMMIT_MESSAGE" value="Demo was moved to model package and updated to became dynamically changeable." />
+    <MESSAGE value="Refactoring number formatter." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring number formatter." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
