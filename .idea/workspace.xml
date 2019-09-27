@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Demo.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -87,7 +90,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
+  <component name="RunManager" selected="Application.Launcher">
     <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.model.Demo" />
       <module name="Win10Calc" />
@@ -170,10 +173,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Launcher" />
+        <item itemvalue="Application.Demo" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
         <item itemvalue="JUnit.CalculationModelTest" />
-        <item itemvalue="Application.Demo" />
-        <item itemvalue="Application.Launcher" />
         <item itemvalue="JUnit.ControllerTest.moveEquationLabelTextTest" />
       </list>
     </recent_temporary>
@@ -188,13 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00189" summary="View tests updated.">
-      <created>1568633190152</created>
-      <option name="number" value="00189" />
-      <option name="presentableId" value="LOCAL-00189" />
-      <option name="project" value="LOCAL" />
-      <updated>1568633190152</updated>
     </task>
     <task id="LOCAL-00190" summary="Controller tests updated.">
       <created>1568635234063</created>
@@ -532,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569596444797</updated>
     </task>
-    <option name="localTasksCounter" value="238" />
+    <task id="LOCAL-00238" summary="Refactoring controller.">
+      <created>1569596686996</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1569596686997</updated>
+    </task>
+    <option name="localTasksCounter" value="239" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -566,7 +569,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Updating controller tests." />
     <MESSAGE value="Invalid input test case added." />
     <MESSAGE value="Refactoring tests for controller." />
     <MESSAGE value="Changing model's exceptions' logic." />
@@ -591,7 +593,8 @@
     <MESSAGE value="Refactoring number formatter." />
     <MESSAGE value="Refactoring controller tests." />
     <MESSAGE value="Updating model so it is easier to work with it." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating model so it is easier to work with it." />
+    <MESSAGE value="Refactoring controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring controller." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>

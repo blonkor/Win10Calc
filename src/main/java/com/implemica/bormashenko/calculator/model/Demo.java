@@ -85,6 +85,8 @@ public class Demo {
 
         System.out.println("Result of previous operation: " + calculation.getResult());
 
+        calculation.setFirst(BigDecimal.ONE);
+        calculation.setSecond(BigDecimal.ZERO);
         //then divide result of ((a² + (-b)) * c - (√d)) by result of (1/e)².
         calculation.setBinaryOperation(DIVIDE);
         calculation.calculateBinary();

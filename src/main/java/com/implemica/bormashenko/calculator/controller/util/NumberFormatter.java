@@ -291,7 +291,7 @@ public class NumberFormatter {
         }
 
         if (trailingZeros != 0) {
-            StringBuilder zeros = new StringBuilder();
+            StringBuilder zeros = new StringBuilder(trailingZeros);
 
             for (int i = 0; i < trailingZeros; i++) {
                 zeros.append(ZERO);

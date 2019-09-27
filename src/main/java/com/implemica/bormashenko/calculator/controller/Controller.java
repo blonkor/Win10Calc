@@ -321,7 +321,7 @@ public class Controller implements Initializable {
                 buttonToFire.fire();
             }
 
-           //throw new ArrayIndexOutOfBoundsException("Array index of bound");
+           throw new ArrayIndexOutOfBoundsException("Array index of bound");
         } catch (Throwable e) {
             tellUserAboutError(e.getMessage());
         }
