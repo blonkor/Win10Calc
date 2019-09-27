@@ -1130,30 +1130,30 @@ public class ControllerTest extends RobotControl {
     public void exceptionTests() {
         //overflow
         //add
-        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
-                "==+=========", OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10===+=========",
+                OVERFLOW_MESSAGE);
 
         //subtract
-        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
-                "==-===========", OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10===-===========",
+                OVERFLOW_MESSAGE);
 
         //multiply
-        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
-                "===", OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10====",
+                OVERFLOW_MESSAGE);
 
         //divide
-        checkException("0.000000001²²²²²²²²²²*0.000000000000001====================================================/10" +
-                "====", OVERFLOW_MESSAGE);
+        checkException("0.000000001²²²²²²²²²²*0.000000000000001====================================================/10====",
+                OVERFLOW_MESSAGE);
 
         //²
         checkException("1000000000²²²²²²²²²²²", OVERFLOW_MESSAGE);
         checkException("0.000000001²²²²²²²²²²²", OVERFLOW_MESSAGE);
 
         //percentage
-        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10=" +
-                "==+%", OVERFLOW_MESSAGE);
-        checkException("0.000000001²²²²²²²²²²*0.000000000000001====================================================/10" +
-                "===*%", OVERFLOW_MESSAGE);
+        checkException("1000000000²²²²²²²²²²*1000000000000000====================================================*10===+%",
+                OVERFLOW_MESSAGE);
+        checkException("0.000000001²²²²²²²²²²*0.000000000000001====================================================/10===*%",
+                OVERFLOW_MESSAGE);
 
         //invalid input
         checkException("1neg √", INVALID_INPUT_MESSAGE);
@@ -1173,17 +1173,14 @@ public class ControllerTest extends RobotControl {
     @Test
     public void boundaryTests() {
         //string for calculating number 1.e+9999
-        String oneDotEPlusFourNines = "1000000000²²²²²²²²²²*1000000000000000=========================================" +
-                "===========*10===";
+        String oneDotEPlusFourNines = "1000000000²²²²²²²²²²*1000000000000000====================================================*10===";
 
         //string for calculating number 1.e-9999
-        String theSmallestNumber = "0.000000001²²²²²²²²²²*0.0000000000000001=========================================" +
-                "=======*0.000000000000001=";
+        String theSmallestNumber = "0.000000001²²²²²²²²²²*0.0000000000000001================================================*0.000000000000001=";
 
         //string for calculating number 999999999999999949999.....9.9999...9.8
         //(16 nines, then digit 4, then 9983 nines, dot, and 9998 nines, and the last one digit is 8)
-        String boundaryNumber = oneDotEPlusFourNines + "*0.5=*0.1=============== MS /5=*10================- 1/x ==- " +
-                "MR = *10=*0.1= MS esc" + oneDotEPlusFourNines + "*9+ MR =";
+        String boundaryNumber = oneDotEPlusFourNines + "*0.5=*0.1=============== MS /5=*10================- 1/x ==- MR =*10=*0.1= MS esc" + oneDotEPlusFourNines + "*9+ MR =";
 
         //max numbers
         //right
