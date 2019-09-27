@@ -203,7 +203,6 @@ public class NumberFormatter {
         int trailingZeros = number.scale() - numberToWorkWith.scale();
 
         setExponentSeparatorSymbol(numberToWorkWith.abs().compareTo(BigDecimal.ONE) >= 0);
-        //format.setGroupingUsed(); //todo
 
         int scale = numberToWorkWith.scale();
         int precision = numberToWorkWith.precision();

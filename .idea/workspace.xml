@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fea7d4-6ccc-4c8c-a1b6-b5cfa628253e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/model/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/model/DemoTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/implemica/bormashenko/calculator/controller/util/NumberFormatter.java" afterDir="false" />
     </list>
     <list id="82383ff1-c5f9-4fe0-897c-6d65fbc9d833" name="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;" comment="Revert &quot;Bug fixes with showing numbers in screen and equation labels.&quot;&#10;&#10;This reverts commit 7729eaa4" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,7 +88,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Demo">
+  <component name="RunManager" selected="JUnit.ControllerTest.allTests">
     <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.implemica.bormashenko.calculator.model.Demo" />
       <module name="Win10Calc" />
@@ -175,11 +173,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Demo" />
-        <item itemvalue="Application.Launcher" />
-        <item itemvalue="JUnit.NumberFormatterTest (1)" />
-        <item itemvalue="JUnit.NumberFormatterTest" />
         <item itemvalue="JUnit.ControllerTest.allTests" />
+        <item itemvalue="Application.Launcher" />
+        <item itemvalue="JUnit.NumberFormatterTest" />
+        <item itemvalue="Application.Demo" />
+        <item itemvalue="JUnit.NumberFormatterTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -193,13 +191,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564143613323</updated>
-    </task>
-    <task id="LOCAL-00183" summary="Bug fix with equation text after percent operation after equals while binary operation is set.">
-      <created>1568376117285</created>
-      <option name="number" value="00183" />
-      <option name="presentableId" value="LOCAL-00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1568376117285</updated>
     </task>
     <task id="LOCAL-00184" summary="Created animation for moving navigation bar.">
       <created>1568381030219</created>
@@ -537,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569532562625</updated>
     </task>
-    <option name="localTasksCounter" value="232" />
+    <task id="LOCAL-00232" summary="Demo was moved to model package and updated to became dynamically changeable.">
+      <created>1569576601033</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1569576601033</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -571,7 +569,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Boundary tests for controller created. Minor refactoring for controller tests." />
     <MESSAGE value="Bug fixes in controller with stored and returned from memory value." />
     <MESSAGE value="Bug fix with rounded number in controller that does not cause overflow exception." />
     <MESSAGE value="Overflow validation is utility class now." />
@@ -596,7 +593,8 @@
     <MESSAGE value="Append dot method in number formatter was edited." />
     <MESSAGE value="Delete last digit method in number formatter was edited." />
     <MESSAGE value="Change sign method in number formatter was edited." />
-    <option name="LAST_COMMIT_MESSAGE" value="Change sign method in number formatter was edited." />
+    <MESSAGE value="Demo was moved to model package and updated to became dynamically changeable." />
+    <option name="LAST_COMMIT_MESSAGE" value="Demo was moved to model package and updated to became dynamically changeable." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand>
